@@ -728,7 +728,7 @@ namespace HVACMultiSpeedHeatPump {
             if (MSHeatPump(MSHPNum).ControlZoneNum > 0) {
                 AirNodeFound = false;
                 AirLoopFound = false;
-                for (ControlledZoneNum = 1; ControlledZoneNum <= NumOfZones; ++ControlledZoneNum) {
+                for (ControlledZoneNum = 1; ControlledZoneNum <= state.dataGlobal->NumOfZones; ++ControlledZoneNum) {
                     if (ZoneEquipConfig(ControlledZoneNum).ActualZoneNum != MSHeatPump(MSHPNum).ControlZoneNum) continue;
                     // Find the controlled zone number for the specified thermostat location
                     MSHeatPump(MSHPNum).NodeNumOfControlledZone = ZoneEquipConfig(ControlledZoneNum).ZoneNode;
@@ -2896,7 +2896,6 @@ namespace HVACMultiSpeedHeatPump {
         // na
 
         // Using/Aliasing
-        using DataGlobals::WarmupFlag;
         using General::RoundSigDigits;
         using General::SolveRoot;
         using General::TrimSigDigits;
@@ -3187,7 +3186,7 @@ namespace HVACMultiSpeedHeatPump {
                     SpeedNum = 1;
                     SolveRoot(state, ErrorToler, MaxIte, SolFla, PartLoadFrac, MSHPCyclingResidual, 0.0, 1.0, Par);
                     if (SolFla == -1) {
-                        if (!WarmupFlag) {
+                        if (!state.dataGlobal->WarmupFlag) {
                             if (ErrCountCyc == 0) {
                                 ++ErrCountCyc; // TODO: Why is the error count shared among all heat pump units?
                                 ShowWarningError("Iteration limit exceeded calculating DX unit cycling ratio, for unit=" +
@@ -3251,7 +3250,7 @@ namespace HVACMultiSpeedHeatPump {
                     Par(8) = SpeedNum;
                     SolveRoot(state, ErrorToler, MaxIte, SolFla, SpeedRatio, MSHPVarSpeedResidual, 0.0, 1.0, Par);
                     if (SolFla == -1) {
-                        if (!WarmupFlag) {
+                        if (!state.dataGlobal->WarmupFlag) {
                             if (ErrCountVar == 0) {
                                 ++ErrCountVar;
                                 ShowWarningError("Iteration limit exceeded calculating DX unit speed ratio, for unit=" +
@@ -3297,7 +3296,7 @@ namespace HVACMultiSpeedHeatPump {
                         if ((QZnReq > 0.0 && QZnReq <= LowOutput) || (QZnReq < 0.0 && QZnReq >= LowOutput)) {
                             SolveRoot(state, ErrorToler, MaxIte, SolFla, PartLoadFrac, MSHPCyclingResidual, 0.0, 1.0, Par);
                             if (SolFla == -1) {
-                                if (!WarmupFlag) {
+                                if (!state.dataGlobal->WarmupFlag) {
                                     if (ErrCountCyc == 0) {
                                         ++ErrCountCyc;
                                         ShowWarningError("Iteration limit exceeded calculating DX unit cycling ratio, for unit=" +
@@ -3354,7 +3353,7 @@ namespace HVACMultiSpeedHeatPump {
                                 Par(8) = SpeedNum;
                                 SolveRoot(state, ErrorToler, MaxIte, SolFla, SpeedRatio, MSHPVarSpeedResidual, 0.0, 1.0, Par);
                                 if (SolFla == -1) {
-                                    if (!WarmupFlag) {
+                                    if (!state.dataGlobal->WarmupFlag) {
                                         if (ErrCountVar == 0) {
                                             ++ErrCountVar;
                                             ShowWarningError("Iteration limit exceeded calculating DX unit speed ratio, for unit=" +

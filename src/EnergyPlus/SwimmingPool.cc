@@ -157,7 +157,7 @@ namespace SwimmingPool {
 
         this->calculate(state);
 
-        this->update();
+        this->update(state);
     }
 
     void GetSwimmingPool(EnergyPlusData &state)
@@ -486,7 +486,7 @@ namespace SwimmingPool {
 
         if (this->MyOneTimeFlag) {
             this->setupOutputVars(state); // Set up the output variables once here
-            this->ZeroSourceSumHATsurf.allocate(DataGlobals::NumOfZones);
+            this->ZeroSourceSumHATsurf.allocate(state.dataGlobal->NumOfZones);
             this->ZeroSourceSumHATsurf = 0.0;
             this->QPoolSrcAvg.allocate(DataSurfaces::TotSurfaces);
             this->QPoolSrcAvg = 0.0;
@@ -818,7 +818,7 @@ namespace SwimmingPool {
         // Convection coefficient calculation
         Real64 HConvIn = 0.22 * std::pow(std::abs(this->PoolWaterTemp - DataHeatBalFanSys::MAT(ZoneNum)), 1.0 / 3.0) *
                          this->CurCoverConvFac; // convection coefficient for pool
-        calcSwimmingPoolEvap(EvapRate, SurfNum, DataHeatBalFanSys::MAT(ZoneNum), DataHeatBalFanSys::ZoneAirHumRat(ZoneNum));
+        calcSwimmingPoolEvap(state, EvapRate, SurfNum, DataHeatBalFanSys::MAT(ZoneNum), DataHeatBalFanSys::ZoneAirHumRat(ZoneNum));
         this->MakeUpWaterMassFlowRate = EvapRate;
         Real64 EvapEnergyLossPerArea = -EvapRate *
                                        Psychrometrics::PsyHfgAirFnWTdb(DataHeatBalFanSys::ZoneAirHumRat(ZoneNum), DataHeatBalFanSys::MAT(ZoneNum)) /
@@ -884,7 +884,8 @@ namespace SwimmingPool {
             EvapRate * Psychrometrics::PsyHfgAirFnWTdb(DataHeatBalFanSys::ZoneAirHumRat(ZoneNum), DataHeatBalFanSys::MAT(ZoneNum));
     }
 
-    void SwimmingPoolData::calcSwimmingPoolEvap(Real64 &EvapRate,   // evaporation rate of pool
+    void SwimmingPoolData::calcSwimmingPoolEvap(EnergyPlusData &state,
+                                                Real64 &EvapRate,   // evaporation rate of pool
                                                 int const SurfNum,  // surface index
                                                 Real64 const MAT,   // mean air temperature
                                                 Real64 const HumRat // zone air humidity ratio
@@ -898,8 +899,8 @@ namespace SwimmingPool {
         // So evaporation rate, area, and pressures have to be converted to standard E+ units (kg/s, m2, and Pa, respectively)
         // Evaporation Rate per Area = Evaporation Rate * Heat of Vaporization / Area of Surface
 
-        Real64 PSatPool = Psychrometrics::PsyPsatFnTemp(this->PoolWaterTemp, RoutineName);
-        Real64 PParAir = Psychrometrics::PsyPsatFnTemp(MAT, RoutineName) * Psychrometrics::PsyRhFnTdbWPb(MAT, HumRat, DataEnvironment::OutBaroPress);
+        Real64 PSatPool = Psychrometrics::PsyPsatFnTemp(state, this->PoolWaterTemp, RoutineName);
+        Real64 PParAir = Psychrometrics::PsyPsatFnTemp(state, MAT, RoutineName) * Psychrometrics::PsyRhFnTdbWPb(state, MAT, HumRat, DataEnvironment::OutBaroPress);
         if (PSatPool < PParAir) PSatPool = PParAir;
         this->SatPressPoolWaterTemp = PSatPool;
         this->PartPressZoneAirTemp = PParAir;
@@ -907,7 +908,7 @@ namespace SwimmingPool {
                    DataConversions::CFMF * this->CurCoverEvapFac;
     }
 
-    void SwimmingPoolData::update()
+    void SwimmingPoolData::update(EnergyPlusData &state)
     {
         // SUBROUTINE INFORMATION:
         //       AUTHOR         Rick Strand, Ho-Sung Kim
@@ -924,13 +925,13 @@ namespace SwimmingPool {
         if (this->LastSysTimeElapsed(SurfNum) == DataHVACGlobals::SysTimeElapsed) {
             // Still iterating or reducing system time step, so subtract old values which were
             // not valid
-            this->QPoolSrcAvg(SurfNum) -= this->LastQPoolSrc(SurfNum) * this->LastTimeStepSys(SurfNum) / DataGlobals::TimeStepZone;
-            this->HeatTransCoefsAvg(SurfNum) -= this->LastHeatTransCoefs(SurfNum) * this->LastTimeStepSys(SurfNum) / DataGlobals::TimeStepZone;
+            this->QPoolSrcAvg(SurfNum) -= this->LastQPoolSrc(SurfNum) * this->LastTimeStepSys(SurfNum) / state.dataGlobal->TimeStepZone;
+            this->HeatTransCoefsAvg(SurfNum) -= this->LastHeatTransCoefs(SurfNum) * this->LastTimeStepSys(SurfNum) / state.dataGlobal->TimeStepZone;
         }
 
         // Update the running average and the "last" values with the current values of the appropriate variables
-        this->QPoolSrcAvg(SurfNum) += DataHeatBalFanSys::QPoolSurfNumerator(SurfNum) * DataHVACGlobals::TimeStepSys / DataGlobals::TimeStepZone;
-        this->HeatTransCoefsAvg(SurfNum) += DataHeatBalFanSys::PoolHeatTransCoefs(SurfNum) * DataHVACGlobals::TimeStepSys / DataGlobals::TimeStepZone;
+        this->QPoolSrcAvg(SurfNum) += DataHeatBalFanSys::QPoolSurfNumerator(SurfNum) * DataHVACGlobals::TimeStepSys / state.dataGlobal->TimeStepZone;
+        this->HeatTransCoefsAvg(SurfNum) += DataHeatBalFanSys::PoolHeatTransCoefs(SurfNum) * DataHVACGlobals::TimeStepSys / state.dataGlobal->TimeStepZone;
 
         this->LastQPoolSrc(SurfNum) = DataHeatBalFanSys::QPoolSurfNumerator(SurfNum);
         this->LastHeatTransCoefs(SurfNum) = DataHeatBalFanSys::PoolHeatTransCoefs(SurfNum);

@@ -256,7 +256,7 @@ void ManageHVACSizingSimulation(EnergyPlusData &state, bool &ErrorsFound)
         // for each set
         AddDesignSetToEnvironmentStruct(state, HVACSizingIterCount);
 
-        WarmupFlag = true;
+        state.dataGlobal->WarmupFlag = true;
         Available = true;
         for (int i = 1; i <= state.dataWeatherManager->NumOfEnvrn; ++i) { // loop over environments
 
@@ -296,7 +296,7 @@ void ManageHVACSizingSimulation(EnergyPlusData &state, bool &ErrorsFound)
             }
             state.dataGlobal->EndEnvrnFlag = false;
             // EndMonthFlag = false;
-            WarmupFlag = true;
+            state.dataGlobal->WarmupFlag = true;
             state.dataGlobal->DayOfSim = 0;
             state.dataGlobal->DayOfSimChr = "0";
             NumOfWarmupDays = 0;
@@ -304,23 +304,23 @@ void ManageHVACSizingSimulation(EnergyPlusData &state, bool &ErrorsFound)
             bool anyEMSRan;
             ManageEMS(state, EMSManager::EMSCallFrom::BeginNewEnvironment, anyEMSRan, ObjexxFCL::Optional_int_const()); // calling point
 
-            while ((state.dataGlobal->DayOfSim < NumOfDayInEnvrn) || (WarmupFlag)) { // Begin day loop ...
+            while ((state.dataGlobal->DayOfSim < state.dataGlobal->NumOfDayInEnvrn) || (state.dataGlobal->WarmupFlag)) { // Begin day loop ...
 
                 if (ReportDuringHVACSizingSimulation) {
                     if (sqlite) sqlite->sqliteBegin(); // setup for one transaction per day
                 }
                 ++state.dataGlobal->DayOfSim;
                 state.dataGlobal->DayOfSimChr = fmt::to_string(state.dataGlobal->DayOfSim);
-                if (!WarmupFlag) {
+                if (!state.dataGlobal->WarmupFlag) {
                     ++CurrentOverallSimDay;
                     DisplaySimDaysProgress(CurrentOverallSimDay, TotalOverallSimDays);
                 } else {
                     state.dataGlobal->DayOfSimChr = "0";
                 }
                 state.dataGlobal->BeginDayFlag = true;
-                EndDayFlag = false;
+                state.dataGlobal->EndDayFlag = false;
 
-                if (WarmupFlag) {
+                if (state.dataGlobal->WarmupFlag) {
                     ++NumOfWarmupDays;
                     cWarmupDay = TrimSigDigits(NumOfWarmupDays);
                     DisplayString("Warming up {" + cWarmupDay + '}');
@@ -333,12 +333,12 @@ void ManageHVACSizingSimulation(EnergyPlusData &state, bool &ErrorsFound)
                     DisplayPerfSimulationFlag = false;
                 }
 
-                for (HourOfDay = 1; HourOfDay <= 24; ++HourOfDay) { // Begin hour loop ...
+                for (state.dataGlobal->HourOfDay = 1; state.dataGlobal->HourOfDay <= 24; ++state.dataGlobal->HourOfDay) { // Begin hour loop ...
 
                     state.dataGlobal->BeginHourFlag = true;
-                    EndHourFlag = false;
+                    state.dataGlobal->EndDayFlag = false;
 
-                    for (TimeStep = 1; TimeStep <= NumOfTimeStepInHour; ++TimeStep) {
+                    for (state.dataGlobal->TimeStep = 1; state.dataGlobal->TimeStep <= state.dataGlobal->NumOfTimeStepInHour; ++state.dataGlobal->TimeStep) {
                         if (AnySlabsInModel || AnyBasementsInModel) {
                             SimulateGroundDomains(state, false);
                         }
@@ -352,11 +352,11 @@ void ManageHVACSizingSimulation(EnergyPlusData &state, bool &ErrorsFound)
                         // Note also that BeginTimeStepFlag, EndTimeStepFlag, and the
                         // SubTimeStepFlags can/will be set/reset in the HVAC Manager.
 
-                        if (TimeStep == NumOfTimeStepInHour) {
-                            EndHourFlag = true;
-                            if (HourOfDay == 24) {
-                                EndDayFlag = true;
-                                if (!WarmupFlag && (state.dataGlobal->DayOfSim == NumOfDayInEnvrn)) {
+                        if (state.dataGlobal->TimeStep == state.dataGlobal->NumOfTimeStepInHour) {
+                            state.dataGlobal->EndDayFlag = true;
+                            if (state.dataGlobal->HourOfDay == 24) {
+                                state.dataGlobal->EndDayFlag = true;
+                                if (!state.dataGlobal->WarmupFlag && (state.dataGlobal->DayOfSim == state.dataGlobal->NumOfDayInEnvrn)) {
                                     state.dataGlobal->EndEnvrnFlag = true;
                                 }
                             }
@@ -376,7 +376,7 @@ void ManageHVACSizingSimulation(EnergyPlusData &state, bool &ErrorsFound)
 
                     } // TimeStep loop
 
-                    PreviousHour = HourOfDay;
+                    state.dataGlobal->PreviousHour = state.dataGlobal->HourOfDay;
 
                 } // ... End hour loop.
                 if (ReportDuringHVACSizingSimulation) {
@@ -405,7 +405,7 @@ void ManageHVACSizingSimulation(EnergyPlusData &state, bool &ErrorsFound)
 
     } // End HVAC Sizing Iteration loop
 
-    WarmupFlag = false;
+    state.dataGlobal->WarmupFlag = false;
     DoOutputReporting = true;
     DoingHVACSizingSimulations = false;
     hvacSizingSimulationManager.reset(); // delete/reset unique_ptr

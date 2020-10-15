@@ -320,11 +320,11 @@ namespace ThermalComfort {
 
     void CalcThermalComfortSimpleASH55(EnergyPlusData &state);
 
-    void ResetThermalComfortSimpleASH55();
+    void ResetThermalComfortSimpleASH55(EnergyPlusData &state);
 
     void CalcIfSetPointMet(EnergyPlusData &state);
 
-    void ResetSetPointMet();
+    void ResetSetPointMet(EnergyPlusData &state);
 
     void CalcThermalComfortAdaptiveASH55(
         EnergyPlusData &state,

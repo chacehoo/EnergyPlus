@@ -627,9 +627,9 @@ namespace CoolTower {
                 }
 
                 // Determine air mass flow rate and volume flow rate
-                InletHumRat = PsyWFnTdbTwbPb(OutDryBulbTemp, OutWetBulbTemp, OutBaroPress);
+                InletHumRat = PsyWFnTdbTwbPb(state, OutDryBulbTemp, OutWetBulbTemp, OutBaroPress);
                 // Assume no pressure drops and no changes in enthalpy between inlet and outlet air
-                IntHumRat = PsyWFnTdbH(OutletTemp, OutEnthalpy); // Initialized humidity ratio
+                IntHumRat = PsyWFnTdbH(state, OutletTemp, OutEnthalpy); // Initialized humidity ratio
                 AirDensity = PsyRhoAirFnPbTdbW(OutBaroPress, OutletTemp, IntHumRat);
                 AirMassFlowRate = AirDensity * state.dataCoolTower->CoolTowerSys(CoolTowerNum).ActualAirVolFlowRate;
                 // From the mass balance W_in*(m_air + m_water) = W_out*m_air

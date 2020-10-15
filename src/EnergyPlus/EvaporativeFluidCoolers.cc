@@ -1024,7 +1024,7 @@ namespace EvaporativeFluidCoolers {
         }
 
         this->CalculateWaterUsage(state);
-        this->UpdateEvapFluidCooler();
+        this->UpdateEvapFluidCooler(state);
         this->ReportEvapFluidCooler(RunFlag);
     }
 
@@ -1454,7 +1454,7 @@ namespace EvaporativeFluidCoolers {
                     this->inletConds.AirWetBulb = 25.6;
                     this->inletConds.AirPress = DataEnvironment::StdBaroPress;
                     this->inletConds.AirHumRat =
-                        Psychrometrics::PsyWFnTdbTwbPb(this->inletConds.AirTemp, this->inletConds.AirWetBulb, this->inletConds.AirPress);
+                        Psychrometrics::PsyWFnTdbTwbPb(state, this->inletConds.AirTemp, this->inletConds.AirWetBulb, this->inletConds.AirPress);
                     TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, UA, boundUAResidualFunc, UA0, UA1, Par);
                     if (SolFla == -1) {
                         ShowWarningError("Iteration limit exceeded in calculating evaporative fluid cooler UA.");
@@ -1563,7 +1563,7 @@ namespace EvaporativeFluidCoolers {
                 this->inletConds.AirWetBulb = 25.6;           // 78F design inlet air wet-bulb temp
                 this->inletConds.AirPress = DataEnvironment::StdBaroPress;
                 this->inletConds.AirHumRat =
-                    Psychrometrics::PsyWFnTdbTwbPb(this->inletConds.AirTemp, this->inletConds.AirWetBulb, this->inletConds.AirPress);
+                    Psychrometrics::PsyWFnTdbTwbPb(state, this->inletConds.AirTemp, this->inletConds.AirWetBulb, this->inletConds.AirPress);
                 TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, UA, boundUAResidualFunc, UA0, UA1, Par);
                 if (SolFla == -1) {
                     ShowWarningError("Iteration limit exceeded in calculating evaporative fluid cooler UA.");
@@ -1634,7 +1634,7 @@ namespace EvaporativeFluidCoolers {
                 this->inletConds.AirWetBulb = this->DesignEnteringAirWetBulbTemp;
                 this->inletConds.AirPress = DataEnvironment::StdBaroPress;
                 this->inletConds.AirHumRat =
-                    Psychrometrics::PsyWFnTdbTwbPb(this->inletConds.AirTemp, this->inletConds.AirWetBulb, this->inletConds.AirPress);
+                    Psychrometrics::PsyWFnTdbTwbPb(state, this->inletConds.AirTemp, this->inletConds.AirWetBulb, this->inletConds.AirPress);
                 TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, UA, boundUAResidualFunc, UA0, UA1, Par);
                 if (SolFla == -1) {
                     ShowWarningError("Iteration limit exceeded in calculating evaporative fluid cooler UA.");
@@ -1775,7 +1775,7 @@ namespace EvaporativeFluidCoolers {
                 this->inletConds.AirWetBulb = 25.6;           // 78F design inlet air wet-bulb temp
                 this->inletConds.AirPress = DataEnvironment::StdBaroPress;
                 this->inletConds.AirHumRat =
-                    Psychrometrics::PsyWFnTdbTwbPb(this->inletConds.AirTemp, this->inletConds.AirWetBulb, this->inletConds.AirPress);
+                    Psychrometrics::PsyWFnTdbTwbPb(state, this->inletConds.AirTemp, this->inletConds.AirWetBulb, this->inletConds.AirPress);
                 TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, UA, boundUAResidualFunc, UA0, UA1, Par);
                 if (SolFla == -1) {
                     ShowWarningError("Iteration limit exceeded in calculating evaporative fluid cooler UA.");
@@ -1828,7 +1828,7 @@ namespace EvaporativeFluidCoolers {
                 this->inletConds.AirWetBulb = this->DesignEnteringAirWetBulbTemp;
                 this->inletConds.AirPress = DataEnvironment::StdBaroPress;
                 this->inletConds.AirHumRat =
-                    Psychrometrics::PsyWFnTdbTwbPb(this->inletConds.AirTemp, this->inletConds.AirWetBulb, this->inletConds.AirPress);
+                    Psychrometrics::PsyWFnTdbTwbPb(state, this->inletConds.AirTemp, this->inletConds.AirWetBulb, this->inletConds.AirPress);
                 TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, UA, boundUAResidualFunc, UA0, UA1, Par);
                 if (SolFla == -1) {
                     ShowSevereError("Iteration limit exceeded in calculating EvaporativeFluidCooler UA");
@@ -2244,7 +2244,7 @@ namespace EvaporativeFluidCoolers {
         Real64 CpAir = Psychrometrics::PsyCpAirFnW(this->inletConds.AirHumRat);
         Real64 CpWater = FluidProperties::GetSpecificHeatGlycol(
             state, DataPlant::PlantLoop(this->LoopNum).FluidName, this->InletWaterTemp, DataPlant::PlantLoop(this->LoopNum).FluidIndex, RoutineName);
-        Real64 InletAirEnthalpy = Psychrometrics::PsyHFnTdbRhPb(InletAirWetBulb, 1.0, this->inletConds.AirPress);
+        Real64 InletAirEnthalpy = Psychrometrics::PsyHFnTdbRhPb(state, InletAirWetBulb, 1.0, this->inletConds.AirPress);
 
         // initialize exiting wet bulb temperature before iterating on final solution
         Real64 OutletAirWetBulb = InletAirWetBulb + 6.0;
@@ -2254,7 +2254,7 @@ namespace EvaporativeFluidCoolers {
         int Iter = 0;
         while ((WetBulbError > WetBulbTolerance) && (Iter <= IterMax) && (DeltaTwb > DeltaTwbTolerance)) {
             ++Iter;
-            Real64 OutletAirEnthalpy = Psychrometrics::PsyHFnTdbRhPb(OutletAirWetBulb, 1.0, this->inletConds.AirPress);
+            Real64 OutletAirEnthalpy = Psychrometrics::PsyHFnTdbRhPb(state, OutletAirWetBulb, 1.0, this->inletConds.AirPress);
             // calculate the airside specific heat and capacity
             Real64 CpAirside = (OutletAirEnthalpy - InletAirEnthalpy) / (OutletAirWetBulb - InletAirWetBulb);
             Real64 AirCapacity = AirMassFlowRate * CpAirside;
@@ -2358,14 +2358,14 @@ namespace EvaporativeFluidCoolers {
 
             Real64 AirDensity = Psychrometrics::PsyRhoAirFnPbTdbW(this->inletConds.AirPress, this->inletConds.AirTemp, this->inletConds.AirHumRat);
             Real64 AirMassFlowRate = this->AirFlowRateRatio * this->HighSpeedAirFlowRate * AirDensity;
-            Real64 InletAirEnthalpy = Psychrometrics::PsyHFnTdbRhPb(this->inletConds.AirWetBulb, 1.0, this->inletConds.AirPress);
+            Real64 InletAirEnthalpy = Psychrometrics::PsyHFnTdbRhPb(state, this->inletConds.AirWetBulb, 1.0, this->inletConds.AirPress);
 
             if (AirMassFlowRate > 0.0) {
                 // Calculate outlet air conditions for determining water usage
 
                 Real64 OutletAirEnthalpy = InletAirEnthalpy + this->Qactual / AirMassFlowRate;
-                Real64 OutletAirTSat = Psychrometrics::PsyTsatFnHPb(OutletAirEnthalpy, this->inletConds.AirPress);
-                Real64 OutletAirHumRatSat = Psychrometrics::PsyWFnTdbH(OutletAirTSat, OutletAirEnthalpy);
+                Real64 OutletAirTSat = Psychrometrics::PsyTsatFnHPb(state, OutletAirEnthalpy, this->inletConds.AirPress);
+                Real64 OutletAirHumRatSat = Psychrometrics::PsyWFnTdbH(state, OutletAirTSat, OutletAirEnthalpy);
 
                 // calculate specific humidity ratios (HUMRAT to mass of moist air not dry air)
                 Real64 InSpecificHumRat = this->inletConds.AirHumRat / (1 + this->inletConds.AirHumRat);
@@ -2451,7 +2451,7 @@ namespace EvaporativeFluidCoolers {
         this->StarvedMakeUpVol = this->StarvedMakeUpVdot * (DataHVACGlobals::TimeStepSys * DataGlobalConstants::SecInHour());
     }
 
-    void EvapFluidCoolerSpecs::UpdateEvapFluidCooler()
+    void EvapFluidCoolerSpecs::UpdateEvapFluidCooler(EnergyPlusData &state)
     {
 
         // SUBROUTINE INFORMATION:
@@ -2469,7 +2469,7 @@ namespace EvaporativeFluidCoolers {
 
         DataLoopNode::Node(this->WaterOutletNode).Temp = this->OutletWaterTemp;
 
-        if (DataPlant::PlantLoop(this->LoopNum).LoopSide(LoopSideNum).FlowLock == 0 || DataGlobals::WarmupFlag) return;
+        if (DataPlant::PlantLoop(this->LoopNum).LoopSide(LoopSideNum).FlowLock == 0 || state.dataGlobal->WarmupFlag) return;
 
         // Check flow rate through evaporative fluid cooler and compare to design flow rate,
         // show warning if greater than Design * Mulitplier

@@ -117,7 +117,7 @@ namespace OutputReportTabularAnnual {
 
         bool invalidAggregationOrder();
 
-        void gatherForTimestep(OutputProcessor::TimeStepType kindOfTypeStep);
+        void gatherForTimestep(EnergyPlusData &state, OutputProcessor::TimeStepType kindOfTypeStep);
 
         void resetGathering();
 
@@ -144,7 +144,7 @@ namespace OutputReportTabularAnnual {
         std::vector<std::string> m_objectNames;     // for each row of annual table
         std::vector<AnnualFieldSet> m_annualFields; // for each column
 
-        Real64 getElapsedTime(OutputProcessor::TimeStepType kindOfTimeStep);
+        Real64 getElapsedTime(EnergyPlusData &state, OutputProcessor::TimeStepType kindOfTimeStep);
 
         Real64 getSecondsInTimeStep(OutputProcessor::TimeStepType kindOfTimeStep);
 

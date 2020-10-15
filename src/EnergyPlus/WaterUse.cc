@@ -162,7 +162,7 @@ namespace WaterUse {
                 if (state.dataWaterUse->WaterConnections(WaterConnNum).TempError < Tolerance) {
                     break;
                 } else if (NumIteration > MaxIterations) {
-                    if (!DataGlobals::WarmupFlag) {
+                    if (!state.dataGlobal->WarmupFlag) {
                         if (state.dataWaterUse->WaterConnections(WaterConnNum).MaxIterationsErrorIndex == 0) {
                             ShowWarningError("WaterUse:Connections = " + state.dataWaterUse->WaterConnections(WaterConnNum).Name +
                                              ":  Heat recovery temperature did not converge");
@@ -257,7 +257,7 @@ namespace WaterUse {
             if (this->TempError < Tolerance) {
                 break;
             } else if (NumIteration > MaxIterations) {
-                if (!DataGlobals::WarmupFlag) {
+                if (!state.dataGlobal->WarmupFlag) {
                     if (this->MaxIterationsErrorIndex == 0) {
                         ShowWarningError("WaterUse:Connections = " + this->Name + ":  Heat recovery temperature did not converge");
                         ShowContinueErrorTimeStamp("");
@@ -933,7 +933,7 @@ namespace WaterUse {
                 this->LatentEnergy = 0.0;
             } else {
                 Real64 ZoneHumRat = DataHeatBalFanSys::ZoneAirHumRat(this->Zone);
-                Real64 ZoneHumRatSat = Psychrometrics::PsyWFnTdbRhPb(
+                Real64 ZoneHumRatSat = Psychrometrics::PsyWFnTdbRhPb(state,
                     DataHeatBalFanSys::MAT(this->Zone), 1.0, DataEnvironment::OutBaroPress, RoutineName); // Humidratio at 100% relative humidity
                 Real64 RhoAirDry = Psychrometrics::PsyRhoAirFnPbTdbW(DataEnvironment::OutBaroPress, DataHeatBalFanSys::MAT(this->Zone), 0.0);
                 Real64 ZoneMassMax =

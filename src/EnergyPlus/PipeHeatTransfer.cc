@@ -843,9 +843,6 @@ namespace PipeHeatTransfer {
 
         // Using/Aliasing
         using DataEnvironment::OutDryBulbTemp;
-        using DataGlobals::HourOfDay;
-        using DataGlobals::TimeStep;
-        using DataGlobals::TimeStepZone;
         using DataHeatBalFanSys::MAT; // average (mean) zone air temperature [C]
         using DataHVACGlobals::SysTimeElapsed;
         using DataHVACGlobals::TimeStepSys;
@@ -903,7 +900,7 @@ namespace PipeHeatTransfer {
                         for (DepthIndex = 1; DepthIndex <= this->NumDepthNodes; ++DepthIndex) {
                             for (WidthIndex = 1; WidthIndex <= this->PipeNodeWidth; ++WidthIndex) {
                                 CurrentDepth = (DepthIndex - 1) * this->dSregular;
-                                this->T(WidthIndex, DepthIndex, LengthIndex, TimeIndex) = this->TBND(state, CurrentDepth, CurSimDay);
+                                this->T(WidthIndex, DepthIndex, LengthIndex, TimeIndex) = this->TBND(state, CurrentDepth);
                             }
                         }
                     }
@@ -948,13 +945,13 @@ namespace PipeHeatTransfer {
                         for (DepthIndex = 1; DepthIndex <= this->NumDepthNodes; ++DepthIndex) {
                             // Farfield boundary
                             CurrentDepth = (DepthIndex - 1) * this->dSregular;
-                            CurTemp = this->TBND(state, CurrentDepth, CurSimDay);
+                            CurTemp = this->TBND(state, CurrentDepth);
                             this->T(1, DepthIndex, LengthIndex, TimeIndex) = CurTemp;
                         }
                         for (WidthIndex = 1; WidthIndex <= this->PipeNodeWidth; ++WidthIndex) {
                             // Bottom side of boundary
                             CurrentDepth = this->DomainDepth;
-                            CurTemp = this->TBND(state, CurrentDepth, CurSimDay);
+                            CurTemp = this->TBND(state, CurrentDepth);
                             this->T(WidthIndex, this->NumDepthNodes, LengthIndex, TimeIndex) = CurTemp;
                         }
                     }
@@ -985,7 +982,7 @@ namespace PipeHeatTransfer {
         if (!FirstHVACIteration) this->FirstHVACupdateFlag = true;
 
         // Calculate the current sim time for this pipe (not necessarily structure variable, but it is ok for consistency)
-        this->CurrentSimTime = (state.dataGlobal->DayOfSim - 1) * 24 + HourOfDay - 1 + (TimeStep - 1) * TimeStepZone + SysTimeElapsed;
+        this->CurrentSimTime = (state.dataGlobal->DayOfSim - 1) * 24 + state.dataGlobal->HourOfDay - 1 + (state.dataGlobal->TimeStep - 1) * state.dataGlobal->TimeStepZone + SysTimeElapsed;
         if (std::abs(this->CurrentSimTime - this->PreviousSimTime) > 1.0e-6) {
             PushArrays = true;
             this->PreviousSimTime = this->CurrentSimTime;
@@ -1271,8 +1268,6 @@ namespace PipeHeatTransfer {
         using DataEnvironment::SkyTemp;
         using DataEnvironment::SOLCOS;
         using DataEnvironment::WindSpeed;
-        using DataGlobals::HourOfDay;
-        using DataGlobals::TimeStep;
         using DataLoopNode::Node;
 
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -1901,8 +1896,8 @@ namespace PipeHeatTransfer {
 
     //==============================================================================
 
-    Real64 PipeHTData::TBND(EnergyPlusData &state, Real64 const z,       // Current Depth
-                            Real64 const DayOfSim // Current Simulation Day
+    Real64 PipeHTData::TBND(EnergyPlusData &state,
+                            Real64 const z       // Current Depth
     )
     {
 

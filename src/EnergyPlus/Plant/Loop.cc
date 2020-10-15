@@ -45,11 +45,12 @@
 // OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#include <EnergyPlus/Plant/DataPlant.hh>
+#include <EnergyPlus/Data/EnergyPlusData.hh>
 #include <EnergyPlus/DataBranchAirLoopPlant.hh>
 #include <EnergyPlus/FluidProperties.hh>
-#include <EnergyPlus/Plant/Loop.hh>
 #include <EnergyPlus/General.hh>
+#include <EnergyPlus/Plant/DataPlant.hh>
+#include <EnergyPlus/Plant/Loop.hh>
 #include <EnergyPlus/UtilityRoutines.hh>
 
 namespace EnergyPlus {
@@ -223,7 +224,7 @@ namespace DataPlant {
         this->UnmetDemand = LoadToLoopSetPoint;
     }
 
-    void PlantLoopData::CheckLoopExitNode(bool const FirstHVACIteration) {
+    void PlantLoopData::CheckLoopExitNode(EnergyPlusData &state, bool const FirstHVACIteration) {
 
         // SUBROUTINE INFORMATION:
         //       AUTHOR         Dan Fisher
@@ -242,7 +243,6 @@ namespace DataPlant {
 
         // Using/Aliasing
         using DataBranchAirLoopPlant::MassFlowTolerance;
-        using DataGlobals::WarmupFlag;
         using DataLoopNode::Node;
         using DataLoopNode::NodeID;
         using DataPlant::SupplySide;
@@ -257,7 +257,7 @@ namespace DataPlant {
         LoopInlet = supplySide.NodeNumIn;
         LoopOutlet = supplySide.NodeNumOut;
         // Check continuity invalid...loop pumps now turned on and off
-        if (!FirstHVACIteration && !WarmupFlag) {
+        if (!FirstHVACIteration && !state.dataGlobal->WarmupFlag) {
             if (std::abs(Node(LoopOutlet).MassFlowRate - Node(LoopInlet).MassFlowRate) > MassFlowTolerance) {
                 if (this->MFErrIndex == 0) {
                     ShowWarningError("PlantSupplySide: PlantLoop=\"" + this->Name +

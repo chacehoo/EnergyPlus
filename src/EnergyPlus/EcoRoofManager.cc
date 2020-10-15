@@ -411,7 +411,7 @@ namespace EcoRoofManager {
         // Make sure the ecoroof module resets its conditions at start of EVERY warmup day and every new design day
         // for Reverse DD testing
 
-        if (state.dataGlobal->BeginEnvrnFlag || WarmupFlag) {
+        if (state.dataGlobal->BeginEnvrnFlag || state.dataGlobal->WarmupFlag) {
             Moisture = dataMaterial.Material(state.dataConstruction->Construct(ConstrNum).LayerPoint(1)).InitMoisture;    // Initial moisture content in soil
             MeanRootMoisture = Moisture;                                             // Start the root zone moisture at the same value as the surface.
             Alphag = 1.0 - dataMaterial.Material(state.dataConstruction->Construct(ConstrNum).LayerPoint(1)).AbsorpSolar; // albedo rather than absorptivity
@@ -821,14 +821,14 @@ namespace EcoRoofManager {
                 if (index1 > 1) {
                     ShowWarningError("CalcEcoRoof: Too few time steps per hour for stability.");
                     if (ceil(60 * index1 / MinutesPerTimeStep) <= 60) {
-                        ShowContinueError("...Entered Timesteps per hour=[" + RoundSigDigits(NumOfTimeStepInHour) +
+                        ShowContinueError("...Entered Timesteps per hour=[" + RoundSigDigits(state.dataGlobal->NumOfTimeStepInHour) +
                                           "], Change to some value greater than or equal to [" + RoundSigDigits(60 * index1 / MinutesPerTimeStep) +
                                           "] for assured stability.");
                         ShowContinueError("...Note that EnergyPlus has a maximum of 60 timesteps per hour");
                         ShowContinueError("...The program will continue, but if the simulation fails due to too low/high temperatures, instability "
                                           "here could be the reason.");
                     } else {
-                        ShowContinueError("...Entered Timesteps per hour=[" + RoundSigDigits(NumOfTimeStepInHour) +
+                        ShowContinueError("...Entered Timesteps per hour=[" + RoundSigDigits(state.dataGlobal->NumOfTimeStepInHour) +
                                           "], however the required frequency for stability [" + RoundSigDigits(60 * index1 / MinutesPerTimeStep) +
                                           "] is over the EnergyPlus maximum of 60.");
                         ShowContinueError("...Consider using the simple moisture diffusion calculation method for this application");
@@ -853,19 +853,19 @@ namespace EcoRoofManager {
 
         // NEXT Update evapotranspiration summary variable for print out
         CurrentET = (Vfluxg + Vfluxf) * MinutesPerTimeStep * 60.0; // units are meters
-        if (!WarmupFlag) {
+        if (!state.dataGlobal->WarmupFlag) {
             CumET += CurrentET;
         }
 
         // NEXT Add Precipitation to surface soil moisture variable (if a schedule exists)
-        if (!WarmupFlag) {
+        if (!state.dataGlobal->WarmupFlag) {
             CurrentPrecipitation = 0.0; // first initialize to zero
         }
         CurrentPrecipitation = 0.0; // first initialize to zero
         if (RainFall.ModeID == RainSchedDesign) {
             CurrentPrecipitation = RainFall.CurrentAmount; //  units of m
             Moisture += CurrentPrecipitation / TopDepth;   // x (m) evenly put into top layer
-            if (!WarmupFlag) {
+            if (!state.dataGlobal->WarmupFlag) {
                 CumPrecip += CurrentPrecipitation;
             }
         }
@@ -884,7 +884,7 @@ namespace EcoRoofManager {
         }
 
         Moisture += CurrentIrrigation / TopDepth; // irrigation in (m)/timestep put into top layer
-        if (!WarmupFlag) {
+        if (!state.dataGlobal->WarmupFlag) {
             CumIrrigation += CurrentIrrigation;
         }
 
@@ -1038,7 +1038,7 @@ namespace EcoRoofManager {
 
         // NEXT Limit moisture values to saturation (create RUNOFF that we can track)
         // CurrentRunoff is sum of "overwatering" in a timestep and excess moisture content
-        if (!WarmupFlag) {
+        if (!state.dataGlobal->WarmupFlag) {
             CumRunoff += CurrentRunoff;
         }
 

@@ -422,12 +422,12 @@ namespace EMSManager {
         Real64 tmpReal;         // temporary local integer
 
         if (GetEMSUserInput) {
-            SetupZoneInfoAsInternalDataAvail();
+            SetupZoneInfoAsInternalDataAvail(state);
             SetupWindowShadingControlActuators(state);
             SetupSurfaceConvectionActuators();
             SetupSurfaceConstructionActuators();
             SetupSurfaceOutdoorBoundaryConditionActuators();
-            SetupZoneOutdoorBoundaryConditionActuators();
+            SetupZoneOutdoorBoundaryConditionActuators(state);
             GetEMSInput(state);
             GetEMSUserInput = false;
         }
@@ -2281,7 +2281,7 @@ namespace EMSManager {
         }
     }
 
-    void SetupZoneInfoAsInternalDataAvail()
+    void SetupZoneInfoAsInternalDataAvail(EnergyPlusData &state)
     {
 
         // SUBROUTINE INFORMATION:
@@ -2300,7 +2300,6 @@ namespace EMSManager {
         // na
 
         // Using/Aliasing
-        using DataGlobals::NumOfZones;
         using DataHeatBalance::Zone;
 
         // Locals
@@ -2321,7 +2320,7 @@ namespace EMSManager {
         int ZoneNum;
 
         if (allocated(Zone)) {
-            for (ZoneNum = 1; ZoneNum <= NumOfZones; ++ZoneNum) {
+            for (ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ++ZoneNum) {
 
                 SetupEMSInternalVariable("Zone Floor Area", Zone(ZoneNum).Name, "[m2]", Zone(ZoneNum).FloorArea);
                 SetupEMSInternalVariable("Zone Air Volume", Zone(ZoneNum).Name, "[m3]", Zone(ZoneNum).Volume);
@@ -2331,7 +2330,7 @@ namespace EMSManager {
         }
     }
 
-    void SetupZoneOutdoorBoundaryConditionActuators()
+    void SetupZoneOutdoorBoundaryConditionActuators(EnergyPlusData &state)
     {
 
         // SUBROUTINE INFORMATION:
@@ -2350,13 +2349,12 @@ namespace EMSManager {
         // na
 
         // Using/Aliasing
-        using DataGlobals::NumOfZones;
         using DataHeatBalance::Zone;
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int ZoneNum; // local loop index.
 
-        for (ZoneNum = 1; ZoneNum <= NumOfZones; ++ZoneNum) {
+        for (ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ++ZoneNum) {
 
             SetupEMSActuator("Zone",
                              Zone(ZoneNum).Name,

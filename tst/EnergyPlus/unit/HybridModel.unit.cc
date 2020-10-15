@@ -242,7 +242,7 @@ TEST_F(EnergyPlusFixture, HybridModel_CorrectZoneAirTempTest)
     ZoneGCGain(1) = 0.0;
 
     // Parameter setup
-    NumOfZones = 1;
+    state.dataGlobal->NumOfZones = 1;
     CurZoneEqNum = 1;
     state.dataZonePlenum->NumZoneReturnPlenums = 0;
     state.dataZonePlenum->NumZoneSupplyPlenums = 0;
@@ -254,13 +254,13 @@ TEST_F(EnergyPlusFixture, HybridModel_CorrectZoneAirTempTest)
     Zone(1).SurfaceFirst = 1;
     Zone(1).SurfaceLast = 2;
     Zone(1).Volume = 1061.88;
-    TimeStepZone = 10.0 / 60.0; // Zone timestep in hours
+    state.dataGlobal->TimeStepZone = 10.0 / 60.0; // Zone timestep in hours
     TimeStepSys = 10.0 / 60.0;
     Real64 ZoneTempChange;
 
     // Hybrid modeling trigger
     FlagHybridModel_TM = true;
-    WarmupFlag = false;
+    state.dataGlobal->WarmupFlag = false;
     DoingSizing = false;
     DayOfYear = 1;
 
@@ -736,7 +736,7 @@ TEST_F(EnergyPlusFixture, HybridModel_CorrectZoneContaminantsTest)
     MixingMassFlowCO2(1) = 0.0;
 
     // Parameter setup
-    NumOfZones = 1;
+    state.dataGlobal->NumOfZones = 1;
     CurZoneEqNum = 1;
     state.dataZonePlenum->NumZoneReturnPlenums = 0;
     state.dataZonePlenum->NumZoneSupplyPlenums = 0;
@@ -748,12 +748,12 @@ TEST_F(EnergyPlusFixture, HybridModel_CorrectZoneContaminantsTest)
     Zone(1).SurfaceFirst = 1;
     Zone(1).SurfaceLast = 2;
     Zone(1).Volume = 4000;
-    TimeStepZone = 10.0 / 60.0; // Zone timestep in hours
+    state.dataGlobal->TimeStepZone = 10.0 / 60.0; // Zone timestep in hours
     TimeStepSys = 10.0 / 60.0;
 
     // Hybrid modeling trigger
     FlagHybridModel_TM = false;
-    WarmupFlag = false;
+    state.dataGlobal->WarmupFlag = false;
     DoingSizing = false;
     DayOfYear = 1;
 

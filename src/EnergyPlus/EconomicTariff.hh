@@ -636,7 +636,7 @@ namespace EconomicTariff {
     //======================================================================================================================
     //======================================================================================================================
 
-    void GatherForEconomics();
+    void GatherForEconomics(EnergyPlusData &state);
 
     bool isWithinRange(int const testVal, int const minThreshold, int const maxThreshold);
 

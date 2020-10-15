@@ -306,7 +306,7 @@ namespace SteamBaseboardRadiator {
                 CalcSteamBaseboard(state, BaseboardNum, PowerMet);
             }
 
-            UpdateSteamBaseboard(BaseboardNum);
+            UpdateSteamBaseboard(state, BaseboardNum);
 
             ReportSteamBaseboard(BaseboardNum);
 
@@ -577,7 +577,7 @@ namespace SteamBaseboardRadiator {
             SteamBaseboard(BaseboardNum).FracDistribToSurf = 0.0;
 
             // search zone equipment list structure for zone index
-            for (int ctrlZone = 1; ctrlZone <= DataGlobals::NumOfZones; ++ctrlZone) {
+            for (int ctrlZone = 1; ctrlZone <= state.dataGlobal->NumOfZones; ++ctrlZone) {
                 for (int zoneEquipTypeNum = 1; zoneEquipTypeNum <= DataZoneEquipment::ZoneEquipList(ctrlZone).NumOfEquipTypes; ++zoneEquipTypeNum) {
                     if (DataZoneEquipment::ZoneEquipList(ctrlZone).EquipType_Num(zoneEquipTypeNum) == DataZoneEquipment::BBSteam_Num &&
                         DataZoneEquipment::ZoneEquipList(ctrlZone).EquipName(zoneEquipTypeNum) == SteamBaseboard(BaseboardNum).EquipID) {
@@ -790,7 +790,7 @@ namespace SteamBaseboardRadiator {
             // initialize the environment and sizing flags
             MyEnvrnFlag.allocate(NumSteamBaseboards);
             MySizeFlag.allocate(NumSteamBaseboards);
-            ZeroSourceSumHATsurf.dimension(NumOfZones, 0.0);
+            ZeroSourceSumHATsurf.dimension(state.dataGlobal->NumOfZones, 0.0);
             QBBSteamRadSource.dimension(NumSteamBaseboards, 0.0);
             QBBSteamRadSrcAvg.dimension(NumSteamBaseboards, 0.0);
             LastQBBSteamRadSrc.dimension(NumSteamBaseboards, 0.0);
@@ -809,7 +809,7 @@ namespace SteamBaseboardRadiator {
         if (!ZoneEquipmentListChecked && ZoneEquipInputsFilled) {
             ZoneEquipmentListChecked = true;
             for (Loop = 1; Loop <= NumSteamBaseboards; ++Loop) {
-                if (CheckZoneEquipmentList(cCMO_BBRadiator_Steam, SteamBaseboard(Loop).EquipID)) continue;
+                if (CheckZoneEquipmentList(state, cCMO_BBRadiator_Steam, SteamBaseboard(Loop).EquipID)) continue;
                 ShowSevereError("InitBaseboard: Unit=[" + cCMO_BBRadiator_Steam + ',' + SteamBaseboard(Loop).EquipID +
                                 "] is not on any ZoneHVAC:EquipmentList.  It will not be simulated.");
             }
@@ -1224,7 +1224,7 @@ namespace SteamBaseboardRadiator {
         SteamBaseboard(BaseboardNum).RadPower = RadHeat;
     }
 
-    void UpdateSteamBaseboard(int const BaseboardNum)
+    void UpdateSteamBaseboard(EnergyPlusData &state, int const BaseboardNum)
     {
         // SUBROUTINE INFORMATION:
         //       AUTHOR         Russ Taylor
@@ -1244,7 +1244,6 @@ namespace SteamBaseboardRadiator {
         // na
 
         // Using/Aliasing
-        using DataGlobals::TimeStepZone;
         using PlantUtilities::SafeCopyPlantNode;
 
         // Locals
@@ -1265,10 +1264,10 @@ namespace SteamBaseboardRadiator {
 
         // First, update the running average if necessary...
         if (LastSysTimeElapsed(BaseboardNum) == SysTimeElapsed) {
-            QBBSteamRadSrcAvg(BaseboardNum) -= LastQBBSteamRadSrc(BaseboardNum) * LastTimeStepSys(BaseboardNum) / TimeStepZone;
+            QBBSteamRadSrcAvg(BaseboardNum) -= LastQBBSteamRadSrc(BaseboardNum) * LastTimeStepSys(BaseboardNum) / state.dataGlobal->TimeStepZone;
         }
         // Update the running average and the "last" values with the current values of the appropriate variables
-        QBBSteamRadSrcAvg(BaseboardNum) += QBBSteamRadSource(BaseboardNum) * TimeStepSys / TimeStepZone;
+        QBBSteamRadSrcAvg(BaseboardNum) += QBBSteamRadSource(BaseboardNum) * TimeStepSys / state.dataGlobal->TimeStepZone;
 
         LastQBBSteamRadSrc(BaseboardNum) = QBBSteamRadSource(BaseboardNum);
         LastSysTimeElapsed(BaseboardNum) = SysTimeElapsed;

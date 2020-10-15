@@ -153,7 +153,7 @@ protected:
         DataEnvironment::OutBaroPress = 101325;          // sea level
         DataZoneEquipment::ZoneEquipInputsFilled = true; // denotes zone equipment has been read in
 
-        int numZones = DataGlobals::NumOfZones = 5;
+        int numZones = state.dataGlobal->NumOfZones = 5;
         int numAirloops = 5;
         DataLoopNode::Node.allocate(50);
         DataLoopNode::NodeID.allocate(50);
@@ -2258,7 +2258,7 @@ TEST_F(EnergyPlusFixture, VRF_FluidTCtrl_VRFOU_Compressor)
     FluidProperties::GetFluidPropertiesData(state); // read refrigerant properties
 
     // set up ZoneEquipConfig data
-    DataGlobals::NumOfZones = 1;
+    state.dataGlobal->NumOfZones = 1;
     DataZoneEquipment::ZoneEquipConfig.allocate(1);
     DataZoneEquipment::ZoneEquipConfig(1).IsControlled = true;
     DataZoneEquipment::ZoneEquipConfig(1).NumInletNodes = 1;
@@ -5559,9 +5559,9 @@ TEST_F(EnergyPlusFixture, VRFTest_SysCurve_WaterCooled)
     DataZoneEnergyDemands::ZoneSysEnergyDemand.allocate(1);
 
     Array2D<Real64> DummyArray; // Sky temperature
-    DataGlobals::NumOfTimeStepInHour = 4;
-    DataGlobals::MinutesPerTimeStep = 60 / DataGlobals::NumOfTimeStepInHour;
-    DummyArray.allocate(DataGlobals::NumOfTimeStepInHour, 24);
+    state.dataGlobal->NumOfTimeStepInHour = 4;
+    DataGlobals::MinutesPerTimeStep = 60 / state.dataGlobal->NumOfTimeStepInHour;
+    DummyArray.allocate(state.dataGlobal->NumOfTimeStepInHour, 24);
     DummyArray = 0.0;
     ScheduleManager::GetScheduleValuesForDay(state, 1, DummyArray, 58, 3);
 
@@ -6433,7 +6433,7 @@ TEST_F(EnergyPlusFixture, VRFTest_TU_NoLoad_OAMassFlowRateTest)
     DataZoneEquipment::ZoneEquipInputsFilled = true; // denotes zone equipment has been read in
     DataEnvironment::StdRhoAir = PsyRhoAirFnPbTdbW(DataEnvironment::OutBaroPress, 20.0, 0.0);
     DataGlobals::SysSizingCalc = true;
-    DataGlobals::NumOfTimeStepInHour = 1;
+    state.dataGlobal->NumOfTimeStepInHour = 1;
     DataGlobals::MinutesPerTimeStep = 60;
     DataSizing::ZoneEqSizing.allocate(1);
 
@@ -6567,7 +6567,7 @@ TEST_F(EnergyPlusFixture, VRFTest_CondenserCalcTest)
     // set up environment
     state.dataGlobal->DayOfSim = 1;
     DataGlobals::CurrentTime = 0.25;
-    DataGlobals::TimeStepZone = 0.25;
+    state.dataGlobal->TimeStepZone = 0.25;
     DataHVACGlobals::SysTimeElapsed = 0.0;
     DataEnvironment::OutDryBulbTemp = 35.0;
     DataEnvironment::OutHumRat = 0.01;
@@ -6667,7 +6667,7 @@ TEST_F(EnergyPlusFixture, VRFTest_CondenserCalcTest)
     EXPECT_EQ(VRF(VRFCond).ElecHeatingPower, VRF(VRFCond).RatedHeatingPower * VRF(VRFCond).VRFCondPLR);
 
     // increment time step
-    DataGlobals::CurrentTime += DataGlobals::TimeStepZone; // 0.5
+    DataGlobals::CurrentTime += state.dataGlobal->TimeStepZone; // 0.5
     // set TU's to request both cooling and heating
     TerminalUnitList(1).TotalCoolLoad(1) = 0.0;
     TerminalUnitList(1).HRCoolRequest(1) = false;
@@ -6721,7 +6721,7 @@ TEST_F(EnergyPlusFixture, VRFTest_CondenserCalcTest)
     LastModeCooling(VRFCond) = true;
     LastModeHeating(VRFCond) = false;
 
-    DataGlobals::CurrentTime += DataGlobals::TimeStepZone; // 0.75 - CalcVRFCondenser saves last time stamp for use in exponential curve, increment by
+    DataGlobals::CurrentTime += state.dataGlobal->TimeStepZone; // 0.75 - CalcVRFCondenser saves last time stamp for use in exponential curve, increment by
                                                            // 1 time step to get same answer
     CalcVRFCondenser(state, VRFCond);
     EXPECT_TRUE(VRF(VRFCond).HRHeatingActive);
@@ -6740,7 +6740,7 @@ TEST_F(EnergyPlusFixture, VRFTest_CondenserCalcTest)
     EXPECT_NEAR(HREIRAdjustment, 1.06321, 0.00001);
 
     // simulate again and see that power has exponential changed from previous time step
-    DataGlobals::CurrentTime += DataGlobals::TimeStepZone; // 1.0
+    DataGlobals::CurrentTime += state.dataGlobal->TimeStepZone; // 1.0
     CoolingLoad(VRFCond) = false;
     HeatingLoad(VRFCond) = true;
     LastModeCooling(VRFCond) = false;
@@ -6755,7 +6755,7 @@ TEST_F(EnergyPlusFixture, VRFTest_CondenserCalcTest)
     EXPECT_NEAR(HREIRAdjustment, 1.08646, 0.00001); // will exponentially rise towards VRF( VRFCond ).HREIRFTHeatConst = 1.1
 
     // simulate again and see that power has exponential changed from previous time step
-    DataGlobals::CurrentTime += DataGlobals::TimeStepZone; // 1.25
+    DataGlobals::CurrentTime += state.dataGlobal->TimeStepZone; // 1.25
     CalcVRFCondenser(state, VRFCond);
     HREIRAdjustment = HRInitialEIRFrac + (HREIRFTConst - HRInitialEIRFrac) * VRF(VRFCond).SUMultiplier;
     EXPECT_NEAR(VRF(VRFCond).SUMultiplier, 0.95021, 0.00001); // will exponentially rise towards 1.0
@@ -6763,7 +6763,7 @@ TEST_F(EnergyPlusFixture, VRFTest_CondenserCalcTest)
     EXPECT_NEAR(HREIRAdjustment, 1.09502, 0.00001); // will exponentially rise towards VRF( VRFCond ).HREIRFTHeatConst = 1.1
 
     // simulate again and see that power has exponential changed from previous time step
-    DataGlobals::CurrentTime += DataGlobals::TimeStepZone; // 1.5
+    DataGlobals::CurrentTime += state.dataGlobal->TimeStepZone; // 1.5
     CalcVRFCondenser(state, VRFCond);
     HREIRAdjustment = HRInitialEIRFrac + (HREIRFTConst - HRInitialEIRFrac) * VRF(VRFCond).SUMultiplier;
     EXPECT_NEAR(VRF(VRFCond).SUMultiplier, 0.98168, 0.00001); // will exponentially rise towards 1.0
@@ -6771,7 +6771,7 @@ TEST_F(EnergyPlusFixture, VRFTest_CondenserCalcTest)
     EXPECT_NEAR(HREIRAdjustment, 1.09817, 0.00001); // will exponentially rise towards VRF( VRFCond ).HREIRFTHeatConst = 1.1
 
     // simulate again and see that power has exponential changed from previous time step
-    DataGlobals::CurrentTime += DataGlobals::TimeStepZone; // 1.75
+    DataGlobals::CurrentTime += state.dataGlobal->TimeStepZone; // 1.75
     CalcVRFCondenser(state, VRFCond);
     HREIRAdjustment = HRInitialEIRFrac + (HREIRFTConst - HRInitialEIRFrac) * VRF(VRFCond).SUMultiplier;
     EXPECT_NEAR(VRF(VRFCond).SUMultiplier, 1.0, 0.00001); // will exponentially rise towards 1.0
@@ -13111,7 +13111,7 @@ TEST_F(EnergyPlusFixture, VRFTest_CondenserCalcTest_HREIRFTHeat)
     // set up environment
     state.dataGlobal->DayOfSim = 2; // user a higher day than previous unit test to get around static timer variables problem
     DataGlobals::CurrentTime = 0.25;
-    DataGlobals::TimeStepZone = 0.25;
+    state.dataGlobal->TimeStepZone = 0.25;
     DataHVACGlobals::TimeStepSys = 0.25;
     DataHVACGlobals::SysTimeElapsed = 0.0;
     DataEnvironment::OutDryBulbTemp = 35.0;
@@ -13127,7 +13127,7 @@ TEST_F(EnergyPlusFixture, VRFTest_CondenserCalcTest_HREIRFTHeat)
     CalcVRFCondenser(state, VRFCond);
 
     // increment time step
-    DataGlobals::CurrentTime += DataGlobals::TimeStepZone; // 0.5
+    DataGlobals::CurrentTime += state.dataGlobal->TimeStepZone; // 0.5
 
     // set TU's to request both cooling and heating
     CoolingLoad(VRFCond) = false;
@@ -14931,7 +14931,7 @@ TEST_F(EnergyPlusFixture, VRFTest_TU_NotOnZoneHVACEquipmentList)
     DataZoneEquipment::ZoneEquipInputsFilled = true; // denotes zone equipment has been read in
     DataEnvironment::StdRhoAir = PsyRhoAirFnPbTdbW(DataEnvironment::OutBaroPress, 20.0, 0.0);
     DataGlobals::SysSizingCalc = true;
-    DataGlobals::NumOfTimeStepInHour = 1;
+    state.dataGlobal->NumOfTimeStepInHour = 1;
     DataGlobals::MinutesPerTimeStep = 60;
     DataSizing::ZoneEqSizing.allocate(1);
 

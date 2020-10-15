@@ -1100,7 +1100,7 @@ TEST_F(EnergyPlusFixture, UnitHeater_HWHeatingCoilUAAutoSizingTest)
     });
     ASSERT_TRUE(process_idf(idf_objects));
 
-    NumOfTimeStepInHour = 4; // must initialize this to get schedules initialized
+    state.dataGlobal->NumOfTimeStepInHour = 4; // must initialize this to get schedules initialized
     MinutesPerTimeStep = 15; // must initialize this to get schedules initialized
     ProcessScheduleInput(state);  // read schedule data
 
@@ -1274,7 +1274,7 @@ TEST_F(EnergyPlusFixture, UnitHeater_SimUnitHeaterTest)
     });
     ASSERT_TRUE(process_idf(idf_objects));
 
-    NumOfTimeStepInHour = 4; // must initialize this to get schedules initialized
+    state.dataGlobal->NumOfTimeStepInHour = 4; // must initialize this to get schedules initialized
     MinutesPerTimeStep = 15; // must initialize this to get schedules initialized
     ProcessScheduleInput(state);  // read schedule data
 
@@ -2439,8 +2439,8 @@ TEST_F(EnergyPlusFixture, UnitHeater_SecondPriorityZoneEquipment)
     EXPECT_EQ(HeatingCoils::HeatingCoil(2).HeatingCoilRate, 0.0);
 
     // re-set the hour of the day
-    DataGlobals::TimeStep = 1;
-    DataGlobals::HourOfDay = 24;
+    state.dataGlobal->TimeStep = 1;
+    state.dataGlobal->HourOfDay = 24;
     DataGlobals::CurrentTime = 24.0;
     // set zone air node condition
     Node(ZoneEquipConfig(1).ZoneNode).Temp = 20.0;

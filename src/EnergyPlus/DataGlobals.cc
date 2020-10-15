@@ -67,20 +67,6 @@ namespace DataGlobals {
 
 
     // (last time step of last hour of last day of environ which is a design day)
-    bool EndDayFlag(false);            // True at the end of each day (last time step of last hour of day)
-    bool EndHourFlag(false);           // True at the end of each hour (last time step of hour)
-    int PreviousHour(0);               // Previous Hour Index
-    int HourOfDay(0);                  // Counter for hours in a simulation day
-    Real64 WeightPreviousHour(0.0);    // Weighting of value for previous hour
-    Real64 WeightNow(0.0);             // Weighting of value for current hour
-    int NumOfDayInEnvrn(0);            // Number of days in the simulation for a particular environment
-    int NumOfTimeStepInHour(0);        // Number of time steps in each hour of the simulation
-    int NumOfZones(0);                 // Total number of Zones for simulation
-    int TimeStep(0);                   // Counter for time steps (fractional hours)
-    Real64 TimeStepZone(0.0);          // Zone time step in fractional hours
-    bool WarmupFlag(false);            // True during the warmup portion of a simulation
-    int StdOutputRecordCount(0);                     // Count of Standard output records
-    int StdMeterRecordCount(0);                      // Count of Meter output records
     bool ZoneSizingCalc(false);                      // TRUE if zone sizing calculation
     bool SysSizingCalc(false);                       // TRUE if system sizing calculation
     bool DoZoneSizing(false);                        // User input in SimulationControl object
@@ -140,27 +126,13 @@ namespace DataGlobals {
     // Needed for unit tests, should not be normally called.
     void clear_state(IOFiles &ioFiles)
     {
-        EndDayFlag = false;
-        EndHourFlag = false;
-        PreviousHour = 0;
-        HourOfDay = 0;
-        WeightPreviousHour = 0.0;
-        WeightNow = 0.0;
-        NumOfDayInEnvrn = 0;
-        NumOfTimeStepInHour = 0;
-        NumOfZones = 0;
-        TimeStep = 0;
-        TimeStepZone = 0.0;
-        WarmupFlag = false;
         ioFiles.eso.close();
         ioFiles.err_stream.reset();
-        StdOutputRecordCount = 0;
         ioFiles.debug.close();
         ioFiles.zsz.close();
         ioFiles.ssz.close();
         ioFiles.mtr.close();
         ioFiles.shade.close();
-        StdMeterRecordCount = 0;
         ZoneSizingCalc = false;
         SysSizingCalc = false;
         DoZoneSizing = false;

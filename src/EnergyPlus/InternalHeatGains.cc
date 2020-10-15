@@ -180,10 +180,10 @@ namespace InternalHeatGains {
 
         ReportInternalHeatGains(state);
 
-        CheckReturnAirHeatGain();
+        CheckReturnAirHeatGain(state);
 
         // for the load component report, gather the load components for each timestep but not when doing pulse
-        if (ZoneSizingCalc) GatherComponentLoadsIntGain();
+        if (ZoneSizingCalc) GatherComponentLoadsIntGain(state);
     }
 
     void GetInternalHeatGainsInput(EnergyPlusData &state)
@@ -284,12 +284,12 @@ namespace InternalHeatGains {
         };
 
         // FLOW:
-        ZoneIntGain.allocate(NumOfZones);
-        ZnRpt.allocate(NumOfZones);
-        ZoneIntEEuse.allocate(NumOfZones);
-        RefrigCaseCredit.allocate(NumOfZones);
+        ZoneIntGain.allocate(state.dataGlobal->NumOfZones);
+        ZnRpt.allocate(state.dataGlobal->NumOfZones);
+        ZoneIntEEuse.allocate(state.dataGlobal->NumOfZones);
+        RefrigCaseCredit.allocate(state.dataGlobal->NumOfZones);
 
-        RepVarSet.dimension(NumOfZones, true);
+        RepVarSet.dimension(state.dataGlobal->NumOfZones, true);
 
         // Determine argument length of objects gotten by this routine
         MaxAlpha = -100;
@@ -341,7 +341,7 @@ namespace InternalHeatGains {
         AlphaName = "";
 
         // CurrentModuleObject='Zone'
-        for (Loop = 1; Loop <= NumOfZones; ++Loop) {
+        for (Loop = 1; Loop <= state.dataGlobal->NumOfZones; ++Loop) {
             // Overall Zone Variables
             SetupOutputVariable(state,
                 "Zone Total Internal Radiant Heating Energy", OutputProcessor::Unit::J, ZnRpt(Loop).TotRadiantGain, "Zone", "Sum", Zone(Loop).Name);
@@ -1094,7 +1094,7 @@ namespace InternalHeatGains {
         }         // TotPeople > 0
 
         // transfer the nominal number of people in a zone to the tabular reporting
-        for (Loop = 1; Loop <= NumOfZones; ++Loop) {
+        for (Loop = 1; Loop <= state.dataGlobal->NumOfZones; ++Loop) {
             if (Zone(Loop).TotOccupants > 0.0) {
                 if (Zone(Loop).FloorArea > 0.0 && Zone(Loop).FloorArea / Zone(Loop).TotOccupants < 0.1) {
                     ShowWarningError(RoutineName + "Zone=\"" + Zone(Loop).Name + "\" occupant density is extremely high.");
@@ -4663,7 +4663,7 @@ namespace InternalHeatGains {
             "Heat\n");
 
         print(state.files.eio, Format_721);
-        for (Loop = 1; Loop <= NumOfZones; ++Loop) {
+        for (Loop = 1; Loop <= state.dataGlobal->NumOfZones; ++Loop) {
             LightTot = 0.0;
             ElecTot = 0.0;
             GasTot = 0.0;
@@ -5311,8 +5311,8 @@ namespace InternalHeatGains {
 
                 // For predefined tabular reports related to outside air ventilation
                 ZonePreDefRep(NZ).isOccupied = true; // set flag to occupied to be used in tabular reporting for ventilation
-                ZonePreDefRep(NZ).NumOccAccum += NumberOccupants * TimeStepZone;
-                ZonePreDefRep(NZ).NumOccAccumTime += TimeStepZone;
+                ZonePreDefRep(NZ).NumOccAccum += NumberOccupants * state.dataGlobal->TimeStepZone;
+                ZonePreDefRep(NZ).NumOccAccumTime += state.dataGlobal->TimeStepZone;
             } else {
                 ZonePreDefRep(NZ).isOccupied = false; // set flag to occupied to be used in tabular reporting for ventilation
             }
@@ -5546,9 +5546,9 @@ namespace InternalHeatGains {
         FigureRefrigerationZoneGains(state);
 
         // store pointer values to hold generic internal gain values constant for entire timestep
-        UpdateInternalGainValues();
+        UpdateInternalGainValues(state);
 
-        for (int NZ = 1; NZ <= NumOfZones; ++NZ) {
+        for (int NZ = 1; NZ <= state.dataGlobal->NumOfZones; ++NZ) {
 
             SumAllInternalLatentGains(NZ, ZoneLatentGain(NZ));
             // Added for hybrid model
@@ -5572,9 +5572,9 @@ namespace InternalHeatGains {
 
         pulseMultipler = 0.01; // the W/sqft pulse for the zone
         if (CompLoadReportIsReq) {
-            AllocateLoadComponentArrays();
+            AllocateLoadComponentArrays(state);
         }
-        for (int zoneNum = 1; zoneNum <= NumOfZones; ++zoneNum) {// Loop through all surfaces...
+        for (int zoneNum = 1; zoneNum <= state.dataGlobal->NumOfZones; ++zoneNum) {// Loop through all surfaces...
             int const firstSurf = Zone(zoneNum).SurfaceFirst;
             int const lastSurf = Zone(zoneNum).SurfaceLast;
             if (firstSurf <= 0) continue;
@@ -5594,7 +5594,7 @@ namespace InternalHeatGains {
                     // QRadThermInAbs is the thermal radiation absorbed on inside surfaces
                     SurfQRadThermInAbs(SurfNum) = adjQL * TMULT(radEnclosureNum) * ITABSF(SurfNum);
                     // store the magnitude and time of the pulse
-                    radiantPulseTimestep(CurOverallSimDay, zoneNum) = (HourOfDay - 1) * NumOfTimeStepInHour + TimeStep;
+                    radiantPulseTimestep(CurOverallSimDay, zoneNum) = (state.dataGlobal->HourOfDay - 1) * state.dataGlobal->NumOfTimeStepInHour + state.dataGlobal->TimeStep;
                     radiantPulseReceived(CurOverallSimDay, SurfNum) =
                             (adjQL - curQL) * TMULT(radEnclosureNum) * ITABSF(SurfNum) * Surface(SurfNum).Area;
                 }
@@ -5602,7 +5602,7 @@ namespace InternalHeatGains {
         }
     }
 
-    void CheckReturnAirHeatGain()
+    void CheckReturnAirHeatGain(EnergyPlusData &state)
     {
         // SUBROUTINE INFORMATION:
         //       AUTHOR         Xuan Luo
@@ -5616,7 +5616,7 @@ namespace InternalHeatGains {
         using DataHeatBalance::Zone;
         using DataZoneEquipment::ZoneEquipConfig;
 
-        for (int ZoneNum = 1; ZoneNum <= NumOfZones; ++ZoneNum) {
+        for (int ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ++ZoneNum) {
             if (Zone(ZoneNum).HasAdjustedReturnTempByITE && Zone(ZoneNum).HasLtsRetAirGain) {
                 ShowFatalError("Return air heat gains from lights are not allowed when Air Flow Calculation Method = "
                                "FlowControlWithApproachTemperatures in zones with ITE objects.");
@@ -5738,7 +5738,7 @@ namespace InternalHeatGains {
         } // ZoneITEq init loop
 
         // Zone total report variables
-        for (Loop = 1; Loop <= NumOfZones; ++Loop) {
+        for (Loop = 1; Loop <= state.dataGlobal->NumOfZones; ++Loop) {
             ZnRpt(Loop).ITEqCPUPower = 0.0;
             ZnRpt(Loop).ITEqFanPower = 0.0;
             ZnRpt(Loop).ITEqUPSPower = 0.0;
@@ -5816,8 +5816,8 @@ namespace InternalHeatGains {
                     WAirIn = ZoneAirHumRat(NZ);
                 }
             }
-            TDPAirIn = PsyTdpFnWPb(WAirIn, StdBaroPress, RoutineName);
-            RHAirIn = 100.0 * PsyRhFnTdbWPb(TAirIn, WAirIn, StdBaroPress, RoutineName); // RHAirIn is %
+            TDPAirIn = PsyTdpFnWPb(state, WAirIn, StdBaroPress, RoutineName);
+            RHAirIn = 100.0 * PsyRhFnTdbWPb(state, TAirIn, WAirIn, StdBaroPress, RoutineName); // RHAirIn is %
 
             // Calculate power input and airflow
             TAirInDesign = ZoneITEq(Loop).DesignTAirIn;
@@ -5951,46 +5951,46 @@ namespace InternalHeatGains {
             EnvClass = ZoneITEq(Loop).Class;
             if (EnvClass > 0) {
                 if (TAirIn > DBMax(EnvClass)) {
-                    ZoneITEq(Loop).TimeAboveDryBulbT = TimeStepZone;
-                    ZoneITEq(Loop).TimeOutOfOperRange = TimeStepZone;
+                    ZoneITEq(Loop).TimeAboveDryBulbT = state.dataGlobal->TimeStepZone;
+                    ZoneITEq(Loop).TimeOutOfOperRange = state.dataGlobal->TimeStepZone;
                     ZoneITEq(Loop).DryBulbTAboveDeltaT = TAirIn - DBMax(EnvClass);
-                    ZnRpt(NZ).ITEqTimeAboveDryBulbT = TimeStepZone;
-                    ZnRpt(NZ).ITEqTimeOutOfOperRange = TimeStepZone;
+                    ZnRpt(NZ).ITEqTimeAboveDryBulbT = state.dataGlobal->TimeStepZone;
+                    ZnRpt(NZ).ITEqTimeOutOfOperRange = state.dataGlobal->TimeStepZone;
                 }
                 if (TAirIn < DBMin(EnvClass)) {
-                    ZoneITEq(Loop).TimeBelowDryBulbT = TimeStepZone;
-                    ZoneITEq(Loop).TimeOutOfOperRange = TimeStepZone;
+                    ZoneITEq(Loop).TimeBelowDryBulbT = state.dataGlobal->TimeStepZone;
+                    ZoneITEq(Loop).TimeOutOfOperRange = state.dataGlobal->TimeStepZone;
                     ZoneITEq(Loop).DryBulbTBelowDeltaT = TAirIn - DBMin(EnvClass);
-                    ZnRpt(NZ).ITEqTimeBelowDryBulbT = TimeStepZone;
-                    ZnRpt(NZ).ITEqTimeOutOfOperRange = TimeStepZone;
+                    ZnRpt(NZ).ITEqTimeBelowDryBulbT = state.dataGlobal->TimeStepZone;
+                    ZnRpt(NZ).ITEqTimeOutOfOperRange = state.dataGlobal->TimeStepZone;
                 }
                 if (TDPAirIn > DPMax(EnvClass)) {
-                    ZoneITEq(Loop).TimeAboveDewpointT = TimeStepZone;
-                    ZoneITEq(Loop).TimeOutOfOperRange = TimeStepZone;
+                    ZoneITEq(Loop).TimeAboveDewpointT = state.dataGlobal->TimeStepZone;
+                    ZoneITEq(Loop).TimeOutOfOperRange = state.dataGlobal->TimeStepZone;
                     ZoneITEq(Loop).DewpointTAboveDeltaT = TDPAirIn - DPMax(EnvClass);
-                    ZnRpt(NZ).ITEqTimeAboveDewpointT = TimeStepZone;
-                    ZnRpt(NZ).ITEqTimeOutOfOperRange = TimeStepZone;
+                    ZnRpt(NZ).ITEqTimeAboveDewpointT = state.dataGlobal->TimeStepZone;
+                    ZnRpt(NZ).ITEqTimeOutOfOperRange = state.dataGlobal->TimeStepZone;
                 }
                 if (TDPAirIn < DPMin(EnvClass)) {
-                    ZoneITEq(Loop).TimeBelowDewpointT = TimeStepZone;
-                    ZoneITEq(Loop).TimeOutOfOperRange = TimeStepZone;
+                    ZoneITEq(Loop).TimeBelowDewpointT = state.dataGlobal->TimeStepZone;
+                    ZoneITEq(Loop).TimeOutOfOperRange = state.dataGlobal->TimeStepZone;
                     ZoneITEq(Loop).DewpointTBelowDeltaT = TDPAirIn - DPMin(EnvClass);
-                    ZnRpt(NZ).ITEqTimeBelowDewpointT = TimeStepZone;
-                    ZnRpt(NZ).ITEqTimeOutOfOperRange = TimeStepZone;
+                    ZnRpt(NZ).ITEqTimeBelowDewpointT = state.dataGlobal->TimeStepZone;
+                    ZnRpt(NZ).ITEqTimeOutOfOperRange = state.dataGlobal->TimeStepZone;
                 }
                 if (RHAirIn > RHMax(EnvClass)) {
-                    ZoneITEq(Loop).TimeAboveRH = TimeStepZone;
-                    ZoneITEq(Loop).TimeOutOfOperRange = TimeStepZone;
+                    ZoneITEq(Loop).TimeAboveRH = state.dataGlobal->TimeStepZone;
+                    ZoneITEq(Loop).TimeOutOfOperRange = state.dataGlobal->TimeStepZone;
                     ZoneITEq(Loop).RHAboveDeltaRH = RHAirIn - RHMax(EnvClass);
-                    ZnRpt(NZ).ITEqTimeAboveRH = TimeStepZone;
-                    ZnRpt(NZ).ITEqTimeOutOfOperRange = TimeStepZone;
+                    ZnRpt(NZ).ITEqTimeAboveRH = state.dataGlobal->TimeStepZone;
+                    ZnRpt(NZ).ITEqTimeOutOfOperRange = state.dataGlobal->TimeStepZone;
                 }
                 if (RHAirIn < RHMin(EnvClass)) {
-                    ZoneITEq(Loop).TimeBelowRH = TimeStepZone;
-                    ZoneITEq(Loop).TimeOutOfOperRange = TimeStepZone;
+                    ZoneITEq(Loop).TimeBelowRH = state.dataGlobal->TimeStepZone;
+                    ZoneITEq(Loop).TimeOutOfOperRange = state.dataGlobal->TimeStepZone;
                     ZoneITEq(Loop).RHBelowDeltaRH = RHAirIn - RHMin(EnvClass);
-                    ZnRpt(NZ).ITEqTimeBelowRH = TimeStepZone;
-                    ZnRpt(NZ).ITEqTimeOutOfOperRange = TimeStepZone;
+                    ZnRpt(NZ).ITEqTimeBelowRH = state.dataGlobal->TimeStepZone;
+                    ZnRpt(NZ).ITEqTimeOutOfOperRange = state.dataGlobal->TimeStepZone;
                 }
             }
 
@@ -6084,13 +6084,13 @@ namespace InternalHeatGains {
             Lights(Loop).ConGainEnergy = Lights(Loop).ConGainRate * TimeStepZoneSec;
             Lights(Loop).RetAirGainEnergy = Lights(Loop).RetAirGainRate * TimeStepZoneSec;
             Lights(Loop).TotGainEnergy = Lights(Loop).TotGainRate * TimeStepZoneSec;
-            if (!WarmupFlag) {
+            if (!state.dataGlobal->WarmupFlag) {
                 if (DoOutputReporting && WriteTabularFiles && (state.dataGlobal->KindOfSim == DataGlobalConstants::KindOfSim::RunPeriodWeather)) { // for weather simulations only
                     // for tabular report, accumulate the total electricity used for each Light object
                     Lights(Loop).SumConsumption += Lights(Loop).Consumption;
                     // for tabular report, accumulate the time when each Light has consumption (using a very small threshold instead of zero)
                     if (Lights(Loop).Power > 0.01 * Lights(Loop).DesignLevel) {
-                        Lights(Loop).SumTimeNotZeroCons += TimeStepZone;
+                        Lights(Loop).SumTimeNotZeroCons += state.dataGlobal->TimeStepZone;
                     }
                 }
             }
@@ -6148,7 +6148,7 @@ namespace InternalHeatGains {
             ZoneBBHeat(Loop).TotGainEnergy = ZoneBBHeat(Loop).TotGainRate * TimeStepZoneSec;
         }
 
-        for (ZoneLoop = 1; ZoneLoop <= NumOfZones; ++ZoneLoop) {
+        for (ZoneLoop = 1; ZoneLoop <= state.dataGlobal->NumOfZones; ++ZoneLoop) {
             // People
             ZnRpt(ZoneLoop).PeopleNumOcc = ZoneIntGain(ZoneLoop).NOFOCC;
             ZnRpt(ZoneLoop).PeopleRadGain = ZoneIntGain(ZoneLoop).QOCRAD * TimeStepZoneSec;
@@ -6404,7 +6404,7 @@ namespace InternalHeatGains {
         }
     }
 
-    void UpdateInternalGainValues(Optional_bool_const SuppressRadiationUpdate, Optional_bool_const SumLatentGains)
+    void UpdateInternalGainValues(EnergyPlusData &state, Optional_bool_const SuppressRadiationUpdate, Optional_bool_const SumLatentGains)
     {
 
         // SUBROUTINE INFORMATION:
@@ -6437,7 +6437,7 @@ namespace InternalHeatGains {
         }
 
         // store pointer values to hold generic internal gain values constant for entire timestep
-        for (NZ = 1; NZ <= NumOfZones; ++NZ) {
+        for (NZ = 1; NZ <= state.dataGlobal->NumOfZones; ++NZ) {
             for (Loop = 1; Loop <= ZoneIntGain(NZ).NumberOfDevices; ++Loop) {
                 ZoneIntGain(NZ).Device(Loop).ConvectGainRate = *ZoneIntGain(NZ).Device(Loop).PtrConvectGainRate;
                 ZoneIntGain(NZ).Device(Loop).ReturnAirConvGainRate = *ZoneIntGain(NZ).Device(Loop).PtrReturnAirConvGainRate;
@@ -6457,7 +6457,7 @@ namespace InternalHeatGains {
         }
 
         if (Contaminant.GenericContamSimulation && allocated(ZoneGCGain)) {
-            for (NZ = 1; NZ <= NumOfZones; ++NZ) {
+            for (NZ = 1; NZ <= state.dataGlobal->NumOfZones; ++NZ) {
                 SumAllInternalGenericContamGains(NZ, ZoneGCGain(NZ));
                 ZnRpt(NZ).GCRate = ZoneGCGain(NZ);
             }
@@ -6940,7 +6940,7 @@ namespace InternalHeatGains {
         SumGCGainRate = tmpSumGCGainRate;
     }
 
-    void GatherComponentLoadsIntGain()
+    void GatherComponentLoadsIntGain(EnergyPlusData &state)
     {
         // SUBROUTINE INFORMATION:
         //       AUTHOR         Jason Glazer
@@ -6958,7 +6958,6 @@ namespace InternalHeatGains {
         using namespace DataHeatBalance;
         using DataGlobals::CompLoadReportIsReq;
         using DataGlobals::isPulseZoneSizing;
-        using DataGlobals::NumOfTimeStepInHour;
         using DataSizing::CurOverallSimDay;
         using OutputReportTabular::equipInstantSeq;
         using OutputReportTabular::equipLatentSeq;
@@ -7037,8 +7036,8 @@ namespace InternalHeatGains {
                                                  IntGainTypeOf_ElectricLoadCenterConverter});
 
         if (CompLoadReportIsReq && !isPulseZoneSizing) {
-            TimeStepInDay = (HourOfDay - 1) * NumOfTimeStepInHour + TimeStep;
-            for (iZone = 1; iZone <= NumOfZones; ++iZone) {
+            TimeStepInDay = (state.dataGlobal->HourOfDay - 1) * state.dataGlobal->NumOfTimeStepInHour + state.dataGlobal->TimeStep;
+            for (iZone = 1; iZone <= state.dataGlobal->NumOfZones; ++iZone) {
                 SumInternalConvectionGainsByTypes(iZone, IntGainTypesPeople, peopleInstantSeq(CurOverallSimDay, TimeStepInDay, iZone));
                 SumInternalLatentGainsByTypes(iZone, IntGainTypesPeople, peopleLatentSeq(CurOverallSimDay, TimeStepInDay, iZone));
                 SumInternalRadiationGainsByTypes(iZone, IntGainTypesPeople, peopleRadSeq(CurOverallSimDay, TimeStepInDay, iZone));

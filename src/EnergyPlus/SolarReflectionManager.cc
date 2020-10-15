@@ -580,7 +580,6 @@ namespace SolarReflectionManager {
 
         // USE STATEMENTS: na
         // Using/Aliasing
-        using DataGlobals::HourOfDay;
         using DataSystemVariables::DetailedSolarTimestepIntegration;
 
         // Locals
@@ -605,9 +604,9 @@ namespace SolarReflectionManager {
                 FigureBeamSolDiffuseReflFactors(IHr);
             }    // End of IHr loop
         } else { // timestep integrated solar, use current hour of day
-            ReflFacBmToDiffSolObs(HourOfDay, {1, TotSurfaces}) = 0.0;
-            ReflFacBmToDiffSolGnd(HourOfDay, {1, TotSurfaces}) = 0.0;
-            FigureBeamSolDiffuseReflFactors(HourOfDay);
+            ReflFacBmToDiffSolObs(state.dataGlobal->HourOfDay, {1, TotSurfaces}) = 0.0;
+            ReflFacBmToDiffSolGnd(state.dataGlobal->HourOfDay, {1, TotSurfaces}) = 0.0;
+            FigureBeamSolDiffuseReflFactors(state.dataGlobal->HourOfDay);
         }
     }
 
@@ -859,7 +858,6 @@ namespace SolarReflectionManager {
         // REFERENCES: na
 
         // Using/Aliasing
-        using DataGlobals::HourOfDay;
         using DataSystemVariables::DetailedSolarTimestepIntegration;
 
         // Locals
@@ -883,9 +881,9 @@ namespace SolarReflectionManager {
                 FigureBeamSolSpecularReflFactors(state, IHr);
             }    // End of IHr loop
         } else { // timestep integrated solar, use current hour of day
-            ReflFacBmToBmSolObs(HourOfDay, {1, TotSurfaces}) = 0.0;
-            CosIncAveBmToBmSolObs(HourOfDay, {1, TotSurfaces}) = 0.0;
-            FigureBeamSolSpecularReflFactors(state, HourOfDay);
+            ReflFacBmToBmSolObs(state.dataGlobal->HourOfDay, {1, TotSurfaces}) = 0.0;
+            CosIncAveBmToBmSolObs(state.dataGlobal->HourOfDay, {1, TotSurfaces}) = 0.0;
+            FigureBeamSolSpecularReflFactors(state, state.dataGlobal->HourOfDay);
         }
     }
 

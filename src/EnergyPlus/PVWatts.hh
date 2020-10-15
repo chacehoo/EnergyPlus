@@ -169,7 +169,8 @@ namespace PVWatts {
     public:
         static PVWattsGenerator createFromIdfObj(EnergyPlusData &state, int objNum);
 
-        PVWattsGenerator(const std::string &name,
+        PVWattsGenerator(EnergyPlusData &state,
+                         const std::string &name,
                          const Real64 dcSystemCapacity,
                          ModuleType moduleType,
                          ArrayType arrayType,

@@ -115,11 +115,11 @@ protected:
 
         DataEnvironment::StdRhoAir = Psychrometrics::PsyRhoAirFnPbTdbW(101325.0, 20.0, 0.0); // initialize StdRhoAir
         DataEnvironment::OutBaroPress = 101325.0;
-        DataGlobals::NumOfZones = 1;
-        DataHeatBalance::Zone.allocate(DataGlobals::NumOfZones);
-        DataZoneEquipment::ZoneEquipConfig.allocate(DataGlobals::NumOfZones);
-        DataZoneEquipment::ZoneEquipList.allocate(DataGlobals::NumOfZones);
-        DataZoneEquipment::ZoneEquipAvail.dimension(DataGlobals::NumOfZones, DataHVACGlobals::NoAction);
+        state.dataGlobal->NumOfZones = 1;
+        DataHeatBalance::Zone.allocate(state.dataGlobal->NumOfZones);
+        DataZoneEquipment::ZoneEquipConfig.allocate(state.dataGlobal->NumOfZones);
+        DataZoneEquipment::ZoneEquipList.allocate(state.dataGlobal->NumOfZones);
+        DataZoneEquipment::ZoneEquipAvail.dimension(state.dataGlobal->NumOfZones, DataHVACGlobals::NoAction);
         DataHeatBalance::Zone(1).Name = "EAST ZONE";
         DataZoneEquipment::NumOfZoneEquipLists = 1;
         DataHeatBalance::Zone(1).IsControlled = true;
@@ -6728,7 +6728,7 @@ TEST_F(EnergyPlusFixture, UnitarySystemModel_ReportingTest)
 
     ASSERT_TRUE(process_idf(idf_objects)); // read idf objects
 
-    DataGlobals::NumOfTimeStepInHour = 1; // must initialize this to get schedules initialized
+    state.dataGlobal->NumOfTimeStepInHour = 1; // must initialize this to get schedules initialized
     DataGlobals::MinutesPerTimeStep = 60; // must initialize this to get schedules initialized
     ScheduleManager::ProcessScheduleInput(state);
 

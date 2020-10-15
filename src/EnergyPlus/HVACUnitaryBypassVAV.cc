@@ -2298,7 +2298,7 @@ namespace HVACUnitaryBypassVAV {
                                                                                 CBVAV(CBVAVNum).CoolCoilCompIndex,
                                                                                 DataHVACGlobals::ContFanCycCoil,
                                                                                 HXUnitOn);
-                            if (SolFla == -1 && !DataGlobals::WarmupFlag) {
+                            if (SolFla == -1 && !state.dataGlobal->WarmupFlag) {
                                 if (CBVAV(CBVAVNum).HXDXIterationExceeded < 1) {
                                     ++CBVAV(CBVAVNum).HXDXIterationExceeded;
                                     ShowWarningError("Iteration limit exceeded calculating HX assisted DX unit part-load ratio, for unit = " +
@@ -2313,7 +2313,7 @@ namespace HVACUnitaryBypassVAV {
                                         PartLoadFrac,
                                         PartLoadFrac);
                                 }
-                            } else if (SolFla == -2 && !DataGlobals::WarmupFlag) {
+                            } else if (SolFla == -2 && !state.dataGlobal->WarmupFlag) {
                                 PartLoadFrac = max(0.0,
                                                    min(1.0,
                                                        (DataLoopNode::Node(CBVAV(CBVAVNum).DXCoilInletNode).Temp - CBVAV(CBVAVNum).CoilTempSetPoint) /
@@ -2368,7 +2368,7 @@ namespace HVACUnitaryBypassVAV {
                                                DataHVACGlobals::ContFanCycCoil,
                                                PartLoadFrac,
                                                OnOffAirFlowRatio);
-                            if (SolFla == -1 && !DataGlobals::WarmupFlag) {
+                            if (SolFla == -1 && !state.dataGlobal->WarmupFlag) {
                                 if (CBVAV(CBVAVNum).DXIterationExceeded < 1) {
                                     ++CBVAV(CBVAVNum).DXIterationExceeded;
                                     ShowWarningError("Iteration limit exceeded calculating DX unit part-load ratio, for unit = " +
@@ -2383,7 +2383,7 @@ namespace HVACUnitaryBypassVAV {
                                         PartLoadFrac,
                                         PartLoadFrac);
                                 }
-                            } else if (SolFla == -2 && !DataGlobals::WarmupFlag) {
+                            } else if (SolFla == -2 && !state.dataGlobal->WarmupFlag) {
                                 PartLoadFrac = max(0.0,
                                                    min(1.0,
                                                        (DataLoopNode::Node(CBVAV(CBVAVNum).DXCoilInletNode).Temp - CBVAV(CBVAVNum).CoilTempSetPoint) /
@@ -2585,7 +2585,7 @@ namespace HVACUnitaryBypassVAV {
                                         state, tempAccuracy, MaxIte, SolFla, SpeedRatio, HVACDXSystem::VSCoilSpeedResidual, 1.0e-10, 1.0, Par);
 
                                     if (SolFla == -1) {
-                                        if (!DataGlobals::WarmupFlag) {
+                                        if (!state.dataGlobal->WarmupFlag) {
                                             if (CBVAV(CBVAVNum).DXIterationExceeded < 4) {
                                                 ++CBVAV(CBVAVNum).DXIterationExceeded;
                                                 ShowWarningError(CBVAV(CBVAVNum).DXCoolCoilType +
@@ -2603,7 +2603,7 @@ namespace HVACUnitaryBypassVAV {
                                                                            PartLoadFrac);
                                         }
                                     } else if (SolFla == -2) {
-                                        if (!DataGlobals::WarmupFlag) {
+                                        if (!state.dataGlobal->WarmupFlag) {
                                             if (CBVAV(CBVAVNum).DXIterationFailed < 4) {
                                                 ++CBVAV(CBVAVNum).DXIterationFailed;
                                                 ShowWarningError(
@@ -2632,7 +2632,7 @@ namespace HVACUnitaryBypassVAV {
                                     TempSolveRoot::SolveRoot(
                                         state, tempAccuracy, MaxIte, SolFla, PartLoadFrac, HVACDXSystem::VSCoilCyclingResidual, 1.0e-10, 1.0, Par);
                                     if (SolFla == -1) {
-                                        if (!DataGlobals::WarmupFlag) {
+                                        if (!state.dataGlobal->WarmupFlag) {
                                             if (CBVAV(CBVAVNum).DXCyclingIterationExceeded < 4) {
                                                 ++CBVAV(CBVAVNum).DXCyclingIterationExceeded;
                                                 ShowWarningError(
@@ -2654,7 +2654,7 @@ namespace HVACUnitaryBypassVAV {
                                         }
                                     } else if (SolFla == -2) {
 
-                                        if (!DataGlobals::WarmupFlag) {
+                                        if (!state.dataGlobal->WarmupFlag) {
                                             if (CBVAV(CBVAVNum).DXCyclingIterationFailed < 4) {
                                                 ++CBVAV(CBVAVNum).DXCyclingIterationFailed;
                                                 ShowWarningError(
@@ -2851,9 +2851,9 @@ namespace HVACUnitaryBypassVAV {
 
                             // Calculate the approach temperature (difference between SA dry-bulb temp and SA dew point temp)
                             ApproachTemp = DataLoopNode::Node(CBVAV(CBVAVNum).DXCoilOutletNode).Temp -
-                                           Psychrometrics::PsyTdpFnWPb(DataLoopNode::Node(OutletNode).HumRat, OutdoorBaroPress);
+                                           Psychrometrics::PsyTdpFnWPb(state, DataLoopNode::Node(OutletNode).HumRat, OutdoorBaroPress);
                             // Calculate the dew point temperature at the SA humidity ratio setpoint
-                            DesiredDewPoint = Psychrometrics::PsyTdpFnWPb(DataLoopNode::Node(OutletNode).HumRatMax, OutdoorBaroPress);
+                            DesiredDewPoint = Psychrometrics::PsyTdpFnWPb(state, DataLoopNode::Node(OutletNode).HumRatMax, OutdoorBaroPress);
                             // Adjust the calculated dew point temperature by the approach temp
                             CBVAV(CBVAVNum).CoilTempSetPoint = min(CBVAV(CBVAVNum).CoilTempSetPoint, (DesiredDewPoint + ApproachTemp));
 
@@ -3084,13 +3084,13 @@ namespace HVACUnitaryBypassVAV {
                                                DataHVACGlobals::ContFanCycCoil,
                                                PartLoadFrac,
                                                OnOffAirFlowRatio);
-                            if (SolFla == -1 && !DataGlobals::WarmupFlag) {
+                            if (SolFla == -1 && !state.dataGlobal->WarmupFlag) {
                                 ShowWarningError("Iteration limit exceeded calculating DX unit part-load ratio, for unit = " +
                                                  CBVAV(CBVAVNum).HeatCoilName);
                                 ShowContinueError("Calculated part-load ratio = " + General::RoundSigDigits(PartLoadFrac, 3));
                                 ShowContinueErrorTimeStamp(
                                     "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
-                            } else if (SolFla == -2 && !DataGlobals::WarmupFlag) {
+                            } else if (SolFla == -2 && !state.dataGlobal->WarmupFlag) {
                                 ShowSevereError("DX unit part-load ratio calculation failed: part-load ratio limits exceeded, for unit = " +
                                                 CBVAV(CBVAVNum).HeatCoilName);
                                 ShowContinueErrorTimeStamp("A part-load ratio of " + General::RoundSigDigits(PartLoadFrac, 3) +
@@ -3297,7 +3297,7 @@ namespace HVACUnitaryBypassVAV {
                                 state, tempAccuracy, MaxIte, SolFla, SpeedRatio, HVACDXHeatPumpSystem::VSCoilSpeedResidual, 1.0e-10, 1.0, Par);
 
                             if (SolFla == -1) {
-                                if (!DataGlobals::WarmupFlag) {
+                                if (!state.dataGlobal->WarmupFlag) {
                                     if (CBVAV(CBVAVNum).DXHeatIterationExceeded < 4) {
                                         ++CBVAV(CBVAVNum).DXHeatIterationExceeded;
                                         ShowWarningError(CBVAV(CBVAVNum).HeatCoilType +
@@ -3316,7 +3316,7 @@ namespace HVACUnitaryBypassVAV {
                                 }
                             } else if (SolFla == -2) {
 
-                                if (!DataGlobals::WarmupFlag) {
+                                if (!state.dataGlobal->WarmupFlag) {
                                     if (CBVAV(CBVAVNum).DXHeatIterationFailed < 4) {
                                         ++CBVAV(CBVAVNum).DXHeatIterationFailed;
                                         ShowWarningError(CBVAV(CBVAVNum).HeatCoilType +
@@ -3355,7 +3355,7 @@ namespace HVACUnitaryBypassVAV {
                             TempSolveRoot::SolveRoot(
                                 state, tempAccuracy, MaxIte, SolFla, PartLoadFrac, HVACDXHeatPumpSystem::VSCoilCyclingResidual, 1.0e-10, 1.0, Par);
                             if (SolFla == -1) {
-                                if (!DataGlobals::WarmupFlag) {
+                                if (!state.dataGlobal->WarmupFlag) {
                                     if (CBVAV(CBVAVNum).DXHeatCyclingIterationExceeded < 4) {
                                         ++CBVAV(CBVAVNum).DXHeatCyclingIterationExceeded;
                                         ShowWarningError(
@@ -3376,7 +3376,7 @@ namespace HVACUnitaryBypassVAV {
                                 }
                             } else if (SolFla == -2) {
 
-                                if (!DataGlobals::WarmupFlag) {
+                                if (!state.dataGlobal->WarmupFlag) {
                                     if (CBVAV(CBVAVNum).DXHeatCyclingIterationFailed < 4) {
                                         ++CBVAV(CBVAVNum).DXHeatCyclingIterationFailed;
                                         ShowWarningError(CBVAV(CBVAVNum).HeatCoilType +
@@ -3495,13 +3495,13 @@ namespace HVACUnitaryBypassVAV {
         Real64 ZoneLoad = 0.0; // Total load in controlled zone [W]
 
         int dayOfSim = state.dataGlobal->DayOfSim; // DayOfSim increments during Warmup when it actually simulates the same day
-        if (DataGlobals::WarmupFlag) {
+        if (state.dataGlobal->WarmupFlag) {
             // when warmupday increments then reset timer
             if (lastDayOfSim != dayOfSim) CBVAV(CBVAVNum).changeOverTimer = -1.0; // reset to default (thisTime always > -1)
             lastDayOfSim = dayOfSim;
             dayOfSim = 1; // reset so that thisTime is <= 24 during warmup
         }
-        Real64 thisTime = (dayOfSim - 1) * 24 + DataGlobals::HourOfDay - 1 + (DataGlobals::TimeStep - 1) * DataGlobals::TimeStepZone +
+        Real64 thisTime = (dayOfSim - 1) * 24 + state.dataGlobal->HourOfDay - 1 + (state.dataGlobal->TimeStep - 1) * state.dataGlobal->TimeStepZone +
                           DataHVACGlobals::SysTimeElapsed;
 
         if (thisTime <= CBVAV(CBVAVNum).changeOverTimer) {

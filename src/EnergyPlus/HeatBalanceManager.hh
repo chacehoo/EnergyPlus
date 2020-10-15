@@ -199,7 +199,7 @@ namespace HeatBalanceManager {
 
     void InitHeatBalance(EnergyPlusData &state);
 
-    void AllocateHeatBalArrays();
+    void AllocateHeatBalArrays(EnergyPlusData &state);
 
     // End Initialization Section of the Module
     //******************************************************************************

@@ -591,7 +591,7 @@ namespace ZoneDehumidifier {
         if (!state.dataZoneDehumidifier->ZoneEquipmentListChecked && ZoneEquipInputsFilled) {
             state.dataZoneDehumidifier->ZoneEquipmentListChecked = true;
             for (LoopIndex = 1; LoopIndex <= state.dataZoneDehumidifier->NumDehumidifiers; ++LoopIndex) {
-                if (CheckZoneEquipmentList(state.dataZoneDehumidifier->ZoneDehumid(LoopIndex).UnitType, state.dataZoneDehumidifier->ZoneDehumid(LoopIndex).Name)) continue;
+                if (CheckZoneEquipmentList(state, state.dataZoneDehumidifier->ZoneDehumid(LoopIndex).UnitType, state.dataZoneDehumidifier->ZoneDehumid(LoopIndex).Name)) continue;
                 ShowSevereError("InitZoneDehumidifier: Zone Dehumidifier=\"" + state.dataZoneDehumidifier->ZoneDehumid(LoopIndex).UnitType + ',' + state.dataZoneDehumidifier->ZoneDehumid(LoopIndex).Name +
                                 "\" is not on any ZoneHVAC:EquipmentList.  It will not be simulated.");
             }
@@ -605,7 +605,7 @@ namespace ZoneDehumidifier {
             // Might default back to STP later after discussion with M. Witte, use StdRhoAir instead of calc'd RhoAir at rated conditions
             RatedAirDBTemp = 26.6667; // 26.6667 C, 80F
             RatedAirRH = 0.6;         // 60% RH
-            RatedAirHumrat = PsyWFnTdbRhPb(RatedAirDBTemp, RatedAirRH, StdBaroPress, RoutineName);
+            RatedAirHumrat = PsyWFnTdbRhPb(state, RatedAirDBTemp, RatedAirRH, StdBaroPress, RoutineName);
             state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).RatedAirMassFlow =
                 PsyRhoAirFnPbTdbW(StdBaroPress, RatedAirDBTemp, RatedAirHumrat, RoutineName) * state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).RatedAirVolFlow;
 
@@ -762,7 +762,7 @@ namespace ZoneDehumidifier {
 
         InletAirTemp = Node(AirInletNodeNum).Temp;
         InletAirHumRat = Node(AirInletNodeNum).HumRat;
-        InletAirRH = 100.0 * PsyRhFnTdbWPb(InletAirTemp, InletAirHumRat, OutBaroPress, RoutineName); // RH in percent (%)
+        InletAirRH = 100.0 * PsyRhFnTdbWPb(state, InletAirTemp, InletAirHumRat, OutBaroPress, RoutineName); // RH in percent (%)
 
         if (QZnDehumidReq < 0.0 && GetCurrentScheduleValue(state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).SchedPtr) > 0.0 &&
             InletAirTemp >= state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).MinInletAirTemp && InletAirTemp <= state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).MaxInletAirTemp) {

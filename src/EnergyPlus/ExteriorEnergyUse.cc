@@ -74,7 +74,6 @@ namespace ExteriorEnergyUse {
     // affect simulation results for the energy usage in a building but may affect the "metered"
     // usage of a facility.
 
-    using DataGlobals::TimeStepZone;
     using DataGlobals::TimeStepZoneSec;
 
     void ManageExteriorEnergyUse(EnergyPlusData &state)
@@ -545,7 +544,6 @@ namespace ExteriorEnergyUse {
         // Using/Aliasing
         using DataEnvironment::SunIsUp;
         using DataGlobals::DoOutputReporting;
-        using DataGlobals::WarmupFlag;
         using ScheduleManager::GetCurrentScheduleValue;
 
         // Locals
@@ -595,7 +593,7 @@ namespace ExteriorEnergyUse {
             state.dataExteriorEnergyUse->ExteriorLights(Item).CurrentUse = state.dataExteriorEnergyUse->ExteriorLights(Item).Power * TimeStepZoneSec;
 
             // gather for tabular reports
-            if (!WarmupFlag) {
+            if (!state.dataGlobal->WarmupFlag) {
                 //      IF (DoOutputReporting .AND.  WriteTabularFiles .and. (KindOfSim == ksRunPeriodWeather)) THEN !for weather simulations only
                 if (DoOutputReporting && (state.dataGlobal->KindOfSim == DataGlobalConstants::KindOfSim::RunPeriodWeather)) { // for weather simulations only
                     // for tabular report, accumua the total electricity used for each ExteriorLights object
@@ -603,7 +601,7 @@ namespace ExteriorEnergyUse {
                     // for tabular report, accumulate the time when each ExteriorLights has consumption
                     //(using a very small threshold instead of zero)
                     if (state.dataExteriorEnergyUse->ExteriorLights(Item).CurrentUse > 0.01) {
-                        state.dataExteriorEnergyUse->ExteriorLights(Item).SumTimeNotZeroCons += TimeStepZone;
+                        state.dataExteriorEnergyUse->ExteriorLights(Item).SumTimeNotZeroCons += state.dataGlobal->TimeStepZone;
                     }
                 }
             }

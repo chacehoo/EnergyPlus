@@ -2419,7 +2419,7 @@ TEST_F(LowTempRadiantSystemTest, calculateRunningMeanAverageTemperatureTest)
     CFloRadSys.allocate(1);
     auto &thisCFloSys (CFloRadSys(1));
 
-    NumOfTimeStepInHour = 1;
+    state.dataGlobal->NumOfTimeStepInHour = 1;
     state.dataWeatherManager->TodayOutDryBulbTemp.allocate(NumOfTimeStepInHour, DataGlobalConstants::HoursInDay());
     state.dataWeatherManager->TodayOutDryBulbTemp = 0.0;
     for (int hourNumber = 1; hourNumber <= DataGlobalConstants::HoursInDay(); ++hourNumber) {
@@ -2428,8 +2428,8 @@ TEST_F(LowTempRadiantSystemTest, calculateRunningMeanAverageTemperatureTest)
 
     // Test 1: First day of the simulation and it's in warmup-->everything set to the same temperature
     state.dataGlobal->DayOfSim = 1;
-    DataGlobals::WarmupFlag = true;
-    DataGlobals::NumOfDayInEnvrn = 366;
+    state.dataGlobal->WarmupFlag = true;
+    state.dataGlobal->NumOfDayInEnvrn = 366;
     thisCFloSys.todayAverageOutdoorDryBulbTemperature = -9999.9;
     thisCFloSys.yesterdayAverageOutdoorDryBulbTemperature = -9999.9;
     thisCFloSys.todayRunningMeanOutdoorDryBulbTemperature = -9999.9;
@@ -2444,8 +2444,8 @@ TEST_F(LowTempRadiantSystemTest, calculateRunningMeanAverageTemperatureTest)
 
     // Test 2: Not first dsy of simulation but still in warmup-->should not do anything because in warmup same day repeated over and over
     state.dataGlobal->DayOfSim = 2;
-    DataGlobals::WarmupFlag = true;
-    DataGlobals::NumOfDayInEnvrn = 366;
+    state.dataGlobal->WarmupFlag = true;
+    state.dataGlobal->NumOfDayInEnvrn = 366;
     thisCFloSys.todayAverageOutdoorDryBulbTemperature = -9999.9;
     thisCFloSys.yesterdayAverageOutdoorDryBulbTemperature = -9999.9;
     thisCFloSys.todayRunningMeanOutdoorDryBulbTemperature = -9999.9;
@@ -2460,8 +2460,8 @@ TEST_F(LowTempRadiantSystemTest, calculateRunningMeanAverageTemperatureTest)
 
     // Test 3: Not in warmup but number of days of simulation only 1-->should not do anything because it's a single day which means no real history
     state.dataGlobal->DayOfSim = 1;
-    DataGlobals::WarmupFlag = false;
-    DataGlobals::NumOfDayInEnvrn = 1;
+    state.dataGlobal->WarmupFlag = false;
+    state.dataGlobal->NumOfDayInEnvrn = 1;
     thisCFloSys.todayAverageOutdoorDryBulbTemperature = 12.345;
     thisCFloSys.yesterdayAverageOutdoorDryBulbTemperature = 12.345;
     thisCFloSys.todayRunningMeanOutdoorDryBulbTemperature = 12.345;
@@ -2476,8 +2476,8 @@ TEST_F(LowTempRadiantSystemTest, calculateRunningMeanAverageTemperatureTest)
 
     // Test 4: Not in warmup and number of days of simulation greater than 1-->apply the formula for running mean temperature and shift data
     state.dataGlobal->DayOfSim = 1;
-    DataGlobals::WarmupFlag = false;
-    DataGlobals::NumOfDayInEnvrn = 366;
+    state.dataGlobal->WarmupFlag = false;
+    state.dataGlobal->NumOfDayInEnvrn = 366;
     thisCFloSys.todayAverageOutdoorDryBulbTemperature = 15.0;
     thisCFloSys.yesterdayAverageOutdoorDryBulbTemperature = 10.0;
     thisCFloSys.todayRunningMeanOutdoorDryBulbTemperature = 14.5;
@@ -2500,10 +2500,10 @@ TEST_F(LowTempRadiantSystemTest, updateOperatingModeHistoryTest)
     int expectedResult;
     int resetResult = -9999;
     HydrRadSys.allocate(1);
-    DataGlobals::NumOfTimeStepInHour = 6;
+    state.dataGlobal->NumOfTimeStepInHour = 6;
     state.dataGlobal->DayOfSim = 2;
-    DataGlobals::HourOfDay = 4;
-    DataGlobals::TimeStep = 5;
+    state.dataGlobal->HourOfDay = 4;
+    state.dataGlobal->TimeStep = 5;
     auto &thisRadSys (HydrRadSys(1));
 
     // Test 1: Operating Mode different, beginning of day-->lastOperatingMode should switch, last parameters should get set appropriately
@@ -2520,7 +2520,7 @@ TEST_F(LowTempRadiantSystemTest, updateOperatingModeHistoryTest)
     EXPECT_EQ(thisRadSys.lastDayOfSim, expectedResult);
     expectedResult = DataGlobalConstants::HoursInDay();
     EXPECT_EQ(thisRadSys.lastHourOfDay, expectedResult);
-    expectedResult = DataGlobals::NumOfTimeStepInHour;
+    expectedResult = state.dataGlobal->NumOfTimeStepInHour;
     EXPECT_EQ(thisRadSys.lastTimeStep, expectedResult);
     EXPECT_EQ(thisRadSys.lastOperatingMode, LowTempRadiantSystem::CoolingMode);
     EXPECT_EQ(thisRadSys.OperatingMode, LowTempRadiantSystem::NotOperating);
@@ -2539,7 +2539,7 @@ TEST_F(LowTempRadiantSystemTest, updateOperatingModeHistoryTest)
     EXPECT_EQ(thisRadSys.lastDayOfSim, expectedResult);
     expectedResult = 3;
     EXPECT_EQ(thisRadSys.lastHourOfDay, expectedResult);
-    expectedResult = DataGlobals::NumOfTimeStepInHour;
+    expectedResult = state.dataGlobal->NumOfTimeStepInHour;
     EXPECT_EQ(thisRadSys.lastTimeStep, expectedResult);
     EXPECT_EQ(thisRadSys.lastOperatingMode, LowTempRadiantSystem::CoolingMode);
     EXPECT_EQ(thisRadSys.OperatingMode, LowTempRadiantSystem::NotOperating);
@@ -2589,7 +2589,7 @@ TEST_F(LowTempRadiantSystemTest, setOperatingModeBasedOnChangeoverDelayTest)
     int expectedResult;
     HydrRadSys.allocate(1);
     auto &thisRadSys (HydrRadSys(1));
-    DataGlobals::NumOfTimeStepInHour = 6;
+    state.dataGlobal->NumOfTimeStepInHour = 6;
     DataGlobals::MinutesPerTimeStep = 10.0;
 
     // Test 1: lastOperatingMode is NotOperating-->don't do anything to OperatingMode
@@ -2628,8 +2628,8 @@ TEST_F(LowTempRadiantSystemTest, setOperatingModeBasedOnChangeoverDelayTest)
     thisRadSys.OperatingMode = LowTempRadiantSystem::CoolingMode;
     thisRadSys.schedPtrChangeoverDelay = -1;
     state.dataGlobal->DayOfSim = 2;
-    DataGlobals::HourOfDay = 1;
-    DataGlobals::TimeStep = 1;
+    state.dataGlobal->HourOfDay = 1;
+    state.dataGlobal->TimeStep = 1;
     thisRadSys.lastDayOfSim = 1;
     thisRadSys.lastHourOfDay = 24;
     thisRadSys.lastTimeStep = 2;
@@ -2643,8 +2643,8 @@ TEST_F(LowTempRadiantSystemTest, setOperatingModeBasedOnChangeoverDelayTest)
     thisRadSys.lastOperatingMode = LowTempRadiantSystem::HeatingMode;
     thisRadSys.OperatingMode = LowTempRadiantSystem::CoolingMode;
     state.dataGlobal->DayOfSim = 2;
-    DataGlobals::HourOfDay = 1;
-    DataGlobals::TimeStep = 4;
+    state.dataGlobal->HourOfDay = 1;
+    state.dataGlobal->TimeStep = 4;
     thisRadSys.lastDayOfSim = 1;
     thisRadSys.lastHourOfDay = 22;
     thisRadSys.lastTimeStep = 3;

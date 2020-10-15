@@ -1873,10 +1873,10 @@ namespace WaterThermalTanks {
                     bool FoundInletNode = false;
                     bool FoundOutletNode = false;
                     int ZoneNum;
-                    for (ZoneNum = 1; ZoneNum <= DataGlobals::NumOfZones; ++ZoneNum) {
+                    for (ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ++ZoneNum) {
                         if (HPWH.AmbientTempZone == DataZoneEquipment::ZoneEquipConfig(ZoneNum).ActualZoneNum) break;
                     }
-                    if (ZoneNum <= DataGlobals::NumOfZones) {
+                    if (ZoneNum <= state.dataGlobal->NumOfZones) {
                         for (int SupAirIn = 1; SupAirIn <= DataZoneEquipment::ZoneEquipConfig(ZoneNum).NumInletNodes; ++SupAirIn) {
                             if (HPWH.HeatPumpAirOutletNode != DataZoneEquipment::ZoneEquipConfig(ZoneNum).InletNode(SupAirIn)) continue;
                             FoundOutletNode = true;
@@ -4122,16 +4122,16 @@ namespace WaterThermalTanks {
                             if (allocated(DataZoneEquipment::ZoneEquipConfig) && allocated(DataZoneEquipment::ZoneEquipList)) {
                                 bool FoundTankInList = false;
                                 bool TankNotLowestPriority = false;
-                                for (int ZoneEquipConfigNum = 1; ZoneEquipConfigNum <= DataGlobals::NumOfZones; ++ZoneEquipConfigNum) {
+                                for (int ZoneEquipConfigNum = 1; ZoneEquipConfigNum <= state.dataGlobal->NumOfZones; ++ZoneEquipConfigNum) {
                                     if (DataZoneEquipment::ZoneEquipConfig(ZoneEquipConfigNum).ActualZoneNum != HPWH.AmbientTempZone) continue;
-                                    if (ZoneEquipConfigNum <= DataGlobals::NumOfZones) {
-                                        for (int ZoneEquipListNum = 1; ZoneEquipListNum <= DataGlobals::NumOfZones; ++ZoneEquipListNum) {
+                                    if (ZoneEquipConfigNum <= state.dataGlobal->NumOfZones) {
+                                        for (int ZoneEquipListNum = 1; ZoneEquipListNum <= state.dataGlobal->NumOfZones; ++ZoneEquipListNum) {
                                             if (DataZoneEquipment::ZoneEquipConfig(ZoneEquipConfigNum).EquipListName !=
                                                 DataZoneEquipment::ZoneEquipList(ZoneEquipListNum).Name)
                                                 continue;
                                             int TankCoolingPriority = 0;
                                             int TankHeatingPriority = 0;
-                                            if (ZoneEquipConfigNum <= DataGlobals::NumOfZones) {
+                                            if (ZoneEquipConfigNum <= state.dataGlobal->NumOfZones) {
                                                 for (int EquipmentTypeNum = 1;
                                                      EquipmentTypeNum <= DataZoneEquipment::ZoneEquipList(ZoneEquipListNum).NumOfEquipTypes;
                                                      ++EquipmentTypeNum) {
@@ -5625,7 +5625,7 @@ namespace WaterThermalTanks {
 
         if (!state.dataGlobal->BeginEnvrnFlag) this->MyEnvrnFlag = true;
 
-        if (this->WarmupFlag && (!DataGlobals::WarmupFlag)) {
+        if (this->state.dataGlobal->WarmupFlag && (!state.dataGlobal->WarmupFlag)) {
             // reInitialize tank temperature to setpoint of first hour (use HPWH or Desuperheater heating coil set point if applicable)
             // BG's interpretation here is that its better to reset initial condition to setpoint once warm up is over.
             // (otherwise with a dynamic storage model it is difficult for the user to see the initial performance if it isn't periodic.)
@@ -5667,9 +5667,9 @@ namespace WaterThermalTanks {
             this->SavedHeaterOn2 = false;
             this->Mode = 0;
             this->SavedMode = 0;
-            this->WarmupFlag = false;
+            this->state.dataGlobal->WarmupFlag = false;
         }
-        if (DataGlobals::WarmupFlag) this->WarmupFlag = true;
+        if (state.dataGlobal->WarmupFlag) this->state.dataGlobal->WarmupFlag = true;
 
         if (FirstHVACIteration) {
             // Get all scheduled values
@@ -5928,7 +5928,7 @@ namespace WaterThermalTanks {
                 } else if (SELECT_CASE_var == AmbientTempEnum::Schedule) {
                     HPInletDryBulbTemp = ScheduleManager::GetCurrentScheduleValue(state.dataWaterThermalTanks->HPWaterHeater(HPNum).AmbientTempSchedule);
                     HPInletRelHum = ScheduleManager::GetCurrentScheduleValue(state.dataWaterThermalTanks->HPWaterHeater(HPNum).AmbientRHSchedule);
-                    HPInletHumRat = Psychrometrics::PsyWFnTdbRhPb(HPInletDryBulbTemp, HPInletRelHum, DataEnvironment::OutBaroPress, RoutineName);
+                    HPInletHumRat = Psychrometrics::PsyWFnTdbRhPb(state, HPInletDryBulbTemp, HPInletRelHum, DataEnvironment::OutBaroPress, RoutineName);
                     DataLoopNode::Node(HPAirInletNode).Temp = HPInletDryBulbTemp;
                     DataLoopNode::Node(HPAirInletNode).HumRat = HPInletHumRat;
                     DataLoopNode::Node(HPAirInletNode).Enthalpy = Psychrometrics::PsyHFnTdbW(HPInletDryBulbTemp, HPInletHumRat);
@@ -5982,7 +5982,7 @@ namespace WaterThermalTanks {
             //   HPWHInletDBTemp and HPWHInletWBTemp are DataHVACGlobals to pass info to HPWHDXCoil
             DataHVACGlobals::HPWHInletDBTemp = HPInletDryBulbTemp;
             DataHVACGlobals::HPWHInletWBTemp =
-                Psychrometrics::PsyTwbFnTdbWPb(DataHVACGlobals::HPWHInletDBTemp, HPInletHumRat, DataEnvironment::OutBaroPress);
+                Psychrometrics::PsyTwbFnTdbWPb(state, DataHVACGlobals::HPWHInletDBTemp, HPInletHumRat, DataEnvironment::OutBaroPress);
 
             // initialize flow rates at speed levels for variable-speed HPWH
             if ((state.dataWaterThermalTanks->HPWaterHeater(HPNum).bIsIHP) && (0 == state.dataWaterThermalTanks->HPWaterHeater(HPNum).NumofSpeed)) // use SCWH coil represents
@@ -6132,7 +6132,7 @@ namespace WaterThermalTanks {
         static std::string const RoutineName("CalcWaterThermalTankMixed");
 
         // FLOW:
-        Real64 TimeElapsed_loc = DataGlobals::HourOfDay + DataGlobals::TimeStep * DataGlobals::TimeStepZone + DataHVACGlobals::SysTimeElapsed;
+        Real64 TimeElapsed_loc = state.dataGlobal->HourOfDay + state.dataGlobal->TimeStep * state.dataGlobal->TimeStepZone + DataHVACGlobals::SysTimeElapsed;
 
         if (this->TimeElapsed != TimeElapsed_loc) {
             // The simulation has advanced to the next system DataGlobals::TimeStep.  Save conditions from the end of the previous system
@@ -6620,7 +6620,7 @@ namespace WaterThermalTanks {
 
             if (CycleOnCount_loc > MaxCycles) {
 
-                if (!DataGlobals::WarmupFlag) {
+                if (!state.dataGlobal->WarmupFlag) {
                     if (this->MaxCycleErrorIndex == 0) {
                         ShowWarningError("WaterHeater:Mixed = " + this->Name + ":  Heater is cycling on and off more than once per second.");
                         ShowContinueError("Try increasing Deadband Temperature Difference or Tank Volume");
@@ -6665,7 +6665,7 @@ namespace WaterThermalTanks {
         this->TankTemp = TankTemp_loc;       // Final tank temperature for carry-over to next DataGlobals::TimeStep
         this->TankTempAvg = TankTempAvg_loc; // Average tank temperature over the DataGlobals::TimeStep for reporting
 
-        if (!DataGlobals::WarmupFlag) {
+        if (!state.dataGlobal->WarmupFlag) {
             // Warn for potential freezing when avg of final temp over all nodes is below 2°C (nearing 0°C)
             if (this->TankTemp < 2) {
                 if (this->FreezingErrorIndex == 0) {
@@ -7011,7 +7011,7 @@ namespace WaterThermalTanks {
         const Real64 &nTankNodes = this->Nodes;
 
         // Fraction of the current hour that has elapsed (h)
-        const Real64 TimeElapsed_loc = DataGlobals::HourOfDay + DataGlobals::TimeStep * DataGlobals::TimeStepZone + DataHVACGlobals::SysTimeElapsed;
+        const Real64 TimeElapsed_loc = state.dataGlobal->HourOfDay + state.dataGlobal->TimeStep * state.dataGlobal->TimeStepZone + DataHVACGlobals::SysTimeElapsed;
 
         // Seconds in one DataGlobals::TimeStep (s)
         const Real64 SecInTimeStep = DataHVACGlobals::TimeStepSys * DataGlobalConstants::SecInHour();
@@ -7532,7 +7532,7 @@ namespace WaterThermalTanks {
         this->TankTemp = sum(this->Node, &StratifiedNodeData::Temp) / this->Nodes;
         this->TankTempAvg = sum(this->Node, &StratifiedNodeData::TempAvg) / this->Nodes;
 
-        if (!DataGlobals::WarmupFlag) {
+        if (!state.dataGlobal->WarmupFlag) {
             // Warn for potential freezing when avg of final temp over all nodes is below 2°C (nearing 0°C)
             if (this->TankTemp < 2) {
                 if (this->FreezingErrorIndex == 0) {
@@ -7859,7 +7859,7 @@ namespace WaterThermalTanks {
         Real64 desupHtrSetPointTemp = DesupHtr.SetPointTemp;
         Real64 DeadBandTempDiff = DesupHtr.DeadBandTempDiff;
         if ((desupHtrSetPointTemp - DeadBandTempDiff) <= this->SetPointTemp) {
-            if (!DataGlobals::WarmupFlag && !DataGlobals::DoingSizing && !DataGlobals::KickOffSimulation) {
+            if (!state.dataGlobal->WarmupFlag && !DataGlobals::DoingSizing && !DataGlobals::KickOffSimulation) {
                 Real64 MinTemp = desupHtrSetPointTemp - DeadBandTempDiff;
                 ++DesupHtr.SetPointError;
                 if (DesupHtr.SetPointError < 5) {
@@ -8023,7 +8023,7 @@ namespace WaterThermalTanks {
                                 TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, partLoadRatio, boundPLRFunc, 0.0, DesupHtr.DXSysPLR, Par);
                                 if (SolFla == -1) {
                                     IterNum = fmt::to_string(MaxIte);
-                                    if (!DataGlobals::WarmupFlag) {
+                                    if (!state.dataGlobal->WarmupFlag) {
                                         ++DesupHtr.IterLimitExceededNum1;
                                         if (DesupHtr.IterLimitExceededNum1 == 1) {
                                             ShowWarningError(DesupHtr.Type + " \"" + DesupHtr.Name + "\"");
@@ -8046,7 +8046,7 @@ namespace WaterThermalTanks {
                                         min(DesupHtr.DXSysPLR, (desupHtrSetPointTemp - this->SavedTankTemp) / (NewTankTemp - this->SavedTankTemp)));
                                     this->SourceMassFlowRate = MdotWater * partLoadRatio;
                                     this->CalcWaterThermalTank(state);
-                                    if (!DataGlobals::WarmupFlag) {
+                                    if (!state.dataGlobal->WarmupFlag) {
                                         ++DesupHtr.RegulaFalsiFailedNum1;
                                         if (DesupHtr.RegulaFalsiFailedNum1 == 1) {
                                             ShowWarningError(DesupHtr.Type + " \"" + DesupHtr.Name + "\"");
@@ -8140,7 +8140,7 @@ namespace WaterThermalTanks {
                                     TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, partLoadRatio, boundPLRFunc, 0.0, DesupHtr.DXSysPLR, Par);
                                     if (SolFla == -1) {
                                         IterNum = fmt::to_string(MaxIte);
-                                        if (!DataGlobals::WarmupFlag) {
+                                        if (!state.dataGlobal->WarmupFlag) {
                                             ++DesupHtr.IterLimitExceededNum2;
                                             if (DesupHtr.IterLimitExceededNum2 == 1) {
                                                 ShowWarningError(DesupHtr.Type + " \"" + DesupHtr.Name + "\"");
@@ -8161,7 +8161,7 @@ namespace WaterThermalTanks {
                                         partLoadRatio = max(0.0,
                                                             min(DesupHtr.DXSysPLR,
                                                                 (desupHtrSetPointTemp - this->SavedTankTemp) / (NewTankTemp - this->SavedTankTemp)));
-                                        if (!DataGlobals::WarmupFlag) {
+                                        if (!state.dataGlobal->WarmupFlag) {
                                             ++DesupHtr.RegulaFalsiFailedNum2;
                                             if (DesupHtr.RegulaFalsiFailedNum2 == 1) {
                                                 ShowWarningError(DesupHtr.Type + " \"" + DesupHtr.Name + "\"");
@@ -8510,7 +8510,7 @@ namespace WaterThermalTanks {
             }
 
             //   Warn if HPWH compressor cut-in temperature is less than the water heater tank's set point temp
-            if (!DataGlobals::WarmupFlag && !DataGlobals::DoingSizing && !DataGlobals::KickOffSimulation) {
+            if (!state.dataGlobal->WarmupFlag && !DataGlobals::DoingSizing && !DataGlobals::KickOffSimulation) {
                 if ((HPSetPointTemp - DeadBandTempDiff) <= this->SetPointTemp) {
                     Real64 HPMinTemp = HPSetPointTemp - DeadBandTempDiff;
                     const auto HPMinTempChar = fmt::to_string(HPMinTemp);
@@ -8852,7 +8852,7 @@ namespace WaterThermalTanks {
                     if (SolFla == -1) {
                         std::string IterNum;
                         IterNum = fmt::to_string(MaxIte);
-                        if (!DataGlobals::WarmupFlag) {
+                        if (!state.dataGlobal->WarmupFlag) {
                             ++HeatPump.IterLimitExceededNum2;
                             if (HeatPump.IterLimitExceededNum2 == 1) {
                                 ShowWarningError(HeatPump.Type + " \"" + HeatPump.Name + "\"");
@@ -8871,7 +8871,7 @@ namespace WaterThermalTanks {
                         }
                     } else if (SolFla == -2) {
                         state.dataWaterThermalTanks->hpPartLoadRatio = max(0.0, min(1.0, (HPSetPointTemp - savedTankTemp) / (NewTankTemp - savedTankTemp)));
-                        if (!DataGlobals::WarmupFlag) {
+                        if (!state.dataGlobal->WarmupFlag) {
                             ++HeatPump.RegulaFalsiFailedNum2;
                             if (HeatPump.RegulaFalsiFailedNum2 == 1) {
                                 ShowWarningError(HeatPump.Type + " \"" + HeatPump.Name + "\"");
@@ -9043,7 +9043,7 @@ namespace WaterThermalTanks {
 
                         if (SolFla == -1) {
                             IterNum = fmt::to_string(MaxIte);
-                            if (!DataGlobals::WarmupFlag) {
+                            if (!state.dataGlobal->WarmupFlag) {
                                 ++HeatPump.IterLimitExceededNum1;
                                 if (HeatPump.IterLimitExceededNum1 == 1) {
                                     ShowWarningError(HeatPump.Type + " \"" + HeatPump.Name + "\"");
@@ -9062,7 +9062,7 @@ namespace WaterThermalTanks {
                             }
                         } else if (SolFla == -2) {
                             SpeedRatio = max(0.0, min(1.0, (HPSetPointTemp - LowSpeedTankTemp) / (NewTankTemp - LowSpeedTankTemp)));
-                            if (!DataGlobals::WarmupFlag) {
+                            if (!state.dataGlobal->WarmupFlag) {
                                 ++HeatPump.RegulaFalsiFailedNum1;
                                 if (HeatPump.RegulaFalsiFailedNum1 == 1) {
                                     ShowWarningError(HeatPump.Type + " \"" + HeatPump.Name + "\"");
@@ -11379,7 +11379,7 @@ namespace WaterThermalTanks {
                     //       initialize temperatures for HPWH DX Coil heating capacity and COP curves
                     DataHVACGlobals::HPWHInletDBTemp = this->AmbientTemp;
                     DataHVACGlobals::HPWHInletWBTemp =
-                        Psychrometrics::PsyTwbFnTdbWPb(DataHVACGlobals::HPWHInletDBTemp, AmbientHumRat, DataEnvironment::OutBaroPress);
+                        Psychrometrics::PsyTwbFnTdbWPb(state, DataHVACGlobals::HPWHInletDBTemp, AmbientHumRat, DataEnvironment::OutBaroPress);
 
                     //       set up full air flow on DX coil inlet node
                     if (state.dataWaterThermalTanks->HPWaterHeater(HPNum).InletAirMixerNode > 0) {

@@ -116,10 +116,6 @@ namespace GroundHeatExchangers {
     //   Ground Heat Exchanger.' Applied Energy. Vol 114, 57-69.
 
     // Using/Aliasing
-    using DataGlobals::HourOfDay;
-    using DataGlobals::TimeStep;
-    using DataGlobals::TimeStepZone;
-    using DataGlobals::WarmupFlag;
     using DataHVACGlobals::SysTimeElapsed;
     using DataHVACGlobals::TimeStepSys;
     using namespace DataLoopNode;
@@ -1789,7 +1785,7 @@ namespace GroundHeatExchangers {
         // Get time constants
         getAnnualTimeConstant();
 
-        if (triggerDesignDayReset && WarmupFlag) updateCurSimTime = true;
+        if (triggerDesignDayReset && state.dataGlobal->WarmupFlag) updateCurSimTime = true;
         if (state.dataGlobal->DayOfSim == 1 && updateCurSimTime) {
             currentSimTime = 0.0;
             prevTimeSteps = 0.0;
@@ -1802,7 +1798,7 @@ namespace GroundHeatExchangers {
             triggerDesignDayReset = false;
         }
 
-        currentSimTime = (state.dataGlobal->DayOfSim - 1) * 24 + HourOfDay - 1 + (TimeStep - 1) * TimeStepZone + SysTimeElapsed; //+ TimeStepsys
+        currentSimTime = (state.dataGlobal->DayOfSim - 1) * 24 + state.dataGlobal->HourOfDay - 1 + (state.dataGlobal->TimeStep - 1) * state.dataGlobal->TimeStepZone + SysTimeElapsed; //+ TimeStepsys
         locHourOfDay = mod(currentSimTime, hrsPerDay) + 1;
         locDayOfSim = currentSimTime / 24 + 1;
 
@@ -1810,7 +1806,7 @@ namespace GroundHeatExchangers {
             updateCurSimTime = true;
         }
 
-        if (!WarmupFlag) {
+        if (!state.dataGlobal->WarmupFlag) {
             triggerDesignDayReset = true;
         }
 
@@ -2042,7 +2038,7 @@ namespace GroundHeatExchangers {
 
         GLHEdeltaTemp = std::abs(outletTemp - inletTemp);
 
-        if (GLHEdeltaTemp > deltaTempLimit && this->numErrorCalls < numVerticalGLHEs && !WarmupFlag) {
+        if (GLHEdeltaTemp > deltaTempLimit && this->numErrorCalls < numVerticalGLHEs && !state.dataGlobal->WarmupFlag) {
             fluidDensity = GetDensityGlycol(state, PlantLoop(loopNum).FluidName, inletTemp, PlantLoop(loopNum).FluidIndex, RoutineName);
             designMassFlow = designFlow * fluidDensity;
             ShowWarningError("Check GLHE design inputs & g-functions for consistency");
@@ -3321,7 +3317,7 @@ namespace GroundHeatExchangers {
         Real64 fluidDensity;
         bool errFlag;
 
-        Real64 currTime = ((state.dataGlobal->DayOfSim - 1) * 24 + (HourOfDay - 1) + (TimeStep - 1) * TimeStepZone + SysTimeElapsed) * DataGlobalConstants::SecInHour();
+        Real64 currTime = ((state.dataGlobal->DayOfSim - 1) * 24 + (state.dataGlobal->HourOfDay - 1) + (state.dataGlobal->TimeStep - 1) * state.dataGlobal->TimeStepZone + SysTimeElapsed) * DataGlobalConstants::SecInHour();
 
         // Init more variables
         if (myFlag) {
@@ -3430,7 +3426,7 @@ namespace GroundHeatExchangers {
         bool errFlag;
         Real64 CurTime;
 
-        CurTime = ((state.dataGlobal->DayOfSim - 1) * 24 + (HourOfDay - 1) + (TimeStep - 1) * TimeStepZone + SysTimeElapsed) * DataGlobalConstants::SecInHour();
+        CurTime = ((state.dataGlobal->DayOfSim - 1) * 24 + (state.dataGlobal->HourOfDay - 1) + (state.dataGlobal->TimeStep - 1) * state.dataGlobal->TimeStepZone + SysTimeElapsed) * DataGlobalConstants::SecInHour();
 
         // Init more variables
         if (myFlag) {

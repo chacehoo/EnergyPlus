@@ -402,7 +402,7 @@ namespace PondGroundHeatExchanger {
             this->setupOutputVarsFlag = false;
         }
 
-        if (this->OneTimeFlag || DataGlobals::WarmupFlag) {
+        if (this->OneTimeFlag || state.dataGlobal->WarmupFlag) {
             // initialize pond temps to mean of drybulb and ground temps.
             this->BulkTemperature = this->PastBulkTemperature =
                 0.5 * (DataEnvironment::OutDryBulbTempAt(PondHeight) + DataEnvironment::GroundTemp_Deep);
@@ -623,10 +623,10 @@ namespace PondGroundHeatExchanger {
 
         // evaporation flux
         // get air properties
-        Real64 HumRatioAir = Psychrometrics::PsyWFnTdbTwbPb(OutDryBulb, OutWetBulb, DataEnvironment::OutBaroPress);
+        Real64 HumRatioAir = Psychrometrics::PsyWFnTdbTwbPb(state, OutDryBulb, OutWetBulb, DataEnvironment::OutBaroPress);
 
         // humidity ratio at pond surface/film temperature
-        Real64 HumRatioFilm = Psychrometrics::PsyWFnTdbTwbPb(PondBulkTemp, PondBulkTemp, DataEnvironment::OutBaroPress);
+        Real64 HumRatioFilm = Psychrometrics::PsyWFnTdbTwbPb(state, PondBulkTemp, PondBulkTemp, DataEnvironment::OutBaroPress);
         Real64 SpecHeatAir = Psychrometrics::PsyCpAirFnW(HumRatioAir);
         Real64 LatentHeatAir = Psychrometrics::PsyHfgAirFnWTdb(HumRatioAir, OutDryBulb);
 
@@ -839,7 +839,7 @@ namespace PondGroundHeatExchanger {
                                            _,
                                            "[C]",
                                            "[C]");
-            if (this->ConsecutiveFrozen >= DataGlobals::NumOfTimeStepInHour * 30) {
+            if (this->ConsecutiveFrozen >= state.dataGlobal->NumOfTimeStepInHour * 30) {
                 ShowFatalError("GroundHeatExchanger:Pond=\"" + this->Name + "\" has been frozen for 30 consecutive hours.  Program terminates.");
             }
         } else {

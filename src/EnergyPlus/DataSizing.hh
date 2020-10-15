@@ -1235,18 +1235,19 @@ namespace DataSizing {
     // Needed for unit tests, should not be normally called.
     void clear_state();
 
-    // Resets Data globals so that prevoiusly set variables are not used in other equipment models
+    // Resets Data globals so that previously set variables are not used in other equipment models
     void resetHVACSizingGlobals(int const curZoneEqNum,
                                 int const curSysNum,
                                 bool &firstPassFlag     // Can be set to false during the routine
     );
 
-    void GetCoilDesFlowT(int SysNum, // central air system index
-        Real64 CpAir,         // specific heat to be used in calculations [J/kgC]
-        Real64& DesFlow,      // returned design mass flow [kg/s]
-        Real64& DesExitTemp,  // returned design coil exit temperature [kg/s]
-        Real64& DesExitHumRat // returned design coil exit humidity ratio [kg/kg]
-        );
+    void GetCoilDesFlowT(EnergyPlusData &state,
+                         int SysNum, // central air system index
+                         Real64 CpAir,         // specific heat to be used in calculations [J/kgC]
+                         Real64& DesFlow,      // returned design mass flow [kg/s]
+                         Real64& DesExitTemp,  // returned design coil exit temperature [kg/s]
+                         Real64& DesExitHumRat // returned design coil exit humidity ratio [kg/kg]
+    );
 
 } // namespace DataSizing
 

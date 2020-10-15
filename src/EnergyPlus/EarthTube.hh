@@ -181,13 +181,14 @@ namespace EarthTube {
                                 bool &ErrorsFound            // Found a problem
     );
 
-    void CalcEarthTube();
+    void CalcEarthTube(EnergyPlusData &state);
 
-    void CalcEarthTubeHumRat(int const Loop, // EarthTube number (index)
+    void CalcEarthTubeHumRat(EnergyPlusData &state,
+                             int const Loop, // EarthTube number (index)
                              int const NZ    // Zone number (index)
     );
 
-    void ReportEarthTube();
+    void ReportEarthTube(EnergyPlusData &state);
 
     //        End of Module Subroutines for EarthTube
 

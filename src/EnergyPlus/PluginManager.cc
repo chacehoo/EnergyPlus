@@ -102,7 +102,7 @@ namespace PluginManagement {
         }
 #if LINK_WITH_PYTHON == 1
         for (auto &plugin : plugins) {
-            if (plugin.runDuringWarmup || !DataGlobals::WarmupFlag) {
+            if (plugin.runDuringWarmup || !state.dataGlobal->WarmupFlag) {
                 bool const didOneRun = plugin.run(state, iCalledFrom);
                 if (didOneRun) anyRan = true;
             }
@@ -411,7 +411,7 @@ namespace PluginManagement {
 #endif
     }
 
-    PluginManager::PluginManager()
+    PluginManager::PluginManager(EnergyPlusData &state)
     {
 #if LINK_WITH_PYTHON == 1
         // we'll need the program directory for a few things so get it once here at the top and sanitize it
@@ -584,7 +584,7 @@ namespace PluginManagement {
                 std::string variableName = fields.at("name_of_a_python_plugin_variable");
                 int variableIndex = EnergyPlus::PluginManagement::PluginManager::getGlobalVariableHandle(variableName);
                 int numValues = fields.at("number_of_timesteps_to_be_logged");
-                trends.emplace_back(thisObjectName, numValues, variableIndex);
+                trends.emplace_back(state, thisObjectName, numValues, variableIndex);
                 this->maxTrendVariableIndex++;
             }
         }

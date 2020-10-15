@@ -744,7 +744,7 @@ namespace Boilers {
         }
 
         // If there is a fault of boiler fouling (zrp_Nov2016)
-        if (this->FaultyBoilerFoulingFlag && (!DataGlobals::WarmupFlag) && (!DataGlobals::DoingSizing) && (!DataGlobals::KickOffSimulation)) {
+        if (this->FaultyBoilerFoulingFlag && (!state.dataGlobal->WarmupFlag) && (!DataGlobals::DoingSizing) && (!DataGlobals::KickOffSimulation)) {
             int FaultIndex = this->FaultyBoilerFoulingIndex;
             Real64 NomCap_ff = BoilerNomCap;
             Real64 BoilerNomEff_ff = BoilerNomEff;
@@ -844,7 +844,7 @@ namespace Boilers {
         BoilerEff = EffCurveOutput * BoilerNomEff;
 
         // warn if efficiency curve produces zero or negative results
-        if (!DataGlobals::WarmupFlag && EffCurveOutput <= 0.0) {
+        if (!state.dataGlobal->WarmupFlag && EffCurveOutput <= 0.0) {
             if (this->BoilerLoad > 0.0) {
                 if (this->EffCurveOutputError < 1) {
                     ++this->EffCurveOutputError;
@@ -875,7 +875,7 @@ namespace Boilers {
         }
 
         // warn if overall efficiency greater than 1.1
-        if (!DataGlobals::WarmupFlag && BoilerEff > 1.1) {
+        if (!state.dataGlobal->WarmupFlag && BoilerEff > 1.1) {
             if (this->BoilerLoad > 0.0 && this->EfficiencyCurvePtr > 0) {
                 if (this->CalculatedEffError < 1) {
                     ++this->CalculatedEffError;

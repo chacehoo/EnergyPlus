@@ -158,7 +158,7 @@ namespace OutAirNodeManager {
             GetOutAirNodesInput(state);     // Get OutAir Nodes data
             GetOutAirNodesInputFlag = false;
         }
-        InitOutAirNodes();
+        InitOutAirNodes(state);
     }
 
     void GetOutAirNodesInput(EnergyPlusData &state)
@@ -425,7 +425,7 @@ namespace OutAirNodeManager {
         }
     }
 
-    void InitOutAirNodes()
+    void InitOutAirNodes(EnergyPlusData &state)
     {
         // SUBROUTINE INFORMATION:
         //       AUTHOR         Fred Buhl
@@ -445,7 +445,7 @@ namespace OutAirNodeManager {
         // Do the begin time step initialization
         for (OutsideAirNodeNum = 1; OutsideAirNodeNum <= NumOutsideAirNodes; ++OutsideAirNodeNum) {
             NodeNum = OutsideAirNodeList(OutsideAirNodeNum);
-            SetOANodeValues(NodeNum, true);
+            SetOANodeValues(state, NodeNum, true);
         }
     }
 
@@ -582,12 +582,13 @@ namespace OutAirNodeManager {
                             NumOutsideAirNodes,
                             ObjectIsNotParent,
                             IncrementFluidStreamYes);
-                SetOANodeValues(NodeNumber, false);
+                SetOANodeValues(state, NodeNumber, false);
             }
         }
     }
 
-    void SetOANodeValues(int const NodeNum, // Number of node to check to see if in Outside Air list
+    void SetOANodeValues(EnergyPlusData &state,
+                         int const NodeNum, // Number of node to check to see if in Outside Air list
                          bool InitCall            // True if Init calls, false if CheckAndAddAirNodeNumber calls
     )
     {
@@ -648,12 +649,12 @@ namespace OutAirNodeManager {
                 }
                 if (Node(NodeNum).OutAirWetBulbSchedNum == 0 && !Node(NodeNum).EMSOverrideOutAirWetBulb && (Node(NodeNum).EMSOverrideOutAirDryBulb || Node(NodeNum).OutAirDryBulbSchedNum != 0)) {
                     Node(NodeNum).HumRat = OutHumRat;
-                    Node(NodeNum).OutAirWetBulb = PsyTwbFnTdbWPb(Node(NodeNum).OutAirDryBulb, OutHumRat, OutBaroPress);
+                    Node(NodeNum).OutAirWetBulb = PsyTwbFnTdbWPb(state, Node(NodeNum).OutAirDryBulb, OutHumRat, OutBaroPress);
                 } else {
-                    Node(NodeNum).HumRat = PsyWFnTdbTwbPb(Node(NodeNum).OutAirDryBulb, Node(NodeNum).OutAirWetBulb, OutBaroPress);
+                    Node(NodeNum).HumRat = PsyWFnTdbTwbPb(state, Node(NodeNum).OutAirDryBulb, Node(NodeNum).OutAirWetBulb, OutBaroPress);
                 }
             } else {
-                Node(NodeNum).HumRat = PsyWFnTdbTwbPb(Node(NodeNum).OutAirDryBulb, Node(NodeNum).OutAirWetBulb, OutBaroPress);
+                Node(NodeNum).HumRat = PsyWFnTdbTwbPb(state, Node(NodeNum).OutAirDryBulb, Node(NodeNum).OutAirWetBulb, OutBaroPress);
             }
         } else {
             Node(NodeNum).HumRat = OutHumRat;

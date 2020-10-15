@@ -2258,7 +2258,7 @@ namespace General {
         return BetweenDates;
     }
 
-    std::string CreateSysTimeIntervalString()
+    std::string CreateSysTimeIntervalString(EnergyPlusData &state)
     {
 
         // FUNCTION INFORMATION:
@@ -2279,7 +2279,6 @@ namespace General {
 
         // Using/Aliasing
         using DataGlobals::CurrentTime;
-        using DataGlobals::TimeStepZone;
         using DataHVACGlobals::SysTimeElapsed;
         using DataHVACGlobals::TimeStepSys;
 
@@ -2309,7 +2308,7 @@ namespace General {
         //  ActualTimeS=INT(CurrentTime)+(SysTimeElapsed+(CurrentTime - INT(CurrentTime)))
         // CR6902  ActualTimeS=INT(CurrentTime-TimeStepZone)+SysTimeElapsed
         // [DC] TODO: Improve display accuracy up to fractional seconds using hh:mm:ss.0 format
-        ActualTimeS = CurrentTime - TimeStepZone + SysTimeElapsed;
+        ActualTimeS = CurrentTime - state.dataGlobal->TimeStepZone + SysTimeElapsed;
         ActualTimeE = ActualTimeS + TimeStepSys;
         ActualTimeHrS = int(ActualTimeS);
         //  ActualTimeHrE=INT(ActualTimeE)
@@ -2704,7 +2703,7 @@ namespace General {
         Minute = mod(TmpItem, DecHr);
     }
 
-    int DetermineMinuteForReporting(OutputProcessor::TimeStepType t_timeStepType) // kind of reporting, Zone Timestep or System
+    int DetermineMinuteForReporting(EnergyPlusData &state, OutputProcessor::TimeStepType t_timeStepType) // kind of reporting, Zone Timestep or System
     {
 
         // FUNCTION INFORMATION:
@@ -2725,7 +2724,6 @@ namespace General {
 
         // Using/Aliasing
         using DataGlobals::CurrentTime;
-        using DataGlobals::TimeStepZone;
         using DataHVACGlobals::SysTimeElapsed;
         using DataHVACGlobals::TimeStepSys;
 
@@ -2750,7 +2748,7 @@ namespace General {
         int ActualTimeHrS;
 
         if (t_timeStepType == OutputProcessor::TimeStepType::TimeStepSystem) {
-            ActualTimeS = CurrentTime - TimeStepZone + SysTimeElapsed;
+            ActualTimeS = CurrentTime - state.dataGlobal->TimeStepZone + SysTimeElapsed;
             ActualTimeE = ActualTimeS + TimeStepSys;
             ActualTimeHrS = int(ActualTimeS);
             ActualTimeMin = nint((ActualTimeE - ActualTimeHrS) * FracToMin);
@@ -2859,7 +2857,7 @@ namespace General {
         return LogicalToInteger;
     }
 
-    Real64 GetCurrentHVACTime()
+    Real64 GetCurrentHVACTime(EnergyPlusData &state)
     {
         // SUBROUTINE INFORMATION:
         //       AUTHOR         Dimitri Curtil
@@ -2878,7 +2876,6 @@ namespace General {
 
         // Using/Aliasing
         using DataGlobals::CurrentTime;
-        using DataGlobals::TimeStepZone;
         using DataHVACGlobals::SysTimeElapsed;
         using DataHVACGlobals::TimeStepSys;
 
@@ -2902,16 +2899,16 @@ namespace General {
         Real64 CurrentHVACTime;
 
         // This is the correct formula that does not use MinutesPerSystemTimeStep, which would
-        // erronously truncate all sub-minute system time steps down to the closest full minute.
+        // erroneously truncate all sub-minute system time steps down to the closest full minute.
         // Maybe later TimeStepZone, TimeStepSys and SysTimeElapsed could also be specified
         // as real.
-        CurrentHVACTime = (CurrentTime - TimeStepZone) + SysTimeElapsed + TimeStepSys;
+        CurrentHVACTime = (CurrentTime - state.dataGlobal->TimeStepZone) + SysTimeElapsed + TimeStepSys;
         GetCurrentHVACTime = CurrentHVACTime * DataGlobalConstants::SecInHour();
 
         return GetCurrentHVACTime;
     }
 
-    Real64 GetPreviousHVACTime()
+    Real64 GetPreviousHVACTime(EnergyPlusData &state)
     {
         // SUBROUTINE INFORMATION:
         //       AUTHOR         Dimitri Curtil
@@ -2930,7 +2927,6 @@ namespace General {
 
         // Using/Aliasing
         using DataGlobals::CurrentTime;
-        using DataGlobals::TimeStepZone;
         using DataHVACGlobals::SysTimeElapsed;
 
         // Return value
@@ -2954,13 +2950,13 @@ namespace General {
 
         // This is the correct formula that does not use MinutesPerSystemTimeStep, which would
         // erronously truncate all sub-minute system time steps down to the closest full minute.
-        PreviousHVACTime = (CurrentTime - TimeStepZone) + SysTimeElapsed;
+        PreviousHVACTime = (CurrentTime - state.dataGlobal->TimeStepZone) + SysTimeElapsed;
         GetPreviousHVACTime = PreviousHVACTime * DataGlobalConstants::SecInHour();
 
         return GetPreviousHVACTime;
     }
 
-    std::string CreateHVACTimeIntervalString()
+    std::string CreateHVACTimeIntervalString(EnergyPlusData &state)
     {
 
         // FUNCTION INFORMATION:
@@ -2999,7 +2995,7 @@ namespace General {
         // FUNCTION LOCAL VARIABLE DECLARATIONS:
         // na
 
-        OutputString = CreateTimeIntervalString(GetPreviousHVACTime(), GetCurrentHVACTime());
+        OutputString = CreateTimeIntervalString(GetPreviousHVACTime(state), GetCurrentHVACTime(state));
 
         return OutputString;
     }

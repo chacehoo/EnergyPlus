@@ -144,9 +144,9 @@ namespace EarthTube {
 
         if (TotEarthTube == 0) return;
 
-        CalcEarthTube();
+        CalcEarthTube(state);
 
-        ReportEarthTube();
+        ReportEarthTube(state);
     }
 
     void GetEarthTube(EnergyPlusData &state, bool &ErrorsFound) // If errors found in input
@@ -176,10 +176,10 @@ namespace EarthTube {
         int Loop;
         Array1D_bool RepVarSet;
 
-        RepVarSet.dimension(NumOfZones, true);
+        RepVarSet.dimension(state.dataGlobal->NumOfZones, true);
 
         // Following used for reporting
-        ZnRptET.allocate(NumOfZones);
+        ZnRptET.allocate(state.dataGlobal->NumOfZones);
 
         cCurrentModuleObject = "ZoneEarthtube";
         TotEarthTube = inputProcessor->getNumObjectsFound(cCurrentModuleObject);
@@ -497,7 +497,7 @@ namespace EarthTube {
         }
     }
 
-    void CalcEarthTube()
+    void CalcEarthTube(EnergyPlusData &state)
     {
 
         // SUBROUTINE INFORMATION:
@@ -623,11 +623,12 @@ namespace EarthTube {
                 }
             }
 
-            CalcEarthTubeHumRat(Loop, NZ);
+            CalcEarthTubeHumRat(state, Loop, NZ);
         }
     }
 
-    void CalcEarthTubeHumRat(int const Loop, // EarthTube number (index)
+    void CalcEarthTubeHumRat(EnergyPlusData &state,
+                             int const Loop, // EarthTube number (index)
                              int const NZ    // Zone number (index)
     )
     {
@@ -647,7 +648,7 @@ namespace EarthTube {
         Real64 InsideDewPointTemp;
         Real64 InsideHumRat;
 
-        InsideDewPointTemp = PsyTdpFnWPb(OutHumRat, OutBaroPress);
+        InsideDewPointTemp = PsyTdpFnWPb(state, OutHumRat, OutBaroPress);
 
         if (EarthTubeSys(Loop).InsideAirTemp >= InsideDewPointTemp) {
             InsideHumRat = OutHumRat;
@@ -666,7 +667,7 @@ namespace EarthTube {
             MCPTE(NZ) = MCPE(NZ) * EarthTubeSys(Loop).AirTemp;
 
         } else {
-            InsideHumRat = PsyWFnTdpPb(EarthTubeSys(Loop).InsideAirTemp, OutBaroPress);
+            InsideHumRat = PsyWFnTdpPb(state, EarthTubeSys(Loop).InsideAirTemp, OutBaroPress);
             InsideEnthalpy = PsyHFnTdbW(EarthTubeSys(Loop).InsideAirTemp, InsideHumRat);
             // Intake fans will add some heat to the air, raising the temperature for an intake fan...
             if (EarthTubeSys(Loop).FanType == IntakeEarthTube) {
@@ -683,11 +684,11 @@ namespace EarthTube {
         }
 
         EarthTubeSys(Loop).HumRat = InsideHumRat;
-        EarthTubeSys(Loop).WetBulbTemp = PsyTwbFnTdbWPb(EarthTubeSys(Loop).InsideAirTemp, InsideHumRat, OutBaroPress);
+        EarthTubeSys(Loop).WetBulbTemp = PsyTwbFnTdbWPb(state, EarthTubeSys(Loop).InsideAirTemp, InsideHumRat, OutBaroPress);
         EAMFLxHumRat(NZ) = EAMFL(NZ) * InsideHumRat;
     }
 
-    void ReportEarthTube()
+    void ReportEarthTube(EnergyPlusData &state)
     {
 
         // SUBROUTINE INFORMATION:
@@ -710,7 +711,7 @@ namespace EarthTube {
 
         ReportingConstant = TimeStepSys * DataGlobalConstants::SecInHour();
 
-        for (ZoneLoop = 1; ZoneLoop <= NumOfZones; ++ZoneLoop) { // Start of zone loads report variable update loop ...
+        for (ZoneLoop = 1; ZoneLoop <= state.dataGlobal->NumOfZones; ++ZoneLoop) { // Start of zone loads report variable update loop ...
 
             // Break the infiltration load into heat gain and loss components.
             AirDensity = PsyRhoAirFnPbTdbW(OutBaroPress, OutDryBulbTemp, OutHumRat);

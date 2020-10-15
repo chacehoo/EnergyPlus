@@ -513,7 +513,7 @@ namespace SimAirServingZones {
         cAlphaFields = "";
         lAlphaBlanks = true;
 
-        NumOfTimeStepInDay = NumOfTimeStepInHour * 24;
+        NumOfTimeStepInDay = state.dataGlobal->NumOfTimeStepInHour * 24;
 
         inputProcessor->getObjectDefMaxArgs("NodeList", NumParams, NumAlphas, NumNumbers);
         NodeNums.dimension(NumParams, 0);
@@ -679,7 +679,7 @@ namespace SimAirServingZones {
                 }
             }
             if ((test == 0) && (state.dataAirLoop->AirToZoneNodeInfo(AirSysNum).NumReturnNodes > 0)) { // there, see if it's in the controlled zone info
-                for (count = 1; count <= NumOfZones; ++count) {
+                for (count = 1; count <= state.dataGlobal->NumOfZones; ++count) {
                     for (int retNode = 1; retNode <= DataZoneEquipment::ZoneEquipConfig(count).NumReturnNodes; ++retNode) {
                         if (ZoneEquipConfig(count).ReturnNode(retNode) != state.dataAirLoop->AirToZoneNodeInfo(AirSysNum).ZoneEquipReturnNodeNum(1)) continue;
                         test = count;
@@ -1595,14 +1595,14 @@ namespace SimAirServingZones {
             // store the results in state.dataAirLoop->AirToZoneNodeInfo()%CoolCtrlZoneNums and state.dataAirLoop->AirToZoneNodeInfo()%HeatCtrlZoneNums
 
             // Allocate scratch arrays for storing controlled zone numbers for each air loop.
-            CtrlZoneNumsCool.allocate(NumOfZones);
-            CtrlZoneNumsHeat.allocate(NumOfZones);
-            ZoneInletNodesCool.allocate(NumOfZones);
-            ZoneInletNodesHeat.allocate(NumOfZones);
-            TermInletNodesCool.allocate(NumOfZones);
-            TermInletNodesHeat.allocate(NumOfZones);
-            TermUnitSizingNumsCool.allocate(NumOfZones);
-            TermUnitSizingNumsHeat.allocate(NumOfZones);
+            CtrlZoneNumsCool.allocate(state.dataGlobal->NumOfZones);
+            CtrlZoneNumsHeat.allocate(state.dataGlobal->NumOfZones);
+            ZoneInletNodesCool.allocate(state.dataGlobal->NumOfZones);
+            ZoneInletNodesHeat.allocate(state.dataGlobal->NumOfZones);
+            TermInletNodesCool.allocate(state.dataGlobal->NumOfZones);
+            TermInletNodesHeat.allocate(state.dataGlobal->NumOfZones);
+            TermUnitSizingNumsCool.allocate(state.dataGlobal->NumOfZones);
+            TermUnitSizingNumsHeat.allocate(state.dataGlobal->NumOfZones);
 
             MassFlowSetToler = HVACFlowRateToler * 0.00001;
 
@@ -1773,7 +1773,7 @@ namespace SimAirServingZones {
                     for (SupAirPathOutNodeNum = 1; SupAirPathOutNodeNum <= NumSupAirPathOutNodes; ++SupAirPathOutNodeNum) {
                         FoundSupPathZoneConnect = false;
                         // loop over all controlled zones.
-                        for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+                        for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
                             if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
                             // Loop over the air distribution unit inlets for each controlled zone.
                             // Look for a match between the zone splitter outlet node and the air distribution unit inlet node.
@@ -1867,7 +1867,7 @@ namespace SimAirServingZones {
                     // ZoneSideNodeNum and a zone's air distribution unit inlets.
                     if (SupAirPathNum == 0) {
 
-                        for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+                        for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
                             if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
                             // Loop over the air distribution unit inlets for each controlled zone.
                             // Look for a match between the zone equip inlet node and the air distribution unit inlet node.
@@ -2022,8 +2022,8 @@ namespace SimAirServingZones {
             }
 
             // now register zone inlet nodes as critical demand nodes in the convergence tracking
-            ZoneInletConvergence.allocate(NumOfZones);
-            for (ZoneNum = 1; ZoneNum <= NumOfZones; ++ZoneNum) {
+            ZoneInletConvergence.allocate(state.dataGlobal->NumOfZones);
+            for (ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ++ZoneNum) {
                 if (ZoneEquipConfig(ZoneNum).NumInletNodes > 0) {
                     ZoneInletConvergence(ZoneNum).NumInletNodes = ZoneEquipConfig(ZoneNum).NumInletNodes;
                     ZoneInletConvergence(ZoneNum).InletNode.allocate(ZoneEquipConfig(ZoneNum).NumInletNodes);
@@ -2397,7 +2397,7 @@ namespace SimAirServingZones {
 
         bool returnPathFound = false;
         // Loop over all controlled zones
-        for (int ctrlZoneNum = 1; ctrlZoneNum <= NumOfZones; ++ctrlZoneNum) {
+        for (int ctrlZoneNum = 1; ctrlZoneNum <= state.dataGlobal->NumOfZones; ++ctrlZoneNum) {
             auto &thisZoneEquip(DataZoneEquipment::ZoneEquipConfig(ctrlZoneNum));
             if (!thisZoneEquip.IsControlled) continue;
             // Loop over each return node for this zone
@@ -2462,7 +2462,7 @@ namespace SimAirServingZones {
             if (state.dataAirLoop->AirToZoneNodeInfo(airLoopNum).NumReturnNodes > 0) {
                 int zeqReturnNodeNum = state.dataAirLoop->AirToZoneNodeInfo(airLoopNum).ZoneEquipReturnNodeNum(1);
                 if (zeqReturnNodeNum > 0) {
-                    for (int ctrlZoneNum = 1; ctrlZoneNum <= NumOfZones; ++ctrlZoneNum) {
+                    for (int ctrlZoneNum = 1; ctrlZoneNum <= state.dataGlobal->NumOfZones; ++ctrlZoneNum) {
                         auto &thisZoneEquip(DataZoneEquipment::ZoneEquipConfig(ctrlZoneNum));
                         if (!thisZoneEquip.IsControlled) continue;
                         for (int zoneOutNum = 1; zoneOutNum <= thisZoneEquip.NumReturnNodes; ++zoneOutNum) {
@@ -2581,7 +2581,7 @@ namespace SimAirServingZones {
         // reflect the numerical work. The condition to detect a new HVAC time step is essentially
         // based on the time stamp at the beginning of the current HVAC step (expressed in seconds).
         if (FirstHVACIteration) {
-            rxTime = GetPreviousHVACTime();
+            rxTime = GetPreviousHVACTime(state);
             if (SavedPreviousHVACTime != rxTime) {
                 SavedPreviousHVACTime = rxTime;
                 IterTot = 0;
@@ -3048,7 +3048,7 @@ namespace SimAirServingZones {
                         AirLoopConvergedFlag = false;
 
                         // The warning message will be suppressed during the warm up days.
-                        if (!WarmupFlag) {
+                        if (!state.dataGlobal->WarmupFlag) {
                             ++ErrCount;
                             if (ErrCount < 15) {
                                 ErrEnvironmentName = EnvironmentName;
@@ -3056,7 +3056,7 @@ namespace SimAirServingZones {
                                 ShowWarningError("SolveAirLoopControllers: Maximum iterations (" + CharErrOut + ") exceeded for " +
                                                  PrimaryAirSystem(AirLoopNum).Name + ", " +
                                                  PrimaryAirSystem(AirLoopNum).ControllerName(AirLoopControlNum) + ", at " + EnvironmentName + ", " +
-                                                 CurMnDy + ' ' + CreateSysTimeIntervalString());
+                                                 CurMnDy + ' ' + CreateSysTimeIntervalString(state));
                             } else {
                                 if (EnvironmentName != ErrEnvironmentName) {
                                     MaxErrCount = 0;
@@ -3277,14 +3277,14 @@ namespace SimAirServingZones {
                 if (Iter > MaxIter) {
 
                     // The warning message will be suppressed during the warm up days.
-                    if (!WarmupFlag) {
+                    if (!state.dataGlobal->WarmupFlag) {
                         ++ErrCount;
                         if (ErrCount < 15) {
                             ErrEnvironmentName = EnvironmentName;
                             const auto CharErrOut = fmt::to_string(MaxIter);
                             ShowWarningError("SolveAirLoopControllers: Maximum iterations (" + CharErrOut + ") exceeded for " +
                                              PrimaryAirSystem(AirLoopNum).Name + ":" + ControllerName + ", at " + EnvironmentName + ", " + CurMnDy +
-                                             ' ' + CreateSysTimeIntervalString());
+                                             ' ' + CreateSysTimeIntervalString(state));
                         } else {
                             if (EnvironmentName != ErrEnvironmentName) {
                                 MaxErrCount = 0;
@@ -5409,7 +5409,7 @@ namespace SimAirServingZones {
         Real64 termunitsizingtemp;          // (1.0+termunitsizing(ctrlzone)%inducrat)
         Real64 VozClg(0.0);                 // corrected (for ventilation efficiency) zone outside air flow rate [m3/s]
 
-        NumOfTimeStepInDay = NumOfTimeStepInHour * 24;
+        NumOfTimeStepInDay = state.dataGlobal->NumOfTimeStepInHour * 24;
 
         // allocate scratch arrays
         if (!allocated(SensCoolCapTemp)) {
@@ -5448,7 +5448,7 @@ namespace SimAirServingZones {
 
                 // Correct the zone return temperature in ZoneSizing for the case of induction units. The calc in
                 // ZoneEquipmentManager assumes all the air entering the zone goes into the return node.
-                for (int CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+                for (int CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
                     if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
                     // Use first non-zero airdistunit for now
                     int TermUnitSizingIndex = 0;
@@ -5527,11 +5527,11 @@ namespace SimAirServingZones {
 
             } else if (SELECT_CASE_var == DataGlobalConstants::CallIndicator::DuringDay) {
 
-                TimeStepInDay = (HourOfDay - 1) * NumOfTimeStepInHour + TimeStep; // calculate current zone time step index
+                TimeStepInDay = (state.dataGlobal->HourOfDay - 1) * state.dataGlobal->NumOfTimeStepInHour + state.dataGlobal->TimeStep; // calculate current zone time step index
 
                 // Correct the zone return temperature in ZoneSizing for the case of induction units. The calc in
                 // ZoneEquipmentManager assumes all the air entering the zone goes into the return node.
-                for (int CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+                for (int CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
                     if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
                     // Use first non-zero airdistunit for now, if there is one
                     termunitsizingtempfrac = 1.0;
@@ -6434,7 +6434,7 @@ namespace SimAirServingZones {
 
                 // Correct the zone return temperature in FinalZoneSizing for the case of induction units. The calc in
                 // ZoneEquipmentManager assumes all the air entering the zone goes into the return node.
-                for (int CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+                for (int CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
                     if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
                     // Use first non-zero airdistunit for now, if there is one
                     termunitsizingtempfrac = 1.0;
@@ -7207,7 +7207,7 @@ namespace SimAirServingZones {
                 Minutes = 0;
                 TimeStepIndex = 0;
                 for (HourCounter = 1; HourCounter <= 24; ++HourCounter) {
-                    for (TimeStepCounter = 1; TimeStepCounter <= NumOfTimeStepInHour; ++TimeStepCounter) {
+                    for (TimeStepCounter = 1; TimeStepCounter <= state.dataGlobal->NumOfTimeStepInHour; ++TimeStepCounter) {
                         ++TimeStepIndex;
                         Minutes += MinutesPerTimeStep;
                         if (Minutes == 60) {

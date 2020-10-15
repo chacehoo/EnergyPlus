@@ -761,7 +761,7 @@ namespace HeatBalanceHAMTManager {
         Real64 waterd; // water density
         bool DoReport;
 
-        deltat = TimeStepZone * 3600.0;
+        deltat = state.dataGlobal->TimeStepZone * 3600.0;
 
         // Check the materials information and work out how many cells are required.
         errorCount = 0;
@@ -1230,8 +1230,8 @@ namespace HeatBalanceHAMTManager {
         // Check, Is this per unit area or for the whole wall.
         //    cells(Intcell(sid))%Qadds=QRadSWInAbs(sid)+NetLWRadToSurf(sid)+QHtRadSysSurf(sid)+QRadThermInAbs(sid)
 
-        cells(ExtConcell(sid)).rh = PsyRhFnTdbRhov(cells(ExtConcell(sid)).temp, RhoOut, HAMTExt);
-        cells(IntConcell(sid)).rh = PsyRhFnTdbRhov(cells(IntConcell(sid)).temp, RhoIn, HAMTInt);
+        cells(ExtConcell(sid)).rh = PsyRhFnTdbRhov(state, cells(ExtConcell(sid)).temp, RhoOut, HAMTExt);
+        cells(IntConcell(sid)).rh = PsyRhFnTdbRhov(state, cells(IntConcell(sid)).temp, RhoIn, HAMTInt);
 
         if (cells(ExtConcell(sid)).rh > rhmax) {
             cells(ExtConcell(sid)).rh = rhmax;
@@ -1245,7 +1245,7 @@ namespace HeatBalanceHAMTManager {
             cells(ExtConcell(sid)).vtc = extvtc(sid);
         } else {
             if (cells(ExtConcell(sid)).rh > 0) {
-                cells(ExtConcell(sid)).vtc = HMassConvExtFD(sid) * RhoOut / (PsyPsatFnTemp(TempOutsideAirFD(sid)) * cells(ExtConcell(sid)).rh);
+                cells(ExtConcell(sid)).vtc = HMassConvExtFD(sid) * RhoOut / (PsyPsatFnTemp(state, TempOutsideAirFD(sid)) * cells(ExtConcell(sid)).rh);
             } else {
                 cells(ExtConcell(sid)).vtc = 10000.0;
             }
@@ -1253,10 +1253,10 @@ namespace HeatBalanceHAMTManager {
 
         if (intvtcflag(sid)) {
             cells(IntConcell(sid)).vtc = intvtc(sid);
-            HMassConvInFD(sid) = cells(IntConcell(sid)).vtc * PsyPsatFnTemp(MAT(Surface(sid).Zone)) * cells(IntConcell(sid)).rh / RhoIn;
+            HMassConvInFD(sid) = cells(IntConcell(sid)).vtc * PsyPsatFnTemp(state, MAT(Surface(sid).Zone)) * cells(IntConcell(sid)).rh / RhoIn;
         } else {
             if (cells(IntConcell(sid)).rh > 0) {
-                cells(IntConcell(sid)).vtc = HMassConvInFD(sid) * RhoIn / (PsyPsatFnTemp(MAT(Surface(sid).Zone)) * cells(IntConcell(sid)).rh);
+                cells(IntConcell(sid)).vtc = HMassConvInFD(sid) * RhoIn / (PsyPsatFnTemp(state, MAT(Surface(sid).Zone)) * cells(IntConcell(sid)).rh);
             } else {
                 cells(IntConcell(sid)).vtc = 10000.0;
             }
@@ -1284,9 +1284,9 @@ namespace HeatBalanceHAMTManager {
 
             for (cid = firstcell(sid); cid <= lastcell(sid); ++cid) {
                 matid = cells(cid).matid;
-                cells(cid).vp = RHtoVP(cells(cid).rh, cells(cid).temp);
-                cells(cid).vpp1 = RHtoVP(cells(cid).rhp1, cells(cid).tempp1);
-                cells(cid).vpsat = PsyPsatFnTemp(cells(cid).tempp1);
+                cells(cid).vp = RHtoVP(state, cells(cid).rh, cells(cid).temp);
+                cells(cid).vpp1 = RHtoVP(state, cells(cid).rhp1, cells(cid).tempp1);
+                cells(cid).vpsat = PsyPsatFnTemp(state, cells(cid).tempp1);
                 if (matid > 0) {
                     interp(
                         dataMaterial.Material(matid).niso, dataMaterial.Material(matid).isorh, dataMaterial.Material(matid).isodata, cells(cid).rhp1, cells(cid).water, cells(cid).dwdphi);
@@ -1360,7 +1360,7 @@ namespace HeatBalanceHAMTManager {
                     qvp = vpdiff * whv;
                 }
                 if (std::abs(qvp) > qvplim) {
-                    if (!WarmupFlag) {
+                    if (!state.dataGlobal->WarmupFlag) {
                         ++qvpErrCount;
                         if (qvpErrCount < 16) {
                             ShowWarningError("HeatAndMoistureTransfer: Large Latent Heat for Surface " + Surface(sid).Name);
@@ -1379,7 +1379,7 @@ namespace HeatBalanceHAMTManager {
             tempmax = maxval(cells, &subcell::tempp1);
             tempmin = minval(cells, &subcell::tempp1);
             if (tempmax > MaxSurfaceTempLimit) {
-                if (!WarmupFlag) {
+                if (!state.dataGlobal->WarmupFlag) {
                     if (Surface(sid).HighTempErrCount == 0) {
                         ShowSevereMessage("HAMT: Temperature (high) out of bounds (" + RoundSigDigits(tempmax, 2) +
                                           ") for surface=" + Surface(sid).Name);
@@ -1395,7 +1395,7 @@ namespace HeatBalanceHAMTManager {
                 }
             }
             if (tempmax > MaxSurfaceTempLimitBeforeFatal) {
-                if (!WarmupFlag) {
+                if (!state.dataGlobal->WarmupFlag) {
                     ShowSevereError("HAMT: HAMT: Temperature (high) out of bounds ( " + RoundSigDigits(tempmax, 2) +
                                     ") for surface=" + Surface(sid).Name);
                     ShowContinueErrorTimeStamp("");
@@ -1403,7 +1403,7 @@ namespace HeatBalanceHAMTManager {
                 }
             }
             if (tempmin < MinSurfaceTempLimit) {
-                if (!WarmupFlag) {
+                if (!state.dataGlobal->WarmupFlag) {
                     if (Surface(sid).HighTempErrCount == 0) {
                         ShowSevereMessage("HAMT: Temperature (low) out of bounds (" + RoundSigDigits(tempmin, 2) +
                                           ") for surface=" + Surface(sid).Name);
@@ -1419,7 +1419,7 @@ namespace HeatBalanceHAMTManager {
                 }
             }
             if (tempmin < MinSurfaceTempLimitBeforeFatal) {
-                if (!WarmupFlag) {
+                if (!state.dataGlobal->WarmupFlag) {
                     ShowSevereError("HAMT: HAMT: Temperature (low) out of bounds ( " + RoundSigDigits(tempmin, 2) +
                                     ") for surface=" + Surface(sid).Name);
                     ShowContinueErrorTimeStamp("");
@@ -1522,12 +1522,12 @@ namespace HeatBalanceHAMTManager {
         TempSurfOutTmp = cells(Extcell(sid)).tempp1;
         TempSurfInTmp = cells(Intcell(sid)).tempp1;
 
-        TempSurfInP = cells(Intcell(sid)).rhp1 * PsyPsatFnTemp(cells(Intcell(sid)).tempp1);
+        TempSurfInP = cells(Intcell(sid)).rhp1 * PsyPsatFnTemp(state, cells(Intcell(sid)).tempp1);
 
         RhoVaporSurfIn(sid) = TempSurfInP / (461.52 * (MAT(Surface(sid).Zone) + DataGlobalConstants::KelvinConv()));
     }
 
-    void UpdateHeatBalHAMT(int const sid)
+    void UpdateHeatBalHAMT(EnergyPlusData &state, int const sid)
     {
         // SUBROUTINE INFORMATION:
         //       AUTHOR         Phillip Biddulph
@@ -1590,7 +1590,7 @@ namespace HeatBalanceHAMTManager {
         surfextrh(sid) = 100.0 * cells(Extcell(sid)).rh;
         surftemp(sid) = cells(Intcell(sid)).temp;
         surfexttemp(sid) = cells(Extcell(sid)).temp;
-        surfvp(sid) = RHtoVP(cells(Intcell(sid)).rh, cells(Intcell(sid)).temp);
+        surfvp(sid) = RHtoVP(state, cells(Intcell(sid)).rh, cells(Intcell(sid)).temp);
     }
 
     void interp(int const ndata, const Array1D<Real64> &xx, const Array1D<Real64> &yy, Real64 const invalue, Real64 &outvalue, Optional<Real64> outgrad)
@@ -1668,7 +1668,7 @@ namespace HeatBalanceHAMTManager {
         }
     }
 
-    Real64 RHtoVP(Real64 const RH, Real64 const Temperature)
+    Real64 RHtoVP(EnergyPlusData &state, Real64 const RH, Real64 const Temperature)
     {
         // FUNCTION INFORMATION:
         //       AUTHOR         Phillip Biddulph
@@ -1707,7 +1707,7 @@ namespace HeatBalanceHAMTManager {
 
         Real64 VPSat;
 
-        VPSat = PsyPsatFnTemp(Temperature);
+        VPSat = PsyPsatFnTemp(state, Temperature);
 
         RHtoVP = RH * VPSat;
 

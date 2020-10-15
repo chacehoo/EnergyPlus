@@ -121,7 +121,6 @@ namespace OutdoorAirUnit {
     using namespace DataLoopNode;
     using DataGlobals::DisplayExtraWarnings;
     using DataGlobals::SysSizingCalc;
-    using DataGlobals::WarmupFlag;
     using DataGlobals::ZoneSizingCalc;
     using DataHVACGlobals::BlowThru;
     using DataHVACGlobals::ContFanCycCoil;
@@ -1240,7 +1239,7 @@ CurrentModuleObjects(CO_OAEqList), ComponentListName);
         if (!ZoneEquipmentListChecked && ZoneEquipInputsFilled) {
             ZoneEquipmentListChecked = true;
             for (Loop = 1; Loop <= NumOfOAUnits; ++Loop) {
-                if (CheckZoneEquipmentList(CurrentModuleObject, OutAirUnit(Loop).Name)) continue;
+                if (CheckZoneEquipmentList(state, CurrentModuleObject, OutAirUnit(Loop).Name)) continue;
                 ShowSevereError("InitOutdoorAirUnit: Zone Outdoor Air Unit=[" + CurrentModuleObject + ',' + OutAirUnit(Loop).Name +
                                 "] is not on any ZoneHVAC:EquipmentList.  It will not be simulated.");
             }

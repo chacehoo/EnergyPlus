@@ -335,25 +335,27 @@ namespace HVACControllers {
     // Begin Algorithm Section of the Module
     //******************************************************************************
 
-    void CalcSimpleController(int const ControlNum,
+    void CalcSimpleController(EnergyPlusData &state,
+                              int const ControlNum,
                               bool const FirstHVACIteration,
                               bool &IsConvergedFlag,
                               bool &IsUpToDateFlag,
                               std::string const &ControllerName // used when errors occur
     );
 
-    void FindRootSimpleController(int const ControlNum,
+    void FindRootSimpleController(EnergyPlusData &state,
+                                  int const ControlNum,
                                   bool const FirstHVACIteration,
                                   bool &IsConvergedFlag,
                                   bool &IsUpToDateFlag,
                                   std::string const &ControllerName // used when errors occur
     );
 
-    void CheckSimpleController(int const ControlNum, bool &IsConvergedFlag);
+    void CheckSimpleController(EnergyPlusData &state, int const ControlNum, bool &IsConvergedFlag);
 
-    bool CheckMinActiveController(int const ControlNum);
+    bool CheckMinActiveController(EnergyPlusData &state, int const ControlNum);
 
-    bool CheckMaxActiveController(int const ControlNum);
+    bool CheckMaxActiveController(EnergyPlusData &state, int const ControlNum);
 
     void CheckTempAndHumRatCtrl(int const ControlNum, bool &IsConvergedFlag);
 
@@ -409,17 +411,18 @@ namespace HVACControllers {
 
     void SetupIndividualControllerTracer(int const ControlNum);
 
-    void TraceIndividualController(int const ControlNum,
+    void TraceIndividualController(EnergyPlusData &state,
+                                   int const ControlNum,
                                    bool const FirstHVACIteration,
                                    int const AirLoopPass,
                                    int const Operation, // Operation to execute
                                    bool const IsConvergedFlag);
 
-    std::string CreateHVACTimeString();
+    std::string CreateHVACTimeString(EnergyPlusData &state);
 
-    std::string CreateHVACStepFullString();
+    std::string CreateHVACStepFullString(EnergyPlusData &state);
 
-    std::string MakeHVACTimeIntervalString();
+    std::string MakeHVACTimeIntervalString(EnergyPlusData &state);
 
     //        End of Tracing subroutines for the Controller Module
 

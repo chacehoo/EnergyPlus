@@ -137,12 +137,12 @@ TEST_F(EnergyPlusFixture, SolarShadingTest_CalcPerSolarBeamTest)
     }
 
     DetailedSolarTimestepIntegration = true;
-    HourOfDay = 23;
+    state.dataGlobal->HourOfDay = 23;
     CalcPerSolarBeam(state, AvgEqOfTime, AvgSinSolarDeclin, AvgCosSolarDeclin);
 
     for (int SurfNum = 1; SurfNum <= TotSurfaces; ++SurfNum) {
         for (int Hour = 1; Hour <= 24; ++Hour) {
-            if (Hour == HourOfDay) {
+            if (Hour == state.dataGlobal->HourOfDay) {
                 EXPECT_EQ(1.0, SurfaceWindow(SurfNum).OutProjSLFracMult(Hour));
                 EXPECT_EQ(1.0, SurfaceWindow(SurfNum).InOutProjSLFracMult(Hour));
             } else {
@@ -657,8 +657,8 @@ TEST_F(EnergyPlusFixture, SolarShadingTest_FigureSolarBeamAtTimestep)
     SolarShading::DetermineShadowingCombinations(state);
     DataEnvironment::DayOfYear_Schedule = 168;
     DataEnvironment::DayOfWeek = 6;
-    DataGlobals::TimeStep = 4;
-    DataGlobals::HourOfDay = 9;
+    state.dataGlobal->TimeStep = 4;
+    state.dataGlobal->HourOfDay = 9;
 
     //	compare_err_stream( "" ); // just for debugging
 
@@ -671,7 +671,7 @@ TEST_F(EnergyPlusFixture, SolarShadingTest_FigureSolarBeamAtTimestep)
     SolarShading::SkyDifSolarShading(state);
     CalcSkyDifShading = false;
 
-    FigureSolarBeamAtTimestep(state, DataGlobals::HourOfDay, DataGlobals::TimeStep);
+    FigureSolarBeamAtTimestep(state, state.dataGlobal->HourOfDay, state.dataGlobal->TimeStep);
 
     int windowSurfNum = UtilityRoutines::FindItemInList("ZN001:WALL-SOUTH:WIN001", DataSurfaces::Surface);
     EXPECT_NEAR(0.6504, DifShdgRatioIsoSkyHRTS(4, 9, windowSurfNum), 0.0001);
@@ -1053,8 +1053,8 @@ TEST_F(EnergyPlusFixture, SolarShadingTest_ExternalShadingIO)
     SolarShading::DetermineShadowingCombinations(state);
     DataEnvironment::DayOfYear_Schedule = 168;
     DataEnvironment::DayOfWeek = 6;
-    DataGlobals::TimeStep = 4;
-    DataGlobals::HourOfDay = 9;
+    state.dataGlobal->TimeStep = 4;
+    state.dataGlobal->HourOfDay = 9;
     DataGlobals::DoingSizing = false;
     state.dataGlobal->KindOfSim = DataGlobalConstants::KindOfSim::RunPeriodWeather;
 
@@ -1074,7 +1074,7 @@ TEST_F(EnergyPlusFixture, SolarShadingTest_ExternalShadingIO)
     DataBSDFWindow::SUNCOSTS(4, 9, 1) = 0.1;
     DataBSDFWindow::SUNCOSTS(4, 9, 2) = 0.1;
     DataBSDFWindow::SUNCOSTS(4, 9, 3) = 0.1;
-    FigureSolarBeamAtTimestep(state, DataGlobals::HourOfDay, DataGlobals::TimeStep);
+    FigureSolarBeamAtTimestep(state, state.dataGlobal->HourOfDay, state.dataGlobal->TimeStep);
 
     EXPECT_TRUE(DataSystemVariables::shadingMethod == DataSystemVariables::ShadingMethod::Scheduled);
     EXPECT_DOUBLE_EQ(0.5432, ScheduleManager::LookUpScheduleValue(state, 2, 9, 4));
@@ -1838,8 +1838,8 @@ TEST_F(EnergyPlusFixture, SolarShadingTest_PolygonClippingDirect)
     SolarShading::DetermineShadowingCombinations(state);
     DataEnvironment::DayOfYear_Schedule = 168;
     DataEnvironment::DayOfWeek = 6;
-    DataGlobals::TimeStep = 4;
-    DataGlobals::HourOfDay = 9;
+    state.dataGlobal->TimeStep = 4;
+    state.dataGlobal->HourOfDay = 9;
 
     //	compare_err_stream( "" ); // just for debugging
     EXPECT_FALSE(DataSystemVariables::SlaterBarsky);
@@ -1854,7 +1854,7 @@ TEST_F(EnergyPlusFixture, SolarShadingTest_PolygonClippingDirect)
     SolarShading::SkyDifSolarShading(state);
     CalcSkyDifShading = false;
 
-    FigureSolarBeamAtTimestep(state, DataGlobals::HourOfDay, DataGlobals::TimeStep);
+    FigureSolarBeamAtTimestep(state, state.dataGlobal->HourOfDay, state.dataGlobal->TimeStep);
     int surfNum = UtilityRoutines::FindItemInList("ZN001:WALL-SOUTH:WIN001", DataSurfaces::Surface);
     EXPECT_NEAR(0.6504, DifShdgRatioIsoSkyHRTS(4, 9, surfNum), 0.0001);
     EXPECT_NEAR(0.9152, DifShdgRatioHorizHRTS(4, 9, surfNum), 0.0001);

@@ -544,13 +544,15 @@ namespace UnitarySystems {
 
         void initUnitarySystems(EnergyPlusData &state, int const &AirLoopNum, bool const &FirstHVACIteration, int const ZoneOAUnitNum, Real64 const OAUCoilOutTemp);
 
-        void checkNodeSetPoint(EnergyPlusData &state, int const AirLoopNum,       // number of the current air loop being simulated
+        void checkNodeSetPoint(EnergyPlusData &state,
+                               int const AirLoopNum,       // number of the current air loop being simulated
                                int const ControlNode,      // Node to test for set point
                                int const CoilType,         // True if cooling coil, then test for HumRatMax set point
                                Real64 const OAUCoilOutTemp // the coil inlet temperature of OutdoorAirUnit
         );
 
-        void frostControlSetPointLimit(Real64 &TempSetPoint,       // temperature setpoint of the sensor node
+        void frostControlSetPointLimit(EnergyPlusData &state,
+                                       Real64 &TempSetPoint,       // temperature setpoint of the sensor node
                                        Real64 &HumRatSetPoint,     // humidity ratio setpoint of the sensor node
                                        Real64 const BaroPress,     // baromtric pressure, Pa [N/m^2]
                                        Real64 const TfrostControl, // minimum temperature limit for forst control

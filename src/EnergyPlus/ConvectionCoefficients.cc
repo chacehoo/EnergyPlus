@@ -174,7 +174,7 @@ namespace ConvectionCoefficients {
         if (state.dataConvectionCoefficient->NodeCheck) { // done once when conditions are ready...
             if (!SysSizingCalc && !ZoneSizingCalc && ZoneEquipInputsFilled && allocated(Node)) {
                 state.dataConvectionCoefficient->NodeCheck = false;
-                for (ZoneNum = 1; ZoneNum <= NumOfZones; ++ZoneNum) {
+                for (ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ++ZoneNum) {
                     if (Zone(ZoneNum).InsideConvectionAlgo != CeilingDiffuser) continue;
                     if (Zone(ZoneNum).SystemZoneNodeNumber != 0) continue;
                     ShowSevereError("InitInteriorConvectionCoeffs: Inside Convection=CeilingDiffuser, but no system inlet node defined, Zone=" +
@@ -236,7 +236,7 @@ namespace ConvectionCoefficients {
             state.dataConvectionCoefficient->MyEnvirnFlag = false;
         }
         if (!state.dataGlobal->BeginEnvrnFlag) state.dataConvectionCoefficient->MyEnvirnFlag = true;
-        for (ZoneNum = 1; ZoneNum <= NumOfZones; ++ZoneNum) {
+        for (ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ++ZoneNum) {
 
             {
                 auto const SELECT_CASE_var(Zone(ZoneNum).InsideConvectionAlgo);
@@ -252,7 +252,7 @@ namespace ConvectionCoefficients {
                 }
             }
         }
-        for (ZoneNum = 1; ZoneNum <= NumOfZones; ++ZoneNum) {
+        for (ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ++ZoneNum) {
 
             for (SurfNum = Zone(ZoneNum).SurfaceFirst; SurfNum <= Zone(ZoneNum).SurfaceLast; ++SurfNum) {
 
@@ -2659,7 +2659,7 @@ namespace ConvectionCoefficients {
         int ZoneNode = Zone(ZoneNum).SystemZoneNodeNumber;
         if (!state.dataGlobal->BeginEnvrnFlag && ZoneNode > 0) {
             int ZoneMult = Zone(ZoneNum).Multiplier * Zone(ZoneNum).ListMultiplier;
-            Real64 AirDensity = PsyRhoAirFnPbTdbW(OutBaroPress, Node(ZoneNode).Temp, PsyWFnTdpPb(Node(ZoneNode).Temp, OutBaroPress));
+            Real64 AirDensity = PsyRhoAirFnPbTdbW(OutBaroPress, Node(ZoneNode).Temp, PsyWFnTdpPb(state, Node(ZoneNode).Temp, OutBaroPress));
             return Node(ZoneNode).MassFlowRate / (AirDensity * ZoneMult);
         } else {
             return 0.0;
@@ -2824,7 +2824,7 @@ namespace ConvectionCoefficients {
             ZoneVolume = Zone(ZoneNum).Volume;
             ZoneNode = Zone(ZoneNum).SystemZoneNodeNumber;
             ZoneMult = Zone(ZoneNum).Multiplier * Zone(ZoneNum).ListMultiplier;
-            AirDensity = PsyRhoAirFnPbTdbW(OutBaroPress, Node(ZoneNode).Temp, PsyWFnTdpPb(Node(ZoneNode).Temp, OutBaroPress));
+            AirDensity = PsyRhoAirFnPbTdbW(OutBaroPress, Node(ZoneNode).Temp, PsyWFnTdpPb(state, Node(ZoneNode).Temp, OutBaroPress));
             ZoneMassFlowRate = Node(ZoneNode).MassFlowRate / ZoneMult;
 
             if (ZoneMassFlowRate < MinFlow) {
@@ -3484,7 +3484,7 @@ namespace ConvectionCoefficients {
 
         BldgVolumeSum = 0.0;
         RoofBoundZvals = 0.0;
-        for (ZoneLoop = 1; ZoneLoop <= NumOfZones; ++ZoneLoop) {
+        for (ZoneLoop = 1; ZoneLoop <= state.dataGlobal->NumOfZones; ++ZoneLoop) {
 
             BldgVolumeSum += Zone(ZoneLoop).Volume * Zone(ZoneLoop).Multiplier * Zone(ZoneLoop).ListMultiplier;
             PerimExtLengthSum = 0.0; // init
@@ -4183,7 +4183,7 @@ namespace ConvectionCoefficients {
         int ZoneLoop;
         int SurfLoop;
 
-        for (ZoneLoop = 1; ZoneLoop <= NumOfZones; ++ZoneLoop) {
+        for (ZoneLoop = 1; ZoneLoop <= state.dataGlobal->NumOfZones; ++ZoneLoop) {
             state.dataConvectionCoefficient->ActiveWallCount = 0;
             state.dataConvectionCoefficient->ActiveWallArea = 0.0;
             state.dataConvectionCoefficient->ActiveCeilingCount = 0;
@@ -4240,7 +4240,7 @@ namespace ConvectionCoefficients {
 
         // this next call sets up the flow regime and assigns a classification to surface
         //  TODO: candidate for rework to do zone level calcs once rather than for each surface
-        DynamicIntConvSurfaceClassification(SurfNum);
+        DynamicIntConvSurfaceClassification(state, SurfNum);
 
         // simple worker routine takes surface classification and fills in model to use (IntConvHcModelEq) for that surface
         MapIntConvClassificationToHcModels(state, SurfNum);
@@ -5039,7 +5039,7 @@ namespace ConvectionCoefficients {
         }
     }
 
-    void DynamicIntConvSurfaceClassification(int const SurfNum) // surface number
+    void DynamicIntConvSurfaceClassification(EnergyPlusData &state, int const SurfNum) // surface number
     {
 
         // SUBROUTINE INFORMATION:
@@ -5282,7 +5282,7 @@ namespace ConvectionCoefficients {
 
             // Reynolds number = Vdot supply / v * cube root of zone volume (Goldstein and Noveselac 2010)
             if (Node(ZoneNode).MassFlowRate > 0.0) {
-                AirDensity = PsyRhoAirFnPbTdbW(OutBaroPress, Node(ZoneNode).Temp, PsyWFnTdpPb(Node(ZoneNode).Temp, OutBaroPress));
+                AirDensity = PsyRhoAirFnPbTdbW(OutBaroPress, Node(ZoneNode).Temp, PsyWFnTdpPb(state, Node(ZoneNode).Temp, OutBaroPress));
                 Re = Node(ZoneNode).MassFlowRate / (v * AirDensity * std::pow(Zone(ZoneNum).Volume, OneThird));
             } else {
                 Re = 0.0;
@@ -6074,7 +6074,7 @@ namespace ConvectionCoefficients {
         SupplyAirTemp = MAT(ZoneNum);
         if (Zone(ZoneNum).IsControlled) {
             ZoneNode = Zone(ZoneNum).SystemZoneNodeNumber;
-            AirDensity = PsyRhoAirFnPbTdbW(OutBaroPress, Node(ZoneNode).Temp, PsyWFnTdpPb(Node(ZoneNode).Temp, OutBaroPress));
+            AirDensity = PsyRhoAirFnPbTdbW(OutBaroPress, Node(ZoneNode).Temp, PsyWFnTdpPb(state, Node(ZoneNode).Temp, OutBaroPress));
             AirChangeRate = (Node(ZoneNode).MassFlowRate * DataGlobalConstants::SecInHour()) / (AirDensity * Zone(ZoneNum).Volume);
             if (ZoneEquipConfig(ZoneNum).EquipListIndex > 0) {
                 for (EquipNum = 1; EquipNum <= ZoneEquipList(ZoneEquipConfig(ZoneNum).EquipListIndex).NumOfEquipTypes; ++EquipNum) {
@@ -6859,7 +6859,7 @@ namespace ConvectionCoefficients {
                                                "and set to 9.999 [W/m2-K]",
                                                state.dataConvectionCoefficient->BMMixedAssistedWallErrorIDX2);
             }
-            if (DeltaTemp == 0.0 && !WarmupFlag) {
+            if (DeltaTemp == 0.0 && !state.dataGlobal->WarmupFlag) {
                 if (state.dataConvectionCoefficient->BMMixedAssistedWallErrorIDX1 == 0) {
                     ShowWarningMessage("CalcBeausoleilMorrisonMixedAssistedWall: Convection model not evaluated (would divide by zero)");
                     ShowContinueError("The temperature difference between surface and air is zero");
@@ -6953,7 +6953,7 @@ namespace ConvectionCoefficients {
             return CalcBeausoleilMorrisonMixedOpposingWall(DeltaTemp, Height, SurfTemp, SupplyAirTemp, AirChangeRate);
 
         } else {
-            if (!WarmupFlag) {
+            if (!state.dataGlobal->WarmupFlag) {
                 if (state.dataConvectionCoefficient->BMMixedOpposingWallErrorIDX1 == 0) {
                     ShowSevereMessage("CalcBeausoleilMorrisonMixedOpposingWall: Convection model not evaluated (would divide by zero)");
                     ShowContinueError("The temperature difference between surface and air is zero");
@@ -7028,7 +7028,7 @@ namespace ConvectionCoefficients {
                                                "and set to 9.999 [W/m2-K]",
                                                state.dataConvectionCoefficient->BMMixedStableFloorErrorIDX1);
             }
-            if (DeltaTemp == 0.0 && !WarmupFlag) {
+            if (DeltaTemp == 0.0 && !state.dataGlobal->WarmupFlag) {
                 if (state.dataConvectionCoefficient->BMMixedStableFloorErrorIDX2 == 0) {
                     ShowWarningMessage("CalcBeausoleilMorrisonMixedStableFloor: Convection model not evaluated (would divide by zero)");
                     ShowContinueError("The temperature difference between surface and air is zero");
@@ -7106,7 +7106,7 @@ namespace ConvectionCoefficients {
                                                state.dataConvectionCoefficient->BMMixedUnstableFloorErrorIDX1);
             }
 
-            if (DeltaTemp == 0.0 && !WarmupFlag) {
+            if (DeltaTemp == 0.0 && !state.dataGlobal->WarmupFlag) {
                 if (state.dataConvectionCoefficient->BMMixedUnstableFloorErrorIDX2 == 0) {
                     ShowWarningMessage("CalcBeausoleilMorrisonMixedUnstableFloor: Convection model not evaluated (would divide by zero)");
                     ShowContinueError("The temperature difference between surface and air is zero");
@@ -7182,7 +7182,7 @@ namespace ConvectionCoefficients {
                                                state.dataConvectionCoefficient->BMMixedStableCeilingErrorIDX1);
 
             }
-            if (DeltaTemp == 0.0 && !WarmupFlag) {
+            if (DeltaTemp == 0.0 && !state.dataGlobal->WarmupFlag) {
                 if (state.dataConvectionCoefficient->BMMixedStableCeilingErrorIDX2 == 0) {
                     ShowWarningMessage("CalcBeausoleilMorrisonMixedStableCeiling: Convection model not evaluated (would divide by zero)");
                     ShowContinueError("The temperature difference between surface and air is zero");
@@ -7241,9 +7241,7 @@ namespace ConvectionCoefficients {
                                                       int const ZoneNum               // index of zone for messaging
     )
     {
-        using DataGlobals::WarmupFlag;
-
-         if ((HydraulicDiameter != 0.0) && (std::abs(DeltaTemp) > DataHVACGlobals::SmallTempDiff)) {
+        if ((HydraulicDiameter != 0.0) && (std::abs(DeltaTemp) > DataHVACGlobals::SmallTempDiff)) {
             Real64 SupplyAirTemp = CalcZoneSupplyAirTemp(ZoneNum);
             Real64 AirChangeRate = CalcZoneSystemACH(state, ZoneNum);
             return CalcBeausoleilMorrisonMixedUnstableCeiling(DeltaTemp, HydraulicDiameter, SurfTemp, SupplyAirTemp, AirChangeRate);
@@ -7259,7 +7257,7 @@ namespace ConvectionCoefficients {
                                                "and set to 9.999 [W/m2-K]",
                                                state.dataConvectionCoefficient->BMMixedUnstableCeilingErrorIDX1);
             }
-            if (DeltaTemp == 0.0 && !WarmupFlag) {
+            if (DeltaTemp == 0.0 && !state.dataGlobal->WarmupFlag) {
                 if (state.dataConvectionCoefficient->BMMixedUnstableCeilingErrorIDX2 == 0) {
                     ShowWarningMessage("CalcBeausoleilMorrisonMixedUnstableCeiling: Convection model not evaluated (would divide by zero)");
                     ShowContinueError("The temperature difference between surface and air is zero");

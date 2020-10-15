@@ -3187,7 +3187,7 @@ namespace VariableSpeedCoils {
                 // call coil model with everthing set at rating point
                 state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).InletAirDBTemp = state.dataVariableSpeedCoils->RatedInletAirTemp;
                 state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).InletAirHumRat =
-                    Psychrometrics::PsyWFnTdbTwbPb(state.dataVariableSpeedCoils->RatedInletAirTemp, state.dataVariableSpeedCoils->RatedInletWetBulbTemp, DataEnvironment::StdPressureSeaLevel);
+                    Psychrometrics::PsyWFnTdbTwbPb(state, state.dataVariableSpeedCoils->RatedInletAirTemp, state.dataVariableSpeedCoils->RatedInletWetBulbTemp, DataEnvironment::StdPressureSeaLevel);
                 state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).InletAirEnthalpy = Psychrometrics::PsyHFnTdbW(state.dataVariableSpeedCoils->RatedInletAirTemp, state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).InletAirHumRat);
                 state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).InletAirPressure = DataEnvironment::StdPressureSeaLevel;
 
@@ -3206,7 +3206,7 @@ namespace VariableSpeedCoils {
                 DataEnvironment::OutWetBulbTemp = ratedOutdoorAirWetBulb;
                 DataEnvironment::OutBaroPress = DataEnvironment::StdPressureSeaLevel; // assume rating is for sea level.
                 DataEnvironment::OutHumRat =
-                    Psychrometrics::PsyWFnTdbTwbPb(state.dataVariableSpeedCoils->RatedAmbAirTemp, ratedOutdoorAirWetBulb, DataEnvironment::StdPressureSeaLevel, RoutineName);
+                    Psychrometrics::PsyWFnTdbTwbPb(state, state.dataVariableSpeedCoils->RatedAmbAirTemp, ratedOutdoorAirWetBulb, DataEnvironment::StdPressureSeaLevel, RoutineName);
                 if (state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).CondenserInletNodeNum > 0) {
                     Node(state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).CondenserInletNodeNum).Temp = state.dataVariableSpeedCoils->RatedAmbAirTemp;
                     Node(state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).CondenserInletNodeNum).HumRat = DataEnvironment::OutHumRat;
@@ -3235,7 +3235,7 @@ namespace VariableSpeedCoils {
                 CalcVarSpeedCoilCooling(state, DXCoilNum, 2.0, runtimeFrac, SensLoad, LatentLoad, 1, 1.0, 1.0, 1.0, state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).NumOfSpeeds);
                 // coil outlets
                 Real64 RatedOutletWetBulb(0.0);
-                RatedOutletWetBulb = Psychrometrics::PsyTwbFnTdbWPb(state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).OutletAirDBTemp,
+                RatedOutletWetBulb = Psychrometrics::PsyTwbFnTdbWPb(state, state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).OutletAirDBTemp,
                                                                     state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).OutletAirHumRat,
                                                                     DataEnvironment::StdPressureSeaLevel,
                                                                     RoutineName);
@@ -3291,7 +3291,7 @@ namespace VariableSpeedCoils {
                 // call coil model with everthing set at rating point
                 state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).InletAirDBTemp = state.dataVariableSpeedCoils->RatedInletAirTempHeat;
                 state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).InletAirHumRat =
-                    Psychrometrics::PsyWFnTdbTwbPb(state.dataVariableSpeedCoils->RatedInletAirTempHeat, state.dataVariableSpeedCoils->RatedInletWetBulbTemp, DataEnvironment::StdPressureSeaLevel);
+                    Psychrometrics::PsyWFnTdbTwbPb(state, state.dataVariableSpeedCoils->RatedInletAirTempHeat, state.dataVariableSpeedCoils->RatedInletWetBulbTemp, DataEnvironment::StdPressureSeaLevel);
                 state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).InletAirEnthalpy = Psychrometrics::PsyHFnTdbW(state.dataVariableSpeedCoils->RatedInletAirTempHeat, state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).InletAirHumRat);
                 state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).InletAirPressure = DataEnvironment::StdPressureSeaLevel;
 
@@ -3309,7 +3309,7 @@ namespace VariableSpeedCoils {
                 DataEnvironment::OutWetBulbTemp = state.dataVariableSpeedCoils->RatedAmbAirWBHeat;
                 DataEnvironment::OutBaroPress = DataEnvironment::StdPressureSeaLevel; // assume rating is for sea level.
                 DataEnvironment::OutHumRat =
-                    Psychrometrics::PsyWFnTdbTwbPb(state.dataVariableSpeedCoils->RatedAmbAirTempHeat, state.dataVariableSpeedCoils->RatedAmbAirWBHeat, DataEnvironment::StdPressureSeaLevel, RoutineName);
+                    Psychrometrics::PsyWFnTdbTwbPb(state, state.dataVariableSpeedCoils->RatedAmbAirTempHeat, state.dataVariableSpeedCoils->RatedAmbAirWBHeat, DataEnvironment::StdPressureSeaLevel, RoutineName);
                 if (state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).CondenserInletNodeNum > 0) {
                     Node(state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).CondenserInletNodeNum).Temp = state.dataVariableSpeedCoils->RatedAmbAirTempHeat;
                     Node(state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).CondenserInletNodeNum).HumRat = DataEnvironment::OutHumRat;
@@ -3339,7 +3339,7 @@ namespace VariableSpeedCoils {
                 CalcVarSpeedCoilHeating(state, DXCoilNum, 2.0, runtimeFrac, SensLoad, 1, 1.0, 1.0, 1.0, state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).NumOfSpeeds);
                 // coil outlets
                 Real64 RatedOutletWetBulb(0.0);
-                RatedOutletWetBulb = Psychrometrics::PsyTwbFnTdbWPb(state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).OutletAirDBTemp,
+                RatedOutletWetBulb = Psychrometrics::PsyTwbFnTdbWPb(state, state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).OutletAirDBTemp,
                                                                     state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).OutletAirHumRat,
                                                                     DataEnvironment::StdPressureSeaLevel,
                                                                     RoutineName);
@@ -3914,7 +3914,7 @@ namespace VariableSpeedCoils {
                     } else if (PrimaryAirSystem(CurSysNum).supFanLocation == DataAirSystems::fanPlacement::DrawThru) {
                         SupTemp -= FanCoolLoad / (CpAir * rhoair * VolFlowRate);
                     }
-                    MixWetBulb = PsyTwbFnTdbWPb(MixTemp, MixHumRat, OutBaroPress, RoutineName);
+                    MixWetBulb = PsyTwbFnTdbWPb(state, MixTemp, MixHumRat, OutBaroPress, RoutineName);
                     // need to use OutTemp for air-cooled and state.dataVariableSpeedCoils->RatedInletWaterTemp for water-cooled
                     if (state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).CondenserInletNodeNum != 0) {
                         RatedSourceTempCool = state.dataVariableSpeedCoils->RatedInletWaterTemp;
@@ -3991,7 +3991,7 @@ namespace VariableSpeedCoils {
                         SupTemp -= FanCoolLoad / (CpAir * rhoair * VolFlowRate);
                     }
 
-                    MixWetBulb = PsyTwbFnTdbWPb(MixTemp, MixHumRat, OutBaroPress, RoutineName);
+                    MixWetBulb = PsyTwbFnTdbWPb(state, MixTemp, MixHumRat, OutBaroPress, RoutineName);
                     // need to use OutTemp for air-cooled and state.dataVariableSpeedCoils->RatedInletWaterTemp for water-cooled
                     if (state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).CondenserInletNodeNum != 0) {
                         RatedSourceTempCool = state.dataVariableSpeedCoils->RatedInletWaterTemp;
@@ -4248,7 +4248,7 @@ namespace VariableSpeedCoils {
 
         if (state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).CoolHeatType == "WATERHEATING") {
             HPInletAirHumRat =
-                PsyWFnTdbTwbPb(state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).WHRatedInletDBTemp, state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).WHRatedInletWBTemp, StdBaroPress, RoutineName);
+                PsyWFnTdbTwbPb(state, state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).WHRatedInletDBTemp, state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).WHRatedInletWBTemp, StdBaroPress, RoutineName);
             rhoA = PsyRhoAirFnPbTdbW(OutBaroPress, state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).WHRatedInletDBTemp, HPInletAirHumRat, RoutineName);
 
             for (Mode = state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).NumOfSpeeds; Mode >= 1; --Mode) {
@@ -4557,7 +4557,7 @@ namespace VariableSpeedCoils {
         // convert SHR to rated Bypass factor and effective air side surface area
         if (state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).CoolHeatType == "COOLING") {
             for (Mode = 1; Mode <= state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).NumOfSpeeds; ++Mode) {
-                state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedCBF(Mode) = CalcCBF(state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).VarSpeedCoilType,
+                state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedCBF(Mode) = CalcCBF(state, state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).VarSpeedCoilType,
                                                                    state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name,
                                                                    state.dataVariableSpeedCoils->RatedInletAirTemp,
                                                                    state.dataVariableSpeedCoils->RatedInletAirHumRat,
@@ -4594,7 +4594,7 @@ namespace VariableSpeedCoils {
                     HPWHCoolCapacity = state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedTotCap(Mode) * (1.0 - 1.0 / state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedCOP(Mode)) -
                                        state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSWHPumpPower(Mode) * state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).HPWHCondPumpFracToWater;
 
-                state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedCBF(Mode) = CalcCBF(state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).VarSpeedCoilType,
+                state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedCBF(Mode) = CalcCBF(state, state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).VarSpeedCoilType,
                                                                    state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name,
                                                                    HPWHInletDBTemp,
                                                                    HPInletAirHumRat,
@@ -4989,7 +4989,7 @@ namespace VariableSpeedCoils {
             CpAir_Init = PsyCpAirFnW(LoadSideInletHumRat_Init);
             state.dataVariableSpeedCoils->firstTime = false;
         }
-        LoadSideInletWBTemp_Init = PsyTwbFnTdbWPb(LoadSideInletDBTemp_Init, LoadSideInletHumRat_Init, OutBaroPress, RoutineName);
+        LoadSideInletWBTemp_Init = PsyTwbFnTdbWPb(state, LoadSideInletDBTemp_Init, LoadSideInletHumRat_Init, OutBaroPress, RoutineName);
 
         MaxSpeed = state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).NumOfSpeeds;
 
@@ -5043,7 +5043,7 @@ namespace VariableSpeedCoils {
                 }
                 // (Outdoor wet-bulb temp from DataEnvironment) + (1.0-EvapCondEffectiveness) * (drybulb - wetbulb)
                 CondInletTemp = OutdoorWetBulb + (OutdoorDryBulb - OutdoorWetBulb) * (1.0 - EvapCondEffectSped);
-                CondInletHumRat = PsyWFnTdbTwbPb(CondInletTemp, OutdoorWetBulb, OutdoorPressure);
+                CondInletHumRat = PsyWFnTdbTwbPb(state, CondInletTemp, OutdoorWetBulb, OutdoorPressure);
                 CompAmbTemp = CondInletTemp;
             } else {                            // AIR COOLED CONDENSER
                 CondInletTemp = OutdoorDryBulb; // Outdoor dry-bulb temp
@@ -5117,7 +5117,7 @@ namespace VariableSpeedCoils {
         // Set indoor air conditions to the actual condition
         LoadSideInletDBTemp_Unit = state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).InletAirDBTemp;
         LoadSideInletHumRat_Unit = state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).InletAirHumRat;
-        LoadSideInletWBTemp_Unit = PsyTwbFnTdbWPb(LoadSideInletDBTemp_Unit, LoadSideInletHumRat_Unit, OutBaroPress, RoutineName);
+        LoadSideInletWBTemp_Unit = PsyTwbFnTdbWPb(state, LoadSideInletDBTemp_Unit, LoadSideInletHumRat_Unit, OutBaroPress, RoutineName);
         LoadSideInletEnth_Unit = state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).InletAirEnthalpy;
         CpAir_Unit = PsyCpAirFnW(LoadSideInletHumRat_Unit);
 
@@ -5424,13 +5424,13 @@ namespace VariableSpeedCoils {
         state.dataVariableSpeedCoils->LoadSideOutletEnth = state.dataVariableSpeedCoils->LoadSideInletEnth - state.dataVariableSpeedCoils->QLoadTotal / state.dataVariableSpeedCoils->LoadSideMassFlowRate;
         state.dataVariableSpeedCoils->LoadSideOutletDBTemp = state.dataVariableSpeedCoils->LoadSideInletDBTemp - state.dataVariableSpeedCoils->QSensible / (state.dataVariableSpeedCoils->LoadSideMassFlowRate * CpAir);
 
-        MaxHumRat = PsyWFnTdbRhPb(state.dataVariableSpeedCoils->LoadSideOutletDBTemp, 0.9999, state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).InletAirPressure, RoutineName);
+        MaxHumRat = PsyWFnTdbRhPb(state, state.dataVariableSpeedCoils->LoadSideOutletDBTemp, 0.9999, state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).InletAirPressure, RoutineName);
         MaxOutletEnth = PsyHFnTdbW(state.dataVariableSpeedCoils->LoadSideOutletDBTemp, MaxHumRat);
         if (state.dataVariableSpeedCoils->LoadSideOutletEnth > MaxOutletEnth) {
             state.dataVariableSpeedCoils->LoadSideOutletEnth = MaxOutletEnth;
             // QLoadTotal = state.dataVariableSpeedCoils->LoadSideMassFlowRate * (LoadSideInletEnth - LoadSideOutletEnth)
         }
-        state.dataVariableSpeedCoils->LoadSideOutletHumRat = PsyWFnTdbH(state.dataVariableSpeedCoils->LoadSideOutletDBTemp, state.dataVariableSpeedCoils->LoadSideOutletEnth, RoutineName);
+        state.dataVariableSpeedCoils->LoadSideOutletHumRat = PsyWFnTdbH(state, state.dataVariableSpeedCoils->LoadSideOutletDBTemp, state.dataVariableSpeedCoils->LoadSideOutletEnth, RoutineName);
         if (state.dataVariableSpeedCoils->LoadSideOutletHumRat > MaxHumRat) {
             state.dataVariableSpeedCoils->LoadSideOutletHumRat = MaxHumRat;
         }
@@ -5929,8 +5929,8 @@ namespace VariableSpeedCoils {
             } else {
                 hDelta =  state.dataVariableSpeedCoils->QLoadTotal / state.dataVariableSpeedCoils->LoadSideMassFlowRate;
                 hADP = state.dataVariableSpeedCoils->LoadSideInletEnth - hDelta / (1.0 - CBFSpeed);
-                tADP = PsyTsatFnHPb(hADP, LoadPressure, RoutineName);
-                wADP = PsyWFnTdbH(tADP, hADP, RoutineName);
+                tADP = PsyTsatFnHPb(state, hADP, LoadPressure, RoutineName);
+                wADP = PsyWFnTdbH(state, tADP, hADP, RoutineName);
                 hTinwADP = PsyHFnTdbW(state.dataVariableSpeedCoils->LoadSideInletDBTemp, wADP);
                 if (( state.dataVariableSpeedCoils->LoadSideInletEnth - hADP) > 1.e-10) {
                     SHR = min((hTinwADP - hADP) / ( state.dataVariableSpeedCoils->LoadSideInletEnth - hADP), 1.0);
@@ -5972,12 +5972,12 @@ namespace VariableSpeedCoils {
         CpAir = PsyCpAirFnW(state.dataVariableSpeedCoils->LoadSideInletHumRat);
         state.dataVariableSpeedCoils->LoadSideOutletDBTemp = state.dataVariableSpeedCoils->LoadSideInletDBTemp -  state.dataVariableSpeedCoils->QSensible / (state.dataVariableSpeedCoils->LoadSideMassFlowRate * CpAir);
 
-        MaxHumRat = PsyWFnTdbRhPb( state.dataVariableSpeedCoils->LoadSideOutletDBTemp, 0.9999, state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).InletAirPressure, RoutineName);
+        MaxHumRat = PsyWFnTdbRhPb(state,  state.dataVariableSpeedCoils->LoadSideOutletDBTemp, 0.9999, state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).InletAirPressure, RoutineName);
         MaxOutletEnth = PsyHFnTdbW( state.dataVariableSpeedCoils->LoadSideOutletDBTemp, MaxHumRat);
         if ( state.dataVariableSpeedCoils->LoadSideOutletEnth > MaxOutletEnth) {
             state.dataVariableSpeedCoils->LoadSideOutletEnth = MaxOutletEnth;
         }
-        state.dataVariableSpeedCoils->LoadSideOutletHumRat = PsyWFnTdbH( state.dataVariableSpeedCoils->LoadSideOutletDBTemp, state.dataVariableSpeedCoils->LoadSideOutletEnth, RoutineName);
+        state.dataVariableSpeedCoils->LoadSideOutletHumRat = PsyWFnTdbH(state,  state.dataVariableSpeedCoils->LoadSideOutletDBTemp, state.dataVariableSpeedCoils->LoadSideOutletEnth, RoutineName);
         if ( state.dataVariableSpeedCoils->LoadSideOutletHumRat > MaxHumRat) {
             state.dataVariableSpeedCoils->LoadSideOutletHumRat = MaxHumRat;
         }
@@ -6180,7 +6180,7 @@ namespace VariableSpeedCoils {
         state.dataVariableSpeedCoils->LoadSideInletDBTemp = state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).InletAirDBTemp;
         state.dataVariableSpeedCoils->LoadSideInletHumRat = state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).InletAirHumRat;
 
-        state.dataVariableSpeedCoils->LoadSideInletWBTemp = PsyTwbFnTdbWPb(state.dataVariableSpeedCoils->LoadSideInletDBTemp, state.dataVariableSpeedCoils->LoadSideInletHumRat, OutBaroPress, RoutineName);
+        state.dataVariableSpeedCoils->LoadSideInletWBTemp = PsyTwbFnTdbWPb(state, state.dataVariableSpeedCoils->LoadSideInletDBTemp, state.dataVariableSpeedCoils->LoadSideInletHumRat, OutBaroPress, RoutineName);
         state.dataVariableSpeedCoils->LoadSideInletEnth = state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).InletAirEnthalpy;
         CpAir = PsyCpAirFnW(state.dataVariableSpeedCoils->LoadSideInletHumRat);
 
@@ -6392,7 +6392,7 @@ namespace VariableSpeedCoils {
             // Calculating adjustment factors for defrost
             // Calculate delta w through outdoor coil by assuming a coil temp of 0.82*DBT-9.7(F) per DOE2.1E
             OutdoorCoilT = 0.82 * OutdoorDryBulb - 8.589;
-            OutdoorCoildw = max(1.0e-6, (OutdoorHumRat - PsyWFnTdpPb(OutdoorCoilT, OutdoorPressure)));
+            OutdoorCoildw = max(1.0e-6, (OutdoorHumRat - PsyWFnTdpPb(state, OutdoorCoilT, OutdoorPressure)));
 
             // Initializing defrost adjustment factors
             LoadDueToDefrost = 0.0;
@@ -6453,7 +6453,7 @@ namespace VariableSpeedCoils {
         // calculate coil outlet state variables
         state.dataVariableSpeedCoils->LoadSideOutletEnth = state.dataVariableSpeedCoils->LoadSideInletEnth +  state.dataVariableSpeedCoils->QLoadTotal / state.dataVariableSpeedCoils->LoadSideMassFlowRate;
         state.dataVariableSpeedCoils->LoadSideOutletDBTemp = state.dataVariableSpeedCoils->LoadSideInletDBTemp +  state.dataVariableSpeedCoils->QSensible / (state.dataVariableSpeedCoils->LoadSideMassFlowRate * CpAir);
-        state.dataVariableSpeedCoils->LoadSideOutletHumRat = PsyWFnTdbH( state.dataVariableSpeedCoils->LoadSideOutletDBTemp, state.dataVariableSpeedCoils->LoadSideOutletEnth, RoutineName);
+        state.dataVariableSpeedCoils->LoadSideOutletHumRat = PsyWFnTdbH(state,  state.dataVariableSpeedCoils->LoadSideOutletDBTemp, state.dataVariableSpeedCoils->LoadSideOutletEnth, RoutineName);
 
         // Actual outlet conditions are "average" for time step
         if (CyclingScheme == ContFanCycCoil) {
@@ -7161,7 +7161,7 @@ namespace VariableSpeedCoils {
         }
 
         if (state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).reportCoilFinalSizes) {
-            if (!DataGlobals::WarmupFlag && !DataGlobals::DoingHVACSizingSimulations && !DataGlobals::DoingSizing) {
+            if (!state.dataGlobal->WarmupFlag && !DataGlobals::DoingHVACSizingSimulations && !DataGlobals::DoingSizing) {
                 if (state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).VSCoilTypeOfNum == Coil_CoolingWaterToAirHPVSEquationFit ||
                     state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).VSCoilTypeOfNum == Coil_CoolingAirToAirVariableSpeed) { // cooling coil
                     coilSelectionReportObj->setCoilFinalSizes(state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name,
@@ -7433,8 +7433,8 @@ namespace VariableSpeedCoils {
             //   Calculate apparatus dew point conditions using TotCap and CBF
             Real64 hDelta = TotCapCalc / AirMassFlow;                       // Change in air enthalpy across the cooling coil [J/kg]
             Real64 hADP = InletEnthalpy - hDelta / (1.0 - localCBF);        // Apparatus dew point enthalpy [J/kg]
-            Real64 tADP = PsyTsatFnHPb(hADP, Pressure);                     // Apparatus dew point temperature [C]
-            Real64 wADP = PsyWFnTdbH(tADP, hADP);                           // Apparatus dew point humidity ratio [kg/kg]
+            Real64 tADP = PsyTsatFnHPb(state, hADP, Pressure);                     // Apparatus dew point temperature [C]
+            Real64 wADP = PsyWFnTdbH(state, tADP, hADP);                           // Apparatus dew point humidity ratio [kg/kg]
             Real64 hTinwADP = PsyHFnTdbW(InletDryBulb, wADP);               // Enthalpy at inlet dry-bulb and wADP [J/kg]
             SHRCalc = min((hTinwADP - hADP) / (InletEnthalpy - hADP), 1.0); // temporary calculated value of SHR
 
@@ -7446,7 +7446,7 @@ namespace VariableSpeedCoils {
                 //     capacity at the dry-out point to determine exiting conditions from coil. This is required
                 //     since the TotCapTempModFac doesn't work properly with dry-coil conditions.
                 InletHumRatCalc = RF * wADP + (1.0 - RF) * InletHumRatCalc;
-                InletWetBulbCalc = PsyTwbFnTdbWPb(InletDryBulb, InletHumRatCalc, Pressure);
+                InletWetBulbCalc = PsyTwbFnTdbWPb(state, InletDryBulb, InletHumRatCalc, Pressure);
                 ++Counter;
                 if (std::abs(werror) > Tolerance) {
                     LoopOn = true; // Recalculate with modified inlet conditions

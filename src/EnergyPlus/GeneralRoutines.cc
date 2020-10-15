@@ -160,7 +160,6 @@ void ControlCompOutput(EnergyPlusData &state, std::string const &CompName,      
     using namespace DataLoopNode;
     using BaseboardRadiator::SimHWConvective;
     using DataBranchAirLoopPlant::MassFlowTolerance;
-    using DataGlobals::WarmupFlag;
     using FanCoilUnits::Calc4PipeFanCoil;
     using General::RoundSigDigits;
     using General::TrimSigDigits;
@@ -626,7 +625,7 @@ void ControlCompOutput(EnergyPlusData &state, std::string const &CompName,      
         }
 
         ++Iter;
-        if ((Iter > MaxIter) && (!WarmupFlag)) {
+        if ((Iter > MaxIter) && (!state.dataGlobal->WarmupFlag)) {
             // if ( CompErrIndex == 0 ) {
             ShowWarningMessage("ControlCompOutput: Maximum iterations exceeded for " + CompType + " = " + CompName);
             ShowContinueError("... Load met       = " + TrimSigDigits(LoadMet, 5) + " W.");
@@ -1123,7 +1122,7 @@ void CalcPassiveExteriorBaffleGap(EnergyPlusData &state,
     LocalWetBulbTemp = sum_product_sub(Surface, &SurfaceData::Area, &SurfaceData::OutWetBulbTemp, SurfPtrARR) /
                        surfaceArea; // Autodesk:F2C++ Functions handle array subscript usage
 
-    LocalOutHumRat = PsyWFnTdbTwbPb(LocalOutDryBulbTemp, LocalWetBulbTemp, OutBaroPress, RoutineName);
+    LocalOutHumRat = PsyWFnTdbTwbPb(state, LocalOutDryBulbTemp, LocalWetBulbTemp, OutBaroPress, RoutineName);
 
     RhoAir = PsyRhoAirFnPbTdbW(OutBaroPress, LocalOutDryBulbTemp, LocalOutHumRat, RoutineName);
     CpAir = PsyCpAirFnW(LocalOutHumRat);

@@ -583,10 +583,10 @@ TEST_F(EnergyPlusFixture, EconomicTariff_GatherForEconomics)
 
     ASSERT_TRUE(process_idf(idf_objects));
 
-    DataGlobals::NumOfTimeStepInHour = 4;    // must initialize this to get schedules initialized
+    state.dataGlobal->NumOfTimeStepInHour = 4;    // must initialize this to get schedules initialized
     DataGlobals::MinutesPerTimeStep = 15;    // must initialize this to get schedules initialized
-    DataGlobals::TimeStepZone = 0.25;
-    DataGlobals::TimeStepZoneSec = DataGlobals::TimeStepZone * DataGlobalConstants::SecInHour();
+    state.dataGlobal->TimeStepZone = 0.25;
+    DataGlobals::TimeStepZoneSec = state.dataGlobal->TimeStepZone * DataGlobalConstants::SecInHour();
 
     ScheduleManager::ProcessScheduleInput(state); // read schedules
     ExteriorEnergyUse::ManageExteriorEnergyUse(state);
@@ -625,17 +625,17 @@ TEST_F(EnergyPlusFixture, EconomicTariff_GatherForEconomics)
 
     DataEnvironment::Month = 5;
     DataEnvironment::DayOfMonth = 31;
-    DataGlobals::HourOfDay = 23;
+    state.dataGlobal->HourOfDay = 23;
     DataEnvironment::DSTIndicator = 1; // DST IS ON
     DataEnvironment::MonthTomorrow = 6;
     DataEnvironment::DayOfWeek = 4;
     DataEnvironment::DayOfWeekTomorrow = 5;
     DataEnvironment::HolidayIndex = 0;
-    DataGlobals::TimeStep = 4;
+    state.dataGlobal->TimeStep = 4;
     DataEnvironment::DayOfYear_Schedule = General::OrdinalDay(DataEnvironment::Month, DataEnvironment::DayOfMonth, 1);
 
     ScheduleManager::UpdateScheduleValues(state);
-    EXPECT_EQ(1.0, ScheduleManager::LookUpScheduleValue(state, 1, DataGlobals::HourOfDay, DataGlobals::TimeStep));
+    EXPECT_EQ(1.0, ScheduleManager::LookUpScheduleValue(state, 1, state.dataGlobal->HourOfDay, state.dataGlobal->TimeStep));
     EXPECT_EQ(1.0, ScheduleManager::GetCurrentScheduleValue(tariff(1).seasonSchIndex));
     EXPECT_EQ(1.0, ScheduleManager::Schedule(seasonSchPtr).CurrentValue);
 
@@ -656,13 +656,13 @@ TEST_F(EnergyPlusFixture, EconomicTariff_GatherForEconomics)
 
     DataEnvironment::Month = 5;
     DataEnvironment::DayOfMonth = 31;
-    DataGlobals::HourOfDay = 24;
+    state.dataGlobal->HourOfDay = 24;
     DataEnvironment::DSTIndicator = 1; // DST IS ON
     DataEnvironment::MonthTomorrow = 6;
     DataEnvironment::DayOfWeek = 4;
     DataEnvironment::DayOfWeekTomorrow = 5;
     DataEnvironment::HolidayIndex = 0;
-    DataGlobals::TimeStep = 1;
+    state.dataGlobal->TimeStep = 1;
     DataEnvironment::DayOfYear_Schedule = General::OrdinalDay(DataEnvironment::Month, DataEnvironment::DayOfMonth, 1);
 
     ScheduleManager::UpdateScheduleValues(state);

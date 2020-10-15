@@ -131,8 +131,8 @@ namespace EnergyPlus {
         DataEnvironment::StdRhoAir = 1.20;
         state.dataWaterCoils->GetWaterCoilsInputFlag = true;
         NumCoils = 0;
-        DataGlobals::NumOfTimeStepInHour = 1;
-        DataGlobals::TimeStep = 1;
+        state.dataGlobal->NumOfTimeStepInHour = 1;
+        state.dataGlobal->TimeStep = 1;
         DataGlobals::MinutesPerTimeStep = 60;
 
         InitializePsychRoutines();
@@ -398,7 +398,7 @@ namespace EnergyPlus {
 
         DataEnvironment::Month = 1;
         DataEnvironment::DayOfMonth = 21;
-        DataGlobals::HourOfDay = 1;
+        state.dataGlobal->HourOfDay = 1;
         DataEnvironment::DSTIndicator = 0;
         DataEnvironment::DayOfWeek = 2;
         DataEnvironment::HolidayIndex = 0;
@@ -442,8 +442,8 @@ namespace EnergyPlus {
         DataEnvironment::StdRhoAir = 1.20;
         state.dataWaterCoils->GetWaterCoilsInputFlag = true;
         NumCoils = 0;
-        DataGlobals::NumOfTimeStepInHour = 1;
-        DataGlobals::TimeStep = 1;
+        state.dataGlobal->NumOfTimeStepInHour = 1;
+        state.dataGlobal->TimeStep = 1;
         DataGlobals::MinutesPerTimeStep = 60;
 
         InitializePsychRoutines();
@@ -712,7 +712,7 @@ namespace EnergyPlus {
 
         DataEnvironment::Month = 1;
         DataEnvironment::DayOfMonth = 21;
-        DataGlobals::HourOfDay = 1;
+        state.dataGlobal->HourOfDay = 1;
         DataEnvironment::DSTIndicator = 0;
         DataEnvironment::DayOfWeek = 2;
         DataEnvironment::HolidayIndex = 0;
@@ -755,8 +755,8 @@ namespace EnergyPlus {
         DataEnvironment::StdRhoAir = 1.20;
         state.dataWaterCoils->GetWaterCoilsInputFlag = true;
         NumCoils = 0;
-        DataGlobals::NumOfTimeStepInHour = 1;
-        DataGlobals::TimeStep = 1;
+        state.dataGlobal->NumOfTimeStepInHour = 1;
+        state.dataGlobal->TimeStep = 1;
         DataGlobals::MinutesPerTimeStep = 60;
 
         InitializePsychRoutines();
@@ -1047,7 +1047,7 @@ namespace EnergyPlus {
 
         DataEnvironment::Month = 1;
         DataEnvironment::DayOfMonth = 21;
-        DataGlobals::HourOfDay = 1;
+        state.dataGlobal->HourOfDay = 1;
         DataEnvironment::DSTIndicator = 0;
         DataEnvironment::DayOfWeek = 2;
         DataEnvironment::HolidayIndex = 0;
@@ -1142,8 +1142,8 @@ namespace EnergyPlus {
         DataEnvironment::StdRhoAir = 1.20;
         state.dataWaterCoils->GetWaterCoilsInputFlag = true;
         NumCoils = 0;
-        DataGlobals::NumOfTimeStepInHour = 1;
-        DataGlobals::TimeStep = 1;
+        state.dataGlobal->NumOfTimeStepInHour = 1;
+        state.dataGlobal->TimeStep = 1;
         DataGlobals::MinutesPerTimeStep = 60;
 
         InitializePsychRoutines();
@@ -1400,7 +1400,7 @@ namespace EnergyPlus {
 
         DataEnvironment::Month = 1;
         DataEnvironment::DayOfMonth = 21;
-        DataGlobals::HourOfDay = 1;
+        state.dataGlobal->HourOfDay = 1;
         DataEnvironment::DSTIndicator = 0;
         DataEnvironment::DayOfWeek = 2;
         DataEnvironment::HolidayIndex = 0;
@@ -1450,8 +1450,8 @@ namespace EnergyPlus {
         DataEnvironment::StdRhoAir = 1.20;
         state.dataWaterCoils->GetWaterCoilsInputFlag = true;
         NumCoils = 0;
-        DataGlobals::NumOfTimeStepInHour = 1;
-        DataGlobals::TimeStep = 1;
+        state.dataGlobal->NumOfTimeStepInHour = 1;
+        state.dataGlobal->TimeStep = 1;
         DataGlobals::MinutesPerTimeStep = 60;
 
         InitializePsychRoutines();
@@ -1745,7 +1745,7 @@ namespace EnergyPlus {
 
         DataEnvironment::Month = 1;
         DataEnvironment::DayOfMonth = 21;
-        DataGlobals::HourOfDay = 1;
+        state.dataGlobal->HourOfDay = 1;
         DataEnvironment::DSTIndicator = 0;
         DataEnvironment::DayOfWeek = 2;
         DataEnvironment::HolidayIndex = 0;
@@ -1802,8 +1802,8 @@ namespace EnergyPlus {
         DataEnvironment::StdRhoAir = 1.20;
         state.dataWaterCoils->GetWaterCoilsInputFlag = true;
         NumCoils = 0;
-        DataGlobals::NumOfTimeStepInHour = 1;
-        DataGlobals::TimeStep = 1;
+        state.dataGlobal->NumOfTimeStepInHour = 1;
+        state.dataGlobal->TimeStep = 1;
         DataGlobals::MinutesPerTimeStep = 60;
         DataSizing::CurZoneEqNum = 1;
 
@@ -2079,7 +2079,7 @@ namespace EnergyPlus {
 
         DataEnvironment::Month = 1;
         DataEnvironment::DayOfMonth = 21;
-        DataGlobals::HourOfDay = 1;
+        state.dataGlobal->HourOfDay = 1;
         DataEnvironment::DSTIndicator = 0;
         DataEnvironment::DayOfWeek = 2;
         DataEnvironment::HolidayIndex = 0;
@@ -2220,8 +2220,8 @@ namespace EnergyPlus {
         DataEnvironment::StdRhoAir = 1.20;
         state.dataWaterCoils->GetWaterCoilsInputFlag = true;
         NumCoils = 0;
-        DataGlobals::NumOfTimeStepInHour = 1;
-        DataGlobals::TimeStep = 1;
+        state.dataGlobal->NumOfTimeStepInHour = 1;
+        state.dataGlobal->TimeStep = 1;
         DataGlobals::MinutesPerTimeStep = 60;
 
         InitializePsychRoutines();
@@ -2338,7 +2338,7 @@ namespace EnergyPlus {
         state.dataGlobal->BeginEnvrnFlag = true;
         DataEnvironment::DayOfYear_Schedule = 1;
         DataEnvironment::DayOfWeek = 2;
-        DataGlobals::HourOfDay = 1;
+        state.dataGlobal->HourOfDay = 1;
         ProcessScheduleInput(state);
         UpdateScheduleValues(state);
 
@@ -2505,8 +2505,8 @@ namespace EnergyPlus {
         DataEnvironment::StdRhoAir = 1.20;
         state.dataWaterCoils->GetWaterCoilsInputFlag = true;
         NumCoils = 0;
-        DataGlobals::NumOfTimeStepInHour = 1;
-        DataGlobals::TimeStep = 1;
+        state.dataGlobal->NumOfTimeStepInHour = 1;
+        state.dataGlobal->TimeStep = 1;
         DataGlobals::MinutesPerTimeStep = 60;
         DataSizing::CurZoneEqNum = 1;
 
@@ -2789,7 +2789,7 @@ namespace EnergyPlus {
 
         DataEnvironment::Month = 1;
         DataEnvironment::DayOfMonth = 21;
-        DataGlobals::HourOfDay = 1;
+        state.dataGlobal->HourOfDay = 1;
         DataEnvironment::DSTIndicator = 0;
         DataEnvironment::DayOfWeek = 2;
         DataEnvironment::HolidayIndex = 0;
@@ -2910,8 +2910,8 @@ namespace EnergyPlus {
         DataEnvironment::StdRhoAir = 1.20;
         state.dataWaterCoils->GetWaterCoilsInputFlag = true;
         NumCoils = 0;
-        DataGlobals::NumOfTimeStepInHour = 1;
-        DataGlobals::TimeStep = 1;
+        state.dataGlobal->NumOfTimeStepInHour = 1;
+        state.dataGlobal->TimeStep = 1;
         DataGlobals::MinutesPerTimeStep = 60;
         DataSizing::CurZoneEqNum = 1;
 
@@ -3202,7 +3202,7 @@ namespace EnergyPlus {
 
         DataEnvironment::Month = 1;
         DataEnvironment::DayOfMonth = 21;
-        DataGlobals::HourOfDay = 1;
+        state.dataGlobal->HourOfDay = 1;
         DataEnvironment::DSTIndicator = 0;
         DataEnvironment::DayOfWeek = 2;
         DataEnvironment::HolidayIndex = 0;
@@ -3314,8 +3314,8 @@ namespace EnergyPlus {
         DataEnvironment::StdRhoAir = 1.20;
         state.dataWaterCoils->GetWaterCoilsInputFlag = true;
         NumCoils = 0;
-        DataGlobals::NumOfTimeStepInHour = 1;
-        DataGlobals::TimeStep = 1;
+        state.dataGlobal->NumOfTimeStepInHour = 1;
+        state.dataGlobal->TimeStep = 1;
         DataGlobals::MinutesPerTimeStep = 60;
         DataSizing::CurZoneEqNum = 1;
 
@@ -3565,7 +3565,7 @@ namespace EnergyPlus {
         StdRhoAir = 1.2;
         DataEnvironment::Month = 1;
         DataEnvironment::DayOfMonth = 21;
-        DataGlobals::HourOfDay = 1;
+        state.dataGlobal->HourOfDay = 1;
         DataEnvironment::DSTIndicator = 0;
         DataEnvironment::DayOfWeek = 2;
         DataEnvironment::HolidayIndex = 0;
@@ -3681,8 +3681,8 @@ namespace EnergyPlus {
         DataEnvironment::StdRhoAir = 1.20;
         state.dataWaterCoils->GetWaterCoilsInputFlag = true;
         NumCoils = 0;
-        DataGlobals::NumOfTimeStepInHour = 1;
-        DataGlobals::TimeStep = 1;
+        state.dataGlobal->NumOfTimeStepInHour = 1;
+        state.dataGlobal->TimeStep = 1;
         DataGlobals::MinutesPerTimeStep = 60;
         DataSizing::CurZoneEqNum = 1;
 
@@ -3932,7 +3932,7 @@ namespace EnergyPlus {
         StdRhoAir = 1.2;
         DataEnvironment::Month = 1;
         DataEnvironment::DayOfMonth = 21;
-        DataGlobals::HourOfDay = 1;
+        state.dataGlobal->HourOfDay = 1;
         DataEnvironment::DSTIndicator = 0;
         DataEnvironment::DayOfWeek = 2;
         DataEnvironment::HolidayIndex = 0;
@@ -4048,8 +4048,8 @@ namespace EnergyPlus {
         DataEnvironment::StdRhoAir = 1.20;
         state.dataWaterCoils->GetWaterCoilsInputFlag = true;
         NumCoils = 0;
-        DataGlobals::NumOfTimeStepInHour = 1;
-        DataGlobals::TimeStep = 1;
+        state.dataGlobal->NumOfTimeStepInHour = 1;
+        state.dataGlobal->TimeStep = 1;
         DataGlobals::MinutesPerTimeStep = 60;
         DataSizing::CurZoneEqNum = 1;
 
@@ -4299,7 +4299,7 @@ namespace EnergyPlus {
         StdRhoAir = 1.2;
         DataEnvironment::Month = 1;
         DataEnvironment::DayOfMonth = 21;
-        DataGlobals::HourOfDay = 1;
+        state.dataGlobal->HourOfDay = 1;
         DataEnvironment::DSTIndicator = 0;
         DataEnvironment::DayOfWeek = 2;
         DataEnvironment::HolidayIndex = 0;
@@ -4517,8 +4517,8 @@ namespace EnergyPlus {
         DataEnvironment::StdRhoAir = 1.20;
         state.dataWaterCoils->GetWaterCoilsInputFlag = true;
         //NumCoils = 0;
-        DataGlobals::NumOfTimeStepInHour = 1;
-        DataGlobals::TimeStep = 1;
+        state.dataGlobal->NumOfTimeStepInHour = 1;
+        state.dataGlobal->TimeStep = 1;
         DataGlobals::MinutesPerTimeStep = 60;
         DataSizing::CurZoneEqNum = 1;
         InitializePsychRoutines();
@@ -4610,7 +4610,7 @@ namespace EnergyPlus {
 
         DataEnvironment::Month = 1;
         DataEnvironment::DayOfMonth = 21;
-        DataGlobals::HourOfDay = 1;
+        state.dataGlobal->HourOfDay = 1;
         DataEnvironment::DSTIndicator = 0;
         DataEnvironment::DayOfWeek = 2;
         DataEnvironment::HolidayIndex = 0;

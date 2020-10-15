@@ -295,7 +295,7 @@ ENERGYPLUSLIB_API Real64 psyVFnTdbWPb(EnergyPlusState state, Real64 TDB, Real64 
 /// \param[in] TDB Dry bulb temperature, in Celsius
 /// \param[in] H Enthalpy, in J/kg
 /// \returns Psychrometric humidity ratio, in kgWater/kgDryAir
-ENERGYPLUSLIB_API Real64 psyWFnTdbH(EnergyPlusState state, Real64 TDB, Real64 H);
+ENERGYPLUSLIB_API Real64 PsyWFnTdbH(state, EnergyPlusState state, Real64 TDB, Real64 H);
 /// \brief Returns the psychrometric saturation pressure at given conditions.
 /// \param[in] state An active EnergyPlusState instance created with `stateNew`.
 /// \param[in] T Dry bulb temperature, in Celsius
@@ -345,7 +345,7 @@ ENERGYPLUSLIB_API Real64 psyWFnTdbRhPb(EnergyPlusState state, Real64 TDB, Real64
 /// \param[in] TWB Wet bulb temperature, in Celsius
 /// \param[in] PB Barometric pressure, in Pascals
 /// \returns Psychrometric humidity ratio, in kgWater/kgDryAir
-ENERGYPLUSLIB_API Real64 psyWFnTdbTwbPb(EnergyPlusState state, Real64 TDB, Real64 TWB, Real64 PB);
+ENERGYPLUSLIB_API Real64 PsyWFnTdbTwbPb(state, EnergyPlusState state, Real64 TDB, Real64 TWB, Real64 PB);
 /// \brief Returns the psychrometric enthalpy at given conditions.
 /// \param[in] state An active EnergyPlusState instance created with `stateNew`.
 /// \param[in] TDB Dry bulb temperature, in Celsius

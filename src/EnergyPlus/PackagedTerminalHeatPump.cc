@@ -140,7 +140,6 @@ namespace PackagedTerminalHeatPump {
     using namespace DataLoopNode;
     using namespace DataSizing;
     using DataGlobals::DisplayExtraWarnings;
-    using DataGlobals::NumOfZones;
     using DataGlobals::SysSizingCalc;
     using namespace DataHVACGlobals;
     using DXCoils::DXCoilPartLoadRatio;
@@ -1151,7 +1150,7 @@ namespace PackagedTerminalHeatPump {
             // check that PTUnit inlet node is a zone exhaust node.
             if (!PTUnit(PTUnitNum).ATMixerExists || PTUnit(PTUnitNum).ATMixerType == ATMixer_SupplySide) {
                 ZoneNodeNotFound = true;
-                for (CtrlZone = 1; CtrlZone <= NumOfZones; ++CtrlZone) {
+                for (CtrlZone = 1; CtrlZone <= state.dataGlobal->NumOfZones; ++CtrlZone) {
                     if (!ZoneEquipConfig(CtrlZone).IsControlled) continue;
                     for (NodeNum = 1; NodeNum <= ZoneEquipConfig(CtrlZone).NumExhaustNodes; ++NodeNum) {
                         if (PTUnit(PTUnitNum).AirInNode == ZoneEquipConfig(CtrlZone).ExhaustNode(NodeNum)) {
@@ -1171,7 +1170,7 @@ namespace PackagedTerminalHeatPump {
             // check that PTUnit outlet node is a zone inlet node.
             if (!PTUnit(PTUnitNum).ATMixerExists || PTUnit(PTUnitNum).ATMixerType == ATMixer_InletSide) {
                 ZoneNodeNotFound = true;
-                for (CtrlZone = 1; CtrlZone <= NumOfZones; ++CtrlZone) {
+                for (CtrlZone = 1; CtrlZone <= state.dataGlobal->NumOfZones; ++CtrlZone) {
                     if (!ZoneEquipConfig(CtrlZone).IsControlled) continue;
                     for (NodeNum = 1; NodeNum <= ZoneEquipConfig(CtrlZone).NumInletNodes; ++NodeNum) {
                         if (PTUnit(PTUnitNum).AirOutNode == ZoneEquipConfig(CtrlZone).InletNode(NodeNum)) {
@@ -1981,7 +1980,7 @@ namespace PackagedTerminalHeatPump {
             // check that Air-conditioners inlet node is a zone exhaust node or the OA Mixer return node.
             if (!PTUnit(PTUnitNum).ATMixerExists || PTUnit(PTUnitNum).ATMixerType == ATMixer_SupplySide) {
                 ZoneNodeNotFound = true;
-                for (CtrlZone = 1; CtrlZone <= NumOfZones; ++CtrlZone) {
+                for (CtrlZone = 1; CtrlZone <= state.dataGlobal->NumOfZones; ++CtrlZone) {
                     if (!ZoneEquipConfig(CtrlZone).IsControlled) continue;
                     for (NodeNum = 1; NodeNum <= ZoneEquipConfig(CtrlZone).NumExhaustNodes; ++NodeNum) {
                         if (PTUnit(PTUnitNum).AirInNode == ZoneEquipConfig(CtrlZone).ExhaustNode(NodeNum)) {
@@ -2001,7 +2000,7 @@ namespace PackagedTerminalHeatPump {
             // check that Air-conditioners outlet node is a zone inlet node.
             if (!PTUnit(PTUnitNum).ATMixerExists || PTUnit(PTUnitNum).ATMixerType == ATMixer_InletSide) {
                 ZoneNodeNotFound = true;
-                for (CtrlZone = 1; CtrlZone <= NumOfZones; ++CtrlZone) {
+                for (CtrlZone = 1; CtrlZone <= state.dataGlobal->NumOfZones; ++CtrlZone) {
                     if (!ZoneEquipConfig(CtrlZone).IsControlled) continue;
                     for (NodeNum = 1; NodeNum <= ZoneEquipConfig(CtrlZone).NumInletNodes; ++NodeNum) {
                         if (PTUnit(PTUnitNum).AirOutNode == ZoneEquipConfig(CtrlZone).InletNode(NodeNum)) {
@@ -2873,7 +2872,7 @@ namespace PackagedTerminalHeatPump {
             // check that PTUnit inlet node is a zone exhaust node.
             if (!PTUnit(PTUnitNum).ATMixerExists || PTUnit(PTUnitNum).ATMixerType == ATMixer_SupplySide) {
                 ZoneNodeNotFound = true;
-                for (CtrlZone = 1; CtrlZone <= NumOfZones; ++CtrlZone) {
+                for (CtrlZone = 1; CtrlZone <= state.dataGlobal->NumOfZones; ++CtrlZone) {
                     if (!ZoneEquipConfig(CtrlZone).IsControlled) continue;
                     for (NodeNum = 1; NodeNum <= ZoneEquipConfig(CtrlZone).NumExhaustNodes; ++NodeNum) {
                         if (PTUnit(PTUnitNum).AirInNode == ZoneEquipConfig(CtrlZone).ExhaustNode(NodeNum)) {
@@ -2893,7 +2892,7 @@ namespace PackagedTerminalHeatPump {
             // check that PTUnit outlet node is a zone inlet node.
             if (!PTUnit(PTUnitNum).ATMixerExists || PTUnit(PTUnitNum).ATMixerType == ATMixer_InletSide) {
                 ZoneNodeNotFound = true;
-                for (CtrlZone = 1; CtrlZone <= NumOfZones; ++CtrlZone) {
+                for (CtrlZone = 1; CtrlZone <= state.dataGlobal->NumOfZones; ++CtrlZone) {
                     if (!ZoneEquipConfig(CtrlZone).IsControlled) continue;
                     for (NodeNum = 1; NodeNum <= ZoneEquipConfig(CtrlZone).NumInletNodes; ++NodeNum) {
                         if (PTUnit(PTUnitNum).AirOutNode == ZoneEquipConfig(CtrlZone).InletNode(NodeNum)) {
@@ -4010,10 +4009,10 @@ namespace PackagedTerminalHeatPump {
             if (ZoneEquipInputsFilled) {
                 ZoneEquipmentListNotChecked = false;
                 for (Loop = 1; Loop <= NumPTUs; ++Loop) {
-                    if (CheckZoneEquipmentList(PTUnit(Loop).UnitType, PTUnit(Loop).Name, CtrlZoneNum)) {
+                    if (CheckZoneEquipmentList(state, PTUnit(Loop).UnitType, PTUnit(Loop).Name, CtrlZoneNum)) {
                         // save the ZoneEquipConfig index for this unit
                         PTUnit(Loop).ControlZoneNum = CtrlZoneNum;
-                        for (int ControlledZoneNum = 1; ControlledZoneNum <= NumOfZones; ++ControlledZoneNum) {
+                        for (int ControlledZoneNum = 1; ControlledZoneNum <= state.dataGlobal->NumOfZones; ++ControlledZoneNum) {
                             for (int ZoneExhNum = 1; ZoneExhNum <= ZoneEquipConfig(ControlledZoneNum).NumExhaustNodes; ++ZoneExhNum) {
                                 if (ZoneEquipConfig(ControlledZoneNum).ExhaustNode(ZoneExhNum) != PTUnit(Loop).AirInNode) continue;
                                 // Find the controlled zone number for the specified thermostat location
@@ -5548,7 +5547,6 @@ namespace PackagedTerminalHeatPump {
 
         // Using/Aliasing
         using DataEnvironment::OutDryBulbTemp;
-        using DataGlobals::WarmupFlag;
         using General::RoundSigDigits;
         using General::SolveRoot;
         using General::TrimSigDigits;
@@ -5716,7 +5714,7 @@ namespace PackagedTerminalHeatPump {
                     }
                     SolveRoot(state, ErrorToler, MaxIte, SolFla, PartLoadFrac, PLRResidual, TempMinPLR, TempMaxPLR, Par);
                     if (SolFla == -1) {
-                        if (!FirstHVACIteration && !WarmupFlag) {
+                        if (!FirstHVACIteration && !state.dataGlobal->WarmupFlag) {
                             CalcPTUnit(
                                 state, PTUnitNum, FirstHVACIteration, PartLoadFrac, TempOutput, QZnReq, OnOffAirFlowRatio, SupHeaterLoad, HXUnitOn);
                             if (PTUnit(PTUnitNum).IterErrIndex == 0) {
@@ -5741,7 +5739,7 @@ namespace PackagedTerminalHeatPump {
                             ShowContinueError("Packaged terminal unit part-load ratio calculation failed: PLR limits of 0 to 1 exceeded");
                             ShowContinueError("Please fill out a bug report and forward to the EnergyPlus support group.");
                             ShowContinueErrorTimeStamp("");
-                            if (WarmupFlag) ShowContinueError("Error occurred during warmup days.");
+                            if (state.dataGlobal->WarmupFlag) ShowContinueError("Error occurred during warmup days.");
                         }
                         PartLoadFrac = max(MinPLF, std::abs(QZnReq - NoCompOutput) / std::abs(FullOutput - NoCompOutput));
                     }
@@ -5751,7 +5749,7 @@ namespace PackagedTerminalHeatPump {
                         ShowContinueError("Packaged terminal unit part-load ratio calculation failed: PLR limits of 0 to 1 exceeded");
                         ShowContinueError("Please fill out a bug report and forward to the EnergyPlus support group.");
                         ShowContinueErrorTimeStamp("");
-                        if (WarmupFlag) ShowContinueError("Error occurred during warmup days.");
+                        if (state.dataGlobal->WarmupFlag) ShowContinueError("Error occurred during warmup days.");
                     }
                     PartLoadFrac = max(MinPLF, std::abs(QZnReq - NoCompOutput) / std::abs(FullOutput - NoCompOutput));
                 }
@@ -7413,7 +7411,6 @@ namespace PackagedTerminalHeatPump {
 
         // Using/Aliasing
         using DataEnvironment::OutDryBulbTemp;
-        using DataGlobals::WarmupFlag;
         using DataZoneEnergyDemands::CurDeadBandOrSetback;
         using General::RoundSigDigits;
         using General::SolveRoot;
@@ -7620,7 +7617,7 @@ namespace PackagedTerminalHeatPump {
 
                 SolveRoot(state, ErrorToler, MaxIte, SolFla, PartLoadFrac, VSHPCyclingResidual, 0.0, 1.0, Par);
                 if (SolFla == -1) {
-                    if (!WarmupFlag) {
+                    if (!state.dataGlobal->WarmupFlag) {
                         if (ErrCountCyc == 0) {
                             ++ErrCountCyc;
                             ShowWarningError("Iteration limit exceeded calculating VS WSHP unit cycling ratio, for unit=" + PTUnit(PTUnitNum).Name);
@@ -7702,7 +7699,7 @@ namespace PackagedTerminalHeatPump {
 
                 SolveRoot(state, ErrorToler, MaxIte, SolFla, SpeedRatio, VSHPSpeedResidual, 1.0e-10, 1.0, Par);
                 if (SolFla == -1) {
-                    if (!WarmupFlag) {
+                    if (!state.dataGlobal->WarmupFlag) {
                         if (ErrCountVar == 0) {
                             ++ErrCountVar;
                             ShowWarningError("Iteration limit exceeded calculating VS WSHP unit speed ratio, for unit=" + PTUnit(PTUnitNum).Name);

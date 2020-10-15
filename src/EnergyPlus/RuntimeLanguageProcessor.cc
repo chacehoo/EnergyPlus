@@ -243,9 +243,6 @@ namespace RuntimeLanguageProcessor {
         using DataEnvironment::SunIsUp;
         using DataEnvironment::Year;
         using DataGlobals::CurrentTime;
-        using DataGlobals::HourOfDay;
-        using DataGlobals::TimeStepZone;
-        using DataGlobals::WarmupFlag;
         using DataHVACGlobals::SysTimeElapsed;
         using DataHVACGlobals::TimeStepSys;
 
@@ -282,7 +279,7 @@ namespace RuntimeLanguageProcessor {
             OffVariableNum = NewEMSVariable("OFF", 0, False);
             OnVariableNum = NewEMSVariable("ON", 0, True);
             PiVariableNum = NewEMSVariable("PI", 0, SetErlValueNumber(DataGlobalConstants::Pi()));
-            TimeStepsPerHourVariableNum = NewEMSVariable("TIMESTEPSPERHOUR", 0, SetErlValueNumber(double(DataGlobals::NumOfTimeStepInHour)));
+            TimeStepsPerHourVariableNum = NewEMSVariable("TIMESTEPSPERHOUR", 0, SetErlValueNumber(double(state.dataGlobal->NumOfTimeStepInHour)));
 
             // Create dynamic built-in variables
             YearVariableNum = NewEMSVariable("YEAR", 0);
@@ -300,7 +297,7 @@ namespace RuntimeLanguageProcessor {
             IsRainingVariableNum = NewEMSVariable("ISRAINING", 0);
             SystemTimeStepVariableNum = NewEMSVariable("SYSTEMTIMESTEP", 0);
             ZoneTimeStepVariableNum = NewEMSVariable("ZONETIMESTEP", 0);
-            ErlVariable(ZoneTimeStepVariableNum).Value = SetErlValueNumber(TimeStepZone);
+            ErlVariable(ZoneTimeStepVariableNum).Value = SetErlValueNumber(state.dataGlobal->TimeStepZone);
             CurrentEnvironmentPeriodNum = NewEMSVariable("CURRENTENVIRONMENT", 0);
             ActualDateAndTimeNum = NewEMSVariable("ACTUALDATEANDTIME", 0);
             ActualTimeNum = NewEMSVariable("ACTUALTIME", 0);
@@ -329,21 +326,21 @@ namespace RuntimeLanguageProcessor {
         ErlVariable(DayOfMonthVariableNum).Value = SetErlValueNumber(double(DayOfMonth));
         ErlVariable(DayOfWeekVariableNum).Value = SetErlValueNumber(double(DayOfWeek));
         ErlVariable(DayOfYearVariableNum).Value = SetErlValueNumber(double(DayOfYear));
-        ErlVariable(TimeStepNumVariableNum).Value = SetErlValueNumber(double(DataGlobals::TimeStep));
+        ErlVariable(TimeStepNumVariableNum).Value = SetErlValueNumber(double(state.dataGlobal->TimeStep));
 
         ErlVariable(DSTVariableNum).Value = SetErlValueNumber(double(DSTIndicator));
         // DSTadjust = REAL(DSTIndicator, r64)
-        tmpHours = double(HourOfDay - 1); // no, just stay on 0..23+ DSTadjust ! offset by 1 and daylight savings time
+        tmpHours = double(state.dataGlobal->HourOfDay - 1); // no, just stay on 0..23+ DSTadjust ! offset by 1 and daylight savings time
         ErlVariable(HourVariableNum).Value = SetErlValueNumber(tmpHours);
 
-        if (TimeStepSys < TimeStepZone) {
+        if (TimeStepSys < state.dataGlobal->TimeStepZone) {
             // CurrentTime is for end of zone timestep, need to account for system timestep
-            tmpCurrentTime = CurrentTime - TimeStepZone + SysTimeElapsed + TimeStepSys;
+            tmpCurrentTime = CurrentTime - state.dataGlobal->TimeStepZone + SysTimeElapsed + TimeStepSys;
         } else {
             tmpCurrentTime = CurrentTime;
         }
         ErlVariable(CurrentTimeVariableNum).Value = SetErlValueNumber(tmpCurrentTime);
-        tmpMinutes = ((tmpCurrentTime - double(HourOfDay - 1)) * 60.0); // -1.0 // off by 1
+        tmpMinutes = ((tmpCurrentTime - double(state.dataGlobal->HourOfDay - 1)) * 60.0); // -1.0 // off by 1
         ErlVariable(MinuteVariableNum).Value = SetErlValueNumber(tmpMinutes);
         ErlVariable(HolidayVariableNum).Value = SetErlValueNumber(double(HolidayIndex));
         if (SunIsUp) {
@@ -360,7 +357,7 @@ namespace RuntimeLanguageProcessor {
 
         tmpCurEnvirNum = double(CurEnvirNum);
         ErlVariable(CurrentEnvironmentPeriodNum).Value = SetErlValueNumber(tmpCurEnvirNum);
-        if (WarmupFlag) {
+        if (state.dataGlobal->WarmupFlag) {
             ErlVariable(WarmUpFlagNum).Value = SetErlValueNumber(1.0);
         } else {
             ErlVariable(WarmUpFlagNum).Value = SetErlValueNumber(0.0);
@@ -1052,7 +1049,6 @@ namespace RuntimeLanguageProcessor {
         using DataEnvironment::CurMnDy;
         using DataEnvironment::EnvironmentName;
         using DataGlobals::DoingSizing;
-        using DataGlobals::WarmupFlag;
         using General::CreateSysTimeIntervalString;
 
         // Locals
@@ -1089,7 +1085,7 @@ namespace RuntimeLanguageProcessor {
         cValueString = ValueToString(ReturnValue);
 
         // put together timestamp info
-        if (WarmupFlag) {
+        if (state.dataGlobal->WarmupFlag) {
             if (!DoingSizing) {
                 DuringWarmup = " During Warmup, Occurrence info=";
             } else {
@@ -1102,7 +1098,7 @@ namespace RuntimeLanguageProcessor {
                 DuringWarmup = " During Sizing, Occurrence info=";
             }
         }
-        TimeString = DuringWarmup + EnvironmentName + ", " + CurMnDy + ' ' + CreateSysTimeIntervalString();
+        TimeString = DuringWarmup + EnvironmentName + ", " + CurMnDy + ' ' + CreateSysTimeIntervalString(state);
 
         if (OutputFullEMSTrace || (OutputEMSErrors && (ReturnValue.Type == ValueError))) {
             print(state.files.edd, "{},Line {},{},{},{}\n", NameString, LineNumString, LineString, cValueString, TimeString);
@@ -2129,12 +2125,14 @@ namespace RuntimeLanguageProcessor {
                                                                                                                // vapor/kg dry air) | drybulb (C)
                     } else if (SELECT_CASE_var == FuncTdpFnTdbTwbPb) {
                         ReturnValue = SetErlValueNumber(PsyTdpFnTdbTwbPb(
+                            state,
                             Operand(1).Number,
                             Operand(2).Number,
                             Operand(3).Number,
                             EMSBuiltInFunction)); // result =>   dew-point temperature {C} | drybulb (C) | wetbulb (C) | pressure (Pa)
                     } else if (SELECT_CASE_var == FuncTdpFnWPb) {
                         ReturnValue = SetErlValueNumber(PsyTdpFnWPb(
+                            state,
                             Operand(1).Number,
                             Operand(2).Number,
                             EMSBuiltInFunction)); // result =>  dew-point temperature {C} | Humidity ratio (kg water vapor/kg dry air) | pressure (Pa)
@@ -2143,7 +2141,7 @@ namespace RuntimeLanguageProcessor {
                             PsyHFnTdbW(Operand(1).Number,
                                        Operand(2).Number)); // result =>  enthalpy (J/kg) | drybulb (C) | Humidity ratio (kg water vapor/kg dry air)
                     } else if (SELECT_CASE_var == FuncHFnTdbRhPb) {
-                        ReturnValue = SetErlValueNumber(PsyHFnTdbRhPb(
+                        ReturnValue = SetErlValueNumber(PsyHFnTdbRhPb(state,
                             Operand(1).Number,
                             Operand(2).Number,
                             Operand(3).Number,
@@ -2154,6 +2152,7 @@ namespace RuntimeLanguageProcessor {
                             Operand(2).Number)); // result =>  dry-bulb temperature {C} | enthalpy (J/kg) | Humidity ratio (kg water vapor/kg dry air)
                     } else if (SELECT_CASE_var == FuncRhovFnTdbRh) {
                         ReturnValue = SetErlValueNumber(PsyRhovFnTdbRh(
+                            state,
                             Operand(1).Number,
                             Operand(2).Number,
                             EMSBuiltInFunction)); // result =>  Vapor density in air (kg/m3) | drybulb (C) | relative humidity value (0.0 - 1.0)
@@ -2168,53 +2167,56 @@ namespace RuntimeLanguageProcessor {
                                                                                                        // vapor/kg dry air) | pressure (Pa)
                     } else if (SELECT_CASE_var == FuncRhFnTdbRhov) {
                         ReturnValue = SetErlValueNumber(PsyRhFnTdbRhov(
+                            state,
                             Operand(1).Number,
                             Operand(2).Number,
                             EMSBuiltInFunction)); // result => relative humidity value (0.0-1.0) | drybulb (C) | vapor density in air (kg/m3)
                     } else if (SELECT_CASE_var == FuncRhFnTdbRhovLBnd0C) {
                         ReturnValue = SetErlValueNumber(PsyRhFnTdbRhovLBnd0C(
+                            state,
                             Operand(1).Number,
                             Operand(2).Number,
                             EMSBuiltInFunction)); // relative humidity value (0.0-1.0) | drybulb (C) | vapor density in air (kg/m3)
                     } else if (SELECT_CASE_var == FuncRhFnTdbWPb) {
-                        ReturnValue = SetErlValueNumber(PsyRhFnTdbWPb(Operand(1).Number,
+                        ReturnValue = SetErlValueNumber(PsyRhFnTdbWPb(state, Operand(1).Number,
                                                                       Operand(2).Number,
                                                                       Operand(3).Number,
                                                                       EMSBuiltInFunction)); // result =>  relative humidity value (0.0-1.0) | drybulb
                                                                                             // (C) | Humidity ratio (kg water vapor/kg dry air) |
                                                                                             // pressure (Pa)
                     } else if (SELECT_CASE_var == FuncTwbFnTdbWPb) {
-                        ReturnValue = SetErlValueNumber(PsyTwbFnTdbWPb(Operand(1).Number,
+                        ReturnValue = SetErlValueNumber(PsyTwbFnTdbWPb(state, Operand(1).Number,
                                                                        Operand(2).Number,
                                                                        Operand(3).Number,
                                                                        EMSBuiltInFunction)); // result=> Temperature Wet-Bulb {C} | drybulb (C) |
                                                                                              // Humidity ratio (kg water vapor/kg dry air) | pressure
                                                                                              // (Pa)
                     } else if (SELECT_CASE_var == FuncVFnTdbWPb) {
-                        ReturnValue = SetErlValueNumber(PsyVFnTdbWPb(Operand(1).Number,
+                        ReturnValue = SetErlValueNumber(PsyVFnTdbWPb(state,
+                                                                     Operand(1).Number,
                                                                      Operand(2).Number,
                                                                      Operand(3).Number,
                                                                      EMSBuiltInFunction)); // result=> specific volume {m3/kg} | drybulb (C) |
                                                                                            // Humidity ratio (kg water vapor/kg dry air) | pressure
                                                                                            // (Pa)
                     } else if (SELECT_CASE_var == FuncWFnTdpPb) {
-                        ReturnValue = SetErlValueNumber(PsyWFnTdpPb(
+                        ReturnValue = SetErlValueNumber(PsyWFnTdpPb(state,
                             Operand(1).Number,
                             Operand(2).Number,
                             EMSBuiltInFunction)); // result=> humidity ratio  (kg water vapor/kg dry air) | dew point temperature (C) | pressure (Pa)
                     } else if (SELECT_CASE_var == FuncWFnTdbH) {
                         ReturnValue = SetErlValueNumber(
-                            PsyWFnTdbH(Operand(1).Number,
+                            PsyWFnTdbH(state, Operand(1).Number,
                                        Operand(2).Number,
                                        EMSBuiltInFunction)); // result=> humidity ratio  (kg water vapor/kg dry air) | drybulb (C) | enthalpy (J/kg)
                     } else if (SELECT_CASE_var == FuncWFnTdbTwbPb) {
-                        ReturnValue = SetErlValueNumber(PsyWFnTdbTwbPb(Operand(1).Number,
+                        ReturnValue = SetErlValueNumber(PsyWFnTdbTwbPb(state, Operand(1).Number,
                                                                        Operand(2).Number,
                                                                        Operand(3).Number,
                                                                        EMSBuiltInFunction)); // result=> humidity ratio  (kg water vapor/kg dry air) |
                                                                                              // drybulb (C) | wet-bulb temperature {C} | pressure (Pa)
                     } else if (SELECT_CASE_var == FuncWFnTdbRhPb) {
-                        ReturnValue = SetErlValueNumber(PsyWFnTdbRhPb(Operand(1).Number,
+                        ReturnValue = SetErlValueNumber(PsyWFnTdbRhPb(state, Operand(1).Number,
                                                                       Operand(2).Number,
                                                                       Operand(3).Number,
                                                                       EMSBuiltInFunction)); // result=> humidity ratio  (kg water vapor/kg dry air) |
@@ -2222,10 +2224,10 @@ namespace RuntimeLanguageProcessor {
                                                                                             // pressure (Pa)
                     } else if (SELECT_CASE_var == FuncPsatFnTemp) {
                         ReturnValue = SetErlValueNumber(
-                            PsyPsatFnTemp(Operand(1).Number, EMSBuiltInFunction)); // result=> saturation pressure {Pascals} | drybulb (C)
+                            PsyPsatFnTemp(state, Operand(1).Number, EMSBuiltInFunction)); // result=> saturation pressure {Pascals} | drybulb (C)
                     } else if (SELECT_CASE_var == FuncTsatFnHPb) {
                         ReturnValue = SetErlValueNumber(
-                            PsyTsatFnHPb(Operand(1).Number,
+                            PsyTsatFnHPb(state, Operand(1).Number,
                                          Operand(2).Number,
                                          EMSBuiltInFunction)); // result=> saturation temperature {C} | enthalpy {J/kg} | pressure (Pa)
                                                                //      CASE (FuncTsatFnPb)
@@ -2453,88 +2455,88 @@ namespace RuntimeLanguageProcessor {
                         }
 
                     } else if (SELECT_CASE_var == FuncTodayIsRain) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTodayIsRain, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TodayIsRain, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTodayIsSnow) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTodayIsSnow, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TodayIsSnow, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTodayOutDryBulbTemp) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTodayOutDryBulbTemp, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TodayOutDryBulbTemp, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTodayOutDewPointTemp) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTodayOutDewPointTemp, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TodayOutDewPointTemp, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTodayOutBaroPress) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTodayOutBaroPress, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TodayOutBaroPress, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTodayOutRelHum) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTodayOutRelHum, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TodayOutRelHum, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTodayWindSpeed) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTodayWindSpeed, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TodayWindSpeed, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTodayWindDir) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTodayWindDir, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TodayWindDir, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTodaySkyTemp) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTodaySkyTemp, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TodaySkyTemp, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTodayHorizIRSky) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTodayHorizIRSky, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TodayHorizIRSky, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTodayBeamSolarRad) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTodayBeamSolarRad, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TodayBeamSolarRad, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTodayDifSolarRad) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTodayDifSolarRad, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TodayDifSolarRad, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTodayAlbedo) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTodayAlbedo, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TodayAlbedo, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTodayLiquidPrecip) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTodayLiquidPrecip, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TodayLiquidPrecip, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTomorrowIsRain) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTomorrowIsRain, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TomorrowIsRain, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTomorrowIsSnow) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTomorrowIsSnow, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TomorrowIsSnow, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTomorrowOutDryBulbTemp) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTomorrowOutDryBulbTemp, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TomorrowOutDryBulbTemp, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTomorrowOutDewPointTemp) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTomorrowOutDewPointTemp, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TomorrowOutDewPointTemp, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTomorrowOutBaroPress) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTomorrowOutBaroPress, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TomorrowOutBaroPress, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTomorrowOutRelHum) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTomorrowOutRelHum, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TomorrowOutRelHum, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTomorrowWindSpeed) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTomorrowWindSpeed, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TomorrowWindSpeed, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTomorrowWindDir) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTomorrowWindDir, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TomorrowWindDir, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTomorrowSkyTemp) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTomorrowSkyTemp, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TomorrowSkyTemp, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTomorrowHorizIRSky) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTomorrowHorizIRSky, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TomorrowHorizIRSky, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTomorrowBeamSolarRad) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTomorrowBeamSolarRad, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TomorrowBeamSolarRad, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTomorrowDifSolarRad) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTomorrowDifSolarRad, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TomorrowDifSolarRad, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTomorrowAlbedo) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTomorrowAlbedo, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TomorrowAlbedo, ReturnValue);
                     } else if (SELECT_CASE_var == FuncTomorrowLiquidPrecip) {
-                        TodayTomorrowWeather(
+                        TodayTomorrowWeather(state,
                             FuncTomorrowLiquidPrecip, Operand(1).Number, Operand(2).Number, state.dataWeatherManager->TomorrowLiquidPrecip, ReturnValue);
                     } else {
                         // throw Error!
@@ -2549,11 +2551,11 @@ namespace RuntimeLanguageProcessor {
     }
 
     void TodayTomorrowWeather(
-        int const FunctionCode, Real64 const Operand1, Real64 const Operand2, Array2D<Real64> &TodayTomorrowWeatherSource, ErlValueType &ReturnVal)
+        EnergyPlusData &state, int const FunctionCode, Real64 const Operand1, Real64 const Operand2, Array2D<Real64> &TodayTomorrowWeatherSource, ErlValueType &ReturnVal)
     {
         int iHour = (Operand1 + 1); // Operand 1 is hour from 0:23
         int iTimeStep = Operand2;
-        if ((iHour > 0) && (iHour <= 24) && (iTimeStep > 0) && (iTimeStep <= DataGlobals::NumOfTimeStepInHour)) {
+        if ((iHour > 0) && (iHour <= 24) && (iTimeStep > 0) && (iTimeStep <= state.dataGlobal->NumOfTimeStepInHour)) {
             ReturnVal = SetErlValueNumber(TodayTomorrowWeatherSource(iTimeStep, iHour));
         } else {
             ReturnVal.Type = DataRuntimeLanguage::ValueError;
@@ -2564,11 +2566,11 @@ namespace RuntimeLanguageProcessor {
     }
 
     void TodayTomorrowWeather(
-        int const FunctionCode, Real64 const Operand1, Real64 const Operand2, Array2D_bool &TodayTomorrowWeatherSource, ErlValueType &ReturnVal)
+        EnergyPlusData &state, int const FunctionCode, Real64 const Operand1, Real64 const Operand2, Array2D_bool &TodayTomorrowWeatherSource, ErlValueType &ReturnVal)
     {
         int iHour = (Operand1 + 1); // Operand 1 is hour from 0:23
         int iTimeStep = Operand2;
-        if ((iHour > 0) && (iHour <= 24) && (iTimeStep > 0) && (iTimeStep <= DataGlobals::NumOfTimeStepInHour)) {
+        if ((iHour > 0) && (iHour <= 24) && (iTimeStep > 0) && (iTimeStep <= state.dataGlobal->NumOfTimeStepInHour)) {
             // For logicals return 1 or 0
             if (TodayTomorrowWeatherSource(iTimeStep, iHour)) {
                 ReturnVal = SetErlValueNumber(1.0);
@@ -2583,9 +2585,9 @@ namespace RuntimeLanguageProcessor {
         }
     }
 
-    int TodayTomorrowWeather(int hour, int timestep, Array2D<Real64> &TodayTomorrowWeatherSource, Real64 &value) {
+    int TodayTomorrowWeather(EnergyPlusData &state, int hour, int timestep, Array2D<Real64> &TodayTomorrowWeatherSource, Real64 &value) {
         int iHour = hour + 1;
-        if ((iHour > 0) && (iHour <= 24) && (timestep > 0) && (timestep <= DataGlobals::NumOfTimeStepInHour)) {
+        if ((iHour > 0) && (iHour <= 24) && (timestep > 0) && (timestep <= state.dataGlobal->NumOfTimeStepInHour)) {
             value = TodayTomorrowWeatherSource(timestep, iHour);
             return 0;
         } else {
@@ -2593,9 +2595,9 @@ namespace RuntimeLanguageProcessor {
         }
     }
 
-    int TodayTomorrowWeather(int hour, int timestep, Array2D<bool> &TodayTomorrowWeatherSource, int &value) {
+    int TodayTomorrowWeather(EnergyPlusData &state, int hour, int timestep, Array2D<bool> &TodayTomorrowWeatherSource, int &value) {
         int iHour = hour + 1;
-        if ((iHour > 0) && (iHour <= 24) && (timestep > 0) && (timestep <= DataGlobals::NumOfTimeStepInHour)) {
+        if ((iHour > 0) && (iHour <= 24) && (timestep > 0) && (timestep <= state.dataGlobal->NumOfTimeStepInHour)) {
             if (TodayTomorrowWeatherSource(timestep, iHour)) {
                 value = 1.0;
             } else {
@@ -2627,7 +2629,6 @@ namespace RuntimeLanguageProcessor {
 
         // Using/Aliasing
         using CurveManager::GetCurveIndex;
-        using DataGlobals::TimeStepZone;
         using General::TrimSigDigits;
 
         // Locals
@@ -3114,10 +3115,10 @@ namespace RuntimeLanguageProcessor {
                         //  further back in time is higher index in array
                         for (loop = 1; loop <= NumTrendSteps; ++loop) {
                             if (loop == 1) {
-                                TrendVariable(TrendNum).TimeARR(loop) = -TimeStepZone;
+                                TrendVariable(TrendNum).TimeARR(loop) = -state.dataGlobal->TimeStepZone;
                                 continue;
                             } else {
-                                TrendVariable(TrendNum).TimeARR(loop) = TrendVariable(TrendNum).TimeARR(loop - 1) - TimeStepZone; // fractional hours
+                                TrendVariable(TrendNum).TimeARR(loop) = TrendVariable(TrendNum).TimeARR(loop - 1) - state.dataGlobal->TimeStepZone; // fractional hours
                             }
                         }
                     } else {

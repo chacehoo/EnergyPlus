@@ -1264,12 +1264,12 @@ namespace NodeInputManager {
                 if (ReportWetBulb) {
                     // if Node%Press was reliable could be used here.
                     MoreNodeInfo(iNode).WetBulbTemp =
-                        PsyTwbFnTdbWPb(Node(iNode).Temp, Node(iNode).HumRat, OutBaroPress, nodeReportingStrings[iNode - 1]);
+                        PsyTwbFnTdbWPb(state, Node(iNode).Temp, Node(iNode).HumRat, OutBaroPress, nodeReportingStrings[iNode - 1]);
                 } else {
                     MoreNodeInfo(iNode).WetBulbTemp = 0.0;
                 }
                 if (ReportDewPoint) {
-                    MoreNodeInfo(iNode).AirDewPointTemp = PsyTdpFnWPb(Node(iNode).HumRat, OutBaroPress);
+                    MoreNodeInfo(iNode).AirDewPointTemp = PsyTdpFnWPb(state, Node(iNode).HumRat, OutBaroPress);
                 } else {
                     MoreNodeInfo(iNode).AirDewPointTemp = 0.0;
                 }
@@ -1277,7 +1277,7 @@ namespace NodeInputManager {
                     // if Node%Press was reliable could be used here.
                     // following routines don't issue psych errors and may be more reliable.
                     MoreNodeInfo(iNode).RelHumidity =
-                        100.0 * PsyRhFnTdbWPb(Node(iNode).Temp, Node(iNode).HumRat, OutBaroPress, nodeReportingStrings[iNode - 1]);
+                        100.0 * PsyRhFnTdbWPb(state, Node(iNode).Temp, Node(iNode).HumRat, OutBaroPress, nodeReportingStrings[iNode - 1]);
                     //        rRhoVapor=PsyRhovFnTdbWPb(Node(iNode)%Temp,Node(iNode)%HumRat,OutBaroPress,'NodeReportingCalc:'//TRIM(NodeID(iNode)))
                     //        MoreNodeInfo(iNode)%RelHumidity = 100.0 * PsyRhFnTdbRhov(Node(iNode)%Temp,rRhoVapor,  &
                     //              'NodeReportingCalc:'//TRIM(NodeID(iNode)))
@@ -1335,7 +1335,7 @@ namespace NodeInputManager {
                 if (Node(iNode).HumRat > 0.0) {
                     MoreNodeInfo(iNode).ReportEnthalpy = PsyHFnTdbW(Node(iNode).Temp, Node(iNode).HumRat);
                     if (ReportWetBulb) {
-                        MoreNodeInfo(iNode).WetBulbTemp = PsyTwbFnTdbWPb(Node(iNode).Temp, Node(iNode).HumRat, StdBaroPress);
+                        MoreNodeInfo(iNode).WetBulbTemp = PsyTwbFnTdbWPb(state, Node(iNode).Temp, Node(iNode).HumRat, StdBaroPress);
                     } else {
                         MoreNodeInfo(iNode).WetBulbTemp = 0.0;
                     }

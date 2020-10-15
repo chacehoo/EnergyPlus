@@ -136,8 +136,6 @@ namespace ZoneEquipmentManager {
     // This module manages the zone equipment.
 
     // Using/Aliasing
-    using DataGlobals::NumOfTimeStepInHour;
-    using DataGlobals::NumOfZones;
     using DataGlobals::ZoneSizingCalc;
     using namespace DataSizing;
     using DataEnvironment::CurEnvirNum;
@@ -213,10 +211,10 @@ namespace ZoneEquipmentManager {
             GetZoneEquipmentData(state);
         }
 
-        state.dataZoneEquipmentManager->NumOfTimeStepInDay = NumOfTimeStepInHour * 24;
+        state.dataZoneEquipmentManager->NumOfTimeStepInDay = state.dataGlobal->NumOfTimeStepInHour * 24;
 
         MaxNumOfEquipTypes = 0;
-        for (Counter = 1; Counter <= NumOfZones; ++Counter) {
+        for (Counter = 1; Counter <= state.dataGlobal->NumOfZones; ++Counter) {
             if (!ZoneEquipConfig(Counter).IsControlled) continue;
             MaxNumOfEquipTypes = max(MaxNumOfEquipTypes, ZoneEquipList(Counter).NumOfEquipTypes);
         }
@@ -264,9 +262,9 @@ namespace ZoneEquipmentManager {
 
         if (state.dataZoneEquipmentManager->InitZoneEquipmentOneTimeFlag) {
             state.dataZoneEquipmentManager->InitZoneEquipmentOneTimeFlag = false;
-            ZoneEqSizing.allocate(NumOfZones);
+            ZoneEqSizing.allocate(state.dataGlobal->NumOfZones);
             // setup zone equipment sequenced demand storage
-            for (ControlledZoneNum = 1; ControlledZoneNum <= NumOfZones; ++ControlledZoneNum) {
+            for (ControlledZoneNum = 1; ControlledZoneNum <= state.dataGlobal->NumOfZones; ++ControlledZoneNum) {
                 if (!ZoneEquipConfig(ControlledZoneNum).IsControlled) continue;
                 if (ZoneEquipConfig(ControlledZoneNum).EquipListIndex == 0) continue;
                 ZoneEquipCount = ZoneEquipList(ZoneEquipConfig(ControlledZoneNum).EquipListIndex).NumOfEquipTypes;
@@ -300,7 +298,7 @@ namespace ZoneEquipmentManager {
                     }
                 }
             }
-            for (ControlledZoneNum = 1; ControlledZoneNum <= NumOfZones; ++ControlledZoneNum) {
+            for (ControlledZoneNum = 1; ControlledZoneNum <= state.dataGlobal->NumOfZones; ++ControlledZoneNum) {
                 if (!ZoneEquipConfig(ControlledZoneNum).IsControlled) continue;
 
                 ZoneNodeNum = ZoneEquipConfig(ControlledZoneNum).ZoneNode;
@@ -381,7 +379,7 @@ namespace ZoneEquipmentManager {
 
         // do the  HVAC time step initializations
 
-        for (ControlledZoneNum = 1; ControlledZoneNum <= NumOfZones; ++ControlledZoneNum) {
+        for (ControlledZoneNum = 1; ControlledZoneNum <= state.dataGlobal->NumOfZones; ++ControlledZoneNum) {
             if (!ZoneEquipConfig(ControlledZoneNum).IsControlled) continue;
             ZoneNodeNum = ZoneEquipConfig(ControlledZoneNum).ZoneNode;
             ZoneEquipConfig(ControlledZoneNum).ExcessZoneExh = 0.0;
@@ -483,7 +481,7 @@ namespace ZoneEquipmentManager {
             state.dataZoneEquipmentManager->SizeZoneEquipmentOneTimeFlag = false;
         }
 
-        for (ControlledZoneNum = 1; ControlledZoneNum <= NumOfZones; ++ControlledZoneNum) {
+        for (ControlledZoneNum = 1; ControlledZoneNum <= state.dataGlobal->NumOfZones; ++ControlledZoneNum) {
             if (!ZoneEquipConfig(ControlledZoneNum).IsControlled) continue;
 
             ActualZoneNum = CalcZoneSizing(CurOverallSimDay, ControlledZoneNum).ActualZoneNum;
@@ -511,8 +509,8 @@ namespace ZoneEquipmentManager {
                     ShowFatalError("Previous severe error causes abort ");
                 }
                 // set the DOAS mass flow rate and supply temperature and humidity ratio
-                HR90H = PsyWFnTdbRhPb(CalcZoneSizing(CurOverallSimDay, ControlledZoneNum).DOASHighSetpoint, 0.9, StdBaroPress);
-                HR90L = PsyWFnTdbRhPb(CalcZoneSizing(CurOverallSimDay, ControlledZoneNum).DOASLowSetpoint, 0.9, StdBaroPress);
+                HR90H = PsyWFnTdbRhPb(state, CalcZoneSizing(CurOverallSimDay, ControlledZoneNum).DOASHighSetpoint, 0.9, StdBaroPress);
+                HR90L = PsyWFnTdbRhPb(state, CalcZoneSizing(CurOverallSimDay, ControlledZoneNum).DOASLowSetpoint, 0.9, StdBaroPress);
                 DOASMassFlowRate = CalcFinalZoneSizing(ControlledZoneNum).MinOA;
                 CalcDOASSupCondsForSizing(OutDryBulbTemp,
                                           OutHumRat,
@@ -653,7 +651,7 @@ namespace ZoneEquipmentManager {
 
         CalcZoneLeavingConditions(state, true);
 
-        for (ControlledZoneNum = 1; ControlledZoneNum <= NumOfZones; ++ControlledZoneNum) {
+        for (ControlledZoneNum = 1; ControlledZoneNum <= state.dataGlobal->NumOfZones; ++ControlledZoneNum) {
             if (!ZoneEquipConfig(ControlledZoneNum).IsControlled) continue;
             // MJW for now - use first return node, make a separate commit to add a dimension to all of the sizing rettemp variables
             if (ZoneEquipConfig(ControlledZoneNum).NumReturnNodes > 0) {
@@ -844,18 +842,18 @@ namespace ZoneEquipmentManager {
         // Put Auto Sizing of Sizing:Zone inputs here!
         AutoCalcDOASControlStrategy(state);
 
-        ZoneSizing.allocate(TotDesDays + TotRunDesPersDays, NumOfZones);
-        FinalZoneSizing.allocate(NumOfZones);
-        CalcZoneSizing.allocate(TotDesDays + TotRunDesPersDays, NumOfZones);
-        CalcFinalZoneSizing.allocate(NumOfZones);
+        ZoneSizing.allocate(TotDesDays + TotRunDesPersDays, state.dataGlobal->NumOfZones);
+        FinalZoneSizing.allocate(state.dataGlobal->NumOfZones);
+        CalcZoneSizing.allocate(TotDesDays + TotRunDesPersDays, state.dataGlobal->NumOfZones);
+        CalcFinalZoneSizing.allocate(state.dataGlobal->NumOfZones);
         TermUnitFinalZoneSizing.allocate(DataSizing::NumAirTerminalUnits);
         DesDayWeath.allocate(TotDesDays + TotRunDesPersDays);
-        NumOfTimeStepInDay = NumOfTimeStepInHour * 24;
+        NumOfTimeStepInDay = state.dataGlobal->NumOfTimeStepInHour * 24;
         state.dataZoneEquipmentManager->AvgData.allocate(NumOfTimeStepInDay);
-        CoolPeakDateHrMin.allocate(NumOfZones);
-        HeatPeakDateHrMin.allocate(NumOfZones);
-        ZoneSizThermSetPtHi.allocate(NumOfZones);
-        ZoneSizThermSetPtLo.allocate(NumOfZones);
+        CoolPeakDateHrMin.allocate(state.dataGlobal->NumOfZones);
+        HeatPeakDateHrMin.allocate(state.dataGlobal->NumOfZones);
+        ZoneSizThermSetPtHi.allocate(state.dataGlobal->NumOfZones);
+        ZoneSizThermSetPtLo.allocate(state.dataGlobal->NumOfZones);
 
         CoolPeakDateHrMin = "";
         HeatPeakDateHrMin = "";
@@ -864,16 +862,16 @@ namespace ZoneEquipmentManager {
         ZoneSizThermSetPtLo = 1000.0;
 
         for (DesDayNum = 1; DesDayNum <= TotDesDays + TotRunDesPersDays; ++DesDayNum) {
-            DesDayWeath(DesDayNum).Temp.allocate(NumOfTimeStepInHour * 24);
-            DesDayWeath(DesDayNum).HumRat.allocate(NumOfTimeStepInHour * 24);
-            DesDayWeath(DesDayNum).Press.allocate(NumOfTimeStepInHour * 24);
+            DesDayWeath(DesDayNum).Temp.allocate(state.dataGlobal->NumOfTimeStepInHour * 24);
+            DesDayWeath(DesDayNum).HumRat.allocate(state.dataGlobal->NumOfTimeStepInHour * 24);
+            DesDayWeath(DesDayNum).Press.allocate(state.dataGlobal->NumOfTimeStepInHour * 24);
             DesDayWeath(DesDayNum).Temp = 0.0;
             DesDayWeath(DesDayNum).HumRat = 0.0;
             DesDayWeath(DesDayNum).Press = 0.0;
         }
         // Fill zone sizing arrays from input array
         for (DesDayNum = 1; DesDayNum <= TotDesDays + TotRunDesPersDays; ++DesDayNum) {
-            for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+            for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
                 if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
                 ZoneSizing(DesDayNum, CtrlZoneNum).ZoneName = ZoneEquipConfig(CtrlZoneNum).ZoneName;
                 ZoneSizing(DesDayNum, CtrlZoneNum).ActualZoneNum = ZoneEquipConfig(CtrlZoneNum).ActualZoneNum;
@@ -1010,7 +1008,7 @@ namespace ZoneEquipmentManager {
             }
         }
 
-        for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+        for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
             if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
             FinalZoneSizing(CtrlZoneNum).ZoneName = ZoneEquipConfig(CtrlZoneNum).ZoneName;
             FinalZoneSizing(CtrlZoneNum).ActualZoneNum = ZoneEquipConfig(CtrlZoneNum).ActualZoneNum;
@@ -1277,7 +1275,7 @@ namespace ZoneEquipmentManager {
         // Use the max occupancy data from the PEOPLE structure to calculate design min OA for each zone
         // Calculate the zone design minimum outside air flow rate from the 3 Zone Sizing OA inputs and
         // from the specified OA method
-        for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+        for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
             if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
             // Use the max occupancy data from the PEOPLE structure to calculate design min OA for each zone
             // from the outside air flow per person input
@@ -1364,7 +1362,7 @@ namespace ZoneEquipmentManager {
         print(state.files.eio, "! <Heating Sizing Factor Information>, Sizing Factor ID, Value\n");
         static constexpr auto Format_991(" Heating Sizing Factor Information, Global, {:12.5N}\n");
         print(state.files.eio, Format_991, GlobalHeatSizingFactor);
-        for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+        for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
             if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
             if (FinalZoneSizing(CtrlZoneNum).HeatSizingFactor != 1.0) {
                 static constexpr auto Format_992(" Heating Sizing Factor Information, Zone {}, {:12.5N}\n");
@@ -1374,7 +1372,7 @@ namespace ZoneEquipmentManager {
         print(state.files.eio, "! <Cooling Sizing Factor Information>, Sizing Factor ID, Value\n");
         static constexpr auto Format_994(" Cooling Sizing Factor Information, Global, {:12.5N}\n");
         print(state.files.eio, Format_994, GlobalCoolSizingFactor);
-        for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+        for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
             if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
             if (FinalZoneSizing(CtrlZoneNum).CoolSizingFactor != 1.0) {
                 static constexpr auto Format_995(" Cooling Sizing Factor Information, Zone {}, {:12.5N}\n");
@@ -1388,7 +1386,7 @@ namespace ZoneEquipmentManager {
         // Zero zone sizing arrays between the pulse and normal sizing.
         DisplayString("Re-zeroing zone sizing arrays");
 
-        for (int ctrlZoneNum = 1; ctrlZoneNum <= NumOfZones; ++ctrlZoneNum) {
+        for (int ctrlZoneNum = 1; ctrlZoneNum <= state.dataGlobal->NumOfZones; ++ctrlZoneNum) {
             for (int desDayNum = 1; desDayNum <= TotDesDays + TotRunDesPersDays; ++desDayNum) {
                 ZoneSizing(desDayNum, ctrlZoneNum).zeroMemberData();
                 CalcZoneSizing(desDayNum, ctrlZoneNum).zeroMemberData();
@@ -1420,11 +1418,8 @@ namespace ZoneEquipmentManager {
         using DataEnvironment::StdBaroPress;
         using DataEnvironment::StdRhoAir;
         using DataGlobals::AnyEnergyManagementSystemInModel;
-        using DataGlobals::HourOfDay;
         using DataGlobals::isPulseZoneSizing;
         using DataGlobals::MinutesPerTimeStep;
-        using DataGlobals::NumOfTimeStepInHour;
-        using DataGlobals::TimeStep;
         using DataHeatBalFanSys::TempZoneThermostatSetPoint;
         using DataHeatBalFanSys::ZoneThermostatSetPointHi;
         using DataHeatBalFanSys::ZoneThermostatSetPointLo;
@@ -1467,7 +1462,7 @@ namespace ZoneEquipmentManager {
 
             if (SELECT_CASE_var == DataGlobalConstants::CallIndicator::BeginDay) {
 
-                for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+                for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
 
                     if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
 
@@ -1481,10 +1476,10 @@ namespace ZoneEquipmentManager {
 
             } else if (SELECT_CASE_var == DataGlobalConstants::CallIndicator::DuringDay) {
 
-                TimeStepInDay = (HourOfDay - 1) * NumOfTimeStepInHour + TimeStep;
+                TimeStepInDay = (state.dataGlobal->HourOfDay - 1) * state.dataGlobal->NumOfTimeStepInHour + TimeStep;
 
                 // save the results of the ideal zone component calculation in the CalcZoneSizing sequence variables
-                for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+                for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
                     if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
                     if (ZoneThermostatSetPointHi(CtrlZoneNum) > 0.0 && ZoneThermostatSetPointHi(CtrlZoneNum) > ZoneSizThermSetPtHi(CtrlZoneNum)) {
                         ZoneSizThermSetPtHi(CtrlZoneNum) = ZoneThermostatSetPointHi(CtrlZoneNum);
@@ -1546,56 +1541,56 @@ namespace ZoneEquipmentManager {
 
             } else if (SELECT_CASE_var == DataGlobalConstants::CallIndicator::EndDay) {
                 // average some of the zone sequences to reduce peakiness
-                for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+                for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
                     if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
                     state.dataZoneEquipmentManager->AvgData = 0.0;
                     MovingAvg(CalcZoneSizing(CurOverallSimDay, CtrlZoneNum).CoolFlowSeq, state.dataZoneEquipmentManager->NumOfTimeStepInDay, NumTimeStepsInAvg, state.dataZoneEquipmentManager->AvgData);
                     CalcZoneSizing(CurOverallSimDay, CtrlZoneNum).CoolFlowSeq = state.dataZoneEquipmentManager->AvgData;
                 }
-                for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+                for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
                     if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
                     state.dataZoneEquipmentManager->AvgData = 0.0;
                     MovingAvg(CalcZoneSizing(CurOverallSimDay, CtrlZoneNum).CoolLoadSeq, state.dataZoneEquipmentManager->NumOfTimeStepInDay, NumTimeStepsInAvg, state.dataZoneEquipmentManager->AvgData);
                     CalcZoneSizing(CurOverallSimDay, CtrlZoneNum).CoolLoadSeq = state.dataZoneEquipmentManager->AvgData;
                 }
-                for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+                for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
                     if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
                     state.dataZoneEquipmentManager->AvgData = 0.0;
                     MovingAvg(CalcZoneSizing(CurOverallSimDay, CtrlZoneNum).HeatFlowSeq, state.dataZoneEquipmentManager->NumOfTimeStepInDay, NumTimeStepsInAvg, state.dataZoneEquipmentManager->AvgData);
                     CalcZoneSizing(CurOverallSimDay, CtrlZoneNum).HeatFlowSeq = state.dataZoneEquipmentManager->AvgData;
                 }
-                for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+                for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
                     if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
                     state.dataZoneEquipmentManager->AvgData = 0.0;
                     MovingAvg(CalcZoneSizing(CurOverallSimDay, CtrlZoneNum).HeatLoadSeq, state.dataZoneEquipmentManager->NumOfTimeStepInDay, NumTimeStepsInAvg, state.dataZoneEquipmentManager->AvgData);
                     CalcZoneSizing(CurOverallSimDay, CtrlZoneNum).HeatLoadSeq = state.dataZoneEquipmentManager->AvgData;
                 }
-                for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+                for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
                     if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
                     state.dataZoneEquipmentManager->AvgData = 0.0;
                     MovingAvg(CalcZoneSizing(CurOverallSimDay, CtrlZoneNum).CoolZoneRetTempSeq, state.dataZoneEquipmentManager->NumOfTimeStepInDay, NumTimeStepsInAvg, state.dataZoneEquipmentManager->AvgData);
                     CalcZoneSizing(CurOverallSimDay, CtrlZoneNum).CoolZoneRetTempSeq = state.dataZoneEquipmentManager->AvgData;
                 }
-                for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+                for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
                     if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
                     state.dataZoneEquipmentManager->AvgData = 0.0;
                     MovingAvg(CalcZoneSizing(CurOverallSimDay, CtrlZoneNum).HeatZoneRetTempSeq, state.dataZoneEquipmentManager->NumOfTimeStepInDay, NumTimeStepsInAvg, state.dataZoneEquipmentManager->AvgData);
                     CalcZoneSizing(CurOverallSimDay, CtrlZoneNum).HeatZoneRetTempSeq = state.dataZoneEquipmentManager->AvgData;
                 }
-                for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+                for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
                     if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
                     state.dataZoneEquipmentManager->AvgData = 0.0;
                     MovingAvg(CalcZoneSizing(CurOverallSimDay, CtrlZoneNum).DOASHeatAddSeq, state.dataZoneEquipmentManager->NumOfTimeStepInDay, NumTimeStepsInAvg, state.dataZoneEquipmentManager->AvgData);
                     CalcZoneSizing(CurOverallSimDay, CtrlZoneNum).DOASHeatAddSeq = state.dataZoneEquipmentManager->AvgData;
                 }
-                for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+                for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
                     if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
                     state.dataZoneEquipmentManager->AvgData = 0.0;
                     MovingAvg(CalcZoneSizing(CurOverallSimDay, CtrlZoneNum).DOASLatAddSeq, state.dataZoneEquipmentManager->NumOfTimeStepInDay, NumTimeStepsInAvg, state.dataZoneEquipmentManager->AvgData);
                     CalcZoneSizing(CurOverallSimDay, CtrlZoneNum).DOASLatAddSeq = state.dataZoneEquipmentManager->AvgData;
                 }
 
-                for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+                for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
 
                     if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
                     // save the sequence values at the heating peak
@@ -1785,7 +1780,7 @@ namespace ZoneEquipmentManager {
                 // now apply EMS overrides (if any)
 
                 if (AnyEnergyManagementSystemInModel) {
-                    for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+                    for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
                         if (CalcFinalZoneSizing(CtrlZoneNum).EMSOverrideDesHeatMassOn) {
                             if (CalcFinalZoneSizing(CtrlZoneNum).DesHeatMassFlow > 0.0)
                                 CalcFinalZoneSizing(CtrlZoneNum).DesHeatMassFlow = CalcFinalZoneSizing(CtrlZoneNum).EMSValueDesHeatMassFlow;
@@ -1815,7 +1810,7 @@ namespace ZoneEquipmentManager {
 
                 if (!isPulseZoneSizing) {
 
-                    for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+                    for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
                         if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
                         if (std::abs(CalcFinalZoneSizing(CtrlZoneNum).DesCoolLoad) <= 1.e-8) {
                             ShowWarningError("Calculated design cooling load for zone=" + CalcFinalZoneSizing(CtrlZoneNum).ZoneName + " is zero.");
@@ -1828,7 +1823,7 @@ namespace ZoneEquipmentManager {
                     }
 
                     print(state.files.zsz, "Time");
-                    for (I = 1; I <= NumOfZones; ++I) {
+                    for (I = 1; I <= state.dataGlobal->NumOfZones; ++I) {
                         if (!ZoneEquipConfig(I).IsControlled) continue;
 
                         static constexpr auto ZSizeFmt11("{}{}:{}{}{}{}:{}{}{}{}:{}{}{}{}:{}{}");
@@ -1961,7 +1956,7 @@ namespace ZoneEquipmentManager {
                     Minutes = 0;
                     TimeStepIndex = 0;
                     for (HourCounter = 1; HourCounter <= 24; ++HourCounter) {
-                        for (TimeStepCounter = 1; TimeStepCounter <= NumOfTimeStepInHour; ++TimeStepCounter) {
+                        for (TimeStepCounter = 1; TimeStepCounter <= state.dataGlobal->NumOfTimeStepInHour; ++TimeStepCounter) {
                             ++TimeStepIndex;
                             Minutes += MinutesPerTimeStep;
                             if (Minutes == 60) {
@@ -1970,7 +1965,7 @@ namespace ZoneEquipmentManager {
                             } else {
                                 HourPrint = HourCounter - 1;
                             }
-                            for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+                            for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
                                 if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
                                 if (TimeStepIndex == CalcFinalZoneSizing(CtrlZoneNum).TimeStepNumAtHeatMax) {
                                     HeatPeakDateHrMin(CtrlZoneNum) = CalcFinalZoneSizing(CtrlZoneNum).cHeatDDDate + ' ' + format(PeakHrMinFmt, HourPrint,Minutes);
@@ -1982,7 +1977,7 @@ namespace ZoneEquipmentManager {
 
                             static constexpr auto ZSizeFmt20("{:02}:{:02}:00");
                             print(state.files.zsz, ZSizeFmt20, HourPrint, Minutes);
-                            for (I = 1; I <= NumOfZones; ++I) {
+                            for (I = 1; I <= state.dataGlobal->NumOfZones; ++I) {
                                 if (!ZoneEquipConfig(I).IsControlled) continue;
                                 static constexpr auto ZSizeFmt21("{}{:12.6E}{}{:12.6E}{}{:12.6E}{}{:12.6E}");
                                 print(state.files.zsz,
@@ -2001,7 +1996,7 @@ namespace ZoneEquipmentManager {
                     }
                     print(state.files.zsz, "Peak");
 
-                    for (I = 1; I <= NumOfZones; ++I) {
+                    for (I = 1; I <= state.dataGlobal->NumOfZones; ++I) {
                         if (!ZoneEquipConfig(I).IsControlled) continue;
 
                         static constexpr auto ZSizeFmt31("{}{:12.6E}{}{:12.6E}{}{:12.6E}{}{:12.6E}");
@@ -2019,7 +2014,7 @@ namespace ZoneEquipmentManager {
                     print(state.files.zsz, "\n");
 
                     print(state.files.zsz, "\nPeak Vol Flow (m3/s)");
-                    for (I = 1; I <= NumOfZones; ++I) {
+                    for (I = 1; I <= state.dataGlobal->NumOfZones; ++I) {
                         if (!ZoneEquipConfig(I).IsControlled) continue;
                         static constexpr auto ZSizeFmt41("{}{}{}{:12.6E}{}{:12.6E}");
                         print(state.files.zsz,
@@ -2112,7 +2107,7 @@ namespace ZoneEquipmentManager {
                 }
 
                 for (DesDayNum = 1; DesDayNum <= TotDesDays + TotRunDesPersDays; ++DesDayNum) {
-                    for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+                    for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
                         if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
                         for (TimeStepIndex = 1; TimeStepIndex <= state.dataZoneEquipmentManager->NumOfTimeStepInDay; ++TimeStepIndex) {
                             ZoneSizing(DesDayNum, CtrlZoneNum).HeatFlowSeq(TimeStepIndex) =
@@ -2147,7 +2142,7 @@ namespace ZoneEquipmentManager {
                     }
                 }
 
-                for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+                for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
                     if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
                     for (TimeStepIndex = 1; TimeStepIndex <= state.dataZoneEquipmentManager->NumOfTimeStepInDay; ++TimeStepIndex) {
                         FinalZoneSizing(CtrlZoneNum).HeatFlowSeq(TimeStepIndex) = CalcFinalZoneSizing(CtrlZoneNum).HeatFlowSeq(TimeStepIndex);
@@ -2172,7 +2167,7 @@ namespace ZoneEquipmentManager {
                             CalcFinalZoneSizing(CtrlZoneNum).CoolOutHumRatSeq(TimeStepIndex);
                     }
                 }
-                for (CtrlZoneNum = 1; CtrlZoneNum <= NumOfZones; ++CtrlZoneNum) {
+                for (CtrlZoneNum = 1; CtrlZoneNum <= state.dataGlobal->NumOfZones; ++CtrlZoneNum) {
                     if (!ZoneEquipConfig(CtrlZoneNum).IsControlled) continue;
                     // update non air system design load and air flow to include the sizing factor
                     FinalZoneSizing(CtrlZoneNum).NonAirSysDesCoolLoad *= FinalZoneSizing(CtrlZoneNum).CoolSizingFactor;
@@ -2361,7 +2356,7 @@ namespace ZoneEquipmentManager {
                             if (FinalZoneSizing(CtrlZoneNum).ZoneHumRatAtCoolPeak > 0.0) {
                                 FinalZoneSizing(CtrlZoneNum).ZoneHumRatAtCoolPeak =
                                     min(FinalZoneSizing(CtrlZoneNum).ZoneHumRatAtCoolPeak,
-                                        PsyWFnTdpPb(FinalZoneSizing(CtrlZoneNum).ZoneTempAtCoolPeak, StdBaroPress, RoutineName));
+                                        PsyWFnTdpPb(state, FinalZoneSizing(CtrlZoneNum).ZoneTempAtCoolPeak, StdBaroPress, RoutineName));
 
                             } else {
                                 FinalZoneSizing(CtrlZoneNum).ZoneHumRatAtCoolPeak = ZoneSizing(DDNumF, CtrlZoneNum).CoolDesHumRat;
@@ -2526,7 +2521,7 @@ namespace ZoneEquipmentManager {
                             if (FinalZoneSizing(CtrlZoneNum).ZoneHumRatAtHeatPeak > 0.0) {
                                 FinalZoneSizing(CtrlZoneNum).ZoneHumRatAtHeatPeak =
                                     min(FinalZoneSizing(CtrlZoneNum).ZoneHumRatAtHeatPeak,
-                                        PsyWFnTdpPb(FinalZoneSizing(CtrlZoneNum).ZoneTempAtHeatPeak, StdBaroPress, RoutineName));
+                                        PsyWFnTdpPb(state, FinalZoneSizing(CtrlZoneNum).ZoneTempAtHeatPeak, StdBaroPress, RoutineName));
                             } else {
                                 FinalZoneSizing(CtrlZoneNum).ZoneHumRatAtHeatPeak = ZoneSizing(DDNumF, CtrlZoneNum).HeatDesHumRat;
                             }
@@ -2708,7 +2703,7 @@ namespace ZoneEquipmentManager {
             CalcAirFlowSimple(state, 0, AdjustZoneMassFlowFlag);
         }
 
-        for (ControlledZoneNum = 1; ControlledZoneNum <= NumOfZones; ++ControlledZoneNum) {
+        for (ControlledZoneNum = 1; ControlledZoneNum <= state.dataGlobal->NumOfZones; ++ControlledZoneNum) {
 
             if (!ZoneEquipConfig(ControlledZoneNum).IsControlled) continue;
             ActualZoneNum = ZoneEquipConfig(ControlledZoneNum).ActualZoneNum;
@@ -3288,7 +3283,7 @@ namespace ZoneEquipmentManager {
 
         if (ResetSimOrder) {
             const int ControlledZoneNum = [&] {
-                for (int i = 1; i <= NumOfZones; ++i) {
+                for (int i = 1; i <= state.dataGlobal->NumOfZones; ++i) {
                     if (ZoneEquipConfig(i).ActualZoneNum == ZoneNum) return i;
                 }
                 return 0;
@@ -3947,7 +3942,7 @@ namespace ZoneEquipmentManager {
                     state.dataAirLoop->AirLoopFlow(airLoop).SysRetFlow = 0.0;
                     state.dataAirLoop->AirLoopFlow(airLoop).ExcessZoneExhFlow = 0.0;
                 }
-                for (int ZoneNum = 1; ZoneNum <= NumOfZones; ++ZoneNum) {
+                for (int ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ++ZoneNum) {
                     if (!ZoneEquipConfig(ZoneNum).IsControlled) continue;
                     ZoneInfiltrationFlag(ZoneNum) = false;
                     MassConservation(ZoneNum).IncludeInfilToZoneMassBal = 0.0;
@@ -3958,7 +3953,7 @@ namespace ZoneEquipmentManager {
             BuildingZoneMixingFlowOld = BuildingZoneMixingFlow;
             BuildingZoneMixingFlow = 0.0;
 
-            for (ZoneNum1 = 1; ZoneNum1 <= NumOfZones; ++ZoneNum1) {
+            for (ZoneNum1 = 1; ZoneNum1 <= state.dataGlobal->NumOfZones; ++ZoneNum1) {
                 int ZoneNum = ZoneNum1;
                 if (ZoneAirMassFlow.EnforceZoneMassBalance) ZoneNum = ZoneReOrder(ZoneNum1);
 
@@ -4128,7 +4123,7 @@ namespace ZoneEquipmentManager {
                 thisAirLoopFlow.ZoneRetFlow = 0.0; // reset to zero and re-accumulate below
             }
 
-            for (int zoneNum = 1; zoneNum <= NumOfZones; ++zoneNum) {
+            for (int zoneNum = 1; zoneNum <= state.dataGlobal->NumOfZones; ++zoneNum) {
                 auto &thisZoneEquip(ZoneEquipConfig(zoneNum));
                 if (!thisZoneEquip.IsControlled) continue;
                 int numRetNodes = thisZoneEquip.NumReturnNodes;
@@ -4147,7 +4142,7 @@ namespace ZoneEquipmentManager {
                 }
                 // Check zone flow balance but not when zone air mass balance is active
                 if (!ZoneAirMassFlow.EnforceZoneMassBalance && !DataGlobals::DoingSizing && !DataGlobals::DoingHVACSizingSimulations &&
-                    !DataGlobals::WarmupFlag && !FirstHVACIteration) {
+                    !state.dataGlobal->WarmupFlag && !FirstHVACIteration) {
                     if (!thisZoneEquip.FlowError) {
                         // Net system flows first (sum leaving flows, less entering flows)
                         Real64 sysUnbalExhaust = (thisZoneEquip.TotExhaustAirMassFlowRate - thisZoneEquip.ZoneExhBalanced);
@@ -4394,7 +4389,7 @@ namespace ZoneEquipmentManager {
         Real64 ZoneMult;        // zone multiplier
         Real64 SumRetAirLatentGainRate;
 
-        for (ZoneNum = 1; ZoneNum <= NumOfZones; ++ZoneNum) {
+        for (ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ++ZoneNum) {
             if (!ZoneEquipConfig(ZoneNum).IsControlled) continue;
             ActualZoneNum = ZoneEquipConfig(ZoneNum).ActualZoneNum;
             // A return air system may not exist for certain systems; Therefore when no return node exists
@@ -4598,7 +4593,6 @@ namespace ZoneEquipmentManager {
         using DataContaminantBalance::MixingMassFlowGC;
         using DataContaminantBalance::ZoneAirCO2;
         using DataContaminantBalance::ZoneAirGC;
-        using DataGlobals::HourOfDay;
         using DataGlobals::KickOffSimulation;
         using DataHeatBalance::Ventilation;
         using DataHVACGlobals::CycleOn;
@@ -4695,17 +4689,17 @@ namespace ZoneEquipmentManager {
 
         // Allocate the ZMAT and ZHumRat arrays
 
-        if (!allocated(ZMAT)) ZMAT.allocate(NumOfZones);
-        if (!allocated(ZHumRat)) ZHumRat.allocate(NumOfZones);
+        if (!allocated(ZMAT)) ZMAT.allocate(state.dataGlobal->NumOfZones);
+        if (!allocated(ZHumRat)) ZHumRat.allocate(state.dataGlobal->NumOfZones);
         if (!allocated(VentMCP)) VentMCP.allocate(TotVentilation);
 
         // Allocate module level logical arrays for MIXING and CROSS MIXING reporting
         if (!allocated(CrossMixingReportFlag)) CrossMixingReportFlag.allocate(TotCrossMixing);
         if (!allocated(MixingReportFlag)) MixingReportFlag.allocate(TotMixing);
 
-        if (!allocated(MCPTThermChim)) MCPTThermChim.allocate(NumOfZones);
-        if (!allocated(MCPThermChim)) MCPThermChim.allocate(NumOfZones);
-        if (!allocated(ThermChimAMFL)) ThermChimAMFL.allocate(NumOfZones);
+        if (!allocated(MCPTThermChim)) MCPTThermChim.allocate(state.dataGlobal->NumOfZones);
+        if (!allocated(MCPThermChim)) MCPThermChim.allocate(state.dataGlobal->NumOfZones);
+        if (!allocated(ThermChimAMFL)) ThermChimAMFL.allocate(state.dataGlobal->NumOfZones);
 
         //                                      COMPUTE ZONE AIR MIXINGS
         MCPM = 0.0;
@@ -4745,7 +4739,7 @@ namespace ZoneEquipmentManager {
         ManageThermalChimney(state);
 
         // Assign zone air temperature
-        for (j = 1; j <= NumOfZones; ++j) {
+        for (j = 1; j <= state.dataGlobal->NumOfZones; ++j) {
             ZMAT(j) = MAT(j);
             ZHumRat(j) = ZoneAirHumRat(j);
             // This is only temporary fix for CR8867.  (L. Gu 8/12)
@@ -5322,7 +5316,7 @@ namespace ZoneEquipmentManager {
         //                              AIR MIXING
         if (TotRefDoorMixing > 0) {
             // Zone loops structured in getinput so only do each pair of zones bounding door once, even if multiple doors in one zone
-            for (ZoneA = 1; ZoneA <= (NumOfZones - 1); ++ZoneA) {
+            for (ZoneA = 1; ZoneA <= (state.dataGlobal->NumOfZones - 1); ++ZoneA) {
                 if (!RefDoorMixing(ZoneA).RefDoorMixFlag) continue;
                 for (j = 1; j <= RefDoorMixing(ZoneA).NumRefDoorConnections; ++j) {
                     ZoneB = RefDoorMixing(ZoneA).MateZonePtr(j);
@@ -5520,7 +5514,7 @@ namespace ZoneEquipmentManager {
         }
 
         // Add infiltration rate enhanced by the existence of thermal chimney
-        for (NZ = 1; NZ <= NumOfZones; ++NZ) {
+        for (NZ = 1; NZ <= state.dataGlobal->NumOfZones; ++NZ) {
             MCPI(NZ) += MCPThermChim(NZ);
             OAMFL(NZ) += ThermChimAMFL(NZ);
             MCPTI(NZ) += MCPTThermChim(NZ);

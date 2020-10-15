@@ -225,9 +225,9 @@ namespace EnergyPlus {
                 // The time init should be done here before we DoOneTimeInits because the DoOneTimeInits
                 // includes a ground temperature initialization, which is based on the Cur%CurSimTimeSeconds variable
                 // which would be carried over from the previous environment
-                thisDomain.Cur.CurSimTimeStepSize = DataGlobals::TimeStepZone * DataGlobalConstants::SecInHour();
-                thisDomain.Cur.CurSimTimeSeconds = ((state.dataGlobal->DayOfSim - 1) * 24 + (DataGlobals::HourOfDay - 1) +
-                                                    (DataGlobals::TimeStep - 1) * DataGlobals::TimeStepZone +
+                thisDomain.Cur.CurSimTimeStepSize = state.dataGlobal->TimeStepZone * DataGlobalConstants::SecInHour();
+                thisDomain.Cur.CurSimTimeSeconds = ((state.dataGlobal->DayOfSim - 1) * 24 + (state.dataGlobal->HourOfDay - 1) +
+                                                    (state.dataGlobal->TimeStep - 1) * state.dataGlobal->TimeStepZone +
                                                     DataHVACGlobals::SysTimeElapsed) * DataGlobalConstants::SecInHour();
 
                 // There are also some inits that are "close to one time" inits...( one-time in standalone, each envrn in E+ )
@@ -2187,8 +2187,8 @@ namespace EnergyPlus {
             // includes a ground temperature initialization, which is based on the Cur%CurSimTimeSeconds variable
             // which would be carried over from the previous environment
             this->Cur.CurSimTimeStepSize = DataHVACGlobals::TimeStepSys * DataGlobalConstants::SecInHour();
-            this->Cur.CurSimTimeSeconds = (state.dataGlobal->DayOfSim - 1) * 24 + (DataGlobals::HourOfDay - 1) +
-                                          (DataGlobals::TimeStep - 1) * DataGlobals::TimeStepZone +
+            this->Cur.CurSimTimeSeconds = (state.dataGlobal->DayOfSim - 1) * 24 + (state.dataGlobal->HourOfDay - 1) +
+                                          (state.dataGlobal->TimeStep - 1) * state.dataGlobal->TimeStepZone +
                                           DataHVACGlobals::SysTimeElapsed;
 
             // There are also some inits that are "close to one time" inits...(one-time in standalone, each envrn in E+)
@@ -4323,7 +4323,7 @@ namespace EnergyPlus {
             // evapotranspiration calculated values
             Real64 Latitude_Radians;
             Real64 DayOfYear;
-            Real64 HourOfDay;
+            Real64 HourOfDay_local;
             Real64 CurSecondsIntoToday;
             Real64 dr;
             Real64 Declination;
@@ -4460,7 +4460,7 @@ namespace EnergyPlus {
             CurSecondsIntoToday = int(mod(this->Cur.CurSimTimeSeconds, DataGlobalConstants::SecsInDay()));
 
             // The number of hours into today
-            HourOfDay = int(CurSecondsIntoToday / DataGlobalConstants::SecInHour());
+            HourOfDay_local = int(CurSecondsIntoToday / DataGlobalConstants::SecInHour());
 
             // For convenience convert to Kelvin once
             CurAirTempK = this->Cur.CurAirTemp + 273.15;
@@ -4471,7 +4471,7 @@ namespace EnergyPlus {
             b_SC = 2.0 * DataGlobalConstants::Pi() * (DayOfYear - 81.0) / 364.0;
             Sc = 0.1645 * std::sin(2.0 * b_SC) - 0.1255 * std::cos(b_SC) - 0.025 * std::sin(b_SC);
             Hour_Angle = DataGlobalConstants::Pi() / 12.0 *
-                         (((HourOfDay - 0.5) + 0.06667 * (StMeridian_Degrees - Longitude_Degrees) + Sc) - 12.0);
+                         (((HourOfDay_local - 0.5) + 0.06667 * (StMeridian_Degrees - Longitude_Degrees) + Sc) - 12.0);
 
             // Calculate sunset something, and constrain to a minimum of 0.000001
             X_sunset = 1.0 - pow_2(std::tan(Latitude_Radians)) * pow_2(std::tan(Declination));

@@ -151,7 +151,7 @@ namespace ThermalChimney {
 
     void CalcThermalChimney();
 
-    void ReportThermalChimney();
+    void ReportThermalChimney(EnergyPlusData &state);
 
     void GaussElimination(Array2A<Real64> EquaCoef, Array1D<Real64> &EquaConst, Array1D<Real64> &ThermChimSubTemp, int const NTC);
 

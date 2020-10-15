@@ -138,7 +138,7 @@ namespace FluidCoolers {
         } else {
             this->calcTwoSpeed(state);
         }
-        this->update();
+        this->update(state);
         this->report(RunFlag);
     }
 
@@ -1071,7 +1071,7 @@ namespace FluidCoolers {
                     this->AirTemp = this->DesignEnteringAirTemp;
                     this->AirWetBulb = this->DesignEnteringAirWetBulbTemp;
                     this->AirPress = DataEnvironment::StdBaroPress;
-                    this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(this->AirTemp, this->AirWetBulb, this->AirPress, CalledFrom);
+                    this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(state, this->AirTemp, this->AirWetBulb, this->AirPress, CalledFrom);
                     TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, UA, SimpleFluidCoolerUAResidual, UA0, UA1, Par);
                     if (SolFla == -1) {
                         ShowWarningError("Iteration limit exceeded in calculating fluid cooler UA.");
@@ -1178,7 +1178,7 @@ namespace FluidCoolers {
                 this->AirTemp = this->DesignEnteringAirTemp;           // design inlet air dry-bulb temp
                 this->AirWetBulb = this->DesignEnteringAirWetBulbTemp; // design inlet air wet-bulb temp
                 this->AirPress = DataEnvironment::StdBaroPress;
-                this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(this->AirTemp, this->AirWetBulb, this->AirPress);
+                this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(state, this->AirTemp, this->AirWetBulb, this->AirPress);
                 TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, UA, SimpleFluidCoolerUAResidual, UA0, UA1, Par);
                 if (SolFla == -1) {
                     ShowWarningError("Iteration limit exceeded in calculating fluid cooler UA.");
@@ -1330,7 +1330,7 @@ namespace FluidCoolers {
                 this->AirTemp = this->DesignEnteringAirTemp;           // design inlet air dry-bulb temp
                 this->AirWetBulb = this->DesignEnteringAirWetBulbTemp; // design inlet air wet-bulb temp
                 this->AirPress = DataEnvironment::StdBaroPress;
-                this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(this->AirTemp, this->AirWetBulb, this->AirPress, CalledFrom);
+                this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(state, this->AirTemp, this->AirWetBulb, this->AirPress, CalledFrom);
                 TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, UA, SimpleFluidCoolerUAResidual, UA0, UA1, Par);
                 if (SolFla == -1) {
                     ShowWarningError("Iteration limit exceeded in calculating fluid cooler UA.");
@@ -1744,7 +1744,7 @@ namespace FluidCoolers {
         return Residuum;
     }
 
-    void FluidCoolerspecs::update()
+    void FluidCoolerspecs::update(EnergyPlusData &state)
     {
 
         // SUBROUTINE INFORMATION:
@@ -1764,9 +1764,9 @@ namespace FluidCoolers {
         auto &waterOutletNode = this->WaterOutletNodeNum;
         DataLoopNode::Node(waterOutletNode).Temp = this->OutletWaterTemp;
 
-        if (DataPlant::PlantLoop(this->LoopNum).LoopSide(this->LoopSideNum).FlowLock == 0 || DataGlobals::WarmupFlag) return;
+        if (DataPlant::PlantLoop(this->LoopNum).LoopSide(this->LoopSideNum).FlowLock == 0 || state.dataGlobal->WarmupFlag) return;
 
-        // Check flow rate through fluid cooler and compare to design flow rate, show warning if greater than Design * Mulitplier
+        // Check flow rate through fluid cooler and compare to design flow rate, show warning if greater than Design * Multiplier
         if (DataLoopNode::Node(waterOutletNode).MassFlowRate > this->DesWaterMassFlowRate * this->FluidCoolerMassFlowRateMultiplier) {
             ++this->HighMassFlowErrorCount;
             if (this->HighMassFlowErrorCount < 2) {

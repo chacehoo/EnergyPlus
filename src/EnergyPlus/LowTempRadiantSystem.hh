@@ -196,7 +196,7 @@ namespace LowTempRadiantSystem {
 
         Real64 setOffTemperatureLowTemperatureRadiantSystem(int const scheduleIndex, Real64 const throttlingRange);
 
-        void updateLowTemperatureRadiantSystemSurfaces();
+        void updateLowTemperatureRadiantSystemSurfaces(EnergyPlusData &state);
 
         virtual void updateLowTemperatureRadiantSystem(EnergyPlusData &state) = 0;
 

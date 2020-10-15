@@ -235,8 +235,6 @@ namespace ExternalInterface {
         // Exchanges variables between EnergyPlus and the BCVTB socket.
 
         // Using/Aliasing
-        using DataGlobals::WarmupFlag;
-
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         std::string errorMessage;       // Error message
         int retValErrMsg;
@@ -251,7 +249,7 @@ namespace ExternalInterface {
             // Exchange data only after sizing and after warm-up.
             // Note that checking for ZoneSizingCalc SysSizingCalc does not work here, hence we
             // use the KindOfSim flag
-            if (!WarmupFlag && (state.dataGlobal->KindOfSim == DataGlobalConstants::KindOfSim::RunPeriodWeather)) {
+            if (!state.dataGlobal->WarmupFlag && (state.dataGlobal->KindOfSim == DataGlobalConstants::KindOfSim::RunPeriodWeather)) {
                 CalcExternalInterface(state);
             }
         }
@@ -733,7 +731,6 @@ namespace ExternalInterface {
         // This routine gets, sets and does the time integration in FMUs.
 
         // Using/Aliasing
-        using DataGlobals::WarmupFlag;
         using EMSManager::ManageEMS;
         using General::TrimSigDigits;
         using RuntimeLanguageProcessor::ExternalInterfaceSetErlVariable;
@@ -865,7 +862,7 @@ namespace ExternalInterface {
 
                 // Set in EnergyPlus the values of the schedules
                 for (k = 1; k <= FMU(i).Instance(j).NumOutputVariablesSchedule; ++k) {
-                    ExternalInterfaceSetSchedule(FMU(i).Instance(j).eplusInputVariableSchedule(k).VarIndex,
+                    ExternalInterfaceSetSchedule(state, FMU(i).Instance(j).eplusInputVariableSchedule(k).VarIndex,
                                                  FMU(i).Instance(j).fmuOutputVariableSchedule(k).RealVarValue);
                 }
 
@@ -1857,7 +1854,7 @@ namespace ExternalInterface {
         return str.substr(first, last - first + 1);
     }
 
-    Real64 GetCurSimStartTimeSeconds()
+    Real64 GetCurSimStartTimeSeconds(EnergyPlusData &state)
     {
         // FUNCTION INFORMATION:
         //       AUTHOR         Thierry S. Nouidui, Michael Wetter, Wangda Zuo
@@ -1873,8 +1870,6 @@ namespace ExternalInterface {
         using DataEnvironment::CurrentYearIsLeapYear;
         using DataEnvironment::DayOfMonth;
         using DataEnvironment::Month;
-        using DataGlobals::HourOfDay;
-
         // Locals
         Real64 simtime;
 
@@ -1962,8 +1957,8 @@ namespace ExternalInterface {
             }
         }
 
-        simtime = 24 * (simtime + (DayOfMonth - 1)); // day of month does not need to be stubtracted??
-        simtime = 60 * (simtime + (HourOfDay - 1));  // hours to minutes
+        simtime = 24 * (simtime + (DayOfMonth - 1)); // day of month does not need to be subtracted??
+        simtime = 60 * (simtime + (state.dataGlobal->HourOfDay - 1));  // hours to minutes
         simtime = 60 * (simtime);                    // minutes to seconds
 
         return simtime;
@@ -1984,8 +1979,6 @@ namespace ExternalInterface {
         // Using/Aliasing
         using DataEnvironment::TotalOverallSimDays;
         using DataEnvironment::TotDesDays;
-        using DataGlobals::TimeStepZone;
-        using DataGlobals::WarmupFlag;
         using DataSystemVariables::UpdateDataDuringWarmupExternalInterface;
         using EMSManager::ManageEMS;
         using General::TrimSigDigits;
@@ -2004,18 +1997,18 @@ namespace ExternalInterface {
         Array1D_int keyIndexes(1);     // Array index for
         Array1D_string NamesOfKeys(1); // Specific key name
 
-        if (WarmupFlag && (state.dataGlobal->KindOfSim != DataGlobalConstants::KindOfSim::RunPeriodWeather)) { // No data exchange during design days
+        if (state.dataGlobal->WarmupFlag && (state.dataGlobal->KindOfSim != DataGlobalConstants::KindOfSim::RunPeriodWeather)) { // No data exchange during design days
             if (FirstCallDesignDays) {
                 ShowWarningError("ExternalInterface/CalcExternalInterfaceFMUImport: ExternalInterface does not exchange data during design days.");
             }
             FirstCallDesignDays = false;
         }
-        if (WarmupFlag && (state.dataGlobal->KindOfSim == DataGlobalConstants::KindOfSim::RunPeriodWeather)) { // Data exchange after design days
+        if (state.dataGlobal->WarmupFlag && (state.dataGlobal->KindOfSim == DataGlobalConstants::KindOfSim::RunPeriodWeather)) { // Data exchange after design days
             if (FirstCallWUp) {
                 // set the report during warmup to true so that variables are also updated during the warmup
                 UpdateDataDuringWarmupExternalInterface = true;
-                hStep = (60.0 * TimeStepZone) * 60.0;
-                tStart = GetCurSimStartTimeSeconds();
+                hStep = (60.0 * state.dataGlobal->TimeStepZone) * 60.0;
+                tStart = GetCurSimStartTimeSeconds(state);
                 tStop = tStart + 24.0 * 3600.0;
                 tComm = tStart;
 
@@ -2134,13 +2127,13 @@ namespace ExternalInterface {
             }
         }
         // BeginSimulation
-        if (!WarmupFlag && (state.dataGlobal->KindOfSim == DataGlobalConstants::KindOfSim::RunPeriodWeather)) {
+        if (!state.dataGlobal->WarmupFlag && (state.dataGlobal->KindOfSim == DataGlobalConstants::KindOfSim::RunPeriodWeather)) {
 
             if (FirstCallTStep) {
                 // reset the UpdateDataDuringWarmupExternalInterface to be false.
                 UpdateDataDuringWarmupExternalInterface = false;
                 // The time is computed in seconds for FMU
-                tStart = GetCurSimStartTimeSeconds();
+                tStart = GetCurSimStartTimeSeconds(state);
                 tStop = tStart + (TotalOverallSimDays - TotDesDays) * 24.0 * 3600.0;
                 tComm = tStart;
 
@@ -2394,7 +2387,7 @@ namespace ExternalInterface {
             if ((flaRea == 0) && continueSimulation) {
                 for (i = 1; i <= isize(varInd); ++i) {
                     if (inpVarTypes(i) == indexSchedule) {
-                        ExternalInterfaceSetSchedule(varInd(i), dblValRea(i));
+                        ExternalInterfaceSetSchedule(state, varInd(i), dblValRea(i));
                     } else if ((inpVarTypes(i) == indexVariable) || (inpVarTypes(i) == indexActuator)) {
                         ExternalInterfaceSetErlVariable(varInd(i), dblValRea(i));
                     } else {

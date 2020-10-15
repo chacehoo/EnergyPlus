@@ -352,7 +352,7 @@ namespace EconomicTariff {
             if (ErrorsFound) ShowFatalError("UpdateUtilityBills: Preceding errors cause termination.");
         }
         if (DoOutputReporting && (state.dataGlobal->KindOfSim == DataGlobalConstants::KindOfSim::RunPeriodWeather)) {
-            GatherForEconomics();
+            GatherForEconomics(state);
         }
     }
 
@@ -377,7 +377,6 @@ namespace EconomicTariff {
         // meaning if "CCF" is picked, the conversion factor isn't the same whether it's a water meter or a fuel meter.
 
         using DataGlobalConstants::AssignResourceTypeNum;
-        using DataGlobals::NumOfTimeStepInHour;
         using OutputProcessor::EnergyMeters;
         using OutputReportTabular::AddTOCEntry;
         using OutputReportTabular::displayTariffReport;
@@ -711,20 +710,20 @@ namespace EconomicTariff {
             if (UtilityRoutines::SameString(cAlphaArgs(7), "QuarterHour")) {
                 // check to make sure that the demand window and the TIMESTEP IN HOUR are consistant.
                 {
-                    auto const SELECT_CASE_var(NumOfTimeStepInHour);
+                    auto const SELECT_CASE_var(state.dataGlobal->NumOfTimeStepInHour);
                     if ((SELECT_CASE_var == 1) || (SELECT_CASE_var == 3) || (SELECT_CASE_var == 5) || (SELECT_CASE_var == 15)) {
                         tariff(iInObj).demandWindow = demandWindowHour;
                         tariff(iInObj).demWinTime = 1.00;
                         ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid data");
                         ShowContinueError("Demand window of QuarterHour is not consistent with number of timesteps per hour [" +
-                                          RoundSigDigits(NumOfTimeStepInHour) + "].");
+                                          RoundSigDigits(state.dataGlobal->NumOfTimeStepInHour) + "].");
                         ShowContinueError("Demand window will be set to FullHour, and the simulation continues.");
                     } else if ((SELECT_CASE_var == 2) || (SELECT_CASE_var == 6) || (SELECT_CASE_var == 10) || (SELECT_CASE_var == 30)) {
                         tariff(iInObj).demandWindow = demandWindowHalf;
                         tariff(iInObj).demWinTime = 0.50;
                         ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid data");
                         ShowContinueError("Demand window of QuarterHour is not consistent with number of timesteps per hour [" +
-                                          RoundSigDigits(NumOfTimeStepInHour) + "].");
+                                          RoundSigDigits(state.dataGlobal->NumOfTimeStepInHour) + "].");
                         ShowContinueError("Demand window will be set to HalfHour, and the simulation continues.");
                     } else if ((SELECT_CASE_var == 4) || (SELECT_CASE_var == 12) || (SELECT_CASE_var == 20) || (SELECT_CASE_var == 60)) {
                         tariff(iInObj).demandWindow = demandWindowQuarter;
@@ -733,13 +732,13 @@ namespace EconomicTariff {
                 }
             } else if (UtilityRoutines::SameString(cAlphaArgs(7), "HalfHour")) {
                 {
-                    auto const SELECT_CASE_var(NumOfTimeStepInHour);
+                    auto const SELECT_CASE_var(state.dataGlobal->NumOfTimeStepInHour);
                     if ((SELECT_CASE_var == 1) || (SELECT_CASE_var == 3) || (SELECT_CASE_var == 5) || (SELECT_CASE_var == 15)) {
                         tariff(iInObj).demandWindow = demandWindowHour;
                         tariff(iInObj).demWinTime = 1.00;
                         ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid data");
                         ShowContinueError("Demand window of HalfHour is not consistent with number of timesteps per hour [" +
-                                          RoundSigDigits(NumOfTimeStepInHour) + "].");
+                                          RoundSigDigits(state.dataGlobal->NumOfTimeStepInHour) + "].");
                         ShowContinueError("Demand window will be set to FullHour, and the simulation continues.");
                     } else if ((SELECT_CASE_var == 2) || (SELECT_CASE_var == 4) || (SELECT_CASE_var == 6) || (SELECT_CASE_var == 10) ||
                                (SELECT_CASE_var == 12) || (SELECT_CASE_var == 20) || (SELECT_CASE_var == 30) || (SELECT_CASE_var == 60)) {
@@ -759,7 +758,7 @@ namespace EconomicTariff {
             } else {
                 // if not entered default to the same logic as quarter of an hour
                 {
-                    auto const SELECT_CASE_var(NumOfTimeStepInHour);
+                    auto const SELECT_CASE_var(state.dataGlobal->NumOfTimeStepInHour);
                     if ((SELECT_CASE_var == 1) || (SELECT_CASE_var == 3) || (SELECT_CASE_var == 5) || (SELECT_CASE_var == 15)) {
                         tariff(iInObj).demandWindow = demandWindowHour;
                         tariff(iInObj).demWinTime = 1.00;
@@ -2710,7 +2709,7 @@ namespace EconomicTariff {
     //======================================================================================================================
     //======================================================================================================================
 
-    void GatherForEconomics()
+    void GatherForEconomics(EnergyPlusData &state)
     {
         //    AUTHOR         Jason Glazer of GARD Analytics, Inc.
         //    DATE WRITTEN   June 2004
@@ -2769,9 +2768,9 @@ namespace EconomicTariff {
                     if (tariff(iTariff).monthSchIndex != 0) {
                         curMonth = GetCurrentScheduleValue(tariff(iTariff).monthSchIndex);
                     } else {
-                        // #7814 - Have to carefull with DST. tariff::seasonForMonth is overwritten at each timestep, and only the last value is
+                        // #7814 - Have to careful with DST. tariff::seasonForMonth is overwritten at each timestep, and only the last value is
                         // retained, so make sure to capture the right one
-                        if ((DataGlobals::HourOfDay + DataEnvironment::DSTIndicator) <= 24) {
+                        if ((state.dataGlobal->HourOfDay + DataEnvironment::DSTIndicator) <= 24) {
                             curMonth = DataEnvironment::Month;
                         } else {
                             curMonth = DataEnvironment::MonthTomorrow;
@@ -4215,7 +4214,7 @@ namespace EconomicTariff {
 
         // compute floor area if no ABUPS
         if (buildingConditionedFloorArea == 0.0) {
-            DetermineBuildingFloorArea();
+            DetermineBuildingFloorArea(state);
         }
 
         // do unit conversions if necessary

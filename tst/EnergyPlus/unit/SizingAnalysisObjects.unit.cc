@@ -84,8 +84,8 @@ protected:
         midLogVal = 75.0;
         hiLogVal = 100.0;
 
-        NumOfTimeStepInHour = 4; // in DataGlobals
-        TimeStepZone = 0.25;
+        state.dataGlobal->NumOfTimeStepInHour = 4; // in DataGlobals
+        state.dataGlobal->TimeStepZone = 0.25;
 
         // setup weather manager state needed
         state.dataWeatherManager->NumOfEnvrn = 2;
@@ -110,7 +110,7 @@ protected:
         state.dataWeatherManager->Environment(4).DesignDayNum = 2;
         state.dataWeatherManager->Environment(4).SeedEnvrnNum = 2;
 
-        OutputProcessor::SetupTimePointers("ZONE", TimeStepZone);
+        OutputProcessor::SetupTimePointers("ZONE", state.dataGlobal->TimeStepZone);
         OutputProcessor::SetupTimePointers("HVAC", DataHVACGlobals::TimeStepSys);
 
         PlantSizData.allocate(1);
@@ -157,11 +157,11 @@ TEST_F(SizingAnalysisObjectsTest, testZoneUpdateInLoggerFramework)
     // first step
     state.dataGlobal->KindOfSim = DataGlobalConstants::KindOfSim::HVACSizeDesignDay;
     state.dataGlobal->DayOfSim = 1;
-    HourOfDay = 1;
+    state.dataGlobal->HourOfDay = 1;
     state.dataWeatherManager->Envrn = 3;
     state.dataWeatherManager->Environment(state.dataWeatherManager->Envrn).DesignDayNum = 1;
     sizingLoggerFrameObj.SetupSizingLogsNewEnvironment(state);
-    DataGlobals::TimeStep = 1;
+    state.dataGlobal->TimeStep = 1;
 
     LogVal = lowLogVal;
     sizingLoggerFrameObj.UpdateSizingLogValuesZoneStep(state);
@@ -169,16 +169,16 @@ TEST_F(SizingAnalysisObjectsTest, testZoneUpdateInLoggerFramework)
     EXPECT_DOUBLE_EQ(lowLogVal, sizingLoggerFrameObj.logObjs[logIndex].ztStepObj[0].logDataValue);
 
     // last step of first design day
-    HourOfDay = 24;
-    DataGlobals::TimeStep = 4;
+    state.dataGlobal->HourOfDay = 24;
+    state.dataGlobal->TimeStep = 4;
     LogVal = hiLogVal;
     sizingLoggerFrameObj.UpdateSizingLogValuesZoneStep(state);
 
     EXPECT_DOUBLE_EQ(hiLogVal, sizingLoggerFrameObj.logObjs[logIndex].ztStepObj[95].logDataValue);
 
     // first step of second design day
-    HourOfDay = 1;
-    DataGlobals::TimeStep = 1;
+    state.dataGlobal->HourOfDay = 1;
+    state.dataGlobal->TimeStep = 1;
     state.dataWeatherManager->Envrn = 4;
     state.dataWeatherManager->Environment(state.dataWeatherManager->Envrn).DesignDayNum = 2;
     sizingLoggerFrameObj.SetupSizingLogsNewEnvironment(state);

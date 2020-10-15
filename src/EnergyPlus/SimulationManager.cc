@@ -339,7 +339,7 @@ namespace SimulationManager {
         SetPredefinedTables();
         SetPreConstructionInputParameters(state); // establish array bounds for constructions early
 
-        SetupTimePointers("Zone", TimeStepZone); // Set up Time pointer for HB/Zone Simulation
+        SetupTimePointers("Zone", state.dataGlobal->TimeStepZone); // Set up Time pointer for HB/Zone Simulation
         SetupTimePointers("HVAC", TimeStepSys);
 
         CheckIfAnyEMS(state);
@@ -358,7 +358,7 @@ namespace SimulationManager {
         // Note that some setup is deferred until later such as setting up output variables
         if (!eplusRunningViaAPI) {
             EnergyPlus::PluginManagement::pluginManager =
-                std::unique_ptr<EnergyPlus::PluginManagement::PluginManager>(new EnergyPlus::PluginManagement::PluginManager);
+                std::unique_ptr<EnergyPlus::PluginManagement::PluginManager>(new EnergyPlus::PluginManagement::PluginManager(state));
         } else {
             // if we ARE running via API, we should warn if any plugin objects are found and fail rather than running silently without them
             bool invalidPluginObjects = EnergyPlus::PluginManagement::PluginManager::anyUnexpectedPluginObjects();
@@ -405,7 +405,7 @@ namespace SimulationManager {
 
         AskForConnectionsReport = true; // set to true now that input processing and sizing is done.
         KickOffSimulation = false;
-        WarmupFlag = false;
+        state.dataGlobal->WarmupFlag = false;
         DoWeatherInitReporting = true;
 
         //  Note:  All the inputs have been 'gotten' by the time we get here.
@@ -444,11 +444,8 @@ namespace SimulationManager {
                 ReportLoopConnections(state);
                 ReportAirLoopConnections(state);
                 ReportNodeConnections(state);
-                // Debug reports
-                //      CALL ReportCompSetMeterVariables
-                //      CALL ReportParentChildren
             }
-            CreateEnergyReportStructure();
+            CreateEnergyReportStructure(state);
             bool anyEMSRan;
             ManageEMS(state,
                       EMSManager::EMSCallFrom::SetupSimulation,
@@ -467,7 +464,7 @@ namespace SimulationManager {
 
         if (sqlite) {
             sqlite->sqliteBegin();
-            sqlite->updateSQLiteSimulationRecord(1, DataGlobals::NumOfTimeStepInHour);
+            sqlite->updateSQLiteSimulationRecord(1, state.dataGlobal->NumOfTimeStepInHour);
             sqlite->sqliteCommit();
         }
 
@@ -487,7 +484,7 @@ namespace SimulationManager {
         ResetEnvironmentCounter(state);
 
         EnvCount = 0;
-        WarmupFlag = true;
+        state.dataGlobal->WarmupFlag = true;
 
         while (Available) {
             if (state.dataGlobal->stopSimulation) break;
@@ -525,16 +522,16 @@ namespace SimulationManager {
             }
             state.dataGlobal->EndEnvrnFlag = false;
             EndMonthFlag = false;
-            WarmupFlag = true;
+            state.dataGlobal->WarmupFlag = true;
             state.dataGlobal->DayOfSim = 0;
             state.dataGlobal->DayOfSimChr = "0";
             NumOfWarmupDays = 0;
             if (CurrentYearIsLeapYear) {
-                if (NumOfDayInEnvrn <= 366) {
+                if (state.dataGlobal->NumOfDayInEnvrn <= 366) {
                     isFinalYear = true;
                 }
             } else {
-                if (NumOfDayInEnvrn <= 365) {
+                if (state.dataGlobal->NumOfDayInEnvrn <= 365) {
                     isFinalYear = true;
                 }
             }
@@ -544,23 +541,23 @@ namespace SimulationManager {
             bool anyEMSRan;
             ManageEMS(state, EMSManager::EMSCallFrom::BeginNewEnvironment, anyEMSRan, ObjexxFCL::Optional_int_const()); // calling point
 
-            while ((state.dataGlobal->DayOfSim < NumOfDayInEnvrn) || (WarmupFlag)) { // Begin day loop ...
+            while ((state.dataGlobal->DayOfSim < state.dataGlobal->NumOfDayInEnvrn) || (state.dataGlobal->WarmupFlag)) { // Begin day loop ...
                 if (state.dataGlobal->stopSimulation) break;
 
                 if (sqlite) sqlite->sqliteBegin(); // setup for one transaction per day
 
                 ++state.dataGlobal->DayOfSim;
                 state.dataGlobal->DayOfSimChr = fmt::to_string(state.dataGlobal->DayOfSim);
-                if (!WarmupFlag) {
+                if (!state.dataGlobal->WarmupFlag) {
                     ++CurrentOverallSimDay;
                     DisplaySimDaysProgress(CurrentOverallSimDay, TotalOverallSimDays);
                 } else {
                     state.dataGlobal->DayOfSimChr = "0";
                 }
                 state.dataGlobal->BeginDayFlag = true;
-                EndDayFlag = false;
+                state.dataGlobal->EndDayFlag = false;
 
-                if (WarmupFlag) {
+                if (state.dataGlobal->WarmupFlag) {
                     ++NumOfWarmupDays;
                     cWarmupDay = TrimSigDigits(NumOfWarmupDays);
                     DisplayString("Warming up {" + cWarmupDay + '}');
@@ -582,18 +579,18 @@ namespace SimulationManager {
                     DisplayPerfSimulationFlag = false;
                 }
                 // for simulations that last longer than a week, identify when the last year of the simulation is started
-                if ((state.dataGlobal->DayOfSim > 365) && ((NumOfDayInEnvrn - state.dataGlobal->DayOfSim) == 364) && !WarmupFlag) {
+                if ((state.dataGlobal->DayOfSim > 365) && ((state.dataGlobal->NumOfDayInEnvrn - state.dataGlobal->DayOfSim) == 364) && !state.dataGlobal->WarmupFlag) {
                     DisplayString("Starting last  year of environment at:  " + state.dataGlobal->DayOfSimChr);
-                    ResetTabularReports();
+                    ResetTabularReports(state);
                 }
 
-                for (HourOfDay = 1; HourOfDay <= 24; ++HourOfDay) { // Begin hour loop ...
+                for (state.dataGlobal->HourOfDay = 1; state.dataGlobal->HourOfDay <= 24; ++state.dataGlobal->HourOfDay) { // Begin hour loop ...
                     if (state.dataGlobal->stopSimulation) break;
 
                     state.dataGlobal->BeginHourFlag = true;
-                    EndHourFlag = false;
+                    state.dataGlobal->EndDayFlag = false;
 
-                    for (TimeStep = 1; TimeStep <= NumOfTimeStepInHour; ++TimeStep) {
+                    for (state.dataGlobal->TimeStep = 1; state.dataGlobal->TimeStep <= state.dataGlobal->NumOfTimeStepInHour; ++state.dataGlobal->TimeStep) {
                         if (state.dataGlobal->stopSimulation) break;
 
                         if (AnySlabsInModel || AnyBasementsInModel) {
@@ -619,11 +616,11 @@ namespace SimulationManager {
                         // Note also that BeginTimeStepFlag, EndTimeStepFlag, and the
                         // SubTimeStepFlags can/will be set/reset in the HVAC Manager.
 
-                        if (TimeStep == NumOfTimeStepInHour) {
-                            EndHourFlag = true;
-                            if (HourOfDay == 24) {
-                                EndDayFlag = true;
-                                if ((!WarmupFlag) && (state.dataGlobal->DayOfSim == NumOfDayInEnvrn)) {
+                        if (state.dataGlobal->TimeStep == state.dataGlobal->NumOfTimeStepInHour) {
+                            state.dataGlobal->EndDayFlag = true;
+                            if (state.dataGlobal->HourOfDay == 24) {
+                                state.dataGlobal->EndDayFlag = true;
+                                if ((!state.dataGlobal->WarmupFlag) && (state.dataGlobal->DayOfSim == state.dataGlobal->NumOfDayInEnvrn)) {
                                     state.dataGlobal->EndEnvrnFlag = true;
                                 }
                             }
@@ -647,7 +644,7 @@ namespace SimulationManager {
                         state.dataGlobal->BeginFullSimFlag = false;
                     } // TimeStep loop
 
-                    PreviousHour = HourOfDay;
+                    state.dataGlobal->PreviousHour = state.dataGlobal->HourOfDay;
 
                 } // ... End hour loop.
 
@@ -660,7 +657,7 @@ namespace SimulationManager {
 
         } // ... End environment loop.
 
-        WarmupFlag = false;
+        state.dataGlobal->WarmupFlag = false;
         if (!SimsDone && DoDesDaySim) {
             if ((TotDesDays + TotRunDesPersDays) == 0) { // if sum is 0, then there was no sizing done.
                 ShowWarningError("ManageSimulation: SizingPeriod:* were requested in SimulationControl but no SizingPeriod:* objects in input.");
@@ -946,52 +943,52 @@ namespace SimulationManager {
                                           lAlphaFieldBlanks,
                                           cAlphaFieldNames,
                                           cNumericFieldNames);
-            NumOfTimeStepInHour = Number(1);
-            if (NumOfTimeStepInHour <= 0 || NumOfTimeStepInHour > 60) {
-                Alphas(1) = RoundSigDigits(NumOfTimeStepInHour);
+            state.dataGlobal->NumOfTimeStepInHour = Number(1);
+            if (state.dataGlobal->NumOfTimeStepInHour <= 0 || state.dataGlobal->NumOfTimeStepInHour > 60) {
+                Alphas(1) = RoundSigDigits(state.dataGlobal->NumOfTimeStepInHour);
                 ShowWarningError(CurrentModuleObject + ": Requested number (" + Alphas(1) + ") invalid, Defaulted to 4");
-                NumOfTimeStepInHour = 4;
-            } else if (mod(60, NumOfTimeStepInHour) != 0) {
+                state.dataGlobal->NumOfTimeStepInHour = 4;
+            } else if (mod(60, state.dataGlobal->NumOfTimeStepInHour) != 0) {
                 MinInt = 9999;
                 for (Num = 1; Num <= 12; ++Num) {
-                    if (std::abs(NumOfTimeStepInHour - Div60(Num)) > MinInt) continue;
-                    MinInt = NumOfTimeStepInHour - Div60(Num);
+                    if (std::abs(state.dataGlobal->NumOfTimeStepInHour - Div60(Num)) > MinInt) continue;
+                    MinInt = state.dataGlobal->NumOfTimeStepInHour - Div60(Num);
                     Which = Num;
                 }
-                ShowWarningError(CurrentModuleObject + ": Requested number (" + RoundSigDigits(NumOfTimeStepInHour) +
+                ShowWarningError(CurrentModuleObject + ": Requested number (" + RoundSigDigits(state.dataGlobal->NumOfTimeStepInHour) +
                                  ") not evenly divisible into 60, defaulted to nearest (" + RoundSigDigits(Div60(Which)) + ").");
-                NumOfTimeStepInHour = Div60(Which);
+                state.dataGlobal->NumOfTimeStepInHour = Div60(Which);
             }
-            if (CondFDAlgo && NumOfTimeStepInHour < 20) {
-                ShowWarningError(CurrentModuleObject + ": Requested number (" + RoundSigDigits(NumOfTimeStepInHour) +
+            if (CondFDAlgo && state.dataGlobal->NumOfTimeStepInHour < 20) {
+                ShowWarningError(CurrentModuleObject + ": Requested number (" + RoundSigDigits(state.dataGlobal->NumOfTimeStepInHour) +
                                  ") cannot be used when Conduction Finite Difference algorithm is selected.");
                 ShowContinueError("..." + CurrentModuleObject + " is set to 20.");
-                NumOfTimeStepInHour = 20;
+                state.dataGlobal->NumOfTimeStepInHour = 20;
             }
-            if (NumOfTimeStepInHour < 4 && inputProcessor->getNumObjectsFound("Zone") > 0) {
-                ShowWarningError(CurrentModuleObject + ": Requested number (" + RoundSigDigits(NumOfTimeStepInHour) +
+            if (state.dataGlobal->NumOfTimeStepInHour < 4 && inputProcessor->getNumObjectsFound("Zone") > 0) {
+                ShowWarningError(CurrentModuleObject + ": Requested number (" + RoundSigDigits(state.dataGlobal->NumOfTimeStepInHour) +
                                  ") is less than the suggested minimum of 4.");
                 ShowContinueError("Please see entry for " + CurrentModuleObject + " in Input/Output Reference for discussion of considerations.");
             }
         } else if (Num == 0 && inputProcessor->getNumObjectsFound("Zone") > 0 && !CondFDAlgo) {
             ShowWarningError("No " + CurrentModuleObject + " object found.  Number of TimeSteps in Hour defaulted to 4.");
-            NumOfTimeStepInHour = 4;
+            state.dataGlobal->NumOfTimeStepInHour = 4;
         } else if (Num == 0 && !CondFDAlgo) {
-            NumOfTimeStepInHour = 4;
+            state.dataGlobal->NumOfTimeStepInHour = 4;
         } else if (Num == 0 && inputProcessor->getNumObjectsFound("Zone") > 0 && CondFDAlgo) {
             ShowWarningError("No " + CurrentModuleObject + " object found.  Number of TimeSteps in Hour defaulted to 20.");
             ShowContinueError("...Due to presence of Conduction Finite Difference Algorithm selection.");
-            NumOfTimeStepInHour = 20;
+            state.dataGlobal->NumOfTimeStepInHour = 20;
         } else if (Num == 0 && CondFDAlgo) {
-            NumOfTimeStepInHour = 20;
+            state.dataGlobal->NumOfTimeStepInHour = 20;
         } else {
             ShowSevereError("Too many " + CurrentModuleObject + " Objects found.");
             ErrorsFound = true;
         }
 
-        TimeStepZone = 1.0 / double(NumOfTimeStepInHour);
-        MinutesPerTimeStep = TimeStepZone * 60;
-        TimeStepZoneSec = TimeStepZone * DataGlobalConstants::SecInHour();
+        state.dataGlobal->TimeStepZone = 1.0 / double(state.dataGlobal->NumOfTimeStepInHour);
+        MinutesPerTimeStep = state.dataGlobal->TimeStepZone * 60;
+        TimeStepZoneSec = state.dataGlobal->TimeStepZone * DataGlobalConstants::SecInHour();
 
         CurrentModuleObject = "ConvergenceLimits";
         Num = inputProcessor->getNumObjectsFound(CurrentModuleObject);
@@ -1017,7 +1014,7 @@ namespace SimulationManager {
                                  ") invalid. Set to 1 minute.");
                 MinTimeStepSys = 1.0 / 60.0;
             } else if (MinInt == 0) { // Set to TimeStepZone
-                MinTimeStepSys = TimeStepZone;
+                MinTimeStepSys = state.dataGlobal->TimeStepZone;
             } else {
                 MinTimeStepSys = double(MinInt) / 60.0;
             }
@@ -1042,7 +1039,7 @@ namespace SimulationManager {
             ErrorsFound = true;
         }
 
-        LimitNumSysSteps = int(TimeStepZone / MinTimeStepSys);
+        LimitNumSysSteps = int(state.dataGlobal->TimeStepZone / MinTimeStepSys);
 
         DebugOutput = false;
         EvenDuringWarmup = false;
@@ -1322,10 +1319,10 @@ namespace SimulationManager {
 
                     if (overrideTimestep) {
                         ShowWarningError("Due to PerformancePrecisionTradeoffs Override Mode, the Number of TimeSteps has been changed to 1.");
-                        DataGlobals::NumOfTimeStepInHour = 1;
-                        DataGlobals::TimeStepZone = 1.0 / double(DataGlobals::NumOfTimeStepInHour);
-                        DataGlobals::MinutesPerTimeStep = DataGlobals::TimeStepZone * 60;
-                        DataGlobals::TimeStepZoneSec = DataGlobals::TimeStepZone * DataGlobalConstants::SecInHour();
+                        state.dataGlobal->NumOfTimeStepInHour = 1;
+                        state.dataGlobal->TimeStepZone = 1.0 / double(state.dataGlobal->NumOfTimeStepInHour);
+                        DataGlobals::MinutesPerTimeStep = state.dataGlobal->TimeStepZone * 60;
+                        DataGlobals::TimeStepZoneSec = state.dataGlobal->TimeStepZone * DataGlobalConstants::SecInHour();
                     }
                     if (overrideZoneAirHeatBalAlg) {
                         ShowWarningError(
@@ -1350,7 +1347,7 @@ namespace SimulationManager {
                             MinTimeStepSysOverrideValue = MinutesPerTimeStep;
                         }
                         MinTimeStepSys = MinTimeStepSysOverrideValue / 60.0;
-                        LimitNumSysSteps = int(TimeStepZone / MinTimeStepSys);
+                        LimitNumSysSteps = int(state.dataGlobal->TimeStepZone / MinTimeStepSys);
                     }
                     if (overrideMaxZoneTempDiff) {
                         ShowWarningError(
@@ -1376,7 +1373,7 @@ namespace SimulationManager {
 
         print(state.files.eio, "{}\n", "! <Timesteps per Hour>, #TimeSteps, Minutes per TimeStep {minutes}");
         static constexpr auto Format_731(" Timesteps per Hour, {:2}, {:2}\n");
-        print(state.files.eio, Format_731, NumOfTimeStepInHour, MinutesPerTimeStep);
+        print(state.files.eio, Format_731, state.dataGlobal->NumOfTimeStepInHour, MinutesPerTimeStep);
 
         print(state.files.eio,
               "{}\n",
@@ -1449,7 +1446,7 @@ namespace SimulationManager {
             Alphas(2) = "ScriptF";
         }
         Alphas(3) = overrideModeValue;
-        Alphas(4) = General::RoundSigDigits(DataGlobals::NumOfTimeStepInHour);
+        Alphas(4) = General::RoundSigDigits(state.dataGlobal->NumOfTimeStepInHour);
         if (DataHeatBalance::OverrideZoneAirSolutionAlgo) {
             Alphas(5) = "Yes";
         } else {
@@ -1517,7 +1514,7 @@ namespace SimulationManager {
             UtilityRoutines::appendPerfLog(state, "Zone Radiant Exchange Algorithm", "ScriptF");
         }
         UtilityRoutines::appendPerfLog(state, "Override Mode", currentOverrideModeValue);
-        UtilityRoutines::appendPerfLog(state, "Number of Timesteps per Hour", General::RoundSigDigits(DataGlobals::NumOfTimeStepInHour));
+        UtilityRoutines::appendPerfLog(state, "Number of Timesteps per Hour", General::RoundSigDigits(state.dataGlobal->NumOfTimeStepInHour));
         UtilityRoutines::appendPerfLog(state, "Minimum Number of Warmup Days", General::RoundSigDigits(DataHeatBalance::MinNumberOfWarmupDays));
         UtilityRoutines::appendPerfLog(state, "SuppressAllBeginEnvironmentResets", bool_to_string(DataEnvironment::forceBeginEnvResetSuppress));
         UtilityRoutines::appendPerfLog(state, "Minimum System Timestep", General::RoundSigDigits(DataConvergParams::MinTimeStepSys * 60.0, 1));
@@ -1850,7 +1847,7 @@ namespace SimulationManager {
         // na
 
         // FLOW:
-        StdOutputRecordCount = 0;
+        state.dataGlobal->StdOutputRecordCount = 0;
         state.files.eso.ensure_open("OpenOutputFiles", state.files.outputControl.eso);
         print(state.files.eso, "Program Version,{}\n", VerString);
 
@@ -2000,8 +1997,8 @@ namespace SimulationManager {
 #endif
 
         print(state.files.eso, "{}\n", EndOfDataString);
-        if (StdOutputRecordCount > 0) {
-            print(state.files.eso, variable_fmt, "Number of Records Written", StdOutputRecordCount);
+        if (state.dataGlobal->StdOutputRecordCount > 0) {
+            print(state.files.eso, variable_fmt, "Number of Records Written", state.dataGlobal->StdOutputRecordCount);
             state.files.eso.close();
         } else {
             state.files.eso.del();
@@ -2072,8 +2069,8 @@ namespace SimulationManager {
 
         // Close the Meters Output File
         print(state.files.mtr, "{}\n", EndOfDataString);
-        print(state.files.mtr, " Number of Records Written={:12}\n", StdMeterRecordCount);
-        if (StdMeterRecordCount > 0) {
+        print(state.files.mtr, " Number of Records Written={:12}\n", state.dataGlobal->StdMeterRecordCount);
+        if (state.dataGlobal->StdMeterRecordCount > 0) {
             state.files.mtr.close();
         } else {
             state.files.mtr.del();
@@ -2124,19 +2121,19 @@ namespace SimulationManager {
             state.dataGlobal->BeginEnvrnFlag = true;
             state.dataGlobal->EndEnvrnFlag = false;
             EndMonthFlag = false;
-            WarmupFlag = true;
+            state.dataGlobal->WarmupFlag = true;
             state.dataGlobal->DayOfSim = 0;
 
             ++state.dataGlobal->DayOfSim;
             state.dataGlobal->BeginDayFlag = true;
-            EndDayFlag = false;
+            state.dataGlobal->EndDayFlag = false;
 
-            HourOfDay = 1;
+            state.dataGlobal->HourOfDay = 1;
 
             state.dataGlobal->BeginHourFlag = true;
-            EndHourFlag = false;
+            state.dataGlobal->EndDayFlag = false;
 
-            TimeStep = 1;
+            state.dataGlobal->TimeStep = 1;
 
             if (DeveloperFlag) DisplayString("Initializing Simulation - timestep 1:" + EnvironmentName);
 
@@ -2165,8 +2162,8 @@ namespace SimulationManager {
 
             //         do an end of day, end of environment time step
 
-            HourOfDay = 24;
-            TimeStep = NumOfTimeStepInHour;
+            state.dataGlobal->HourOfDay = 24;
+            state.dataGlobal->TimeStep = state.dataGlobal->NumOfTimeStepInHour;
             state.dataGlobal->EndEnvrnFlag = true;
 
             if (DeveloperFlag) DisplayString("Initializing Simulation - hour 24 timestep 1:" + EnvironmentName);
@@ -2726,7 +2723,7 @@ namespace SimulationManager {
 
         print(state.files.bnd, "{}\n", "! ===============================================================");
         int NumOfControlledZones = 0;
-        for (int Count = 1; Count <= NumOfZones; ++Count) {
+        for (int Count = 1; Count <= state.dataGlobal->NumOfZones; ++Count) {
             if (!allocated(ZoneEquipConfig)) continue;
             if (ZoneEquipConfig(Count).IsControlled) ++NumOfControlledZones;
         }
@@ -2744,7 +2741,7 @@ namespace SimulationManager {
                   "[DD:Cooling] Inlet Node Name>,<DD Sys:Heating Inlet Node Name>");
             print(state.files.bnd, "{}\n", "! <Controlled Zone Exhaust>,<Exhaust Node Count>,<Controlled Zone Name>,<Exhaust Air Node Name>");
 
-            for (int Count = 1; Count <= NumOfZones; ++Count) {
+            for (int Count = 1; Count <= state.dataGlobal->NumOfZones; ++Count) {
                 if (!ZoneEquipConfig(Count).IsControlled) continue;
 
                 print(state.files.bnd,
@@ -2790,7 +2787,7 @@ namespace SimulationManager {
             print(state.files.bnd, "{}\n", Format_722);
             print(state.files.bnd, "{}\n", Format_723);
 
-            for (int Count = 1; Count <= NumOfZones; ++Count) {
+            for (int Count = 1; Count <= state.dataGlobal->NumOfZones; ++Count) {
                 // Zone equipment list array parallels controlled zone equipment array, so
                 // same index finds corresponding data from both arrays
                 if (!ZoneEquipConfig(Count).IsControlled) continue;

@@ -189,7 +189,7 @@ namespace SteamBaseboardRadiator {
 
     void CalcSteamBaseboard(EnergyPlusData &state, int &BaseboardNum, Real64 &LoadMet);
 
-    void UpdateSteamBaseboard(int const BaseboardNum);
+    void UpdateSteamBaseboard(EnergyPlusData &state, int const BaseboardNum);
 
     void UpdateBBSteamRadSourceValAvg(bool &SteamBaseboardSysOn); // .TRUE. if the radiant system has run this zone time step
 

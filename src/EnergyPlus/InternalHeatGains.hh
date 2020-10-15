@@ -74,7 +74,7 @@ namespace InternalHeatGains {
 
     void InitInternalHeatGains(EnergyPlusData &state);
 
-    void CheckReturnAirHeatGain();
+    void CheckReturnAirHeatGain(EnergyPlusData &state);
 
     void CalcZoneITEq(EnergyPlusData &state);
 
@@ -88,7 +88,7 @@ namespace InternalHeatGains {
 
     void CheckLightsReplaceableMinMaxForZone(int const WhichZone); // Zone Number
 
-    void UpdateInternalGainValues(Optional_bool_const SuppressRadiationUpdate = _, Optional_bool_const SumLatentGains = _);
+    void UpdateInternalGainValues(EnergyPlusData &state, Optional_bool_const SuppressRadiationUpdate = _, Optional_bool_const SumLatentGains = _);
 
     void SumAllInternalConvectionGains(int const ZoneNum,        // zone index pointer for which zone to sum gains for
                                        Real64 &SumConvGainRate); // For HybridModel
@@ -170,7 +170,7 @@ namespace InternalHeatGains {
     void SumAllInternalGenericContamGains(int const ZoneNum, // zone index pointer for which zone to sum gains for
                                           Real64 &SumGCGainRate);
 
-    void GatherComponentLoadsIntGain();
+    void GatherComponentLoadsIntGain(EnergyPlusData &state);
 
 } // namespace InternalHeatGains
 

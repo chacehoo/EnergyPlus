@@ -1639,8 +1639,6 @@ namespace WaterManager {
         // Using/Aliasing
         using DataGlobals::DoingSizing;
         using DataGlobals::KickOffSimulation;
-        using DataGlobals::WarmupFlag;
-
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int TankNum;
         int RainColNum;
@@ -1672,7 +1670,7 @@ namespace WaterManager {
             state.dataWaterManager->MyEnvrnFlag = true;
         }
 
-        if (state.dataWaterManager->MyWarmupFlag && (!WarmupFlag)) { // do environment inits.  just went out of warmup mode
+        if (state.dataWaterManager->MyWarmupFlag && (!state.dataGlobal->WarmupFlag)) { // do environment inits.  just went out of warmup mode
             for (TankNum = 1; TankNum <= NumWaterStorageTanks; ++TankNum) {
                 WaterStorage(TankNum).LastTimeStepVolume = WaterStorage(TankNum).InitialVolume;
                 WaterStorage(TankNum).ThisTimeStepVolume = WaterStorage(TankNum).InitialVolume;

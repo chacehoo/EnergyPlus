@@ -150,7 +150,7 @@ namespace HybridUnitaryAirConditioners {
             }
         }
         try {
-            InitZoneHybridUnitaryAirConditioners(CompNum, ZoneNum);
+            InitZoneHybridUnitaryAirConditioners(state, CompNum, ZoneNum);
         } catch (int e) {
             ShowFatalError("An exception occurred in InitZoneHybridUnitaryAirConditioners" + TrimSigDigits(CompNum) + ", Unit name=" + CompName +
                            ", stored unit name for that index=" + ZoneHybridUnitaryAirConditioner(CompNum).Name + ". Please check idf.");
@@ -172,7 +172,8 @@ namespace HybridUnitaryAirConditioners {
         }
     }
 
-    void InitZoneHybridUnitaryAirConditioners(int const UnitNum, // unit number
+    void InitZoneHybridUnitaryAirConditioners(EnergyPlusData &state,
+                                              int const UnitNum, // unit number
                                               int const ZoneNum  // number of zone being served
     )
     {
@@ -254,7 +255,7 @@ namespace HybridUnitaryAirConditioners {
         if (!ZoneEquipmentListChecked && ZoneEquipInputsFilled) {
             ZoneEquipmentListChecked = true;
             for (Loop = 1; Loop <= NumZoneHybridEvap; ++Loop) {
-                if (CheckZoneEquipmentList("ZoneHVAC:HybridUnitaryHVAC", ZoneHybridUnitaryAirConditioner(Loop).Name)) {
+                if (CheckZoneEquipmentList(state, "ZoneHVAC:HybridUnitaryHVAC", ZoneHybridUnitaryAirConditioner(Loop).Name)) {
                     ZoneHybridUnitaryAirConditioner(Loop).ZoneNodeNum = ZoneEquipConfig(ZoneNum).ZoneNode;
                 } else {
                     ShowSevereError(
@@ -285,7 +286,7 @@ namespace HybridUnitaryAirConditioners {
         ZoneHybridUnitaryAirConditioner(UnitNum).InletHumRat = Node(InletNode).HumRat;
         ZoneHybridUnitaryAirConditioner(UnitNum).InletEnthalpy = Node(InletNode).Enthalpy;
         ZoneHybridUnitaryAirConditioner(UnitNum).InletPressure = Node(InletNode).Press;
-        ZoneHybridUnitaryAirConditioner(UnitNum).InletRH = PsyRhFnTdbWPb(ZoneHybridUnitaryAirConditioner(UnitNum).InletTemp,
+        ZoneHybridUnitaryAirConditioner(UnitNum).InletRH = PsyRhFnTdbWPb(state, ZoneHybridUnitaryAirConditioner(UnitNum).InletTemp,
                                                                          ZoneHybridUnitaryAirConditioner(UnitNum).InletHumRat,
                                                                          ZoneHybridUnitaryAirConditioner(UnitNum).InletPressure,
                                                                          "InitZoneHybridUnitaryAirConditioners");
@@ -295,7 +296,7 @@ namespace HybridUnitaryAirConditioners {
         ZoneHybridUnitaryAirConditioner(UnitNum).OutletHumRat = ZoneHybridUnitaryAirConditioner(UnitNum).InletHumRat;
         ZoneHybridUnitaryAirConditioner(UnitNum).OutletEnthalpy = ZoneHybridUnitaryAirConditioner(UnitNum).InletEnthalpy;
         ZoneHybridUnitaryAirConditioner(UnitNum).OutletPressure = ZoneHybridUnitaryAirConditioner(UnitNum).InletPressure;
-        ZoneHybridUnitaryAirConditioner(UnitNum).OutletRH = PsyRhFnTdbWPb(ZoneHybridUnitaryAirConditioner(UnitNum).OutletTemp,
+        ZoneHybridUnitaryAirConditioner(UnitNum).OutletRH = PsyRhFnTdbWPb(state, ZoneHybridUnitaryAirConditioner(UnitNum).OutletTemp,
                                                                           ZoneHybridUnitaryAirConditioner(UnitNum).OutletHumRat,
                                                                           ZoneHybridUnitaryAirConditioner(UnitNum).OutletPressure,
                                                                           "InitZoneHybridUnitaryAirConditioners");
@@ -305,7 +306,7 @@ namespace HybridUnitaryAirConditioners {
         ZoneHybridUnitaryAirConditioner(UnitNum).SecInletHumRat = Node(ZoneHybridUnitaryAirConditioner(UnitNum).SecondaryInletNode).HumRat;
         ZoneHybridUnitaryAirConditioner(UnitNum).SecInletEnthalpy = Node(ZoneHybridUnitaryAirConditioner(UnitNum).SecondaryInletNode).Enthalpy;
         ZoneHybridUnitaryAirConditioner(UnitNum).SecInletPressure = Node(ZoneHybridUnitaryAirConditioner(UnitNum).SecondaryInletNode).Press;
-        ZoneHybridUnitaryAirConditioner(UnitNum).SecInletRH = PsyRhFnTdbWPb(ZoneHybridUnitaryAirConditioner(UnitNum).SecInletTemp,
+        ZoneHybridUnitaryAirConditioner(UnitNum).SecInletRH = PsyRhFnTdbWPb(state, ZoneHybridUnitaryAirConditioner(UnitNum).SecInletTemp,
                                                                             ZoneHybridUnitaryAirConditioner(UnitNum).SecInletHumRat,
                                                                             ZoneHybridUnitaryAirConditioner(UnitNum).SecInletPressure,
                                                                             "InitZoneHybridUnitaryAirConditioners");
@@ -315,7 +316,7 @@ namespace HybridUnitaryAirConditioners {
         ZoneHybridUnitaryAirConditioner(UnitNum).SecOutletHumRat = Node(ZoneHybridUnitaryAirConditioner(UnitNum).SecondaryInletNode).HumRat;
         ZoneHybridUnitaryAirConditioner(UnitNum).SecOutletEnthalpy = Node(ZoneHybridUnitaryAirConditioner(UnitNum).SecondaryInletNode).Enthalpy;
         ZoneHybridUnitaryAirConditioner(UnitNum).SecOutletPressure = Node(ZoneHybridUnitaryAirConditioner(UnitNum).SecondaryInletNode).Press;
-        ZoneHybridUnitaryAirConditioner(UnitNum).SecOutletRH = PsyRhFnTdbWPb(ZoneHybridUnitaryAirConditioner(UnitNum).SecInletTemp,
+        ZoneHybridUnitaryAirConditioner(UnitNum).SecOutletRH = PsyRhFnTdbWPb(state, ZoneHybridUnitaryAirConditioner(UnitNum).SecInletTemp,
                                                                              ZoneHybridUnitaryAirConditioner(UnitNum).SecInletHumRat,
                                                                              ZoneHybridUnitaryAirConditioner(UnitNum).SecInletPressure,
                                                                              "InitZoneHybridUnitaryAirConditioners");

@@ -661,7 +661,7 @@ namespace IceThermalStorage {
                     } // ...loop iterating for the ice storage outlet temperature
 
                     // Keep track of times that the iterations got excessive
-                    if (IterNum >= MaxIterNum && (!DataGlobals::WarmupFlag)) {
+                    if (IterNum >= MaxIterNum && (!state.dataGlobal->WarmupFlag)) {
                         ++this->DischargeIterErrors;
                         if (this->DischargeIterErrors <= 25) {
                             ShowWarningError("Detailed Ice Storage model exceeded its internal discharging maximum iteration limit");

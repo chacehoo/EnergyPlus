@@ -146,7 +146,7 @@ namespace CondenserLoopTowers {
             this->calculateVariableSpeedTower(state);
         }
         this->calculateWaterUsage(state);
-        this->update();
+        this->update(state);
         this->report(RunFlag);
     }
 
@@ -2481,7 +2481,7 @@ namespace CondenserLoopTowers {
                     this->AirTemp = this->DesInletAirDBTemp;    // 35.0;
                     this->AirWetBulb = this->DesInletAirWBTemp; // 25.6;
                     this->AirPress = DataEnvironment::StdBaroPress;
-                    this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(this->AirTemp, this->AirWetBulb, this->AirPress);
+                    this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(state, this->AirTemp, this->AirWetBulb, this->AirPress);
                     auto f = std::bind(&CoolingTower::residualUA, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
                     TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, UA, f, UA0, UA1, Par);
                     if (SolFla == -1) {
@@ -2580,7 +2580,7 @@ namespace CondenserLoopTowers {
                     this->AirTemp = this->DesInletAirDBTemp;    // 35.0;
                     this->AirWetBulb = this->DesInletAirWBTemp; // 25.6;
                     this->AirPress = DataEnvironment::StdBaroPress;
-                    this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(this->AirTemp, this->AirWetBulb, this->AirPress);
+                    this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(state, this->AirTemp, this->AirWetBulb, this->AirPress);
                     auto f = std::bind(&CoolingTower::residualUA, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
                     TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, UA, f, UA0, UA1, Par);
                     if (SolFla == -1) {
@@ -2649,7 +2649,7 @@ namespace CondenserLoopTowers {
                 this->AirTemp = this->DesInletAirDBTemp;    // 95F design inlet air dry-bulb temp
                 this->AirWetBulb = this->DesInletAirWBTemp; // 78F design inlet air wet-bulb temp
                 this->AirPress = DataEnvironment::StdBaroPress;
-                this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(this->AirTemp, this->AirWetBulb, this->AirPress);
+                this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(state, this->AirTemp, this->AirWetBulb, this->AirPress);
                 auto f = std::bind(&CoolingTower::residualUA, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
                 TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, UA, f, UA0, UA1, Par);
                 if (SolFla == -1) {
@@ -2787,7 +2787,7 @@ namespace CondenserLoopTowers {
                 this->AirTemp = this->DesInletAirDBTemp;    // 35.0; // 95F design inlet air dry-bulb temp
                 this->AirWetBulb = this->DesInletAirWBTemp; // 25.6; // 78F design inlet air wet-bulb temp
                 this->AirPress = DataEnvironment::StdBaroPress;
-                this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(this->AirTemp, this->AirWetBulb, this->AirPress);
+                this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(state, this->AirTemp, this->AirWetBulb, this->AirPress);
                 auto f = std::bind(&CoolingTower::residualUA, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
                 TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, UA, f, UA0, UA1, Par);
                 if (SolFla == -1) {
@@ -2868,7 +2868,7 @@ namespace CondenserLoopTowers {
                 this->AirTemp = this->DesInletAirDBTemp;    // 35.0; // 95F design inlet air dry-bulb temp
                 this->AirWetBulb = this->DesInletAirWBTemp; // 25.6; // 78F design inlet air wet-bulb temp
                 this->AirPress = DataEnvironment::StdBaroPress;
-                this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(this->AirTemp, this->AirWetBulb, this->AirPress);
+                this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(state, this->AirTemp, this->AirWetBulb, this->AirPress);
                 auto f = std::bind(&CoolingTower::residualUA, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
                 TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, UA, f, UA0, UA1, Par);
                 if (SolFla == -1) {
@@ -3447,7 +3447,7 @@ namespace CondenserLoopTowers {
                 this->AirTemp = this->DesInletAirDBTemp;    // 35.0;
                 this->AirWetBulb = this->DesInletAirWBTemp; // 25.6;
                 this->AirPress = DataEnvironment::StdBaroPress;
-                this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(this->AirTemp, this->AirWetBulb, this->AirPress);
+                this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(state, this->AirTemp, this->AirWetBulb, this->AirPress);
                 auto f = std::bind(&CoolingTower::residualUA, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
                 TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, UA, f, UA0, UA1, Par);
                 if (SolFla == -1) {
@@ -3479,7 +3479,7 @@ namespace CondenserLoopTowers {
                 this->AirTemp = this->DesInletAirDBTemp;    // 35.0;
                 this->AirWetBulb = this->DesInletAirWBTemp; // 25.6;
                 this->AirPress = DataEnvironment::StdBaroPress;
-                this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(this->AirTemp, this->AirWetBulb, this->AirPress);
+                this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(state, this->AirTemp, this->AirWetBulb, this->AirPress);
                 auto f2 = std::bind(&CoolingTower::residualUA, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
                 TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, UA, f2, UA0, UA1, Par);
                 if (SolFla == -1) {
@@ -3709,7 +3709,7 @@ namespace CondenserLoopTowers {
                     this->AirTemp = this->DesInletAirDBTemp;    // 35.0;
                     this->AirWetBulb = this->DesInletAirWBTemp; // 25.6;
                     this->AirPress = DataEnvironment::StdBaroPress;
-                    this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(this->AirTemp, this->AirWetBulb, this->AirPress);
+                    this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(state, this->AirTemp, this->AirWetBulb, this->AirPress);
                     auto f = std::bind(&CoolingTower::residualUA, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
                     TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, UA, f, UA0, UA1, Par);
                     if (SolFla == -1) {
@@ -3742,7 +3742,7 @@ namespace CondenserLoopTowers {
                     this->AirTemp = DesTowerInletAirDBTemp;    // 35.0;
                     this->AirWetBulb = DesTowerInletAirWBTemp; // 25.6;
                     this->AirPress = DataEnvironment::StdBaroPress;
-                    this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(this->AirTemp, this->AirWetBulb, this->AirPress);
+                    this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(state, this->AirTemp, this->AirWetBulb, this->AirPress);
                     auto f3 = std::bind(&CoolingTower::residualUA, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
                     TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, UA, f3, UA0, UA1, Par);
                     if (SolFla == -1) {
@@ -3870,7 +3870,7 @@ namespace CondenserLoopTowers {
                     this->AirTemp = DesTowerInletAirDBTemp;    // 35.0;
                     this->AirWetBulb = DesTowerInletAirWBTemp; // 25.6;
                     this->AirPress = DataEnvironment::StdBaroPress;
-                    this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(this->AirTemp, this->AirWetBulb, this->AirPress);
+                    this->AirHumRat = Psychrometrics::PsyWFnTdbTwbPb(state, this->AirTemp, this->AirWetBulb, this->AirPress);
                     OutWaterTemp =
                         this->calculateSimpleTowerOutletTemp(state, rho * tmpDesignWaterFlowRate, this->HighSpeedAirFlowRate, this->HighSpeedTowerUA);
                     tmpNomTowerCap = Cp * rho * tmpDesignWaterFlowRate * (this->WaterTemp - OutWaterTemp);
@@ -4059,7 +4059,7 @@ namespace CondenserLoopTowers {
         }
 
         // If there is a fault of condenser SWT Sensor (zrp_Jul2016)
-        if (this->FaultyCondenserSWTFlag && (!DataGlobals::WarmupFlag) && (!DataGlobals::DoingSizing) && (!DataGlobals::KickOffSimulation)) {
+        if (this->FaultyCondenserSWTFlag && (!state.dataGlobal->WarmupFlag) && (!DataGlobals::DoingSizing) && (!DataGlobals::KickOffSimulation)) {
             int FaultIndex = this->FaultyCondenserSWTIndex;
             Real64 TowerOutletTemp_ff = TempSetPoint;
 
@@ -4070,7 +4070,7 @@ namespace CondenserLoopTowers {
         }
 
         // If there is a fault of cooling tower fouling (zrp_Jul2016)
-        if (this->FaultyTowerFoulingFlag && (!DataGlobals::WarmupFlag) && (!DataGlobals::DoingSizing) && (!DataGlobals::KickOffSimulation)) {
+        if (this->FaultyTowerFoulingFlag && (!state.dataGlobal->WarmupFlag) && (!DataGlobals::DoingSizing) && (!DataGlobals::KickOffSimulation)) {
             int FaultIndex = this->FaultyTowerFoulingIndex;
             Real64 FreeConvTowerUA_ff = this->FreeConvTowerUA;
             Real64 HighSpeedTowerUA_ff = this->HighSpeedTowerUA;
@@ -4361,7 +4361,7 @@ namespace CondenserLoopTowers {
         }
 
         // If there is a fault of condenser SWT Sensor (zrp_Jul2016)
-        if (this->FaultyCondenserSWTFlag && (!DataGlobals::WarmupFlag) && (!DataGlobals::DoingSizing) && (!DataGlobals::KickOffSimulation)) {
+        if (this->FaultyCondenserSWTFlag && (!state.dataGlobal->WarmupFlag) && (!DataGlobals::DoingSizing) && (!DataGlobals::KickOffSimulation)) {
             int FaultIndex = this->FaultyCondenserSWTIndex;
             Real64 TowerOutletTemp_ff = TempSetPoint;
 
@@ -4372,7 +4372,7 @@ namespace CondenserLoopTowers {
         }
 
         // If there is a fault of cooling tower fouling (zrp_Jul2016)
-        if (this->FaultyTowerFoulingFlag && (!DataGlobals::WarmupFlag) && (!DataGlobals::DoingSizing) && (!DataGlobals::KickOffSimulation)) {
+        if (this->FaultyTowerFoulingFlag && (!state.dataGlobal->WarmupFlag) && (!DataGlobals::DoingSizing) && (!DataGlobals::KickOffSimulation)) {
             int FaultIndex = this->FaultyTowerFoulingIndex;
             Real64 FreeConvTowerUA_ff = this->FreeConvTowerUA;
             Real64 HighSpeedTowerUA_ff = this->HighSpeedTowerUA;
@@ -4615,7 +4615,7 @@ namespace CondenserLoopTowers {
         }
 
         // If there is a fault of condenser SWT Sensor (zrp_Jul2016)
-        if (this->FaultyCondenserSWTFlag && (!DataGlobals::WarmupFlag) && (!DataGlobals::DoingSizing) && (!DataGlobals::KickOffSimulation)) {
+        if (this->FaultyCondenserSWTFlag && (!state.dataGlobal->WarmupFlag) && (!DataGlobals::DoingSizing) && (!DataGlobals::KickOffSimulation)) {
             int FaultIndex = this->FaultyCondenserSWTIndex;
             Real64 TowerOutletTemp_ff = TempSetPoint;
 
@@ -4740,11 +4740,11 @@ namespace CondenserLoopTowers {
                     auto f = std::bind(&CoolingTower::residualTa, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
                     TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, this->airFlowRateRatio, f, this->MinimumVSAirFlowFrac, 1.0, Par);
                     if (SolFla == -1) {
-                        if (!DataGlobals::WarmupFlag)
+                        if (!state.dataGlobal->WarmupFlag)
                             ShowWarningError("Cooling tower iteration limit exceeded when calculating air flow rate ratio for tower " + this->Name);
                         //           IF RegulaFalsi cannot find a solution then provide detailed output for debugging
                     } else if (SolFla == -2) {
-                        if (!DataGlobals::WarmupFlag) {
+                        if (!state.dataGlobal->WarmupFlag) {
 
                             if (this->CoolingTowerAFRRFailedCount < 1) {
                                 ++this->CoolingTowerAFRRFailedCount;
@@ -4820,14 +4820,14 @@ namespace CondenserLoopTowers {
                 //        Flow fractions greater than a MaxLiquidToGasRatio of 8 are not reliable using the YorkCalc model
                 if (FlowFraction > state.dataCondenserLoopTowers->towers(this->VSTower).MaxLiquidToGasRatio) {
                     //          Report warnings only during actual simulation
-                    if (!DataGlobals::WarmupFlag) {
+                    if (!state.dataGlobal->WarmupFlag) {
                         state.dataCondenserLoopTowers->towers(this->VSTower).PrintLGMessage = true;
                         state.dataCondenserLoopTowers->towers(this->VSTower).LGBuffer1 =
                             format("{} \"{}\" - Liquid to gas ratio (L/G) is out of range at {:5.2F}.", this->TowerType, this->Name, FlowFraction);
                         state.dataCondenserLoopTowers->towers(this->VSTower).LGBuffer2 = format(" ...Valid maximum ratio = {:5.2F}. Occurrence info = {}, {} {}",
                                                                  DataEnvironment::EnvironmentName,
                                                                  DataEnvironment::CurMnDy,
-                                                                 General::CreateSysTimeIntervalString());
+                                                                 General::CreateSysTimeIntervalString(state));
 
                         state.dataCondenserLoopTowers->towers(this->VSTower).LGLast = FlowFraction;
                     }
@@ -4875,14 +4875,14 @@ namespace CondenserLoopTowers {
         Real64 highSpeedTowerUA = this->HighSpeedTowerUA;
 
         // If there is a fault of condenser SWT Sensor (zrp_Jul2016)
-        if (this->FaultyCondenserSWTFlag && (!DataGlobals::WarmupFlag) && (!DataGlobals::DoingSizing) && (!DataGlobals::KickOffSimulation)) {
+        if (this->FaultyCondenserSWTFlag && (!state.dataGlobal->WarmupFlag) && (!DataGlobals::DoingSizing) && (!DataGlobals::KickOffSimulation)) {
             int FaultIndex = this->FaultyCondenserSWTIndex;
             // calculate the sensor offset using fault information
             this->FaultyCondenserSWTOffset = FaultsManager::FaultsCondenserSWTSensor(FaultIndex).CalFaultOffsetAct();
         }
 
         // If there is a fault of cooling tower fouling (zrp_Jul2016)
-        if (this->FaultyTowerFoulingFlag && (!DataGlobals::WarmupFlag) && (!DataGlobals::DoingSizing) && (!DataGlobals::KickOffSimulation)) {
+        if (this->FaultyTowerFoulingFlag && (!state.dataGlobal->WarmupFlag) && (!DataGlobals::DoingSizing) && (!DataGlobals::KickOffSimulation)) {
             int FaultIndex = this->FaultyTowerFoulingIndex;
             Real64 FreeConvTowerUA_ff = this->FreeConvTowerUA;
             Real64 HighSpeedTowerUA_ff = this->HighSpeedTowerUA;
@@ -5038,7 +5038,7 @@ namespace CondenserLoopTowers {
             TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, this->airFlowRateRatio, f, this->MinimumVSAirFlowFrac, 1.0, Par);
 
             if (SolFla == -1) {
-                if (!DataGlobals::WarmupFlag) {
+                if (!state.dataGlobal->WarmupFlag) {
                     if (this->VSMerkelAFRErrorIter < 1) {
                         ++this->VSMerkelAFRErrorIter;
                         ShowWarningError(cCoolingTower_VariableSpeedMerkel +
@@ -5057,7 +5057,7 @@ namespace CondenserLoopTowers {
                 }
             } else if (SolFla == -2) {
                 this->airFlowRateRatio = (std::abs(MyLoad) - MinSpeedFanQdot) / (FullSpeedFanQdot - MinSpeedFanQdot);
-                if (!DataGlobals::WarmupFlag) {
+                if (!state.dataGlobal->WarmupFlag) {
                     if (this->VSMerkelAFRErrorFail < 1) {
                         ++this->VSMerkelAFRErrorFail;
                         ShowWarningError(cCoolingTower_VariableSpeedMerkel +
@@ -5177,7 +5177,7 @@ namespace CondenserLoopTowers {
                                                                 this->WaterTemp,
                                                                 DataPlant::PlantLoop(this->LoopNum).FluidIndex,
                                                                 RoutineName);                           // Heat capacity of water [J/kg/K]
-        Real64 InletAirEnthalpy = Psychrometrics::PsyHFnTdbRhPb(this->AirWetBulb, 1.0, this->AirPress); // Enthalpy of entering moist air [J/kg]
+        Real64 InletAirEnthalpy = Psychrometrics::PsyHFnTdbRhPb(state, this->AirWetBulb, 1.0, this->AirPress); // Enthalpy of entering moist air [J/kg]
 
         // initialize exiting wet bulb temperature before iterating on final solution
         Real64 OutletAirWetBulb = InletAirWetBulb + 6.0; // Wetbulb temp of exiting moist air [C]
@@ -5201,7 +5201,7 @@ namespace CondenserLoopTowers {
         while ((WetBulbError > WetBulbTolerance) && (Iter <= IterMax) && (DeltaTwb > DeltaTwbTolerance)) {
             ++Iter;
             //        OutletAirEnthalpy = PsyHFnTdbRhPb(OutletAirWetBulb,1.0,OutBaroPress)
-            OutletAirEnthalpy = Psychrometrics::PsyHFnTdbRhPb(OutletAirWetBulb, 1.0, this->AirPress);
+            OutletAirEnthalpy = Psychrometrics::PsyHFnTdbRhPb(state, OutletAirWetBulb, 1.0, this->AirPress);
             // calculate the airside specific heat and capacity
             Real64 const CpAirside =
                 (OutletAirEnthalpy - InletAirEnthalpy) /
@@ -5531,13 +5531,13 @@ namespace CondenserLoopTowers {
             if (Twb > state.dataCondenserLoopTowers->towers(this->VSTower).MaxInletAirWBTemp) {
                 TwbCapped = state.dataCondenserLoopTowers->towers(this->VSTower).MaxInletAirWBTemp;
             }
-            if (!DataGlobals::WarmupFlag) {
+            if (!state.dataGlobal->WarmupFlag) {
                 state.dataCondenserLoopTowers->towers(this->VSTower).PrintTwbMessage = true;
                 state.dataCondenserLoopTowers->towers(this->VSTower).TwbBuffer1 =
                     this->TowerType + " \"" + this->Name + "\" - Inlet air wet-bulb temperature is outside model boundaries at " + OutputChar + '.';
                 state.dataCondenserLoopTowers->towers(this->VSTower).TwbBuffer2 = " ...Valid range = " + OutputCharLo + " to " + OutputCharHi +
                                                    ". Occurrence info = " + DataEnvironment::EnvironmentName + ", " + DataEnvironment::CurMnDy + ' ' +
-                                                   General::CreateSysTimeIntervalString();
+                                                   General::CreateSysTimeIntervalString(state);
                 TrimValue = General::RoundSigDigits(TwbCapped, 6);
                 state.dataCondenserLoopTowers->towers(this->VSTower).TwbBuffer3 = " ...Inlet air wet-bulb temperature passed to the model = " + TrimValue;
                 state.dataCondenserLoopTowers->towers(this->VSTower).TwbLast = Twb;
@@ -5558,13 +5558,13 @@ namespace CondenserLoopTowers {
             if (Tr > state.dataCondenserLoopTowers->towers(this->VSTower).MaxRangeTemp) {
                 TrCapped = state.dataCondenserLoopTowers->towers(this->VSTower).MaxRangeTemp;
             }
-            if (!DataGlobals::WarmupFlag) {
+            if (!state.dataGlobal->WarmupFlag) {
                 state.dataCondenserLoopTowers->towers(this->VSTower).PrintTrMessage = true;
                 state.dataCondenserLoopTowers->towers(this->VSTower).TrBuffer1 =
                     this->TowerType + " \"" + this->Name + "\" - Tower range temperature is outside model boundaries at " + OutputChar + '.';
                 state.dataCondenserLoopTowers->towers(this->VSTower).TrBuffer2 = " ...Valid range = " + OutputCharLo + " to " + OutputCharHi +
                                                   ". Occurrence info = " + DataEnvironment::EnvironmentName + ", " + DataEnvironment::CurMnDy + ' ' +
-                                                  General::CreateSysTimeIntervalString();
+                                                  General::CreateSysTimeIntervalString(state);
                 TrimValue = General::RoundSigDigits(Tr, 5);
                 state.dataCondenserLoopTowers->towers(this->VSTower).TrBuffer3 = " ...Tower range temperature passed to the model = " + TrimValue;
                 state.dataCondenserLoopTowers->towers(this->VSTower).TrLast = Tr;
@@ -5585,13 +5585,13 @@ namespace CondenserLoopTowers {
             if (Ta > state.dataCondenserLoopTowers->towers(this->VSTower).MaxApproachTemp) {
                 TaCapped = state.dataCondenserLoopTowers->towers(this->VSTower).MaxApproachTemp;
             }
-            if (!DataGlobals::WarmupFlag) {
+            if (!state.dataGlobal->WarmupFlag) {
                 state.dataCondenserLoopTowers->towers(this->VSTower).PrintTaMessage = true;
                 state.dataCondenserLoopTowers->towers(this->VSTower).TaBuffer1 =
                     this->TowerType + " \"" + this->Name + "\" - Tower approach temperature is outside model boundaries at " + OutputChar + '.';
                 state.dataCondenserLoopTowers->towers(this->VSTower).TaBuffer2 = " ...Valid range = " + OutputCharLo + " to " + OutputCharHi +
                                                   ". Occurrence info = " + DataEnvironment::EnvironmentName + ", " + DataEnvironment::CurMnDy + ' ' +
-                                                  General::CreateSysTimeIntervalString();
+                                                  General::CreateSysTimeIntervalString(state);
                 TrimValue = General::RoundSigDigits(Ta, 5);
                 state.dataCondenserLoopTowers->towers(this->VSTower).TaBuffer3 = " ...Tower approach temperature passed to the model = " + TrimValue;
                 state.dataCondenserLoopTowers->towers(this->VSTower).TaLast = Ta;
@@ -5617,13 +5617,13 @@ namespace CondenserLoopTowers {
                 if (WaterFlowRateRatio > state.dataCondenserLoopTowers->towers(this->VSTower).MaxWaterFlowRatio) {
                     WaterFlowRateRatioCapped = state.dataCondenserLoopTowers->towers(this->VSTower).MaxWaterFlowRatio;
                 }
-                if (!DataGlobals::WarmupFlag) {
+                if (!state.dataGlobal->WarmupFlag) {
                     state.dataCondenserLoopTowers->towers(this->VSTower).PrintWFRRMessage = true;
                     state.dataCondenserLoopTowers->towers(this->VSTower).WFRRBuffer1 =
                         this->TowerType + " \"" + this->Name + "\" - Water flow rate ratio is outside model boundaries at " + OutputChar + '.';
                     state.dataCondenserLoopTowers->towers(this->VSTower).WFRRBuffer2 = " ...Valid range = " + OutputCharLo + " to " + OutputCharHi +
                                                         ". Occurrence info = " + DataEnvironment::EnvironmentName + ", " + DataEnvironment::CurMnDy +
-                                                        ' ' + General::CreateSysTimeIntervalString();
+                                                        ' ' + General::CreateSysTimeIntervalString(state);
                     TrimValue = General::RoundSigDigits(WaterFlowRateRatioCapped, 5);
                     state.dataCondenserLoopTowers->towers(this->VSTower).WFRRBuffer3 = " ...Water flow rate ratio passed to the model = " + TrimValue;
                     state.dataCondenserLoopTowers->towers(this->VSTower).WaterFlowRateRatioLast = WaterFlowRateRatio;
@@ -5771,14 +5771,14 @@ namespace CondenserLoopTowers {
 
             Real64 const AirDensity = Psychrometrics::PsyRhoAirFnPbTdbW(this->AirPress, this->AirTemp, this->AirHumRat);
             Real64 const AirMassFlowRate = this->airFlowRateRatio * this->HighSpeedAirFlowRate * AirDensity * this->NumCellOn / this->NumCell;
-            Real64 const InletAirEnthalpy = Psychrometrics::PsyHFnTdbRhPb(this->AirWetBulb, 1.0, this->AirPress);
+            Real64 const InletAirEnthalpy = Psychrometrics::PsyHFnTdbRhPb(state, this->AirWetBulb, 1.0, this->AirPress);
 
             if (AirMassFlowRate > 0.0) {
                 // Calculate outlet air conditions for determining water usage
 
                 Real64 const OutletAirEnthalpy = InletAirEnthalpy + this->Qactual / AirMassFlowRate;
-                Real64 const OutletAirTSat = Psychrometrics::PsyTsatFnHPb(OutletAirEnthalpy, this->AirPress);
-                Real64 const OutletAirHumRatSat = Psychrometrics::PsyWFnTdbH(OutletAirTSat, OutletAirEnthalpy);
+                Real64 const OutletAirTSat = Psychrometrics::PsyTsatFnHPb(state, OutletAirEnthalpy, this->AirPress);
+                Real64 const OutletAirHumRatSat = Psychrometrics::PsyWFnTdbH(state, OutletAirTSat, OutletAirEnthalpy);
 
                 // calculate specific humidity ratios (HUMRAT to mass of moist air not dry air)
                 Real64 const InSpecificHumRat = this->AirHumRat / (1 + this->AirHumRat);
@@ -5873,7 +5873,7 @@ namespace CondenserLoopTowers {
         this->StarvedMakeUpVol = StarvedVdot * (DataHVACGlobals::TimeStepSys * DataGlobalConstants::SecInHour());
     }
 
-    void CoolingTower::update()
+    void CoolingTower::update(EnergyPlusData &state)
     {
 
         // SUBROUTINE INFORMATION:
@@ -5895,7 +5895,7 @@ namespace CondenserLoopTowers {
         // set node information
         DataLoopNode::Node(this->WaterOutletNodeNum).Temp = this->OutletWaterTemp;
 
-        if (DataPlant::PlantLoop(this->LoopNum).LoopSide(this->LoopSideNum).FlowLock == 0 || DataGlobals::WarmupFlag) return;
+        if (DataPlant::PlantLoop(this->LoopNum).LoopSide(this->LoopSideNum).FlowLock == 0 || state.dataGlobal->WarmupFlag) return;
 
         // Check flow rate through tower and compare to design flow rate, show warning if greater than Design * Mulitplier
         if (DataLoopNode::Node(this->WaterOutletNodeNum).MassFlowRate > this->DesWaterMassFlowRate * this->TowerMassFlowRateMultiplier) {

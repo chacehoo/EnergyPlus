@@ -1284,8 +1284,8 @@ TEST_F(WaterCoilsTest, FanCoilCoolingWaterFlowTest)
     DataEnvironment::StdRhoAir = 1.20;
     state.dataWaterCoils->GetWaterCoilsInputFlag = true;
     NumCoils = 0;
-    DataGlobals::NumOfTimeStepInHour = 1;
-    DataGlobals::TimeStep = 1;
+    state.dataGlobal->NumOfTimeStepInHour = 1;
+    state.dataGlobal->TimeStep = 1;
     DataGlobals::MinutesPerTimeStep = 60;
 
     InitializePsychRoutines();

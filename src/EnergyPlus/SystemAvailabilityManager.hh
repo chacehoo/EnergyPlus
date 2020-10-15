@@ -482,7 +482,7 @@ namespace SystemAvailabilityManager {
                                       bool &ErrorsFound        // true if certain errors are detected here
     );
 
-    void InitSysAvailManagers();
+    void InitSysAvailManagers(EnergyPlusData &state);
 
     void SimSysAvailManager(EnergyPlusData &state,
                             int const SysAvailType,

@@ -1655,7 +1655,7 @@ namespace ZoneTempPredictorCorrector {
         int NumZoneCapaMultiplier = inputProcessor->getNumObjectsFound(cCurrentModuleObject); // Number of ZonesCapacityMultiplier object
         if (NumZoneCapaMultiplier == 0) {
             // Assign default multiplier values to all zones
-            for (int ZoneNum = 1; ZoneNum <= NumOfZones; ZoneNum++) {
+            for (int ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ZoneNum++) {
                 Zone(ZoneNum).ZoneVolCapMultpSens = ZoneVolCapMultpSens;
                 Zone(ZoneNum).ZoneVolCapMultpMoist = ZoneVolCapMultpMoist;
                 Zone(ZoneNum).ZoneVolCapMultpCO2 = ZoneVolCapMultpCO2;
@@ -1719,7 +1719,7 @@ namespace ZoneTempPredictorCorrector {
             }
 
             // Assign default multiplier values to all the other zones
-            for (int ZoneNum = 1; ZoneNum <= NumOfZones; ZoneNum++) {
+            for (int ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ZoneNum++) {
                 if (!Zone(ZoneNum).FlagCustomizedZoneCap) {
                     Zone(ZoneNum).ZoneVolCapMultpSens = ZoneVolCapMultpSens;
                     Zone(ZoneNum).ZoneVolCapMultpMoist = ZoneVolCapMultpMoist;
@@ -1735,18 +1735,18 @@ namespace ZoneTempPredictorCorrector {
                 Real64 ZoneVolCapMultpCO2_temp = 0.0;
                 Real64 ZoneVolCapMultpGenContam_temp = 0.0;
 
-                for (int ZoneNum = 1; ZoneNum <= NumOfZones; ZoneNum++) {
+                for (int ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ZoneNum++) {
                     ZoneVolCapMultpSens_temp += Zone(ZoneNum).ZoneVolCapMultpSens;
                     ZoneVolCapMultpMoist_temp += Zone(ZoneNum).ZoneVolCapMultpMoist;
                     ZoneVolCapMultpCO2_temp += Zone(ZoneNum).ZoneVolCapMultpCO2;
                     ZoneVolCapMultpGenContam_temp += Zone(ZoneNum).ZoneVolCapMultpGenContam;
                 }
 
-                if (NumOfZones > 0) {
-                    ZoneVolCapMultpSens = ZoneVolCapMultpSens_temp / NumOfZones;
-                    ZoneVolCapMultpMoist = ZoneVolCapMultpMoist_temp / NumOfZones;
-                    ZoneVolCapMultpCO2 = ZoneVolCapMultpCO2_temp / NumOfZones;
-                    ZoneVolCapMultpGenContam = ZoneVolCapMultpGenContam_temp / NumOfZones;
+                if (state.dataGlobal->NumOfZones > 0) {
+                    ZoneVolCapMultpSens = ZoneVolCapMultpSens_temp / state.dataGlobal->NumOfZones;
+                    ZoneVolCapMultpMoist = ZoneVolCapMultpMoist_temp / state.dataGlobal->NumOfZones;
+                    ZoneVolCapMultpCO2 = ZoneVolCapMultpCO2_temp / state.dataGlobal->NumOfZones;
+                    ZoneVolCapMultpGenContam = ZoneVolCapMultpGenContam_temp / state.dataGlobal->NumOfZones;
                 }
             }
         }
@@ -2185,7 +2185,7 @@ namespace ZoneTempPredictorCorrector {
 
         if (state.dataZoneTempPredictorCorrector->NumStageCtrZone > 0) {
             StageControlledZone.allocate(state.dataZoneTempPredictorCorrector->NumStageCtrZone);
-            StageZoneLogic.dimension(NumOfZones, false);
+            StageZoneLogic.dimension(state.dataGlobal->NumOfZones, false);
 
             StageControlledZoneNum = 0;
             for (Item = 1; Item <= NumStageControlledZones; ++Item) {
@@ -2579,56 +2579,56 @@ namespace ZoneTempPredictorCorrector {
 
         // FLOW:
         if (state.dataZoneTempPredictorCorrector->InitZoneAirSetPointsOneTimeFlag) {
-            TempZoneThermostatSetPoint.dimension(NumOfZones, 0.0);
-            AdapComfortCoolingSetPoint.dimension(NumOfZones, 0.0);
-            ZoneThermostatSetPointHi.dimension(NumOfZones, 0.0);
-            ZoneThermostatSetPointLo.dimension(NumOfZones, 0.0);
-            ZoneThermostatSetPointHiAver.dimension(NumOfZones, 0.0);
-            ZoneThermostatSetPointLoAver.dimension(NumOfZones, 0.0);
+            TempZoneThermostatSetPoint.dimension(state.dataGlobal->NumOfZones, 0.0);
+            AdapComfortCoolingSetPoint.dimension(state.dataGlobal->NumOfZones, 0.0);
+            ZoneThermostatSetPointHi.dimension(state.dataGlobal->NumOfZones, 0.0);
+            ZoneThermostatSetPointLo.dimension(state.dataGlobal->NumOfZones, 0.0);
+            ZoneThermostatSetPointHiAver.dimension(state.dataGlobal->NumOfZones, 0.0);
+            ZoneThermostatSetPointLoAver.dimension(state.dataGlobal->NumOfZones, 0.0);
 
-            LoadCorrectionFactor.dimension(NumOfZones, 0.0); // PH 3/3/04
-            TempControlType.dimension(NumOfZones, 0);
+            LoadCorrectionFactor.dimension(state.dataGlobal->NumOfZones, 0.0); // PH 3/3/04
+            TempControlType.dimension(state.dataGlobal->NumOfZones, 0);
             if (NumComfortControlledZones > 0) {
-                ComfortControlType.dimension(NumOfZones, 0);
-                ZoneComfortControlsFanger.allocate(NumOfZones);
+                ComfortControlType.dimension(state.dataGlobal->NumOfZones, 0);
+                ZoneComfortControlsFanger.allocate(state.dataGlobal->NumOfZones);
             }
-            state.dataZoneTempPredictorCorrector->ZoneSetPointLast.dimension(NumOfZones, 0.0);
-            Setback.dimension(NumOfZones, false);
-            DeadBandOrSetback.dimension(NumOfZones, false);
-            CurDeadBandOrSetback.dimension(NumOfZones, false);
-            SNLoadHeatEnergy.dimension(NumOfZones, 0.0);
-            SNLoadCoolEnergy.dimension(NumOfZones, 0.0);
-            SNLoadHeatRate.dimension(NumOfZones, 0.0);
-            SNLoadCoolRate.dimension(NumOfZones, 0.0);
-            SNLoadPredictedRate.dimension(NumOfZones, 0.0);
-            SNLoadPredictedHSPRate.dimension(NumOfZones, 0.0);
-            SNLoadPredictedCSPRate.dimension(NumOfZones, 0.0);
-            MoisturePredictedRate.dimension(NumOfZones, 0.0);
-            MoisturePredictedHumSPRate.dimension(NumOfZones, 0.0);
-            MoisturePredictedDehumSPRate.dimension(NumOfZones, 0.0);
-            WZoneTimeMinus1.dimension(NumOfZones, 0.0);
-            WZoneTimeMinus2.dimension(NumOfZones, 0.0);
-            WZoneTimeMinus3.dimension(NumOfZones, 0.0);
-            WZoneTimeMinus4.dimension(NumOfZones, 0.0);
-            DSWZoneTimeMinus1.dimension(NumOfZones, 0.0);
-            DSWZoneTimeMinus2.dimension(NumOfZones, 0.0);
-            DSWZoneTimeMinus3.dimension(NumOfZones, 0.0);
-            DSWZoneTimeMinus4.dimension(NumOfZones, 0.0);
-            ZoneAirHumRatTemp.dimension(NumOfZones, 0.0);
-            WZoneTimeMinus1Temp.dimension(NumOfZones, 0.0);
-            WZoneTimeMinus2Temp.dimension(NumOfZones, 0.0);
-            WZoneTimeMinus3Temp.dimension(NumOfZones, 0.0);
-            WZoneTimeMinusP.dimension(NumOfZones, 0.0);
-            state.dataZoneTempPredictorCorrector->TempIndZnLd.dimension(NumOfZones, 0.0);
-            state.dataZoneTempPredictorCorrector->TempDepZnLd.dimension(NumOfZones, 0.0);
-            NonAirSystemResponse.dimension(NumOfZones, 0.0);
-            SysDepZoneLoads.dimension(NumOfZones, 0.0);
-            SysDepZoneLoadsLagged.dimension(NumOfZones, 0.0);
-            state.dataZoneTempPredictorCorrector->ZoneAirRelHum.dimension(NumOfZones, 0.0);
-            ZoneWMX.dimension(NumOfZones, 0.0);
-            ZoneWM2.dimension(NumOfZones, 0.0);
-            ZoneT1.dimension(NumOfZones, 0.0);
-            ZoneW1.dimension(NumOfZones, 0.0);
+            state.dataZoneTempPredictorCorrector->ZoneSetPointLast.dimension(state.dataGlobal->NumOfZones, 0.0);
+            Setback.dimension(state.dataGlobal->NumOfZones, false);
+            DeadBandOrSetback.dimension(state.dataGlobal->NumOfZones, false);
+            CurDeadBandOrSetback.dimension(state.dataGlobal->NumOfZones, false);
+            SNLoadHeatEnergy.dimension(state.dataGlobal->NumOfZones, 0.0);
+            SNLoadCoolEnergy.dimension(state.dataGlobal->NumOfZones, 0.0);
+            SNLoadHeatRate.dimension(state.dataGlobal->NumOfZones, 0.0);
+            SNLoadCoolRate.dimension(state.dataGlobal->NumOfZones, 0.0);
+            SNLoadPredictedRate.dimension(state.dataGlobal->NumOfZones, 0.0);
+            SNLoadPredictedHSPRate.dimension(state.dataGlobal->NumOfZones, 0.0);
+            SNLoadPredictedCSPRate.dimension(state.dataGlobal->NumOfZones, 0.0);
+            MoisturePredictedRate.dimension(state.dataGlobal->NumOfZones, 0.0);
+            MoisturePredictedHumSPRate.dimension(state.dataGlobal->NumOfZones, 0.0);
+            MoisturePredictedDehumSPRate.dimension(state.dataGlobal->NumOfZones, 0.0);
+            WZoneTimeMinus1.dimension(state.dataGlobal->NumOfZones, 0.0);
+            WZoneTimeMinus2.dimension(state.dataGlobal->NumOfZones, 0.0);
+            WZoneTimeMinus3.dimension(state.dataGlobal->NumOfZones, 0.0);
+            WZoneTimeMinus4.dimension(state.dataGlobal->NumOfZones, 0.0);
+            DSWZoneTimeMinus1.dimension(state.dataGlobal->NumOfZones, 0.0);
+            DSWZoneTimeMinus2.dimension(state.dataGlobal->NumOfZones, 0.0);
+            DSWZoneTimeMinus3.dimension(state.dataGlobal->NumOfZones, 0.0);
+            DSWZoneTimeMinus4.dimension(state.dataGlobal->NumOfZones, 0.0);
+            ZoneAirHumRatTemp.dimension(state.dataGlobal->NumOfZones, 0.0);
+            WZoneTimeMinus1Temp.dimension(state.dataGlobal->NumOfZones, 0.0);
+            WZoneTimeMinus2Temp.dimension(state.dataGlobal->NumOfZones, 0.0);
+            WZoneTimeMinus3Temp.dimension(state.dataGlobal->NumOfZones, 0.0);
+            WZoneTimeMinusP.dimension(state.dataGlobal->NumOfZones, 0.0);
+            state.dataZoneTempPredictorCorrector->TempIndZnLd.dimension(state.dataGlobal->NumOfZones, 0.0);
+            state.dataZoneTempPredictorCorrector->TempDepZnLd.dimension(state.dataGlobal->NumOfZones, 0.0);
+            NonAirSystemResponse.dimension(state.dataGlobal->NumOfZones, 0.0);
+            SysDepZoneLoads.dimension(state.dataGlobal->NumOfZones, 0.0);
+            SysDepZoneLoadsLagged.dimension(state.dataGlobal->NumOfZones, 0.0);
+            state.dataZoneTempPredictorCorrector->ZoneAirRelHum.dimension(state.dataGlobal->NumOfZones, 0.0);
+            ZoneWMX.dimension(state.dataGlobal->NumOfZones, 0.0);
+            ZoneWM2.dimension(state.dataGlobal->NumOfZones, 0.0);
+            ZoneT1.dimension(state.dataGlobal->NumOfZones, 0.0);
+            ZoneW1.dimension(state.dataGlobal->NumOfZones, 0.0);
 
             ListSNLoadHeatEnergy.dimension(NumOfZoneLists, 0.0);
             ListSNLoadCoolEnergy.dimension(NumOfZoneLists, 0.0);
@@ -2639,24 +2639,24 @@ namespace ZoneTempPredictorCorrector {
             GroupSNLoadCoolEnergy.dimension(NumOfZoneGroups, 0.0);
             GroupSNLoadHeatRate.dimension(NumOfZoneGroups, 0.0);
             GroupSNLoadCoolRate.dimension(NumOfZoneGroups, 0.0);
-            AIRRAT.dimension(NumOfZones, 0.0);
-            ZTM1.dimension(NumOfZones, 0.0);
-            ZTM2.dimension(NumOfZones, 0.0);
-            ZTM3.dimension(NumOfZones, 0.0);
+            AIRRAT.dimension(state.dataGlobal->NumOfZones, 0.0);
+            ZTM1.dimension(state.dataGlobal->NumOfZones, 0.0);
+            ZTM2.dimension(state.dataGlobal->NumOfZones, 0.0);
+            ZTM3.dimension(state.dataGlobal->NumOfZones, 0.0);
 
             // Hybrid modeling
-            PreviousMeasuredZT1.dimension(NumOfZones, 0.0);
-            PreviousMeasuredZT2.dimension(NumOfZones, 0.0);
-            PreviousMeasuredZT3.dimension(NumOfZones, 0.0);
-            PreviousMeasuredHumRat1.dimension(NumOfZones, 0.0);
-            PreviousMeasuredHumRat2.dimension(NumOfZones, 0.0);
-            PreviousMeasuredHumRat3.dimension(NumOfZones, 0.0);
+            PreviousMeasuredZT1.dimension(state.dataGlobal->NumOfZones, 0.0);
+            PreviousMeasuredZT2.dimension(state.dataGlobal->NumOfZones, 0.0);
+            PreviousMeasuredZT3.dimension(state.dataGlobal->NumOfZones, 0.0);
+            PreviousMeasuredHumRat1.dimension(state.dataGlobal->NumOfZones, 0.0);
+            PreviousMeasuredHumRat2.dimension(state.dataGlobal->NumOfZones, 0.0);
+            PreviousMeasuredHumRat3.dimension(state.dataGlobal->NumOfZones, 0.0);
 
             // Allocate Derived Types
-            ZoneSysEnergyDemand.allocate(NumOfZones);
-            ZoneSysMoistureDemand.allocate(NumOfZones);
+            ZoneSysEnergyDemand.allocate(state.dataGlobal->NumOfZones);
+            ZoneSysMoistureDemand.allocate(state.dataGlobal->NumOfZones);
 
-            for (Loop = 1; Loop <= NumOfZones; ++Loop) {
+            for (Loop = 1; Loop <= state.dataGlobal->NumOfZones; ++Loop) {
                 FirstSurfFlag = true;
                 if (Zone(Loop).SurfaceFirst > 0) {
                     for (SurfNum = Zone(Loop).SurfaceFirst; SurfNum <= Zone(Loop).SurfaceLast; ++SurfNum) {
@@ -2676,7 +2676,7 @@ namespace ZoneTempPredictorCorrector {
             }
 
             // CurrentModuleObject='Zone'
-            for (Loop = 1; Loop <= NumOfZones; ++Loop) {
+            for (Loop = 1; Loop <= state.dataGlobal->NumOfZones; ++Loop) {
                 SetupOutputVariable(state, "Zone Air System Sensible Heating Energy",
                                     OutputProcessor::Unit::J,
                                     SNLoadHeatEnergy(Loop),
@@ -2942,7 +2942,7 @@ namespace ZoneTempPredictorCorrector {
                 e.RemainingOutputRequired = 0.0;
                 e.TotalOutputRequired = 0.0;
             }
-            for (ZoneNum = 1; ZoneNum <= NumOfZones; ++ZoneNum) {
+            for (ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ++ZoneNum) {
                 if (allocated(ZoneSysEnergyDemand(ZoneNum).SequencedOutputRequired)) ZoneSysEnergyDemand(ZoneNum).SequencedOutputRequired = 0.0;
                 if (allocated(ZoneSysEnergyDemand(ZoneNum).SequencedOutputRequiredToHeatingSP))
                     ZoneSysEnergyDemand(ZoneNum).SequencedOutputRequiredToHeatingSP = 0.0;
@@ -3424,7 +3424,7 @@ namespace ZoneTempPredictorCorrector {
         }
 
         // Update zone temperatures
-        for (ZoneNum = 1; ZoneNum <= NumOfZones; ++ZoneNum) {
+        for (ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ++ZoneNum) {
 
             if (ShortenTimeStepSys) {
                 // timestep has just shifted from full zone timestep to a new shorter system timestep
@@ -3627,8 +3627,8 @@ namespace ZoneTempPredictorCorrector {
             // Exact solution or Euler method
             ShortenTimeStepSysRoomAir = false;
             if (ZoneAirSolutionAlgo != Use3rdOrder) {
-                if (ShortenTimeStepSys && TimeStepSys < TimeStepZone) {
-                    if (PreviousTimeStep < TimeStepZone) {
+                if (ShortenTimeStepSys && TimeStepSys < state.dataGlobal->TimeStepZone) {
+                    if (PreviousTimeStep < state.dataGlobal->TimeStepZone) {
                         ZoneT1(ZoneNum) = ZoneTM2(ZoneNum);
                         ZoneW1(ZoneNum) = ZoneWM2(ZoneNum);
                         if (AirModel(ZoneNum).AirModelType == RoomAirModel_AirflowNetwork) {
@@ -3731,10 +3731,10 @@ namespace ZoneTempPredictorCorrector {
 
         // Place holder for occupied heating and cooling set points - for optimum start
         if (!allocated(OccRoomTSetPointHeat)) {
-            OccRoomTSetPointHeat.allocate(NumOfZones);
+            OccRoomTSetPointHeat.allocate(state.dataGlobal->NumOfZones);
         }
         if (!allocated(OccRoomTSetPointCool)) {
-            OccRoomTSetPointCool.allocate(NumOfZones);
+            OccRoomTSetPointCool.allocate(state.dataGlobal->NumOfZones);
         }
         OccRoomTSetPointHeat = 0.0;
         OccRoomTSetPointCool = 100.0;
@@ -3816,7 +3816,7 @@ namespace ZoneTempPredictorCorrector {
 
                     if (allocated(OptStartData.OptStartFlag)) {
                         if (!allocated(DaySPValues)) {
-                            DaySPValues.allocate(NumOfTimeStepInHour, 24);
+                            DaySPValues.allocate(state.dataGlobal->NumOfTimeStepInHour, 24);
                         }
                         if (OptStartData.ActualZoneNum(ActualZoneNum) == ActualZoneNum) {
                             GetScheduleValuesForDay(state, SetPointTempSchedIndexCold, DaySPValues);
@@ -3859,7 +3859,7 @@ namespace ZoneTempPredictorCorrector {
 
                     if (allocated(OptStartData.OptStartFlag)) {
                         if (!allocated(DaySPValues)) {
-                            DaySPValues.allocate(NumOfTimeStepInHour, 24);
+                            DaySPValues.allocate(state.dataGlobal->NumOfTimeStepInHour, 24);
                         }
                         if (OptStartData.ActualZoneNum(ActualZoneNum) == ActualZoneNum) {
                             GetScheduleValuesForDay(state, SetPointTempSchedIndexCold, DaySPValues);
@@ -3886,7 +3886,7 @@ namespace ZoneTempPredictorCorrector {
             }
 
             // Apply offset for faulty therostats_Feb. 2015, zrp
-            if ((NumFaultyThermostat > 0) && (!WarmupFlag) && (!DoingSizing) && (!KickOffSimulation)) {
+            if ((NumFaultyThermostat > 0) && (!state.dataGlobal->WarmupFlag) && (!DoingSizing) && (!KickOffSimulation)) {
 
                 //  loop through the FaultsThermostatOffset objects to find the one for the zone
                 for (int iFault = 1; iFault <= NumFaultyThermostat; ++iFault) {
@@ -4361,7 +4361,7 @@ namespace ZoneTempPredictorCorrector {
         // Check all the controlled zones to see if it matches the zone simulated
         for (HumidControlledZoneNum = 1; HumidControlledZoneNum <= NumHumidityControlZones; ++HumidControlledZoneNum) {
             if (HumidityControlZone(HumidControlledZoneNum).ActualZoneNum != ZoneNum) continue;
-            ZoneAirRH = PsyRhFnTdbWPb(MAT(ZoneNum), ZoneAirHumRat(ZoneNum), OutBaroPress) * 100.0;
+            ZoneAirRH = PsyRhFnTdbWPb(state, MAT(ZoneNum), ZoneAirHumRat(ZoneNum), OutBaroPress) * 100.0;
             ZoneRHHumidifyingSetPoint = GetCurrentScheduleValue(HumidityControlZone(HumidControlledZoneNum).HumidifyingSchedIndex);
             ZoneRHDehumidifyingSetPoint = GetCurrentScheduleValue(HumidityControlZone(HumidControlledZoneNum).DehumidifyingSchedIndex);
 
@@ -4374,7 +4374,7 @@ namespace ZoneTempPredictorCorrector {
             }
 
             // Apply offsets for faulty humidistats_Feb. 2015, zrp
-            if ((NumFaultyHumidistat > 0) && (!WarmupFlag) && (!DoingSizing) && (!KickOffSimulation)) {
+            if ((NumFaultyHumidistat > 0) && (!state.dataGlobal->WarmupFlag) && (!DoingSizing) && (!KickOffSimulation)) {
 
                 //  loop through the FaultsHumidistatOffset objects to find the one for the zone
                 for (int iFault = 1; iFault <= NumFaultyHumidistat; ++iFault) {
@@ -4434,9 +4434,9 @@ namespace ZoneTempPredictorCorrector {
                                 faultZoneWDehumidifyingSetPoint =
                                     PsyWFnTdbRhPb((MAT(ZoneNum) + offsetThermostat), (ZoneRHDehumidifyingSetPoint / 100.0), OutBaroPress);
                                 offsetZoneRHHumidifyingSetPoint =
-                                    ZoneRHHumidifyingSetPoint - PsyRhFnTdbWPb(MAT(ZoneNum), faultZoneWHumidifyingSetPoint, OutBaroPress) * 100.0;
+                                    ZoneRHHumidifyingSetPoint - PsyRhFnTdbWPb(state, MAT(ZoneNum), faultZoneWHumidifyingSetPoint, OutBaroPress) * 100.0;
                                 offsetZoneRHDehumidifyingSetPoint =
-                                    ZoneRHDehumidifyingSetPoint - PsyRhFnTdbWPb(MAT(ZoneNum), faultZoneWDehumidifyingSetPoint, OutBaroPress) * 100.0;
+                                    ZoneRHDehumidifyingSetPoint - PsyRhFnTdbWPb(state, MAT(ZoneNum), faultZoneWDehumidifyingSetPoint, OutBaroPress) * 100.0;
 
                                 // Apply the calculated humidistat offset value
                                 // Positive offset means the sensor reading is higher than the actual value
@@ -4564,7 +4564,7 @@ namespace ZoneTempPredictorCorrector {
             // this amount of moisture must be added to the zone to reach the setpoint.  Negative values represent
             // the amount of moisture that must be removed by the system.
             // MoistLoadHumidSetPoint = massflow * HumRat = kgDryAir/s * kgWater/kgDryAir = kgWater/s
-            WZoneSetPoint = PsyWFnTdbRhPb(ZT(ZoneNum), (ZoneRHHumidifyingSetPoint / 100.0), OutBaroPress, RoutineName);
+            WZoneSetPoint = PsyWFnTdbRhPb(state, ZT(ZoneNum), (ZoneRHHumidifyingSetPoint / 100.0), OutBaroPress, RoutineName);
             Real64 exp_700_A_C(0.0);
             if (ZoneAirSolutionAlgo == Use3rdOrder) {
                 LoadToHumidifySetPoint = ((11.0 / 6.0) * C + A) * WZoneSetPoint -
@@ -4583,7 +4583,7 @@ namespace ZoneTempPredictorCorrector {
             }
             if (RAFNFrac > 0.0) LoadToHumidifySetPoint = LoadToHumidifySetPoint / RAFNFrac;
             ZoneSysMoistureDemand(ZoneNum).OutputRequiredToHumidifyingSP = LoadToHumidifySetPoint;
-            WZoneSetPoint = PsyWFnTdbRhPb(ZT(ZoneNum), (ZoneRHDehumidifyingSetPoint / 100.0), OutBaroPress, RoutineName);
+            WZoneSetPoint = PsyWFnTdbRhPb(state, ZT(ZoneNum), (ZoneRHDehumidifyingSetPoint / 100.0), OutBaroPress, RoutineName);
             if (ZoneAirSolutionAlgo == Use3rdOrder) {
                 LoadToDehumidifySetPoint = ((11.0 / 6.0) * C + A) * WZoneSetPoint -
                                            (B + C * (3.0 * WZoneTimeMinus1Temp(ZoneNum) - (3.0 / 2.0) * WZoneTimeMinus2Temp(ZoneNum) +
@@ -4755,7 +4755,7 @@ namespace ZoneTempPredictorCorrector {
         ZoneTempChange = DataPrecisionGlobals::constant_zero;
 
         // Update zone temperatures
-        for (ZoneNum = 1; ZoneNum <= NumOfZones; ++ZoneNum) {
+        for (ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ++ZoneNum) {
 
             ZoneMult = Zone(ZoneNum).Multiplier * Zone(ZoneNum).ListMultiplier;
 
@@ -5034,7 +5034,7 @@ namespace ZoneTempPredictorCorrector {
             // Hybrid modeling start
             if ((HybridModelZone(ZoneNum).InfiltrationCalc_T || HybridModelZone(ZoneNum).InternalThermalMassCalc_T ||
                  HybridModelZone(ZoneNum).PeopleCountCalc_T) &&
-                (!WarmupFlag) && (!DoingSizing)) {
+                (!state.dataGlobal->WarmupFlag) && (!DoingSizing)) {
                 InverseModelTemperature(
                     state, ZoneNum, SumIntGain, SumIntGainExceptPeople, SumHA, SumHATsurf, SumHATref, SumMCp, SumMCpT, SumSysMCp, SumSysMCpT, AirCap);
             }
@@ -5051,7 +5051,7 @@ namespace ZoneTempPredictorCorrector {
             CorrectZoneHumRat(state, ZoneNum);
 
             ZoneAirHumRat(ZoneNum) = ZoneAirHumRatTemp(ZoneNum);
-            state.dataZoneTempPredictorCorrector->ZoneAirRelHum(ZoneNum) = 100.0 * PsyRhFnTdbWPb(ZT(ZoneNum), ZoneAirHumRat(ZoneNum), OutBaroPress, RoutineName);
+            state.dataZoneTempPredictorCorrector->ZoneAirRelHum(ZoneNum) = 100.0 * PsyRhFnTdbWPb(state, ZT(ZoneNum), ZoneAirHumRat(ZoneNum), OutBaroPress, RoutineName);
 
             // ZoneTempChange is used by HVACManager to determine if the timestep needs to be shortened.
             {
@@ -5134,7 +5134,7 @@ namespace ZoneTempPredictorCorrector {
 
         // Push the temperature and humidity ratio histories
 
-        for (ZoneNum = 1; ZoneNum <= NumOfZones; ++ZoneNum) {
+        for (ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ++ZoneNum) {
             XM4T(ZoneNum) = XM3T(ZoneNum);
             XM3T(ZoneNum) = XM2T(ZoneNum);
             XM2T(ZoneNum) = XMAT(ZoneNum);
@@ -5148,7 +5148,7 @@ namespace ZoneTempPredictorCorrector {
             WZoneTimeMinus1(ZoneNum) = ZoneAirHumRatAvg(ZoneNum); // using average for whole zone time step.
             ZoneAirHumRat(ZoneNum) = ZoneAirHumRatTemp(ZoneNum);
             WZoneTimeMinusP(ZoneNum) = ZoneAirHumRatTemp(ZoneNum);
-            state.dataZoneTempPredictorCorrector->ZoneAirRelHum(ZoneNum) = 100.0 * PsyRhFnTdbWPb(ZT(ZoneNum), ZoneAirHumRat(ZoneNum), OutBaroPress, CorrectZoneAirTemp);
+            state.dataZoneTempPredictorCorrector->ZoneAirRelHum(ZoneNum) = 100.0 * PsyRhFnTdbWPb(state, ZT(ZoneNum), ZoneAirHumRat(ZoneNum), OutBaroPress, CorrectZoneAirTemp);
 
             if (AirModel(ZoneNum).AirModelType == RoomAirModel_UCSDDV || AirModel(ZoneNum).AirModelType == RoomAirModel_UCSDUFI ||
                 AirModel(ZoneNum).AirModelType == RoomAirModel_UCSDUFE) {
@@ -5235,7 +5235,7 @@ namespace ZoneTempPredictorCorrector {
 
         // Push the temperature and humidity ratio histories back in time
 
-        for (ZoneNum = 1; ZoneNum <= NumOfZones; ++ZoneNum) {
+        for (ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ++ZoneNum) {
             DSXM4T(ZoneNum) = DSXM3T(ZoneNum);
             DSXM3T(ZoneNum) = DSXM2T(ZoneNum);
             DSXM2T(ZoneNum) = DSXMAT(ZoneNum);
@@ -5278,7 +5278,7 @@ namespace ZoneTempPredictorCorrector {
         } // zone loop
 
         if (ZoneAirSolutionAlgo != Use3rdOrder) {
-            for (ZoneNum = 1; ZoneNum <= NumOfZones; ++ZoneNum) {
+            for (ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ++ZoneNum) {
                 ZoneTM2(ZoneNum) = ZoneTMX(ZoneNum);
                 ZoneTMX(ZoneNum) = MAT(ZoneNum); // using average for whole zone time step.
                 ZoneWM2(ZoneNum) = ZoneWMX(ZoneNum);
@@ -5326,7 +5326,7 @@ namespace ZoneTempPredictorCorrector {
 
         // REvert the temperature and humidity ratio histories
 
-        for (ZoneNum = 1; ZoneNum <= NumOfZones; ++ZoneNum) {
+        for (ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ++ZoneNum) {
             //  MAT(ZoneNum)  = XMAT(ZoneNum)
             XMAT(ZoneNum) = XM2T(ZoneNum);
             XM2T(ZoneNum) = XM3T(ZoneNum);
@@ -5394,8 +5394,6 @@ namespace ZoneTempPredictorCorrector {
         using DataZoneEquipment::ZoneEquipConfig;
         //using ZonePlenum::ZoneRetPlenCond;
         //using ZonePlenum::ZoneSupPlenCond;
-
-        using DataGlobals::TimeStepZone;
 
         using InternalHeatGains::SumAllInternalConvectionGainsExceptPeople;
 
@@ -5562,7 +5560,7 @@ namespace ZoneTempPredictorCorrector {
 
         // Check to make sure that is saturated there is condensation in the zone
         // by resetting to saturation conditions.
-        WZSat = PsyWFnTdbRhPb(ZT(ZoneNum), 1.0, OutBaroPress, RoutineName);
+        WZSat = PsyWFnTdbRhPb(state, ZT(ZoneNum), 1.0, OutBaroPress, RoutineName);
 
         if (ZoneAirHumRatTemp(ZoneNum) > WZSat) ZoneAirHumRatTemp(ZoneNum) = WZSat;
 
@@ -5571,7 +5569,7 @@ namespace ZoneTempPredictorCorrector {
         }
 
         // HybridModel with measured humidity ratio begins
-        if ((HybridModelZone(ZoneNum).InfiltrationCalc_H || HybridModelZone(ZoneNum).PeopleCountCalc_H) && (!WarmupFlag) && (!DoingSizing)) {
+        if ((HybridModelZone(ZoneNum).InfiltrationCalc_H || HybridModelZone(ZoneNum).PeopleCountCalc_H) && (!state.dataGlobal->WarmupFlag) && (!DoingSizing)) {
             InverseModelHumidity(ZoneNum, LatentGain, LatentGainExceptPeople, ZoneMassFlowRate, MoistureMassFlowRate, H2OHtOfVap, RhoAir);
         }
 
@@ -5822,7 +5820,7 @@ namespace ZoneTempPredictorCorrector {
                     MultpHM = AirCapHM /
                               (Zone(ZoneNum).Volume * PsyRhoAirFnPbTdbW(OutBaroPress, ZT(ZoneNum), ZoneAirHumRat(ZoneNum)) *
                                PsyCpAirFnW(ZoneAirHumRat(ZoneNum))) *
-                              (TimeStepZone * DataGlobalConstants::SecInHour());      // Inverse equation
+                              (state.dataGlobal->TimeStepZone * DataGlobalConstants::SecInHour());      // Inverse equation
                     if ((MultpHM < 1.0) || (MultpHM > 30.0)) { // Temperature capacity multiplier greater than
                                                                // 1 and less than 30
                         MultpHM = 1.0;                         // Default value 1.0
@@ -5845,7 +5843,7 @@ namespace ZoneTempPredictorCorrector {
 
                     // Calculate and store the multiplier average at the end of HM
                     // simulations
-                    if (DayOfYear == HybridModelZone(ZoneNum).HybridEndDayOfYear && EndDayFlag) {
+                    if (DayOfYear == HybridModelZone(ZoneNum).HybridEndDayOfYear && state.dataGlobal->EndDayFlag) {
                         HMMultiplierAverage = Zone(ZoneNum).ZoneVolCapMultpSensHMSum / Zone(ZoneNum).ZoneVolCapMultpSensHMCountSum;
                         Zone(ZoneNum).ZoneVolCapMultpSensHMAverage = HMMultiplierAverage;
                     }
@@ -6688,7 +6686,7 @@ namespace ZoneTempPredictorCorrector {
             // formulate dynamic threshold value based on 20% of quadrature sum of components
             Threshold = 0.2 * std::sqrt(pow_2(SumIntGains) + pow_2(SumHADTsurfs) + pow_2(SumMCpDTzones) + pow_2(SumMCpDtInfil) +
                                         pow_2(SumMCpDTsystem) + pow_2(SumNonAirSystem) + pow_2(CzdTdt));
-            if ((std::abs(imBalance) > Threshold) && (!WarmupFlag) && (!DoingSizing)) { // air balance is out by more than threshold
+            if ((std::abs(imBalance) > Threshold) && (!state.dataGlobal->WarmupFlag) && (!DoingSizing)) { // air balance is out by more than threshold
                 if (Zone(ZoneNum).AirHBimBalanceErrIndex == 0) {
                     ShowWarningMessage("Zone Air Heat Balance is out of balance for zone named " + Zone(ZoneNum).Name);
                     ShowContinueError("Zone Air Heat Balance Deviation Rate is more than " + RoundSigDigits(Threshold, 1) + " {W}");
@@ -6795,14 +6793,14 @@ namespace ZoneTempPredictorCorrector {
 
         // first time run allocate arrays and setup output variable
         if (state.dataZoneTempPredictorCorrector->SetupOscillationOutputFlag) {
-            state.dataZoneTempPredictorCorrector->ZoneTempHist.allocate(4, NumOfZones);
+            state.dataZoneTempPredictorCorrector->ZoneTempHist.allocate(4, state.dataGlobal->NumOfZones);
             state.dataZoneTempPredictorCorrector->ZoneTempHist = 0.0;
-            state.dataZoneTempPredictorCorrector->ZoneTempOscillate.dimension(NumOfZones, 0.0);
-            state.dataZoneTempPredictorCorrector->ZoneTempOscillateDuringOccupancy.dimension(NumOfZones, 0.0);
-            state.dataZoneTempPredictorCorrector->ZoneTempOscillateInDeadband.dimension(NumOfZones, 0.0);
+            state.dataZoneTempPredictorCorrector->ZoneTempOscillate.dimension(state.dataGlobal->NumOfZones, 0.0);
+            state.dataZoneTempPredictorCorrector->ZoneTempOscillateDuringOccupancy.dimension(state.dataGlobal->NumOfZones, 0.0);
+            state.dataZoneTempPredictorCorrector->ZoneTempOscillateInDeadband.dimension(state.dataGlobal->NumOfZones, 0.0);
             // set up zone by zone variables
             // CurrentModuleObject='Zone'
-            for (iZone = 1; iZone <= NumOfZones; ++iZone) {
+            for (iZone = 1; iZone <= state.dataGlobal->NumOfZones; ++iZone) {
                 SetupOutputVariable(state,
                     "Zone Oscillating Temperatures Time", OutputProcessor::Unit::hr, state.dataZoneTempPredictorCorrector->ZoneTempOscillate(iZone), "System", "Sum", Zone(iZone).Name);
                 SetupOutputVariable(state,
@@ -6836,7 +6834,7 @@ namespace ZoneTempPredictorCorrector {
             isAnyZoneOscillatingDuringOccupancy = false;
             isAnyZoneOscillatingInDeadband = false;
 
-            for (iZone = 1; iZone <= NumOfZones; ++iZone) {
+            for (iZone = 1; iZone <= state.dataGlobal->NumOfZones; ++iZone) {
                 isOscillate = false;
                 state.dataZoneTempPredictorCorrector->ZoneTempHist(4, iZone) = state.dataZoneTempPredictorCorrector->ZoneTempHist(3, iZone);
                 state.dataZoneTempPredictorCorrector->ZoneTempHist(3, iZone) = state.dataZoneTempPredictorCorrector->ZoneTempHist(2, iZone);
@@ -7417,7 +7415,7 @@ namespace ZoneTempPredictorCorrector {
             Par(2) = double(PeopleNum);
             TempSolveRoot::SolveRoot(state, Acc, MaxIter, SolFla, Tset, PMVResidual, Tmin, Tmax, Par);
             if (SolFla == -1) {
-                if (!WarmupFlag) {
+                if (!state.dataGlobal->WarmupFlag) {
                     ++IterLimitExceededNum1;
                     if (IterLimitExceededNum1 == 1) {
                         ShowWarningError(ComfortControlledZone(ComfortControlNum).Name +
@@ -7431,7 +7429,7 @@ namespace ZoneTempPredictorCorrector {
                     }
                 }
             } else if (SolFla == -2) {
-                if (!WarmupFlag) {
+                if (!state.dataGlobal->WarmupFlag) {
                     ++IterLimitExceededNum2;
                     if (IterLimitExceededNum2 == 1) {
                         ShowWarningError(ComfortControlledZone(ComfortControlNum).Name +

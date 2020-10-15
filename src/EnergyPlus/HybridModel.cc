@@ -49,6 +49,7 @@
 #include <ObjexxFCL/Array.functions.hh>
 
 // EnergyPlus Headers
+#include <EnergyPlus/Data/EnergyPlusData.hh>
 #include <EnergyPlus/DataGlobals.hh>
 #include <EnergyPlus/DataHeatBalance.hh>
 #include <EnergyPlus/DataRoomAirModel.hh>
@@ -139,7 +140,7 @@ namespace HybridModel {
         // Read hybrid model input
         CurrentModuleObject = "HybridModel:Zone";
         NumOfHybridModelZones = inputProcessor->getNumObjectsFound(CurrentModuleObject);
-        HybridModelZone.allocate(NumOfZones);
+        HybridModelZone.allocate(state.dataGlobal->NumOfZones);
 
         if (NumOfHybridModelZones > 0) {
 
@@ -452,7 +453,7 @@ namespace HybridModel {
 
             // RoomAirModelType should be Mixing if Hybrid Modeling is performed for the zone
             if (FlagHybridModel) {
-                for (ZonePtr = 1; ZonePtr <= NumOfZones; ZonePtr++) {
+                for (ZonePtr = 1; ZonePtr <= state.dataGlobal->NumOfZones; ZonePtr++) {
                     if ((HybridModelZone(ZonePtr).InternalThermalMassCalc_T || HybridModelZone(ZonePtr).InfiltrationCalc_T) &&
                         (AirModel(ZonePtr).AirModelType != RoomAirModel_Mixing)) {
                         AirModel(ZonePtr).AirModelType = RoomAirModel_Mixing;

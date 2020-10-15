@@ -89,7 +89,7 @@ TEST_F(EnergyPlusFixture, PV_ReportPV_ZoneIndexNonZero)
     DataHeatBalance::Zone.allocate(2);
     DataSurfaces::Surface.allocate(3);
 
-    DataGlobals::NumOfZones = 2;
+    state.dataGlobal->NumOfZones = 2;
     DataHeatBalance::Zone(1).Name = "Zone1";
     DataHeatBalance::Zone(1).ListMultiplier = 1.0;
     DataHeatBalance::Zone(1).Multiplier = 5.0;

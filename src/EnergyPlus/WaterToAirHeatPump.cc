@@ -1374,7 +1374,7 @@ namespace WaterToAirHeatPump {
                     //        END IF
                     //      END DO LOOP1
 
-                    EffectiveSurfaceTemp = PsyTsatFnHPb(EffectiveSatEnth, PB, RoutineNameLoadSideSurfaceTemp);
+                    EffectiveSurfaceTemp = PsyTsatFnHPb(state, EffectiveSatEnth, PB, RoutineNameLoadSideSurfaceTemp);
 
                     QSensible = LoadSideMassFlowRate * CpAir * (LoadSideInletDBTemp - EffectiveSurfaceTemp) * LoadSideEffec;
                     EvapSatEnth = LoadSideAirInletEnth - initialQLoadTotal / (EffectWET * LoadSideMassFlowRate);
@@ -1403,7 +1403,7 @@ namespace WaterToAirHeatPump {
                     //        END IF
                     //      END DO LOOP2
 
-                    EvapTemp = PsyTsatFnHPb(EvapSatEnth, PB, RoutineNameLoadSideEvapTemp);
+                    EvapTemp = PsyTsatFnHPb(state, EvapSatEnth, PB, RoutineNameLoadSideEvapTemp);
 
                     // Load Side Saturated Temperature (Evaporating Temp in this case)
                     LoadSideTemp = EvapTemp;
@@ -1413,7 +1413,7 @@ namespace WaterToAirHeatPump {
                     LoadSidePressure = GetSatPressureRefrig(state, Refrigerant, LoadSideTemp, state.dataWaterToAirHeatPump->RefrigIndex, RoutineNameLoadSideTemp);
 
                     if (LoadSidePressure < LowPressCutoff && !FirstHVACIteration) {
-                        if (!WarmupFlag) {
+                        if (!state.dataGlobal->WarmupFlag) {
                             ShowRecurringWarningErrorAtEnd("WaterToAir Heat pump:cooling [" + state.dataWaterToAirHeatPump->WatertoAirHP(HPNum).Name +
                                                                "] shut off on low pressure < " + RoundSigDigits(LowPressCutoff, 0),
                                                            state.dataWaterToAirHeatPump->WatertoAirHP(HPNum).LowPressClgError,
@@ -1428,7 +1428,7 @@ namespace WaterToAirHeatPump {
                     }
 
                     if (SourceSidePressure > HighPressCutoff && !FirstHVACIteration) {
-                        if (!WarmupFlag) {
+                        if (!state.dataGlobal->WarmupFlag) {
                             ShowRecurringWarningErrorAtEnd("WaterToAir Heat pump:cooling [" + state.dataWaterToAirHeatPump->WatertoAirHP(HPNum).Name +
                                                                "] shut off on high pressure > " + RoundSigDigits(HighPressCutoff, 0),
                                                            state.dataWaterToAirHeatPump->WatertoAirHP(HPNum).HighPressClgError,
@@ -1579,7 +1579,7 @@ namespace WaterToAirHeatPump {
                 } else if (NumIteration4 == 2) {
                     QLatActual = QLoadTotal - QSensible;
                     SHRss = QSensible / QLoadTotal;
-                    LoadSideInletWBTemp = PsyTwbFnTdbWPb(LoadSideInletDBTemp, LoadSideInletHumRat, PB);
+                    LoadSideInletWBTemp = PsyTwbFnTdbWPb(state, LoadSideInletDBTemp, LoadSideInletHumRat, PB);
                     SHReff =
                         CalcEffectiveSHR(state, HPNum, SHRss, CyclingScheme, RuntimeFrac, QLatRated, QLatActual, LoadSideInletDBTemp, LoadSideInletWBTemp);
                     //   Update sensible capacity based on effective SHR
@@ -1597,7 +1597,7 @@ namespace WaterToAirHeatPump {
         // calculate coil outlet state variables
         LoadSideAirOutletEnth = LoadSideAirInletEnth - QLoadTotal / LoadSideMassFlowRate;
         LoadSideOutletDBTemp = LoadSideInletDBTemp - QSensible * LoadSideMassFlowRate_CpAir_inv;
-        LoadSideOutletHumRat = PsyWFnTdbH(LoadSideOutletDBTemp, LoadSideAirOutletEnth, RoutineNameLoadSideOutletEnthalpy);
+        LoadSideOutletHumRat = PsyWFnTdbH(state, LoadSideOutletDBTemp, LoadSideAirOutletEnth, RoutineNameLoadSideOutletEnthalpy);
         SourceSideOutletTemp = SourceSideInletTemp + QSource / (SourceSideMassFlowRate * CpWater);
 
         // Actual outlet conditions are "average" for time step
@@ -1942,7 +1942,7 @@ namespace WaterToAirHeatPump {
                 SourceSidePressure = GetSatPressureRefrig(state, Refrigerant, SourceSideTemp, state.dataWaterToAirHeatPump->RefrigIndex, RoutineNameSourceSideTemp);
                 LoadSidePressure = GetSatPressureRefrig(state, Refrigerant, LoadSideTemp, state.dataWaterToAirHeatPump->RefrigIndex, RoutineNameLoadSideTemp);
                 if (SourceSidePressure < LowPressCutoff && !FirstHVACIteration) {
-                    if (!WarmupFlag) {
+                    if (!state.dataGlobal->WarmupFlag) {
                         ShowRecurringWarningErrorAtEnd("WaterToAir Heat pump:heating [" + state.dataWaterToAirHeatPump->WatertoAirHP(HPNum).Name + "] shut off on low pressure < " +
                                                            RoundSigDigits(LowPressCutoff, 0),
                                                        state.dataWaterToAirHeatPump->WatertoAirHP(HPNum).LowPressHtgError,
@@ -1957,7 +1957,7 @@ namespace WaterToAirHeatPump {
                 }
 
                 if (LoadSidePressure > HighPressCutoff && !FirstHVACIteration) {
-                    if (!WarmupFlag) {
+                    if (!state.dataGlobal->WarmupFlag) {
                         ShowRecurringWarningErrorAtEnd("WaterToAir Heat pump:heating [" + state.dataWaterToAirHeatPump->WatertoAirHP(HPNum).Name +
                                                            "] shut off on high pressure > " + RoundSigDigits(HighPressCutoff, 0),
                                                        state.dataWaterToAirHeatPump->WatertoAirHP(HPNum).HighPressHtgError,
@@ -2115,7 +2115,7 @@ namespace WaterToAirHeatPump {
         // calculate coil outlet state variables
         LoadSideAirOutletEnth = LoadSideAirInletEnth + QLoadTotal / LoadSideMassFlowRate;
         LoadSideOutletDBTemp = LoadSideInletDBTemp + QLoadTotal / (LoadSideMassFlowRate * CpAir);
-        LoadSideOutletHumRat = PsyWFnTdbH(LoadSideOutletDBTemp, LoadSideAirOutletEnth, RoutineNameLoadSideOutletEnthalpy);
+        LoadSideOutletHumRat = PsyWFnTdbH(state, LoadSideOutletDBTemp, LoadSideAirOutletEnth, RoutineNameLoadSideOutletEnthalpy);
         SourceSideOutletTemp = SourceSideInletTemp - QSource / (SourceSideMassFlowRate * CpWater);
 
         // Calculate actual outlet conditions for the run time fraction

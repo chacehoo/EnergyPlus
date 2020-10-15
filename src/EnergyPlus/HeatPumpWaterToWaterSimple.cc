@@ -102,10 +102,6 @@ namespace HeatPumpWaterToWaterSimple {
     // USE STATEMENTS:
     // Use statements for data only modules
     // Using/Aliasing
-    using DataGlobals::HourOfDay;
-    using DataGlobals::TimeStep;
-    using DataGlobals::TimeStepZone;
-    using DataGlobals::WarmupFlag;
     using General::TrimSigDigits;
     using namespace DataLoopNode;
 
@@ -812,7 +808,7 @@ namespace HeatPumpWaterToWaterSimple {
         }
 
         // Calculate the simulation time
-        CurrentSimTime = (state.dataGlobal->DayOfSim - 1) * 24 + (HourOfDay - 1) + (TimeStep - 1) * TimeStepZone + SysTimeElapsed;
+        CurrentSimTime = (state.dataGlobal->DayOfSim - 1) * 24 + (state.dataGlobal->HourOfDay - 1) + (state.dataGlobal->TimeStep - 1) * state.dataGlobal->TimeStepZone + SysTimeElapsed;
 
         LoopNum = this->LoadLoopNum;
         LoopSideNum = this->LoadLoopSideNum;
@@ -1714,7 +1710,7 @@ namespace HeatPumpWaterToWaterSimple {
         Power = CoolPowerRated *
                 (CoolPowerCoeff1 + (func1 * CoolPowerCoeff2) + (func2 * CoolPowerCoeff3) + (func3 * CoolPowerCoeff4) + (func4 * CoolPowerCoeff5));
 
-        if ((QLoad <= 0.0 || Power <= 0.0) && !WarmupFlag) {
+        if ((QLoad <= 0.0 || Power <= 0.0) && !state.dataGlobal->WarmupFlag) {
             if (QLoad <= 0.0) {
                 if (this->CoolCapNegativeCounter < 1) {
                     ++this->CoolCapNegativeCounter;
@@ -1893,7 +1889,7 @@ namespace HeatPumpWaterToWaterSimple {
         Power = HeatPowerRated *
                 (HeatPowerCoeff1 + (func1 * HeatPowerCoeff2) + (func2 * HeatPowerCoeff3) + (func3 * HeatPowerCoeff4) + (func4 * HeatPowerCoeff5));
 
-        if ((QLoad <= 0.0 || Power <= 0.0) && !WarmupFlag) {
+        if ((QLoad <= 0.0 || Power <= 0.0) && !state.dataGlobal->WarmupFlag) {
             if (QLoad <= 0.0) {
                 if (this->HeatCapNegativeCounter < 1) {
                     ++this->HeatCapNegativeCounter;

@@ -1178,8 +1178,6 @@ namespace UtilityRoutines {
         using namespace DataErrorTracking;
         using DataGlobals::DoingSizing;
         using DataGlobals::KickOffSimulation;
-        using DataGlobals::WarmupFlag;
-
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
 
@@ -1199,7 +1197,7 @@ namespace UtilityRoutines {
         }
 
         ++TotalSevereErrors;
-        if (WarmupFlag && !DoingSizing && !KickOffSimulation && !AbortProcessing) ++TotalSevereErrorsDuringWarmup;
+        if (state.dataGlobal->WarmupFlag && !DoingSizing && !KickOffSimulation && !AbortProcessing) ++TotalSevereErrorsDuringWarmup;
         if (DoingSizing) ++TotalSevereErrorsDuringSizing;
         ShowErrorMessage(" ** Severe  ** " + ErrorMessage, OutUnit1, OutUnit2);
         LastSevereError = ErrorMessage;
@@ -1335,7 +1333,6 @@ namespace UtilityRoutines {
         using DataEnvironment::CurMnDy;
         using DataEnvironment::EnvironmentName;
         using DataGlobals::DoingSizing;
-        using DataGlobals::WarmupFlag;
         using General::CreateSysTimeIntervalString;
 
         // Locals
@@ -1352,7 +1349,7 @@ namespace UtilityRoutines {
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         std::string cEnvHeader;
 
-        if (WarmupFlag) {
+        if (state.dataGlobal->WarmupFlag) {
             if (!DoingSizing) {
                 cEnvHeader = " During Warmup, Environment=";
             } else {
@@ -1368,7 +1365,7 @@ namespace UtilityRoutines {
 
         if (len(Message) < 50) {
             const auto m = Message + cEnvHeader + EnvironmentName + ", at Simulation time=" + CurMnDy + ' ' +
-                                 CreateSysTimeIntervalString();
+                                 CreateSysTimeIntervalString(state);
             ShowErrorMessage(" **   ~~~   ** " + m,
                              OutUnit1,
                              OutUnit2);
@@ -1381,7 +1378,7 @@ namespace UtilityRoutines {
         } else {
             const auto m = " **   ~~~   ** " + Message;
             const auto postfix = " **   ~~~   ** " + cEnvHeader + EnvironmentName + ", at Simulation time=" + CurMnDy + ' ' +
-                CreateSysTimeIntervalString();
+                CreateSysTimeIntervalString(state);
             ShowErrorMessage(m);
             ShowErrorMessage(postfix,
                              OutUnit1,
@@ -1467,8 +1464,6 @@ namespace UtilityRoutines {
         using namespace DataErrorTracking;
         using DataGlobals::DoingSizing;
         using DataGlobals::KickOffSimulation;
-        using DataGlobals::WarmupFlag;
-
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
 
@@ -1488,7 +1483,7 @@ namespace UtilityRoutines {
         }
 
         ++TotalWarningErrors;
-        if (WarmupFlag && !DoingSizing && !KickOffSimulation && !AbortProcessing) ++TotalWarningErrorsDuringWarmup;
+        if (state.dataGlobal->WarmupFlag && !DoingSizing && !KickOffSimulation && !AbortProcessing) ++TotalWarningErrorsDuringWarmup;
         if (DoingSizing) ++TotalWarningErrorsDuringSizing;
         ShowErrorMessage(" ** Warning ** " + ErrorMessage, OutUnit1, OutUnit2);
 
@@ -1719,8 +1714,6 @@ namespace UtilityRoutines {
         using namespace DataStringGlobals;
         using namespace DataErrorTracking;
         using DataGlobals::DoingSizing;
-        using DataGlobals::WarmupFlag;
-
         // If Index is zero, then assign next available index and reallocate array
         if (ErrorMsgIndex == 0) {
             RecurringErrors.redimension(++NumRecurringErrors);
@@ -1728,7 +1721,7 @@ namespace UtilityRoutines {
             // The message string only needs to be stored once when a new recurring message is created
             RecurringErrors(ErrorMsgIndex).Message = ErrorMessage;
             RecurringErrors(ErrorMsgIndex).Count = 1;
-            if (WarmupFlag) RecurringErrors(ErrorMsgIndex).WarmupCount = 1;
+            if (state.dataGlobal->WarmupFlag) RecurringErrors(ErrorMsgIndex).WarmupCount = 1;
             if (DoingSizing) RecurringErrors(ErrorMsgIndex).SizingCount = 1;
 
             // For max, min, and sum values, store the current value when a new recurring message is created
@@ -1757,7 +1750,7 @@ namespace UtilityRoutines {
         } else if (ErrorMsgIndex > 0) {
             // Do stats and store
             ++RecurringErrors(ErrorMsgIndex).Count;
-            if (WarmupFlag) ++RecurringErrors(ErrorMsgIndex).WarmupCount;
+            if (state.dataGlobal->WarmupFlag) ++RecurringErrors(ErrorMsgIndex).WarmupCount;
             if (DoingSizing) ++RecurringErrors(ErrorMsgIndex).SizingCount;
 
             if (present(ErrorReportMaxOf)) {

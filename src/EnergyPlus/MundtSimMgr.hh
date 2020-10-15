@@ -58,6 +58,9 @@
 
 namespace EnergyPlus {
 
+// Forward declarations
+struct EnergyPlusData;
+
 namespace MundtSimMgr {
 
     // Using/Aliasing
@@ -163,7 +166,7 @@ namespace MundtSimMgr {
 
     //*****************************************************************************************
 
-    void GetSurfHBDataForMundtModel(int const ZoneNum); // index number for the specified zone
+    void GetSurfHBDataForMundtModel(EnergyPlusData &state, int const ZoneNum); // index number for the specified zone
 
     //*****************************************************************************************
 

@@ -385,7 +385,8 @@ void CoilCoolingDXCurveFitSpeed::size(EnergyPlus::EnergyPlusData &state)
         this->RatedCBF = 0.001;
     } else {
 
-    this->RatedCBF = CalcBypassFactor(RatedInletAirTemp,
+    this->RatedCBF = CalcBypassFactor(state,
+                                      RatedInletAirTemp,
                                       RatedInletAirHumRat,
                                       Psychrometrics::PsyHFnTdbW(RatedInletAirTemp, RatedInletAirHumRat),
                                       DataEnvironment::StdPressureSeaLevel);
@@ -428,7 +429,7 @@ void CoilCoolingDXCurveFitSpeed::CalcSpeedOutput(EnergyPlus::EnergyPlusData &sta
         CBF = 0.0;
     }
 
-    Real64 inletWetBulb = Psychrometrics::PsyTwbFnTdbWPb(inletNode.Temp, inletNode.HumRat, ambPressure);
+    Real64 inletWetBulb = Psychrometrics::PsyTwbFnTdbWPb(state, inletNode.Temp, inletNode.HumRat, ambPressure);
     Real64 inletw = inletNode.HumRat;
 
     int Counter = 0;              // iteration counter for dry coil condition
@@ -472,8 +473,8 @@ void CoilCoolingDXCurveFitSpeed::CalcSpeedOutput(EnergyPlus::EnergyPlusData &sta
         } else {
             // Calculate apparatus dew point conditions using TotCap and CBF
             Real64 hADP = inletNode.Enthalpy - hDelta / (1.0 - CBF);
-            Real64 tADP = Psychrometrics::PsyTsatFnHPb(hADP, ambPressure, RoutineName);
-            Real64 wADP = Psychrometrics::PsyWFnTdbH(tADP, hADP, RoutineName);
+            Real64 tADP = Psychrometrics::PsyTsatFnHPb(state, hADP, ambPressure, RoutineName);
+            Real64 wADP = Psychrometrics::PsyWFnTdbH(state, tADP, hADP, RoutineName);
             Real64 hTinwADP = Psychrometrics::PsyHFnTdbW(inletNode.Temp, wADP);
             if ((inletNode.Enthalpy - hADP) > 1.e-10) {
                 SHR = min((hTinwADP - hADP) / (inletNode.Enthalpy - hADP), 1.0);
@@ -488,7 +489,7 @@ void CoilCoolingDXCurveFitSpeed::CalcSpeedOutput(EnergyPlus::EnergyPlusData &sta
                 // capacity at the dry-out point to determine exiting conditions from coil. This is required
                 // since the TotCapTempModFac doesn't work properly with dry-coil conditions.
                 inletw = RF * wADP + (1.0 - RF) * inletw;
-                inletWetBulb = Psychrometrics::PsyTwbFnTdbWPb(inletNode.Temp, inletw, ambPressure);
+                inletWetBulb = Psychrometrics::PsyTwbFnTdbWPb(state, inletNode.Temp, inletw, ambPressure);
                 ++Counter;
                 if (std::abs(werror) > Tolerance) continue; // Recalculate with modified inlet conditions
                 break;
@@ -529,11 +530,11 @@ void CoilCoolingDXCurveFitSpeed::CalcSpeedOutput(EnergyPlus::EnergyPlusData &sta
 
     outletNode.Enthalpy = inletNode.Enthalpy - hDelta;
     Real64 hTinwout = inletNode.Enthalpy - ((1.0 - SHR) * hDelta);
-    outletNode.HumRat = Psychrometrics::PsyWFnTdbH(inletNode.Temp, hTinwout);
+    outletNode.HumRat = Psychrometrics::PsyWFnTdbH(state, inletNode.Temp, hTinwout);
     outletNode.Temp = Psychrometrics::PsyTdbFnHW(outletNode.Enthalpy, outletNode.HumRat);
 }
 
-Real64 CoilCoolingDXCurveFitSpeed::CalcBypassFactor(Real64 tdb, Real64 w, Real64 h, Real64 p)
+Real64 CoilCoolingDXCurveFitSpeed::CalcBypassFactor(EnergyPlusData &state, Real64 tdb, Real64 w, Real64 h, Real64 p)
 {
 
     static std::string const RoutineName("CalcBypassFactor: ");
@@ -544,15 +545,15 @@ Real64 CoilCoolingDXCurveFitSpeed::CalcBypassFactor(Real64 tdb, Real64 w, Real64
     Real64 deltaH = rated_total_capacity / airMassFlowRate;
     Real64 outp = p;
     Real64 outh = h - deltaH;
-    Real64 outw = Psychrometrics::PsyWFnTdbH(tdb, h - (1.0 - this->grossRatedSHR) * deltaH); // enthalpy at Tdb,in and Wout
+    Real64 outw = Psychrometrics::PsyWFnTdbH(state, tdb, h - (1.0 - this->grossRatedSHR) * deltaH); // enthalpy at Tdb,in and Wout
     Real64 outtdb = Psychrometrics::PsyTdbFnHW(outh, outw);
-    Real64 outrh = Psychrometrics::PsyRhFnTdbWPb(outtdb, outw, outp);
+    Real64 outrh = Psychrometrics::PsyRhFnTdbWPb(state, outtdb, outw, outp);
 
     if (outrh >= 1.0) {
-        Real64 outletAirTempSat = Psychrometrics::PsyTsatFnHPb(outh, outp, RoutineName);
+        Real64 outletAirTempSat = Psychrometrics::PsyTsatFnHPb(state, outh, outp, RoutineName);
         if (outtdb < outletAirTempSat) { // Limit to saturated conditions at OutletAirEnthalpy
             outtdb = outletAirTempSat + 0.005;
-            outw = Psychrometrics::PsyWFnTdbH(outtdb, outh, RoutineName);
+            outw = Psychrometrics::PsyWFnTdbH(state, outtdb, outh, RoutineName);
             Real64 adjustedSHR = (Psychrometrics::PsyHFnTdbW(tdb, outw) - outh) / deltaH;
             ShowWarningError(RoutineName + object_name + " \"" + name +
                              "\", SHR adjusted to achieve valid outlet air properties and the simulation continues.");
@@ -562,7 +563,7 @@ Real64 CoilCoolingDXCurveFitSpeed::CalcBypassFactor(Real64 tdb, Real64 w, Real64
     }
 
     // ADP conditions
-    Real64 adp_tdb = Psychrometrics::PsyTdpFnWPb(outw, outp);
+    Real64 adp_tdb = Psychrometrics::PsyTdpFnWPb(state, outw, outp);
 
     std::size_t iter = 0;
     const std::size_t maxIter(50);
@@ -582,7 +583,7 @@ Real64 CoilCoolingDXCurveFitSpeed::CalcBypassFactor(Real64 tdb, Real64 w, Real64
         ShowFatalError("Errors found in calculating coil bypass factors");
     }
 
-    Real64 adp_w = min(outw, Psychrometrics::PsyWFnTdpPb(adp_tdb, DataEnvironment::StdPressureSeaLevel));
+    Real64 adp_w = min(outw, Psychrometrics::PsyWFnTdpPb(state, adp_tdb, DataEnvironment::StdPressureSeaLevel));
 
     while ((iter <= maxIter) && (tolerance > 0.001)) {
 
@@ -590,7 +591,7 @@ Real64 CoilCoolingDXCurveFitSpeed::CalcBypassFactor(Real64 tdb, Real64 w, Real64
         if (iter > 0) adp_tdb += deltaADPTemp;
         ++iter;
         //  Find new slope using guessed Tadp
-        adp_w = min(outw, Psychrometrics::PsyWFnTdpPb(adp_tdb, DataEnvironment::StdPressureSeaLevel));
+        adp_w = min(outw, Psychrometrics::PsyWFnTdpPb(state, adp_tdb, DataEnvironment::StdPressureSeaLevel));
         Real64 slope = (w - adp_w) / max(0.001, (tdb - adp_tdb));
         //  check for convergence (slopes are equal to within error tolerance)
         Real64 error = (slope - slopeAtConds) / slopeAtConds;

@@ -209,7 +209,7 @@ namespace Humidifiers {
 
         thisHum.InitHumidifier(state);
 
-        thisHum.ControlHumidifier(WaterAddNeeded);
+        thisHum.ControlHumidifier(state, WaterAddNeeded);
 
         // call the correct humidifier calculation routine
         {
@@ -217,7 +217,7 @@ namespace Humidifiers {
 
             if (SELECT_CASE_var == Humidifier_Steam_Electric) { // 'HUMIDIFIER:STEAM:ELECTRIC'
 
-                thisHum.CalcElecSteamHumidifier(WaterAddNeeded);
+                thisHum.CalcElecSteamHumidifier(state, WaterAddNeeded);
 
             } else if (SELECT_CASE_var == Humidifier_Steam_Gas) { // 'HUMIDIFIER:STEAM:GAS'
 
@@ -975,7 +975,7 @@ namespace Humidifiers {
         }
     }
 
-    void HumidifierData::ControlHumidifier(Real64 &WaterAddNeeded // moisture addition rate needed to meet minimum humidity ratio setpoint [kg/s]
+    void HumidifierData::ControlHumidifier(EnergyPlusData &state, Real64 &WaterAddNeeded // moisture addition rate needed to meet minimum humidity ratio setpoint [kg/s]
     )
     {
 
@@ -1019,7 +1019,7 @@ namespace Humidifiers {
         if (AirInMassFlowRate <= SmallMassFlow) UnitOn = false;
         if (GetCurrentScheduleValue(SchedPtr) <= 0.0) UnitOn = false;
         if (AirInHumRat >= HumRatSet) UnitOn = false;
-        HumRatSatIn = PsyWFnTdbRhPb(AirInTemp, 1.0, OutBaroPress, RoutineName);
+        HumRatSatIn = PsyWFnTdbRhPb(state, AirInTemp, 1.0, OutBaroPress, RoutineName);
         if (AirInHumRat >= HumRatSatIn) UnitOn = false;
         if (UnitOn) {
             // AirMassFlowRate*AirInHumRat + WaterAddNeeded = AirMassFlowRate*HumRatSet
@@ -1029,7 +1029,7 @@ namespace Humidifiers {
         }
     }
 
-    void HumidifierData::CalcElecSteamHumidifier(Real64 const WaterAddNeeded // moisture addition rate set by controller [kg/s]
+    void HumidifierData::CalcElecSteamHumidifier(EnergyPlusData &state, Real64 const WaterAddNeeded // moisture addition rate set by controller [kg/s]
     )
     {
 
@@ -1078,7 +1078,7 @@ namespace Humidifiers {
         // crosses the saturation line.
         Real64 WaterDens; // density of liquid water [kg/m3]
 
-        HumRatSatIn = PsyWFnTdbRhPb(AirInTemp, 1.0, OutBaroPress, RoutineName);
+        HumRatSatIn = PsyWFnTdbRhPb(state, AirInTemp, 1.0, OutBaroPress, RoutineName);
         HumRatSatOut = 0.0;
         HumRatSatApp = 0.0;
         WaterInEnthalpy = 2676125.0; // At 100 C
@@ -1094,7 +1094,7 @@ namespace Humidifiers {
             AirOutEnthalpy = (AirInMassFlowRate * AirInEnthalpy + WaterAddNeededMax * WaterInEnthalpy) / AirInMassFlowRate;
             AirOutHumRat = (AirInMassFlowRate * AirInHumRat + WaterAddNeededMax) / AirInMassFlowRate;
             AirOutTemp = PsyTdbFnHW(AirOutEnthalpy, AirOutHumRat);
-            HumRatSatOut = PsyWFnTdbRhPb(AirOutTemp, 1.0, OutBaroPress, RoutineName);
+            HumRatSatOut = PsyWFnTdbRhPb(state, AirOutTemp, 1.0, OutBaroPress, RoutineName);
             if (AirOutHumRat <= HumRatSatOut) {
                 // If the outlet condition is below the saturation curve, the desired moisture addition rate can be met.
                 WaterAdd = WaterAddNeededMax;
@@ -1117,7 +1117,7 @@ namespace Humidifiers {
                 // This point isn't quite on the saturation curve since we made a linear approximation of the curve,
                 // but the temperature should be very close to the correct outlet temperature. We will use this temperature
                 // as the outlet temperature and move to the saturation curve for the outlet humidity and enthalpy
-                AirOutHumRat = PsyWFnTdbRhPb(AirOutTemp, 1.0, OutBaroPress, RoutineName);
+                AirOutHumRat = PsyWFnTdbRhPb(state, AirOutTemp, 1.0, OutBaroPress, RoutineName);
                 AirOutEnthalpy = PsyHFnTdbW(AirOutTemp, AirOutHumRat);
                 WaterAdd = AirInMassFlowRate * (AirOutHumRat - AirInHumRat);
             }
@@ -1193,7 +1193,7 @@ namespace Humidifiers {
         int RefrigerantIndex;           // refiferant index
         int WaterIndex;                 // fluid type index
 
-        HumRatSatIn = PsyWFnTdbRhPb(AirInTemp, 1.0, OutBaroPress, RoutineName);
+        HumRatSatIn = PsyWFnTdbRhPb(state, AirInTemp, 1.0, OutBaroPress, RoutineName);
         HumRatSatOut = 0.0;
         HumRatSatApp = 0.0;
         WaterInEnthalpy = 2676125.0; // At 100 C
@@ -1209,7 +1209,7 @@ namespace Humidifiers {
             AirOutEnthalpy = (AirInMassFlowRate * AirInEnthalpy + WaterAddNeededMax * WaterInEnthalpy) / AirInMassFlowRate;
             AirOutHumRat = (AirInMassFlowRate * AirInHumRat + WaterAddNeededMax) / AirInMassFlowRate;
             AirOutTemp = PsyTdbFnHW(AirOutEnthalpy, AirOutHumRat);
-            HumRatSatOut = PsyWFnTdbRhPb(AirOutTemp, 1.0, OutBaroPress, RoutineName);
+            HumRatSatOut = PsyWFnTdbRhPb(state, AirOutTemp, 1.0, OutBaroPress, RoutineName);
             if (AirOutHumRat <= HumRatSatOut) {
                 // If the outlet condition is below the saturation curve, the desired moisture addition rate can be met.
                 WaterAdd = WaterAddNeededMax;
@@ -1232,7 +1232,7 @@ namespace Humidifiers {
                 // This point isn't quite on the saturation curve since we made a linear approximation of the curve,
                 // but the temperature should be very close to the correct outlet temperature. We will use this temperature
                 // as the outlet temperature and move to the saturation curve for the outlet humidity and enthalpy
-                AirOutHumRat = PsyWFnTdbRhPb(AirOutTemp, 1.0, OutBaroPress, RoutineName);
+                AirOutHumRat = PsyWFnTdbRhPb(state, AirOutTemp, 1.0, OutBaroPress, RoutineName);
                 AirOutEnthalpy = PsyHFnTdbW(AirOutTemp, AirOutHumRat);
                 WaterAdd = AirInMassFlowRate * (AirOutHumRat - AirInHumRat);
             }

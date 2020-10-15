@@ -193,9 +193,9 @@ namespace HighTempRadiantSystem {
                                      Real64 &LoadMet      // load met by the radiant system, in Watts
     );
 
-    void UpdateHTRadSourceValAvg(bool &HighTempRadSysOn); // .TRUE. if the radiant system has run this zone time step
+    void UpdateHTRadSourceValAvg(EnergyPlusData &state, bool &HighTempRadSysOn); // .TRUE. if the radiant system has run this zone time step
 
-    void DistributeHTRadGains();
+    void DistributeHTRadGains(EnergyPlusData &state);
 
     void
     ReportHighTempRadiantSystem(int const RadSysNum); // Index for the low temperature radiant system under consideration within the derived types

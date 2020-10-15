@@ -72,7 +72,8 @@ namespace PVWatts {
 
     std::map<int, PVWattsGenerator> PVWattsGenerators;
 
-    PVWattsGenerator::PVWattsGenerator(const std::string &name,
+    PVWattsGenerator::PVWattsGenerator(EnergyPlusData &state,
+                                       const std::string &name,
                                        const Real64 dcSystemCapacity,
                                        ModuleType moduleType,
                                        ArrayType arrayType,
@@ -189,7 +190,7 @@ namespace PVWatts {
 
         // Set up the pvwatts cell temperature member
         const Real64 pvwatts_height = 5.0;
-        m_tccalc = std::unique_ptr<pvwatts_celltemp>(new pvwatts_celltemp(m_inoct + 273.15, pvwatts_height, DataGlobals::TimeStepZone));
+        m_tccalc = std::unique_ptr<pvwatts_celltemp>(new pvwatts_celltemp(m_inoct + 273.15, pvwatts_height, state.dataGlobal->TimeStepZone));
     }
 
     void PVWattsGenerator::setupOutputVariables(EnergyPlusData &state)
@@ -297,12 +298,12 @@ namespace PVWatts {
         }
 
         if (NumNums < NumFields::GROUND_COVERAGE_RATIO) {
-            return PVWattsGenerator(name, dcSystemCapacity, moduleType, arrayType, systemLosses, geometryType, tilt, azimuth, surfaceNum, 0.4);
+            return PVWattsGenerator(state, name, dcSystemCapacity, moduleType, arrayType, systemLosses, geometryType, tilt, azimuth, surfaceNum, 0.4);
         }
         const Real64 groundCoverageRatio(rNumericArgs(NumFields::GROUND_COVERAGE_RATIO));
 
         PVWattsGenerator pvwattsGenerator(
-            name, dcSystemCapacity, moduleType, arrayType, systemLosses, geometryType, tilt, azimuth, surfaceNum, groundCoverageRatio);
+            state, name, dcSystemCapacity, moduleType, arrayType, systemLosses, geometryType, tilt, azimuth, surfaceNum, groundCoverageRatio);
         return pvwattsGenerator;
     }
 
@@ -373,9 +374,6 @@ namespace PVWatts {
 
     void PVWattsGenerator::calc(EnergyPlusData& state)
     {
-        using DataGlobals::HourOfDay;
-        using DataGlobals::TimeStep;
-        using DataGlobals::TimeStepZone;
         using DataHVACGlobals::TimeStepSys;
 
         // We only run this once for each zone time step.
@@ -390,7 +388,7 @@ namespace PVWatts {
         // initialize_cell_temp
         m_tccalc->set_last_values(m_lastCellTemperature, m_lastPlaneOfArrayIrradiance);
 
-        Real64 albedo = state.dataWeatherManager->TodayAlbedo(TimeStep, HourOfDay);
+        Real64 albedo = state.dataWeatherManager->TodayAlbedo(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay);
         if (!(std::isfinite(albedo) && albedo > 0.0 && albedo < 1)) {
             albedo = 0.2;
         }
@@ -399,9 +397,9 @@ namespace PVWatts {
         IrradianceOutput irr_st = processIrradiance(DataEnvironment::Year,
                                                     DataEnvironment::Month,
                                                     DataEnvironment::DayOfMonth,
-                                                    HourOfDay - 1,
-                                                    (TimeStep - 0.5) * DataGlobals::MinutesPerTimeStep,
-                                                    TimeStepZone,
+                                                    state.dataGlobal->HourOfDay - 1,
+                                                    (state.dataGlobal->TimeStep - 0.5) * DataGlobals::MinutesPerTimeStep,
+                                                    state.dataGlobal->TimeStepZone,
                                                     state.dataWeatherManager->WeatherFileLatitude,
                                                     state.dataWeatherManager->WeatherFileLongitude,
                                                     state.dataWeatherManager->WeatherFileTimeZone,
@@ -412,7 +410,7 @@ namespace PVWatts {
         // powerout
         Real64 shad_beam = 1.0;
         if (m_geometryType == GeometryType::SURFACE) {
-            shad_beam = DataHeatBalance::SunlitFrac(TimeStep, HourOfDay, m_surfaceNum);
+            shad_beam = DataHeatBalance::SunlitFrac(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, m_surfaceNum);
         }
         DCPowerOutput pwr_st =
             powerout(shad_beam, 1.0, DataEnvironment::BeamSolarRad, albedo, DataEnvironment::WindSpeed, DataEnvironment::OutDryBulbTemp, irr_st);
@@ -436,9 +434,6 @@ namespace PVWatts {
         int year, int month, int day, int hour, Real64 minute, Real64 ts_hour, Real64 lat, Real64 lon, Real64 tz, Real64 dn, Real64 df, Real64 alb)
     {
         IrradianceOutput out;
-
-        using DataGlobals::HourOfDay;
-        using DataGlobals::TimeStep;
 
         irrad irr;
         irr.set_time(year, month, day, hour, minute, ts_hour);

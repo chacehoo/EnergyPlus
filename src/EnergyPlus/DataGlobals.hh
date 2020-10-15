@@ -67,21 +67,7 @@ struct EnergyPlusData;
 namespace DataGlobals {
 
     // (last time step of last hour of last day of environ which is a design day)
-    extern bool EndDayFlag;                          // True at the end of each day (last time step of last hour of day)
-    extern bool EndHourFlag;                         // True at the end of each hour (last time step of hour)
-    extern int PreviousHour;                         // Previous Hour Index
-    extern int HourOfDay;                            // Counter for hours in a simulation day
-    extern Real64 WeightPreviousHour;                // Weighting of value for previous hour
-    extern Real64 WeightNow;                         // Weighting of value for current hour
-    extern int NumOfDayInEnvrn;                      // Number of days in the simulation for a particular environment
-    extern int NumOfTimeStepInHour;                  // Number of time steps in each hour of the simulation
-    extern int NumOfZones;                           // Total number of Zones for simulation
-    extern int TimeStep;                             // Counter for time steps (fractional hours)
-    extern Real64 TimeStepZone;                      // Zone time step in fractional hours
-    extern bool WarmupFlag;                          // True during the warmup portion of a simulation
     extern int OutputStandardError;                  // Unit number for the standard error output file
-    extern int StdOutputRecordCount;                 // Count of Standard output records
-    extern int StdMeterRecordCount;                  // Count of Meter output records
     extern bool ZoneSizingCalc;                      // TRUE if zone sizing calculation
     extern bool SysSizingCalc;                       // TRUE if system sizing calculation
     extern bool DoZoneSizing;                        // User input in SimulationControl object
@@ -155,6 +141,20 @@ namespace DataGlobals {
         std::string CalendarYearChr;                // Calendar year of the current day of simulation (character -- for reporting)
         bool EndEnvrnFlag = false;                  // True at the end of each environment (last time step of last hour of last day of environ)
         bool EndDesignDayEnvrnsFlag = false;        // True at the end of the last design day environment
+        bool EndDayFlag = false;                    // True at the end of each day (last time step of last hour of day)
+        bool EndHourFlag = false;                   // True at the end of each hour (last time step of hour)
+        int PreviousHour = 0;                       // Previous Hour Index
+        int HourOfDay = 0;                          // Counter for hours in a simulation day
+        Real64 WeightPreviousHour = 0.0;            // Weighting of value for previous hour
+        Real64 WeightNow = 0.0;                     // Weighting of value for current hour
+        int NumOfDayInEnvrn = 0;                    // Number of days in the simulation for a particular environment
+        int NumOfTimeStepInHour = 0;                // Number of time steps in each hour of the simulation
+        int NumOfZones = 0;                         // Total number of Zones for simulation
+        int TimeStep = 0;                           // Counter for time steps (fractional hours)
+        Real64 TimeStepZone = 0.0;                  // Zone time step in fractional hours
+        bool WarmupFlag = false;                    // True during the warmup portion of a simulation
+        int StdOutputRecordCount = 0;               // Count of Standard output records
+        int StdMeterRecordCount = 0;                // Count of Meter output records
 
         bool AnnualSimulation = false;
         std::string DayOfSimChr = "0";              // Counter for days (during the simulation) (character -- for reporting)
@@ -186,6 +186,20 @@ namespace DataGlobals {
             this->CalendarYearChr = "0";
             this->EndEnvrnFlag = false;
             this->EndDesignDayEnvrnsFlag = false;
+            this->EndDayFlag = false;
+            this->EndHourFlag = false;
+            this->PreviousHour = 0;
+            this->HourOfDay = 0;
+            this->WeightPreviousHour = 0.0;
+            this->WeightNow = 0.0;
+            this->NumOfDayInEnvrn = 0;
+            this->NumOfTimeStepInHour = 0;
+            this->NumOfZones = 0;
+            this->TimeStep = 0;
+            this->TimeStepZone = 0.0;
+            this->WarmupFlag = false;
+            this->StdOutputRecordCount = 0;
+            this->StdMeterRecordCount = 0;
 
             this->AnnualSimulation = false;
             this->DayOfSimChr = "0";

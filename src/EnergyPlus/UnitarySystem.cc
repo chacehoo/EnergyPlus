@@ -1163,7 +1163,7 @@ namespace UnitarySystems {
         }
 
         if (m_setFaultModelInput) {
-            if ((!DataGlobals::WarmupFlag) && (!DataGlobals::DoingSizing) && (!DataGlobals::KickOffSimulation)) {
+            if ((!state.dataGlobal->WarmupFlag) && (!DataGlobals::DoingSizing) && (!DataGlobals::KickOffSimulation)) {
 
                 // check FaultsManager if connection exists
                 FaultsManager::SetFaultyCoilSATSensor(this->UnitType, this->Name, this->m_FaultyCoilSATFlag, this->m_FaultyCoilSATIndex);
@@ -1256,7 +1256,7 @@ namespace UnitarySystems {
         if (AirLoopNum == -1) {                                            // Outdoor Air Unit
             DataLoopNode::Node(ControlNode).TempSetPoint = OAUCoilOutTemp; // Set the coil outlet temperature
             if (this->m_ISHundredPercentDOASDXCoil) {
-                this->frostControlSetPointLimit(this->m_DesiredOutletTemp,
+                this->frostControlSetPointLimit(state, this->m_DesiredOutletTemp,
                                                 DataLoopNode::Node(ControlNode).HumRatMax,
                                                 DataEnvironment::OutBaroPress,
                                                 this->DesignMinOutletTemp,
@@ -1299,7 +1299,8 @@ namespace UnitarySystems {
         }
     }
 
-    void UnitarySys::frostControlSetPointLimit(Real64 &TempSetPoint,       // temperature setpoint of the sensor node
+    void UnitarySys::frostControlSetPointLimit(EnergyPlusData &state,
+                                               Real64 &TempSetPoint,       // temperature setpoint of the sensor node
                                                Real64 &HumRatSetPoint,     // humidity ratio setpoint of the sensor node
                                                Real64 const BaroPress,     // baromtric pressure, Pa [N/m^2]
                                                Real64 const TfrostControl, // minimum temperature limit for forst control
@@ -1333,7 +1334,7 @@ namespace UnitarySystems {
             }
         } else if (ControlMode == RunOnLatent && AirMassFlow > DataHVACGlobals::SmallAirVolFlow &&
                    HumRatSetPoint < DataLoopNode::Node(this->CoolCoilInletNodeNum).HumRat) {
-            Real64 HumRatioSat = Psychrometrics::PsyWFnTdpPb(TfrostControl, BaroPress, routineName);
+            Real64 HumRatioSat = Psychrometrics::PsyWFnTdpPb(state, TfrostControl, BaroPress, routineName);
             if (HumRatioSat > HumRatSetPoint) {
                 HumRatSetPoint = HumRatioSat;
                 this->m_FrostControlStatus = 2;
@@ -3198,7 +3199,7 @@ namespace UnitarySystems {
 
                 // check if the UnitarySystem is connected as zone equipment
                 if (!thisSys.ATMixerExists && !AirLoopFound && !OASysFound) {
-                    for (int ControlledZoneNum = 1; ControlledZoneNum <= DataGlobals::NumOfZones; ++ControlledZoneNum) {
+                    for (int ControlledZoneNum = 1; ControlledZoneNum <= state.dataGlobal->NumOfZones; ++ControlledZoneNum) {
                         for (int ZoneExhNum = 1; ZoneExhNum <= DataZoneEquipment::ZoneEquipConfig(ControlledZoneNum).NumExhaustNodes; ++ZoneExhNum) {
                             if (DataZoneEquipment::ZoneEquipConfig(ControlledZoneNum).ExhaustNode(ZoneExhNum) != thisSys.AirInNode) continue;
                             ZoneEquipmentFound = true;
@@ -3243,7 +3244,7 @@ namespace UnitarySystems {
                         }
                     }
                     if (!ZoneInletNodeFound) {
-                        for (int ControlledZoneNum = 1; ControlledZoneNum <= DataGlobals::NumOfZones; ++ControlledZoneNum) {
+                        for (int ControlledZoneNum = 1; ControlledZoneNum <= state.dataGlobal->NumOfZones; ++ControlledZoneNum) {
                             for (int ZoneInletNum = 1; ZoneInletNum <= DataZoneEquipment::ZoneEquipConfig(ControlledZoneNum).NumInletNodes;
                                  ++ZoneInletNum) {
                                 if (DataZoneEquipment::ZoneEquipConfig(ControlledZoneNum).InletNode(ZoneInletNum) != thisSys.AirOutNode) continue;
@@ -3268,7 +3269,7 @@ namespace UnitarySystems {
                 if (thisSys.ATMixerExists && thisSys.ATMixerType == DataHVACGlobals::ATMixer_InletSide) {
 
                     if (!AirLoopFound && !OASysFound) {
-                        for (int ControlledZoneNum = 1; ControlledZoneNum <= DataGlobals::NumOfZones; ++ControlledZoneNum) {
+                        for (int ControlledZoneNum = 1; ControlledZoneNum <= state.dataGlobal->NumOfZones; ++ControlledZoneNum) {
                             for (int ZoneExhNum = 1; ZoneExhNum <= DataZoneEquipment::ZoneEquipConfig(ControlledZoneNum).NumExhaustNodes;
                                  ++ZoneExhNum) {
                                 if (DataZoneEquipment::ZoneEquipConfig(ControlledZoneNum).ExhaustNode(ZoneExhNum) != thisSys.m_ATMixerSecNode)
@@ -3313,7 +3314,7 @@ namespace UnitarySystems {
                             }
                         }
                         if (!ZoneInletNodeFound) {
-                            for (int ControlledZoneNum = 1; ControlledZoneNum <= DataGlobals::NumOfZones; ++ControlledZoneNum) {
+                            for (int ControlledZoneNum = 1; ControlledZoneNum <= state.dataGlobal->NumOfZones; ++ControlledZoneNum) {
                                 for (int ZoneInletNum = 1; ZoneInletNum <= DataZoneEquipment::ZoneEquipConfig(ControlledZoneNum).NumInletNodes;
                                      ++ZoneInletNum) {
                                     if (DataZoneEquipment::ZoneEquipConfig(ControlledZoneNum).InletNode(ZoneInletNum) != thisSys.AirOutNode) continue;
@@ -3338,7 +3339,7 @@ namespace UnitarySystems {
                 if (thisSys.ATMixerExists && thisSys.ATMixerType == DataHVACGlobals::ATMixer_SupplySide) {
 
                     if (!AirLoopFound && !OASysFound) {
-                        for (int ControlledZoneNum = 1; ControlledZoneNum <= DataGlobals::NumOfZones; ++ControlledZoneNum) {
+                        for (int ControlledZoneNum = 1; ControlledZoneNum <= state.dataGlobal->NumOfZones; ++ControlledZoneNum) {
                             for (int ZoneExhNum = 1; ZoneExhNum <= DataZoneEquipment::ZoneEquipConfig(ControlledZoneNum).NumExhaustNodes;
                                  ++ZoneExhNum) {
                                 if (DataZoneEquipment::ZoneEquipConfig(ControlledZoneNum).ExhaustNode(ZoneExhNum) != thisSys.AirInNode) continue;
@@ -3383,7 +3384,7 @@ namespace UnitarySystems {
                             }
                         }
                         if (!ZoneInletNodeFound) {
-                            for (int ControlledZoneNum = 1; ControlledZoneNum <= DataGlobals::NumOfZones; ++ControlledZoneNum) {
+                            for (int ControlledZoneNum = 1; ControlledZoneNum <= state.dataGlobal->NumOfZones; ++ControlledZoneNum) {
                                 for (int ZoneInletNum = 1; ZoneInletNum <= DataZoneEquipment::ZoneEquipConfig(ControlledZoneNum).NumInletNodes;
                                      ++ZoneInletNum) {
                                     if (DataZoneEquipment::ZoneEquipConfig(ControlledZoneNum).InletNode(ZoneInletNum) != thisSys.ATMixerOutNode)
@@ -3418,7 +3419,7 @@ namespace UnitarySystems {
                                                                 cCurrentModuleObject)) {
                                     AirLoopNumber = AirLoopNum;
                                     AirLoopFound = true;
-                                    for (int ControlledZoneNum = 1; ControlledZoneNum <= DataGlobals::NumOfZones; ++ControlledZoneNum) {
+                                    for (int ControlledZoneNum = 1; ControlledZoneNum <= state.dataGlobal->NumOfZones; ++ControlledZoneNum) {
                                         if (DataZoneEquipment::ZoneEquipConfig(ControlledZoneNum).ActualZoneNum != thisSys.ControlZoneNum) continue;
                                         //             Find the controlled zone number for the specified thermostat location
                                         thisSys.NodeNumOfControlledZone = DataZoneEquipment::ZoneEquipConfig(ControlledZoneNum).ZoneNode;
@@ -7852,7 +7853,7 @@ namespace UnitarySystems {
                     } else if (ControlNode == OutNode) {
                         if (this->m_ISHundredPercentDOASDXCoil && this->m_RunOnSensibleLoad) {
                             if (DataLoopNode::Node(ControlNode).HumRatMax > 0.0) humRatMaxSP = DataLoopNode::Node(ControlNode).HumRatMax;
-                            this->frostControlSetPointLimit(DataLoopNode::Node(ControlNode).TempSetPoint,
+                            this->frostControlSetPointLimit(state, DataLoopNode::Node(ControlNode).TempSetPoint,
                                                             humRatMaxSP,
                                                             DataEnvironment::OutBaroPress,
                                                             this->DesignMinOutletTemp,
@@ -7865,7 +7866,7 @@ namespace UnitarySystems {
                             if (DataLoopNode::Node(this->AirOutNode).HumRatMax > 0.0) humRatMaxSP = DataLoopNode::Node(this->AirOutNode).HumRatMax;
                             if (DataLoopNode::Node(ControlNode).HumRatMax > 0.0) humRatMaxSP = DataLoopNode::Node(ControlNode).HumRatMax;
                             if (this->m_ISHundredPercentDOASDXCoil && this->m_RunOnLatentLoad) {
-                                this->frostControlSetPointLimit(DataLoopNode::Node(ControlNode).TempSetPoint,
+                                this->frostControlSetPointLimit(state, DataLoopNode::Node(ControlNode).TempSetPoint,
                                                                 humRatMaxSP,
                                                                 DataEnvironment::OutBaroPress,
                                                                 this->DesignMinOutletTemp,
@@ -7877,7 +7878,7 @@ namespace UnitarySystems {
                         if (DataLoopNode::Node(ControlNode).HumRatMax > 0.0) humRatMaxSP = DataLoopNode::Node(ControlNode).HumRatMax;
                         if (DataLoopNode::Node(OutNode).HumRatMax > 0.0) humRatMaxSP = DataLoopNode::Node(OutNode).HumRatMax;
                         if (this->m_ISHundredPercentDOASDXCoil && this->m_RunOnSensibleLoad) {
-                            this->frostControlSetPointLimit(DataLoopNode::Node(ControlNode).TempSetPoint,
+                            this->frostControlSetPointLimit(state, DataLoopNode::Node(ControlNode).TempSetPoint,
                                                             humRatMaxSP,
                                                             DataEnvironment::OutBaroPress,
                                                             this->DesignMinOutletTemp,
@@ -7887,7 +7888,7 @@ namespace UnitarySystems {
                             DataLoopNode::Node(ControlNode).TempSetPoint - (DataLoopNode::Node(ControlNode).Temp - DataLoopNode::Node(OutNode).Temp);
                         if (this->m_DehumidControlType_Num != DehumCtrlType::None) {
                             if (this->m_ISHundredPercentDOASDXCoil && this->m_RunOnLatentLoad) {
-                                this->frostControlSetPointLimit(DataLoopNode::Node(ControlNode).TempSetPoint,
+                                this->frostControlSetPointLimit(state, DataLoopNode::Node(ControlNode).TempSetPoint,
                                                                 humRatMaxSP,
                                                                 DataEnvironment::OutBaroPress,
                                                                 this->DesignMinOutletTemp,
@@ -11731,7 +11732,7 @@ namespace UnitarySystems {
                                 TempSolveRoot::SolveRoot(
                                     state, Acc, MaxIte, SolFla, PartLoadFrac, this->HXAssistedCoolCoilTempResidual, TempMinPLR, TempMaxPLR, Par);
                                 if (SolFla == -1) {
-                                    if (!DataGlobals::WarmupFlag) {
+                                    if (!state.dataGlobal->WarmupFlag) {
                                         if (this->warnIndex.m_HXAssistedSensPLRIter < 1) {
                                             ++this->warnIndex.m_HXAssistedSensPLRIter;
                                             ShowWarningError(
@@ -11753,7 +11754,7 @@ namespace UnitarySystems {
                                     }
                                 } else if (SolFla == -2) {
                                     PartLoadFrac = ReqOutput / FullOutput;
-                                    if (!DataGlobals::WarmupFlag) {
+                                    if (!state.dataGlobal->WarmupFlag) {
                                         if (this->warnIndex.m_HXAssistedSensPLRFail < 1) {
                                             ++this->warnIndex.m_HXAssistedSensPLRFail;
                                             ShowWarningError(this->UnitType +
@@ -11775,7 +11776,7 @@ namespace UnitarySystems {
                                 }
                             } else if (SolFla == -2) {
                                 PartLoadFrac = ReqOutput / FullOutput;
-                                if (!DataGlobals::WarmupFlag) {
+                                if (!state.dataGlobal->WarmupFlag) {
                                     if (this->warnIndex.m_HXAssistedSensPLRFail2 < 1) {
                                         ++this->warnIndex.m_HXAssistedSensPLRFail2;
                                         ShowWarningError(this->UnitType +
@@ -12147,7 +12148,7 @@ namespace UnitarySystems {
                                                              TempMaxPLR,
                                                              Par);
                                     if (SolFla == -1) {
-                                        if (!DataGlobals::WarmupFlag) {
+                                        if (!state.dataGlobal->WarmupFlag) {
                                             if (this->warnIndex.m_HXAssistedCRLatPLRIter < 1) {
                                                 ++this->warnIndex.m_HXAssistedCRLatPLRIter;
                                                 ShowWarningError(
@@ -12172,7 +12173,7 @@ namespace UnitarySystems {
                                     } else if (SolFla == -2) {
 
                                         PartLoadFrac = ReqOutput / FullOutput;
-                                        if (!DataGlobals::WarmupFlag) {
+                                        if (!state.dataGlobal->WarmupFlag) {
                                             if (this->warnIndex.m_HXAssistedCRLatPLRFail < 1) {
                                                 ++this->warnIndex.m_HXAssistedCRLatPLRFail;
                                                 ShowWarningError(this->UnitType +
@@ -12194,7 +12195,7 @@ namespace UnitarySystems {
                                     }
                                 } else if (SolFla == -2) {
                                     PartLoadFrac = ReqOutput / FullOutput;
-                                    if (!DataGlobals::WarmupFlag) {
+                                    if (!state.dataGlobal->WarmupFlag) {
                                         if (this->warnIndex.m_HXAssistedCRLatPLRFail2 < 1) {
                                             ++this->warnIndex.m_HXAssistedCRLatPLRFail2;
                                             ShowWarningError(this->UnitType +
@@ -12413,7 +12414,7 @@ namespace UnitarySystems {
         }
 
         if (SolFla == -1) {
-            if (!DataGlobals::WarmupFlag) {
+            if (!state.dataGlobal->WarmupFlag) {
                 if (this->warnIndex.m_SensPLRIter < 1) {
                     ++this->warnIndex.m_SensPLRIter;
                     ShowWarningError(this->UnitType + " - Iteration limit exceeded calculating part-load ratio for unit = " + this->Name);
@@ -12431,7 +12432,7 @@ namespace UnitarySystems {
             }
         } else if (SolFla == -2) {
             PartLoadFrac = ReqOutput / FullOutput;
-            if (!DataGlobals::WarmupFlag) {
+            if (!state.dataGlobal->WarmupFlag) {
                 if (this->warnIndex.m_SensPLRFail < 1) {
                     ++this->warnIndex.m_SensPLRFail;
                     ShowWarningError(this->UnitType +
@@ -12450,7 +12451,7 @@ namespace UnitarySystems {
         }
 
         if (SolFlaLat == -1 && SolFla != -1) {
-            if (!DataGlobals::WarmupFlag) {
+            if (!state.dataGlobal->WarmupFlag) {
                 if (this->warnIndex.m_LatPLRIter < 1) {
                     ++this->warnIndex.m_LatPLRIter;
                     ShowWarningError(this->UnitType + " - Iteration limit exceeded calculating latent part-load ratio for unit = " + this->Name);
@@ -12472,7 +12473,7 @@ namespace UnitarySystems {
             } else {
                 PartLoadFrac = 1.0;
             }
-            if (!DataGlobals::WarmupFlag) {
+            if (!state.dataGlobal->WarmupFlag) {
                 if (this->warnIndex.m_LatPLRFail < 1) {
                     ++this->warnIndex.m_LatPLRFail;
                     ShowWarningError(this->UnitType +
@@ -13091,7 +13092,7 @@ namespace UnitarySystems {
 
         if (SolFla < 0) {
             if (SolFla == -1) {
-                if (!DataGlobals::WarmupFlag) {
+                if (!state.dataGlobal->WarmupFlag) {
                     if (this->warnIndex.m_HeatCoilSensPLRIter < 1) {
                         ++this->warnIndex.m_HeatCoilSensPLRIter;
                         ShowWarningError(this->UnitType +
@@ -13110,7 +13111,7 @@ namespace UnitarySystems {
                 }
             } else if (SolFla == -2) {
                 PartLoadFrac = ReqOutput / FullOutput;
-                if (!DataGlobals::WarmupFlag) {
+                if (!state.dataGlobal->WarmupFlag) {
                     if (this->warnIndex.m_HeatCoilSensPLRFail < 1) {
                         ++this->warnIndex.m_HeatCoilSensPLRFail;
                         ShowWarningError(this->UnitType +
@@ -13466,7 +13467,7 @@ namespace UnitarySystems {
         }
 
         if (SolFla == -1) {
-            if (!DataGlobals::WarmupFlag) {
+            if (!state.dataGlobal->WarmupFlag) {
                 if (this->warnIndex.m_SuppHeatCoilSensPLRIter < 1) {
                     ++this->warnIndex.m_SuppHeatCoilSensPLRIter;
                     ShowWarningError(this->UnitType + " - Iteration limit exceeded calculating sensible part-load ratio for unit = " + this->Name);
@@ -13484,7 +13485,7 @@ namespace UnitarySystems {
             } // IF(.NOT. WarmupFlag)THEN
         } else if (SolFla == -2) {
             PartLoadFrac = ReqOutput / FullOutput;
-            if (!DataGlobals::WarmupFlag) {
+            if (!state.dataGlobal->WarmupFlag) {
                 if (this->warnIndex.m_SuppHeatCoilSensPLRFail < 1) {
                     ++this->warnIndex.m_SuppHeatCoilSensPLRFail;
                     ShowWarningError(this->UnitType +
@@ -14707,7 +14708,7 @@ namespace UnitarySystems {
                 SpeedNum = int(Par[5]);
                 FanOpMode = int(Par[6]);
 
-                HeatingCoils::CalcMultiStageElectricHeatingCoil(CoilIndex, SpeedRatio, CycRatio, SpeedNum, FanOpMode);
+                HeatingCoils::CalcMultiStageElectricHeatingCoil(state, CoilIndex, SpeedRatio, CycRatio, SpeedNum, FanOpMode);
 
                 OutletAirTemp = DataLoopNode::Node(thisSys.HeatCoilOutletNodeNum).Temp;
 
@@ -14717,7 +14718,7 @@ namespace UnitarySystems {
                 SpeedNum = int(Par[5]);
                 FanOpMode = int(Par[6]);
 
-                HeatingCoils::CalcMultiStageElectricHeatingCoil(CoilIndex, SpeedRatio, CycRatio, SpeedNum, FanOpMode);
+                HeatingCoils::CalcMultiStageElectricHeatingCoil(state, CoilIndex, SpeedRatio, CycRatio, SpeedNum, FanOpMode);
 
                 OutletAirTemp = DataLoopNode::Node(thisSys.HeatCoilOutletNodeNum).Temp;
 
@@ -15134,7 +15135,7 @@ namespace UnitarySystems {
                 SpeedNum = int(Par[5]);
                 FanOpMode = int(Par[6]);
 
-                HeatingCoils::CalcMultiStageElectricHeatingCoil(CoilIndex, SpeedRatio, CycRatio, SpeedNum, FanOpMode);
+                HeatingCoils::CalcMultiStageElectricHeatingCoil(state, CoilIndex, SpeedRatio, CycRatio, SpeedNum, FanOpMode);
 
                 OutletAirTemp = DataLoopNode::Node(thisSys.HeatCoilOutletNodeNum).Temp;
 

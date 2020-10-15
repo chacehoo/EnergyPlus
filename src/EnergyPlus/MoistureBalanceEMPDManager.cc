@@ -139,7 +139,8 @@ namespace MoistureBalanceEMPDManager {
         InitEnvrnFlag = true;
     }
 
-    Real64 CalcDepthFromPeriod(Real64 const period,          // in seconds
+    Real64 CalcDepthFromPeriod(EnergyPlusData &state,
+                               Real64 const period,          // in seconds
                                Material::MaterialProperties const &mat // material
     )
     {
@@ -150,7 +151,7 @@ namespace MoistureBalanceEMPDManager {
         Real64 const P_amb = 101325; // Pa
 
         // Calculate saturation vapor pressure at assumed temperature
-        Real64 const PV_sat = Psychrometrics::PsyPsatFnTemp(T, "CalcDepthFromPeriod");
+        Real64 const PV_sat = Psychrometrics::PsyPsatFnTemp(state, T, "CalcDepthFromPeriod");
 
         // Calculate slope of moisture sorption curve
         Real64 const slope_MC = mat.MoistACoeff * mat.MoistBCoeff * std::pow(RH, mat.MoistBCoeff - 1) +
@@ -265,12 +266,12 @@ namespace MoistureBalanceEMPDManager {
             material.MoistCCoeff = MaterialProps(4);
             material.MoistDCoeff = MaterialProps(5);
             if (lNumericFieldBlanks(6) || MaterialProps(6) == DataGlobalConstants::AutoCalculate()) {
-                material.EMPDSurfaceDepth = CalcDepthFromPeriod(24 * 3600, material); // 1 day
+                material.EMPDSurfaceDepth = CalcDepthFromPeriod(state, 24 * 3600, material); // 1 day
             } else {
                 material.EMPDSurfaceDepth = MaterialProps(6);
             }
             if (lNumericFieldBlanks(7) || MaterialProps(7) == DataGlobalConstants::AutoCalculate()) {
-                material.EMPDDeepDepth = CalcDepthFromPeriod(21 * 24 * 3600, material); // 3 weeks
+                material.EMPDDeepDepth = CalcDepthFromPeriod(state, 21 * 24 * 3600, material); // 3 weeks
             } else {
                 material.EMPDDeepDepth = MaterialProps(7);
             }
@@ -284,7 +285,7 @@ namespace MoistureBalanceEMPDManager {
         }
 
         // Ensure at least one interior EMPD surface for each zone
-        EMPDzone.dimension(NumOfZones, false);
+        EMPDzone.dimension(state.dataGlobal->NumOfZones, false);
         for (SurfNum = 1; SurfNum <= TotSurfaces; ++SurfNum) {
             if (!Surface(SurfNum).HeatTransSurf || Surface(SurfNum).Class == SurfaceClass_Window)
                 continue; // Heat transfer surface only and not a window
@@ -328,7 +329,7 @@ namespace MoistureBalanceEMPDManager {
             }
         }
 
-        for (Loop = 1; Loop <= NumOfZones; ++Loop) {
+        for (Loop = 1; Loop <= state.dataGlobal->NumOfZones; ++Loop) {
             if (!EMPDzone(Loop)) {
                 ShowSevereError("GetMoistureBalanceEMPDInput: None of the constructions for zone = " + Zone(Loop).Name +
                                 " has an inside layer with EMPD properties");
@@ -398,7 +399,7 @@ namespace MoistureBalanceEMPDManager {
             ZoneNum = Surface(SurfNum).Zone;
             if (!Surface(SurfNum).HeatTransSurf) continue;
             Real64 const rv_air_in_initval = min(PsyRhovFnTdbWPb_fast(MAT(ZoneNum), max(ZoneAirHumRat(ZoneNum), 1.0e-5), OutBaroPress),
-                                                 PsyRhovFnTdbRh(MAT(ZoneNum), 1.0, "InitMoistureBalanceEMPD"));
+                                                 PsyRhovFnTdbRh(state, MAT(ZoneNum), 1.0, "InitMoistureBalanceEMPD"));
             RVSurfaceOld(SurfNum) = rv_air_in_initval;
             RVSurface(SurfNum) = rv_air_in_initval;
             RVSurfLayer(SurfNum) = rv_air_in_initval;
@@ -561,7 +562,7 @@ namespace MoistureBalanceEMPDManager {
         RHaver = RVaver * 461.52 * (Taver + DataGlobalConstants::KelvinConv()) * std::exp(-23.7093 + 4111.0 / (Taver + 237.7));
 
         // Calculate the saturated vapor pressure, surface vapor pressure and dewpoint. Used to check for condensation in HeatBalanceSurfaceManager
-        PVsat = PsyPsatFnTemp(Taver, RoutineName);
+        PVsat = PsyPsatFnTemp(state, Taver, RoutineName);
         PVsurf = RHaver * std::exp(23.7093 - 4111.0 / (Taver + 237.7));
         TempSat = 4111.0 / (23.7093 - std::log(PVsurf)) + 35.45 - DataGlobalConstants::KelvinConv();
 
@@ -579,8 +580,8 @@ namespace MoistureBalanceEMPDManager {
         RHZone = rho_vapor_air_in * 461.52 * (TempZone + DataGlobalConstants::KelvinConv()) * std::exp(-23.7093 + 4111.0 / ((TempZone + DataGlobalConstants::KelvinConv()) - 35.45));
 
         // Convert stored vapor density from previous timestep to RH.
-        RH_deep_layer_old = PsyRhFnTdbRhov(Taver, rv_deep_old);
-        RH_surf_layer_old = PsyRhFnTdbRhov(Taver, rv_surf_layer_old);
+        RH_deep_layer_old = PsyRhFnTdbRhov(state, Taver, rv_deep_old);
+        RH_surf_layer_old = PsyRhFnTdbRhov(state, Taver, rv_surf_layer_old);
 
         // If coating vapor resistance factor equals 0, coating resistance is zero (avoid divide by zero).
         // Otherwise, calculate coating resistance with coating vapor resistance factor and thickness. [s/m]
@@ -606,13 +607,13 @@ namespace MoistureBalanceEMPDManager {
 
         // Calculate vapor flux leaving surface layer, entering deep layer, and entering zone.
         mass_flux_surf_deep_max =
-            material.EMPDDeepDepth * material.Density * dU_dRH * (RH_surf_layer_old - RH_deep_layer_old) / (TimeStepZone * 3600.0);
+            material.EMPDDeepDepth * material.Density * dU_dRH * (RH_surf_layer_old - RH_deep_layer_old) / (state.dataGlobal->TimeStepZone * 3600.0);
         mass_flux_surf_deep = hm_deep_layer * (rv_surf_layer_old - rv_deep_old);
         if (std::abs(mass_flux_surf_deep_max) < std::abs(mass_flux_surf_deep)) {
             mass_flux_surf_deep = mass_flux_surf_deep_max;
         }
 
-        mass_flux_zone_surf_max = material.EMPDSurfaceDepth * material.Density * dU_dRH * (RHZone - RH_surf_layer_old) / (TimeStepZone * 3600.0);
+        mass_flux_zone_surf_max = material.EMPDSurfaceDepth * material.Density * dU_dRH * (RHZone - RH_surf_layer_old) / (state.dataGlobal->TimeStepZone * 3600.0);
         mass_flux_zone_surf = hm_surf_layer * (rho_vapor_air_in - rv_surf_layer_old);
         if (std::abs(mass_flux_zone_surf_max) < std::abs(mass_flux_zone_surf)) {
             mass_flux_zone_surf = mass_flux_zone_surf_max;
@@ -628,7 +629,7 @@ namespace MoistureBalanceEMPDManager {
 
         // Calculate new surface layer RH using mass balance on surface layer
         RH_surf_layer_tmp =
-            RH_surf_layer_old + TimeStepZone * 3600.0 * (-mass_flux_surf_layer / (material.Density * material.EMPDSurfaceDepth * dU_dRH));
+            RH_surf_layer_old + state.dataGlobal->TimeStepZone * 3600.0 * (-mass_flux_surf_layer / (material.Density * material.EMPDSurfaceDepth * dU_dRH));
 
         //	RH_surf_layer = RH_surf_layer_tmp;
 
@@ -676,11 +677,11 @@ namespace MoistureBalanceEMPDManager {
         if (material.EMPDDeepDepth <= 0.0) {
             RH_deep_layer = RH_deep_layer_old;
         } else {
-            RH_deep_layer = RH_deep_layer_old + TimeStepZone * 3600.0 * mass_flux_deep_layer / (material.Density * material.EMPDDeepDepth * dU_dRH);
+            RH_deep_layer = RH_deep_layer_old + state.dataGlobal->TimeStepZone * 3600.0 * mass_flux_deep_layer / (material.Density * material.EMPDDeepDepth * dU_dRH);
         }
         // Convert calculated RH back to vapor density of surface and deep layers.
-        rv_surf_layer = PsyRhovFnTdbRh(Taver, RH_surf_layer);
-        rv_deep_layer = PsyRhovFnTdbRh(Taver, RH_deep_layer);
+        rv_surf_layer = PsyRhovFnTdbRh(state, Taver, RH_surf_layer);
+        rv_deep_layer = PsyRhovFnTdbRh(state, Taver, RH_deep_layer);
 
         // Calculate surface-layer and deep-layer vapor pressures [Pa]
         PV_surf_layer = RH_surf_layer * std::exp(23.7093 - 4111.0 / (Taver + 237.7));

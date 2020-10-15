@@ -173,7 +173,7 @@ namespace FluidCoolers {
 
         void size(EnergyPlusData &state);
 
-        void update();
+        void update(EnergyPlusData &state);
 
         void report(bool RunFlag);
 

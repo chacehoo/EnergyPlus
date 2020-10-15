@@ -304,24 +304,24 @@ namespace OutputReportTabularAnnual {
         return (missingHourAggError || missingMaxOrMinError);
     }
 
-    void GatherAnnualResultsForTimeStep(OutputProcessor::TimeStepType kindOfTimeStep)
+    void GatherAnnualResultsForTimeStep(EnergyPlusData &state, OutputProcessor::TimeStepType kindOfTimeStep)
     {
         // Jason Glazer, August 2015
         // This function is not part of the class but acts as an interface between procedural code and the class by
         // gathering data for each of the AnnualTable objects
         std::vector<AnnualTable>::iterator annualTableIt;
         for (annualTableIt = annualTables.begin(); annualTableIt != annualTables.end(); ++annualTableIt) {
-            annualTableIt->gatherForTimestep(kindOfTimeStep);
+            annualTableIt->gatherForTimestep(state, kindOfTimeStep);
         }
     }
 
-    void AnnualTable::gatherForTimestep(OutputProcessor::TimeStepType kindOfTimeStep)
+    void AnnualTable::gatherForTimestep(EnergyPlusData &state, OutputProcessor::TimeStepType kindOfTimeStep)
     {
         // Jason Glazer, August 2015
         // For each cell of the table, gather the value as indicated by the type of aggregation
 
         int timestepTimeStamp;
-        Real64 elapsedTime = AnnualTable::getElapsedTime(kindOfTimeStep);
+        Real64 elapsedTime = AnnualTable::getElapsedTime(state, kindOfTimeStep);
         Real64 secondsInTimeStep = AnnualTable::getSecondsInTimeStep(kindOfTimeStep);
         bool activeMinMax = false;
         bool activeHoursShown = false;
@@ -353,9 +353,9 @@ namespace OutputReportTabularAnnual {
                         Real64 newDuration = 0.0;
                         bool activeNewValue = false;
                         // the current timestamp
-                        int minuteCalculated = General::DetermineMinuteForReporting(kindOfTimeStep);
+                        int minuteCalculated = General::DetermineMinuteForReporting(state, kindOfTimeStep);
                         General::EncodeMonDayHrMin(
-                            timestepTimeStamp, DataEnvironment::Month, DataEnvironment::DayOfMonth, DataGlobals::HourOfDay, minuteCalculated);
+                            timestepTimeStamp, DataEnvironment::Month, DataEnvironment::DayOfMonth, state.dataGlobal->HourOfDay, minuteCalculated);
                         // perform the selected aggregation type
                         // the following types of aggregations are not gathered at this point:
                         // noAggregation, valueWhenMaxMin, sumOrAverageHoursShown, 	maximumDuringHoursShown, minimumDuringHoursShown:
@@ -601,13 +601,13 @@ namespace OutputReportTabularAnnual {
         }
     }
 
-    Real64 AnnualTable::getElapsedTime(OutputProcessor::TimeStepType kindOfTimeStep)
+    Real64 AnnualTable::getElapsedTime(EnergyPlusData &state, OutputProcessor::TimeStepType kindOfTimeStep)
     {
         Real64 elapsedTime;
         if (kindOfTimeStep == OutputProcessor::TimeStepType::TimeStepZone) {
             elapsedTime = DataHVACGlobals::TimeStepSys;
         } else {
-            elapsedTime = DataGlobals::TimeStepZone;
+            elapsedTime = state.dataGlobal->TimeStepZone;
         }
         return elapsedTime;
     }

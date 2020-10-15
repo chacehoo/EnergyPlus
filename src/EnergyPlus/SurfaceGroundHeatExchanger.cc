@@ -1385,7 +1385,6 @@ namespace SurfaceGroundHeatExchanger {
         // values to the running average.
 
         // Using/Aliasing
-        using DataGlobals::TimeStepZone;
         using DataHVACGlobals::SysTimeElapsed;
         using DataHVACGlobals::TimeStepSys;
         using DataLoopNode::Node;
@@ -1406,11 +1405,11 @@ namespace SurfaceGroundHeatExchanger {
             if (this->LastSysTimeElapsed == SysTimeElapsed) {
                 // Still iterating or reducing system time step, so subtract old values which were
                 // not valid
-                this->QSrcAvg -= this->LastQSrc * this->LastTimeStepSys / TimeStepZone;
+                this->QSrcAvg -= this->LastQSrc * this->LastTimeStepSys / state.dataGlobal->TimeStepZone;
             }
 
             // Update the running average and the "last" values with the current values of the appropriate variables
-            this->QSrcAvg += this->QSrc * TimeStepSys / TimeStepZone;
+            this->QSrcAvg += this->QSrc * TimeStepSys / state.dataGlobal->TimeStepZone;
 
             this->LastQSrc = SourceFlux;
             this->LastSysTimeElapsed = SysTimeElapsed;

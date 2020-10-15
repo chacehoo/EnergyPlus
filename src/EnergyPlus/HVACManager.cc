@@ -129,17 +129,11 @@ namespace HVACManager {
     using DataGlobals::AnyIdealCondEntSetPointInModel;
     using DataGlobals::DisplayExtraWarnings;
     using DataGlobals::DoOutputReporting;
-    using DataGlobals::EndHourFlag;
-    using DataGlobals::HourOfDay;
     using DataGlobals::isPulseZoneSizing;
     using DataGlobals::KickOffSimulation;
     using DataGlobals::MetersHaveBeenInitialized;
-    using DataGlobals::NumOfZones;
     using DataGlobals::RunOptCondEntTemp;
     using DataGlobals::SysSizingCalc;
-    using DataGlobals::TimeStep;
-    using DataGlobals::TimeStepZone;
-    using DataGlobals::WarmupFlag;
     using DataGlobals::ZoneSizingCalc;
     using namespace DataEnvironment;
 
@@ -343,7 +337,7 @@ namespace HVACManager {
             AirLoopsSimOnce = false;
             MyEnvrnFlag = false;
             NumOfSysTimeStepsLastZoneTimeStep = 1;
-            PreviousTimeStep = TimeStepZone;
+            PreviousTimeStep = state.dataGlobal->TimeStepZone;
         }
         if (!state.dataGlobal->BeginEnvrnFlag) {
             MyEnvrnFlag = true;
@@ -351,13 +345,13 @@ namespace HVACManager {
 
         QRadSurfAFNDuct = 0.0;
         SysTimeElapsed = 0.0;
-        TimeStepSys = TimeStepZone;
+        TimeStepSys = state.dataGlobal->TimeStepZone;
         FirstTimeStepSysFlag = true;
         ShortenTimeStepSys = false;
         UseZoneTimeStepHistory = true;
-        PriorTimeStep = TimeStepZone;
+        PriorTimeStep = state.dataGlobal->TimeStepZone;
         NumOfSysTimeSteps = 1;
-        FracTimeStepZone = TimeStepSys / TimeStepZone;
+        FracTimeStepZone = TimeStepSys / state.dataGlobal->TimeStepZone;
 
         bool anyEMSRan;
         ManageEMS(state, EMSManager::EMSCallFrom::BeginTimestepBeforePredictor, anyEMSRan, ObjexxFCL::Optional_int_const()); // calling point
@@ -383,7 +377,7 @@ namespace HVACManager {
 
         SysDepZoneLoadsLagged = SysDepZoneLoads;
 
-        UpdateInternalGainValues(true, true);
+        UpdateInternalGainValues(state, true, true);
 
         ManageZoneAirUpdates(state, iPredictStep, ZoneTempChange, ShortenTimeStepSys, UseZoneTimeStepHistory, PriorTimeStep);
 
@@ -391,7 +385,7 @@ namespace HVACManager {
 
         SimHVAC(state);
 
-        if (AnyIdealCondEntSetPointInModel && MetersHaveBeenInitialized && !WarmupFlag) {
+        if (AnyIdealCondEntSetPointInModel && MetersHaveBeenInitialized && !state.dataGlobal->WarmupFlag) {
             RunOptCondEntTemp = true;
             while (RunOptCondEntTemp) {
                 SimHVAC(state);
@@ -416,7 +410,7 @@ namespace HVACManager {
             ZTempTrendsNumSysSteps = int(ZoneTempChange / MaxZoneTempDiff + 1.0); // add 1 for truncation
             NumOfSysTimeSteps = min(ZTempTrendsNumSysSteps, LimitNumSysSteps);
             // then determine timestep length for even distribution, protect div by zero
-            if (NumOfSysTimeSteps > 0) TimeStepSys = TimeStepZone / NumOfSysTimeSteps;
+            if (NumOfSysTimeSteps > 0) TimeStepSys = state.dataGlobal->TimeStepZone / NumOfSysTimeSteps;
             TimeStepSys = max(TimeStepSys, MinTimeStepSys);
             UseZoneTimeStepHistory = false;
             ShortenTimeStepSys = true;
@@ -425,11 +419,11 @@ namespace HVACManager {
             UseZoneTimeStepHistory = true;
         }
 
-        if (UseZoneTimeStepHistory) PreviousTimeStep = TimeStepZone;
+        if (UseZoneTimeStepHistory) PreviousTimeStep = state.dataGlobal->TimeStepZone;
         for (SysTimestepLoop = 1; SysTimestepLoop <= NumOfSysTimeSteps; ++SysTimestepLoop) {
             if (state.dataGlobal->stopSimulation) break;
 
-            if (TimeStepSys < TimeStepZone) {
+            if (TimeStepSys < state.dataGlobal->TimeStepZone) {
 
                 ManageHybridVentilation(state);
                 CalcAirFlowSimple(state, SysTimestepLoop);
@@ -438,7 +432,7 @@ namespace HVACManager {
                     ManageAirflowNetworkBalance(state, false);
                 }
 
-                UpdateInternalGainValues(true, true);
+                UpdateInternalGainValues(state, true, true);
 
                 ManageZoneAirUpdates(state, iPredictStep, ZoneTempChange, ShortenTimeStepSys, UseZoneTimeStepHistory,
                                      PriorTimeStep);
@@ -448,7 +442,7 @@ namespace HVACManager {
                                                 PriorTimeStep);
                 SimHVAC(state);
 
-                if (AnyIdealCondEntSetPointInModel && MetersHaveBeenInitialized && !WarmupFlag) {
+                if (AnyIdealCondEntSetPointInModel && MetersHaveBeenInitialized && !state.dataGlobal->WarmupFlag) {
                     RunOptCondEntTemp = true;
                     while (RunOptCondEntTemp) {
                         SimHVAC(state);
@@ -474,9 +468,9 @@ namespace HVACManager {
                 PreviousTimeStep = TimeStepSys;
             }
 
-            FracTimeStepZone = TimeStepSys / TimeStepZone;
+            FracTimeStepZone = TimeStepSys / state.dataGlobal->TimeStepZone;
 
-            for (ZoneNum = 1; ZoneNum <= NumOfZones; ++ZoneNum) {
+            for (ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ++ZoneNum) {
                 ZTAV(ZoneNum) += ZT(ZoneNum) * FracTimeStepZone;
                 ZoneAirHumRatAvg(ZoneNum) += ZoneAirHumRat(ZoneNum) * FracTimeStepZone;
                 if (Contaminant.CO2Simulation) ZoneAirCO2Avg(ZoneNum) += ZoneAirCO2(ZoneNum) * FracTimeStepZone;
@@ -505,16 +499,16 @@ namespace HVACManager {
             ManageEMS(state, EMSManager::EMSCallFrom::EndSystemTimestepBeforeHVACReporting, anyEMSRan, ObjexxFCL::Optional_int_const()); // EMS calling point
 
             // This is where output processor data is updated for System Timestep reporting
-            if (!WarmupFlag) {
+            if (!state.dataGlobal->WarmupFlag) {
                 if (DoOutputReporting) {
                     CalcMoreNodeInfo(state);
                     CalculatePollution();
                     InitEnergyReports(state);
-                    ReportSystemEnergyUse();
+                    ReportSystemEnergyUse(state);
                 }
                 if (DoOutputReporting || (ZoneSizingCalc && CompLoadReportIsReq)) {
                     ReportAirHeatBalance(state);
-                    if (ZoneSizingCalc) GatherComponentLoadsHVAC();
+                    if (ZoneSizingCalc) GatherComponentLoadsHVAC(state);
                 }
                 if (DoOutputReporting) {
                     ReportMaxVentilationLoads(state);
@@ -624,7 +618,7 @@ namespace HVACManager {
             if (EvenDuringWarmup) {
                 ReportDebug = true;
             } else {
-                ReportDebug = !WarmupFlag;
+                ReportDebug = !state.dataGlobal->WarmupFlag;
             }
             if ((ReportDebug) && (state.dataGlobal->DayOfSim > 0)) { // Report the node data
                 if (size(Node) > 0 && !DebugNamesReported) {
@@ -636,7 +630,7 @@ namespace HVACManager {
                 }
                 if (size(Node) > 0) {
                     print(state.files.debug, "\n\n Day of Sim     Hour of Day    Time\n");
-                    print(state.files.debug, "{:12}{:12} {:22.15N} \n", state.dataGlobal->DayOfSim, HourOfDay, TimeStep * TimeStepZone);
+                    print(state.files.debug, "{:12}{:12} {:22.15N} \n", state.dataGlobal->DayOfSim, state.dataGlobal->HourOfDay, state.dataGlobal->TimeStep * state.dataGlobal->TimeStepZone);
                     print(state.files.debug,
                           "{}\n",
                           "node #   Temp   MassMinAv  MassMaxAv TempSP      MassFlow       MassMin       MassMax        MassSP    Press        "
@@ -909,7 +903,7 @@ namespace HVACManager {
             // Eventually, when all of the flags are set to false, the
             // simulation has converged for this system time step.
 
-            UpdateZoneInletConvergenceLog();
+            UpdateZoneInletConvergenceLog(state);
 
             ++HVACManageIteration; // Increment the iteration counter
 
@@ -952,7 +946,7 @@ namespace HVACManager {
                                      SimElecCircuitsFlag,
                                      FirstHVACIteration,
                                      SimWithPlantFlowLocked);
-                UpdateZoneInletConvergenceLog();
+                UpdateZoneInletConvergenceLog(state);
                 // now call for a last plant simulation
                 SimAirLoopsFlag = false;
                 SimZoneEquipmentFlag = false;
@@ -979,24 +973,24 @@ namespace HVACManager {
                                      SimElecCircuitsFlag,
                                      FirstHVACIteration,
                                      SimWithPlantFlowLocked);
-                UpdateZoneInletConvergenceLog();
+                UpdateZoneInletConvergenceLog(state);
             }
         }
 
         // DSU  Test plant loop for errors
         for (LoopNum = 1; LoopNum <= TotNumLoops; ++LoopNum) {
             for (LoopSide = DemandSide; LoopSide <= SupplySide; ++LoopSide) {
-                CheckPlantMixerSplitterConsistency(LoopNum, LoopSide, FirstHVACIteration);
+                CheckPlantMixerSplitterConsistency(state, LoopNum, LoopSide, FirstHVACIteration);
                 CheckForRunawayPlantTemps(LoopNum, LoopSide);
             }
         }
 
-        if ((HVACManageIteration > MaxIter) && (!WarmupFlag)) {
+        if ((HVACManageIteration > MaxIter) && (!state.dataGlobal->WarmupFlag)) {
             ++ErrCount;
             if (ErrCount < 15) {
                 ErrEnvironmentName = EnvironmentName;
                 ShowWarningError("SimHVAC: Maximum iterations (" + fmt::to_string(MaxIter) + ") exceeded for all HVAC loops, at " + EnvironmentName + ", " +
-                                 CurMnDy + ' ' + CreateSysTimeIntervalString());
+                                 CurMnDy + ' ' + CreateSysTimeIntervalString(state));
                 if (SimAirLoopsFlag) {
                     ShowContinueError("The solution for one or more of the Air Loop HVAC systems did not appear to converge");
                 }
@@ -1132,7 +1126,7 @@ namespace HVACManager {
                     } // loop over air loop systems
 
                     // loop over zones and check for issues with zone inlet nodes
-                    for (ZoneNum = 1; ZoneNum <= NumOfZones; ++ZoneNum) {
+                    for (ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ++ZoneNum) {
 
                         for (NodeIndex = 1; NodeIndex <= ZoneInletConvergence(ZoneNum).NumInletNodes; ++NodeIndex) {
 
@@ -2444,7 +2438,7 @@ namespace HVACManager {
         if (AirflowNetwork::SimulateAirflowNetwork > AirflowNetwork::AirflowNetworkControlSimple) ReportAirflowNetwork(state);
 
         // Reports zone exhaust loss by exhaust fans
-        for (ZoneLoop = 1; ZoneLoop <= NumOfZones; ++ZoneLoop) { // Start of zone loads report variable update loop ...
+        for (ZoneLoop = 1; ZoneLoop <= state.dataGlobal->NumOfZones; ++ZoneLoop) { // Start of zone loads report variable update loop ...
             CpAir = PsyCpAirFnW(OutHumRat);
             H2OHtOfVap = PsyHgAirFnWTdb(OutHumRat, Zone(ZoneLoop).OutDryBulbTemp);
             ADSCorrectionFactor = 1.0;
@@ -2482,12 +2476,12 @@ namespace HVACManager {
             return;
 
         if (ReportAirHeatBalanceFirstTimeFlag) {
-            MixSenLoad.allocate(NumOfZones);
-            MixLatLoad.allocate(NumOfZones);
+            MixSenLoad.allocate(state.dataGlobal->NumOfZones);
+            MixLatLoad.allocate(state.dataGlobal->NumOfZones);
             ReportAirHeatBalanceFirstTimeFlag = false;
         }
 
-        for (ZoneLoop = 1; ZoneLoop <= NumOfZones; ++ZoneLoop) { // Start of zone loads report variable update loop ...
+        for (ZoneLoop = 1; ZoneLoop <= state.dataGlobal->NumOfZones; ++ZoneLoop) { // Start of zone loads report variable update loop ...
 
             // Break the infiltration load into heat gain and loss components
             ADSCorrectionFactor = 1.0;
@@ -2955,7 +2949,7 @@ namespace HVACManager {
                 }
             }
             // check to see if a controlled zone is served exclusively by a zonal system
-            for (ControlledZoneNum = 1; ControlledZoneNum <= NumOfZones; ++ControlledZoneNum) {
+            for (ControlledZoneNum = 1; ControlledZoneNum <= state.dataGlobal->NumOfZones; ++ControlledZoneNum) {
                 ZoneNum = ZoneEquipConfig(ControlledZoneNum).ActualZoneNum;
                 bool airLoopFound = false;
                 for (int zoneInNode = 1; zoneInNode <= ZoneEquipConfig(ControlledZoneNum).NumInletNodes; ++zoneInNode) {
@@ -2969,7 +2963,7 @@ namespace HVACManager {
             }
             // issue warning messages if zone is served by a zonal system or a cycling system and the input calls for
             // heat gain to return air
-            for (ControlledZoneNum = 1; ControlledZoneNum <= NumOfZones; ++ControlledZoneNum) {
+            for (ControlledZoneNum = 1; ControlledZoneNum <= state.dataGlobal->NumOfZones; ++ControlledZoneNum) {
                 if (!ZoneEquipConfig(ControlledZoneNum).IsControlled) continue;
                 ZoneNum = ZoneEquipConfig(ControlledZoneNum).ActualZoneNum;
                 CyclingFan = false;
@@ -3019,7 +3013,7 @@ namespace HVACManager {
         }
         // set the zone level NoHeatToReturnAir flag
         // if any air loop in the zone is continuous fan, then set NoHeatToReturnAir = false and sort it out node-by-node
-        for (ControlledZoneNum = 1; ControlledZoneNum <= NumOfZones; ++ControlledZoneNum) {
+        for (ControlledZoneNum = 1; ControlledZoneNum <= state.dataGlobal->NumOfZones; ++ControlledZoneNum) {
             if (!ZoneEquipConfig(ControlledZoneNum).IsControlled) continue;
             ZoneNum = ZoneEquipConfig(ControlledZoneNum).ActualZoneNum;
             Zone(ZoneNum).NoHeatToReturnAir = true;
@@ -3037,7 +3031,7 @@ namespace HVACManager {
         }
     }
 
-    void UpdateZoneInletConvergenceLog()
+    void UpdateZoneInletConvergenceLog(EnergyPlusData &state)
     {
 
         // SUBROUTINE INFORMATION:
@@ -3058,7 +3052,6 @@ namespace HVACManager {
         // Using/Aliasing
         using DataConvergParams::ConvergLogStackDepth;
         using DataConvergParams::ZoneInletConvergence;
-        using DataGlobals::NumOfZones;
         using DataLoopNode::Node;
 
         // Locals
@@ -3080,7 +3073,7 @@ namespace HVACManager {
         int NodeNum;
         Array1D<Real64> tmpRealARR(ConvergLogStackDepth);
 
-        for (ZoneNum = 1; ZoneNum <= NumOfZones; ++ZoneNum) {
+        for (ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ++ZoneNum) {
 
             for (NodeIndex = 1; NodeIndex <= ZoneInletConvergence(ZoneNum).NumInletNodes; ++NodeIndex) {
                 NodeNum = ZoneInletConvergence(ZoneNum).InletNode(NodeIndex).NodeNum;
@@ -3105,7 +3098,7 @@ namespace HVACManager {
     void CheckAirLoopFlowBalance(EnergyPlusData &state)
     {
         // Check for unbalanced airloop
-        if (!DataGlobals::WarmupFlag && AirLoopsSimOnce) {
+        if (!state.dataGlobal->WarmupFlag && AirLoopsSimOnce) {
             for (int AirLoopNum = 1; AirLoopNum <= NumPrimaryAirSys; ++AirLoopNum) {
                 auto &thisAirLoopFlow(state.dataAirLoop->AirLoopFlow(AirLoopNum));
                 if (!thisAirLoopFlow.FlowError) {

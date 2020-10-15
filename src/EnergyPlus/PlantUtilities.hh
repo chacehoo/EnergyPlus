@@ -56,6 +56,9 @@
 
 namespace EnergyPlus {
 
+// Forward declarations
+struct EnergyPlusData;
+
 namespace PlantUtilities {
 
     // Functions
@@ -94,7 +97,7 @@ namespace PlantUtilities {
     bool AnyPlantSplitterMixerLacksContinuity();
 
     void
-    CheckPlantMixerSplitterConsistency(int const LoopNum, int const LoopSideNum, bool const FirstHVACIteration);
+    CheckPlantMixerSplitterConsistency(EnergyPlusData &state, int const LoopNum, int const LoopSideNum, bool const FirstHVACIteration);
 
     void CheckForRunawayPlantTemps(int const LoopNum, int const LoopSideNum);
 

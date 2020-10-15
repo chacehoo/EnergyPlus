@@ -123,7 +123,6 @@ namespace VentilatedSlab {
     using namespace DataLoopNode;
     using DataGlobals::DisplayExtraWarnings;
     using DataGlobals::SysSizingCalc;
-    using DataGlobals::WarmupFlag;
     using DataHeatBalFanSys::QRadSysSource;
     using DataHVACGlobals::ContFanCycCoil;
     using DataHVACGlobals::SmallAirVolFlow;
@@ -1292,7 +1291,6 @@ namespace VentilatedSlab {
         using DataEnvironment::OutHumRat;
         using DataEnvironment::StdRhoAir;
         using DataGlobals::AnyPlantInModel;
-        using DataGlobals::NumOfZones;
         using DataHeatBalFanSys::MAT;
         using DataHeatBalFanSys::ZoneAirHumRat;
         using DataHVACGlobals::ZoneComp;
@@ -1355,7 +1353,7 @@ namespace VentilatedSlab {
             state.dataVentilatedSlab->MySizeFlag.allocate(state.dataVentilatedSlab->NumOfVentSlabs);
             MyPlantScanFlag.allocate(state.dataVentilatedSlab->NumOfVentSlabs);
             MyZoneEqFlag.allocate(state.dataVentilatedSlab->NumOfVentSlabs);
-            state.dataVentilatedSlab->ZeroSourceSumHATsurf.dimension(NumOfZones, 0.0);
+            state.dataVentilatedSlab->ZeroSourceSumHATsurf.dimension(state.dataGlobal->NumOfZones, 0.0);
             state.dataVentilatedSlab->QRadSysSrcAvg.dimension(TotSurfaces, 0.0);
             state.dataVentilatedSlab->LastQRadSysSrc.dimension(TotSurfaces, 0.0);
             state.dataVentilatedSlab->LastSysTimeElapsed.dimension(TotSurfaces, 0.0);
@@ -1445,7 +1443,7 @@ namespace VentilatedSlab {
         if (!ZoneEquipmentListChecked && ZoneEquipInputsFilled) {
             ZoneEquipmentListChecked = true;
             for (RadNum = 1; RadNum <= state.dataVentilatedSlab->NumOfVentSlabs; ++RadNum) {
-                if (CheckZoneEquipmentList(state.dataVentilatedSlab->cMO_VentilatedSlab, state.dataVentilatedSlab->VentSlab(RadNum).Name)) continue;
+                if (CheckZoneEquipmentList(state, state.dataVentilatedSlab->cMO_VentilatedSlab, state.dataVentilatedSlab->VentSlab(RadNum).Name)) continue;
                 ShowSevereError("InitVentilatedSlab: Ventilated Slab Unit=[" + state.dataVentilatedSlab->cMO_VentilatedSlab + ',' + state.dataVentilatedSlab->VentSlab(RadNum).Name +
                                 "] is not on any ZoneHVAC:EquipmentList.  It will not be simulated.");
             }
@@ -2620,7 +2618,7 @@ namespace VentilatedSlab {
             } else if (SELECT_CASE_var == state.dataVentilatedSlab->SURControl) {
                 SetPointTemp = TH(2, 1, state.dataVentilatedSlab->VentSlab(Item).SurfacePtr(RadSurfNum));
             } else if (SELECT_CASE_var == state.dataVentilatedSlab->DPTZControl) {
-                SetPointTemp = PsyTdpFnWPb(ZoneAirHumRat(state.dataVentilatedSlab->VentSlab(Item).ZonePtr), OutBaroPress);
+                SetPointTemp = PsyTdpFnWPb(state, ZoneAirHumRat(state.dataVentilatedSlab->VentSlab(Item).ZonePtr), OutBaroPress);
             } else {                // Should never get here
                 SetPointTemp = 0.0; // Suppress uninitialized warning
                 ShowSevereError("Illegal control type in low temperature radiant system: " + state.dataVentilatedSlab->VentSlab(Item).Name);
@@ -3680,7 +3678,7 @@ namespace VentilatedSlab {
                     // conditions.
 
                     if (state.dataVentilatedSlab->OperatingMode == state.dataVentilatedSlab->CoolingMode) {
-                        DewPointTemp = PsyTdpFnWPb(ZoneAirHumRat(state.dataVentilatedSlab->VentSlab(Item).ZonePtr), OutBaroPress);
+                        DewPointTemp = PsyTdpFnWPb(state, ZoneAirHumRat(state.dataVentilatedSlab->VentSlab(Item).ZonePtr), OutBaroPress);
                         for (RadSurfNum2 = 1; RadSurfNum2 <= state.dataVentilatedSlab->VentSlab(Item).NumOfSurfaces; ++RadSurfNum2) {
                             if (TH(2, 1, state.dataVentilatedSlab->VentSlab(Item).SurfacePtr(RadSurfNum2)) < (DewPointTemp + CondDeltaTemp)) {
                                 // Condensation warning--must shut off radiant system
@@ -3698,7 +3696,7 @@ namespace VentilatedSlab {
                                         QRadSysSource(Surface(SurfNum2).ExtBoundCond) = 0.0; // Also zero the other side of an interzone
                                 }
                                 // Produce a warning message so that user knows the system was shut-off due to potential for condensation
-                                if (!WarmupFlag) {
+                                if (!state.dataGlobal->WarmupFlag) {
                                     ++CondensationErrorCount;
 
                                     if (state.dataVentilatedSlab->VentSlab(Item).CondErrIndex == 0) {
@@ -3750,7 +3748,7 @@ namespace VentilatedSlab {
                         if ((std::abs(Node(ReturnAirNode).Temp - AirOutletTempCheck) > TempCheckLimit) &&
                             (std::abs(TotalVentSlabRadPower) > ZeroSystemResp)) {
 
-                            if (!WarmupFlag) {
+                            if (!state.dataGlobal->WarmupFlag) {
                                 ++EnergyImbalanceErrorCount;
                                 if (state.dataVentilatedSlab->VentSlab(Item).EnrgyImbalErrIndex == 0) {
                                     ShowWarningMessage(state.dataVentilatedSlab->cMO_VentilatedSlab + " [" + state.dataVentilatedSlab->VentSlab(Item).Name + ']');
@@ -3783,7 +3781,7 @@ namespace VentilatedSlab {
                         if ((std::abs(Node(ZoneAirInNode).Temp - AirOutletTempCheck) > TempCheckLimit) &&
                             (std::abs(TotalVentSlabRadPower) > ZeroSystemResp)) {
 
-                            if (!WarmupFlag) {
+                            if (!state.dataGlobal->WarmupFlag) {
                                 ++EnergyImbalanceErrorCount;
                                 if (state.dataVentilatedSlab->VentSlab(Item).EnrgyImbalErrIndex == 0) {
                                     ShowWarningMessage(state.dataVentilatedSlab->cMO_VentilatedSlab + " [" + state.dataVentilatedSlab->VentSlab(Item).Name + ']');
@@ -3930,7 +3928,7 @@ namespace VentilatedSlab {
                     // conditions.
 
                     if (state.dataVentilatedSlab->OperatingMode == state.dataVentilatedSlab->CoolingMode) {
-                        DewPointTemp = PsyTdpFnWPb(ZoneAirHumRat(state.dataVentilatedSlab->VentSlab(Item).ZPtr(RadSurfNum)), OutBaroPress);
+                        DewPointTemp = PsyTdpFnWPb(state, ZoneAirHumRat(state.dataVentilatedSlab->VentSlab(Item).ZPtr(RadSurfNum)), OutBaroPress);
                         for (RadSurfNum2 = 1; RadSurfNum2 <= state.dataVentilatedSlab->VentSlab(Item).NumOfSurfaces; ++RadSurfNum2) {
                             if (TH(2, 1, state.dataVentilatedSlab->VentSlab(Item).SurfacePtr(RadSurfNum2)) < (DewPointTemp + CondDeltaTemp)) {
                                 // Condensation warning--must shut off radiant system
@@ -3948,7 +3946,7 @@ namespace VentilatedSlab {
                                         QRadSysSource(Surface(SurfNum2).ExtBoundCond) = 0.0; // Also zero the other side of an interzone
                                 }
                                 // Produce a warning message so that user knows the system was shut-off due to potential for condensation
-                                if (!WarmupFlag) {
+                                if (!state.dataGlobal->WarmupFlag) {
                                     ++CondensationErrorCount;
                                     if (state.dataVentilatedSlab->VentSlab(Item).CondErrIndex == 0) {
                                         ShowWarningMessage(state.dataVentilatedSlab->cMO_VentilatedSlab + " [" + state.dataVentilatedSlab->VentSlab(Item).Name + ']');
@@ -4029,7 +4027,7 @@ namespace VentilatedSlab {
                     if ((std::abs(Node(ReturnAirNode).Temp - AirOutletTempCheck) > TempCheckLimit) &&
                         (std::abs(TotalVentSlabRadPower) > ZeroSystemResp)) { // Return air temperature check did not match calculated temp
 
-                        if (!WarmupFlag) {
+                        if (!state.dataGlobal->WarmupFlag) {
                             ++EnergyImbalanceErrorCount;
                             if (state.dataVentilatedSlab->VentSlab(Item).EnrgyImbalErrIndex == 0) {
                                 ShowWarningMessage(state.dataVentilatedSlab->cMO_VentilatedSlab + " [" + state.dataVentilatedSlab->VentSlab(Item).Name + ']');
@@ -4175,7 +4173,6 @@ namespace VentilatedSlab {
         // values to the running average.
 
         // Using/Aliasing
-        using DataGlobals::TimeStepZone;
         using DataHeatBalance::Zone;
         using DataHeatBalFanSys::MAT;
         using DataHVACGlobals::SysTimeElapsed;
@@ -4218,11 +4215,11 @@ namespace VentilatedSlab {
             if (state.dataVentilatedSlab->LastSysTimeElapsed(SurfNum) == SysTimeElapsed) {
                 // Still iterating or reducing system time step, so subtract old values which were
                 // not valid
-                state.dataVentilatedSlab->QRadSysSrcAvg(SurfNum) -= state.dataVentilatedSlab->LastQRadSysSrc(SurfNum) * state.dataVentilatedSlab->LastTimeStepSys(SurfNum) / TimeStepZone;
+                state.dataVentilatedSlab->QRadSysSrcAvg(SurfNum) -= state.dataVentilatedSlab->LastQRadSysSrc(SurfNum) * state.dataVentilatedSlab->LastTimeStepSys(SurfNum) / state.dataGlobal->TimeStepZone;
             }
 
             // Update the running average and the "last" values with the current values of the appropriate variables
-            state.dataVentilatedSlab->QRadSysSrcAvg(SurfNum) += QRadSysSource(SurfNum) * TimeStepSys / TimeStepZone;
+            state.dataVentilatedSlab->QRadSysSrcAvg(SurfNum) += QRadSysSource(SurfNum) * TimeStepSys / state.dataGlobal->TimeStepZone;
 
             state.dataVentilatedSlab->LastQRadSysSrc(SurfNum) = QRadSysSource(SurfNum);
             state.dataVentilatedSlab->LastSysTimeElapsed(SurfNum) = SysTimeElapsed;

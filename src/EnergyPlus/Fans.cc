@@ -107,7 +107,6 @@ namespace Fans {
     using DataEnvironment::StdRhoAir;
     using DataGlobals::DisplayExtraWarnings;
     using DataGlobals::SysSizingCalc;
-    using DataGlobals::WarmupFlag;
     using DataHVACGlobals::BalancedExhMassFlow;
     using DataHVACGlobals::cFanTypes;
     using DataHVACGlobals::Cooling;
@@ -560,7 +559,7 @@ namespace Fans {
                                     cAlphaFieldNames(1) + '=' + cAlphaArgs(1));
                     ErrorsFound = true;
                 } else {
-                    if (HasFractionalScheduleValue(Fan(FanNum).AvailSchedPtrNum)) {
+                    if (HasFractionalScheduleValue(state, Fan(FanNum).AvailSchedPtrNum)) {
                         ShowWarningError(cCurrentModuleObject + "=\"" + Fan(FanNum).FanName + "\" has fractional values in Schedule=" +
                                          cAlphaArgs(2) + ". Only 0.0 in the schedule value turns the fan off.");
                     }
@@ -1064,7 +1063,7 @@ namespace Fans {
             ZoneEquipmentListChecked = true;
             for (Loop = 1; Loop <= state.dataFans->NumFans; ++Loop) {
                 if (!UtilityRoutines::SameString(Fan(Loop).FanType, "Fan:ZoneExhaust")) continue;
-                if (CheckZoneEquipmentList(Fan(Loop).FanType, Fan(Loop).FanName)) continue;
+                if (CheckZoneEquipmentList(state, Fan(Loop).FanType, Fan(Loop).FanName)) continue;
                 ShowSevereError("InitFans: Fan=[" + Fan(Loop).FanType + ',' + Fan(Loop).FanName +
                                 "] is not on any ZoneHVAC:EquipmentList.  It will not be simulated.");
             }
@@ -1608,7 +1607,7 @@ namespace Fans {
 
         // Faulty fan operations_Jun. 2015, zrp
         // Update MassFlow & DeltaPress if there are fouling air filters corresponding to the fan
-        if (Fan(FanNum).FaultyFilterFlag && (!WarmupFlag) && (!DoingSizing) && (!KickOffSimulation)) {
+        if (Fan(FanNum).FaultyFilterFlag && (!state.dataGlobal->WarmupFlag) && (!DoingSizing) && (!KickOffSimulation)) {
 
             int iFault = Fan(FanNum).FaultyFilterIndex;
 
@@ -1766,7 +1765,7 @@ namespace Fans {
 
         // Faulty fan operations_Apr. 2015, zrp
         // Update MassFlow & DeltaPress if there are fouling air filters corresponding to the fan
-        if (Fan(FanNum).FaultyFilterFlag && (!WarmupFlag) && (!DoingSizing) && (!KickOffSimulation) && (!Fan(FanNum).EMSMaxMassFlowOverrideOn)) {
+        if (Fan(FanNum).FaultyFilterFlag && (!state.dataGlobal->WarmupFlag) && (!DoingSizing) && (!KickOffSimulation) && (!Fan(FanNum).EMSMaxMassFlowOverrideOn)) {
 
             int iFault = Fan(FanNum).FaultyFilterIndex;
 
@@ -1946,7 +1945,7 @@ namespace Fans {
 
         // Faulty fan operations_Apr. 2015, zrp
         // Update MassFlow & DeltaPress if there are fouling air filters corresponding to the fan
-        if (Fan(FanNum).FaultyFilterFlag && (!WarmupFlag) && (!DoingSizing) && (!KickOffSimulation) && (!Fan(FanNum).EMSMaxMassFlowOverrideOn)) {
+        if (Fan(FanNum).FaultyFilterFlag && (!state.dataGlobal->WarmupFlag) && (!DoingSizing) && (!KickOffSimulation) && (!Fan(FanNum).EMSMaxMassFlowOverrideOn)) {
 
             int iFault = Fan(FanNum).FaultyFilterIndex;
 
@@ -2017,7 +2016,7 @@ namespace Fans {
 
                     SpeedRaisedToPower = CurveValue(state, Fan(FanNum).FanPowerRatAtSpeedRatCurveIndex, SpeedRatio);
                     if (SpeedRaisedToPower < 0.0) {
-                        if (Fan(FanNum).OneTimePowerRatioCheck && !WarmupFlag) {
+                        if (Fan(FanNum).OneTimePowerRatioCheck && !state.dataGlobal->WarmupFlag) {
                             ShowSevereError(cFanTypes(Fan(FanNum).FanType_Num) + " = " + Fan(FanNum).FanName + "\"");
                             ShowContinueError("Error in Fan Power Ratio curve. Curve output less than 0.0.");
                             ShowContinueError("Curve output = " + TrimSigDigits(SpeedRaisedToPower, 5) +
@@ -2029,10 +2028,10 @@ namespace Fans {
                         }
                         SpeedRaisedToPower = 0.0;
                     }
-                    if (Fan(FanNum).FanEffRatioCurveIndex > 0 && !WarmupFlag) {
+                    if (Fan(FanNum).FanEffRatioCurveIndex > 0 && !state.dataGlobal->WarmupFlag) {
                         EffRatioAtSpeedRatio = CurveValue(state, Fan(FanNum).FanEffRatioCurveIndex, SpeedRatio);
                         if (EffRatioAtSpeedRatio < 0.01) {
-                            if (Fan(FanNum).OneTimeEffRatioCheck && !WarmupFlag) {
+                            if (Fan(FanNum).OneTimeEffRatioCheck && !state.dataGlobal->WarmupFlag) {
                                 ShowSevereError(cFanTypes(Fan(FanNum).FanType_Num) + " = " + Fan(FanNum).FanName + "\"");
                                 ShowContinueError("Error in Fan Efficiency Ratio curve. Curve output less than 0.01.");
                                 ShowContinueError("Curve output = " + TrimSigDigits(EffRatioAtSpeedRatio, 5) +

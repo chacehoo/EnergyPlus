@@ -55,6 +55,7 @@
 #include <vector>
 
 // EnergyPlus Headers
+#include <EnergyPlus/Data/EnergyPlusData.hh>
 #include <EnergyPlus/DataGlobals.hh>
 #include <EnergyPlus/EMSManager.hh>
 #include <EnergyPlus/EnergyPlus.hh>
@@ -178,7 +179,7 @@ namespace PluginManagement {
 
     class PluginManager {
     public:
-        PluginManager();
+        PluginManager(EnergyPlusData &state);
         ~PluginManager();
 
         static int numActiveCallbacks();
@@ -215,7 +216,7 @@ namespace PluginManagement {
         std::deque<Real64> values;
         std::deque<Real64> times;
         int indexOfPluginVariable;
-        PluginTrendVariable(std::string _name, int _numValues, int _indexOfPluginVariable) :
+        PluginTrendVariable(EnergyPlusData &state, std::string _name, int _numValues, int _indexOfPluginVariable) :
             name(std::move(_name)), numValues(_numValues), indexOfPluginVariable(_indexOfPluginVariable)
         {
             // initialize the deque so it can be queried immediately, even with just zeroes
@@ -223,7 +224,7 @@ namespace PluginManagement {
                 this->values.push_back(0);
             }
             for (int loop = 1; loop <= _numValues; ++loop) {
-                this->times.push_back(-loop * DataGlobals::TimeStepZone);
+                this->times.push_back(-loop * state.dataGlobal->TimeStepZone);
             }
         }
         void reset() {

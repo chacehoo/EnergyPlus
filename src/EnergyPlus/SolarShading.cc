@@ -526,7 +526,7 @@ namespace SolarShading {
 
 
             // Surface Win
-            for (int zoneNum = 1; zoneNum <= DataGlobals::NumOfZones; ++zoneNum) {
+            for (int zoneNum = 1; zoneNum <= state.dataGlobal->NumOfZones; ++zoneNum) {
                 int const firstSurfWin = Zone(zoneNum).WindowSurfaceFirst;
                 int const lastSurfWin = Zone(zoneNum).WindowSurfaceLast;
                 if (firstSurfWin == -1) continue;
@@ -1003,12 +1003,12 @@ namespace SolarShading {
         SurfSunlitArea.dimension(TotSurfaces, 0.0);
         SurfSunlitFrac.dimension(TotSurfaces, 0.0);
         SunlitFracHR.dimension(24, TotSurfaces, 0.0);
-        SunlitFrac.dimension(NumOfTimeStepInHour, 24, TotSurfaces, 0.0);
-        SunlitFracWithoutReveal.dimension(NumOfTimeStepInHour, 24, TotSurfaces, 0.0);
-        BackSurfaces.dimension(NumOfTimeStepInHour, 24, MaxBkSurf, TotSurfaces, 0);
-        OverlapAreas.dimension(NumOfTimeStepInHour, 24, MaxBkSurf, TotSurfaces, 0.0);
+        SunlitFrac.dimension(state.dataGlobal->NumOfTimeStepInHour, 24, TotSurfaces, 0.0);
+        SunlitFracWithoutReveal.dimension(state.dataGlobal->NumOfTimeStepInHour, 24, TotSurfaces, 0.0);
+        BackSurfaces.dimension(state.dataGlobal->NumOfTimeStepInHour, 24, MaxBkSurf, TotSurfaces, 0);
+        OverlapAreas.dimension(state.dataGlobal->NumOfTimeStepInHour, 24, MaxBkSurf, TotSurfaces, 0.0);
         CosIncAngHR.dimension(24, TotSurfaces, 0.0);
-        CosIncAng.dimension(NumOfTimeStepInHour, 24, TotSurfaces, 0.0);
+        CosIncAng.dimension(state.dataGlobal->NumOfTimeStepInHour, 24, TotSurfaces, 0.0);
         AnisoSkyMult.dimension(TotSurfaces, 1.0); // For isotropic sky: recalculated in AnisoSkyViewFactors if anisotropic radiance
         //  ALLOCATE(WithShdgIsoSky(TotSurfaces))
         //  WithShdgIsoSky=0.0
@@ -1052,21 +1052,21 @@ namespace SolarShading {
         InsideGlassCondensationFlag.dimension(TotSurfaces, 0);
         InsideFrameCondensationFlag.dimension(TotSurfaces, 0);
         InsideDividerCondensationFlag.dimension(TotSurfaces, 0);
-        ZoneTransSolar.dimension(NumOfZones, 0.0);
-        ZoneBmSolFrExtWinsRep.dimension(NumOfZones, 0.0);
-        ZoneBmSolFrIntWinsRep.dimension(NumOfZones, 0.0);
-        InitialZoneDifSolReflW.dimension(NumOfZones, 0.0);
-        ZoneDifSolFrExtWinsRep.dimension(NumOfZones, 0.0);
-        ZoneDifSolFrIntWinsRep.dimension(NumOfZones, 0.0);
-        ZoneWinHeatGain.dimension(NumOfZones, 0.0);
-        ZoneWinHeatGainRep.dimension(NumOfZones, 0.0);
-        ZoneWinHeatLossRep.dimension(NumOfZones, 0.0);
-        ZoneOpaqSurfInsFaceCond.dimension(NumOfZones, 0.0);
-        ZoneOpaqSurfInsFaceCondGainRep.dimension(NumOfZones, 0.0);
-        ZoneOpaqSurfInsFaceCondLossRep.dimension(NumOfZones, 0.0);
-        ZoneOpaqSurfExtFaceCond.dimension(NumOfZones, 0.0);
-        ZoneOpaqSurfExtFaceCondGainRep.dimension(NumOfZones, 0.0);
-        ZoneOpaqSurfExtFaceCondLossRep.dimension(NumOfZones, 0.0);
+        ZoneTransSolar.dimension(state.dataGlobal->NumOfZones, 0.0);
+        ZoneBmSolFrExtWinsRep.dimension(state.dataGlobal->NumOfZones, 0.0);
+        ZoneBmSolFrIntWinsRep.dimension(state.dataGlobal->NumOfZones, 0.0);
+        InitialZoneDifSolReflW.dimension(state.dataGlobal->NumOfZones, 0.0);
+        ZoneDifSolFrExtWinsRep.dimension(state.dataGlobal->NumOfZones, 0.0);
+        ZoneDifSolFrIntWinsRep.dimension(state.dataGlobal->NumOfZones, 0.0);
+        ZoneWinHeatGain.dimension(state.dataGlobal->NumOfZones, 0.0);
+        ZoneWinHeatGainRep.dimension(state.dataGlobal->NumOfZones, 0.0);
+        ZoneWinHeatLossRep.dimension(state.dataGlobal->NumOfZones, 0.0);
+        ZoneOpaqSurfInsFaceCond.dimension(state.dataGlobal->NumOfZones, 0.0);
+        ZoneOpaqSurfInsFaceCondGainRep.dimension(state.dataGlobal->NumOfZones, 0.0);
+        ZoneOpaqSurfInsFaceCondLossRep.dimension(state.dataGlobal->NumOfZones, 0.0);
+        ZoneOpaqSurfExtFaceCond.dimension(state.dataGlobal->NumOfZones, 0.0);
+        ZoneOpaqSurfExtFaceCondGainRep.dimension(state.dataGlobal->NumOfZones, 0.0);
+        ZoneOpaqSurfExtFaceCondLossRep.dimension(state.dataGlobal->NumOfZones, 0.0);
 
         SurfQRadSWOutIncident.dimension(TotSurfaces, 0.0);
         SurfQRadSWOutIncidentBeam.dimension(TotSurfaces, 0.0);
@@ -1105,7 +1105,7 @@ namespace SolarShading {
         SurfInitialDifSolInAbsReport.dimension(TotSurfaces, 0.0);
         SurfWinInitialDifSolInTransReport.dimension(TotSurfaces, 0.0);
         SurfSWInAbsTotalReport.dimension(TotSurfaces, 0.0);
-        WindowRevealStatus.dimension(NumOfTimeStepInHour, 24, TotSurfaces, 0);
+        WindowRevealStatus.dimension(state.dataGlobal->NumOfTimeStepInHour, 24, TotSurfaces, 0);
 
         // Weiler-Atherton
         MAXHCArrayBounds = 2 * (MaxVerticesPerSurface + 1);
@@ -1139,18 +1139,18 @@ namespace SolarShading {
         SurfWinHeatTransferRepEnergy.dimension(TotSurfaces, 0.0);
         SurfWinShadingAbsorbedSolarEnergy.dimension(TotSurfaces, 0.0);
 
-        ZoneTransSolarEnergy.dimension(NumOfZones, 0.0);
-        ZoneBmSolFrExtWinsRepEnergy.dimension(NumOfZones, 0.0);
-        ZoneBmSolFrIntWinsRepEnergy.dimension(NumOfZones, 0.0);
-        ZoneDifSolFrExtWinsRepEnergy.dimension(NumOfZones, 0.0);
-        ZoneDifSolFrIntWinsRepEnergy.dimension(NumOfZones, 0.0);
-        ZoneWinHeatGainRepEnergy.dimension(NumOfZones, 0.0);
-        ZoneWinHeatLossRepEnergy.dimension(NumOfZones, 0.0);
+        ZoneTransSolarEnergy.dimension(state.dataGlobal->NumOfZones, 0.0);
+        ZoneBmSolFrExtWinsRepEnergy.dimension(state.dataGlobal->NumOfZones, 0.0);
+        ZoneBmSolFrIntWinsRepEnergy.dimension(state.dataGlobal->NumOfZones, 0.0);
+        ZoneDifSolFrExtWinsRepEnergy.dimension(state.dataGlobal->NumOfZones, 0.0);
+        ZoneDifSolFrIntWinsRepEnergy.dimension(state.dataGlobal->NumOfZones, 0.0);
+        ZoneWinHeatGainRepEnergy.dimension(state.dataGlobal->NumOfZones, 0.0);
+        ZoneWinHeatLossRepEnergy.dimension(state.dataGlobal->NumOfZones, 0.0);
 
-        ZnOpqSurfInsFaceCondGnRepEnrg.dimension(NumOfZones, 0.0);
-        ZnOpqSurfInsFaceCondLsRepEnrg.dimension(NumOfZones, 0.0);
-        ZnOpqSurfExtFaceCondGnRepEnrg.dimension(NumOfZones, 0.0);
-        ZnOpqSurfExtFaceCondLsRepEnrg.dimension(NumOfZones, 0.0);
+        ZnOpqSurfInsFaceCondGnRepEnrg.dimension(state.dataGlobal->NumOfZones, 0.0);
+        ZnOpqSurfInsFaceCondLsRepEnrg.dimension(state.dataGlobal->NumOfZones, 0.0);
+        ZnOpqSurfExtFaceCondGnRepEnrg.dimension(state.dataGlobal->NumOfZones, 0.0);
+        ZnOpqSurfExtFaceCondLsRepEnrg.dimension(state.dataGlobal->NumOfZones, 0.0);
         //  ALLOCATE(DifIncInsSurfAmountRepEnergy(TotSurfaces))
         //  DifIncInsSurfAmountRepEnergy=0.0
         SurfBmIncInsSurfAmountRepEnergy.dimension(TotSurfaces, 0.0);
@@ -1261,7 +1261,7 @@ namespace SolarShading {
                                 "Sum",
                                 thisEnclosureName);
             }
-            for (int ZoneLoop = 1; ZoneLoop <= NumOfZones; ++ZoneLoop) {
+            for (int ZoneLoop = 1; ZoneLoop <= state.dataGlobal->NumOfZones; ++ZoneLoop) {
                 if (DisplayAdvancedReportVariables) {
                 // CurrentModuleObject='Zone(Advanced)'
                 SetupOutputVariable(state, "Zone Opaque Surface Inside Faces Total Conduction Heat Gain Rate",
@@ -2439,7 +2439,7 @@ namespace SolarShading {
         }
     }
 
-    void AnisoSkyViewFactors()
+    void AnisoSkyViewFactors(EnergyPlusData &state)
     {
 
         // SUBROUTINE INFORMATION:
@@ -2592,13 +2592,13 @@ namespace SolarShading {
 
             if (!DetailedSkyDiffuseAlgorithm || !ShadingTransmittanceVaries || SolarDistribution == MinimalShadowing) {
                 AnisoSkyMult(SurfNum) = MultIsoSky(SurfNum) * DifShdgRatioIsoSky(SurfNum) +
-                                        MultCircumSolar(SurfNum) * SunlitFrac(TimeStep, HourOfDay, SurfNum) +
+                                        MultCircumSolar(SurfNum) * SunlitFrac(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, SurfNum) +
                                         MultHorizonZenith(SurfNum) * DifShdgRatioHoriz(SurfNum);
             } else {
-                AnisoSkyMult(SurfNum) = MultIsoSky(SurfNum) * DifShdgRatioIsoSkyHRTS(TimeStep, HourOfDay, SurfNum) +
-                                        MultCircumSolar(SurfNum) * SunlitFrac(TimeStep, HourOfDay, SurfNum) +
-                                        MultHorizonZenith(SurfNum) * DifShdgRatioHorizHRTS(TimeStep, HourOfDay, SurfNum);
-                curDifShdgRatioIsoSky(SurfNum) = DifShdgRatioIsoSkyHRTS(TimeStep, HourOfDay, SurfNum);
+                AnisoSkyMult(SurfNum) = MultIsoSky(SurfNum) * DifShdgRatioIsoSkyHRTS(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, SurfNum) +
+                                        MultCircumSolar(SurfNum) * SunlitFrac(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, SurfNum) +
+                                        MultHorizonZenith(SurfNum) * DifShdgRatioHorizHRTS(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, SurfNum);
+                curDifShdgRatioIsoSky(SurfNum) = DifShdgRatioIsoSkyHRTS(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, SurfNum);
             }
             AnisoSkyMult(SurfNum) = max(0.0, AnisoSkyMult(SurfNum)); // make sure not negative.
         }
@@ -4916,8 +4916,6 @@ namespace SolarShading {
         // BLAST/IBLAST code, original author George Walton
 
         // Using/Aliasing
-        using DataGlobals::HourOfDay;
-        using DataGlobals::TimeStep;
         using DataSystemVariables::DetailedSkyDiffuseAlgorithm;
         using DataSystemVariables::DetailedSolarTimestepIntegration;
 
@@ -4965,44 +4963,45 @@ namespace SolarShading {
                 e.InOutProjSLFracMult = 1.0;
             }
         } else {
-            SunlitFracHR(HourOfDay, {1, TotSurfaces}) = 0.0;
-            SunlitFrac(TimeStep, HourOfDay, {1, TotSurfaces}) = 0.0;
-            SunlitFracWithoutReveal(TimeStep, HourOfDay, {1, TotSurfaces}) = 0.0;
+            SunlitFracHR(state.dataGlobal->HourOfDay, {1, TotSurfaces}) = 0.0;
+            SunlitFrac(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, {1, TotSurfaces}) = 0.0;
+            SunlitFracWithoutReveal(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, {1, TotSurfaces}) = 0.0;
             CTHETA({1, TotSurfaces}) = 0.0;
-            CosIncAngHR(HourOfDay, {1, TotSurfaces}) = 0.0;
-            CosIncAng(TimeStep, HourOfDay, {1, TotSurfaces}) = 0.0;
+            CosIncAngHR(state.dataGlobal->HourOfDay, {1, TotSurfaces}) = 0.0;
+            CosIncAng(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, {1, TotSurfaces}) = 0.0;
             AOSurf({1, TotSurfaces}) = 0.0;
-            BackSurfaces(TimeStep, HourOfDay, {1, MaxBkSurf}, {1, TotSurfaces}) = 0;
-            OverlapAreas(TimeStep, HourOfDay, {1, MaxBkSurf}, {1, TotSurfaces}) = 0.0;
+            BackSurfaces(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, {1, MaxBkSurf}, {1, TotSurfaces}) = 0;
+            OverlapAreas(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, {1, MaxBkSurf}, {1, TotSurfaces}) = 0.0;
             for (int SurfNum = 1; SurfNum <= TotSurfaces; ++SurfNum) {
-                SurfaceWindow(SurfNum).OutProjSLFracMult(HourOfDay) = 1.0;
-                SurfaceWindow(SurfNum).InOutProjSLFracMult(HourOfDay) = 1.0;
+                SurfaceWindow(SurfNum).OutProjSLFracMult(state.dataGlobal->HourOfDay) = 1.0;
+                SurfaceWindow(SurfNum).InOutProjSLFracMult(state.dataGlobal->HourOfDay) = 1.0;
             }
         }
 
         if (!DetailedSolarTimestepIntegration) {
             for (iHour = 1; iHour <= 24; ++iHour) { // Do for all hours
-                for (TS = 1; TS <= NumOfTimeStepInHour; ++TS) {
-                    FigureSunCosines(iHour, TS, AvgEqOfTime, AvgSinSolarDeclin, AvgCosSolarDeclin);
+                for (TS = 1; TS <= state.dataGlobal->NumOfTimeStepInHour; ++TS) {
+                    FigureSunCosines(state, iHour, TS, AvgEqOfTime, AvgSinSolarDeclin, AvgCosSolarDeclin);
                 }
             }
         } else {
-            FigureSunCosines(HourOfDay, TimeStep, AvgEqOfTime, AvgSinSolarDeclin, AvgCosSolarDeclin);
+            FigureSunCosines(state, state.dataGlobal->HourOfDay, state.dataGlobal->TimeStep, AvgEqOfTime, AvgSinSolarDeclin, AvgCosSolarDeclin);
         }
         // Initialize/update the Complex Fenestration geometry and optical properties
         UpdateComplexWindows(state);
         if (!DetailedSolarTimestepIntegration) {
             for (iHour = 1; iHour <= 24; ++iHour) { // Do for all hours.
-                for (TS = 1; TS <= NumOfTimeStepInHour; ++TS) {
+                for (TS = 1; TS <= state.dataGlobal->NumOfTimeStepInHour; ++TS) {
                     FigureSolarBeamAtTimestep(state, iHour, TS);
                 } // TimeStep Loop
             }     // Hour Loop
         } else {
-            FigureSolarBeamAtTimestep(state, HourOfDay, TimeStep);
+            FigureSolarBeamAtTimestep(state, state.dataGlobal->HourOfDay, state.dataGlobal->TimeStep);
         }
     }
 
-    void FigureSunCosines(int const iHour,
+    void FigureSunCosines(EnergyPlusData &state,
+                          int const iHour,
                           int const iTimeStep,
                           Real64 const EqOfTime,       // value of Equation of Time for period
                           Real64 const SinSolarDeclin, // value of Sine of Solar Declination for period
@@ -5027,7 +5026,6 @@ namespace SolarShading {
         // na
 
         // Using/Aliasing
-        using DataGlobals::TimeStepZone;
         using DataSystemVariables::DetailedSolarTimestepIntegration;
 
         // Locals
@@ -5045,8 +5043,8 @@ namespace SolarShading {
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         Real64 CurrentTime; // Current Time for passing to Solar Position Routine
 
-        if (NumOfTimeStepInHour != 1) {
-            CurrentTime = double(iHour - 1) + double(iTimeStep) * (TimeStepZone);
+        if (state.dataGlobal->NumOfTimeStepInHour != 1) {
+            CurrentTime = double(iHour - 1) + double(iTimeStep) * (state.dataGlobal->TimeStepZone);
         } else {
             CurrentTime = double(iHour) + TS1TimeOffset;
         }
@@ -5054,7 +5052,7 @@ namespace SolarShading {
 
         // Save hourly values for use in DaylightingManager
         if (!DetailedSolarTimestepIntegration) {
-            if (iTimeStep == NumOfTimeStepInHour) SUNCOSHR(iHour, {1, 3}) = SUNCOS;
+            if (iTimeStep == state.dataGlobal->NumOfTimeStepInHour) SUNCOSHR(iHour, {1, 3}) = SUNCOS;
         } else {
             SUNCOSHR(iHour, {1, 3}) = SUNCOS;
         }
@@ -5116,7 +5114,7 @@ namespace SolarShading {
             CTHETA(SurfNum) =
                 SUNCOS(1) * Surface(SurfNum).OutNormVec(1) + SUNCOS(2) * Surface(SurfNum).OutNormVec(2) + SUNCOS(3) * Surface(SurfNum).OutNormVec(3);
             if (!DetailedSolarTimestepIntegration) {
-                if (iTimeStep == NumOfTimeStepInHour) CosIncAngHR(iHour, SurfNum) = CTHETA(SurfNum);
+                if (iTimeStep == state.dataGlobal->NumOfTimeStepInHour) CosIncAngHR(iHour, SurfNum) = CTHETA(SurfNum);
             } else {
                 CosIncAngHR(iHour, SurfNum) = CTHETA(SurfNum);
             }
@@ -5137,7 +5135,7 @@ namespace SolarShading {
                 if (Surface(SurfNum).Area >= 1.e-10) {
                     SurfArea = Surface(SurfNum).NetAreaShadowCalc;
                     if (!DetailedSolarTimestepIntegration) {
-                        if (iTimeStep == NumOfTimeStepInHour) SunlitFracHR(iHour, SurfNum) = SAREA(SurfNum) / SurfArea;
+                        if (iTimeStep == state.dataGlobal->NumOfTimeStepInHour) SunlitFracHR(iHour, SurfNum) = SAREA(SurfNum) / SurfArea;
                     } else {
                         SunlitFracHR(iHour, SurfNum) = SAREA(SurfNum) / SurfArea;
                     }
@@ -6775,7 +6773,7 @@ namespace SolarShading {
         Real64 SolarIntoZone; // Solar radiation into zone to current surface
 
         if (MustAllocSolarShading) {
-            DBZoneIntWin.allocate(NumOfZones);
+            DBZoneIntWin.allocate(state.dataGlobal->NumOfZones);
             IntBeamAbsByShadFac.allocate(TotSurfaces);
             ExtBeamAbsByShadFac.allocate(TotSurfaces);
             WinTransBmSolar.allocate(TotSurfaces);
@@ -6818,7 +6816,7 @@ namespace SolarShading {
         IntBeamAbsByShadFac = 0.0;
         ExtBeamAbsByShadFac = 0.0;
 
-        for (int zoneNum = 1; zoneNum <= DataGlobals::NumOfZones; ++zoneNum) {
+        for (int zoneNum = 1; zoneNum <= state.dataGlobal->NumOfZones; ++zoneNum) {
             ZoneTransSolarEnergy(zoneNum) = 0.0;
             ZoneBmSolFrExtWinsRepEnergy(zoneNum) = 0.0;
             ZoneBmSolFrIntWinsRepEnergy(zoneNum) = 0.0;
@@ -6890,8 +6888,8 @@ namespace SolarShading {
                     OutShelfSurf = 0;
                 }
 
-                CosInc = CosIncAng(TimeStep, HourOfDay, SurfNum2);
-                SunLitFract = SunlitFrac(TimeStep, HourOfDay, SurfNum2);
+                CosInc = CosIncAng(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, SurfNum2);
+                SunLitFract = SunlitFrac(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, SurfNum2);
 
                 //-------------------------------------------------------------------------
                 // EXTERIOR BEAM SOLAR RADIATION ABSORBED ON THE OUTSIDE OF OPAQUE SURFACES
@@ -6912,13 +6910,13 @@ namespace SolarShading {
 
                 // Somewhat of a kludge
                 if (Surface(SurfNum).Class == SurfaceClass_TDD_Dome || SurfWinOriginalClass(SurfNum) == SurfaceClass_TDD_Diffuser)
-                    SunlitFracWithoutReveal(TimeStep, HourOfDay, SurfNum) = SunLitFract; // Frames/dividers not allowed
+                    SunlitFracWithoutReveal(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, SurfNum) = SunLitFract; // Frames/dividers not allowed
 
                 WinTransBmBmSolar = 0.0;
                 WinTransBmDifSolar = 0.0;
 
-                InOutProjSLFracMult = SurfaceWindow(SurfNum).InOutProjSLFracMult(HourOfDay);
-                if (SunlitFracWithoutReveal(TimeStep, HourOfDay, SurfNum) > 0.0) {
+                InOutProjSLFracMult = SurfaceWindow(SurfNum).InOutProjSLFracMult(state.dataGlobal->HourOfDay);
+                if (SunlitFracWithoutReveal(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, SurfNum) > 0.0) {
 
                     if (SurfWinWindowModelType(SurfNum) != WindowBSDFModel && SurfWinWindowModelType(SurfNum) != WindowEQLModel) {
 
@@ -6933,7 +6931,7 @@ namespace SolarShading {
 
                         for (Lay = 1; Lay <= NGlass; ++Lay) {
                             AbWin = POLYF(CosInc, state.dataConstruction->Construct(ConstrNum).AbsBeamCoef({1, 6}, Lay)) * CosInc * SunLitFract *
-                                    SurfaceWindow(SurfNum).OutProjSLFracMult(HourOfDay);
+                                    SurfaceWindow(SurfNum).OutProjSLFracMult(state.dataGlobal->HourOfDay);
                             ADiffWin = state.dataConstruction->Construct(ConstrNum).AbsDiff(Lay);
                             if (ShadeFlag <= 0 || ShadeFlag >= 10) {
 
@@ -6948,7 +6946,7 @@ namespace SolarShading {
 
                                 // Shade, screen, blind or switchable glazing on (ShadeFlag > 0)
 
-                                FracSunLit = SunLitFract * SurfaceWindow(SurfNum).OutProjSLFracMult(HourOfDay);
+                                FracSunLit = SunLitFract * SurfaceWindow(SurfNum).OutProjSLFracMult(state.dataGlobal->HourOfDay);
                                 if (ShadeFlag == ExtShadeOn || ShadeFlag == ExtBlindOn || ShadeFlag == ExtScreenOn) FracSunLit = SunLitFract;
                                 if (ShadeFlag == IntShadeOn || ShadeFlag == ExtShadeOn || ShadeFlag == BGShadeOn || ShadeFlag == SwitchableGlazing) {
 
@@ -7265,8 +7263,8 @@ namespace SolarShading {
                                  ++Lay) {
                                 auto absBeamWin = SurfaceWindow(SurfNum)
                                         .ComplexFen.State(SurfaceWindow(SurfNum).ComplexFen.CurrentState)
-                                        .WinBmFtAbs(HourOfDay, TimeStep, Lay);
-                                AbWin = absBeamWin * CosInc * SunLitFract * SurfaceWindow(SurfNum).OutProjSLFracMult(HourOfDay);
+                                        .WinBmFtAbs(state.dataGlobal->HourOfDay, state.dataGlobal->TimeStep, Lay);
+                                AbWin = absBeamWin * CosInc * SunLitFract * SurfaceWindow(SurfNum).OutProjSLFracMult(state.dataGlobal->HourOfDay);
 
                                 // Add contribution of beam reflected from outside and inside reveal
                                 AWinSurf(Lay, SurfNum) =
@@ -7357,7 +7355,7 @@ namespace SolarShading {
 
                     DSZoneWin = AnisoSkyMult(SurfNum) * DiffTrans * Surface(SurfNum).Area;
 
-                    ShelfSolarRad = (BeamSolarRad * SunlitFrac(TimeStep, HourOfDay, OutShelfSurf) * CosIncAng(TimeStep, HourOfDay, OutShelfSurf) +
+                    ShelfSolarRad = (BeamSolarRad * SunlitFrac(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, OutShelfSurf) * CosIncAng(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, OutShelfSurf) +
                                      DifSolarRad * AnisoSkyMult(OutShelfSurf)) *
                                     Shelf(ShelfNum).OutReflectSol;
 
@@ -7389,7 +7387,7 @@ namespace SolarShading {
                         DiffTransGnd = SurfaceWindow(SurfNum).ComplexFen.State(SurfaceWindow(SurfNum).ComplexFen.CurrentState).WinSkyGndTrans;
                         DiffTransBmGnd = SurfaceWindow(SurfNum)
                                 .ComplexFen.State(SurfaceWindow(SurfNum).ComplexFen.CurrentState)
-                                .WinBmGndTrans(HourOfDay, TimeStep);
+                                .WinBmGndTrans(state.dataGlobal->HourOfDay, state.dataGlobal->TimeStep);
                         if (GndSolarRad != 0.0) {
                             DGZoneWin =
                                     ((SurfWinBmGndSolarInc(SurfNum) * DiffTransBmGnd + SurfWinSkyGndSolarInc(SurfNum) * DiffTransGnd) *
@@ -7554,10 +7552,10 @@ namespace SolarShading {
                         // Need to check what effect, if any, defining these here has
                         TBmBm = SurfaceWindow(SurfNum)
                                 .ComplexFen.State(SurfaceWindow(SurfNum).ComplexFen.CurrentState)
-                                .WinDirSpecTrans(HourOfDay, TimeStep);
+                                .WinDirSpecTrans(state.dataGlobal->HourOfDay, state.dataGlobal->TimeStep);
                         TBmDif = SurfaceWindow(SurfNum)
                                          .ComplexFen.State(SurfaceWindow(SurfNum).ComplexFen.CurrentState)
-                                         .WinDirHemiTrans(HourOfDay, TimeStep) -
+                                         .WinDirHemiTrans(state.dataGlobal->HourOfDay, state.dataGlobal->TimeStep) -
                                  TBmBm;
                     } else if (SurfWinWindowModelType(SurfNum) == WindowEQLModel) {
                         // get ASHWAT fenestration model beam-beam and beam-diffuse properties
@@ -7914,14 +7912,14 @@ namespace SolarShading {
 
                             for (IBack = 1; IBack <= MaxBkSurf; ++IBack) {
 
-                                BackSurfNum = BackSurfaces(TimeStep, HourOfDay, IBack, SurfNum);
+                                BackSurfNum = BackSurfaces(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, IBack, SurfNum);
 
                                 if (BackSurfNum == 0) break; // No more irradiated back surfaces for this exterior window
                                 ConstrNumBack = Surface(BackSurfNum).Construction;
                                 NBackGlass = state.dataConstruction->Construct(ConstrNumBack).TotGlassLayers;
                                 // Irradiated (overlap) area for this back surface, projected onto window plane
                                 // (includes effect of shadowing on exterior window)
-                                AOverlap = OverlapAreas(TimeStep, HourOfDay, IBack, SurfNum);
+                                AOverlap = OverlapAreas(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, IBack, SurfNum);
                                 BOverlap = TBm * AOverlap * CosInc; //[m2]
 
                                 if (state.dataConstruction->Construct(ConstrNumBack).TransDiff <= 0.0) {
@@ -7960,7 +7958,7 @@ namespace SolarShading {
                                     ShadeFlagBack = SurfWinShadingFlag(BackSurfNum);
                                     SlatAngBack = SurfWinSlatAngThisTS(BackSurfNum);
                                     VarSlatsBack = SurfWinMovableSlats(BackSurfNum);
-                                    CosIncBack = std::abs(CosIncAng(TimeStep, HourOfDay, BackSurfNum));
+                                    CosIncBack = std::abs(CosIncAng(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, BackSurfNum));
                                     if (SurfWinWindowModelType(SurfNum) == WindowBSDFModel) {
                                         // Transmitting window is complex fen, change the incident angle to one for ray joining
                                         // transmitting and back window centers
@@ -8327,12 +8325,12 @@ namespace SolarShading {
                             // Solar radiation from this window will be calculated only in case when this window is not scheduled surface gained
                             if (FenSolAbsPtr == 0) {
                                 // Current incoming direction number (Sun direction)
-                                IBm = ComplexWind(SurfNum).Geom(CurCplxFenState).SolBmIndex(HourOfDay, TimeStep);
+                                IBm = ComplexWind(SurfNum).Geom(CurCplxFenState).SolBmIndex(state.dataGlobal->HourOfDay, state.dataGlobal->TimeStep);
 
                                 // Report variables for complex fenestration here
                                 SurfWinBSDFBeamDirectionRep(SurfNum) = IBm;
-                                SurfWinBSDFBeamThetaRep(SurfNum) = ComplexWind(SurfNum).Geom(CurCplxFenState).ThetaBm(HourOfDay, TimeStep);
-                                SurfWinBSDFBeamPhiRep(SurfNum) = ComplexWind(SurfNum).Geom(CurCplxFenState).PhiBm(HourOfDay, TimeStep);
+                                SurfWinBSDFBeamThetaRep(SurfNum) = ComplexWind(SurfNum).Geom(CurCplxFenState).ThetaBm(state.dataGlobal->HourOfDay, state.dataGlobal->TimeStep);
+                                SurfWinBSDFBeamPhiRep(SurfNum) = ComplexWind(SurfNum).Geom(CurCplxFenState).PhiBm(state.dataGlobal->HourOfDay, state.dataGlobal->TimeStep);
 
                                 int BaseSurf = Surface(SurfNum).BaseSurf;  // Base surface number for current complex window
                                 // Get total number of back surfaces for current window (surface)
@@ -8468,7 +8466,7 @@ namespace SolarShading {
 
                             for (IBack = 1; IBack <= MaxBkSurf; ++IBack) {
 
-                                BackSurfNum = BackSurfaces(TimeStep, HourOfDay, IBack, SurfNum);
+                                BackSurfNum = BackSurfaces(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, IBack, SurfNum);
 
                                 if (BackSurfNum == 0) break; // No more irradiated back surfaces for this exterior window
                                 if (SurfWinWindowModelType(IBack) != WindowEQLModel) continue; // only EQL back window is allowed
@@ -8477,7 +8475,7 @@ namespace SolarShading {
                                 NBackGlass = state.dataConstruction->Construct(ConstrNumBack).TotGlassLayers;
                                 // Irradiated (overlap) area for this back surface, projected onto window plane
                                 // (includes effect of shadowing on exterior window)
-                                AOverlap = OverlapAreas(TimeStep, HourOfDay, IBack, SurfNum);
+                                AOverlap = OverlapAreas(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, IBack, SurfNum);
                                 BOverlap = TBm * AOverlap * CosInc; //[m2]
 
                                 if (state.dataConstruction->Construct(ConstrNumBack).TransDiff <= 0.0) {
@@ -8511,7 +8509,7 @@ namespace SolarShading {
                                     // Equivalent Layer window model has no distinction when treating windows with and
                                     // without shades (interior, inbetween and exterior shades)
 
-                                    CosIncBack = std::abs(CosIncAng(TimeStep, HourOfDay, BackSurfNum));
+                                    CosIncBack = std::abs(CosIncAng(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, BackSurfNum));
                                     //  Note in equivalent layer window model if storm window exists it is defined as part of
                                     //  window construction, hence it does not require a separate treatment
                                     AbsBeamWinEQL = 0.0;
@@ -8741,7 +8739,7 @@ namespace SolarShading {
 
                         } else if (OutShelfSurf > 0) { // Outside daylighting shelf
                             ShelfSolarRad =
-                                    (BeamSolarRad * SunlitFrac(TimeStep, HourOfDay, OutShelfSurf) * CosIncAng(TimeStep, HourOfDay, OutShelfSurf) +
+                                    (BeamSolarRad * SunlitFrac(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, OutShelfSurf) * CosIncAng(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, OutShelfSurf) +
                                      DifSolarRad * AnisoSkyMult(OutShelfSurf)) *
                                     Shelf(ShelfNum).OutReflectSol;
 
@@ -8834,13 +8832,12 @@ namespace SolarShading {
 
         using namespace DataDaylightingDevices;
 
-        for (int ZoneNum = 1; ZoneNum <= NumOfZones; ++ZoneNum) {
+        for (int ZoneNum = 1; ZoneNum <= state.dataGlobal->NumOfZones; ++ZoneNum) {
             for (int SurfNum = Zone(ZoneNum).SurfaceFirst; SurfNum <= Zone(ZoneNum).SurfaceLast; ++SurfNum) {
                 if (((Surface(SurfNum).ExtBoundCond != ExternalEnvironment) && (Surface(SurfNum).ExtBoundCond != OtherSideCondModeledExt)) &&
                     SurfWinOriginalClass(SurfNum) != SurfaceClass_TDD_Diffuser)
                     continue;
                 if (!Surface(SurfNum).HeatTransSurf) continue;
-                // TH added 3/24/2010 while debugging CR 7872
                 if (!Surface(SurfNum).ExtSolar) continue;
                 int ConstrNum = Surface(SurfNum).Construction;
                 int ConstrNumSh = Surface(SurfNum).activeShadedConstruction;
@@ -8857,8 +8854,8 @@ namespace SolarShading {
                     SurfNum2 = SurfNum;
                 }
 
-                Real64 CosInc = CosIncAng(TimeStep, HourOfDay, SurfNum2);
-                Real64 SunLitFract = SunlitFrac(TimeStep, HourOfDay, SurfNum2);
+                Real64 CosInc = CosIncAng(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, SurfNum2);
+                Real64 SunLitFract = SunlitFrac(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, SurfNum2);
 
                 //-------------------------------------------------------------------------
                 // EXTERIOR BEAM SOLAR RADIATION ABSORBED ON THE OUTSIDE OF OPAQUE SURFACES
@@ -8916,7 +8913,7 @@ namespace SolarShading {
         using namespace MultiLayerOptics;
 
         if (MustAllocSolarShading) {
-            DBZoneIntWin.allocate(NumOfZones);
+            DBZoneIntWin.allocate(state.dataGlobal->NumOfZones);
         }
 
         DSZone = 0.0;
@@ -8948,11 +8945,11 @@ namespace SolarShading {
                     SurfNum2 = SurfNum;
                 }
                 auto &window = SurfaceWindow(SurfNum2);
-                Real64 CosInc = CosIncAng(TimeStep, HourOfDay, SurfNum2);
+                Real64 CosInc = CosIncAng(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, SurfNum2);
                 std::pair<Real64, Real64> incomingAngle = getSunWCEAngles(state, SurfNum2, BSDFHemisphere::Incoming);
                 Real64 Theta = incomingAngle.first;
                 Real64 Phi = incomingAngle.second;
-                Real64 SunLitFract = SunlitFrac(TimeStep, HourOfDay, SurfNum2);
+                Real64 SunLitFract = SunlitFrac(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, SurfNum2);
 
                 int ConstrNum = Surface(SurfNum2).Construction;
                 if (Surface(SurfNum2).activeShadedConstruction > 0) ConstrNum = Surface(SurfNum2).activeShadedConstruction;
@@ -8961,7 +8958,7 @@ namespace SolarShading {
                 ///////////////////////////////////////////////
                 // Solar absorbed in window layers
                 ///////////////////////////////////////////////
-                if (SunlitFracWithoutReveal(TimeStep, HourOfDay, SurfNum2) > 0.0) {
+                if (SunlitFracWithoutReveal(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, SurfNum2) > 0.0) {
                     auto numOfLayers = aLayer->getNumOfLayers();
                     if (SurfWinWindowModelType(SurfNum) == WindowBSDFModel) {
                         auto CurrentState = SurfaceWindow(SurfNum).ComplexFen.CurrentState;
@@ -8980,13 +8977,13 @@ namespace SolarShading {
                     } else {
                         for (size_t Lay = 1; Lay <= numOfLayers; ++Lay) {
                             auto AbWinBeam = aLayer->getAbsorptanceLayer(Lay, Side::Front, ScatteringSimple::Direct, Theta, Phi) *
-                                             window.OutProjSLFracMult(HourOfDay);
+                                             window.OutProjSLFracMult(state.dataGlobal->HourOfDay);
                             auto AbWinDiffFront = aLayer->getAbsorptanceLayer(Lay, Side::Front, ScatteringSimple::Diffuse, Theta, Phi);
                             auto AbWinDiffBack = aLayer->getAbsorptanceLayer(Lay, Side::Back, ScatteringSimple::Diffuse, Theta, Phi);
 
                             // Simon: This should not be multiplied with cosine of incident angle. This however gives same
                             // results as BSDF and Winkelmann models.
-                            AWinSurf(Lay, SurfNum) = AbWinBeam * CosInc * SunLitFract * SurfaceWindow(SurfNum).OutProjSLFracMult(HourOfDay);
+                            AWinSurf(Lay, SurfNum) = AbWinBeam * CosInc * SunLitFract * SurfaceWindow(SurfNum).OutProjSLFracMult(state.dataGlobal->HourOfDay);
                             AWinSurfDiffFront(Lay, SurfNum) = AbWinDiffFront;
                             AWinSurfDiffBack(Lay, SurfNum) = AbWinDiffBack;
 
@@ -9023,8 +9020,8 @@ namespace SolarShading {
                 ////////////////////////////////////////////////////////////////////
                 Real64 TBmBm = aLayer->getPropertySimple(PropertySimple::T, Side::Front, Scattering::DirectDirect, Theta, Phi);
                 Real64 TBmDif = aLayer->getPropertySimple(PropertySimple::T, Side::Front, Scattering::DirectDiffuse, Theta, Phi);
-                Real64 WinTransBmBmSolar = TBmBm * SunLitFract * CosInc * Surface(SurfNum).Area * window.InOutProjSLFracMult(HourOfDay);
-                Real64 WinTransBmDifSolar = TBmDif * SunLitFract * CosInc * Surface(SurfNum).Area * window.InOutProjSLFracMult(HourOfDay);
+                Real64 WinTransBmBmSolar = TBmBm * SunLitFract * CosInc * Surface(SurfNum).Area * window.InOutProjSLFracMult(state.dataGlobal->HourOfDay);
+                Real64 WinTransBmDifSolar = TBmDif * SunLitFract * CosInc * Surface(SurfNum).Area * window.InOutProjSLFracMult(state.dataGlobal->HourOfDay);
                 BTOTZone += WinTransBmBmSolar + WinTransBmDifSolar;
 
                 Real64 DifSolarRadiation = SurfSkySolarInc(SurfNum2) + SurfGndSolarInc(SurfNum2);
@@ -9047,7 +9044,7 @@ namespace SolarShading {
                 ////////////////////////////////////////////////////////////////////
                 Real64 TBm = TBmBm;
                 // Correction for beam absorbed by inside reveal
-                Real64 TBmDenom = SunLitFract * CosInc * Surface(SurfNum).Area * window.InOutProjSLFracMult(HourOfDay);
+                Real64 TBmDenom = SunLitFract * CosInc * Surface(SurfNum).Area * window.InOutProjSLFracMult(state.dataGlobal->HourOfDay);
                 if (TBmDenom != 0.0) { // when =0.0, no correction
                     TBm -= SurfWinBmSolAbsdInsReveal(SurfNum) / TBmDenom;
                 }
@@ -9059,14 +9056,14 @@ namespace SolarShading {
                 if (SolarDistribution == FullInteriorExterior) {
                     for (int IBack = 1; IBack <= NumOfBackSurf; ++IBack) {
 
-                        int const BackSurfNum = BackSurfaces(TimeStep, HourOfDay, IBack, SurfNum);
+                        int const BackSurfNum = BackSurfaces(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, IBack, SurfNum);
 
                         if (BackSurfNum == 0) break; // No more irradiated back surfaces for this exterior window
                         int ConstrNumBack = Surface(BackSurfNum).Construction;
                         // NBackGlass = Construct( ConstrNumBack ).TotGlassLayers;
                         // Irradiated (overlap) area for this back surface, projected onto window plane
                         // (includes effect of shadowing on exterior window)
-                        Real64 AOverlap = OverlapAreas(TimeStep, HourOfDay, IBack, SurfNum);
+                        Real64 AOverlap = OverlapAreas(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, IBack, SurfNum);
                         Real64 BOverlap = TBm * AOverlap * CosInc; //[m2]
 
                         if (state.dataConstruction->Construct(ConstrNumBack).TransDiff <= 0.0) {
@@ -9100,7 +9097,7 @@ namespace SolarShading {
                         if (!Surface(FloorNum).HeatTransSurf) continue;
                         if (ISABSF(FloorNum) <= 0.0 || FloorNum == SurfNum) continue; // Keep only floor surfaces
 
-                        Real64 BTOTWinZone = TBm * SunLitFract * Surface(SurfNum).Area * CosInc * window.InOutProjSLFracMult(HourOfDay); //[m2]
+                        Real64 BTOTWinZone = TBm * SunLitFract * Surface(SurfNum).Area * CosInc * window.InOutProjSLFracMult(state.dataGlobal->HourOfDay); //[m2]
 
                         if (state.dataConstruction->Construct(Surface(FloorNum).Construction).TransDiff <= 0.0) {
                             // Opaque surface
@@ -9247,13 +9244,13 @@ namespace SolarShading {
             if (!DetailedSolarTimestepIntegration) {
                 //  Perform calculations.
                 ShadowingDaysLeft = ShadowingCalcFrequency;
-                if (state.dataGlobal->DayOfSim + ShadowingDaysLeft > NumOfDayInEnvrn) {
-                    ShadowingDaysLeft = NumOfDayInEnvrn - state.dataGlobal->DayOfSim + 1;
+                if (state.dataGlobal->DayOfSim + ShadowingDaysLeft > state.dataGlobal->NumOfDayInEnvrn) {
+                    ShadowingDaysLeft = state.dataGlobal->NumOfDayInEnvrn - state.dataGlobal->DayOfSim + 1;
                 }
 
                 //  Calculate average Equation of Time, Declination Angle for this period
 
-                if (!WarmupFlag) {
+                if (!state.dataGlobal->WarmupFlag) {
                     if (state.dataGlobal->KindOfSim == DataGlobalConstants::KindOfSim::RunPeriodWeather) {
                         DisplayString("Updating Shadowing Calculations, Start Date=" + CurMnDyYr);
                     } else {
@@ -9280,7 +9277,7 @@ namespace SolarShading {
                 SUN3(DayOfYear, AvgSinSolarDeclin, AvgEqOfTime);
                 AvgCosSolarDeclin = std::sqrt(1.0 - pow_2(AvgSinSolarDeclin));
                 // trigger display of progress in the simulation every two weeks
-                if (!WarmupFlag && state.dataGlobal->BeginDayFlag && (state.dataGlobal->DayOfSim % 14 == 0)) {
+                if (!state.dataGlobal->WarmupFlag && state.dataGlobal->BeginDayFlag && (state.dataGlobal->DayOfSim % 14 == 0)) {
                     DisplayPerfSimulationFlag = true;
                 }
             }
@@ -9298,13 +9295,13 @@ namespace SolarShading {
             CalcDayltgCoefficients(state);
         }
 
-        if (!WarmupFlag) {
+        if (!state.dataGlobal->WarmupFlag) {
             --ShadowingDaysLeft;
         }
 
         // Recalculate daylighting coefficients if storm window has been added
         // or removed from one or more windows at beginning of day
-        if (TotWindowsWithDayl > 0 && !state.dataGlobal->BeginSimFlag && !state.dataGlobal->BeginEnvrnFlag && !WarmupFlag && TotStormWin > 0 && StormWinChangeThisDay) {
+        if (TotWindowsWithDayl > 0 && !state.dataGlobal->BeginSimFlag && !state.dataGlobal->BeginEnvrnFlag && !state.dataGlobal->WarmupFlag && TotStormWin > 0 && StormWinChangeThisDay) {
             CalcDayltgCoefficients(state);
         }
     }
@@ -9892,7 +9889,7 @@ namespace SolarShading {
         static Real64 ThetaMax(0.0);   // Maximum allowed slat angle, resp. (rad)  //Autodesk Used uninitialized in some runs
         int IConst; // Construction
 
-        for (int zoneNum = 1; zoneNum <= NumOfZones; ++zoneNum) {
+        for (int zoneNum = 1; zoneNum <= state.dataGlobal->NumOfZones; ++zoneNum) {
             int const firstSurfWin = Zone(zoneNum).WindowSurfaceFirst;
             int const lastSurfWin = Zone(zoneNum).WindowSurfaceLast;
             for (int ISurf = firstSurfWin; ISurf <= lastSurfWin; ++ISurf) {
@@ -10019,8 +10016,8 @@ namespace SolarShading {
                 Real64 HorizSolar = 0.0; // Horizontal direct plus diffuse solar intensity
                 if (SunIsUp) {
                     Real64 SkySolarOnWindow = AnisoSkyMult(ISurf) * DifSolarRad;  // Sky diffuse solar intensity on window (W/m2)
-                    BeamSolarOnWindow = BeamSolarRad * CosIncAng(TimeStep, HourOfDay, ISurf) *
-                                        SunlitFrac(TimeStep, HourOfDay, ISurf);
+                    BeamSolarOnWindow = BeamSolarRad * CosIncAng(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, ISurf) *
+                                        SunlitFrac(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, ISurf);
                     SolarOnWindow =
                             BeamSolarOnWindow + SkySolarOnWindow + GndSolarRad * Surface(ISurf).ViewFactorGround;
                     HorizSolar = BeamSolarRad * SOLCOS(3) + DifSolarRad;
@@ -10395,7 +10392,7 @@ namespace SolarShading {
         return (selected);
     }
 
-    void WindowGapAirflowControl()
+    void WindowGapAirflowControl(EnergyPlusData &state)
     {
 
         // SUBROUTINE INFORMATION:
@@ -10414,7 +10411,7 @@ namespace SolarShading {
         // Using/Aliasing
         using ScheduleManager::GetCurrentScheduleValue;
 
-        for (int zoneNum = 1; zoneNum <= NumOfZones; ++zoneNum) {
+        for (int zoneNum = 1; zoneNum <= state.dataGlobal->NumOfZones; ++zoneNum) {
             int const firstSurfWin = Zone(zoneNum).WindowSurfaceFirst;
             int const lastSurfWin = Zone(zoneNum).WindowSurfaceLast;
             if (firstSurfWin == -1) continue;
@@ -10548,9 +10545,9 @@ namespace SolarShading {
 
         // only for detailed.
         if (DetailedSkyDiffuseAlgorithm && ShadingTransmittanceVaries && SolarDistribution != MinimalShadowing) {
-            DifShdgRatioIsoSkyHRTS.allocate(NumOfTimeStepInHour, 24, TotSurfaces);
+            DifShdgRatioIsoSkyHRTS.allocate(state.dataGlobal->NumOfTimeStepInHour, 24, TotSurfaces);
             DifShdgRatioIsoSkyHRTS = 1.0;
-            DifShdgRatioHorizHRTS.allocate(NumOfTimeStepInHour, 24, TotSurfaces);
+            DifShdgRatioHorizHRTS.allocate(state.dataGlobal->NumOfTimeStepInHour, 24, TotSurfaces);
             DifShdgRatioHorizHRTS = 1.0;
         }
 
@@ -10696,13 +10693,13 @@ namespace SolarShading {
 
         if (DetailedSkyDiffuseAlgorithm && ShadingTransmittanceVaries && SolarDistribution != MinimalShadowing) {
             for (int SurfNum = 1; SurfNum <= TotSurfaces; ++SurfNum) {
-                DifShdgRatioIsoSkyHRTS({1, NumOfTimeStepInHour}, {1, 24}, SurfNum) = DifShdgRatioIsoSky(SurfNum);
-                DifShdgRatioHorizHRTS({1, NumOfTimeStepInHour}, {1, 24}, SurfNum) = DifShdgRatioHoriz(SurfNum);
+                DifShdgRatioIsoSkyHRTS({1, state.dataGlobal->NumOfTimeStepInHour}, {1, 24}, SurfNum) = DifShdgRatioIsoSky(SurfNum);
+                DifShdgRatioHorizHRTS({1, state.dataGlobal->NumOfTimeStepInHour}, {1, 24}, SurfNum) = DifShdgRatioHoriz(SurfNum);
             }
         }
     }
 
-    void CalcWindowProfileAngles()
+    void CalcWindowProfileAngles(EnergyPlusData &state)
     {
 
         // SUBROUTINE INFORMATION:
@@ -10755,7 +10752,7 @@ namespace SolarShading {
         Real64 const cos_ElevSun = std::cos(ElevSun);
         Real64 const sin_ElevSun = std::sin(ElevSun);
 
-        for (int zoneNum = 1; zoneNum <= NumOfZones; ++zoneNum) {
+        for (int zoneNum = 1; zoneNum <= state.dataGlobal->NumOfZones; ++zoneNum) {
             int const firstSurfWin = Zone(zoneNum).WindowSurfaceFirst;
             int const lastSurfWin = Zone(zoneNum).WindowSurfaceLast;
             for (int SurfNum = firstSurfWin; SurfNum <= lastSurfWin; ++SurfNum) {
@@ -10766,7 +10763,7 @@ namespace SolarShading {
 
                 SurfWinProfileAngHor(SurfNum) = 0.0;
                 SurfWinProfileAngVert(SurfNum) = 0.0;
-                if (CosIncAng(TimeStep, HourOfDay, SurfNum) <= 0.0) continue;
+                if (CosIncAng(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, SurfNum) <= 0.0) continue;
 
                 ElevWin = DataGlobalConstants::PiOvr2() - Surface(SurfNum).Tilt * DataGlobalConstants::DegToRadians();
                 AzimWin = Surface(SurfNum).Azimuth * DataGlobalConstants::DegToRadians();
@@ -11152,7 +11149,7 @@ namespace SolarShading {
 
         Real64 tmp_SunlitFracWithoutReveal; // Temporary variable
 
-        for (int zoneNum = 1; zoneNum <= NumOfZones; ++zoneNum) {
+        for (int zoneNum = 1; zoneNum <= state.dataGlobal->NumOfZones; ++zoneNum) {
             int const firstSurfWin = Zone(zoneNum).WindowSurfaceFirst;
             int const lastSurfWin = Zone(zoneNum).WindowSurfaceLast;
             if (firstSurfWin == -1) continue;
@@ -11189,9 +11186,9 @@ namespace SolarShading {
                 ShadeFlag = SurfWinShadingFlag(SurfNum);
                 if (ShadeFlag == ExtShadeOn || ShadeFlag == ExtBlindOn) continue;
 
-                if (CosIncAng(TimeStep, HourOfDay, SurfNum) <= 0.0) continue;
+                if (CosIncAng(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, SurfNum) <= 0.0) continue;
 
-                tmp_SunlitFracWithoutReveal = SunlitFracWithoutReveal(TimeStep, HourOfDay, SurfNum);
+                tmp_SunlitFracWithoutReveal = SunlitFracWithoutReveal(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, SurfNum);
 
                 // Calculate cosine of angle of incidence of beam solar on reveal surfaces,
                 // assumed to be perpendicular to window plane
@@ -11217,7 +11214,7 @@ namespace SolarShading {
                     ConstrNum = Surface(SurfNum).StormWinConstruction;
                     ConstrNumSh = Surface(SurfNum).activeStormWinShadedConstruction;
                 }
-                SolTransGlass = POLYF(CosIncAng(TimeStep, HourOfDay, SurfNum),
+                SolTransGlass = POLYF(CosIncAng(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, SurfNum),
                                       state.dataConstruction->Construct(ConstrNum).TransSolBeamCoef);
                 TanProfileAngVert = SurfWinTanProfileAngVert(SurfNum);
                 TanProfileAngHor = SurfWinTanProfileAngHor(SurfNum);
@@ -11448,7 +11445,7 @@ namespace SolarShading {
 
                             DiffReflGlass = state.dataConstruction->Construct(ConstrNum).ReflectSolDiffBack;
                             if (ShadeFlag == SwitchableGlazing) {
-                                SolTransGlassSh = POLYF(CosIncAng(TimeStep, HourOfDay, SurfNum),
+                                SolTransGlassSh = POLYF(CosIncAng(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, SurfNum),
                                                         state.dataConstruction->Construct(ConstrNumSh).TransSolBeamCoef);
                                 SolTransGlass = InterpSw(SurfWinSwitchingFactor(SurfNum), SolTransGlass,
                                                          SolTransGlassSh);
@@ -11515,7 +11512,7 @@ namespace SolarShading {
         } // End of surface loop
     }
 
-    void ReportSurfaceShading()
+    void ReportSurfaceShading(EnergyPlusData &state)
     {
 
         // SUBROUTINE INFORMATION:
@@ -11559,33 +11556,33 @@ namespace SolarShading {
         int RepCol;  // the column of the predefined report
 
         for (SurfNum = 1; SurfNum <= TotSurfaces; ++SurfNum) {
-            SurfSunlitFrac(SurfNum) = SunlitFrac(TimeStep, HourOfDay, SurfNum);
-            SurfSunlitArea(SurfNum) = SunlitFrac(TimeStep, HourOfDay, SurfNum) * Surface(SurfNum).Area;
+            SurfSunlitFrac(SurfNum) = SunlitFrac(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, SurfNum);
+            SurfSunlitArea(SurfNum) = SunlitFrac(state.dataGlobal->TimeStep, state.dataGlobal->HourOfDay, SurfNum) * Surface(SurfNum).Area;
         }
         // added for predefined reporting
         RepCol = 0;
         if (Month == 3 && DayOfMonth == 21) {
-            if ((HourOfDay == 9) && (TimeStep == 4)) {
+            if ((state.dataGlobal->HourOfDay == 9) && (state.dataGlobal->TimeStep == 4)) {
                 RepCol = pdchSlfMar21_9;
-            } else if ((HourOfDay == 12) && (TimeStep == 4)) {
+            } else if ((state.dataGlobal->HourOfDay == 12) && (state.dataGlobal->TimeStep == 4)) {
                 RepCol = pdchSlfMar21_12;
-            } else if ((HourOfDay == 15) && (TimeStep == 4)) {
+            } else if ((state.dataGlobal->HourOfDay == 15) && (state.dataGlobal->TimeStep == 4)) {
                 RepCol = pdchSlfMar21_15;
             }
         } else if (Month == 6 && DayOfMonth == 21) {
-            if ((HourOfDay == 9) && (TimeStep == 4)) {
+            if ((state.dataGlobal->HourOfDay == 9) && (state.dataGlobal->TimeStep == 4)) {
                 RepCol = pdchSlfJun21_9;
-            } else if ((HourOfDay == 12) && (TimeStep == 4)) {
+            } else if ((state.dataGlobal->HourOfDay == 12) && (state.dataGlobal->TimeStep == 4)) {
                 RepCol = pdchSlfJun21_12;
-            } else if ((HourOfDay == 15) && (TimeStep == 4)) {
+            } else if ((state.dataGlobal->HourOfDay == 15) && (state.dataGlobal->TimeStep == 4)) {
                 RepCol = pdchSlfJun21_15;
             }
         } else if (Month == 12 && DayOfMonth == 21) {
-            if ((HourOfDay == 9) && (TimeStep == 4)) {
+            if ((state.dataGlobal->HourOfDay == 9) && (state.dataGlobal->TimeStep == 4)) {
                 RepCol = pdchSlfDec21_9;
-            } else if ((HourOfDay == 12) && (TimeStep == 4)) {
+            } else if ((state.dataGlobal->HourOfDay == 12) && (state.dataGlobal->TimeStep == 4)) {
                 RepCol = pdchSlfDec21_12;
-            } else if ((HourOfDay == 15) && (TimeStep == 4)) {
+            } else if ((state.dataGlobal->HourOfDay == 15) && (state.dataGlobal->TimeStep == 4)) {
                 RepCol = pdchSlfDec21_15;
             }
         }
@@ -11790,7 +11787,7 @@ namespace SolarShading {
         // REFERENCES: See EnergyPlus engineering documentation
         // USE STATEMENTS: na
 
-        for (int zoneNum = 1; zoneNum <= NumOfZones; ++zoneNum) {
+        for (int zoneNum = 1; zoneNum <= state.dataGlobal->NumOfZones; ++zoneNum) {
             int const firstSurfWin = Zone(zoneNum).WindowSurfaceFirst;
             int const lastSurfWin = Zone(zoneNum).WindowSurfaceLast;
             if (firstSurfWin == -1) continue;

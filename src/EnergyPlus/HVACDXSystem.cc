@@ -819,7 +819,7 @@ namespace HVACDXSystem {
                     if (AirLoopNum == -1) {                                 // Outdoor Air Unit
                         Node(ControlNode).TempSetPoint = OAUCoilOutletTemp; // Set the coil outlet temperature
                         if (DXCoolingSystem(DXSystemNum).ISHundredPercentDOASDXCoil) {
-                            FrostControlSetPointLimit(DXSystemNum,
+                            FrostControlSetPointLimit(state, DXSystemNum,
                                                       DXCoolingSystem(DXSystemNum).DesiredOutletTemp,
                                                       Node(ControlNode).HumRatMax,
                                                       OutBaroPress,
@@ -914,7 +914,7 @@ namespace HVACDXSystem {
             } else if (ControlNode == OutNode) {
                 DXCoolingSystem(DXSystemNum).DesiredOutletTemp = OAUCoilOutletTemp;
                 if (DXCoolingSystem(DXSystemNum).ISHundredPercentDOASDXCoil && DXCoolingSystem(DXSystemNum).RunOnSensibleLoad) {
-                    FrostControlSetPointLimit(DXSystemNum,
+                    FrostControlSetPointLimit(state, DXSystemNum,
                                               DXCoolingSystem(DXSystemNum).DesiredOutletTemp,
                                               Node(ControlNode).HumRatMax,
                                               OutBaroPress,
@@ -939,7 +939,7 @@ namespace HVACDXSystem {
                 DXCoolingSystem(DXSystemNum).DesiredOutletHumRat = 1.0;
             } else if (ControlNode == OutNode) {
                 if (DXCoolingSystem(DXSystemNum).ISHundredPercentDOASDXCoil && DXCoolingSystem(DXSystemNum).RunOnSensibleLoad) {
-                    FrostControlSetPointLimit(DXSystemNum,
+                    FrostControlSetPointLimit(state, DXSystemNum,
                                               Node(ControlNode).TempSetPoint,
                                               Node(ControlNode).HumRatMax,
                                               OutBaroPress,
@@ -950,7 +950,7 @@ namespace HVACDXSystem {
                 //  If HumRatMax is zero, then there is no request from SetpointManager:SingleZone:Humidity:Maximum
                 if ((DXCoolingSystem(DXSystemNum).DehumidControlType != DehumidControl_None) && (Node(ControlNode).HumRatMax > 0.0)) {
                     if (DXCoolingSystem(DXSystemNum).ISHundredPercentDOASDXCoil && DXCoolingSystem(DXSystemNum).RunOnLatentLoad) {
-                        FrostControlSetPointLimit(DXSystemNum,
+                        FrostControlSetPointLimit(state, DXSystemNum,
                                                   Node(ControlNode).TempSetPoint,
                                                   Node(ControlNode).HumRatMax,
                                                   OutBaroPress,
@@ -963,7 +963,7 @@ namespace HVACDXSystem {
                 }
             } else {
                 if (DXCoolingSystem(DXSystemNum).ISHundredPercentDOASDXCoil && DXCoolingSystem(DXSystemNum).RunOnSensibleLoad) {
-                    FrostControlSetPointLimit(DXSystemNum,
+                    FrostControlSetPointLimit(state, DXSystemNum,
                                               Node(ControlNode).TempSetPoint,
                                               Node(ControlNode).HumRatMax,
                                               OutBaroPress,
@@ -973,7 +973,7 @@ namespace HVACDXSystem {
                 DXCoolingSystem(DXSystemNum).DesiredOutletTemp = Node(ControlNode).TempSetPoint - (Node(ControlNode).Temp - Node(OutNode).Temp);
                 if (DXCoolingSystem(DXSystemNum).DehumidControlType != DehumidControl_None) {
                     if (DXCoolingSystem(DXSystemNum).ISHundredPercentDOASDXCoil && DXCoolingSystem(DXSystemNum).RunOnLatentLoad) {
-                        FrostControlSetPointLimit(DXSystemNum,
+                        FrostControlSetPointLimit(state, DXSystemNum,
                                                   Node(ControlNode).TempSetPoint,
                                                   Node(ControlNode).HumRatMax,
                                                   OutBaroPress,
@@ -1021,7 +1021,6 @@ namespace HVACDXSystem {
         using DataEnvironment::OutBaroPress;
         using DataGlobals::DoingSizing;
         using DataGlobals::KickOffSimulation;
-        using DataGlobals::WarmupFlag;
         using DataHVACGlobals::TempControlTol;
         using DXCoils::DXCoilOutletHumRat;
         using DXCoils::DXCoilOutletTemp;
@@ -1122,7 +1121,7 @@ namespace HVACDXSystem {
         I = 1;
 
         // If there is a fault of coil SAT Sensor (zrp_Nov2016)
-        if (DXCoolingSystem(DXSystemNum).FaultyCoilSATFlag && (!WarmupFlag) && (!DoingSizing) && (!KickOffSimulation)) {
+        if (DXCoolingSystem(DXSystemNum).FaultyCoilSATFlag && (!state.dataGlobal->WarmupFlag) && (!DoingSizing) && (!KickOffSimulation)) {
             // calculate the sensor offset using fault information
             int FaultIndex = DXCoolingSystem(DXSystemNum).FaultyCoilSATIndex;
             DXCoolingSystem(DXSystemNum).FaultyCoilSATOffset = FaultsCoilSATSensor(FaultIndex).CalFaultOffsetAct();
@@ -1196,7 +1195,7 @@ namespace HVACDXSystem {
                                     Par(5) = double(FanOpMode);
                                     TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, PartLoadFrac, DOE2DXCoilResidual, 0.0, 1.0, Par);
                                     if (SolFla == -1) {
-                                        if (!WarmupFlag) {
+                                        if (!state.dataGlobal->WarmupFlag) {
                                             if (DXCoolingSystem(DXSystemNum).DXCoilSensPLRIter < 1) {
                                                 ++DXCoolingSystem(DXSystemNum).DXCoilSensPLRIter;
                                                 ShowWarningError(
@@ -1219,7 +1218,7 @@ namespace HVACDXSystem {
                                         }
                                     } else if (SolFla == -2) {
                                         PartLoadFrac = ReqOutput / FullOutput;
-                                        if (!WarmupFlag) {
+                                        if (!state.dataGlobal->WarmupFlag) {
                                             if (DXCoolingSystem(DXSystemNum).DXCoilSensPLRFail < 1) {
                                                 ++DXCoolingSystem(DXSystemNum).DXCoilSensPLRFail;
                                                 ShowWarningError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
@@ -1278,7 +1277,7 @@ namespace HVACDXSystem {
                                     Par(5) = double(FanOpMode);
                                     TempSolveRoot::SolveRoot(state, HumRatAcc, MaxIte, SolFla, PartLoadFrac, DOE2DXCoilHumRatResidual, 0.0, 1.0, Par);
                                     if (SolFla == -1) {
-                                        if (!WarmupFlag) {
+                                        if (!state.dataGlobal->WarmupFlag) {
                                             if (DXCoolingSystem(DXSystemNum).DXCoilLatPLRIter < 1) {
                                                 ++DXCoolingSystem(DXSystemNum).DXCoilLatPLRIter;
                                                 ShowWarningError(
@@ -1305,7 +1304,7 @@ namespace HVACDXSystem {
                                         } else {
                                             PartLoadFrac = 1.0;
                                         }
-                                        if (!WarmupFlag) {
+                                        if (!state.dataGlobal->WarmupFlag) {
                                             if (DXCoolingSystem(DXSystemNum).DXCoilLatPLRFail < 1) {
                                                 ++DXCoolingSystem(DXSystemNum).DXCoilLatPLRFail;
                                                 ShowWarningError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
@@ -1454,7 +1453,7 @@ namespace HVACDXSystem {
                                     //               tighter boundary of solution has been found, call RegulaFalsi a second time
                                     TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, PartLoadFrac, HXAssistedCoolCoilTempResidual, TempMinPLR, TempMaxPLR, Par);
                                     if (SolFla == -1) {
-                                        if (!WarmupFlag) {
+                                        if (!state.dataGlobal->WarmupFlag) {
                                             if (DXCoolingSystem(DXSystemNum).HXAssistedSensPLRIter < 1) {
                                                 ++DXCoolingSystem(DXSystemNum).HXAssistedSensPLRIter;
                                                 ShowWarningError(
@@ -1476,7 +1475,7 @@ namespace HVACDXSystem {
                                         }
                                     } else if (SolFla == -2) {
                                         PartLoadFrac = ReqOutput / FullOutput;
-                                        if (!WarmupFlag) {
+                                        if (!state.dataGlobal->WarmupFlag) {
                                             if (DXCoolingSystem(DXSystemNum).HXAssistedSensPLRFail < 1) {
                                                 ++DXCoolingSystem(DXSystemNum).HXAssistedSensPLRFail;
                                                 ShowWarningError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
@@ -1499,7 +1498,7 @@ namespace HVACDXSystem {
 
                                 } else if (SolFla == -2) {
                                     PartLoadFrac = ReqOutput / FullOutput;
-                                    if (!WarmupFlag) {
+                                    if (!state.dataGlobal->WarmupFlag) {
                                         if (DXCoolingSystem(DXSystemNum).HXAssistedSensPLRFail2 < 1) {
                                             ++DXCoolingSystem(DXSystemNum).HXAssistedSensPLRFail2;
                                             ShowWarningError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
@@ -1583,7 +1582,7 @@ namespace HVACDXSystem {
                                 Par(5) = double(FanOpMode);
                                 TempSolveRoot::SolveRoot(state, Acc, MaxIte, SolFla, PartLoadFrac, HXAssistedCoolCoilTempResidual, 0.0, 1.0, Par);
                                 if (SolFla == -1) {
-                                    if (!WarmupFlag) {
+                                    if (!state.dataGlobal->WarmupFlag) {
                                         if (DXCoolingSystem(DXSystemNum).HXAssistedLatPLRIter < 1) {
                                             ++DXCoolingSystem(DXSystemNum).HXAssistedLatPLRIter;
                                             ShowWarningError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
@@ -1604,7 +1603,7 @@ namespace HVACDXSystem {
                                     }
                                 } else if (SolFla == -2) {
                                     PartLoadFrac = ReqOutput / FullOutput;
-                                    if (!WarmupFlag) {
+                                    if (!state.dataGlobal->WarmupFlag) {
                                         if (DXCoolingSystem(DXSystemNum).HXAssistedLatPLRFail < 1) {
                                             ++DXCoolingSystem(DXSystemNum).HXAssistedLatPLRFail;
                                             ShowWarningError(
@@ -1699,7 +1698,7 @@ namespace HVACDXSystem {
                                     //               tighter boundary of solution has been found, call RegulaFalsi a second time
                                     TempSolveRoot::SolveRoot(state, HumRatAcc, MaxIte, SolFla, PartLoadFrac, HXAssistedCoolCoilHRResidual, TempMinPLR, TempMaxPLR, Par);
                                     if (SolFla == -1) {
-                                        if (!WarmupFlag) {
+                                        if (!state.dataGlobal->WarmupFlag) {
                                             if (DXCoolingSystem(DXSystemNum).HXAssistedCRLatPLRIter < 1) {
                                                 ++DXCoolingSystem(DXSystemNum).HXAssistedCRLatPLRIter;
                                                 ShowWarningError(
@@ -1723,7 +1722,7 @@ namespace HVACDXSystem {
 
                                     } else if (SolFla == -2) {
                                         PartLoadFrac = ReqOutput / FullOutput;
-                                        if (!WarmupFlag) {
+                                        if (!state.dataGlobal->WarmupFlag) {
                                             if (DXCoolingSystem(DXSystemNum).HXAssistedCRLatPLRFail < 1) {
                                                 ++DXCoolingSystem(DXSystemNum).HXAssistedCRLatPLRFail;
                                                 ShowWarningError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
@@ -1745,7 +1744,7 @@ namespace HVACDXSystem {
                                     }
                                 } else if (SolFla == -2) {
                                     PartLoadFrac = ReqOutput / FullOutput;
-                                    if (!WarmupFlag) {
+                                    if (!state.dataGlobal->WarmupFlag) {
                                         if (DXCoolingSystem(DXSystemNum).HXAssistedCRLatPLRFail2 < 1) {
                                             ++DXCoolingSystem(DXSystemNum).HXAssistedCRLatPLRFail2;
                                             ShowWarningError(
@@ -1788,7 +1787,7 @@ namespace HVACDXSystem {
                                 Par(2) = DesOutTemp;
                                 SolveRoot(state, Acc, MaxIte, SolFla, SpeedRatio, DXCoilVarSpeedResidual, 0.0, 1.0, Par);
                                 if (SolFla == -1) {
-                                    if (!WarmupFlag) {
+                                    if (!state.dataGlobal->WarmupFlag) {
                                         if (DXCoolingSystem(DXSystemNum).MSpdSensPLRIter < 1) {
                                             ++DXCoolingSystem(DXSystemNum).MSpdSensPLRIter;
                                             ShowWarningError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
@@ -1807,7 +1806,7 @@ namespace HVACDXSystem {
                                                                        SpeedRatio);
                                     }
                                 } else if (SolFla == -2) {
-                                    if (!WarmupFlag)
+                                    if (!state.dataGlobal->WarmupFlag)
                                         ShowFatalError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                        " - compressor speed calculation failed: speed limits exceeded, for unit=" +
                                                        DXCoolingSystem(DXSystemNum).Name);
@@ -1821,7 +1820,7 @@ namespace HVACDXSystem {
                             Par(2) = DesOutTemp;
                             SolveRoot(state, Acc, MaxIte, SolFla, CycRatio, DXCoilCyclingResidual, 0.0, 1.0, Par);
                             if (SolFla == -1) {
-                                if (!WarmupFlag) {
+                                if (!state.dataGlobal->WarmupFlag) {
                                     if (DXCoolingSystem(DXSystemNum).MSpdCycSensPLRIter < 1) {
                                         ++DXCoolingSystem(DXSystemNum).MSpdCycSensPLRIter;
                                         ShowWarningError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
@@ -1840,7 +1839,7 @@ namespace HVACDXSystem {
                                                                    CycRatio);
                                 }
                             } else if (SolFla == -2) { // should never get here, if it does logic above to protect from this
-                                if (!WarmupFlag)
+                                if (!state.dataGlobal->WarmupFlag)
                                     ShowFatalError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                    " - cycling ratio calculation failed: cycling limits exceeded, for unit=" +
                                                    DXCoolingSystem(DXSystemNum).Name);
@@ -1878,7 +1877,7 @@ namespace HVACDXSystem {
                                         Par(2) = DesOutHumRat;
                                         SolveRoot(state, HumRatAcc, MaxIte, SolFla, SpeedRatio, DXCoilVarSpeedHumRatResidual, 0.0, 1.0, Par);
                                         if (SolFla == -1) {
-                                            if (!WarmupFlag) {
+                                            if (!state.dataGlobal->WarmupFlag) {
                                                 if (DXCoolingSystem(DXSystemNum).MSpdLatPLRIter < 1) {
                                                     ++DXCoolingSystem(DXSystemNum).MSpdLatPLRIter;
                                                     ShowWarningError(
@@ -1898,7 +1897,7 @@ namespace HVACDXSystem {
                                                     SpeedRatio);
                                             }
                                         } else if (SolFla == -2) {
-                                            if (!WarmupFlag)
+                                            if (!state.dataGlobal->WarmupFlag)
                                                 ShowFatalError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                                " - compressor speed calculation failed:speed limits exceeded, for unit=" +
                                                                DXCoolingSystem(DXSystemNum).Name);
@@ -1912,7 +1911,7 @@ namespace HVACDXSystem {
                                     Par(2) = DesOutHumRat;
                                     SolveRoot(state, HumRatAcc, MaxIte, SolFla, CycRatio, DXCoilCyclingHumRatResidual, 0.0, 1.0, Par);
                                     if (SolFla == -1) {
-                                        if (!WarmupFlag) {
+                                        if (!state.dataGlobal->WarmupFlag) {
                                             if (DXCoolingSystem(DXSystemNum).MSpdCycLatPLRIter < 1) {
                                                 ++DXCoolingSystem(DXSystemNum).MSpdCycLatPLRIter;
                                                 ShowWarningError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
@@ -1931,7 +1930,7 @@ namespace HVACDXSystem {
                                                                            CycRatio);
                                         }
                                     } else if (SolFla == -2) { // should never get here, if it does logic above to protect from this
-                                        if (!WarmupFlag)
+                                        if (!state.dataGlobal->WarmupFlag)
                                             ShowFatalError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                            " - cycling ratio calculation failed: cycling limits exceeded, for unit=" +
                                                            DXCoolingSystem(DXSystemNum).Name);
@@ -1983,7 +1982,7 @@ namespace HVACDXSystem {
                                 Par(4) = double(FanOpMode);
                                 SolveRoot(state, Acc, MaxIte, SolFla, PartLoadFrac, MultiModeDXCoilResidual, 0.0, 1.0, Par);
                                 if (SolFla == -1) {
-                                    if (!WarmupFlag) {
+                                    if (!state.dataGlobal->WarmupFlag) {
                                         if (DXCoolingSystem(DXSystemNum).MModeSensPLRIter < 1) {
                                             ++DXCoolingSystem(DXSystemNum).MModeSensPLRIter;
                                             ShowWarningError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
@@ -2003,7 +2002,7 @@ namespace HVACDXSystem {
                                             PartLoadFrac);
                                     }
                                 } else if (SolFla == -2) {
-                                    if (!WarmupFlag) {
+                                    if (!state.dataGlobal->WarmupFlag) {
                                         ShowSevereError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                         " : part-load ratio calculation failed: part-load ratio limits exceeded, for unit=" +
                                                         DXCoolingSystem(DXSystemNum).Name);
@@ -2064,7 +2063,7 @@ namespace HVACDXSystem {
                                     Par(4) = double(FanOpMode);
                                     SolveRoot(state, Acc, MaxIte, SolFla, PartLoadFrac, MultiModeDXCoilHumRatResidual, 0.0, 1.0, Par);
                                     if (SolFla == -1) {
-                                        if (!WarmupFlag) {
+                                        if (!state.dataGlobal->WarmupFlag) {
                                             if (DXCoolingSystem(DXSystemNum).MModeLatPLRIter < 1) {
                                                 ++DXCoolingSystem(DXSystemNum).MModeLatPLRIter;
                                                 ShowWarningError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
@@ -2090,7 +2089,7 @@ namespace HVACDXSystem {
                                                 PartLoadFrac);
                                         }
                                     } else if (SolFla == -2) {
-                                        if (!WarmupFlag) {
+                                        if (!state.dataGlobal->WarmupFlag) {
                                             ShowSevereError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                             " : part-load ratio calculation failed: part-load ratio limits exceeded, for unit=" +
                                                             DXCoolingSystem(DXSystemNum).Name);
@@ -2107,7 +2106,7 @@ namespace HVACDXSystem {
                                     Par(4) = double(FanOpMode);
                                     SolveRoot(state, Acc, MaxIte, SolFla, PartLoadFrac, MultiModeDXCoilResidual, 0.0, 1.0, Par);
                                     if (SolFla == -1) {
-                                        if (!WarmupFlag) {
+                                        if (!state.dataGlobal->WarmupFlag) {
                                             if (DXCoolingSystem(DXSystemNum).MModeLatPLRIter < 1) {
                                                 ++DXCoolingSystem(DXSystemNum).MModeLatPLRIter;
                                                 ShowWarningError(
@@ -2128,7 +2127,7 @@ namespace HVACDXSystem {
                                                 PartLoadFrac);
                                         }
                                     } else if (SolFla == -2) {
-                                        if (!WarmupFlag) {
+                                        if (!state.dataGlobal->WarmupFlag) {
                                             ShowSevereError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                             " : part-load ratio calculation failed: part-load ratio limits exceeded, for unit=" +
                                                             DXCoolingSystem(DXSystemNum).Name);
@@ -2170,7 +2169,7 @@ namespace HVACDXSystem {
                                 Par(4) = double(FanOpMode);
                                 SolveRoot(state, Acc, MaxIte, SolFla, PartLoadFrac, MultiModeDXCoilHumRatResidual, 0.0, 1.0, Par);
                                 if (SolFla == -1) {
-                                    if (!WarmupFlag) {
+                                    if (!state.dataGlobal->WarmupFlag) {
                                         if (DXCoolingSystem(DXSystemNum).MModeLatPLRIter2 < 1) {
                                             ++DXCoolingSystem(DXSystemNum).MModeLatPLRIter2;
                                             ShowWarningError(
@@ -2191,7 +2190,7 @@ namespace HVACDXSystem {
                                             PartLoadFrac);
                                     }
                                 } else if (SolFla == -2) {
-                                    if (!WarmupFlag) {
+                                    if (!state.dataGlobal->WarmupFlag) {
                                         ShowSevereError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                         " : part-load ratio calculation failed: part-load ratio limits exceeded, for unit=" +
                                                         DXCoolingSystem(DXSystemNum).Name);
@@ -2298,7 +2297,7 @@ namespace HVACDXSystem {
                                     SpeedRatio = 0.0;
                                     SolveRoot(state, Acc, MaxIte, SolFla, PartLoadFrac, VSCoilCyclingResidual, 1.0e-10, 1.0, Par);
                                     if (SolFla == -1) {
-                                        if (!WarmupFlag && std::abs(Node(OutletNode).Temp - DesOutTemp) > Acc) {
+                                        if (!state.dataGlobal->WarmupFlag && std::abs(Node(OutletNode).Temp - DesOutTemp) > Acc) {
                                             if (DXCoolingSystem(DXSystemNum).DXCoilSensPLRIter < 1) {
                                                 ++DXCoolingSystem(DXSystemNum).DXCoilSensPLRIter;
                                                 ShowWarningError(
@@ -2321,7 +2320,7 @@ namespace HVACDXSystem {
                                         }
                                     } else if (SolFla == -2) {
                                         PartLoadFrac = TempSpeedReqst / TempSpeedOut;
-                                        if (!WarmupFlag) {
+                                        if (!state.dataGlobal->WarmupFlag) {
                                             if (DXCoolingSystem(DXSystemNum).DXCoilSensPLRFail < 1) {
                                                 ++DXCoolingSystem(DXSystemNum).DXCoilSensPLRFail;
                                                 ShowWarningError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
@@ -2406,7 +2405,7 @@ namespace HVACDXSystem {
                                             CycRatio = PartLoadFrac;
                                         }
                                         if (SolFla == -1) {
-                                            if (!WarmupFlag && std::abs(Node(OutletNode).Temp - DesOutTemp) > Acc) {
+                                            if (!state.dataGlobal->WarmupFlag && std::abs(Node(OutletNode).Temp - DesOutTemp) > Acc) {
                                                 if (DXCoolingSystem(DXSystemNum).DXCoilSensPLRIter < 1) {
                                                     ++DXCoolingSystem(DXSystemNum).DXCoilSensPLRIter;
                                                     ShowWarningError(
@@ -2428,7 +2427,7 @@ namespace HVACDXSystem {
                                             }
                                         } else if (SolFla == -2) {
                                             PartLoadFrac = TempSpeedReqst / TempSpeedOut;
-                                            if (!WarmupFlag) {
+                                            if (!state.dataGlobal->WarmupFlag) {
                                                 if (DXCoolingSystem(DXSystemNum).DXCoilSensPLRFail < 1) {
                                                     ++DXCoolingSystem(DXSystemNum).DXCoilSensPLRFail;
                                                     ShowWarningError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
@@ -2531,7 +2530,7 @@ namespace HVACDXSystem {
                                         }
 
                                         if (SolFla == -1) {
-                                            if (!WarmupFlag && std::abs(Node(OutletNode).HumRat - DesOutHumRat) > (Acc / 100.0)) {
+                                            if (!state.dataGlobal->WarmupFlag && std::abs(Node(OutletNode).HumRat - DesOutHumRat) > (Acc / 100.0)) {
                                                 if (DXCoolingSystem(DXSystemNum).DXCoilSensPLRIter < 1) {
                                                     ++DXCoolingSystem(DXSystemNum).DXCoilSensPLRIter;
                                                     ShowWarningError(
@@ -2553,7 +2552,7 @@ namespace HVACDXSystem {
                                             }
                                         } else if (SolFla == -2) {
                                             PartLoadFrac = SpeedRatio;
-                                            if (!WarmupFlag) {
+                                            if (!state.dataGlobal->WarmupFlag) {
                                                 if (DXCoolingSystem(DXSystemNum).DXCoilSensPLRFail < 1) {
                                                     ++DXCoolingSystem(DXSystemNum).DXCoilSensPLRFail;
                                                     ShowWarningError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
@@ -2587,7 +2586,7 @@ namespace HVACDXSystem {
                                         CycRatio = PartLoadFrac;
                                     }
                                     if (SolFla == -1) {
-                                        if (!WarmupFlag && std::abs(Node(OutletNode).HumRat - DesOutHumRat) > (Acc / 100.0)) {
+                                        if (!state.dataGlobal->WarmupFlag && std::abs(Node(OutletNode).HumRat - DesOutHumRat) > (Acc / 100.0)) {
                                             if (DXCoolingSystem(DXSystemNum).DXCoilLatPLRIter < 1) {
                                                 ++DXCoolingSystem(DXSystemNum).DXCoilLatPLRIter;
                                                 ShowWarningError(
@@ -2609,7 +2608,7 @@ namespace HVACDXSystem {
                                         }
                                     } else if (SolFla == -2) {
                                         PartLoadFrac = 1.0;
-                                        if (!WarmupFlag) {
+                                        if (!state.dataGlobal->WarmupFlag) {
                                             if (DXCoolingSystem(DXSystemNum).DXCoilLatPLRFail < 1) {
                                                 ++DXCoolingSystem(DXSystemNum).DXCoilLatPLRFail;
                                                 ShowWarningError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
@@ -3420,7 +3419,8 @@ namespace HVACDXSystem {
         return Residuum;
     }
 
-    void FrostControlSetPointLimit(int const DXSystemNum,      // dx cooling coil system index
+    void FrostControlSetPointLimit(EnergyPlusData &state,
+                                   int const DXSystemNum,      // dx cooling coil system index
                                    Real64 &TempSetPoint,       // temperature setpoint of the sensor node
                                    Real64 &HumRatSetPoint,     // humidity ratio setpoint of the sensor node
                                    Real64 const BaroPress,     // baromtric pressure, Pa [N/m^2]
@@ -3468,7 +3468,7 @@ namespace HVACDXSystem {
             }
         } else if (ControlMode == RunOnLatent && AirMassFlow > MinAirMassFlow &&
                    HumRatSetPoint < Node(DXCoolingSystem(DXSystemNum).DXCoolingCoilInletNodeNum).HumRat) {
-            HumRatioSat = PsyWFnTdpPb(TfrostControl, BaroPress, RoutineName);
+            HumRatioSat = PsyWFnTdpPb(state, TfrostControl, BaroPress, RoutineName);
             if (HumRatioSat > HumRatSetPoint) {
                 HumRatSetPoint = HumRatioSat;
                 DXCoolingSystem(DXSystemNum).FrostControlStatus = 2;

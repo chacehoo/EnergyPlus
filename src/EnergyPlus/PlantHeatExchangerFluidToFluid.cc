@@ -2151,7 +2151,7 @@ namespace PlantHeatExchangerFluidToFluid {
                         Acc, MaxIte, SolFla, DmdSideMdot, f, this->DemandSideLoop.MassFlowRateMin, this->DemandSideLoop.MassFlowRateMax, Par);
 
                     if (SolFla == -1) { // no convergence
-                        if (!DataGlobals::WarmupFlag) {
+                        if (!state.dataGlobal->WarmupFlag) {
                             if (this->DmdSideModulatSolvNoConvergeErrorCount < 1) {
                                 ++this->DmdSideModulatSolvNoConvergeErrorCount;
                                 ShowWarningError(ComponentClassName + " named " + this->Name +
@@ -2168,7 +2168,7 @@ namespace PlantHeatExchangerFluidToFluid {
                     } else if (SolFla == -2) { // f(x0) and f(x1) have the same sign
                         DmdSideMdot = this->DemandSideLoop.MassFlowRateMax * (LeavingTempFullFlow - TargetSupplySideLoopLeavingTemp) /
                                       (LeavingTempFullFlow - LeavingTempMinFlow);
-                        if (!DataGlobals::WarmupFlag) {
+                        if (!state.dataGlobal->WarmupFlag) {
                             if (this->DmdSideModulatSolvFailErrorCount < 1) {
                                 ++this->DmdSideModulatSolvFailErrorCount;
                                 ShowWarningError(ComponentClassName + " named " + this->Name +
@@ -2224,7 +2224,7 @@ namespace PlantHeatExchangerFluidToFluid {
                         Acc, MaxIte, SolFla, DmdSideMdot, f, this->DemandSideLoop.MassFlowRateMin, this->DemandSideLoop.MassFlowRateMax, Par);
 
                     if (SolFla == -1) { // no convergence
-                        if (!DataGlobals::WarmupFlag) {
+                        if (!state.dataGlobal->WarmupFlag) {
                             if (this->DmdSideModulatSolvNoConvergeErrorCount < 1) {
                                 ++this->DmdSideModulatSolvNoConvergeErrorCount;
                                 ShowWarningError(ComponentClassName + " named " + this->Name +
@@ -2241,7 +2241,7 @@ namespace PlantHeatExchangerFluidToFluid {
                     } else if (SolFla == -2) { // f(x0) and f(x1) have the same sign
                         DmdSideMdot = this->DemandSideLoop.MassFlowRateMax * (LeavingTempFullFlow - TargetSupplySideLoopLeavingTemp) /
                                       (LeavingTempFullFlow - LeavingTempMinFlow);
-                        if (!DataGlobals::WarmupFlag) {
+                        if (!state.dataGlobal->WarmupFlag) {
                             if (this->DmdSideModulatSolvFailErrorCount < 1) {
                                 ++this->DmdSideModulatSolvFailErrorCount;
                                 ShowWarningError(ComponentClassName + " named " + this->Name +

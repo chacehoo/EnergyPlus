@@ -936,12 +936,12 @@ namespace HybridEvapCoolingModel {
         Initialized = true;
     }
 
-    Real64 Model::CheckVal_W(Real64 W, Real64 T, Real64 P)
+    Real64 Model::CheckVal_W(EnergyPlusData &state, Real64 W, Real64 T, Real64 P)
     {
         // P must be in pascals NOT kPa
-        Real64 OutletRHtest = PsyRhFnTdbWPb(T, W, P); // could also use outlet pressure instead of fixed
+        Real64 OutletRHtest = PsyRhFnTdbWPb(state, T, W, P); // could also use outlet pressure instead of fixed
         Real64 OutletW =
-            PsyWFnTdbRhPb(T, OutletRHtest, P, "Humidity ratio exceeded realistic range error called in " + Name + ", check performance curve");
+            PsyWFnTdbRhPb(state, T, OutletRHtest, P, "Humidity ratio exceeded realistic range error called in " + Name + ", check performance curve");
         return OutletW;
     }
     Real64 Model::CheckVal_T(Real64 T)
@@ -1288,8 +1288,8 @@ namespace HybridEvapCoolingModel {
             return -1;
         } // because it should be fractional, this should only really be possible if its called from a unit test
 
-        Real64 Wosa = PsyWFnTdbRhPb(StepIns.Tosa, StepIns.RHosa, OutBaroPress);
-        Real64 Wra = PsyWFnTdbRhPb(StepIns.Tra, StepIns.RHra, InletPressure);
+        Real64 Wosa = PsyWFnTdbRhPb(state, StepIns.Tosa, StepIns.RHosa, OutBaroPress);
+        Real64 Wra = PsyWFnTdbRhPb(state, StepIns.Tra, StepIns.RHra, InletPressure);
         bool EnvironmentConditionsMet, EnvironmentConditionsMetOnce, MinVRMet, SAT_OC_Met, SAT_OC_MetOnce, SARH_OC_Met, SAHR_OC_MetOnce;
         EnvironmentConditionsMetOnce = SAT_OC_Met = SAT_OC_MetOnce = SARH_OC_Met = SAHR_OC_MetOnce = false;
 
@@ -1403,7 +1403,7 @@ namespace HybridEvapCoolingModel {
                                 CandidateSetting.ScaledSupply_Air_Ventilation_Volume = CandidateSetting.ScaledSupply_Air_Mass_Flow_Rate / StdRhoAir;
                                 CandidateSetting.oMode = Mode;
                                 CandidateSetting.SupplyAirTemperature = Tsa;
-                                CandidateSetting.SupplyAirW = CheckVal_W(Wsa, Tsa, OutletPressure);
+                                CandidateSetting.SupplyAirW = CheckVal_W(state, Wsa, Tsa, OutletPressure);
                                 CandidateSetting.Mode = Mode.ModeID;
                                 Settings.push_back(CandidateSetting);
                             }
@@ -1411,7 +1411,7 @@ namespace HybridEvapCoolingModel {
                     }
                 }
             }
-            if (!WarmupFlag) {
+            if (!state.dataGlobal->WarmupFlag) {
                 // Keep an account of the number of times the supply air temperature and humidity constraints were not met for a given mode but only
                 // do this when its not warmup.
                 if (!SAT_OC_MetinMode) {
@@ -1626,12 +1626,12 @@ namespace HybridEvapCoolingModel {
             }
         }
 
-        Real64 TimeElapsed = DataGlobals::HourOfDay + DataGlobals::TimeStep * DataGlobals::TimeStepZone + SysTimeElapsed;
+        Real64 TimeElapsed = state.dataGlobal->HourOfDay + state.dataGlobal->TimeStep * state.dataGlobal->TimeStepZone + SysTimeElapsed;
 
         // Use the elapsed time to only give a summary of warnings related to the number of Timesteps environmental conditions, or supply air
         // temperature constraints were not met for a given day. ideally there would be a clear flag that indicates "this is the last timestep of the
         // day, so report", but that doesn't seem to exist.
-        if ((TimeElapsed > 24) && WarnOnceFlag && !WarmupFlag) {
+        if ((TimeElapsed > 24) && WarnOnceFlag && !state.dataGlobal->WarmupFlag) {
             if (count_EnvironmentConditionsNotMet > 0)
                 ShowWarningError("In day " + RoundSigDigits((Real64)state.dataGlobal->DayOfSim, 1) + " of simulation, " + Name.c_str() + " was unable to operate for " +
                                  RoundSigDigits((Real64)count_EnvironmentConditionsNotMet, 1) +
@@ -1657,7 +1657,7 @@ namespace HybridEvapCoolingModel {
             count_EnvironmentConditionsNotMet = 0;
             WarnOnceFlag = false;
         }
-        if (DataGlobals::HourOfDay == 1 && !WarnOnceFlag && !WarmupFlag) {
+        if (state.dataGlobal->HourOfDay == 1 && !WarnOnceFlag && !state.dataGlobal->WarmupFlag) {
             WarnOnceFlag = true;
         }
         return ErrorCode;
@@ -1818,8 +1818,8 @@ namespace HybridEvapCoolingModel {
         StepIns.ZoneDehumidificationLoad = RequestedDeHumdificationLoad;
         StepIns.MinimumOA = DesignMinVR;
         // calculate W humidity ratios for outdoor air and return air
-        Real64 Wosa = PsyWFnTdbRhPb(StepIns.Tosa, StepIns.RHosa, OutBaroPress);
-        Real64 Wra = PsyWFnTdbRhPb(StepIns.Tra, StepIns.RHra, InletPressure);
+        Real64 Wosa = PsyWFnTdbRhPb(state, StepIns.Tosa, StepIns.RHosa, OutBaroPress);
+        Real64 Wra = PsyWFnTdbRhPb(state, StepIns.Tra, StepIns.RHra, InletPressure);
         // Sets boolean values for each potential conditioning requirement;  CoolingRequested, HeatingRequested, VentilationRequested,
         // DehumidificationRequested, HumidificationRequested
         DetermineCoolingVentilationOrHumidificationNeeds(StepIns);
@@ -1874,13 +1874,13 @@ namespace HybridEvapCoolingModel {
         }
         // set timestep average outlet condition, considering all operating conditions and runtimes.
         OutletTemp = CheckVal_T(CalculateTimeStepAverage(SYSTEMOUTPUTS::SUPPLY_AIR_TEMP));
-        OutletHumRat = CheckVal_W(CalculateTimeStepAverage(SYSTEMOUTPUTS::SUPPLY_AIR_HR), OutletTemp, OutletPressure);
+        OutletHumRat = CheckVal_W(state, CalculateTimeStepAverage(SYSTEMOUTPUTS::SUPPLY_AIR_HR), OutletTemp, OutletPressure);
 
-        OutletRH = PsyRhFnTdbWPb(OutletTemp, OutletHumRat, OutletPressure);
+        OutletRH = PsyRhFnTdbWPb(state, OutletTemp, OutletHumRat, OutletPressure);
         Real64 OperatingAverageMixedAirTemperature = CalculateTimeStepAverage(SYSTEMOUTPUTS::MIXED_AIR_TEMP);
         Real64 OperatingMixedAirW = CalculateTimeStepAverage(SYSTEMOUTPUTS::MIXED_AIR_HR);
         Real64 MixedAirEnthalpy = PsyHFnTdbW(OperatingAverageMixedAirTemperature, OperatingMixedAirW);
-        OutletEnthalpy = PsyHFnTdbRhPb(OutletTemp, OutletRH, InletPressure);
+        OutletEnthalpy = PsyHFnTdbRhPb(state, OutletTemp, OutletRH, InletPressure);
         OutletMassFlowRate = CalculateTimeStepAverage(SYSTEMOUTPUTS::SUPPLY_MASS_FLOW);
 
         if (StdRhoAir > 1) {

@@ -557,7 +557,7 @@ namespace ConvectionCoefficients {
 
     void MapExtConvClassificationToHcModels(EnergyPlusData &state, int SurfNum); // surface number
 
-    void DynamicIntConvSurfaceClassification(int SurfNum); // surface number
+    void DynamicIntConvSurfaceClassification(EnergyPlusData &state, int SurfNum); // surface number
 
     void MapIntConvClassificationToHcModels(EnergyPlusData &state, int SurfNum); // surface pointer index
 

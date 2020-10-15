@@ -227,7 +227,7 @@ namespace DisplacementVentMgr {
 
         // Do the one time initializations
         if (InitUCSDDVMyOneTimeFlag) {
-            MyEnvrnFlag.dimension(NumOfZones, true);
+            MyEnvrnFlag.dimension(state.dataGlobal->NumOfZones, true);
             HeightFloorSubzoneTop = 0.2;
             ThickOccupiedSubzoneMin = 0.2;
             HeightIntMassDefault = 2.0;
@@ -674,8 +674,8 @@ namespace DisplacementVentMgr {
 
         // Exact solution or Euler method
         if (ZoneAirSolutionAlgo != Use3rdOrder) {
-            if (ShortenTimeStepSysRoomAir && TimeStepSys < TimeStepZone) {
-                if (PreviousTimeStep < TimeStepZone) {
+            if (ShortenTimeStepSysRoomAir && TimeStepSys < state.dataGlobal->TimeStepZone) {
+                if (PreviousTimeStep < state.dataGlobal->TimeStepZone) {
                     Zone1Floor(ZoneNum) = ZoneM2Floor(ZoneNum);
                     Zone1OC(ZoneNum) = ZoneM2OC(ZoneNum);
                     Zone1MX(ZoneNum) = ZoneM2MX(ZoneNum);

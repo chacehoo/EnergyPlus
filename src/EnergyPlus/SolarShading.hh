@@ -211,7 +211,7 @@ namespace SolarShading {
 
     void AllocateModuleArrays(EnergyPlusData &state);
 
-    void AnisoSkyViewFactors();
+    void AnisoSkyViewFactors(EnergyPlusData &state);
 
     void CHKBKS(int const NBS, // Surface Number of the potential back surface
                 int const NRS  // Surface Number of the potential shadow receiving surface
@@ -301,7 +301,8 @@ namespace SolarShading {
                           Real64 const AvgCosSolarDeclin  // Average value of Cosine of Solar Declination for period
     );
 
-    void FigureSunCosines(int const iHour,
+    void FigureSunCosines(EnergyPlusData &state,
+                          int const iHour,
                           int const iTimeStep,
                           Real64 const EqOfTime,       // value of Equation of Time for period
                           Real64 const SinSolarDeclin, // value of Sine of Solar Declination for period
@@ -386,11 +387,11 @@ namespace SolarShading {
 
     int selectActiveWindowShadingControlIndex(int curSurface);
 
-    void WindowGapAirflowControl();
+    void WindowGapAirflowControl(EnergyPlusData &state);
 
     void SkyDifSolarShading(EnergyPlusData &state);
 
-    void CalcWindowProfileAngles();
+    void CalcWindowProfileAngles(EnergyPlusData &state);
 
     void CalcFrameDividerShadow(int const SurfNum,  // Surface number
                                 int const FrDivNum, // Frame/divider number
@@ -399,7 +400,7 @@ namespace SolarShading {
 
     void CalcBeamSolarOnWinRevealSurface(EnergyPlusData &state);
 
-    void ReportSurfaceShading();
+    void ReportSurfaceShading(EnergyPlusData &state);
 
     void ReportSurfaceErrors();
 

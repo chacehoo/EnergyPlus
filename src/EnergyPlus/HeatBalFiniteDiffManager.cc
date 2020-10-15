@@ -97,11 +97,7 @@ namespace HeatBalFiniteDiffManager {
 
     // Using/Aliasing
     using DataGlobals::DisplayExtraWarnings;
-    using DataGlobals::HourOfDay;
-    using DataGlobals::NumOfTimeStepInHour;
-    using DataGlobals::TimeStep;
     using DataGlobals::TimeStepZoneSec;
-    using DataGlobals::WarmupFlag;
     using namespace DataMoistureBalance;
     using DataEnvironment::IsRain;
     using DataEnvironment::SkyTemp;
@@ -672,7 +668,7 @@ namespace HeatBalFiniteDiffManager {
 
         //  set a Delt that fits the zone time step and keeps it below 200s.
 
-        fracTimeStepZone_Hour = 1.0 / double(NumOfTimeStepInHour);
+        fracTimeStepZone_Hour = 1.0 / double(state.dataGlobal->NumOfTimeStepInHour);
 
         for (index = 1; index <= 20; ++index) {
             Delt = (fracTimeStepZone_Hour * DataGlobalConstants::SecInHour()) / index; // TimeStepZone = Zone time step in fractional hours
@@ -2226,7 +2222,8 @@ namespace HeatBalFiniteDiffManager {
         SurfOpaqInsFaceConduction(Surf) = QNetSurfInside * surface.Area; // for reporting as in CTF, PT
     }
 
-    void CheckFDSurfaceTempLimits(int const SurfNum,            // surface number
+    void CheckFDSurfaceTempLimits(EnergyPlusData &state,
+                                  int const SurfNum,            // surface number
                                   Real64 const CheckTemperature // calculated temperature, not reset
     )
     {
@@ -2252,8 +2249,8 @@ namespace HeatBalFiniteDiffManager {
 
         ZoneNum = Surface(SurfNum).Zone;
 
-        if (WarmupFlag) ++WarmupSurfTemp;
-        if (!WarmupFlag || WarmupSurfTemp > 10 || DisplayExtraWarnings) {
+        if (state.dataGlobal->WarmupFlag) ++WarmupSurfTemp;
+        if (!state.dataGlobal->WarmupFlag || WarmupSurfTemp > 10 || DisplayExtraWarnings) {
             if (CheckTemperature < MinSurfaceTempLimit) {
                 if (Surface(SurfNum).LowTempErrCount == 0) {
                     ShowSevereMessage("Temperature (low) out of bounds [" + RoundSigDigits(CheckTemperature, 2) + "] for zone=\"" +
