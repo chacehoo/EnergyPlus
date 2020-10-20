@@ -65,12 +65,9 @@
 #include <EnergyPlus/DataHeatBalFanSys.hh>
 #include <EnergyPlus/DataHeatBalSurface.hh>
 #include <EnergyPlus/DataHeatBalance.hh>
-#include <EnergyPlus/DataStringGlobals.hh>
 #include <EnergyPlus/DataSurfaces.hh>
 #include <EnergyPlus/DataSystemVariables.hh>
-#include <EnergyPlus/DataVectorTypes.hh>
 #include <EnergyPlus/DataZoneControls.hh>
-#include <EnergyPlus/DisplayRoutines.hh>
 #include <EnergyPlus/General.hh>
 #include <EnergyPlus/HeatBalanceKivaManager.hh>
 #include <EnergyPlus/Material.hh>
@@ -301,7 +298,7 @@ namespace HeatBalanceKivaManager {
                 } else {
                     Tin = 0.0;
                     ShowSevereError("Illegal control type for Zone=" + DataHeatBalance::Zone(zoneNum).Name +
-                                    ", Found value=" + General::TrimSigDigits(controlType) +
+                                    ", Found value=" + fmt::to_string(controlType) +
                                     ", in Schedule=" + DataZoneControls::TempControlledZone(zoneControlNum).ControlTypeSchedName);
                 }
                 break;
@@ -779,7 +776,7 @@ namespace HeatBalanceKivaManager {
                                              "\", wall surfaces with more than four vertices referencing");
                             ShowContinueError(
                                 "...Foundation Outside Boundary Conditions may not be interpreted correctly in the 2D finite difference model.");
-                            ShowContinueError("Surface=\"" + Surfaces(wl).Name + "\", has " + General::TrimSigDigits(numVs) + " vertices.");
+                            ShowContinueError("Surface=\"" + Surfaces(wl).Name + "\", has " + fmt::to_string(numVs) + " vertices.");
                             ShowContinueError("Consider separating the wall into separate surfaces, each spanning from the floor slab to the top of "
                                               "the foundation wall.");
                         }
@@ -1151,8 +1148,8 @@ namespace HeatBalanceKivaManager {
             }
         }
 
-        gp.createFrame(std::to_string(DataEnvironment::Month) + "/" + std::to_string(DataEnvironment::DayOfMonth) + " " +
-                       std::to_string(DataGlobals::HourOfDay) + ":00");
+        gp.createFrame(fmt::to_string(DataEnvironment::Month) + "/" + fmt::to_string(DataEnvironment::DayOfMonth) + " " +
+                       fmt::to_string(DataGlobals::HourOfDay) + ":00");
 
 #ifndef NDEBUG
 

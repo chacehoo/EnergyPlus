@@ -64,7 +64,6 @@
 #include <EnergyPlus/DataZoneEquipment.hh>
 #include <EnergyPlus/EMSManager.hh>
 #include <EnergyPlus/FluidProperties.hh>
-#include <EnergyPlus/General.hh>
 #include <EnergyPlus/GlobalNames.hh>
 #include <EnergyPlus/Data/EnergyPlusData.hh>
 #include <EnergyPlus/HeatBalanceInternalHeatGains.hh>
@@ -148,8 +147,8 @@ namespace UserDefinedComponents {
         } else {
             // throw warning
             ShowFatalError("SimUserDefinedPlantComponent: did not find where called from loop number called from =" +
-                           General::TrimSigDigits(calledFromLocation.loopNum) +
-                           " , loop side called from =" + General::TrimSigDigits(calledFromLocation.loopSideNum));
+                           fmt::to_string(calledFromLocation.loopNum) +
+                           " , loop side called from =" + fmt::to_string(calledFromLocation.loopSideNum));
         }
     }
 
@@ -245,12 +244,12 @@ namespace UserDefinedComponents {
         } else {
             CompNum = CompIndex;
             if (CompNum < 1 || CompNum > state.dataUserDefinedComponents->NumUserCoils) {
-                ShowFatalError("SimUserDefinedPlantComponent: Invalid CompIndex passed=" + General::TrimSigDigits(CompNum) +
-                               ", Number of units =" + General::TrimSigDigits(state.dataUserDefinedComponents->NumUserCoils) + ", Entered Unit name = " + EquipName);
+                ShowFatalError("SimUserDefinedPlantComponent: Invalid CompIndex passed=" + fmt::to_string(CompNum) +
+                               ", Number of units =" + fmt::to_string(state.dataUserDefinedComponents->NumUserCoils) + ", Entered Unit name = " + EquipName);
             }
             if (state.dataUserDefinedComponents->CheckUserCoilName(CompNum)) {
                 if (EquipName != state.dataUserDefinedComponents->UserCoil(CompNum).Name) {
-                    ShowFatalError("SimUserDefinedPlantComponent: Invalid CompIndex passed=" + General::TrimSigDigits(CompNum) +
+                    ShowFatalError("SimUserDefinedPlantComponent: Invalid CompIndex passed=" + fmt::to_string(CompNum) +
                                    ", Unit name=" + EquipName + ", stored unit name for that index=" + state.dataUserDefinedComponents->UserCoil(CompNum).Name);
                 }
                 state.dataUserDefinedComponents->CheckUserCoilName(CompNum) = false;
@@ -335,12 +334,12 @@ namespace UserDefinedComponents {
         } else {
             CompNum = CompIndex;
             if (CompNum < 1 || CompNum > state.dataUserDefinedComponents->NumUserZoneAir) {
-                ShowFatalError("SimUserDefinedPlantComponent: Invalid CompIndex passed=" + General::TrimSigDigits(CompNum) +
-                               ", Number of units =" + General::TrimSigDigits(state.dataUserDefinedComponents->NumUserZoneAir) + ", Entered Unit name = " + CompName);
+                ShowFatalError("SimUserDefinedPlantComponent: Invalid CompIndex passed=" + fmt::to_string(CompNum) +
+                               ", Number of units =" + fmt::to_string(state.dataUserDefinedComponents->NumUserZoneAir) + ", Entered Unit name = " + CompName);
             }
             if (state.dataUserDefinedComponents->CheckUserZoneAirName(CompNum)) {
                 if (CompName != state.dataUserDefinedComponents->UserZoneAirHVAC(CompNum).Name) {
-                    ShowFatalError("SimUserDefinedPlantComponent: Invalid CompIndex passed=" + General::TrimSigDigits(CompNum) +
+                    ShowFatalError("SimUserDefinedPlantComponent: Invalid CompIndex passed=" + fmt::to_string(CompNum) +
                                    ", Unit name=" + CompName + ", stored unit name for that index=" + state.dataUserDefinedComponents->UserZoneAirHVAC(CompNum).Name);
                 }
                 state.dataUserDefinedComponents->CheckUserZoneAirName(CompNum) = false;
@@ -431,12 +430,12 @@ namespace UserDefinedComponents {
         } else {
             CompNum = CompIndex;
             if (CompNum < 1 || CompNum > state.dataUserDefinedComponents->NumUserAirTerminals) {
-                ShowFatalError("SimUserDefinedPlantComponent: Invalid CompIndex passed=" + General::TrimSigDigits(CompNum) +
-                               ", Number of units =" + General::TrimSigDigits(state.dataUserDefinedComponents->NumUserAirTerminals) + ", Entered Unit name = " + CompName);
+                ShowFatalError("SimUserDefinedPlantComponent: Invalid CompIndex passed=" + fmt::to_string(CompNum) +
+                               ", Number of units =" + fmt::to_string(state.dataUserDefinedComponents->NumUserAirTerminals) + ", Entered Unit name = " + CompName);
             }
             if (state.dataUserDefinedComponents->CheckUserAirTerminal(CompNum)) {
                 if (CompName != state.dataUserDefinedComponents->UserAirTerminal(CompNum).Name) {
-                    ShowFatalError("SimUserDefinedPlantComponent: Invalid CompIndex passed=" + General::TrimSigDigits(CompNum) +
+                    ShowFatalError("SimUserDefinedPlantComponent: Invalid CompIndex passed=" + fmt::to_string(CompNum) +
                                    ", Unit name=" + CompName + ", stored unit name for that index=" + state.dataUserDefinedComponents->UserAirTerminal(CompNum).Name);
                 }
                 state.dataUserDefinedComponents->CheckUserAirTerminal(CompNum) = false;

@@ -342,12 +342,12 @@ namespace HVACControllers {
         } else {
             ControlNum = ControllerIndex;
             if (ControlNum > NumControllers || ControlNum < 1) {
-                ShowFatalError("ManageControllers: Invalid ControllerIndex passed=" + TrimSigDigits(ControlNum) +
-                               ", Number of controllers=" + TrimSigDigits(NumControllers) + ", Controller name=" + ControllerName);
+                ShowFatalError("ManageControllers: Invalid ControllerIndex passed=" + fmt::to_string(ControlNum) +
+                               ", Number of controllers=" + fmt::to_string(NumControllers) + ", Controller name=" + ControllerName);
             }
             if (CheckEquipName(ControlNum)) {
                 if (ControllerName != ControllerProps(ControlNum).ControllerName) {
-                    ShowFatalError("ManageControllers: Invalid ControllerIndex passed=" + TrimSigDigits(ControlNum) + ", Controller name=" +
+                    ShowFatalError("ManageControllers: Invalid ControllerIndex passed=" + fmt::to_string(ControlNum) + ", Controller name=" +
                                    ControllerName + ", stored Controller Name for that index=" + ControllerProps(ControlNum).ControllerName);
                 }
                 CheckEquipName(ControlNum) = false;
@@ -466,7 +466,7 @@ namespace HVACControllers {
                 }
 
             } else {
-                ShowFatalError("ManageControllers: Invalid Operation passed=" + TrimSigDigits(Operation) + ", Controller name=" + ControllerName);
+                ShowFatalError("ManageControllers: Invalid Operation passed=" + fmt::to_string(Operation) + ", Controller name=" + ControllerName);
             }
         }
 
@@ -1819,7 +1819,7 @@ namespace HVACControllers {
                 // Should never happen
                 ShowSevereError("FindRootSimpleController: Root finder failed at " + CreateHVACStepFullString());
                 ShowContinueError(" Controller name=" + ControllerName);
-                ShowContinueError(" Unrecognized root finder status flag=" + TrimSigDigits(RootFinders(ControlNum).StatusFlag));
+                ShowContinueError(" Unrecognized root finder status flag=" + fmt::to_string(RootFinders(ControlNum).StatusFlag));
                 ShowFatalError("Preceding error causes program termination.");
             }
         }
@@ -3157,7 +3157,7 @@ namespace HVACControllers {
 
             } else {
                 // Should never happen
-                ShowFatalError("TraceIndividualController: Invalid Operation passed=" + TrimSigDigits(Operation) +
+                ShowFatalError("TraceIndividualController: Invalid Operation passed=" + fmt::to_string(Operation) +
                                ", Controller name=" + ControllerProps(ControlNum).ControllerName);
             }
         }

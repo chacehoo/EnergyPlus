@@ -1941,8 +1941,8 @@ namespace EnergyPlus {
                 for (int ThisCircuitPipeSegmentCounter = 1;
                      ThisCircuitPipeSegmentCounter <= NumPipeSegments; ++ThisCircuitPipeSegmentCounter) {
                     Segment segment;
-                    segment.Name = "HorizontalTrenchCircuit" + std::to_string(HorizontalGHXCtr) + "Segment" +
-                                   std::to_string(ThisCircuitPipeSegmentCounter);
+                    segment.Name = "HorizontalTrenchCircuit" + fmt::to_string(HorizontalGHXCtr) + "Segment" +
+                                   fmt::to_string(ThisCircuitPipeSegmentCounter);
                     segment.IsActuallyPartOfAHorizontalTrench = true;
                     segment.PipeLocation = PointF(ThisCircuitPipeSegmentCounter * thisInterPipeSpacing,
                                                   thisBurialDepth);

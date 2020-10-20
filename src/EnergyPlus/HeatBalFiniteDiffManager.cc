@@ -357,8 +357,8 @@ namespace HeatBalFiniteDiffManager {
                 MaterialFD(MaterNum).numTempEnth = (MaterialNumProp - 1) / 2;
                 if (MaterialFD(MaterNum).numTempEnth * 2 != (MaterialNumProp - 1)) {
                     ShowSevereError("GetCondFDInput: " + cCurrentModuleObject + "=\"" + MaterialNames(1) + "\", mismatched pairs");
-                    ShowContinueError("...expected " + RoundSigDigits(MaterialFD(MaterNum).numTempEnth) + " pairs, but only entered " +
-                                      RoundSigDigits(MaterialNumProp - 1) + " numbers.");
+                    ShowContinueError("...expected " + fmt::to_string(MaterialFD(MaterNum).numTempEnth) + " pairs, but only entered " +
+                                      fmt::to_string(MaterialNumProp - 1) + " numbers.");
                     ErrorsFound = true;
                 }
                 MaterialFD(MaterNum).TempEnth.dimension(2, MaterialFD(MaterNum).numTempEnth, 0.0);
@@ -385,7 +385,7 @@ namespace HeatBalFiniteDiffManager {
                 if (nonInc) {
                     ShowSevereError("GetCondFDInput: " + cCurrentModuleObject + "=\"" + MaterialNames(1) +
                                     "\", non increasing Temperatures. Temperatures must be strictly increasing.");
-                    ShowContinueError("...occurs first at item=[" + RoundSigDigits(inegptr) + "], value=[" +
+                    ShowContinueError("...occurs first at item=[" + fmt::to_string(inegptr) + "], value=[" +
                                       RoundSigDigits(MaterialFD(MaterNum).TempEnth(1, inegptr), 2) + "].");
                     ErrorsFound = true;
                 }
@@ -399,7 +399,7 @@ namespace HeatBalFiniteDiffManager {
                 }
                 if (nonInc) {
                     ShowSevereError("GetCondFDInput: " + cCurrentModuleObject + "=\"" + MaterialNames(1) + "\", non increasing Enthalpy.");
-                    ShowContinueError("...occurs first at item=[" + RoundSigDigits(inegptr) + "], value=[" +
+                    ShowContinueError("...occurs first at item=[" + fmt::to_string(inegptr) + "], value=[" +
                                       RoundSigDigits(MaterialFD(MaterNum).TempEnth(2, inegptr), 2) + "].");
                     ShowContinueError("...These values may be Cp (Specific Heat) rather than Enthalpy.  Please correct.");
                     ErrorsFound = true;
@@ -447,8 +447,8 @@ namespace HeatBalFiniteDiffManager {
                 MaterialFD(MaterNum).numTempCond = MaterialNumProp / 2;
                 if (MaterialFD(MaterNum).numTempCond * 2 != MaterialNumProp) {
                     ShowSevereError("GetCondFDInput: " + cCurrentModuleObject + "=\"" + MaterialNames(1) + "\", mismatched pairs");
-                    ShowContinueError("...expected " + RoundSigDigits(MaterialFD(MaterNum).numTempCond) + " pairs, but only entered " +
-                                      RoundSigDigits(MaterialNumProp) + " numbers.");
+                    ShowContinueError("...expected " + fmt::to_string(MaterialFD(MaterNum).numTempCond) + " pairs, but only entered " +
+                                      fmt::to_string(MaterialNumProp) + " numbers.");
                     ErrorsFound = true;
                 }
                 MaterialFD(MaterNum).TempCond.dimension(2, MaterialFD(MaterNum).numTempCond, 0.0);
@@ -475,7 +475,7 @@ namespace HeatBalFiniteDiffManager {
                 if (nonInc) {
                     ShowSevereError("GetCondFDInput: " + cCurrentModuleObject + "=\"" + MaterialNames(1) +
                                     "\", non increasing Temperatures. Temperatures must be strictly increasing.");
-                    ShowContinueError("...occurs first at item=[" + RoundSigDigits(inegptr) + "], value=[" +
+                    ShowContinueError("...occurs first at item=[" + fmt::to_string(inegptr) + "], value=[" +
                                       RoundSigDigits(MaterialFD(MaterNum).TempCond(1, inegptr), 2) + "].");
                     ErrorsFound = true;
                 }
@@ -949,44 +949,44 @@ namespace HeatBalFiniteDiffManager {
 
             TotNodes = ConstructFD(Surface(SurfNum).Construction).TotNodes; // Full size nodes, start with outside face.
             for (Lay = 1; Lay <= TotNodes + 1; ++Lay) {                     // include inside face node
-                SetupOutputVariable(state, "CondFD Surface Temperature Node " + TrimSigDigits(Lay) + "",
+                SetupOutputVariable(state, "CondFD Surface Temperature Node " + fmt::to_string(Lay),
                                     OutputProcessor::Unit::C,
                                     SurfaceFD(SurfNum).TDreport(Lay),
                                     "Zone",
                                     "State",
                                     Surface(SurfNum).Name);
-                SetupOutputVariable(state, "CondFD Surface Heat Flux Node " + TrimSigDigits(Lay) + "",
+                SetupOutputVariable(state, "CondFD Surface Heat Flux Node " + fmt::to_string(Lay),
                                     OutputProcessor::Unit::W_m2,
                                     SurfaceFD(SurfNum).QDreport(Lay),
                                     "Zone",
                                     "State",
                                     Surface(SurfNum).Name);
-                SetupOutputVariable(state, "CondFD Phase Change State " + TrimSigDigits(Lay) + "",
+                SetupOutputVariable(state, "CondFD Phase Change State " + fmt::to_string(Lay),
                                     OutputProcessor::Unit::None,
                                     SurfaceFD(SurfNum).PhaseChangeState(Lay),
                                     "Zone",
                                     "State",
                                     Surface(SurfNum).Name);
-                SetupOutputVariable(state, "CondFD Phase Change Previous State " + TrimSigDigits(Lay) + "",
+                SetupOutputVariable(state, "CondFD Phase Change Previous State " + fmt::to_string(Lay),
                                     OutputProcessor::Unit::None,
                                     SurfaceFD(SurfNum).PhaseChangeStateOld(Lay),
                                     "Zone",
                                     "State",
                                     Surface(SurfNum).Name);
-                SetupOutputVariable(state, "CondFD Phase Change Node Temperature " + TrimSigDigits(Lay) + "",
+                SetupOutputVariable(state, "CondFD Phase Change Node Temperature " + fmt::to_string(Lay),
                                     OutputProcessor::Unit::C,
                                     SurfaceFD(SurfNum).TDT(Lay),
                                     "Zone",
                                     "State",
                                     Surface(SurfNum).Name);
                 if (DisplayAdvancedReportVariables) {
-                    SetupOutputVariable(state, "CondFD Surface Heat Capacitance Outer Half Node " + TrimSigDigits(Lay) + "",
+                    SetupOutputVariable(state, "CondFD Surface Heat Capacitance Outer Half Node " + fmt::to_string(Lay),
                                         OutputProcessor::Unit::W_m2K,
                                         SurfaceFD(SurfNum).CpDelXRhoS1(Lay),
                                         "Zone",
                                         "State",
                                         Surface(SurfNum).Name);
-                    SetupOutputVariable(state, "CondFD Surface Heat Capacitance Inner Half Node " + TrimSigDigits(Lay) + "",
+                    SetupOutputVariable(state, "CondFD Surface Heat Capacitance Inner Half Node " + fmt::to_string(Lay),
                                         OutputProcessor::Unit::W_m2K,
                                         SurfaceFD(SurfNum).CpDelXRhoS2(Lay),
                                         "Zone",

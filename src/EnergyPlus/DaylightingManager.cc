@@ -63,7 +63,6 @@
 #include <ObjexxFCL/string.functions.hh>
 
 // EnergyPlus Headers
-#include <EnergyPlus/Construction.hh>
 #include <EnergyPlus/DElightManagerF.hh>
 #include <EnergyPlus/Data/EnergyPlusData.hh>
 #include <EnergyPlus/DataBSDFWindow.hh>
@@ -1967,7 +1966,7 @@ namespace DaylightingManager {
                 //            ! Error message if ref pt is too close to window.
                 if (D1a > 0.0 && D1b > 0.0 && D1b <= HW && D1a <= WW) {
                     ShowSevereError("CalcDaylightCoeffRefPoints: Daylighting calculation cannot be done for zone " + Zone(ZoneNum).Name +
-                                    " because reference point #" + RoundSigDigits(iRefPoint) + " is less than 0.15m (6\") from window plane " +
+                                    " because reference point #" + fmt::to_string(iRefPoint) + " is less than 0.15m (6\") from window plane " +
                                     Surface(IWin).Name);
                     ShowContinueError("Distance=[" + RoundSigDigits(ALF, 5) + "]. This is too close; check position of reference point.");
                     ShowFatalError("Program terminates due to preceding condition.");
@@ -4540,13 +4539,13 @@ namespace DaylightingManager {
                     if (ZoneDaylight(zoneOfSurf).TotalDaylRefPoints > 0 && !Zone(zoneOfSurf).HasInterZoneWindow &&
                         ZoneDaylight(zoneOfSurf).DaylightMethod == SplitFluxDaylighting) {
                         for (int refPtNum = 1; refPtNum <= ZoneDaylight(zoneOfSurf).TotalDaylRefPoints; ++refPtNum) {
-                            SetupOutputVariable(state, "Daylighting Window Reference Point " + std::to_string(refPtNum) + " Illuminance",
+                            SetupOutputVariable(state, "Daylighting Window Reference Point " + fmt::to_string(refPtNum) + " Illuminance",
                                                 OutputProcessor::Unit::lux,
                                                 SurfaceWindow(SurfLoop).IllumFromWinAtRefPtRep(refPtNum),
                                                 "Zone",
                                                 "Average",
                                                 Surface(SurfLoop).Name);
-                            SetupOutputVariable(state, "Daylighting Window Reference Point " + std::to_string(refPtNum) + " View Luminance",
+                            SetupOutputVariable(state, "Daylighting Window Reference Point " + fmt::to_string(refPtNum) + " View Luminance",
                                                 OutputProcessor::Unit::cd_m2,
                                                 SurfaceWindow(SurfLoop).LumWinFromRefPtRep(refPtNum),
                                                 "Zone",
@@ -4684,7 +4683,6 @@ namespace DaylightingManager {
         using DataStringGlobals::CharSpace;
         using DataStringGlobals::CharTab;
         using General::RoundSigDigits;
-        using General::TrimSigDigits;
 
         static ObjexxFCL::gio::Fmt fmtA("(A)");
 
@@ -4797,10 +4795,10 @@ namespace DaylightingManager {
                 }
                 if (IllumMap(MapNum).Xnum * IllumMap(MapNum).Ynum > MaxMapRefPoints) {
                     ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", too many map points specified.");
-                    ShowContinueError("..." + cNumericFieldNames(4) + '[' + RoundSigDigits(IllumMap(MapNum).Xnum) + "] * " + cNumericFieldNames(7) +
-                                      '[' + RoundSigDigits(IllumMap(MapNum).Ynum) + "].= [" +
-                                      RoundSigDigits(IllumMap(MapNum).Xnum * IllumMap(MapNum).Ynum) + "] must be <= [" +
-                                      RoundSigDigits(MaxMapRefPoints) + "].");
+                    ShowContinueError("..." + cNumericFieldNames(4) + '[' + fmt::to_string(IllumMap(MapNum).Xnum) + "] * " + cNumericFieldNames(7) +
+                                      '[' + fmt::to_string(IllumMap(MapNum).Ynum) + "].= [" +
+                                      fmt::to_string(IllumMap(MapNum).Xnum * IllumMap(MapNum).Ynum) + "] must be <= [" +
+                                      fmt::to_string(MaxMapRefPoints) + "].");
                     ErrorsFound = true;
                 }
             } // MapNum
@@ -4883,8 +4881,8 @@ namespace DaylightingManager {
                     if (AddMapPoints > MaxMapRefPoints) {
                         ShowSevereError("GetDaylighting Parameters: Total Map Reference points entered is greater than maximum allowed.");
                         ShowContinueError("Occurs in Zone=" + zone.Name);
-                        ShowContinueError("Maximum reference points allowed=" + TrimSigDigits(MaxMapRefPoints) +
-                                          ", entered amount ( when error first occurred )=" + TrimSigDigits(AddMapPoints));
+                        ShowContinueError("Maximum reference points allowed=" + fmt::to_string(MaxMapRefPoints) +
+                                          ", entered amount ( when error first occurred )=" + fmt::to_string(AddMapPoints));
                         ErrorsFound = true;
                         break;
                     }
@@ -4973,7 +4971,7 @@ namespace DaylightingManager {
                                 if ((IllumMapCalc(MapNum).MapRefPtAbsCoord(1, RefPt) < zone.MinimumX ||
                                      IllumMapCalc(MapNum).MapRefPtAbsCoord(1, RefPt) > zone.MaximumX) &&
                                     !IllumMapCalc(MapNum).MapRefPtInBounds(RefPt)) {
-                                    ShowWarningError("GetInputIlluminanceMap: Reference Map point #[" + RoundSigDigits(RefPt) +
+                                    ShowWarningError("GetInputIlluminanceMap: Reference Map point #[" + fmt::to_string(RefPt) +
                                                      "], X Value outside Zone Min/Max X, Zone=" + zone.Name);
                                     ShowContinueError("...X Reference Point= " + RoundSigDigits(IllumMapCalc(MapNum).MapRefPtAbsCoord(1, RefPt), 2) +
                                                       ", Zone Minimum X= " + RoundSigDigits(zone.MinimumX, 2) +
@@ -4989,7 +4987,7 @@ namespace DaylightingManager {
                                 if ((IllumMapCalc(MapNum).MapRefPtAbsCoord(2, RefPt) < zone.MinimumY ||
                                      IllumMapCalc(MapNum).MapRefPtAbsCoord(2, RefPt) > zone.MaximumY) &&
                                     !IllumMapCalc(MapNum).MapRefPtInBounds(RefPt)) {
-                                    ShowWarningError("GetInputIlluminanceMap: Reference Map point #[" + RoundSigDigits(RefPt) +
+                                    ShowWarningError("GetInputIlluminanceMap: Reference Map point #[" + fmt::to_string(RefPt) +
                                                      "], Y Value outside Zone Min/Max Y, Zone=" + zone.Name);
                                     ShowContinueError("...Y Reference Point= " + RoundSigDigits(IllumMapCalc(MapNum).MapRefPtAbsCoord(2, RefPt), 2) +
                                                       ", Zone Minimum Y= " + RoundSigDigits(zone.MinimumY, 2) +
@@ -5005,7 +5003,7 @@ namespace DaylightingManager {
                                 if ((IllumMapCalc(MapNum).MapRefPtAbsCoord(3, RefPt) < zone.MinimumZ ||
                                      IllumMapCalc(MapNum).MapRefPtAbsCoord(3, RefPt) > zone.MaximumZ) &&
                                     !IllumMapCalc(MapNum).MapRefPtInBounds(RefPt)) {
-                                    ShowWarningError("GetInputIlluminanceMap: Reference Map point #[" + RoundSigDigits(RefPt) +
+                                    ShowWarningError("GetInputIlluminanceMap: Reference Map point #[" + fmt::to_string(RefPt) +
                                                      "], Z Value outside Zone Min/Max Z, Zone=" + zone.Name);
                                     ShowContinueError("...Z Reference Point= " + RoundSigDigits(IllumMapCalc(MapNum).MapRefPtAbsCoord(3, RefPt), 2) +
                                                       ", Zone Minimum Z= " + RoundSigDigits(zone.MinimumZ, 2) +
@@ -5225,25 +5223,25 @@ namespace DaylightingManager {
                 zone_daylight.IllumSetPoint(refPtNum) = rNumericArgs(7 + refPtNum * 2);  // Field: Illuminance Setpoint at Reference Point
 
                 if (zone_daylight.DaylightMethod == SplitFluxDaylighting) {
-                    SetupOutputVariable(state, "Daylighting Reference Point " + std::to_string(refPtNum) + " Illuminance",
+                    SetupOutputVariable(state, "Daylighting Reference Point " + fmt::to_string(refPtNum) + " Illuminance",
                                         OutputProcessor::Unit::lux,
                                         zone_daylight.DaylIllumAtRefPt(refPtNum),
                                         "Zone",
                                         "Average",
                                         zone_daylight.Name);
-                    SetupOutputVariable(state, "Daylighting Reference Point " + std::to_string(refPtNum) + " Daylight Illuminance Setpoint Exceeded Time",
+                    SetupOutputVariable(state, "Daylighting Reference Point " + fmt::to_string(refPtNum) + " Daylight Illuminance Setpoint Exceeded Time",
                                         OutputProcessor::Unit::hr,
                                         zone_daylight.TimeExceedingDaylightIlluminanceSPAtRefPt(refPtNum),
                                         "Zone",
                                         "Sum",
                                         zone_daylight.Name);
-                    SetupOutputVariable(state, "Daylighting Reference Point " + std::to_string(refPtNum) + " Glare Index",
+                    SetupOutputVariable(state, "Daylighting Reference Point " + fmt::to_string(refPtNum) + " Glare Index",
                                         OutputProcessor::Unit::None,
                                         zone_daylight.GlareIndexAtRefPt(refPtNum),
                                         "Zone",
                                         "Average",
                                         zone_daylight.Name);
-                    SetupOutputVariable(state, "Daylighting Reference Point " + std::to_string(refPtNum) + " Glare Index Setpoint Exceeded Time",
+                    SetupOutputVariable(state, "Daylighting Reference Point " + fmt::to_string(refPtNum) + " Glare Index Setpoint Exceeded Time",
                                         OutputProcessor::Unit::hr,
                                         zone_daylight.TimeExceedingGlareIndexSPAtRefPt(refPtNum),
                                         "Zone",
@@ -5291,7 +5289,6 @@ namespace DaylightingManager {
         // For splitflux daylighting, transform the geometry
 
         using General::RoundSigDigits;
-        using General::TrimSigDigits;
         using InternalHeatGains::CheckLightsReplaceableMinMaxForZone;
         using InternalHeatGains::GetDesignLightingLevelForZone;
         using namespace OutputReportPredefined;
@@ -6702,7 +6699,7 @@ namespace DaylightingManager {
             int count = 0;
             for (std::size_t igroup = 1; igroup <= ZoneDaylight(ZoneNum).ShadeDeployOrderExtWins.size(); igroup++) {
                 std::vector<int> listOfExtWin = ZoneDaylight(ZoneNum).ShadeDeployOrderExtWins[igroup - 1];
-                for (auto IWin : listOfExtWin) {
+                for (const auto IWin : listOfExtWin) {
                     ++count;
                     // need to map back to the original order of the "loop" to not change all the other data structures
                     loop = ZoneDaylight(ZoneNum).MapShdOrdToLoopNum(count);
@@ -6747,7 +6744,7 @@ namespace DaylightingManager {
 
                 std::vector<int> listOfExtWin = ZoneDaylight(ZoneNum).ShadeDeployOrderExtWins[igroup - 1];
 
-                for (auto IWin : listOfExtWin) {
+                for (const auto IWin : listOfExtWin) {
                     ++count;
                     // need to map back to the original order of the "loop" to not change all the other data structures
                     loop = ZoneDaylight(ZoneNum).MapShdOrdToLoopNum(count);
@@ -6867,7 +6864,7 @@ namespace DaylightingManager {
                 int countBeforeListOfExtWinLoop = count;
                 bool atLeastOneGlareControlIsActive = false;
 
-                for (auto IWin : listOfExtWin) {
+                for (const auto IWin : listOfExtWin) {
                     ++count;
                     // need to map back to the original order of the "loop" to not change all the other data structures
                     loop = ZoneDaylight(ZoneNum).MapShdOrdToLoopNum(count);
@@ -6982,7 +6979,7 @@ namespace DaylightingManager {
                 count = countBeforeListOfExtWinLoop;
                 breakOuterLoop = false;
 
-                for (auto IWin : listOfExtWin) {
+                for (const auto IWin : listOfExtWin) {
                     ++count;
                     // need to map back to the original order of the "loop" to not change all the other data structures
                     loop = ZoneDaylight(ZoneNum).MapShdOrdToLoopNum(count);
@@ -10069,9 +10066,9 @@ namespace DaylightingManager {
                     IllumMap(MapNum).HeaderXLineLength = linelen;
                     if (static_cast<std::string::size_type>(IllumMap(MapNum).HeaderXLineLength) > len(mapLine)) {
                         ShowWarningError("ReportIllumMap: Map=\"" + IllumMap(MapNum).Name +
-                                         "\" -- the X Header overflows buffer -- will be truncated at " + RoundSigDigits(int(len(mapLine))) +
+                                         "\" -- the X Header overflows buffer -- will be truncated at " + fmt::to_string(int(len(mapLine))) +
                                          " characters.");
-                        ShowContinueError("...needed " + RoundSigDigits(IllumMap(MapNum).HeaderXLineLength) +
+                        ShowContinueError("...needed " + fmt::to_string(IllumMap(MapNum).HeaderXLineLength) +
                                           " characters. Please contact EnergyPlus support.");
                     }
                     IllumMap(MapNum).HeaderXLineLengthNeeded = false;
@@ -10087,9 +10084,9 @@ namespace DaylightingManager {
                     for (R = RefPt; R <= RefPt + IllumMap(MapNum).Xnum - 1; ++R) {
                         IllumOut = nint(IllumMapCalc(MapNum).DaylIllumAtMapPtHr(R));
                         if (IllumMapCalc(MapNum).MapRefPtInBounds(R)) {
-                            String = RoundSigDigits(IllumOut);
+                            String = fmt::to_string(IllumOut);
                         } else {
-                            String = RoundSigDigits(IllumOut);
+                            String = fmt::to_string(IllumOut);
                             String = "*" + String;
                         }
                         mapLine += MapColSep + String;
@@ -10160,7 +10157,6 @@ namespace DaylightingManager {
         using DataStringGlobals::CharComma;
         using DataStringGlobals::CharSpace;
         using DataStringGlobals::CharTab;
-        using General::TrimSigDigits;
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:

@@ -110,7 +110,6 @@ using namespace EnergyPlus::OutputReportPredefined;
 using namespace EnergyPlus::OutputReportTabular;
 using namespace EnergyPlus::OutputProcessor;
 using namespace SimulationManager;
-using namespace ObjexxFCL;
 
 TEST_F(EnergyPlusFixture, OutputReportTabularTest_ConfirmSetUnitsStyleFromString)
 {
@@ -7421,11 +7420,11 @@ TEST_F(EnergyPlusFixture, AzimuthToCardinal)
         if (i % 2 == 1) {
             // It's a wall
             DataSurfaces::Surface(i).Class = DataSurfaces::SurfaceClass_Wall;
-            DataSurfaces::Surface(i).Name = "ExtWall_" + std::to_string(i) + "_" + std::to_string(entryIndex);
+            DataSurfaces::Surface(i).Name = "ExtWall_" + fmt::to_string(i) + "_" + fmt::to_string(entryIndex);
         } else {
             // It's a window
             DataSurfaces::Surface(i).Class = DataSurfaces::SurfaceClass_Window;
-            DataSurfaces::Surface(i).Name = "ExtWindow_" + std::to_string(i) + "_" + std::to_string(entryIndex);
+            DataSurfaces::Surface(i).Name = "ExtWindow_" + fmt::to_string(i) + "_" + fmt::to_string(entryIndex);
             // Window references the previous wall
             DataSurfaces::Surface(i).BaseSurf = i - 1;
         }
@@ -7527,12 +7526,12 @@ TEST_F(EnergyPlusFixture, InteriorSurfaceEnvelopeSummaryReport)
         DataSurfaces::Surface(i).Construction = 1;
         // odd number - wall, even number - door
         if (i % 2 == 1) {
-            DataSurfaces::Surface(i).Name = "Interzonal_Wall_" + std::to_string((i + 1) / 2);
+            DataSurfaces::Surface(i).Name = "Interzonal_Wall_" + fmt::to_string((i + 1) / 2);
             DataSurfaces::Surface(i).GrossArea = 200.;
             DataSurfaces::Surface(i).Class = DataSurfaces::SurfaceClass_Wall;
             DataSurfaces::AllSurfaceListReportOrder.push_back(i);
         }else{
-            DataSurfaces::Surface(i).Name = "Interzonal_Door_" + std::to_string((i + 1) / 2);
+            DataSurfaces::Surface(i).Name = "Interzonal_Door_" + fmt::to_string((i + 1) / 2);
             DataSurfaces::Surface(i).BaseSurfName = DataSurfaces::Surface(i - 1).Name;
             DataSurfaces::Surface(i).BaseSurf = i - 1;
             DataSurfaces::Surface(i).GrossArea = 50.;

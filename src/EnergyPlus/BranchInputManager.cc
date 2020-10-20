@@ -177,7 +177,7 @@ namespace BranchInputManager {
         if (isize(BranchNames) < NumBranchNames) {
             ShowSevereError("GetBranchList: Branch Names array not big enough to hold Branch Names");
             ShowContinueError("Input BranchListName=" + BranchListName + ", in Loop=" + LoopName);
-            ShowContinueError("BranchName Array size=" + TrimSigDigits(size(BranchNames)) + ", but input size=" + TrimSigDigits(NumBranchNames));
+            ShowContinueError(fmt::format("BranchName Array size={}, but input size={}", size(BranchNames), (NumBranchNames)));
             ErrFound = true;
         } else {
             BranchNames = "";
@@ -271,7 +271,7 @@ namespace BranchInputManager {
         if (MinCompsAllowed < NumComps) {
             ShowSevereError("GetBranchData: Component List arrays not big enough to hold Number of Components");
             ShowContinueError("Input BranchName=" + BranchName + ", in Loop=" + LoopName);
-            ShowContinueError("Max Component Array size=" + TrimSigDigits(MinCompsAllowed) + ", but input size=" + TrimSigDigits(NumComps));
+            ShowContinueError(fmt::format("Max Component Array size={}, but input size={}", MinCompsAllowed, NumComps));
             ShowFatalError("Program terminates due to preceding conditions.");
         }
 
@@ -404,7 +404,7 @@ namespace BranchInputManager {
         FanName = std::string();
 
         if (NumBranches == 0) {
-            ShowSevereError("GetBranchFanTypeName:  Branch index not found = " + TrimSigDigits(BranchNum));
+            ShowSevereError(fmt::format("GetBranchFanTypeName:  Branch index not found = {}", BranchNum));
             ErrFound = true;
         } else {
             if (BranchNum > 0 && BranchNum <= NumBranches) {
@@ -420,7 +420,7 @@ namespace BranchInputManager {
                 }
                 if (FanType.empty()) ErrFound = true;
             } else {
-                ShowSevereError("GetBranchFanTypeName:  Branch index not found = " + TrimSigDigits(BranchNum));
+                ShowSevereError(fmt::format("GetBranchFanTypeName:  Branch index not found = {}", BranchNum));
                 ErrFound = true;
             }
         }
@@ -694,8 +694,7 @@ namespace BranchInputManager {
 
                 if (NumInletNodes > isize(InletNodeNames) || NumInletNodes > isize(InletNodeNums)) {
                     ShowSevereError("GetLoopMixer: Connector:Mixer=" + MixerName + " contains too many inlets for size of Inlet Array.");
-                    ShowContinueError("Max array size=" + TrimSigDigits(size(InletNodeNames)) +
-                                      ", Mixer statement inlets=" + TrimSigDigits(NumInletNodes));
+                    ShowContinueError(fmt::format("Max array size={}, Mixer statement inlets={}", size(InletNodeNames), NumInletNodes));
                     ShowFatalError("Program terminates due to preceding condition.");
                 }
                 InletNodeNums = 0;
@@ -839,8 +838,7 @@ namespace BranchInputManager {
 
                 if (NumOutletNodes > isize(OutletNodeNames) || NumOutletNodes > isize(OutletNodeNums)) {
                     ShowSevereError("GetLoopSplitter: Connector:Splitter=" + SplitterName + " contains too many outlets for size of Outlet Array.");
-                    ShowContinueError("Max array size=" + TrimSigDigits(size(OutletNodeNames)) +
-                                      ", Splitter statement outlets=" + TrimSigDigits(NumOutletNodes));
+                    ShowContinueError(fmt::format("Max array size={}, Splitter statement outlets={}", size(OutletNodeNames), NumOutletNodes));
                     ShowFatalError("Program terminates due to preceding condition.");
                 }
                 OutletNodeNums = 0;
@@ -1124,8 +1122,7 @@ namespace BranchInputManager {
             }
             if (Comp > NumInComps) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\", invalid data.");
-                ShowContinueError("...Number of Arguments indicate [" + RoundSigDigits(NumInComps) + "], but count of fields indicates [" +
-                                  RoundSigDigits(Comp) + ']');
+                ShowContinueError(fmt::format("...Number of Arguments indicate [{}], but count of fields indicates [{}]", NumInComps, Comp));
                 ShowContinueError("...examine " + CurrentModuleObject + " carefully.");
                 continue;
             }
@@ -1353,7 +1350,7 @@ namespace BranchInputManager {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + state.dataBranchInputManager->BranchList(BCount).Name + "\", invalid data.");
                 ShowContinueError("..invalid: duplicate branch name specified in the list.");
                 ShowContinueError("..Branch Name=" + TestName);
-                ShowContinueError("..Branch Name #" + TrimSigDigits(Loop) + " is duplicate.");
+                ShowContinueError(fmt::format("..Branch Name #{} is duplicate.", Loop));
                 ErrFound = true;
             }
         }
@@ -1746,7 +1743,7 @@ namespace BranchInputManager {
                 Found = UtilityRoutines::FindItemInList(state.dataBranchInputManager->Splitters(Count).OutletBranchNames(Loop), state.dataBranchInputManager->Branch);
                 if (Found == 0) {
                     ShowSevereError("GetSplitterInput: Invalid Branch=" + state.dataBranchInputManager->Splitters(Count).OutletBranchNames(Loop) +
-                                    ", referenced as Outlet Branch # " + TrimSigDigits(Loop) + " to " + CurrentModuleObject + '=' +
+                                    fmt::format(", referenced as Outlet Branch # {} to ", Loop) + CurrentModuleObject + '=' +
                                     state.dataBranchInputManager->Splitters(Count).Name);
                     ErrorsFound = true;
                 }
@@ -1760,15 +1757,15 @@ namespace BranchInputManager {
                 if (TestName != state.dataBranchInputManager->Splitters(Count).OutletBranchNames(Loop)) continue;
                 ShowSevereError(CurrentModuleObject + '=' + state.dataBranchInputManager->Splitters(Count).Name + " specifies an outlet node name the same as the inlet node.");
                 ShowContinueError("..Inlet Node=" + TestName);
-                ShowContinueError("..Outlet Node #" + TrimSigDigits(Loop) + " is duplicate.");
+                ShowContinueError(fmt::format("..Outlet Node #{} is duplicate.", Loop));
                 ErrorsFound = true;
             }
             for (Loop = 1; Loop <= state.dataBranchInputManager->Splitters(Count).NumOutletBranches; ++Loop) {
                 for (Loop1 = Loop + 1; Loop1 <= state.dataBranchInputManager->Splitters(Count).NumOutletBranches; ++Loop1) {
                     if (state.dataBranchInputManager->Splitters(Count).OutletBranchNames(Loop) != state.dataBranchInputManager->Splitters(Count).OutletBranchNames(Loop1)) continue;
                     ShowSevereError(CurrentModuleObject + '=' + state.dataBranchInputManager->Splitters(Count).Name + " specifies duplicate outlet nodes in its outlet node list.");
-                    ShowContinueError("..Outlet Node #" + TrimSigDigits(Loop) + " Name=" + state.dataBranchInputManager->Splitters(Count).OutletBranchNames(Loop));
-                    ShowContinueError("..Outlet Node #" + TrimSigDigits(Loop) + " is duplicate.");
+                    ShowContinueError(fmt::format("..Outlet Node #{} Name=", Loop) + state.dataBranchInputManager->Splitters(Count).OutletBranchNames(Loop));
+                    ShowContinueError(fmt::format("..Outlet Node #{} is duplicate.", Loop));
                     ErrorsFound = true;
                 }
             }
@@ -1975,7 +1972,7 @@ namespace BranchInputManager {
                 Found = UtilityRoutines::FindItemInList(state.dataBranchInputManager->Mixers(Count).InletBranchNames(Loop), state.dataBranchInputManager->Branch);
                 if (Found == 0) {
                     ShowSevereError("GetMixerInput: Invalid Branch=" + state.dataBranchInputManager->Mixers(Count).InletBranchNames(Loop) + ", referenced as Inlet Branch # " +
-                                    TrimSigDigits(Loop) + " in " + CurrentModuleObject + '=' + state.dataBranchInputManager->Mixers(Count).Name);
+                                    fmt::to_string(Loop) + " in " + CurrentModuleObject + '=' + state.dataBranchInputManager->Mixers(Count).Name);
                     ErrorsFound = true;
                 }
             }
@@ -1988,15 +1985,15 @@ namespace BranchInputManager {
                 if (TestName != state.dataBranchInputManager->Mixers(Count).InletBranchNames(Loop)) continue;
                 ShowSevereError(CurrentModuleObject + '=' + state.dataBranchInputManager->Mixers(Count).Name + " specifies an inlet node name the same as the outlet node.");
                 ShowContinueError("..Outlet Node=" + TestName);
-                ShowContinueError("..Inlet Node #" + TrimSigDigits(Loop) + " is duplicate.");
+                ShowContinueError(fmt::format("..Inlet Node #{} is duplicate.", Loop));
                 ErrorsFound = true;
             }
             for (Loop = 1; Loop <= state.dataBranchInputManager->Mixers(Count).NumInletBranches; ++Loop) {
                 for (Loop1 = Loop + 1; Loop1 <= state.dataBranchInputManager->Mixers(Count).NumInletBranches; ++Loop1) {
                     if (state.dataBranchInputManager->Mixers(Count).InletBranchNames(Loop) != state.dataBranchInputManager->Mixers(Count).InletBranchNames(Loop1)) continue;
                     ShowSevereError(CurrentModuleObject + '=' + state.dataBranchInputManager->Mixers(Count).Name + " specifies duplicate inlet nodes in its inlet node list.");
-                    ShowContinueError("..Inlet Node #" + TrimSigDigits(Loop) + " Name=" + state.dataBranchInputManager->Mixers(Count).InletBranchNames(Loop));
-                    ShowContinueError("..Inlet Node #" + TrimSigDigits(Loop) + " is duplicate.");
+                    ShowContinueError(fmt::format("..Inlet Node #{} Name=", Loop) + state.dataBranchInputManager->Mixers(Count).InletBranchNames(Loop));
+                    ShowContinueError(fmt::format("..Inlet Node #{} is duplicate.", Loop));
                     ErrorsFound = true;
                 }
             }
@@ -2398,7 +2395,7 @@ namespace BranchInputManager {
             ShowContinueError("Look for mistyped branch or component names/types.");
         }
         if (!mustprint && NumDanglingCount > 0) {
-            ShowSevereMessage("AuditBranches: There are " + RoundSigDigits(NumDanglingCount) + " branch(es) that do not appear on any BranchList.");
+            ShowSevereMessage(fmt::format("AuditBranches: There are {} branch(es) that do not appear on any BranchList.", NumDanglingCount));
             TotalSevereErrors += NumDanglingCount;
             ShowContinueError("Use Output:Diagnostics,DisplayExtraWarnings; for detail of each branch not on a branch list.");
         }

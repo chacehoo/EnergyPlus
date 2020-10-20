@@ -60,11 +60,9 @@
 #include <EnergyPlus/DataHeatBalSurface.hh>
 #include <EnergyPlus/DataHeatBalance.hh>
 #include <EnergyPlus/DataIPShortCuts.hh>
-#include <EnergyPlus/DataLoopNode.hh>
 #include <EnergyPlus/DataSizing.hh>
 #include <EnergyPlus/DataSurfaces.hh>
 #include <EnergyPlus/DataViewFactorInformation.hh>
-#include <EnergyPlus/DataZoneEnergyDemands.hh>
 #include <EnergyPlus/DataZoneEquipment.hh>
 #include <EnergyPlus/General.hh>
 #include <EnergyPlus/GeneralRoutines.hh>
@@ -231,12 +229,12 @@ namespace HighTempRadiantSystem {
         } else {
             RadSysNum = CompIndex;
             if (RadSysNum > NumOfHighTempRadSys || RadSysNum < 1) {
-                ShowFatalError("SimHighTempRadiantSystem:  Invalid CompIndex passed=" + TrimSigDigits(RadSysNum) +
-                               ", Number of Units=" + TrimSigDigits(NumOfHighTempRadSys) + ", Entered Unit name=" + CompName);
+                ShowFatalError("SimHighTempRadiantSystem:  Invalid CompIndex passed=" + fmt::to_string(RadSysNum) +
+                               ", Number of Units=" + fmt::to_string(NumOfHighTempRadSys) + ", Entered Unit name=" + CompName);
             }
             if (CheckEquipName(RadSysNum)) {
                 if (CompName != HighTempRadSys(RadSysNum).Name) {
-                    ShowFatalError("SimHighTempRadiantSystem: Invalid CompIndex passed=" + TrimSigDigits(RadSysNum) + ", Unit name=" + CompName +
+                    ShowFatalError("SimHighTempRadiantSystem: Invalid CompIndex passed=" + fmt::to_string(RadSysNum) + ", Unit name=" + CompName +
                                    ", stored Unit Name for that index=" + HighTempRadSys(RadSysNum).Name);
                 }
                 CheckEquipName(RadSysNum) = false;
@@ -919,7 +917,6 @@ namespace HighTempRadiantSystem {
         // Using/Aliasing
         using DataHeatBalance::MRT;
         using DataHeatBalFanSys::MAT;
-        using namespace DataZoneEnergyDemands;
         using ScheduleManager::GetCurrentScheduleValue;
 
         // Locals

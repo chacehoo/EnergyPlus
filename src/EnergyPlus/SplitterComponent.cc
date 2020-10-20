@@ -52,7 +52,6 @@
 #include <EnergyPlus/DataContaminantBalance.hh>
 #include <EnergyPlus/DataEnvironment.hh>
 #include <EnergyPlus/DataLoopNode.hh>
-#include <EnergyPlus/General.hh>
 #include <EnergyPlus/InputProcessing/InputProcessor.hh>
 #include <EnergyPlus/NodeInputManager.hh>
 #include <EnergyPlus/Psychrometrics.hh>
@@ -145,9 +144,6 @@ namespace SplitterComponent {
         // It is called from the SimAirLoopComponent
         // at the system time step.
 
-        // Using/Aliasing
-        using General::TrimSigDigits;
-
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int SplitterNum; // The Splitter that you are currently loading input for
 
@@ -168,12 +164,12 @@ namespace SplitterComponent {
         } else {
             SplitterNum = CompIndex;
             if (SplitterNum > NumSplitters || SplitterNum < 1) {
-                ShowFatalError("SimAirLoopSplitter: Invalid CompIndex passed=" + TrimSigDigits(SplitterNum) +
-                               ", Number of Splitters=" + TrimSigDigits(NumSplitters) + ", Splitter name=" + CompName);
+                ShowFatalError("SimAirLoopSplitter: Invalid CompIndex passed=" + fmt::to_string(SplitterNum) +
+                               ", Number of Splitters=" + fmt::to_string(NumSplitters) + ", Splitter name=" + CompName);
             }
             if (CheckEquipName(SplitterNum)) {
                 if (CompName != SplitterCond(SplitterNum).SplitterName) {
-                    ShowFatalError("SimAirLoopSplitter: Invalid CompIndex passed=" + TrimSigDigits(SplitterNum) + ", Splitter name=" + CompName +
+                    ShowFatalError("SimAirLoopSplitter: Invalid CompIndex passed=" + fmt::to_string(SplitterNum) + ", Splitter name=" + CompName +
                                    ", stored Splitter Name for that index=" + SplitterCond(SplitterNum).SplitterName);
                 }
                 CheckEquipName(SplitterNum) = false;
@@ -214,7 +210,6 @@ namespace SplitterComponent {
         // Uses the status flags to trigger events.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
         using NodeInputManager::GetOnlySingleNode;
 
         // SUBROUTINE PARAMETER DEFINITIONS:
@@ -315,7 +310,7 @@ namespace SplitterComponent {
                 ShowSevereError(CurrentModuleObject + " = " + SplitterCond(SplitterNum).SplitterName +
                                 " specifies an outlet node name the same as the inlet node.");
                 ShowContinueError(".." + cAlphaFields(2) + '=' + NodeID(NodeNum));
-                ShowContinueError("..Outlet Node #" + TrimSigDigits(OutNodeNum1) + " is duplicate.");
+                ShowContinueError("..Outlet Node #" + fmt::to_string(OutNodeNum1) + " is duplicate.");
                 ErrorsFound = true;
             }
             for (OutNodeNum1 = 1; OutNodeNum1 <= SplitterCond(SplitterNum).NumOutletNodes; ++OutNodeNum1) {
@@ -323,8 +318,8 @@ namespace SplitterComponent {
                     if (SplitterCond(SplitterNum).OutletNode(OutNodeNum1) != SplitterCond(SplitterNum).OutletNode(OutNodeNum2)) continue;
                     ShowSevereError(CurrentModuleObject + " = " + SplitterCond(SplitterNum).SplitterName +
                                     " specifies duplicate outlet nodes in its outlet node list.");
-                    ShowContinueError("..Outlet Node #" + TrimSigDigits(OutNodeNum1) + " Name=" + NodeID(OutNodeNum1));
-                    ShowContinueError("..Outlet Node #" + TrimSigDigits(OutNodeNum2) + " is duplicate.");
+                    ShowContinueError("..Outlet Node #" + fmt::to_string(OutNodeNum1) + " Name=" + NodeID(OutNodeNum1));
+                    ShowContinueError("..Outlet Node #" + fmt::to_string(OutNodeNum2) + " is duplicate.");
                     ErrorsFound = true;
                 }
             }

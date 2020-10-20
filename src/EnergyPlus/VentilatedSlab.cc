@@ -188,12 +188,12 @@ namespace VentilatedSlab {
         } else {
             Item = CompIndex;
             if (Item > state.dataVentilatedSlab->NumOfVentSlabs || Item < 1) {
-                ShowFatalError("SimVentilatedSlab:  Invalid CompIndex passed=" + TrimSigDigits(Item) +
-                               ", Number of Systems=" + TrimSigDigits(state.dataVentilatedSlab->NumOfVentSlabs) + ", Entered System name=" + CompName);
+                ShowFatalError("SimVentilatedSlab:  Invalid CompIndex passed=" + fmt::to_string(Item) +
+                               ", Number of Systems=" + fmt::to_string(state.dataVentilatedSlab->NumOfVentSlabs) + ", Entered System name=" + CompName);
             }
             if (state.dataVentilatedSlab->CheckEquipName(Item)) {
                 if (CompName != state.dataVentilatedSlab->VentSlab(Item).Name ) {
-                    ShowFatalError("SimVentilatedSlab: Invalid CompIndex passed=" + TrimSigDigits(Item) + ", System name=" + CompName +
+                    ShowFatalError("SimVentilatedSlab: Invalid CompIndex passed=" + fmt::to_string(Item) + ", System name=" + CompName +
                                    ", stored System Name for that index=" + state.dataVentilatedSlab->VentSlab(Item).Name);
                 }
                 state.dataVentilatedSlab->CheckEquipName(Item) = false;

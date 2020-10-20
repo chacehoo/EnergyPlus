@@ -197,11 +197,11 @@ namespace WaterToAirHeatPumpSimple {
         } else {
             HPNum = CompIndex;
             if (HPNum > state.dataWaterToAirHeatPumpSimple->NumWatertoAirHPs || HPNum < 1) {
-                ShowFatalError("SimWatertoAirHPSimple: Invalid CompIndex passed=" + TrimSigDigits(HPNum) +
-                               ", Number of Water to Air HPs=" + TrimSigDigits(state.dataWaterToAirHeatPumpSimple->NumWatertoAirHPs) + ", WaterToAir HP name=" + CompName);
+                ShowFatalError("SimWatertoAirHPSimple: Invalid CompIndex passed=" + fmt::to_string(HPNum) +
+                               ", Number of Water to Air HPs=" + fmt::to_string(state.dataWaterToAirHeatPumpSimple->NumWatertoAirHPs) + ", WaterToAir HP name=" + CompName);
             }
             if (!CompName.empty() && CompName != state.dataWaterToAirHeatPumpSimple->SimpleWatertoAirHP(HPNum).Name) {
-                ShowFatalError("SimWatertoAirHPSimple: Invalid CompIndex passed=" + TrimSigDigits(HPNum) + ", WaterToAir HP name=" + CompName +
+                ShowFatalError("SimWatertoAirHPSimple: Invalid CompIndex passed=" + fmt::to_string(HPNum) + ", WaterToAir HP name=" + CompName +
                                ", stored WaterToAir HP Name for that index=" + state.dataWaterToAirHeatPumpSimple->SimpleWatertoAirHP(HPNum).Name);
             }
         }
@@ -3180,8 +3180,8 @@ namespace WaterToAirHeatPumpSimple {
         }
 
         if (SimpleWSHPNum <= 0 || SimpleWSHPNum > state.dataWaterToAirHeatPumpSimple->NumWatertoAirHPs) {
-            ShowSevereError("SetSimpleWSHPData: called with WSHP Coil Number out of range=" + TrimSigDigits(SimpleWSHPNum) + " should be >0 and <" +
-                            TrimSigDigits(state.dataWaterToAirHeatPumpSimple->NumWatertoAirHPs));
+            ShowSevereError("SetSimpleWSHPData: called with WSHP Coil Number out of range=" + fmt::to_string(SimpleWSHPNum) + " should be >0 and <" +
+                            fmt::to_string(state.dataWaterToAirHeatPumpSimple->NumWatertoAirHPs));
             ErrorsFound = true;
             return;
         }

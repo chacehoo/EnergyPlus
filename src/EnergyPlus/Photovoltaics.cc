@@ -181,12 +181,12 @@ namespace Photovoltaics {
         } else {
             PVnum = GeneratorIndex;
             if (PVnum > NumPVs || PVnum < 1) {
-                ShowFatalError("SimPhotovoltaicGenerator: Invalid GeneratorIndex passed=" + TrimSigDigits(PVnum) +
-                               ", Number of PVs=" + TrimSigDigits(NumPVs) + ", Generator name=" + GeneratorName);
+                ShowFatalError("SimPhotovoltaicGenerator: Invalid GeneratorIndex passed=" + fmt::to_string(PVnum) +
+                               ", Number of PVs=" + fmt::to_string(NumPVs) + ", Generator name=" + GeneratorName);
             }
             if (CheckEquipName(PVnum)) {
                 if (GeneratorName != PVarray(PVnum).Name) {
-                    ShowFatalError("SimPhotovoltaicGenerator: Invalid GeneratorIndex passed=" + TrimSigDigits(PVnum) +
+                    ShowFatalError("SimPhotovoltaicGenerator: Invalid GeneratorIndex passed=" + fmt::to_string(PVnum) +
                                    ", Generator name=" + GeneratorName + ", stored PV Name for that index=" + PVarray(PVnum).Name);
                 }
                 CheckEquipName(PVnum) = false;

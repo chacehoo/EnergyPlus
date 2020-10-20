@@ -353,7 +353,7 @@ namespace RoomAirModelUserTempPattern {
 
             if (CurPatrnID == 0) {
                 // throw error here ? way to test schedules before getting to this point?
-                ShowFatalError("User defined room air pattern index not found: " + std::to_string(CurntPatternKey));
+                ShowFatalError("User defined room air pattern index not found: " + fmt::to_string(CurntPatternKey));
                 return;
             }
 

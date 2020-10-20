@@ -56,11 +56,9 @@
 #include <EnergyPlus/Autosizing/Base.hh>
 #include <EnergyPlus/BranchNodeConnections.hh>
 #include <EnergyPlus/Data/EnergyPlusData.hh>
-#include <EnergyPlus/DataAirLoop.hh>
 #include <EnergyPlus/DataDefineEquip.hh>
 #include <EnergyPlus/DataEnvironment.hh>
 #include <EnergyPlus/DataHVACGlobals.hh>
-#include <EnergyPlus/DataIPShortCuts.hh>
 #include <EnergyPlus/DataLoopNode.hh>
 #include <EnergyPlus/DataSizing.hh>
 #include <EnergyPlus/DataZoneEnergyDemands.hh>
@@ -69,7 +67,6 @@
 #include <EnergyPlus/General.hh>
 #include <EnergyPlus/GeneralRoutines.hh>
 #include <EnergyPlus/HVACSingleDuctInduc.hh>
-#include <EnergyPlus/HeatingCoils.hh>
 #include <EnergyPlus/InputProcessing/InputProcessor.hh>
 #include <EnergyPlus/MixerComponent.hh>
 #include <EnergyPlus/NodeInputManager.hh>
@@ -190,7 +187,6 @@ namespace HVACSingleDuctInduc {
 
         // Using/Aliasing
         using DataSizing::TermUnitIU;
-        using General::TrimSigDigits;
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int IUNum; // index of terminal unit being simulated
@@ -211,12 +207,12 @@ namespace HVACSingleDuctInduc {
         } else {
             IUNum = CompIndex;
             if (IUNum > NumIndUnits || IUNum < 1) {
-                ShowFatalError("SimIndUnit: Invalid CompIndex passed=" + TrimSigDigits(CompIndex) +
-                               ", Number of Induction Units=" + TrimSigDigits(NumIndUnits) + ", System name=" + CompName);
+                ShowFatalError("SimIndUnit: Invalid CompIndex passed=" + fmt::to_string(CompIndex) +
+                               ", Number of Induction Units=" + fmt::to_string(NumIndUnits) + ", System name=" + CompName);
             }
             if (CheckEquipName(IUNum)) {
                 if (CompName != IndUnit(IUNum).Name) {
-                    ShowFatalError("SimIndUnit: Invalid CompIndex passed=" + TrimSigDigits(CompIndex) + ", Induction Unit name=" + CompName +
+                    ShowFatalError("SimIndUnit: Invalid CompIndex passed=" + fmt::to_string(CompIndex) + ", Induction Unit name=" + CompName +
                                    ", stored Induction Unit for that index=" + IndUnit(IUNum).Name);
                 }
                 CheckEquipName(IUNum) = false;
@@ -280,7 +276,6 @@ namespace HVACSingleDuctInduc {
         using DataDefineEquip::AirDistUnit;
         using DataDefineEquip::NumAirDistUnits;
         using WaterCoils::GetCoilWaterInletNode;
-        using namespace DataIPShortCuts;
         using DataPlant::TypeOf_CoilWaterCooling;
         using DataPlant::TypeOf_CoilWaterDetailedFlatCooling;
         using DataPlant::TypeOf_CoilWaterSimpleHeating;
@@ -1256,11 +1251,11 @@ namespace HVACSingleDuctInduc {
                             ShowWarningMessage("SimFourPipeIndUnit: Hot water coil control failed for " + IndUnit(IUNum).UnitType + "=\"" +
                                                IndUnit(IUNum).Name + "\"");
                             ShowContinueErrorTimeStamp("");
-                            ShowContinueError("  Iteration limit [" + RoundSigDigits(SolveMaxIter) +
+                            ShowContinueError("  Iteration limit [" + fmt::to_string(SolveMaxIter) +
                                               "] exceeded in calculating hot water mass flow rate");
                         }
                         ShowRecurringWarningErrorAtEnd("SimFourPipeIndUnit: Hot water coil control failed (iteration limit [" +
-                                                           RoundSigDigits(SolveMaxIter) + "]) for " + IndUnit(IUNum).UnitType + "=\"" +
+                                                           fmt::to_string(SolveMaxIter) + "]) for " + IndUnit(IUNum).UnitType + "=\"" +
                                                            IndUnit(IUNum).Name + "\"",
                                                        IndUnit(IUNum).HWCoilFailNum1);
                     } else if (SolFlag == -2) {
@@ -1305,11 +1300,11 @@ namespace HVACSingleDuctInduc {
                             ShowWarningMessage("SimFourPipeIndUnit: Cold water coil control failed for " + IndUnit(IUNum).UnitType + "=\"" +
                                                IndUnit(IUNum).Name + "\"");
                             ShowContinueErrorTimeStamp("");
-                            ShowContinueError("  Iteration limit [" + RoundSigDigits(SolveMaxIter) +
+                            ShowContinueError("  Iteration limit [" + fmt::to_string(SolveMaxIter) +
                                               "] exceeded in calculating cold water mass flow rate");
                         }
                         ShowRecurringWarningErrorAtEnd("SimFourPipeIndUnit: Cold water coil control failed (iteration limit [" +
-                                                           RoundSigDigits(SolveMaxIter) + "]) for " + IndUnit(IUNum).UnitType + "=\"" +
+                                                           fmt::to_string(SolveMaxIter) + "]) for " + IndUnit(IUNum).UnitType + "=\"" +
                                                            IndUnit(IUNum).Name,
                                                        IndUnit(IUNum).CWCoilFailNum1);
                     } else if (SolFlag == -2) {

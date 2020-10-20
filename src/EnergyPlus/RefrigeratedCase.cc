@@ -6165,7 +6165,7 @@ namespace RefrigeratedCase {
             if ((NumUnusedRefrigCases > 0) && (!DataGlobals::DisplayExtraWarnings)) {
                 //  write to error file,
                 //  summary number of unused cases given if DataGlobals::DisplayExtraWarnings option not selected
-                ShowWarningError("Refrigeration:Case -> " + General::RoundSigDigits(NumUnusedRefrigCases) +
+                ShowWarningError("Refrigeration:Case -> " + fmt::to_string(NumUnusedRefrigCases) +
                                  " unused refrigerated case(s) found during input processing.");
                 ShowContinueError("  These refrigerated cases are in the input file but are not connected to a ");
                 ShowContinueError("  Refrigeration:CompressorRack, Refrigeration:System, or Refrigeration:SecondarySystem object.");
@@ -6198,7 +6198,7 @@ namespace RefrigeratedCase {
             if ((NumUnusedCompressors > 0) && (!DataGlobals::DisplayExtraWarnings)) {
                 //  write to error file,
                 //  summary number of unused compressors given if DataGlobals::DisplayExtraWarnings option not selected
-                ShowWarningError("Refrigeration:Compressor -> " + General::RoundSigDigits(NumUnusedCompressors) +
+                ShowWarningError("Refrigeration:Compressor -> " + fmt::to_string(NumUnusedCompressors) +
                                  " unused refrigeration compressor(s) found during input processing.");
                 ShowContinueError("  Those refrigeration compressors are in the input file but are not connected to a Refrigeration:System object.");
                 ShowContinueError("   These unused refrigeration compressors will not be simulated.");
@@ -6230,7 +6230,7 @@ namespace RefrigeratedCase {
             if ((NumUnusedWalkIns > 0) && (!DataGlobals::DisplayExtraWarnings)) {
                 //  write to error file,
                 //  summary number of unused walkins given if DataGlobals::DisplayExtraWarnings option not selected
-                ShowWarningError(RoutineName + "Refrigeration:WalkIn -> " + General::RoundSigDigits(NumUnusedWalkIns) +
+                ShowWarningError(RoutineName + "Refrigeration:WalkIn -> " + fmt::to_string(NumUnusedWalkIns) +
                                  " unused refrigeration WalkIns found during input processing.");
                 ShowContinueError("   Those refrigeration WalkIns are in the input file but are not connected to a ");
                 ShowContinueError("   Refrigeration:CompressorRack, Refrigeration:System or Refrigeration:SecondarySystem object.");
@@ -6263,7 +6263,7 @@ namespace RefrigeratedCase {
             if ((NumUnusedCoils > 0) && (!DataGlobals::DisplayExtraWarnings)) {
                 //  write to error file,
                 //  summary number of unused air chillers given if DataGlobals::DisplayExtraWarnings option not selected
-                ShowWarningError(RoutineName + "Refrigeration:AirChiller -> " + General::RoundSigDigits(NumUnusedCoils) +
+                ShowWarningError(RoutineName + "Refrigeration:AirChiller -> " + fmt::to_string(NumUnusedCoils) +
                                  " unused refrigeration air chillers found during input processing.");
                 ShowContinueError("   Those refrigeration air chillers are in the input file but are not connected to a ");
                 ShowContinueError("   Refrigeration:CompressorRack, Refrigeration:System or Refrigeration:SecondarySystem object.");
@@ -6296,7 +6296,7 @@ namespace RefrigeratedCase {
             if ((NumUnusedSecondarys > 0) && (!DataGlobals::DisplayExtraWarnings)) {
                 //  write to error file,
                 //  summary number of unused secondaries given if DataGlobals::DisplayExtraWarnings option not selected
-                ShowWarningError(RoutineName + "Refrigeration:Secondary -> " + General::RoundSigDigits(NumUnusedSecondarys) +
+                ShowWarningError(RoutineName + "Refrigeration:Secondary -> " + fmt::to_string(NumUnusedSecondarys) +
                                  " unused refrigeration Secondary Loops found during input processing.");
                 ShowContinueError("  Those refrigeration Secondary Loops are in the input file but are not connected to a refrigeration system.");
                 ShowContinueError("   These unused refrigeration secondaries will not be simulated.");
@@ -6327,7 +6327,7 @@ namespace RefrigeratedCase {
             if ((NumUnusedCondensers > 0) && (!DataGlobals::DisplayExtraWarnings)) {
                 //  write to error file,
                 //  summary number of unused condensers given if DataGlobals::DisplayExtraWarnings option not selected
-                ShowWarningError(RoutineName + "Refrigeration condenser -> " + General::RoundSigDigits(NumUnusedCondensers) +
+                ShowWarningError(RoutineName + "Refrigeration condenser -> " + fmt::to_string(NumUnusedCondensers) +
                                  " unused refrigeration condensers found during input processing.");
                 ShowContinueError("  Those refrigeration condensers are in the input file but are not connected to a refrigeration system.");
                 ShowContinueError("   These unused refrigeration condensers will not be simulated.");
@@ -6356,7 +6356,7 @@ namespace RefrigeratedCase {
             if ((NumUnusedGasCoolers > 0) && (!DataGlobals::DisplayExtraWarnings)) {
                 //  write to error file,
                 //  summary number of unused gas coolers given if DataGlobals::DisplayExtraWarnings option not selected
-                ShowWarningError(RoutineName + "Refrigeration gas cooler -> " + General::RoundSigDigits(NumUnusedGasCoolers) +
+                ShowWarningError(RoutineName + "Refrigeration gas cooler -> " + fmt::to_string(NumUnusedGasCoolers) +
                                  " unused refrigeration gas cooler(s) found during input processing.");
                 ShowContinueError("  These refrigeration gas coolers are in the input file but are not connected to a refrigeration system.");
                 ShowContinueError("  These unused refrigeration gas coolers will not be simulated.");
@@ -14270,12 +14270,12 @@ namespace RefrigeratedCase {
         } else { // airchllersetpointer passed in call to subroutine not ==0
             ChillerSetID = AirChillerSetPtr;
             if (ChillerSetID > DataHeatBalance::NumRefrigChillerSets || ChillerSetID < 1) {
-                ShowFatalError("SimAirChillerSet:  Invalid AirChillerSetPtr passed=" + General::TrimSigDigits(ChillerSetID) + ", Number of Units=" +
-                               General::TrimSigDigits(DataHeatBalance::NumRefrigChillerSets) + ", Entered Unit name=" + AirChillerSetName);
+                ShowFatalError("SimAirChillerSet:  Invalid AirChillerSetPtr passed=" + fmt::to_string(ChillerSetID) + ", Number of Units=" +
+                               fmt::to_string(DataHeatBalance::NumRefrigChillerSets) + ", Entered Unit name=" + AirChillerSetName);
             } // ChillerSetID makes no sense
             if (CheckChillerSetName(ChillerSetID)) {
                 if (AirChillerSetName != AirChillerSet(ChillerSetID).Name) {
-                    ShowFatalError("SimAirChillerSet:  Invalid AirChillerSetPtr passed=" + General::TrimSigDigits(ChillerSetID) +
+                    ShowFatalError("SimAirChillerSet:  Invalid AirChillerSetPtr passed=" + fmt::to_string(ChillerSetID) +
                                    ", Unit name=" + AirChillerSetName + ", stored Unit Name for that index=" + AirChillerSet(ChillerSetID).Name);
                 } // name not equal correct name
                 CheckChillerSetName(ChillerSetID) = false;

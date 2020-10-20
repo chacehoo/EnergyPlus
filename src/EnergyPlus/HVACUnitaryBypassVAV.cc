@@ -235,12 +235,12 @@ namespace HVACUnitaryBypassVAV {
         } else {
             CBVAVNum = CompIndex;
             if (CBVAVNum > NumCBVAV || CBVAVNum < 1) {
-                ShowFatalError("SimUnitaryBypassVAV:  Invalid CompIndex passed=" + General::TrimSigDigits(CBVAVNum) +
-                               ", Number of Units=" + General::TrimSigDigits(NumCBVAV) + ", Entered Unit name=" + CompName);
+                ShowFatalError("SimUnitaryBypassVAV:  Invalid CompIndex passed=" + fmt::to_string(CBVAVNum) +
+                               ", Number of Units=" + fmt::to_string(NumCBVAV) + ", Entered Unit name=" + CompName);
             }
             if (CheckEquipName(CBVAVNum)) {
                 if (CompName != CBVAV(CBVAVNum).Name) {
-                    ShowFatalError("SimUnitaryBypassVAV: Invalid CompIndex passed=" + General::TrimSigDigits(CBVAVNum) + ", Unit name=" + CompName +
+                    ShowFatalError("SimUnitaryBypassVAV: Invalid CompIndex passed=" + fmt::to_string(CBVAVNum) + ", Unit name=" + CompName +
                                    ", stored Unit Name for that index=" + CBVAV(CBVAVNum).Name);
                 }
                 CheckEquipName(CBVAVNum) = false;
@@ -4061,11 +4061,11 @@ namespace HVACUnitaryBypassVAV {
                                 ShowWarningMessage("CalcNonDXHeatingCoils: Hot water coil control failed for " + CBVAV(CBVAVNum).UnitType + "=\"" +
                                                    CBVAV(CBVAVNum).Name + "\"");
                                 ShowContinueErrorTimeStamp("");
-                                ShowContinueError("  Iteration limit [" + General::RoundSigDigits(SolveMaxIter) +
+                                ShowContinueError("  Iteration limit [" + fmt::to_string(SolveMaxIter) +
                                                   "] exceeded in calculating hot water mass flow rate");
                             }
                             ShowRecurringWarningErrorAtEnd("CalcNonDXHeatingCoils: Hot water coil control failed (iteration limit [" +
-                                                               General::RoundSigDigits(SolveMaxIter) + "]) for " + CBVAV(CBVAVNum).UnitType + "=\"" +
+                                                               fmt::to_string(SolveMaxIter) + "]) for " + CBVAV(CBVAVNum).UnitType + "=\"" +
                                                                CBVAV(CBVAVNum).Name,
                                                            CBVAV(CBVAVNum).HotWaterCoilMaxIterIndex);
                         } else if (SolFlag == -2) {

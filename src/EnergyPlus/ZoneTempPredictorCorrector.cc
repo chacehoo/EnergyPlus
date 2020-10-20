@@ -827,7 +827,7 @@ namespace ZoneTempPredictorCorrector {
 
                     } else {
                         ShowSevereError("GetZoneAirSetpoints: Illegal control type for Zone=" + Zone(ActualZoneNum).Name +
-                                        ", Found value=" + TrimSigDigits(ControlTypeNum) +
+                                        ", Found value=" + fmt::to_string(ControlTypeNum) +
                                         ", in Schedule=" + TempControlledZone(TempControlledZoneNum).ControlTypeSchedName);
                         ShowContinueError("..valid range values are [0,4].");
                         ErrorsFound = true;
@@ -1579,7 +1579,7 @@ namespace ZoneTempPredictorCorrector {
 
                     } else {
                         ShowSevereError("GetZoneAirSetpoints: Illegal control type for Zone=" + Zone(ActualZoneNum).Name +
-                                        ", Found value=" + TrimSigDigits(ControlTypeNum) +
+                                        ", Found value=" + fmt::to_string(ControlTypeNum) +
                                         ", in Schedule=" + ComfortControlledZone(ComfortControlledZoneNum).ControlTypeSchedName);
                         ShowContinueError("..valid range values are [0,4].");
                         ErrorsFound = true;
@@ -3880,7 +3880,7 @@ namespace ZoneTempPredictorCorrector {
 
                 } else {
                     ShowSevereError("CalcZoneAirTempSetpoints: Illegal control type for Zone=" + Zone(ActualZoneNum).Name +
-                                    ", Found value=" + TrimSigDigits(TempControlType(ActualZoneNum)) +
+                                    ", Found value=" + fmt::to_string(TempControlType(ActualZoneNum)) +
                                     ", in Schedule=" + TempControlledZone(RelativeZoneNum).ControlTypeSchedName);
                 }
             }
@@ -7125,7 +7125,7 @@ namespace ZoneTempPredictorCorrector {
 
                 } else {
                     ShowSevereError("CalcZoneAirTempSetpoints: Illegal thermal control control type for Zone=" + Zone(ActualZoneNum).Name +
-                                    ", Found value=" + TrimSigDigits(ComfortControlType(ActualZoneNum)) +
+                                    ", Found value=" + fmt::to_string(ComfortControlType(ActualZoneNum)) +
                                     ", in Schedule=" + ComfortControlledZone(RelativeZoneNum).ControlTypeSchedName);
                 }
             }
@@ -7354,7 +7354,7 @@ namespace ZoneTempPredictorCorrector {
 
                 } else {
                     ShowSevereError("CalcZoneAirComfortSetpoints: Illegal thermal control control type for Zone=" + Zone(ActualZoneNum).Name +
-                                    ", Found value=" + TrimSigDigits(ComfortControlType(ActualZoneNum)) +
+                                    ", Found value=" + fmt::to_string(ComfortControlType(ActualZoneNum)) +
                                     ", in Schedule=" + ComfortControlledZone(ActualZoneNum).ControlTypeSchedName);
                 }
             }

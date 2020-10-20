@@ -845,7 +845,7 @@ void DXFOut(EnergyPlusData &state,
         for (int mapnum = 1; mapnum <= TotIllumMaps; ++mapnum) {
             if (IllumMapCalc(mapnum).Zone != zones) continue;
             for (int refpt = 1; refpt <= IllumMapCalc(mapnum).TotalMapRefPoints; ++refpt) {
-                print(dxffile, Format_710, Zone(zones).Name + ":MapRefPt:" + TrimSigDigits(refpt));
+                print(dxffile, Format_710, Zone(zones).Name + ":MapRefPt:" + fmt::to_string(refpt));
                 print(dxffile,
                       Format_709,
                       normalizeName(Zone(zones).Name),
@@ -1399,9 +1399,9 @@ void DetailsForSurfaces(EnergyPlusData &state, int const RptType) // (1=Vertices
                            << "," << RoundSigDigits(Surface(surf).GrossArea, 2) << "," << RoundSigDigits(Surface(surf).NetAreaShadowCalc, 2) << ","
                            << RoundSigDigits(Surface(surf).Azimuth, 2) << "," << RoundSigDigits(Surface(surf).Tilt, 2) << ","
                            << RoundSigDigits(Surface(surf).Width, 2) << "," << RoundSigDigits(Surface(surf).Height, 2) << ",";
-                *eiostream << ",,,,,,,,,," << TrimSigDigits(Surface(surf).Sides) << '\n';
+                *eiostream << ",,,,,,,,,," << fmt::to_string(Surface(surf).Sides) << '\n';
             } else if (RptType == 1) {
-                *eiostream << TrimSigDigits(Surface(surf).Sides) << ",";
+                *eiostream << fmt::to_string(Surface(surf).Sides) << ",";
             } else {
                 if (Surface(surf).SchedShadowSurfIndex > 0) {
                     ScheduleName = GetScheduleName(state, Surface(surf).SchedShadowSurfIndex);
@@ -1416,7 +1416,7 @@ void DetailsForSurfaces(EnergyPlusData &state, int const RptType) // (1=Vertices
                            << "," << RoundSigDigits(Surface(surf).GrossArea, 2) << "," << RoundSigDigits(Surface(surf).NetAreaShadowCalc, 2) << ","
                            << RoundSigDigits(Surface(surf).Azimuth, 2) << "," << RoundSigDigits(Surface(surf).Tilt, 2) << ","
                            << RoundSigDigits(Surface(surf).Width, 2) << "," << RoundSigDigits(Surface(surf).Height, 2) << ",";
-                *eiostream << ",,,,,,,,,," << TrimSigDigits(Surface(surf).Sides) << ",";
+                *eiostream << ",,,,,,,,,," << fmt::to_string(Surface(surf).Sides) << ",";
             }
             if (RptType == 10) continue;
             for (vert = 1; vert <= Surface(surf).Sides; ++vert) {
@@ -1622,11 +1622,11 @@ void DetailsForSurfaces(EnergyPlusData &state, int const RptType) // (1=Vertices
                 if (RptType == 10) {
                     *eiostream << RoundSigDigits(Surface(surf).ViewFactorGround, 2) << "," << RoundSigDigits(Surface(surf).ViewFactorSky, 2) << ","
                                << RoundSigDigits(Surface(surf).ViewFactorGroundIR, 2) << "," << RoundSigDigits(Surface(surf).ViewFactorSkyIR, 2)
-                               << "," << TrimSigDigits(Surface(surf).Sides) << '\n';
+                               << "," << fmt::to_string(Surface(surf).Sides) << '\n';
                 } else {
                     *eiostream << RoundSigDigits(Surface(surf).ViewFactorGround, 2) << "," << RoundSigDigits(Surface(surf).ViewFactorSky, 2) << ","
                                << RoundSigDigits(Surface(surf).ViewFactorGroundIR, 2) << "," << RoundSigDigits(Surface(surf).ViewFactorSkyIR, 2)
-                               << "," << TrimSigDigits(Surface(surf).Sides) << ",";
+                               << "," << fmt::to_string(Surface(surf).Sides) << ",";
                     for (vert = 1; vert <= Surface(surf).Sides; ++vert) {
                         if (vert != Surface(surf).Sides) {
                             *eiostream << RoundSigDigits(Surface(surf).Vertex(vert).x, 2) << "," << RoundSigDigits(Surface(surf).Vertex(vert).y, 2)
@@ -1717,7 +1717,7 @@ void DetailsForSurfaces(EnergyPlusData &state, int const RptType) // (1=Vertices
                 }
                 *eiostream << "HeatTransfer Surface," << Surface(surf).Name << "," << cSurfaceClass(Surface(surf).Class) << "," << BaseSurfName << ","
                            << AlgoName << ",";
-                *eiostream << TrimSigDigits(Surface(surf).Sides) << ",";
+                *eiostream << fmt::to_string(Surface(surf).Sides) << ",";
                 for (vert = 1; vert <= Surface(surf).Sides; ++vert) {
                     if (vert != Surface(surf).Sides) {
                         *eiostream << RoundSigDigits(Surface(surf).Vertex(vert).x, 2) << "," << RoundSigDigits(Surface(surf).Vertex(vert).y, 2) << ","

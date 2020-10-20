@@ -229,12 +229,12 @@ namespace EvaporativeCoolers {
         } else {
             EvapCoolNum = CompIndex;
             if (EvapCoolNum > NumEvapCool || EvapCoolNum < 1) {
-                ShowFatalError("SimEvapCooler:  Invalid CompIndex passed=" + TrimSigDigits(EvapCoolNum) +
-                               ", Number of Units=" + TrimSigDigits(NumEvapCool) + ", Entered Unit name=" + CompName);
+                ShowFatalError("SimEvapCooler:  Invalid CompIndex passed=" + fmt::to_string(EvapCoolNum) +
+                               ", Number of Units=" + fmt::to_string(NumEvapCool) + ", Entered Unit name=" + CompName);
             }
             if (CheckEquipName(EvapCoolNum)) {
                 if (CompName != EvapCond(EvapCoolNum).EvapCoolerName) {
-                    ShowFatalError("SimEvapCooler: Invalid CompIndex passed=" + TrimSigDigits(EvapCoolNum) + ", Unit name=" + CompName +
+                    ShowFatalError("SimEvapCooler: Invalid CompIndex passed=" + fmt::to_string(EvapCoolNum) + ", Unit name=" + CompName +
                                    ", stored Unit Name for that index=" + EvapCond(EvapCoolNum).EvapCoolerName);
                 }
                 CheckEquipName(EvapCoolNum) = false;
@@ -2557,7 +2557,7 @@ namespace EvaporativeCoolers {
                                             "Evaporative Cooler Research Special = " +
                                             EvapCond(EvapCoolNum).EvapCoolerName);
                             ShowContinueErrorTimeStamp("");
-                            ShowContinueError("  Iteration limit [" + RoundSigDigits(MaxIte) +
+                            ShowContinueError("  Iteration limit [" + fmt::to_string(MaxIte) +
                                               "] exceeded in calculating secondary air mass flow rate");
                             ShowContinueError("  Simulation continues");
                         }
@@ -2619,7 +2619,7 @@ namespace EvaporativeCoolers {
                                             "Evaporative Cooler Research Special = " +
                                             EvapCond(EvapCoolNum).EvapCoolerName);
                             ShowContinueErrorTimeStamp("");
-                            ShowContinueError("  Iteration limit [" + RoundSigDigits(MaxIte) +
+                            ShowContinueError("  Iteration limit [" + fmt::to_string(MaxIte) +
                                               "] exceeded in calculating secondary air mass flow rate");
                             ShowContinueError("  Simulation continues");
                         }
@@ -2668,7 +2668,7 @@ namespace EvaporativeCoolers {
                                             "Evaporative Cooler Research Special = " +
                                             EvapCond(EvapCoolNum).EvapCoolerName);
                             ShowContinueErrorTimeStamp("");
-                            ShowContinueError("  Iteration limit [" + RoundSigDigits(MaxIte) +
+                            ShowContinueError("  Iteration limit [" + fmt::to_string(MaxIte) +
                                               "] exceeded in calculating secondary air mass flow rate");
                             ShowContinueError("  Simulation continues");
                         }
@@ -2740,7 +2740,7 @@ namespace EvaporativeCoolers {
                                             "Evaporative Cooler Research Special = " +
                                             EvapCond(EvapCoolNum).EvapCoolerName);
                             ShowContinueErrorTimeStamp("");
-                            ShowContinueError("  Iteration limit [" + RoundSigDigits(MaxIte) +
+                            ShowContinueError("  Iteration limit [" + fmt::to_string(MaxIte) +
                                               "] exceeded in calculating secondary air mass flow rate");
                             ShowContinueError("  Simulation continues");
                         }
@@ -3612,12 +3612,12 @@ namespace EvaporativeCoolers {
         } else {
             CompNum = CompIndex;
             if (CompNum < 1 || CompNum > NumZoneEvapUnits) {
-                ShowFatalError("SimZoneEvaporativeCoolerUnit: Invalid CompIndex passed=" + TrimSigDigits(CompNum) +
-                               ", Number of units =" + TrimSigDigits(NumZoneEvapUnits) + ", Entered Unit name = " + CompName);
+                ShowFatalError("SimZoneEvaporativeCoolerUnit: Invalid CompIndex passed=" + fmt::to_string(CompNum) +
+                               ", Number of units =" + fmt::to_string(NumZoneEvapUnits) + ", Entered Unit name = " + CompName);
             }
             if (CheckZoneEvapUnitName(CompNum)) {
                 if (CompName != ZoneEvapUnit(CompNum).Name) {
-                    ShowFatalError("SimZoneEvaporativeCoolerUnit: Invalid CompIndex passed=" + TrimSigDigits(CompNum) + ", Unit name=" + CompName +
+                    ShowFatalError("SimZoneEvaporativeCoolerUnit: Invalid CompIndex passed=" + fmt::to_string(CompNum) + ", Unit name=" + CompName +
                                    ", stored unit name for that index=" + ZoneEvapUnit(CompNum).Name);
                 }
                 CheckZoneEvapUnitName(CompNum) = false;
@@ -4677,7 +4677,7 @@ namespace EvaporativeCoolers {
                     ShowContinueError("Check input for Fan Placement.");
                 }
                 ShowRecurringWarningErrorAtEnd("Zone Evaporative Cooler unit part load ratio control failed (iteration limit [" +
-                                                   General::RoundSigDigits(MaxIte) + "]) for ZoneHVAC:EvaporativeCoolerUnit =\"" +
+                                                   fmt::to_string(MaxIte) + "]) for ZoneHVAC:EvaporativeCoolerUnit =\"" +
                                                    ZoneEvapUnit(UnitNum).Name,
                                                ZoneEvapUnit(UnitNum).UnitLoadControlMaxIterErrorIndex);
 
@@ -4837,7 +4837,7 @@ namespace EvaporativeCoolers {
                     ShowContinueError("Fan speed ratio returned=" + RoundSigDigits(FanSpeedRatio, 2));
                     ShowContinueError("Check input for Fan Placement.");
                 }
-                ShowRecurringWarningErrorAtEnd("Zone Evaporative Cooler unit control failed (iteration limit [" + RoundSigDigits(MaxIte) +
+                ShowRecurringWarningErrorAtEnd("Zone Evaporative Cooler unit control failed (iteration limit [" + fmt::to_string(MaxIte) +
                                                    "]) for ZoneHVAC:EvaporativeCoolerUnit =\"" + ZoneEvapUnit(UnitNum).Name,
                                                ZoneEvapUnit(UnitNum).UnitVSControlMaxIterErrorIndex);
 

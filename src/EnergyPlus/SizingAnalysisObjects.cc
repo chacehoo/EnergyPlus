@@ -554,7 +554,7 @@ void PlantCoinicidentAnalysis::ResolveDesignFlowRate(EnergyPlusData& state, int 
                                              "{},Normalized Change {},Specific Heat{J/kg-K},Density {kg/m3}\n");
         eioHeaderDoneOnce = true;
     }
-    chIteration = TrimSigDigits(HVACSizingIterCount);
+    chIteration = fmt::to_string(HVACSizingIterCount);
     if (setNewSizes) {
         chSetSizes = "Yes";
     } else {

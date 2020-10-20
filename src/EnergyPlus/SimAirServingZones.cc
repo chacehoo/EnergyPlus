@@ -755,8 +755,8 @@ namespace SimAirServingZones {
             }
             if (NumNodes != state.dataAirLoop->AirToZoneNodeInfo(AirSysNum).NumSupplyNodes) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\", node mismatch.");
-                ShowContinueError("...number of air system exit nodes [" + RoundSigDigits(NumNodes) +
-                                  "] must match number of zone equip inlet nodes [" + RoundSigDigits(state.dataAirLoop->AirToZoneNodeInfo(AirSysNum).NumSupplyNodes) +
+                ShowContinueError("...number of air system exit nodes [" + fmt::to_string(NumNodes) +
+                                  "] must match number of zone equip inlet nodes [" + fmt::to_string(state.dataAirLoop->AirToZoneNodeInfo(AirSysNum).NumSupplyNodes) +
                                   "].");
                 ErrorsFound = true;
             }

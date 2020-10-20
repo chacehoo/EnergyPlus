@@ -2569,8 +2569,8 @@ namespace StandardRatings {
                 }
                 for (ClassNum = 1; ClassNum <= 4; ++ClassNum) {
                     Num = (ClassNum - 1) * 4;
-                    ClassName = "Class " + RoundSigDigits(ClassNum);
-                    CompNameNew = CompName + "(" + ClassName + ")";
+                    ClassName = "Class " + fmt::to_string(ClassNum);
+                    CompNameNew = fmt::format("{}({})", CompName, ClassName);
                     static constexpr auto Format_102(" DX Cooling Coil ASHRAE 127 Standard Ratings Information, {}, {}, {}, {:.1R}, {:.1R}, {:.1R}, "
                                                      "{:.1R}, {:.1R}, {:.1R}, {:.1R}, {:.1R}\n");
                     print(state.files.eio,

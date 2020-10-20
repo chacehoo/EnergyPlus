@@ -75,7 +75,6 @@
 #include <EnergyPlus/Autosizing/WaterHeatingCoilUASizing.hh>
 #include <EnergyPlus/BranchNodeConnections.hh>
 #include <EnergyPlus/Data/EnergyPlusData.hh>
-#include <EnergyPlus/DataAirSystems.hh>
 #include <EnergyPlus/DataBranchAirLoopPlant.hh>
 #include <EnergyPlus/DataContaminantBalance.hh>
 #include <EnergyPlus/DataEnvironment.hh>
@@ -91,7 +90,6 @@
 #include <EnergyPlus/GeneralRoutines.hh>
 #include <EnergyPlus/GlobalNames.hh>
 #include <EnergyPlus/HVACControllers.hh>
-#include <EnergyPlus/HVACHXAssistedCoolingCoil.hh>
 #include <EnergyPlus/InputProcessing/InputProcessor.hh>
 #include <EnergyPlus/NodeInputManager.hh>
 #include <EnergyPlus/OutputProcessor.hh>
@@ -211,12 +209,12 @@ namespace WaterCoils {
         } else {
             CoilNum = CompIndex;
             if (CoilNum > state.dataWaterCoils->NumWaterCoils || CoilNum < 1) {
-                ShowFatalError("SimulateWaterCoilComponents: Invalid CompIndex passed=" + TrimSigDigits(CoilNum) +
-                               ", Number of Water Coils=" + TrimSigDigits(state.dataWaterCoils->NumWaterCoils) + ", Coil name=" + CompName);
+                ShowFatalError("SimulateWaterCoilComponents: Invalid CompIndex passed=" + fmt::to_string(CoilNum) +
+                               ", Number of Water Coils=" + fmt::to_string(state.dataWaterCoils->NumWaterCoils) + ", Coil name=" + CompName);
             }
             if (state.dataWaterCoils->CheckEquipName(CoilNum)) {
                 if (CompName != state.dataWaterCoils->WaterCoil(CoilNum).Name) {
-                    ShowFatalError("SimulateWaterCoilComponents: Invalid CompIndex passed=" + TrimSigDigits(CoilNum) + ", Coil name=" + CompName +
+                    ShowFatalError("SimulateWaterCoilComponents: Invalid CompIndex passed=" + fmt::to_string(CoilNum) + ", Coil name=" + CompName +
                                    ", stored Coil Name for that index=" + state.dataWaterCoils->WaterCoil(CoilNum).Name);
                 }
                 state.dataWaterCoils->CheckEquipName(CoilNum) = false;
@@ -5634,11 +5632,11 @@ namespace WaterCoils {
         } else {
             CoilNum = CompIndex;
             if (CoilNum > state.dataWaterCoils->NumWaterCoils || CoilNum < 1) {
-                ShowFatalError("CheckWaterCoilSchedule: Invalid CompIndex passed=" + TrimSigDigits(CoilNum) +
-                               ", Number of Heating Coils=" + TrimSigDigits(state.dataWaterCoils->NumWaterCoils) + ", Coil name=" + CompName);
+                ShowFatalError("CheckWaterCoilSchedule: Invalid CompIndex passed=" + fmt::to_string(CoilNum) +
+                               ", Number of Heating Coils=" + fmt::to_string(state.dataWaterCoils->NumWaterCoils) + ", Coil name=" + CompName);
             }
             if (CompName != state.dataWaterCoils->WaterCoil(CoilNum).Name) {
-                ShowFatalError("CheckWaterCoilSchedule: Invalid CompIndex passed=" + TrimSigDigits(CoilNum) + ", Coil name=" + CompName +
+                ShowFatalError("CheckWaterCoilSchedule: Invalid CompIndex passed=" + fmt::to_string(CoilNum) + ", Coil name=" + CompName +
                                ", stored Coil Name for that index=" + state.dataWaterCoils->WaterCoil(CoilNum).Name);
             }
             Value = GetCurrentScheduleValue(state.dataWaterCoils->WaterCoil(CoilNum).SchedPtr); // not scheduled?
@@ -6505,16 +6503,16 @@ namespace WaterCoils {
         } else {
             CoilNum = CompIndex;
             if (CoilNum > state.dataWaterCoils->NumWaterCoils || CoilNum < 1) {
-                ShowFatalError("UpdateWaterToAirCoilPlantConnection:  Invalid CompIndex passed=" + TrimSigDigits(CoilNum) +
-                               ", Number of Coils=" + TrimSigDigits(state.dataWaterCoils->NumWaterCoils) + ", Entered Coil name=" + CoilName);
+                ShowFatalError("UpdateWaterToAirCoilPlantConnection:  Invalid CompIndex passed=" + fmt::to_string(CoilNum) +
+                               ", Number of Coils=" + fmt::to_string(state.dataWaterCoils->NumWaterCoils) + ", Entered Coil name=" + CoilName);
             }
             if (KickOffSimulation) {
                 if (CoilName != state.dataWaterCoils->WaterCoil(CoilNum).Name) {
-                    ShowFatalError("UpdateWaterToAirCoilPlantConnection: Invalid CompIndex passed=" + TrimSigDigits(CoilNum) +
+                    ShowFatalError("UpdateWaterToAirCoilPlantConnection: Invalid CompIndex passed=" + fmt::to_string(CoilNum) +
                                    ", Coil name=" + CoilName + ", stored Coil Name for that index=" + state.dataWaterCoils->WaterCoil(CoilNum).Name);
                 }
                 if (CoilTypeNum != state.dataWaterCoils->WaterCoil(CoilNum).WaterCoilType_Num) {
-                    ShowFatalError("UpdateWaterToAirCoilPlantConnection: Invalid CompIndex passed=" + TrimSigDigits(CoilNum) +
+                    ShowFatalError("UpdateWaterToAirCoilPlantConnection: Invalid CompIndex passed=" + fmt::to_string(CoilNum) +
                                    ", Coil name=" + CoilName + ", stored Coil Name for that index=" + ccSimPlantEquipTypes(CoilTypeNum));
                 }
             }
@@ -6629,8 +6627,8 @@ namespace WaterCoils {
         }
 
         if (CoilNum <= 0 || CoilNum > state.dataWaterCoils->NumWaterCoils) {
-            ShowSevereError("SetHeatingCoilData: called with heating coil Number out of range=" + TrimSigDigits(CoilNum) + " should be >0 and <" +
-                            TrimSigDigits(state.dataWaterCoils->NumWaterCoils));
+            ShowSevereError("SetHeatingCoilData: called with heating coil Number out of range=" + fmt::to_string(CoilNum) + " should be >0 and <" +
+                            fmt::to_string(state.dataWaterCoils->NumWaterCoils));
             ErrorsFound = true;
             return;
         }

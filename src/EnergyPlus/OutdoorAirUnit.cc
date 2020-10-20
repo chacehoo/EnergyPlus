@@ -55,7 +55,6 @@
 // EnergyPlus Headers
 #include <EnergyPlus/Autosizing/Base.hh>
 #include <EnergyPlus/BranchNodeConnections.hh>
-#include <EnergyPlus/DXCoils.hh>
 #include <EnergyPlus/Data/EnergyPlusData.hh>
 #include <EnergyPlus/DataAirSystems.hh>
 #include <EnergyPlus/DataEnvironment.hh>
@@ -64,11 +63,8 @@
 #include <EnergyPlus/DataHeatBalance.hh>
 #include <EnergyPlus/DataLoopNode.hh>
 #include <EnergyPlus/DataSizing.hh>
-#include <EnergyPlus/DataSurfaceLists.hh>
-#include <EnergyPlus/DataZoneEnergyDemands.hh>
 #include <EnergyPlus/DataZoneEquipment.hh>
 #include <EnergyPlus/DesiccantDehumidifiers.hh>
-#include <EnergyPlus/EMSManager.hh>
 #include <EnergyPlus/Fans.hh>
 #include <EnergyPlus/FluidProperties.hh>
 #include <EnergyPlus/General.hh>
@@ -89,7 +85,6 @@
 #include <EnergyPlus/PlantUtilities.hh>
 #include <EnergyPlus/Psychrometrics.hh>
 #include <EnergyPlus/ScheduleManager.hh>
-#include <EnergyPlus/SimAirServingZones.hh>
 #include <EnergyPlus/SteamCoils.hh>
 #include <EnergyPlus/UnitarySystem.hh>
 #include <EnergyPlus/UtilityRoutines.hh>
@@ -266,12 +261,12 @@ namespace OutdoorAirUnit {
         } else {
             OAUnitNum = CompIndex;
             if (OAUnitNum > NumOfOAUnits || OAUnitNum < 1) {
-                ShowFatalError("SimOutdoorAirUnit:  Invalid CompIndex passed=" + TrimSigDigits(OAUnitNum) +
-                               ", Number of Units=" + TrimSigDigits(NumOfOAUnits) + ", Entered Unit name=" + CompName);
+                ShowFatalError("SimOutdoorAirUnit:  Invalid CompIndex passed=" + fmt::to_string(OAUnitNum) +
+                               ", Number of Units=" + fmt::to_string(NumOfOAUnits) + ", Entered Unit name=" + CompName);
             }
             if (CheckEquipName(OAUnitNum)) {
                 if (CompName != OutAirUnit(OAUnitNum).Name) {
-                    ShowFatalError("SimOutdoorAirUnit: Invalid CompIndex passed=" + TrimSigDigits(OAUnitNum) + ", Unit name=" + CompName +
+                    ShowFatalError("SimOutdoorAirUnit: Invalid CompIndex passed=" + fmt::to_string(OAUnitNum) + ", Unit name=" + CompName +
                                    ", stored Unit Name for that index=" + OutAirUnit(OAUnitNum).Name);
                 }
                 CheckEquipName(OAUnitNum) = false;
@@ -331,7 +326,6 @@ namespace OutdoorAirUnit {
         using SteamCoils::GetSteamCoilIndex;
         using WaterCoils::CheckWaterCoilSchedule;
         using namespace DataLoopNode;
-        using namespace DataSurfaceLists;
         using OutAirNodeManager::CheckAndAddAirNodeNumber;
         using WaterCoils::GetCoilWaterInletNode;
         using WaterCoils::GetWaterCoilIndex;
@@ -1722,7 +1716,6 @@ CurrentModuleObjects(CO_OAEqList), ComponentListName);
         // USE STATEMENTS:
 
         // Using/Aliasing
-        using namespace DataZoneEnergyDemands;
         using DataEnvironment::CurMnDy;
         using DataEnvironment::EnvironmentName;
         using DataEnvironment::OutBaroPress;
@@ -2144,7 +2137,6 @@ CurrentModuleObjects(CO_OAEqList), ComponentListName);
         // USE STATEMENTS:
 
         // Using/Aliasing
-        using namespace DataZoneEnergyDemands;
         using DataEnvironment::CurMnDy;
         using DataEnvironment::EnvironmentName;
         using DataEnvironment::OutBaroPress;

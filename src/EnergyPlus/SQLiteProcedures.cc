@@ -1158,12 +1158,12 @@ void SQLite::initializeTabularDataTable()
 
     sqliteExecuteCommand(sql);
 
-    sqliteExecuteCommand("INSERT INTO StringTypes VALUES(" + std::to_string(ReportNameId) + ",'ReportName');");
-    sqliteExecuteCommand("INSERT INTO StringTypes VALUES(" + std::to_string(ReportForStringId) + ",'ReportForString');");
-    sqliteExecuteCommand("INSERT INTO StringTypes VALUES(" + std::to_string(TableNameId) + ",'TableName');");
-    sqliteExecuteCommand("INSERT INTO StringTypes VALUES(" + std::to_string(RowNameId) + ",'RowName');");
-    sqliteExecuteCommand("INSERT INTO StringTypes VALUES(" + std::to_string(ColumnNameId) + ",'ColumnName');");
-    sqliteExecuteCommand("INSERT INTO StringTypes VALUES(" + std::to_string(UnitsId) + ",'Units');");
+    sqliteExecuteCommand("INSERT INTO StringTypes VALUES(" + fmt::to_string(ReportNameId) + ",'ReportName');");
+    sqliteExecuteCommand("INSERT INTO StringTypes VALUES(" + fmt::to_string(ReportForStringId) + ",'ReportForString');");
+    sqliteExecuteCommand("INSERT INTO StringTypes VALUES(" + fmt::to_string(TableNameId) + ",'TableName');");
+    sqliteExecuteCommand("INSERT INTO StringTypes VALUES(" + fmt::to_string(RowNameId) + ",'RowName');");
+    sqliteExecuteCommand("INSERT INTO StringTypes VALUES(" + fmt::to_string(ColumnNameId) + ",'ColumnName');");
+    sqliteExecuteCommand("INSERT INTO StringTypes VALUES(" + fmt::to_string(UnitsId) + ",'Units');");
 
     const std::string sql2 = "CREATE TABLE Strings ( "
                              "StringIndex INTEGER PRIMARY KEY, "

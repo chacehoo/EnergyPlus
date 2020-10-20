@@ -240,11 +240,11 @@ namespace Pumps {
             PumpNum = PumpIndex;
             if (PumpEquip(PumpNum).CheckEquipName) {
                 if (PumpNum > NumPumps || PumpNum < 1) {
-                    ShowFatalError("ManagePumps: Invalid PumpIndex passed=" + TrimSigDigits(PumpNum) +
-                                   ", Number of Pumps=" + TrimSigDigits(NumPumps) + ", Pump name=" + PumpName);
+                    ShowFatalError("ManagePumps: Invalid PumpIndex passed=" + fmt::to_string(PumpNum) +
+                                   ", Number of Pumps=" + fmt::to_string(NumPumps) + ", Pump name=" + PumpName);
                 }
                 if (PumpName != PumpEquip(PumpNum).Name) {
-                    ShowFatalError("ManagePumps: Invalid PumpIndex passed=" + TrimSigDigits(PumpNum) + ", Pump name=" + PumpName +
+                    ShowFatalError("ManagePumps: Invalid PumpIndex passed=" + fmt::to_string(PumpNum) + ", Pump name=" + PumpName +
                                    ", stored Pump Name for that index=" + PumpEquip(PumpNum).Name);
                 }
                 PumpEquip(PumpNum).CheckEquipName = false;

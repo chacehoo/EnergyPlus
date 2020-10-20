@@ -171,10 +171,10 @@ namespace ChillerAbsorption {
                                                                         FirstHVACIteration);
 
         } else {
-            ShowFatalError("SimBLASTAbsorber: Invalid LoopNum passed=" + General::TrimSigDigits(calledFromLocation.loopNum) +
-                           ", Unit name=" + this->Name + ", stored chilled water loop=" + General::TrimSigDigits(this->CWLoopNum) +
-                           ", stored condenser water loop=" + General::TrimSigDigits(this->CDLoopNum) +
-                           ", stored generator loop=" + General::TrimSigDigits(this->GenLoopNum));
+            ShowFatalError("SimBLASTAbsorber: Invalid LoopNum passed=" + fmt::to_string(calledFromLocation.loopNum) +
+                           ", Unit name=" + this->Name + ", stored chilled water loop=" + fmt::to_string(this->CWLoopNum) +
+                           ", stored condenser water loop=" + fmt::to_string(this->CDLoopNum) +
+                           ", stored generator loop=" + fmt::to_string(this->GenLoopNum));
         }
     }
 

@@ -185,12 +185,12 @@ namespace UnitVentilator {
         } else {
             UnitVentNum = CompIndex;
             if (UnitVentNum > state.dataUnitVentilators->NumOfUnitVents || UnitVentNum < 1) {
-                ShowFatalError("SimUnitVentilator:  Invalid CompIndex passed=" + TrimSigDigits(UnitVentNum) +
-                               ", Number of Units=" + TrimSigDigits(state.dataUnitVentilators->NumOfUnitVents) + ", Entered Unit name=" + CompName);
+                ShowFatalError("SimUnitVentilator:  Invalid CompIndex passed=" + fmt::to_string(UnitVentNum) +
+                               ", Number of Units=" + fmt::to_string(state.dataUnitVentilators->NumOfUnitVents) + ", Entered Unit name=" + CompName);
             }
             if (state.dataUnitVentilators->CheckEquipName(UnitVentNum)) {
                 if (CompName != state.dataUnitVentilators->UnitVent(UnitVentNum).Name) {
-                    ShowFatalError("SimUnitVentilator: Invalid CompIndex passed=" + TrimSigDigits(UnitVentNum) + ", Unit name=" + CompName +
+                    ShowFatalError("SimUnitVentilator: Invalid CompIndex passed=" + fmt::to_string(UnitVentNum) + ", Unit name=" + CompName +
                                    ", stored Unit Name for that index=" + state.dataUnitVentilators->UnitVent(UnitVentNum).Name);
                 }
                 state.dataUnitVentilators->CheckEquipName(UnitVentNum) = false;

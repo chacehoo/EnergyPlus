@@ -185,12 +185,12 @@ namespace ElectricBaseboardRadiator {
         } else {
             BaseboardNum = CompIndex;
             if (BaseboardNum > NumElecBaseboards || BaseboardNum < 1) {
-                ShowFatalError("SimElectricBaseboard:  Invalid CompIndex passed=" + TrimSigDigits(BaseboardNum) +
-                               ", Number of Units=" + TrimSigDigits(NumElecBaseboards) + ", Entered Unit name=" + EquipName);
+                ShowFatalError("SimElectricBaseboard:  Invalid CompIndex passed=" + fmt::to_string(BaseboardNum) +
+                               ", Number of Units=" + fmt::to_string(NumElecBaseboards) + ", Entered Unit name=" + EquipName);
             }
             if (CheckEquipName(BaseboardNum)) {
                 if (EquipName != ElecBaseboard(BaseboardNum).EquipName) {
-                    ShowFatalError("SimElectricBaseboard: Invalid CompIndex passed=" + TrimSigDigits(BaseboardNum) + ", Unit name=" + EquipName +
+                    ShowFatalError("SimElectricBaseboard: Invalid CompIndex passed=" + fmt::to_string(BaseboardNum) + ", Unit name=" + EquipName +
                                    ", stored Unit Name for that index=" + ElecBaseboard(BaseboardNum).EquipName);
                 }
                 CheckEquipName(BaseboardNum) = false;
@@ -426,7 +426,7 @@ namespace ElectricBaseboardRadiator {
             if ((ElecBaseboard(BaseboardNum).TotSurfToDistrib < MinDistribSurfaces) && (ElecBaseboard(BaseboardNum).FracRadiant > MinFraction)) {
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) +
                                 "\", the number of surface/radiant fraction groups entered was less than the allowable minimum.");
-                ShowContinueError("...the minimum that must be entered=[" + RoundSigDigits(MinDistribSurfaces) + "].");
+                ShowContinueError("...the minimum that must be entered=[" + fmt::to_string(MinDistribSurfaces) + "].");
                 ErrorsFound = true;
                 ElecBaseboard(BaseboardNum).TotSurfToDistrib = 0; // error
             }

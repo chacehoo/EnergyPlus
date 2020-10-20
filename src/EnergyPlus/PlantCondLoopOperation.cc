@@ -924,9 +924,9 @@ CurrentModuleObject, PlantOpSchemeName);
                                     ShowWarningError(LoopOpSchemeObj + " = \"" + PlantLoop(LoopNum).OperationScheme +
                                                      "\", detected overlapping ranges in " + CurrentModuleObject + " = \"" +
                                                      PlantLoop(LoopNum).OpScheme(SchemeNum).Name + "\".");
-                                    ShowContinueError("Range # " + RoundSigDigits(InnerListNum) +
+                                    ShowContinueError("Range # " + fmt::to_string(InnerListNum) +
                                                       " Lower limit = " + RoundSigDigits(InnerListNumLowerLimit, 1) + " lies within the Range # " +
-                                                      RoundSigDigits(ListNum) + " (" + RoundSigDigits(OuterListNumLowerLimit, 1) + " to " +
+                                                      fmt::to_string(ListNum) + " (" + RoundSigDigits(OuterListNumLowerLimit, 1) + " to " +
                                                       RoundSigDigits(OuterListNumUpperLimit, 1) + ").");
                                     ShowContinueError("Check that input for load range limit values do not overlap, and the simulation continues...");
                                 }
@@ -935,9 +935,9 @@ CurrentModuleObject, PlantOpSchemeName);
                                     ShowWarningError(LoopOpSchemeObj + " = \"" + PlantLoop(LoopNum).OperationScheme +
                                                      "\", detected overlapping ranges in " + CurrentModuleObject + " = \"" +
                                                      PlantLoop(LoopNum).OpScheme(SchemeNum).Name + "\".");
-                                    ShowContinueError("Range # " + RoundSigDigits(InnerListNum) +
+                                    ShowContinueError("Range # " + fmt::to_string(InnerListNum) +
                                                       " Upper limit = " + RoundSigDigits(InnerListNumUpperLimit, 1) + " lies within Range # " +
-                                                      RoundSigDigits(ListNum) + " (" + RoundSigDigits(OuterListNumLowerLimit, 1) + " to " +
+                                                      fmt::to_string(ListNum) + " (" + RoundSigDigits(OuterListNumLowerLimit, 1) + " to " +
                                                       RoundSigDigits(OuterListNumUpperLimit, 1) + ").");
                                     ShowContinueError("Check that input for load range limit values do not overlap, and the simulation continues...");
                                 }
@@ -1446,7 +1446,7 @@ CurrentModuleObject, PlantOpSchemeName);
                             }
                             BaseSizer::reportSizerOutput(CurrentModuleObject,
                                                          PlantLoop(LoopNum).OpScheme(SchemeNum).Name,
-                                                         "Design Water Flow Rate [m3/s] Equipment # " + std::to_string(Num),
+                                                         "Design Water Flow Rate [m3/s] Equipment # " + fmt::to_string(Num),
                                                          CompFlowRate);
                         }
 

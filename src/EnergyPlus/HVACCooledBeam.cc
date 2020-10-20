@@ -65,7 +65,6 @@
 #include <EnergyPlus/DataZoneEnergyDemands.hh>
 #include <EnergyPlus/DataZoneEquipment.hh>
 #include <EnergyPlus/FluidProperties.hh>
-#include <EnergyPlus/General.hh>
 #include <EnergyPlus/GeneralRoutines.hh>
 #include <EnergyPlus/HVACCooledBeam.hh>
 #include <EnergyPlus/InputProcessing/InputProcessor.hh>
@@ -172,9 +171,6 @@ namespace HVACCooledBeam {
         // Manages the simulation of a cooled beam unit.
         // Called from SimZoneAirLoopEquipment in module ZoneAirLoopEquipmentManager.
 
-        // Using/Aliasing
-        using General::TrimSigDigits;
-
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int CBNum; // index of cooled beam unit being simulated
 
@@ -194,12 +190,12 @@ namespace HVACCooledBeam {
         } else {
             CBNum = CompIndex;
             if (CBNum > NumCB || CBNum < 1) {
-                ShowFatalError("SimCoolBeam: Invalid CompIndex passed=" + TrimSigDigits(CompIndex) +
-                               ", Number of Cool Beam Units=" + TrimSigDigits(NumCB) + ", System name=" + CompName);
+                ShowFatalError("SimCoolBeam: Invalid CompIndex passed=" + fmt::to_string(CompIndex) +
+                               ", Number of Cool Beam Units=" + fmt::to_string(NumCB) + ", System name=" + CompName);
             }
             if (CheckEquipName(CBNum)) {
                 if (CompName != CoolBeam(CBNum).Name) {
-                    ShowFatalError("SimCoolBeam: Invalid CompIndex passed=" + TrimSigDigits(CompIndex) + ", Cool Beam Unit name=" + CompName +
+                    ShowFatalError("SimCoolBeam: Invalid CompIndex passed=" + fmt::to_string(CompIndex) + ", Cool Beam Unit name=" + CompName +
                                    ", stored Cool Beam Unit for that index=" + CoolBeam(CBNum).Name);
                 }
                 CheckEquipName(CBNum) = false;
@@ -935,7 +931,6 @@ namespace HVACCooledBeam {
 
         // Using/Aliasing
         using namespace DataZoneEnergyDemands;
-        using General::SolveRoot;
         using PlantUtilities::SetComponentFlowRate;
 
         // Locals

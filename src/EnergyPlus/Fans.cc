@@ -57,7 +57,6 @@
 #include <EnergyPlus/BranchNodeConnections.hh>
 #include <EnergyPlus/CurveManager.hh>
 #include <EnergyPlus/Data/EnergyPlusData.hh>
-#include <EnergyPlus/DataAirLoop.hh>
 #include <EnergyPlus/DataContaminantBalance.hh>
 #include <EnergyPlus/DataEnvironment.hh>
 #include <EnergyPlus/DataLoopNode.hh>
@@ -215,12 +214,12 @@ namespace Fans {
         } else {
             FanNum = CompIndex;
             if (FanNum > state.dataFans->NumFans || FanNum < 1) {
-                ShowFatalError("SimulateFanComponents: Invalid CompIndex passed=" + TrimSigDigits(FanNum) +
-                               ", Number of Fans=" + TrimSigDigits(state.dataFans->NumFans) + ", Fan name=" + CompName);
+                ShowFatalError("SimulateFanComponents: Invalid CompIndex passed=" + fmt::to_string(FanNum) +
+                               ", Number of Fans=" + fmt::to_string(state.dataFans->NumFans) + ", Fan name=" + CompName);
             }
             if (CheckEquipName(FanNum)) {
                 if (!CompName.empty() && CompName != Fan(FanNum).FanName) {
-                    ShowFatalError("SimulateFanComponents: Invalid CompIndex passed=" + TrimSigDigits(FanNum) + ", Fan name=" + CompName +
+                    ShowFatalError("SimulateFanComponents: Invalid CompIndex passed=" + fmt::to_string(FanNum) + ", Fan name=" + CompName +
                                    ", stored Fan Name for that index=" + Fan(FanNum).FanName);
                 }
                 CheckEquipName(FanNum) = false;

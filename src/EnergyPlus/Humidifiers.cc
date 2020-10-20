@@ -192,12 +192,12 @@ namespace Humidifiers {
         } else {
             HumNum = CompIndex;
             if (HumNum > NumHumidifiers || HumNum < 1) {
-                ShowFatalError("SimHumidifier: Invalid CompIndex passed=" + TrimSigDigits(HumNum) +
-                               ", Number of Units=" + TrimSigDigits(NumHumidifiers) + ", Entered Unit name=" + CompName);
+                ShowFatalError("SimHumidifier: Invalid CompIndex passed=" + fmt::to_string(HumNum) +
+                               ", Number of Units=" + fmt::to_string(NumHumidifiers) + ", Entered Unit name=" + CompName);
             }
             if (CheckEquipName(HumNum)) {
                 if (CompName != Humidifier(HumNum).Name) {
-                    ShowFatalError("SimHumidifier: Invalid CompIndex passed=" + TrimSigDigits(HumNum) + ", Unit name=" + CompName +
+                    ShowFatalError("SimHumidifier: Invalid CompIndex passed=" + fmt::to_string(HumNum) + ", Unit name=" + CompName +
                                    ", stored Unit Name for that index=" + Humidifier(HumNum).Name);
                 }
                 CheckEquipName(HumNum) = false;
@@ -226,7 +226,7 @@ namespace Humidifiers {
                 thisHum.CalcGasSteamHumidifier(state, WaterAddNeeded);
 
             } else {
-                ShowSevereError("SimHumidifier: Invalid Humidifier Type Code=" + TrimSigDigits(thisHum.HumType_Code));
+                ShowSevereError("SimHumidifier: Invalid Humidifier Type Code=" + fmt::to_string(thisHum.HumType_Code));
                 ShowContinueError("...Component Name=[" + CompName + "].");
                 ShowFatalError("Preceding Condition causes termination.");
             }

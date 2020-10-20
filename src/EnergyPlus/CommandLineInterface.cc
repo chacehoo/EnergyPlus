@@ -235,7 +235,7 @@ namespace CommandLineInterface {
                 DisplayString("ERROR: Multiple input files specified:");
                 for (size_type i = 0; i < opt.lastArgs.size(); ++i) {
                     std::string const &arg(*opt.lastArgs[i]);
-                    DisplayString("  Input file #" + std::to_string(i + 1) + ": " + arg);
+                    DisplayString("  Input file #" + fmt::to_string(i + 1) + ": " + arg);
                 }
                 DisplayString(errorFollowUp);
                 exit(EXIT_FAILURE);

@@ -354,11 +354,10 @@ namespace SizingManager {
                             if (DayOfSim == 1) {
                                 if (!isPulseZoneSizing) {
                                     DisplayString("Performing Zone Sizing Simulation");
-                                    DisplayString("...for Sizing Period: #" + RoundSigDigits(NumSizingPeriodsPerformed) + ' ' + EnvironmentName);
                                 } else {
                                     DisplayString("Performing Zone Sizing Simulation for Load Component Report");
-                                    DisplayString("...for Sizing Period: #" + RoundSigDigits(NumSizingPeriodsPerformed) + ' ' + EnvironmentName);
                                 }
+                                DisplayString(fmt::format("...for Sizing Period: #{} {}", NumSizingPeriodsPerformed, EnvironmentName));
                             }
                             UpdateZoneSizing(state, DataGlobalConstants::CallIndicator::BeginDay);
                             UpdateFacilitySizing(state, DataGlobalConstants::CallIndicator::BeginDay);
@@ -399,7 +398,7 @@ namespace SizingManager {
                                 if (!WarmupFlag) {
                                     TimeStepInDay = (HourOfDay - 1) * NumOfTimeStepInHour + TimeStep;
                                     if (HourOfDay == 1 && TimeStep == 1) {
-                                        DesDayWeath(CurOverallSimDay).DateString = TrimSigDigits(Month) + '/' + TrimSigDigits(DayOfMonth);
+                                        DesDayWeath(CurOverallSimDay).DateString = fmt::format("{}/{}", Month, DayOfMonth);
                                     }
                                     DesDayWeath(CurOverallSimDay).Temp(TimeStepInDay) = OutDryBulbTemp;
                                     DesDayWeath(CurOverallSimDay).HumRat(TimeStepInDay) = OutHumRat;
@@ -541,7 +540,7 @@ namespace SizingManager {
                     } else { // (.NOT.WarmupFlag)
                         if (DayOfSim == 1) {
                             DisplayString("Calculating System sizing");
-                            DisplayString("...for Sizing Period: #" + RoundSigDigits(NumSizingPeriodsPerformed) + ' ' + EnvironmentName);
+                            DisplayString(fmt::format("...for Sizing Period: #{} {}", NumSizingPeriodsPerformed, EnvironmentName));
                         }
                         UpdateSysSizing(state, DataGlobalConstants::CallIndicator::BeginDay);
                     }
@@ -2523,8 +2522,8 @@ namespace SizingManager {
         }
 
         if (NumTimeStepsInAvg < NumOfTimeStepInHour) {
-            ShowWarningError(cCurrentModuleObject + ": note " + cNumericFieldNames(3) + " entered value=[" + RoundSigDigits(NumTimeStepsInAvg) +
-                             "] is less than 1 hour (i.e., " + RoundSigDigits(NumOfTimeStepInHour) + " timesteps).");
+            ShowWarningError(cCurrentModuleObject + ": note " + cNumericFieldNames(3) + " entered value=[" + fmt::to_string(NumTimeStepsInAvg) +
+                             "] is less than 1 hour (i.e., " + fmt::to_string(NumOfTimeStepInHour) + " timesteps).");
         }
 
         cCurrentModuleObject = "OutputControl:Sizing:Style";

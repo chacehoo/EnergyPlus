@@ -1697,7 +1697,7 @@ namespace ConvectionCoefficients {
                 }
             }
             if (Count > 0) {
-                ShowSevereMessage(RoutineName + RoundSigDigits(Count) + " surfaces had different outside convection algorithms specified when");
+                ShowSevereMessage(RoutineName + fmt::to_string(Count) + " surfaces had different outside convection algorithms specified when");
                 ShowContinueError(
                     "the Zone Outside Convection Algorithm specifies \"SimpleCombined\". SimpleCombined will be used for these surfaces.");
                 if (!DisplayExtraWarnings) {
@@ -1906,10 +1906,10 @@ namespace ConvectionCoefficients {
                 }
                 if (!DisplayExtraWarnings && (SurfaceCountOutside > 0 || SurfaceCountInside > 0)) {
                     if (SurfaceCountOutside > 0) {
-                        OverwriteMessage = TrimSigDigits(SurfaceCountOutside) + " Outside";
+                        OverwriteMessage = fmt::to_string(SurfaceCountOutside) + " Outside";
                     }
                     if (SurfaceCountInside > 0) {
-                        OverwriteMessage = TrimSigDigits(SurfaceCountInside) + " Inside";
+                        OverwriteMessage = fmt::to_string(SurfaceCountInside) + " Inside";
                     }
                     ShowWarningError("User Supplied Convection Coefficients, Multiple Surface Assignments=\"" + SurfaceTypes +
                                      "\", not overwriting already assigned values for " + OverwriteMessage + " assignments.");
@@ -1951,10 +1951,10 @@ namespace ConvectionCoefficients {
                 }
                 if (!DisplayExtraWarnings && (SurfaceCountOutside > 0 || SurfaceCountInside > 0)) {
                     if (SurfaceCountOutside > 0) {
-                        OverwriteMessage = TrimSigDigits(SurfaceCountOutside) + " Outside";
+                        OverwriteMessage = fmt::to_string(SurfaceCountOutside) + " Outside";
                     }
                     if (SurfaceCountInside > 0) {
-                        OverwriteMessage = TrimSigDigits(SurfaceCountInside) + " Inside";
+                        OverwriteMessage = fmt::to_string(SurfaceCountInside) + " Inside";
                     }
                     ShowWarningError("User Supplied Convection Coefficients, Multiple Surface Assignments=\"" + SurfaceTypes +
                                      "\", not overwriting already assigned values for " + OverwriteMessage + " assignments.");
@@ -1996,10 +1996,10 @@ namespace ConvectionCoefficients {
                 }
                 if (!DisplayExtraWarnings && (SurfaceCountOutside > 0 || SurfaceCountInside > 0)) {
                     if (SurfaceCountOutside > 0) {
-                        OverwriteMessage = TrimSigDigits(SurfaceCountOutside) + " Outside";
+                        OverwriteMessage = fmt::to_string(SurfaceCountOutside) + " Outside";
                     }
                     if (SurfaceCountInside > 0) {
-                        OverwriteMessage = TrimSigDigits(SurfaceCountInside) + " Inside";
+                        OverwriteMessage = fmt::to_string(SurfaceCountInside) + " Inside";
                     }
                     ShowWarningError("User Supplied Convection Coefficients, Multiple Surface Assignments=\"" + SurfaceTypes +
                                      "\", not overwriting already assigned values for " + OverwriteMessage + " assignments.");
@@ -2041,10 +2041,10 @@ namespace ConvectionCoefficients {
                 }
                 if (!DisplayExtraWarnings && (SurfaceCountOutside > 0 || SurfaceCountInside > 0)) {
                     if (SurfaceCountOutside > 0) {
-                        OverwriteMessage = TrimSigDigits(SurfaceCountOutside) + " Outside";
+                        OverwriteMessage = fmt::to_string(SurfaceCountOutside) + " Outside";
                     }
                     if (SurfaceCountInside > 0) {
-                        OverwriteMessage = TrimSigDigits(SurfaceCountInside) + " Inside";
+                        OverwriteMessage = fmt::to_string(SurfaceCountInside) + " Inside";
                     }
                     ShowWarningError("User Supplied Convection Coefficients, Multiple Surface Assignments=\"" + SurfaceTypes +
                                      "\", not overwriting already assigned values for " + OverwriteMessage + " assignments.");
@@ -2086,10 +2086,10 @@ namespace ConvectionCoefficients {
                 }
                 if (!DisplayExtraWarnings && (SurfaceCountOutside > 0 || SurfaceCountInside > 0)) {
                     if (SurfaceCountOutside > 0) {
-                        OverwriteMessage = TrimSigDigits(SurfaceCountOutside) + " Outside";
+                        OverwriteMessage = fmt::to_string(SurfaceCountOutside) + " Outside";
                     }
                     if (SurfaceCountInside > 0) {
-                        OverwriteMessage = TrimSigDigits(SurfaceCountInside) + " Inside";
+                        OverwriteMessage = fmt::to_string(SurfaceCountInside) + " Inside";
                     }
                     ShowWarningError("User Supplied Convection Coefficients, Multiple Surface Assignments=\"" + SurfaceTypes +
                                      "\", not overwriting already assigned values for " + OverwriteMessage + " assignments.");
@@ -2130,10 +2130,10 @@ namespace ConvectionCoefficients {
                 }
                 if (!DisplayExtraWarnings && (SurfaceCountOutside > 0 || SurfaceCountInside > 0)) {
                     if (SurfaceCountOutside > 0) {
-                        OverwriteMessage = TrimSigDigits(SurfaceCountOutside) + " Outside";
+                        OverwriteMessage = fmt::to_string(SurfaceCountOutside) + " Outside";
                     }
                     if (SurfaceCountInside > 0) {
-                        OverwriteMessage = TrimSigDigits(SurfaceCountInside) + " Inside";
+                        OverwriteMessage = fmt::to_string(SurfaceCountInside) + " Inside";
                     }
                     ShowWarningError("User Supplied Convection Coefficients, Multiple Surface Assignments=\"" + SurfaceTypes +
                                      "\", not overwriting already assigned values for " + OverwriteMessage + " assignments.");
@@ -2175,10 +2175,10 @@ namespace ConvectionCoefficients {
                 }
                 if (!DisplayExtraWarnings && (SurfaceCountOutside > 0 || SurfaceCountInside > 0)) {
                     if (SurfaceCountOutside > 0) {
-                        OverwriteMessage = TrimSigDigits(SurfaceCountOutside) + " Outside";
+                        OverwriteMessage = fmt::to_string(SurfaceCountOutside) + " Outside";
                     }
                     if (SurfaceCountInside > 0) {
-                        OverwriteMessage = TrimSigDigits(SurfaceCountInside) + " Inside";
+                        OverwriteMessage = fmt::to_string(SurfaceCountInside) + " Inside";
                     }
                     ShowWarningError("User Supplied Convection Coefficients, Multiple Surface Assignments=\"" + SurfaceTypes +
                                      "\", not overwriting already assigned values for " + OverwriteMessage + " assignments.");
@@ -2220,10 +2220,10 @@ namespace ConvectionCoefficients {
                 }
                 if (!DisplayExtraWarnings && (SurfaceCountOutside > 0 || SurfaceCountInside > 0)) {
                     if (SurfaceCountOutside > 0) {
-                        OverwriteMessage = TrimSigDigits(SurfaceCountOutside) + " Outside";
+                        OverwriteMessage = fmt::to_string(SurfaceCountOutside) + " Outside";
                     }
                     if (SurfaceCountInside > 0) {
-                        OverwriteMessage = TrimSigDigits(SurfaceCountInside) + " Inside";
+                        OverwriteMessage = fmt::to_string(SurfaceCountInside) + " Inside";
                     }
                     ShowWarningError("User Supplied Convection Coefficients, Multiple Surface Assignments=\"" + SurfaceTypes +
                                      "\", not overwriting already assigned values for " + OverwriteMessage + " assignments.");
@@ -2265,10 +2265,10 @@ namespace ConvectionCoefficients {
                 }
                 if (!DisplayExtraWarnings && (SurfaceCountOutside > 0 || SurfaceCountInside > 0)) {
                     if (SurfaceCountOutside > 0) {
-                        OverwriteMessage = TrimSigDigits(SurfaceCountOutside) + " Outside";
+                        OverwriteMessage = fmt::to_string(SurfaceCountOutside) + " Outside";
                     }
                     if (SurfaceCountInside > 0) {
-                        OverwriteMessage = TrimSigDigits(SurfaceCountInside) + " Inside";
+                        OverwriteMessage = fmt::to_string(SurfaceCountInside) + " Inside";
                     }
                     ShowWarningError("User Supplied Convection Coefficients, Multiple Surface Assignments=\"" + SurfaceTypes +
                                      "\", not overwriting already assigned values for " + OverwriteMessage + " assignments.");
@@ -2310,10 +2310,10 @@ namespace ConvectionCoefficients {
                 }
                 if (!DisplayExtraWarnings && (SurfaceCountOutside > 0 || SurfaceCountInside > 0)) {
                     if (SurfaceCountOutside > 0) {
-                        OverwriteMessage = TrimSigDigits(SurfaceCountOutside) + " Outside";
+                        OverwriteMessage = fmt::to_string(SurfaceCountOutside) + " Outside";
                     }
                     if (SurfaceCountInside > 0) {
-                        OverwriteMessage = TrimSigDigits(SurfaceCountInside) + " Inside";
+                        OverwriteMessage = fmt::to_string(SurfaceCountInside) + " Inside";
                     }
                     ShowWarningError("User Supplied Convection Coefficients, Multiple Surface Assignments=\"" + SurfaceTypes +
                                      "\", not overwriting already assigned values for " + OverwriteMessage + " assignments.");
@@ -3256,7 +3256,7 @@ namespace ConvectionCoefficients {
         using Psychrometrics::PsyRhoAirFnPbTdbW;
 
         // Locals
-        Real64 const OneThird((1.0 / 3.0)); // 1/3 in highest precision
+        static constexpr Real64 OneThird((1.0 / 3.0)); // 1/3 in highest precision
         static Real64 const pow_5_25(0.56 * root_4(1.0E+5));
         static Real64 const pow_11_25(0.56 * root_4(1.0E+11));
         static Real64 const pow_11_2(0.58 * std::pow(1.0E+11, 0.2));
@@ -5035,7 +5035,7 @@ namespace ConvectionCoefficients {
                 }
             } else {
                 ShowSevereError("MapExtConvClassificationToHcModels: caught unknown outdoor surfce classification:" +
-                                RoundSigDigits(Surface(SurfNum).OutConvClassification));
+                                fmt::to_string(Surface(SurfNum).OutConvClassification));
             }
         }
     }
@@ -7436,7 +7436,7 @@ namespace ConvectionCoefficients {
                     if (state.dataConvectionCoefficient->CalcGoldsteinNovoselacCeilingDiffuserWindowErrorIDX1 == 0) {
                         ShowSevereMessage(
                             "CalcGoldsteinNovoselacCeilingDiffuserWindow: Convection model not evaluated (bad relative window location)");
-                        ShowContinueError("Value for window location = " + RoundSigDigits(WindowLocationType));
+                        ShowContinueError("Value for window location = " + fmt::to_string(WindowLocationType));
                         ShowContinueError("Occurs for zone named = " + Zone(ZoneNum).Name);
                         ShowContinueError("Convection surface heat transfer coefficient set to 9.999 [W/m2-K] and the simulation continues");
                     }
@@ -7511,7 +7511,7 @@ namespace ConvectionCoefficients {
                 WindowLocationType != InConvWinLoc_NotSet) {
                 if (state.dataConvectionCoefficient->CalcGoldsteinNovoselacCeilingDiffuserWallErrorIDX1 == 0) {
                     ShowSevereMessage("CalcGoldsteinNovoselacCeilingDiffuserWall: Convection model not evaluated (bad relative window location)");
-                    ShowContinueError("Value for window location = " + RoundSigDigits(WindowLocationType));
+                    ShowContinueError("Value for window location = " + fmt::to_string(WindowLocationType));
                     ShowContinueError("Occurs for zone named = " + Zone(ZoneNum).Name);
                     ShowContinueError("Convection surface heat transfer coefficient set to 9.999 [W/m2-K] and the simulation continues");
                 }

@@ -874,17 +874,17 @@ namespace UtilityRoutines {
         ShowRecurringErrors();
         SummarizeErrors();
         CloseMiscOpenFiles(state);
-        NumWarnings = RoundSigDigits(TotalWarningErrors);
+        NumWarnings = fmt::to_string(TotalWarningErrors);
         strip(NumWarnings);
-        NumSevere = RoundSigDigits(TotalSevereErrors);
+        NumSevere = fmt::to_string(TotalSevereErrors);
         strip(NumSevere);
-        NumWarningsDuringWarmup = RoundSigDigits(TotalWarningErrorsDuringWarmup);
+        NumWarningsDuringWarmup = fmt::to_string(TotalWarningErrorsDuringWarmup);
         strip(NumWarningsDuringWarmup);
-        NumSevereDuringWarmup = RoundSigDigits(TotalSevereErrorsDuringWarmup);
+        NumSevereDuringWarmup = fmt::to_string(TotalSevereErrorsDuringWarmup);
         strip(NumSevereDuringWarmup);
-        NumWarningsDuringSizing = RoundSigDigits(TotalWarningErrorsDuringSizing);
+        NumWarningsDuringSizing = fmt::to_string(TotalWarningErrorsDuringSizing);
         strip(NumWarningsDuringSizing);
-        NumSevereDuringSizing = RoundSigDigits(TotalSevereErrorsDuringSizing);
+        NumSevereDuringSizing = fmt::to_string(TotalSevereErrorsDuringSizing);
         strip(NumSevereDuringSizing);
 
         Time_Finish = epElapsedTime();
@@ -1142,7 +1142,7 @@ namespace UtilityRoutines {
         DisplayString("**FATAL:" + ErrorMessage);
 
         ShowErrorMessage(" ...Summary of Errors that led to program termination:", OutUnit1, OutUnit2);
-        ShowErrorMessage(" ..... Reference severe error count=" + RoundSigDigits(TotalSevereErrors), OutUnit1, OutUnit2);
+        ShowErrorMessage(" ..... Reference severe error count=" + fmt::to_string(TotalSevereErrors), OutUnit1, OutUnit2);
         ShowErrorMessage(" ..... Last severe error=" + LastSevereError, OutUnit1, OutUnit2);
         if (sqlite) {
             sqlite->createSQLiteErrorRecord(1, 2, ErrorMessage, 1);
@@ -1979,9 +1979,9 @@ namespace UtilityRoutines {
 
                     ShowMessage("");
                     ShowMessage(error.Message);
-                    ShowMessage(StatMessageStart + "  This error occurred " + RoundSigDigits(error.Count) + " total times;");
-                    ShowMessage(StatMessageStart + "  during Warmup " + RoundSigDigits(error.WarmupCount) + " times;");
-                    ShowMessage(StatMessageStart + "  during Sizing " + RoundSigDigits(error.SizingCount) + " times.");
+                    ShowMessage(StatMessageStart + "  This error occurred " + fmt::to_string(error.Count) + " total times;");
+                    ShowMessage(StatMessageStart + "  during Warmup " + fmt::to_string(error.WarmupCount) + " times;");
+                    ShowMessage(StatMessageStart + "  during Sizing " + fmt::to_string(error.SizingCount) + " times.");
                     if (sqlite) {
                         if (warning) {
                             sqlite->createSQLiteErrorRecord(1, 0, error.Message.substr(15), error.Count);

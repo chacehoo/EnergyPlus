@@ -221,12 +221,12 @@ namespace PoweredInductionUnits {
         } else {
             PIUNum = CompIndex;
             if (PIUNum > NumPIUs || PIUNum < 1) {
-                ShowFatalError("SimPIU: Invalid CompIndex passed=" + TrimSigDigits(CompIndex) + ", Number of PIU Units=" + TrimSigDigits(NumPIUs) +
+                ShowFatalError("SimPIU: Invalid CompIndex passed=" + fmt::to_string(CompIndex) + ", Number of PIU Units=" + fmt::to_string(NumPIUs) +
                                ", PIU Unit name=" + CompName);
             }
             if (CheckEquipName(PIUNum)) {
                 if (CompName != PIU(PIUNum).Name) {
-                    ShowFatalError("SimPIU: Invalid CompIndex passed=" + TrimSigDigits(CompIndex) + ", PIU Unit name=" + CompName +
+                    ShowFatalError("SimPIU: Invalid CompIndex passed=" + fmt::to_string(CompIndex) + ", PIU Unit name=" + CompName +
                                    ", stored PIU Unit Name for that index=" + PIU(PIUNum).Name);
                 }
                 CheckEquipName(PIUNum) = false;

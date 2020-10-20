@@ -59,7 +59,6 @@
 #include <EnergyPlus/Coils/CoilCoolingDX.hh>
 #include <EnergyPlus/DXCoils.hh>
 #include <EnergyPlus/Data/EnergyPlusData.hh>
-#include <EnergyPlus/DataAirLoop.hh>
 #include <EnergyPlus/DataGlobals.hh>
 #include <EnergyPlus/DataHVACControllers.hh>
 #include <EnergyPlus/DataHVACSystems.hh>
@@ -2239,7 +2238,7 @@ namespace UnitarySystems {
                                 ShowContinueError("Design specification object = " + state.dataUnitarySystems->designSpecMSHP[MSHPIndex].name);
                                 ShowContinueError("When control type = SetPointBased the outlet air temperature must change with coil capacity, if "
                                                   "air flow also changes outlet air temperature will be relatively constant.");
-                                ShowContinueError("Speed " + General::TrimSigDigits(Iter) +
+                                ShowContinueError("Speed " + fmt::to_string(Iter) +
                                                   " Supply Air Flow Ratio During Heating Operation will be set = 1.0 and the simulation continues");
                                 state.dataUnitarySystems->designSpecMSHP[MSHPIndex].heatingVolFlowRatio[Iter - 1] = 1.0;
                             }

@@ -562,7 +562,7 @@ namespace SimulationManager {
 
                 if (WarmupFlag) {
                     ++NumOfWarmupDays;
-                    cWarmupDay = TrimSigDigits(NumOfWarmupDays);
+                    cWarmupDay = fmt::to_string(NumOfWarmupDays);
                     DisplayString("Warming up {" + cWarmupDay + '}');
                 } else if (DayOfSim == 1) {
                     if (state.dataGlobal->KindOfSim == DataGlobalConstants::KindOfSim::RunPeriodWeather) {
@@ -948,7 +948,7 @@ namespace SimulationManager {
                                           cNumericFieldNames);
             NumOfTimeStepInHour = Number(1);
             if (NumOfTimeStepInHour <= 0 || NumOfTimeStepInHour > 60) {
-                Alphas(1) = RoundSigDigits(NumOfTimeStepInHour);
+                Alphas(1) = fmt::to_string(NumOfTimeStepInHour);
                 ShowWarningError(CurrentModuleObject + ": Requested number (" + Alphas(1) + ") invalid, Defaulted to 4");
                 NumOfTimeStepInHour = 4;
             } else if (mod(60, NumOfTimeStepInHour) != 0) {
@@ -958,18 +958,18 @@ namespace SimulationManager {
                     MinInt = NumOfTimeStepInHour - Div60(Num);
                     Which = Num;
                 }
-                ShowWarningError(CurrentModuleObject + ": Requested number (" + RoundSigDigits(NumOfTimeStepInHour) +
-                                 ") not evenly divisible into 60, defaulted to nearest (" + RoundSigDigits(Div60(Which)) + ").");
+                ShowWarningError(CurrentModuleObject + ": Requested number (" + fmt::to_string(NumOfTimeStepInHour) +
+                                 ") not evenly divisible into 60, defaulted to nearest (" + fmt::to_string(Div60(Which)) + ").");
                 NumOfTimeStepInHour = Div60(Which);
             }
             if (CondFDAlgo && NumOfTimeStepInHour < 20) {
-                ShowWarningError(CurrentModuleObject + ": Requested number (" + RoundSigDigits(NumOfTimeStepInHour) +
+                ShowWarningError(CurrentModuleObject + ": Requested number (" + fmt::to_string(NumOfTimeStepInHour) +
                                  ") cannot be used when Conduction Finite Difference algorithm is selected.");
                 ShowContinueError("..." + CurrentModuleObject + " is set to 20.");
                 NumOfTimeStepInHour = 20;
             }
             if (NumOfTimeStepInHour < 4 && inputProcessor->getNumObjectsFound("Zone") > 0) {
-                ShowWarningError(CurrentModuleObject + ": Requested number (" + RoundSigDigits(NumOfTimeStepInHour) +
+                ShowWarningError(CurrentModuleObject + ": Requested number (" + fmt::to_string(NumOfTimeStepInHour) +
                                  ") is less than the suggested minimum of 4.");
                 ShowContinueError("Please see entry for " + CurrentModuleObject + " in Input/Output Reference for discussion of considerations.");
             }
@@ -1013,7 +1013,7 @@ namespace SimulationManager {
                 MinInt = MinutesPerTimeStep;
             }
             if (MinInt < 0 || MinInt > 60) {
-                ShowWarningError(CurrentModuleObject + ": Requested " + cNumericFieldNames(1) + " (" + RoundSigDigits(MinInt) +
+                ShowWarningError(CurrentModuleObject + ": Requested " + cNumericFieldNames(1) + " (" + fmt::to_string(MinInt) +
                                  ") invalid. Set to 1 minute.");
                 MinTimeStepSys = 1.0 / 60.0;
             } else if (MinInt == 0) { // Set to TimeStepZone
@@ -1386,10 +1386,10 @@ namespace SimulationManager {
         static constexpr auto Format_733(" System Convergence Limits, {}, {}, {}, {}\n");
         print(state.files.eio,
               Format_733,
-              RoundSigDigits(MinInt),
-              RoundSigDigits(MaxIter),
-              RoundSigDigits(MinPlantSubIterations),
-              RoundSigDigits(MaxPlantSubIterations));
+              MinInt,
+              MaxIter,
+              MinPlantSubIterations,
+              MaxPlantSubIterations);
 
         if (DoZoneSizing) {
             Alphas(1) = "Yes";
@@ -1449,13 +1449,13 @@ namespace SimulationManager {
             Alphas(2) = "ScriptF";
         }
         Alphas(3) = overrideModeValue;
-        Alphas(4) = General::RoundSigDigits(DataGlobals::NumOfTimeStepInHour);
+        Alphas(4) = fmt::to_string(DataGlobals::NumOfTimeStepInHour);
         if (DataHeatBalance::OverrideZoneAirSolutionAlgo) {
             Alphas(5) = "Yes";
         } else {
             Alphas(5) = "No";
         }
-        Alphas(6) = General::RoundSigDigits(DataHeatBalance::MinNumberOfWarmupDays);
+        Alphas(6) = fmt::to_string(DataHeatBalance::MinNumberOfWarmupDays);
         if (DataEnvironment::forceBeginEnvResetSuppress) {
             Alphas(7) = "Yes";
         } else {
@@ -1517,8 +1517,8 @@ namespace SimulationManager {
             UtilityRoutines::appendPerfLog(state, "Zone Radiant Exchange Algorithm", "ScriptF");
         }
         UtilityRoutines::appendPerfLog(state, "Override Mode", currentOverrideModeValue);
-        UtilityRoutines::appendPerfLog(state, "Number of Timesteps per Hour", General::RoundSigDigits(DataGlobals::NumOfTimeStepInHour));
-        UtilityRoutines::appendPerfLog(state, "Minimum Number of Warmup Days", General::RoundSigDigits(DataHeatBalance::MinNumberOfWarmupDays));
+        UtilityRoutines::appendPerfLog(state, "Number of Timesteps per Hour", fmt::to_string(DataGlobals::NumOfTimeStepInHour));
+        UtilityRoutines::appendPerfLog(state, "Minimum Number of Warmup Days", fmt::to_string(DataHeatBalance::MinNumberOfWarmupDays));
         UtilityRoutines::appendPerfLog(state, "SuppressAllBeginEnvironmentResets", bool_to_string(DataEnvironment::forceBeginEnvResetSuppress));
         UtilityRoutines::appendPerfLog(state, "Minimum System Timestep", General::RoundSigDigits(DataConvergParams::MinTimeStepSys * 60.0, 1));
         UtilityRoutines::appendPerfLog(state, "MaxZoneTempDiff", General::RoundSigDigits(DataConvergParams::MaxZoneTempDiff, 2));
@@ -2023,17 +2023,17 @@ namespace SimulationManager {
             if (iEnvSetThreads == 0) {
                 cEnvSetThreads = "Not Set";
             } else {
-                cEnvSetThreads = RoundSigDigits(iEnvSetThreads);
+                cEnvSetThreads = fmt::to_string(iEnvSetThreads);
             }
             if (iepEnvSetThreads == 0) {
                 cepEnvSetThreads = "Not Set";
             } else {
-                cepEnvSetThreads = RoundSigDigits(iepEnvSetThreads);
+                cepEnvSetThreads = fmt::to_string(iepEnvSetThreads);
             }
             if (iIDFSetThreads == 0) {
                 cIDFSetThreads = "Not Set";
             } else {
-                cIDFSetThreads = RoundSigDigits(iIDFSetThreads);
+                cIDFSetThreads = fmt::to_string(iIDFSetThreads);
             }
             if (lnumActiveSims) {
                 print(state.files.eio,
@@ -2822,9 +2822,9 @@ namespace SimulationManager {
             ShowMessage("No node connection errors were found.");
         } else {
             if (NumNodeConnectionErrors > 1) {
-                ShowMessage("There were " + std::to_string(NumNodeConnectionErrors) + " node connection errors noted.");
+                ShowMessage("There were " + fmt::to_string(NumNodeConnectionErrors) + " node connection errors noted.");
             } else {
-                ShowMessage("There was " + std::to_string(NumNodeConnectionErrors) + " node connection error noted.");
+                ShowMessage("There was " + fmt::to_string(NumNodeConnectionErrors) + " node connection error noted.");
             }
         }
 

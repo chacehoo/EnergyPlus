@@ -180,12 +180,12 @@ namespace UnitHeater {
         } else {
             UnitHeatNum = CompIndex;
             if (UnitHeatNum > state.dataUnitHeaters->NumOfUnitHeats || UnitHeatNum < 1) {
-                ShowFatalError("SimUnitHeater:  Invalid CompIndex passed=" + TrimSigDigits(UnitHeatNum) +
-                               ", Number of Units=" + TrimSigDigits(state.dataUnitHeaters->NumOfUnitHeats) + ", Entered Unit name=" + CompName);
+                ShowFatalError("SimUnitHeater:  Invalid CompIndex passed=" + fmt::to_string(UnitHeatNum) +
+                               ", Number of Units=" + fmt::to_string(state.dataUnitHeaters->NumOfUnitHeats) + ", Entered Unit name=" + CompName);
             }
             if (state.dataUnitHeaters->CheckEquipName(UnitHeatNum)) {
                 if (CompName != state.dataUnitHeaters->UnitHeat(UnitHeatNum).Name) {
-                    ShowFatalError("SimUnitHeater: Invalid CompIndex passed=" + TrimSigDigits(UnitHeatNum) + ", Unit name=" + CompName +
+                    ShowFatalError("SimUnitHeater: Invalid CompIndex passed=" + fmt::to_string(UnitHeatNum) + ", Unit name=" + CompName +
                                    ", stored Unit Name for that index=" + state.dataUnitHeaters->UnitHeat(UnitHeatNum).Name);
                 }
                 state.dataUnitHeaters->CheckEquipName(UnitHeatNum) = false;

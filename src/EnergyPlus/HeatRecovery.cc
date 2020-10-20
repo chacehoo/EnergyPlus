@@ -57,7 +57,6 @@
 #include <EnergyPlus/BranchNodeConnections.hh>
 #include <EnergyPlus/DXCoils.hh>
 #include <EnergyPlus/Data/EnergyPlusData.hh>
-#include <EnergyPlus/DataAirLoop.hh>
 #include <EnergyPlus/DataContaminantBalance.hh>
 #include <EnergyPlus/DataEnvironment.hh>
 #include <EnergyPlus/DataHVACGlobals.hh>
@@ -68,10 +67,8 @@
 #include <EnergyPlus/General.hh>
 #include <EnergyPlus/GeneralRoutines.hh>
 #include <EnergyPlus/GlobalNames.hh>
-#include <EnergyPlus/HVACControllers.hh>
 #include <EnergyPlus/HeatRecovery.hh>
 #include <EnergyPlus/InputProcessing/InputProcessor.hh>
-#include <EnergyPlus/MixedAir.hh>
 #include <EnergyPlus/NodeInputManager.hh>
 #include <EnergyPlus/OutputProcessor.hh>
 #include <EnergyPlus/Psychrometrics.hh>
@@ -268,12 +265,12 @@ namespace HeatRecovery {
         } else {
             HeatExchNum = CompIndex;
             if (HeatExchNum > NumHeatExchangers || HeatExchNum < 1) {
-                ShowFatalError("SimHeatRecovery:  Invalid CompIndex passed=" + TrimSigDigits(HeatExchNum) +
-                               ", Number of Units=" + TrimSigDigits(NumHeatExchangers) + ", Entered Unit name=" + CompName);
+                ShowFatalError("SimHeatRecovery:  Invalid CompIndex passed=" + fmt::to_string(HeatExchNum) +
+                               ", Number of Units=" + fmt::to_string(NumHeatExchangers) + ", Entered Unit name=" + CompName);
             }
             if (CheckEquipName(HeatExchNum)) {
                 if (CompName != ExchCond(HeatExchNum).Name) {
-                    ShowFatalError("SimHeatRecovery: Invalid CompIndex passed=" + TrimSigDigits(HeatExchNum) + ", Unit name=" + CompName +
+                    ShowFatalError("SimHeatRecovery: Invalid CompIndex passed=" + fmt::to_string(HeatExchNum) + ", Unit name=" + CompName +
                                    ", stored Unit Name for that index=" + ExchCond(HeatExchNum).Name);
                 }
                 CheckEquipName(HeatExchNum) = false;
@@ -3432,7 +3429,7 @@ namespace HeatRecovery {
                 } else if (SELECT_CASE_var == Cross_Flow_Other) { // CROSS FLOW, Cmax MIXED, Cmin UNMIXED
                     Eps = (1.0 - std::exp(-Z * (1.0 - std::exp(-NTU)))) / Z;
                 } else {
-                    ShowFatalError("HeatRecovery: Illegal flow arrangement in CalculateEpsFromNTUandZ, Value=" + RoundSigDigits(FlowArr));
+                    ShowFatalError("HeatRecovery: Illegal flow arrangement in CalculateEpsFromNTUandZ, Value=" + fmt::to_string(FlowArr));
                 }
             }
         }
@@ -3540,7 +3537,7 @@ namespace HeatRecovery {
                 } else if (SELECT_CASE_var == Cross_Flow_Other) { // CROSS FLOW, Cmax MIXED, Cmin UNMIXED
                     NTU = -std::log(1.0 + std::log(1.0 - Eps * Z) / Z);
                 } else {
-                    ShowFatalError("HeatRecovery: Illegal flow arrangement in CalculateNTUfromEpsAndZ, Value=" + RoundSigDigits(FlowArr));
+                    ShowFatalError("HeatRecovery: Illegal flow arrangement in CalculateNTUfromEpsAndZ, Value=" + fmt::to_string(FlowArr));
                 }
             }
         }

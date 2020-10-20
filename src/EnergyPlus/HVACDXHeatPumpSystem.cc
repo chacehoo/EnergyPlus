@@ -198,12 +198,12 @@ namespace HVACDXHeatPumpSystem {
         } else {
             DXSystemNum = CompIndex;
             if (DXSystemNum > NumDXHeatPumpSystems || DXSystemNum < 1) {
-                ShowFatalError("SimDXHeatPumpSystem:  Invalid CompIndex passed=" + TrimSigDigits(DXSystemNum) +
-                               ", Number of DX Units=" + TrimSigDigits(NumDXHeatPumpSystems) + ", DX Unit name=" + DXHeatPumpSystemName);
+                ShowFatalError("SimDXHeatPumpSystem:  Invalid CompIndex passed=" + fmt::to_string(DXSystemNum) +
+                               ", Number of DX Units=" + fmt::to_string(NumDXHeatPumpSystems) + ", DX Unit name=" + DXHeatPumpSystemName);
             }
             if (CheckEquipName(DXSystemNum)) {
                 if (DXHeatPumpSystemName != DXHeatPumpSystem(DXSystemNum).Name) {
-                    ShowFatalError("SimDXHeatPumpSystem: Invalid CompIndex passed=" + TrimSigDigits(DXSystemNum) + ", DX Unit name=" +
+                    ShowFatalError("SimDXHeatPumpSystem: Invalid CompIndex passed=" + fmt::to_string(DXSystemNum) + ", DX Unit name=" +
                                    DXHeatPumpSystemName + ", stored DX Unit Name for that index=" + DXHeatPumpSystem(DXSystemNum).Name);
                 }
                 CheckEquipName(DXSystemNum) = false;

@@ -60,7 +60,6 @@
 #include <EnergyPlus/DataGlobals.hh>
 #include <EnergyPlus/DataHVACGlobals.hh>
 #include <EnergyPlus/DataHeatBalance.hh>
-#include <EnergyPlus/DataIPShortCuts.hh>
 #include <EnergyPlus/DataLoopNode.hh>
 #include <EnergyPlus/EMSManager.hh>
 #include <EnergyPlus/Fans.hh> //coil report
@@ -242,12 +241,12 @@ namespace HVACDXSystem {
         } else {
             DXSystemNum = CompIndex;
             if (DXSystemNum > NumDXSystem || DXSystemNum < 1) {
-                ShowFatalError("SimulateDXCoolingSystem:  Invalid CompIndex passed=" + TrimSigDigits(DXSystemNum) +
-                               ", Number of DX Units=" + TrimSigDigits(NumDXSystem) + ", DX Unit name=" + DXCoolingSystemName);
+                ShowFatalError("SimulateDXCoolingSystem:  Invalid CompIndex passed=" + fmt::to_string(DXSystemNum) +
+                               ", Number of DX Units=" + fmt::to_string(NumDXSystem) + ", DX Unit name=" + DXCoolingSystemName);
             }
             if (CheckEquipName(DXSystemNum)) {
                 if (DXCoolingSystemName != DXCoolingSystem(DXSystemNum).Name) {
-                    ShowFatalError("SimulateDXCoolingSystem: Invalid CompIndex passed=" + TrimSigDigits(DXSystemNum) + ", DX Unit name=" +
+                    ShowFatalError("SimulateDXCoolingSystem: Invalid CompIndex passed=" + fmt::to_string(DXSystemNum) + ", DX Unit name=" +
                                    DXCoolingSystemName + ", stored DX Unit Name for that index=" + DXCoolingSystem(DXSystemNum).Name);
                 }
                 CheckEquipName(DXSystemNum) = false;
@@ -385,7 +384,6 @@ namespace HVACDXSystem {
         using NodeInputManager::GetOnlySingleNode;
         using PackagedThermalStorageCoil::GetTESCoilIndex;
         using VariableSpeedCoils::GetCoilIndexVariableSpeed;
-        using namespace DataIPShortCuts;
         using DXCoils::GetDXCoilIndex;
         using DXCoils::SetCoilSystemCoolingData;
         using DXCoils::SetDXCoilTypeData;

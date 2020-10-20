@@ -2751,7 +2751,7 @@ namespace HeatBalanceAirManager {
                 int airBoundaryIndex = Loop - inputCrossMixing - 1; //zero-based
                 int zone1 = DataHeatBalance::AirBoundaryMixingZone1[airBoundaryIndex];
                 int zone2 = DataHeatBalance::AirBoundaryMixingZone2[airBoundaryIndex];
-                CrossMixing(Loop).Name = "Air Boundary Mixing Zones " + General::RoundSigDigits(zone1) + " and " + General::RoundSigDigits(zone2);
+                CrossMixing(Loop).Name = fmt::format("Air Boundary Mixing Zones {} and {}", zone1, zone2);
                 CrossMixing(Loop).ZonePtr = zone1;
                 CrossMixing(Loop).SchedPtr = DataHeatBalance::AirBoundaryMixingSched[airBoundaryIndex];
                 CrossMixing(Loop).DesignLevel = DataHeatBalance::AirBoundaryMixingVol[airBoundaryIndex];

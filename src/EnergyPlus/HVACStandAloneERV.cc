@@ -221,12 +221,12 @@ namespace HVACStandAloneERV {
         } else {
             StandAloneERVNum = CompIndex;
             if (StandAloneERVNum > NumStandAloneERVs || StandAloneERVNum < 1) {
-                ShowFatalError("SimStandAloneERV:  Invalid CompIndex passed=" + TrimSigDigits(StandAloneERVNum) +
-                               ", Number of Units=" + TrimSigDigits(NumStandAloneERVs) + ", Entered Unit name=" + CompName);
+                ShowFatalError("SimStandAloneERV:  Invalid CompIndex passed=" + fmt::to_string(StandAloneERVNum) +
+                               ", Number of Units=" + fmt::to_string(NumStandAloneERVs) + ", Entered Unit name=" + CompName);
             }
             if (CheckEquipName(StandAloneERVNum)) {
                 if (CompName != StandAloneERV(StandAloneERVNum).Name) {
-                    ShowFatalError("SimStandAloneERV: Invalid CompIndex passed=" + TrimSigDigits(StandAloneERVNum) + ", Unit name=" + CompName +
+                    ShowFatalError("SimStandAloneERV: Invalid CompIndex passed=" + fmt::to_string(StandAloneERVNum) + ", Unit name=" + CompName +
                                    ", stored Unit Name for that index=" + StandAloneERV(StandAloneERVNum).Name);
                 }
                 CheckEquipName(StandAloneERVNum) = false;

@@ -899,7 +899,7 @@ namespace EIRPlantLoopHeatPumps {
             // fatal out just in case
             errorsFound = true;                                                                                      // LCOV_EXCL_LINE
             ShowSevereError("Invalid condenser flow rate for EIR PLHP (name="                                        // LCOV_EXCL_LINE
-                            + this->name + "; entered value: " + std::to_string(this->sourceSideDesignVolFlowRate)); // LCOV_EXCL_LINE
+                            + this->name + "; entered value: " + fmt::to_string(this->sourceSideDesignVolFlowRate)); // LCOV_EXCL_LINE
         } else {
             // can't imagine how it would ever get to this point
             // just assume it's the same as the load side if we don't have any sizing information

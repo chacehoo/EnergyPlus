@@ -311,12 +311,12 @@ namespace LowTempRadiantSystem {
             RadSysNum = CompIndex;
             SystemType = RadSysTypes(RadSysNum).SystemType;
             if (RadSysNum > TotalNumOfRadSystems || RadSysNum < 1) {
-                ShowFatalError("SimLowTempRadiantSystem:  Invalid CompIndex passed=" + TrimSigDigits(RadSysNum) +
-                               ", Number of Units=" + TrimSigDigits(TotalNumOfRadSystems) + ", Entered Unit name=" + CompName);
+                ShowFatalError("SimLowTempRadiantSystem:  Invalid CompIndex passed=" + fmt::to_string(RadSysNum) +
+                               ", Number of Units=" + fmt::to_string(TotalNumOfRadSystems) + ", Entered Unit name=" + CompName);
             }
             if (CheckEquipName(RadSysNum)) {
                 if (CompName != RadSysTypes(RadSysNum).Name) {
-                    ShowFatalError("SimLowTempRadiantSystem: Invalid CompIndex passed=" + TrimSigDigits(RadSysNum) + ", Unit name=" + CompName +
+                    ShowFatalError("SimLowTempRadiantSystem: Invalid CompIndex passed=" + fmt::to_string(RadSysNum) + ", Unit name=" + CompName +
                                    ", stored Unit Name for that index=" + RadSysTypes(RadSysNum).Name);
                 }
                 CheckEquipName(RadSysNum) = false;

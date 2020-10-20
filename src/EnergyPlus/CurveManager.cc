@@ -49,7 +49,6 @@
 #include <cmath>
 #include <string>
 #include <algorithm>
-#include <fstream>
 #include <limits>
 
 // ObjexxFCL Headers
@@ -1659,7 +1658,7 @@ namespace CurveManager {
                         ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
                         ShowContinueError("The number of data entries must match the number of wind directions given in the wind pressure "
                                           "coefficient array. Number of data entries = " +
-                                          RoundSigDigits(NumNumbers));
+                                          fmt::to_string(NumNumbers));
                         ErrorsFound = true;
                     } else {
                         std::vector<double> axis;
@@ -2094,10 +2093,10 @@ namespace CurveManager {
             std::size_t row = colAndRow.second;  // 0 indexed
             auto &content = contents[col];
             if (col >= numColumns) {
-                ShowFatalError("File \"" + filePath + "\" : Requested column (" + General::RoundSigDigits(col+1) + ") exceeds the number of columns (" + General::RoundSigDigits(numColumns) + ").");
+                ShowFatalError("File \"" + filePath + "\" : Requested column (" + fmt::to_string(col+1) + ") exceeds the number of columns (" + fmt::to_string(numColumns) + ").");
             }
             if (row >= numRows) {
-                ShowFatalError("File \"" + filePath + "\" : Requested starting row (" + General::RoundSigDigits(row+1) + ") exceeds the number of rows (" + General::RoundSigDigits(numRows) + ").");
+                ShowFatalError("File \"" + filePath + "\" : Requested starting row (" + fmt::to_string(row+1) + ") exceeds the number of rows (" + fmt::to_string(numRows) + ").");
             }
             std::vector<double> array(numRows - row);
             std::transform(content.begin() + row, content.end(), array.begin(), [](const std::string &str) {
@@ -2139,7 +2138,7 @@ namespace CurveManager {
 
         for (CurveIndex = 1; CurveIndex <= state.dataCurveManager->NumCurves; ++CurveIndex) {
             for (int dim = 1; dim <= state.dataCurveManager->PerfCurve(CurveIndex).NumDims; ++dim) {
-                std::string numStr = std::to_string(dim);
+                std::string numStr = fmt::to_string(dim);
 
                 // TODO: Make CurveInput an Array for better looping here...
                 switch (dim) {
@@ -2512,13 +2511,13 @@ namespace CurveManager {
             // Not compatible
             ShowSevereError(routineName + objectType + "=\"" + objectName + "\"");
             ShowContinueError("...Invalid curve for " + curveFieldText + ".");
-            std::string validString = std::to_string(validDims[0]);
+            std::string validString = fmt::to_string(validDims[0]);
             for (std::size_t i = 1; i < validDims.size(); i++) {
-                validString += " or " + std::to_string(validDims[i]);
+                validString += " or " + fmt::to_string(validDims[i]);
             }
             std::string plural1 = curveDim > 1 ? "s" : "";
             std::string plural2 = validDims[validDims.size()-1] > 1 ? "s" : "";
-            ShowContinueError("...Input curve=\"" + state.dataCurveManager->PerfCurve(CurveIndex).Name + "\" has " + std::to_string(curveDim) + " dimension" + plural1 + ".");
+            ShowContinueError("...Input curve=\"" + state.dataCurveManager->PerfCurve(CurveIndex).Name + "\" has " + fmt::to_string(curveDim) + " dimension" + plural1 + ".");
             ShowContinueError("...Curve type must have " + validString + " dimension" + plural2 + ".");
             return true;
         }
@@ -2676,8 +2675,8 @@ namespace CurveManager {
 
         } else {
 
-            ShowSevereError("SetCurveOutputMinMaxValues: CurveIndex=[" + TrimSigDigits(CurveIndex) +
-                            "] not in range of curves=[1:" + TrimSigDigits(state.dataCurveManager->NumCurves) + "].");
+            ShowSevereError("SetCurveOutputMinMaxValues: CurveIndex=[" + fmt::to_string(CurveIndex) +
+                            "] not in range of curves=[1:" + fmt::to_string(state.dataCurveManager->NumCurves) + "].");
             ErrorsFound = true;
         }
     }

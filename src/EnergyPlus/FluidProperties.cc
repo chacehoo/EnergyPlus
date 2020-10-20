@@ -739,8 +739,8 @@ namespace FluidProperties {
                 if (FluidTemps(Loop).Temps(TempLoop) <= FluidTemps(Loop).Temps(TempLoop - 1)) {
                     ShowSevereError(RoutineName + CurrentModuleObject + " name=" + FluidTemps(Loop).Name +
                                     ", lists must have data in ascending order");
-                    ShowContinueError("First out of order occurrence at Temperature #(" + RoundSigDigits(TempLoop - 1) + ") {" +
-                                      RoundSigDigits(FluidTemps(Loop).Temps(TempLoop - 1), 3) + "} >= Temp(" + RoundSigDigits(TempLoop) + ") {" +
+                    ShowContinueError("First out of order occurrence at Temperature #(" + fmt::to_string(TempLoop - 1) + ") {" +
+                                      RoundSigDigits(FluidTemps(Loop).Temps(TempLoop - 1), 3) + "} >= Temp(" + fmt::to_string(TempLoop) + ") {" +
                                       RoundSigDigits(FluidTemps(Loop).Temps(TempLoop), 3) + '}');
                     ErrorsFound = true;
                     break;
@@ -795,8 +795,8 @@ namespace FluidProperties {
                                 ShowSevereError(RoutineName + CurrentModuleObject + " Name=" + RefrigData(Loop).Name);
                                 ShowContinueError("Temperature Name=" + TempsName +
                                                   ", Temperature array and fluid saturation pressure array must have the same number of points");
-                                ShowContinueError("Temperature # points=" + RoundSigDigits(NumNumbers) + " whereas " + RefrigData(Loop).Name +
-                                                  " # pressure points=" + RoundSigDigits(RefrigData(Loop).NumPsPoints));
+                                ShowContinueError("Temperature # points=" + fmt::to_string(NumNumbers) + " whereas " + RefrigData(Loop).Name +
+                                                  " # pressure points=" + fmt::to_string(RefrigData(Loop).NumPsPoints));
                                 ErrorsFound = true;
                                 break; // the TempLoop DO Loop
                             }
@@ -868,8 +868,8 @@ namespace FluidProperties {
                                 ShowSevereError(RoutineName + CurrentModuleObject + " Name=" + RefrigData(Loop).Name);
                                 ShowSevereError("Temperature Name=" + TempsName +
                                                 ", Temperature array and saturated fluid enthalpy array must have the same number of points");
-                                ShowContinueError("Temperature # points=" + RoundSigDigits(NumNumbers) + " whereas " + RefrigData(Loop).Name +
-                                                  " # points=" + RoundSigDigits(RefrigData(Loop).NumHPoints));
+                                ShowContinueError("Temperature # points=" + fmt::to_string(NumNumbers) + " whereas " + RefrigData(Loop).Name +
+                                                  " # points=" + fmt::to_string(RefrigData(Loop).NumHPoints));
                                 ErrorsFound = true;
                                 break; // the TempLoop DO Loop
                             }
@@ -943,8 +943,8 @@ namespace FluidProperties {
                                 ShowSevereError(RoutineName + CurrentModuleObject + " Name=" + RefrigData(Loop).Name);
                                 ShowContinueError("Temperature Name=" + TempsName +
                                                   ", Temperature array and saturated gas/fluid enthalpy array must have the same number of points");
-                                ShowContinueError("Temperature # points=" + RoundSigDigits(NumNumbers) + " whereas " + RefrigData(Loop).Name +
-                                                  " # points=" + RoundSigDigits(RefrigData(Loop).NumHPoints));
+                                ShowContinueError("Temperature # points=" + fmt::to_string(NumNumbers) + " whereas " + RefrigData(Loop).Name +
+                                                  " # points=" + fmt::to_string(RefrigData(Loop).NumHPoints));
                                 ErrorsFound = true;
                                 break; // the TempLoop DO Loop
                             }
@@ -1014,8 +1014,8 @@ namespace FluidProperties {
                                 ShowSevereError(RoutineName + CurrentModuleObject + " Name=" + RefrigData(Loop).Name);
                                 ShowSevereError("Temperature Name=" + TempsName +
                                                 ", Temperature array and saturated fluid Cp array must have the same number of points");
-                                ShowContinueError("Temperature # points=" + RoundSigDigits(NumNumbers) + " whereas " + RefrigData(Loop).Name +
-                                                  " # Cp points=" + RoundSigDigits(RefrigData(Loop).NumCpPoints));
+                                ShowContinueError("Temperature # points=" + fmt::to_string(NumNumbers) + " whereas " + RefrigData(Loop).Name +
+                                                  " # Cp points=" + fmt::to_string(RefrigData(Loop).NumCpPoints));
                                 ErrorsFound = true;
                                 break; // the TempLoop DO Loop
                             }
@@ -1089,8 +1089,8 @@ namespace FluidProperties {
                                 ShowSevereError(RoutineName + CurrentModuleObject + " Name=" + RefrigData(Loop).Name);
                                 ShowContinueError("Temperature Name=" + TempsName +
                                                   ", Temperature array and saturated gas/fluid Cp array must have the same number of points");
-                                ShowContinueError("Temperature # points=" + RoundSigDigits(NumNumbers) + " whereas " + RefrigData(Loop).Name +
-                                                  " # Cp points=" + RoundSigDigits(RefrigData(Loop).NumCpPoints));
+                                ShowContinueError("Temperature # points=" + fmt::to_string(NumNumbers) + " whereas " + RefrigData(Loop).Name +
+                                                  " # Cp points=" + fmt::to_string(RefrigData(Loop).NumCpPoints));
                                 ErrorsFound = true;
                                 break; // the TempLoop DO Loop
                             }
@@ -1160,8 +1160,8 @@ namespace FluidProperties {
                                 ShowSevereError(RoutineName + CurrentModuleObject + " Name=" + RefrigData(Loop).Name);
                                 ShowContinueError("Temperature Name=" + TempsName +
                                                   ", Temperature array and saturated fluid density array must have the same number of points");
-                                ShowContinueError("Temperature # points=" + RoundSigDigits(NumNumbers) + " whereas " + RefrigData(Loop).Name +
-                                                  " # Density points=" + RoundSigDigits(RefrigData(Loop).NumRhoPoints));
+                                ShowContinueError("Temperature # points=" + fmt::to_string(NumNumbers) + " whereas " + RefrigData(Loop).Name +
+                                                  " # Density points=" + fmt::to_string(RefrigData(Loop).NumRhoPoints));
                                 ErrorsFound = true;
                                 break; // the TempLoop DO Loop
                             }
@@ -1235,8 +1235,8 @@ namespace FluidProperties {
                                 ShowSevereError(RoutineName + CurrentModuleObject + " Name=" + RefrigData(Loop).Name);
                                 ShowContinueError("Temperature Name=" + TempsName +
                                                   ", Temperature array and saturated gas/fluid density array must have the same number of points");
-                                ShowContinueError("Temperature # points=" + RoundSigDigits(NumNumbers) + " whereas " + RefrigData(Loop).Name +
-                                                  " # density points=" + RoundSigDigits(RefrigData(Loop).NumRhoPoints));
+                                ShowContinueError("Temperature # points=" + fmt::to_string(NumNumbers) + " whereas " + RefrigData(Loop).Name +
+                                                  " # density points=" + fmt::to_string(RefrigData(Loop).NumRhoPoints));
                                 ErrorsFound = true;
                                 break; // the TempLoop DO Loop
                             }
@@ -1348,7 +1348,7 @@ namespace FluidProperties {
             }
 
             if (iTemp > 1) {
-                ShowWarningError(RoutineName + CurrentModuleObject + " has " + RoundSigDigits(iTemp - 1) + " similar errors to the previous.");
+                ShowWarningError(RoutineName + CurrentModuleObject + " has " + fmt::to_string(iTemp - 1) + " similar errors to the previous.");
             }
 
             // **********   SUPERHEATED DATA SECTION   **********
@@ -1482,8 +1482,8 @@ namespace FluidProperties {
                     if (RefrigData(Loop).SHPress(InData) <= RefrigData(Loop).SHPress(InData - 1)) {
                         ShowSevereError(RoutineName + CurrentModuleObject + " Name=" + RefrigData(Loop).Name);
                         ShowContinueError("Pressures must be entered in ascending order for fluid property data");
-                        ShowContinueError("First Occurrence at Pressure(" + RoundSigDigits(InData - 1) + ") {" +
-                                          RoundSigDigits(RefrigData(Loop).SHPress(InData - 1), 3) + "} >= Pressure(" + RoundSigDigits(InData) +
+                        ShowContinueError("First Occurrence at Pressure(" + fmt::to_string(InData - 1) + ") {" +
+                                          RoundSigDigits(RefrigData(Loop).SHPress(InData - 1), 3) + "} >= Pressure(" + fmt::to_string(InData) +
                                           ") {" + RoundSigDigits(RefrigData(Loop).SHPress(InData), 3) + '}');
                         ErrorsFound = true;
                         break;
@@ -1614,7 +1614,7 @@ namespace FluidProperties {
             }
 
             if (iTemp > 1) {
-                ShowWarningError(RoutineName + CurrentModuleObject + " has " + RoundSigDigits(iTemp - 1) + " similar errors to the previous.");
+                ShowWarningError(RoutineName + CurrentModuleObject + " has " + fmt::to_string(iTemp - 1) + " similar errors to the previous.");
             }
 
             if (NumOfPressPts == 0) {
@@ -5803,7 +5803,7 @@ CurrentModuleObject,
                     print(state.files.debug, ",{:.3R}\n", RefrigData(RefrigNum).HshValues(Loop, RefrigData(RefrigNum).NumSuperTempPts));
                 }
                 for (Loop = 1; Loop <= RefrigData(RefrigNum).NumSuperPressPts; ++Loop) {
-                    print(state.files.debug, "Superheated Pressure:#{}={:.2R}\n", RoundSigDigits(Loop), RefrigData(RefrigNum).SHPress(Loop));
+                    print(state.files.debug, "Superheated Pressure:#{}={:.2R}\n", fmt::to_string(Loop), RefrigData(RefrigNum).SHPress(Loop));
                     print(state.files.debug, "Density Superheated Gas:");
                     for (Loop1 = 1; Loop1 <= RefrigData(RefrigNum).NumSuperTempPts - 1; ++Loop1) {
                         print(state.files.debug, ",{:.3R}", RefrigData(RefrigNum).RhoshValues(Loop, Loop1));
@@ -8801,8 +8801,8 @@ CurrentModuleObject,
         }
 
         if (NumUnusedRefrig > 0 || NumUnusedGlycol > 0) {
-            if (NumUnusedRefrig > 0) ShowMessage("There are " + RoundSigDigits(NumUnusedRefrig) + " unused refrigerants in input.");
-            if (NumUnusedGlycol > 0) ShowMessage("There are " + RoundSigDigits(NumUnusedGlycol) + " unused glycols in input.");
+            if (NumUnusedRefrig > 0) ShowMessage("There are " + fmt::to_string(NumUnusedRefrig) + " unused refrigerants in input.");
+            if (NumUnusedGlycol > 0) ShowMessage("There are " + fmt::to_string(NumUnusedGlycol) + " unused glycols in input.");
             ShowMessage("Use Output:Diagnostics,DisplayUnusedObjects; to see them.");
         }
     }

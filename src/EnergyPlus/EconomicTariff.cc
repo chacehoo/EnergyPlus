@@ -717,14 +717,14 @@ namespace EconomicTariff {
                         tariff(iInObj).demWinTime = 1.00;
                         ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid data");
                         ShowContinueError("Demand window of QuarterHour is not consistent with number of timesteps per hour [" +
-                                          RoundSigDigits(NumOfTimeStepInHour) + "].");
+                                          fmt::to_string(NumOfTimeStepInHour) + "].");
                         ShowContinueError("Demand window will be set to FullHour, and the simulation continues.");
                     } else if ((SELECT_CASE_var == 2) || (SELECT_CASE_var == 6) || (SELECT_CASE_var == 10) || (SELECT_CASE_var == 30)) {
                         tariff(iInObj).demandWindow = demandWindowHalf;
                         tariff(iInObj).demWinTime = 0.50;
                         ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid data");
                         ShowContinueError("Demand window of QuarterHour is not consistent with number of timesteps per hour [" +
-                                          RoundSigDigits(NumOfTimeStepInHour) + "].");
+                                          fmt::to_string(NumOfTimeStepInHour) + "].");
                         ShowContinueError("Demand window will be set to HalfHour, and the simulation continues.");
                     } else if ((SELECT_CASE_var == 4) || (SELECT_CASE_var == 12) || (SELECT_CASE_var == 20) || (SELECT_CASE_var == 60)) {
                         tariff(iInObj).demandWindow = demandWindowQuarter;
@@ -739,7 +739,7 @@ namespace EconomicTariff {
                         tariff(iInObj).demWinTime = 1.00;
                         ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid data");
                         ShowContinueError("Demand window of HalfHour is not consistent with number of timesteps per hour [" +
-                                          RoundSigDigits(NumOfTimeStepInHour) + "].");
+                                          fmt::to_string(NumOfTimeStepInHour) + "].");
                         ShowContinueError("Demand window will be set to FullHour, and the simulation continues.");
                     } else if ((SELECT_CASE_var == 2) || (SELECT_CASE_var == 4) || (SELECT_CASE_var == 6) || (SELECT_CASE_var == 10) ||
                                (SELECT_CASE_var == 12) || (SELECT_CASE_var == 20) || (SELECT_CASE_var == 30) || (SELECT_CASE_var == 60)) {
@@ -3296,7 +3296,7 @@ namespace EconomicTariff {
                         // do nothing
                     } else {
                         ShowWarningError("UtilityCost Debugging issue. Invalid kind of variable used (pushStack). " +
-                                         std::to_string(econVar(variablePointer).kindOfObj) +
+                                         fmt::to_string(econVar(variablePointer).kindOfObj) +
                                          " in tariff: " + tariff(econVar(variablePointer).tariffIndx).tariffName);
                     }
                 }

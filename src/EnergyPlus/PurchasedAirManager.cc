@@ -249,12 +249,12 @@ namespace PurchasedAirManager {
         } else {
             PurchAirNum = CompIndex;
             if (PurchAirNum > NumPurchAir || PurchAirNum < 1) {
-                ShowFatalError("SimPurchasedAir:  Invalid CompIndex passed=" + TrimSigDigits(PurchAirNum) +
-                               ", Number of Units=" + TrimSigDigits(NumPurchAir) + ", Entered Unit name=" + PurchAirName);
+                ShowFatalError("SimPurchasedAir:  Invalid CompIndex passed=" + fmt::to_string(PurchAirNum) +
+                               ", Number of Units=" + fmt::to_string(NumPurchAir) + ", Entered Unit name=" + PurchAirName);
             }
             if (CheckEquipName(PurchAirNum)) {
                 if (PurchAirName != PurchAir(PurchAirNum).Name) {
-                    ShowFatalError("SimPurchasedAir: Invalid CompIndex passed=" + TrimSigDigits(PurchAirNum) + ", Unit name=" + PurchAirName +
+                    ShowFatalError("SimPurchasedAir: Invalid CompIndex passed=" + fmt::to_string(PurchAirNum) + ", Unit name=" + PurchAirName +
                                    ", stored Unit Name for that index=" + PurchAir(PurchAirNum).Name);
                 }
                 CheckEquipName(PurchAirNum) = false;

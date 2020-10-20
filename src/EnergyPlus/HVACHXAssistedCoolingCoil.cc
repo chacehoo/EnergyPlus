@@ -57,7 +57,6 @@
 #include <EnergyPlus/DataHVACGlobals.hh>
 #include <EnergyPlus/DataHeatBalance.hh>
 #include <EnergyPlus/DataLoopNode.hh>
-#include <EnergyPlus/General.hh>
 #include <EnergyPlus/GlobalNames.hh>
 #include <EnergyPlus/Data/EnergyPlusData.hh>
 #include <EnergyPlus/HVACControllers.hh>
@@ -65,7 +64,6 @@
 #include <EnergyPlus/HeatRecovery.hh>
 #include <EnergyPlus/InputProcessing/InputProcessor.hh>
 #include <EnergyPlus/NodeInputManager.hh>
-#include <EnergyPlus/Psychrometrics.hh>
 #include <EnergyPlus/UtilityRoutines.hh>
 #include <EnergyPlus/VariableSpeedCoils.hh>
 #include <EnergyPlus/WaterCoils.hh>
@@ -186,9 +184,6 @@ namespace HVACHXAssistedCoolingCoil {
         //  This subroutine manages the simulation of the
         //  cooling coil/heat exchanger combination.
 
-        // Using/Aliasing
-        using General::TrimSigDigits;
-
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
         // (not used for Coil:Water:DetailedFlatCooling)
@@ -218,13 +213,13 @@ namespace HVACHXAssistedCoolingCoil {
         } else {
             HXAssistedCoilNum = CompIndex;
             if (HXAssistedCoilNum > TotalNumHXAssistedCoils || HXAssistedCoilNum < 1) {
-                ShowFatalError("SimHXAssistedCoolingCoil: Invalid CompIndex passed=" + TrimSigDigits(HXAssistedCoilNum) +
-                               ", Number of HX Assisted Cooling Coils=" + TrimSigDigits(TotalNumHXAssistedCoils) +
+                ShowFatalError("SimHXAssistedCoolingCoil: Invalid CompIndex passed=" + fmt::to_string(HXAssistedCoilNum) +
+                               ", Number of HX Assisted Cooling Coils=" + fmt::to_string(TotalNumHXAssistedCoils) +
                                ", Coil name=" + HXAssistedCoilName);
             }
             if (CheckEquipName(HXAssistedCoilNum)) {
                 if (!HXAssistedCoilName.empty() && HXAssistedCoilName != HXAssistedCoil(HXAssistedCoilNum).Name) {
-                    ShowFatalError("SimHXAssistedCoolingCoil: Invalid CompIndex passed=" + TrimSigDigits(HXAssistedCoilNum) + ", Coil name=" +
+                    ShowFatalError("SimHXAssistedCoolingCoil: Invalid CompIndex passed=" + fmt::to_string(HXAssistedCoilNum) + ", Coil name=" +
                                    HXAssistedCoilName + ", stored Coil Name for that index=" + HXAssistedCoil(HXAssistedCoilNum).Name);
                 }
                 CheckEquipName(HXAssistedCoilNum) = false;
@@ -881,9 +876,7 @@ namespace HVACHXAssistedCoolingCoil {
 
         // Using/Aliasing
         using DXCoils::SimDXCoil;
-        using General::TrimSigDigits;
         using HeatRecovery::SimHeatRecovery;
-        using Psychrometrics::PsyHFnTdbW;
         using WaterCoils::SimulateWaterCoilComponents;
 
         // Locals
@@ -1004,7 +997,7 @@ namespace HVACHXAssistedCoolingCoil {
             if (HXAssistedCoil(HXAssistedCoilNum).MaxIterCounter < 1) {
                 ++HXAssistedCoil(HXAssistedCoilNum).MaxIterCounter;
                 ShowWarningError(HXAssistedCoil(HXAssistedCoilNum).HXAssistedCoilType + " \"" + HXAssistedCoil(HXAssistedCoilNum).Name +
-                                 "\" -- Exceeded max iterations (" + TrimSigDigits(MaxIter) + ") while calculating operating conditions.");
+                                 "\" -- Exceeded max iterations (" + fmt::to_string(MaxIter) + ") while calculating operating conditions.");
                 ShowContinueErrorTimeStamp("");
             } else {
                 ShowRecurringWarningErrorAtEnd(HXAssistedCoil(HXAssistedCoilNum).HXAssistedCoilType + " \"" + HXAssistedCoil(HXAssistedCoilNum).Name +
@@ -1072,9 +1065,6 @@ namespace HVACHXAssistedCoolingCoil {
         // This routine provides a method for outside routines to check if
         // the hx assisted cooling coil is scheduled to be on.
 
-        // Using/Aliasing
-        using General::TrimSigDigits;
-
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int HXAssistedCoilNum;
 
@@ -1101,11 +1091,11 @@ namespace HVACHXAssistedCoolingCoil {
         } else {
             HXAssistedCoilNum = CompIndex;
             if (HXAssistedCoilNum > TotalNumHXAssistedCoils || HXAssistedCoilNum < 1) {
-                ShowFatalError("CheckHXAssistedCoolingCoilSchedule: Invalid CompIndex passed=" + TrimSigDigits(HXAssistedCoilNum) +
-                               ", Number of Heating Coils=" + TrimSigDigits(TotalNumHXAssistedCoils) + ", Coil name=" + CompName);
+                ShowFatalError("CheckHXAssistedCoolingCoilSchedule: Invalid CompIndex passed=" + fmt::to_string(HXAssistedCoilNum) +
+                               ", Number of Heating Coils=" + fmt::to_string(TotalNumHXAssistedCoils) + ", Coil name=" + CompName);
             }
             if (CompName != HXAssistedCoil(HXAssistedCoilNum).Name) {
-                ShowFatalError("CheckHXAssistedCoolingCoilSchedule: Invalid CompIndex passed=" + TrimSigDigits(HXAssistedCoilNum) +
+                ShowFatalError("CheckHXAssistedCoolingCoilSchedule: Invalid CompIndex passed=" + fmt::to_string(HXAssistedCoilNum) +
                                ", Coil name=" + CompName + ", stored Coil Name for that index=" + HXAssistedCoil(HXAssistedCoilNum).Name);
             }
 

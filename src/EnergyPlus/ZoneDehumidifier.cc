@@ -161,12 +161,12 @@ namespace ZoneDehumidifier {
         } else {
             ZoneDehumidNum = CompIndex;
             if (ZoneDehumidNum > state.dataZoneDehumidifier->NumDehumidifiers || ZoneDehumidNum < 1) {
-                ShowFatalError("SimZoneDehumidifier:  Invalid CompIndex passed= " + TrimSigDigits(ZoneDehumidNum) +
-                               ", Number of Units= " + TrimSigDigits(state.dataZoneDehumidifier->NumDehumidifiers) + ", Entered Unit name= " + CompName);
+                ShowFatalError("SimZoneDehumidifier:  Invalid CompIndex passed= " + fmt::to_string(ZoneDehumidNum) +
+                               ", Number of Units= " + fmt::to_string(state.dataZoneDehumidifier->NumDehumidifiers) + ", Entered Unit name= " + CompName);
             }
             if (state.dataZoneDehumidifier->CheckEquipName(ZoneDehumidNum)) {
                 if (CompName != state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumidNum).Name) {
-                    ShowFatalError("SimZoneDehumidifier: Invalid CompIndex passed=" + TrimSigDigits(ZoneDehumidNum) + ", Unit name= " + CompName +
+                    ShowFatalError("SimZoneDehumidifier: Invalid CompIndex passed=" + fmt::to_string(ZoneDehumidNum) + ", Unit name= " + CompName +
                                    ", stored Unit Name for that index= " + state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumidNum).Name);
                 }
                 state.dataZoneDehumidifier->CheckEquipName(ZoneDehumidNum) = false;

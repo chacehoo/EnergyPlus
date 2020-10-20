@@ -56,7 +56,6 @@
 #include <ObjexxFCL/Vector3.hh>
 #include <ObjexxFCL/gio.hh>
 #include <ObjexxFCL/member.functions.hh>
-#include <ObjexxFCL/string.functions.hh>
 
 // EnergyPlus Headers
 #include <EnergyPlus/CommandLineInterface.hh>
@@ -1420,7 +1419,7 @@ namespace SolarShading {
                     }
                     for (I = 1; I <= NumOfLayers; ++I) {
                         if (state.dataConstruction->Construct(Surface(SurfLoop).Construction).WindowTypeBSDF) {
-                            SetupOutputVariable(state, "Surface Window Total Absorbed Shortwave Radiation Rate Layer " + RoundSigDigits(I) + "",
+                            SetupOutputVariable(state, "Surface Window Total Absorbed Shortwave Radiation Rate Layer " + fmt::to_string(I),
                                                 OutputProcessor::Unit::W,
                                                 SurfWinQRadSWwinAbsLayer(I, SurfLoop),
                                                 "Zone",
@@ -1428,7 +1427,7 @@ namespace SolarShading {
                                                 Surface(SurfLoop).Name);
                         }
                         if (state.dataConstruction->Construct(Surface(SurfLoop).Construction).WindowTypeBSDF || (I == 1)) {
-                            SetupOutputVariable(state, "Surface Window Front Face Temperature Layer " + RoundSigDigits(I) + "",
+                            SetupOutputVariable(state, "Surface Window Front Face Temperature Layer " + fmt::to_string(I),
                                                 OutputProcessor::Unit::C,
                                                 SurfWinFenLaySurfTempFront(I, SurfLoop),
                                                 "Zone",
@@ -1436,7 +1435,7 @@ namespace SolarShading {
                                                 Surface(SurfLoop).Name);
                         }
                         if (state.dataConstruction->Construct(Surface(SurfLoop).Construction).WindowTypeBSDF || (I == NumOfLayers)) {
-                            SetupOutputVariable(state, "Surface Window Back Face Temperature Layer " + RoundSigDigits(I) + "",
+                            SetupOutputVariable(state, "Surface Window Back Face Temperature Layer " + fmt::to_string(I),
                                                 OutputProcessor::Unit::C,
                                                 SurfWinFenLaySurfTempBack(I, SurfLoop),
                                                 "Zone",
@@ -2561,7 +2560,7 @@ namespace SolarShading {
                     ShowSevereError("Cosine of incident angle of beam solar on surface out of range...too high");
                     ShowContinueError("This is a diagnostic error that should not be encountered under normal circumstances");
                     ShowContinueError("Occurs on surface: " + Surface(SurfNum).Name);
-                    ShowContinueError("Current value = " + TrimSigDigits(CosIncAngBeamOnSurface) + " ... should be within [-1, +1]");
+                    ShowContinueError("Current value = " + fmt::to_string(CosIncAngBeamOnSurface) + " ... should be within [-1, +1]");
                     ShowFatalError("Anisotropic solar calculation causes fatal error");
                 }
                 CosIncAngBeamOnSurface = 1.0;
@@ -2570,7 +2569,7 @@ namespace SolarShading {
                     ShowSevereError("Cosine of incident angle of beam solar on surface out of range...too low");
                     ShowContinueError("This is a diagnostic error that should not be encountered under normal circumstances");
                     ShowContinueError("Occurs on surface: " + Surface(SurfNum).Name);
-                    ShowContinueError("Current value = " + TrimSigDigits(CosIncAngBeamOnSurface) + " ... should be within [-1, +1]");
+                    ShowContinueError("Current value = " + fmt::to_string(CosIncAngBeamOnSurface) + " ... should be within [-1, +1]");
                     ShowFatalError("Anisotropic solar calculation causes fatal error");
                 }
                 CosIncAngBeamOnSurface = -1.0;
@@ -2658,7 +2657,7 @@ namespace SolarShading {
             if (DOTP > 0.0009) {
                 ShowSevereError("Problem in interior solar distribution calculation (CHKBKS)");
                 ShowContinueError("   Solar Distribution = FullInteriorExterior will not work in Zone=" + Surface(NRS).ZoneName);
-                ShowContinueError("   because one or more of vertices, such as Vertex " + std::to_string(N) + " of back surface=" + Surface(NBS).Name +
+                ShowContinueError("   because one or more of vertices, such as Vertex " + fmt::to_string(N) + " of back surface=" + Surface(NBS).Name +
                                   ", is in front of receiving surface=" + Surface(NRS).Name);
                 ShowContinueError(format("   (Dot Product indicator={:20.4F})", DOTP));
                 ShowContinueError("   Check surface geometry; if OK, use Solar Distribution = FullExterior instead. Use Output:Diagnostics, DisplayExtraWarnings; for more details.");
@@ -3531,7 +3530,7 @@ namespace SolarShading {
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
 
         if (NS > 2 * MaxHCS) {
-            ShowFatalError("Solar Shading: HTrans: Too many Figures (>" + TrimSigDigits(MaxHCS) + ')');
+            ShowFatalError("Solar Shading: HTrans: Too many Figures (>" + fmt::to_string(MaxHCS) + ')');
         }
 
         HCNV(NS) = NumVertices;
@@ -3594,7 +3593,7 @@ namespace SolarShading {
         // Locals
 
         if (NS > 2 * MaxHCS) {
-            ShowFatalError("Solar Shading: HTrans0: Too many Figures (>" + TrimSigDigits(MaxHCS) + ')');
+            ShowFatalError("Solar Shading: HTrans0: Too many Figures (>" + fmt::to_string(MaxHCS) + ')');
         }
 
         HCNV(NS) = NumVertices;
@@ -3638,7 +3637,7 @@ namespace SolarShading {
         using General::TrimSigDigits;
 
         if (NS > 2 * MaxHCS) {
-            ShowFatalError("Solar Shading: HTrans1: Too many Figures (>" + TrimSigDigits(MaxHCS) + ')');
+            ShowFatalError("Solar Shading: HTrans1: Too many Figures (>" + fmt::to_string(MaxHCS) + ')');
         }
 
         HCNV(NS) = NumVertices;
@@ -4777,7 +4776,7 @@ namespace SolarShading {
             OverlapStatus = TooManyFigures;
 
             if (!TooManyFiguresMessage && !DisplayExtraWarnings) {
-                ShowWarningError("DeterminePolygonOverlap: Too many figures [>" + RoundSigDigits(MaxHCS) +
+                ShowWarningError("DeterminePolygonOverlap: Too many figures [>" + fmt::to_string(MaxHCS) +
                                  "]  detected in an overlap calculation. Use Output:Diagnostics,DisplayExtraWarnings; for more details.");
                 TooManyFiguresMessage = true;
             }
@@ -4863,7 +4862,7 @@ namespace SolarShading {
             OverlapStatus = TooManyVertices;
 
             if (!TooManyVerticesMessage && !DisplayExtraWarnings) {
-                ShowWarningError("DeterminePolygonOverlap: Too many vertices [>" + RoundSigDigits(MaxHCV) +
+                ShowWarningError("DeterminePolygonOverlap: Too many vertices [>" + fmt::to_string(MaxHCV) +
                                  "] detected in an overlap calculation. Use Output:Diagnostics,DisplayExtraWarnings; for more details.");
                 TooManyVerticesMessage = true;
             }
@@ -4879,7 +4878,7 @@ namespace SolarShading {
             OverlapStatus = TooManyFigures;
 
             if (!TooManyFiguresMessage && !DisplayExtraWarnings) {
-                ShowWarningError("DeterminePolygonOverlap: Too many figures [>" + RoundSigDigits(MaxHCS) +
+                ShowWarningError("DeterminePolygonOverlap: Too many figures [>" + fmt::to_string(MaxHCS) +
                                  "]  detected in an overlap calculation. Use Output:Diagnostics,DisplayExtraWarnings; for more details.");
                 TooManyFiguresMessage = true;
             }
@@ -5671,7 +5670,7 @@ namespace SolarShading {
             }
 
             if (TotalReceivingNonConvexSurfaces > 0) {
-                ShowWarningMessage("DetermineShadowingCombinations: There are " + TrimSigDigits(TotalReceivingNonConvexSurfaces) +
+                ShowWarningMessage("DetermineShadowingCombinations: There are " + fmt::to_string(TotalReceivingNonConvexSurfaces) +
                     " surfaces which are receiving surfaces and are non-convex.");
                 ShowContinueError("...Shadowing values may be inaccurate. Check .shd report file for more surface shading details");
                 ShowContinueError("...Add Output:Diagnostics,DisplayExtraWarnings; to see individual warnings for each surface.");
@@ -5679,7 +5678,7 @@ namespace SolarShading {
             }
 
             if (TotalCastingNonConvexSurfaces > 0) {
-                ShowSevereMessage("DetermineShadowingCombinations: There are " + TrimSigDigits(TotalCastingNonConvexSurfaces) +
+                ShowSevereMessage("DetermineShadowingCombinations: There are " + fmt::to_string(TotalCastingNonConvexSurfaces) +
                     " surfaces which are casting surfaces and are non-convex.");
                 ShowContinueError("...Shadowing values may be inaccurate. Check .shd report file for more surface shading details");
                 ShowContinueError("...Add Output:Diagnostics,DisplayExtraWarnings; to see individual severes for each surface.");
@@ -11670,7 +11669,7 @@ namespace SolarShading {
                 TotalWarningErrors += Count - 1;
                 ShowWarningError("Base surface does not surround subsurface (CHKSBS), Overlap Status=" +
                                  cOverLapStatus(TrackBaseSubSurround(Loop1).MiscIndex));
-                ShowContinueError("  The base surround errors occurred " + std::to_string(Count) + " times.");
+                ShowContinueError("  The base surround errors occurred " + fmt::to_string(Count) + " times.");
                 for (Loop2 = 1; Loop2 <= NumBaseSubSurround; ++Loop2) {
                     if (TrackBaseSubSurround(Loop1).SurfIndex1 == TrackBaseSubSurround(Loop2).SurfIndex1 &&
                         TrackBaseSubSurround(Loop1).MiscIndex == TrackBaseSubSurround(Loop2).MiscIndex) {
@@ -11683,7 +11682,7 @@ namespace SolarShading {
             }
             if (TotCount > 0) {
                 ShowMessage("");
-                ShowContinueError("  The base surround errors occurred " + std::to_string(TotCount) + " times (total).");
+                ShowContinueError("  The base surround errors occurred " + fmt::to_string(TotCount) + " times (total).");
                 ShowMessage("");
             }
 
@@ -11691,7 +11690,7 @@ namespace SolarShading {
             SurfErrorReported = false;
             TotCount = 0;
             if (NumTooManyVertices > 0) {
-                ShowMessage("Too many vertices [>=" + RoundSigDigits(MaxHCV) + "] in shadow overlap errors occurring...");
+                ShowMessage("Too many vertices [>=" + fmt::to_string(MaxHCV) + "] in shadow overlap errors occurring...");
                 ShowMessage("These occur throughout the year and may occur several times for the same surfaces. You may be able to reduce them by "
                             "adding Output:Diagnostics,DoNotMirrorDetachedShading;");
             }
@@ -11707,10 +11706,10 @@ namespace SolarShading {
                 TotCount += Count;
                 TotalWarningErrors += Count - 1;
                 ShowMessage("");
-                ShowWarningError("Too many vertices [>=" + RoundSigDigits(MaxHCV) + "] in a shadow overlap");
+                ShowWarningError("Too many vertices [>=" + fmt::to_string(MaxHCV) + "] in a shadow overlap");
                 ShowContinueError("Overlapping figure=" + Surface(TrackTooManyVertices(Loop1).SurfIndex1).Name + ", Surface Class=[" +
                                   cSurfaceClass(Surface(TrackTooManyVertices(Loop1).SurfIndex1).Class) + ']');
-                ShowContinueError("  This error occurred " + std::to_string(Count) + " times.");
+                ShowContinueError("  This error occurred " + fmt::to_string(Count) + " times.");
                 for (Loop2 = 1; Loop2 <= NumTooManyVertices; ++Loop2) {
                     if (TrackTooManyVertices(Loop1).SurfIndex1 == TrackTooManyVertices(Loop2).SurfIndex1) {
                         if (SurfErrorReported2(TrackTooManyVertices(Loop2).SurfIndex2)) continue;
@@ -11723,14 +11722,14 @@ namespace SolarShading {
             }
             if (TotCount > 0) {
                 ShowMessage("");
-                ShowContinueError("  The too many vertices errors occurred " + std::to_string(TotCount) + " times (total).");
+                ShowContinueError("  The too many vertices errors occurred " + fmt::to_string(TotCount) + " times (total).");
                 ShowMessage("");
             }
 
             SurfErrorReported = false;
             TotCount = 0;
             if (NumTooManyFigures > 0) {
-                ShowMessage("Too many figures [>=" + RoundSigDigits(MaxHCS) + "] in shadow overlap errors occurring...");
+                ShowMessage("Too many figures [>=" + fmt::to_string(MaxHCS) + "] in shadow overlap errors occurring...");
                 ShowMessage("These occur throughout the year and may occur several times for the same surfaces. You may be able to reduce them by "
                             "adding OutputDiagnostics,DoNotMirrorDetachedShading;");
             }
@@ -11746,10 +11745,10 @@ namespace SolarShading {
                 TotCount += Count;
                 TotalWarningErrors += Count - 1;
                 ShowMessage("");
-                ShowWarningError("Too many figures [>=" + RoundSigDigits(MaxHCS) + "] in a shadow overlap");
+                ShowWarningError("Too many figures [>=" + fmt::to_string(MaxHCS) + "] in a shadow overlap");
                 ShowContinueError("Overlapping figure=" + Surface(TrackTooManyFigures(Loop1).SurfIndex1).Name + ", Surface Class=[" +
                                   cSurfaceClass(Surface(TrackTooManyFigures(Loop1).SurfIndex1).Class) + ']');
-                ShowContinueError("  This error occurred " + std::to_string(Count) + " times.");
+                ShowContinueError("  This error occurred " + fmt::to_string(Count) + " times.");
                 for (Loop2 = 1; Loop2 <= NumTooManyFigures; ++Loop2) {
                     if (TrackTooManyFigures(Loop1).SurfIndex1 == TrackTooManyFigures(Loop2).SurfIndex1) {
                         if (SurfErrorReported2(TrackTooManyFigures(Loop2).SurfIndex2)) continue;
@@ -11762,7 +11761,7 @@ namespace SolarShading {
             }
             if (TotCount > 0) {
                 ShowMessage("");
-                ShowContinueError("  The too many figures errors occurred " + std::to_string(TotCount) + " times (total).");
+                ShowContinueError("  The too many figures errors occurred " + fmt::to_string(TotCount) + " times (total).");
                 ShowMessage("");
             }
             SurfErrorReported.deallocate();

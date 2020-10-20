@@ -178,12 +178,12 @@ namespace WindowAC {
         } else {
             WindACNum = CompIndex;
             if (WindACNum > state.dataWindowAC->NumWindAC || WindACNum < 1) {
-                ShowFatalError("SimWindowAC:  Invalid CompIndex passed=" + TrimSigDigits(WindACNum) +
-                               ", Number of Units=" + TrimSigDigits(state.dataWindowAC->NumWindAC) + ", Entered Unit name=" + CompName);
+                ShowFatalError("SimWindowAC:  Invalid CompIndex passed=" + fmt::to_string(WindACNum) +
+                               ", Number of Units=" + fmt::to_string(state.dataWindowAC->NumWindAC) + ", Entered Unit name=" + CompName);
             }
             if (state.dataWindowAC->CheckEquipName(WindACNum)) {
                 if (CompName != state.dataWindowAC->WindAC(WindACNum).Name) {
-                    ShowFatalError("SimWindowAC: Invalid CompIndex passed=" + TrimSigDigits(WindACNum) + ", Unit name=" + CompName +
+                    ShowFatalError("SimWindowAC: Invalid CompIndex passed=" + fmt::to_string(WindACNum) + ", Unit name=" + CompName +
                                    ", stored Unit Name for that index=" + state.dataWindowAC->WindAC(WindACNum).Name);
                 }
                 state.dataWindowAC->CheckEquipName(WindACNum) = false;
@@ -1512,7 +1512,7 @@ namespace WindowAC {
                 ShowWarningMessage("ZoneHVAC:WindowAirConditioner=\"" + state.dataWindowAC->WindAC(WindACNum).Name +
                                    "\" -- Exceeded max iterations while adjusting compressor sensible runtime to meet the zone load within the "
                                    "cooling convergence tolerance.");
-                ShowContinueErrorTimeStamp("Iterations=" + TrimSigDigits(MaxIter));
+                ShowContinueErrorTimeStamp("Iterations=" + fmt::to_string(MaxIter));
             }
             ShowRecurringWarningErrorAtEnd("ZoneHVAC:WindowAirConditioner=\"" + state.dataWindowAC->WindAC(WindACNum).Name +
                                                "\"  -- Exceeded max iterations error (sensible runtime) continues...",
@@ -1559,7 +1559,7 @@ namespace WindowAC {
                     ShowWarningMessage("ZoneHVAC:WindowAirConditioner=\"" + state.dataWindowAC->WindAC(WindACNum).Name +
                                        "\" -- Exceeded max iterations while adjusting compressor latent runtime to meet the zone load within the "
                                        "cooling convergence tolerance.");
-                    ShowContinueErrorTimeStamp("Iterations=" + TrimSigDigits(MaxIter));
+                    ShowContinueErrorTimeStamp("Iterations=" + fmt::to_string(MaxIter));
                 }
                 ShowRecurringWarningErrorAtEnd("ZoneHVAC:WindowAirConditioner=\"" + state.dataWindowAC->WindAC(WindACNum).Name +
                                                    "\"  -- Exceeded max iterations error (latent runtime) continues...",

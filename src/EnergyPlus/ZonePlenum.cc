@@ -59,7 +59,6 @@
 #include <EnergyPlus/DataHeatBalance.hh>
 #include <EnergyPlus/DataLoopNode.hh>
 #include <EnergyPlus/DataZoneEquipment.hh>
-#include <EnergyPlus/General.hh>
 #include <EnergyPlus/Data/EnergyPlusData.hh>
 #include <EnergyPlus/InputProcessing/InputProcessor.hh>
 #include <EnergyPlus/NodeInputManager.hh>
@@ -122,7 +121,6 @@ namespace ZonePlenum {
         // Using/Aliasing
         using DataZoneEquipment::ZoneReturnPlenum_Type;
         using DataZoneEquipment::ZoneSupplyPlenum_Type;
-        using General::TrimSigDigits;
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int ZonePlenumNum; // The ZonePlenum that you are currently loading input into
@@ -144,13 +142,13 @@ namespace ZonePlenum {
             } else {
                 ZonePlenumNum = CompIndex;
                 if (ZonePlenumNum > state.dataZonePlenum->NumZoneReturnPlenums || ZonePlenumNum < 1) {
-                    ShowFatalError("SimAirZonePlenum: Invalid CompIndex passed=" + TrimSigDigits(ZonePlenumNum) +
-                                   ", Number of AirLoopHVAC:ReturnPlenum=" + TrimSigDigits(state.dataZonePlenum->NumZoneReturnPlenums) +
+                    ShowFatalError("SimAirZonePlenum: Invalid CompIndex passed=" + fmt::to_string(ZonePlenumNum) +
+                                   ", Number of AirLoopHVAC:ReturnPlenum=" + fmt::to_string(state.dataZonePlenum->NumZoneReturnPlenums) +
                                    ", AirLoopHVAC:ReturnPlenum name=" + CompName);
                 }
                 if (state.dataZonePlenum->CheckRetEquipName(ZonePlenumNum)) {
                     if (CompName != state.dataZonePlenum->ZoneRetPlenCond(ZonePlenumNum).ZonePlenumName) {
-                        ShowFatalError("SimAirZonePlenum: Invalid CompIndex passed=" + TrimSigDigits(ZonePlenumNum) +
+                        ShowFatalError("SimAirZonePlenum: Invalid CompIndex passed=" + fmt::to_string(ZonePlenumNum) +
                                        ", AirLoopHVAC:ReturnPlenum name=" + CompName +
                                        ", stored AirLoopHVAC:ReturnPlenum Name for that index=" + state.dataZonePlenum->ZoneRetPlenCond(ZonePlenumNum).ZonePlenumName);
                     }
@@ -175,13 +173,13 @@ namespace ZonePlenum {
             } else {
                 ZonePlenumNum = CompIndex;
                 if (ZonePlenumNum > state.dataZonePlenum->NumZoneSupplyPlenums || ZonePlenumNum < 1) {
-                    ShowFatalError("SimAirZonePlenum: Invalid CompIndex passed=" + TrimSigDigits(ZonePlenumNum) +
-                                   ", Number of AirLoopHVAC:SupplyPlenum=" + TrimSigDigits(state.dataZonePlenum->NumZoneReturnPlenums) +
+                    ShowFatalError("SimAirZonePlenum: Invalid CompIndex passed=" + fmt::to_string(ZonePlenumNum) +
+                                   ", Number of AirLoopHVAC:SupplyPlenum=" + fmt::to_string(state.dataZonePlenum->NumZoneReturnPlenums) +
                                    ", AirLoopHVAC:SupplyPlenum name=" + CompName);
                 }
                 if (state.dataZonePlenum->CheckSupEquipName(ZonePlenumNum)) {
                     if (CompName != state.dataZonePlenum->ZoneSupPlenCond(ZonePlenumNum).ZonePlenumName) {
-                        ShowFatalError("SimAirZonePlenum: Invalid CompIndex passed=" + TrimSigDigits(ZonePlenumNum) +
+                        ShowFatalError("SimAirZonePlenum: Invalid CompIndex passed=" + fmt::to_string(ZonePlenumNum) +
                                        ", AirLoopHVAC:SupplyPlenum name=" + CompName +
                                        ", stored AirLoopHVAC:SupplyPlenum Name for that index=" + state.dataZonePlenum->ZoneSupPlenCond(ZonePlenumNum).ZonePlenumName);
                     }
@@ -197,7 +195,7 @@ namespace ZonePlenum {
 
         } else {
             ShowSevereError("SimAirZonePlenum: Errors in Plenum=" + CompName);
-            ShowContinueError("ZonePlenum: Unhandled plenum type found:" + TrimSigDigits(iCompType));
+            ShowContinueError("ZonePlenum: Unhandled plenum type found:" + fmt::to_string(iCompType));
             ShowFatalError("Preceding conditions cause termination.");
         }
     }
@@ -673,6 +671,7 @@ namespace ZonePlenum {
             // Check that all ADUs with leakage found a return plenum
             for (ADUNum = 1; ADUNum <= NumAirDistUnits; ++ADUNum) {
                 auto &thisADU(AirDistUnit(ADUNum));
+                // TODO: this is comparing the same thing twice
                 if ((thisADU.DownStreamLeak || thisADU.DownStreamLeak) && (thisADU.RetPlenumNum == 0)) {
                     ShowWarningError("No return plenum found for simple duct leakage for ZoneHVAC:AirDistributionUnit=" + thisADU.Name +
                                      " in Zone=" + ZoneEquipConfig(thisADU.ZoneEqNum).ZoneName);

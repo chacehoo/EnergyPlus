@@ -7123,7 +7123,7 @@ void SetInitialMeterReportingAndOutputNames(EnergyPlusData &state,
                                          EnergyMeters(WhichMeter).TSAccRptNum,
                                          indexGroupKey,
                                          indexGroup,
-                                         TrimSigDigits(EnergyMeters(WhichMeter).TSAccRptNum),
+                                         fmt::to_string(EnergyMeters(WhichMeter).TSAccRptNum),
                                          EnergyMeters(WhichMeter).Name,
                                          EnergyMeters(WhichMeter).Units,
                                          true,
@@ -7177,7 +7177,7 @@ void SetInitialMeterReportingAndOutputNames(EnergyPlusData &state,
                                          EnergyMeters(WhichMeter).HRAccRptNum,
                                          indexGroupKey,
                                          indexGroup,
-                                         TrimSigDigits(EnergyMeters(WhichMeter).HRAccRptNum),
+                                         fmt::to_string(EnergyMeters(WhichMeter).HRAccRptNum),
                                          EnergyMeters(WhichMeter).Name,
                                          EnergyMeters(WhichMeter).Units,
                                          true,
@@ -7231,7 +7231,7 @@ void SetInitialMeterReportingAndOutputNames(EnergyPlusData &state,
                                          EnergyMeters(WhichMeter).DYAccRptNum,
                                          indexGroupKey,
                                          indexGroup,
-                                         TrimSigDigits(EnergyMeters(WhichMeter).DYAccRptNum),
+                                         fmt::to_string(EnergyMeters(WhichMeter).DYAccRptNum),
                                          EnergyMeters(WhichMeter).Name,
                                          EnergyMeters(WhichMeter).Units,
                                          true,
@@ -7285,7 +7285,7 @@ void SetInitialMeterReportingAndOutputNames(EnergyPlusData &state,
                                          EnergyMeters(WhichMeter).MNAccRptNum,
                                          indexGroupKey,
                                          indexGroup,
-                                         TrimSigDigits(EnergyMeters(WhichMeter).MNAccRptNum),
+                                         fmt::to_string(EnergyMeters(WhichMeter).MNAccRptNum),
                                          EnergyMeters(WhichMeter).Name,
                                          EnergyMeters(WhichMeter).Units,
                                          true,
@@ -7339,7 +7339,7 @@ void SetInitialMeterReportingAndOutputNames(EnergyPlusData &state,
                                          EnergyMeters(WhichMeter).YRAccRptNum,
                                          indexGroupKey,
                                          indexGroup,
-                                         TrimSigDigits(EnergyMeters(WhichMeter).YRAccRptNum),
+                                         fmt::to_string(EnergyMeters(WhichMeter).YRAccRptNum),
                                          EnergyMeters(WhichMeter).Name,
                                          EnergyMeters(WhichMeter).Units,
                                          true,
@@ -7393,7 +7393,7 @@ void SetInitialMeterReportingAndOutputNames(EnergyPlusData &state,
                                          EnergyMeters(WhichMeter).SMAccRptNum,
                                          indexGroupKey,
                                          indexGroup,
-                                         TrimSigDigits(EnergyMeters(WhichMeter).SMAccRptNum),
+                                         fmt::to_string(EnergyMeters(WhichMeter).SMAccRptNum),
                                          EnergyMeters(WhichMeter).Name,
                                          EnergyMeters(WhichMeter).Units,
                                          true,
@@ -7784,11 +7784,11 @@ Real64 GetInternalVariableValue(int const varType,    // 1=integer, 2=real, 3=me
     } else if (varType == 1) { // Integer
         if (keyVarIndex > NumOfIVariable) {
             ShowFatalError("GetInternalVariableValue: Integer variable passed index beyond range of array.");
-            ShowContinueError("Index = " + General::TrimSigDigits(keyVarIndex) +
-                              " Number of integer variables = " + General::TrimSigDigits(NumOfIVariable));
+            ShowContinueError("Index = " + fmt::to_string(keyVarIndex) +
+                              " Number of integer variables = " + fmt::to_string(NumOfIVariable));
         }
         if (keyVarIndex < 1) {
-            ShowFatalError("GetInternalVariableValue: Integer variable passed index <1. Index = " + General::TrimSigDigits(keyVarIndex));
+            ShowFatalError("GetInternalVariableValue: Integer variable passed index <1. Index = " + fmt::to_string(keyVarIndex));
         }
 
         // must use %Which, %Value is always zero if variable is not a requested report variable
@@ -7796,11 +7796,11 @@ Real64 GetInternalVariableValue(int const varType,    // 1=integer, 2=real, 3=me
     } else if (varType == 2) { // real
         if (keyVarIndex > NumOfRVariable) {
             ShowFatalError("GetInternalVariableValue: Real variable passed index beyond range of array.");
-            ShowContinueError("Index = " + General::TrimSigDigits(keyVarIndex) +
-                              " Number of real variables = " + General::TrimSigDigits(NumOfRVariable));
+            ShowContinueError("Index = " + fmt::to_string(keyVarIndex) +
+                              " Number of real variables = " + fmt::to_string(NumOfRVariable));
         }
         if (keyVarIndex < 1) {
-            ShowFatalError("GetInternalVariableValue: Integer variable passed index <1. Index = " + General::TrimSigDigits(keyVarIndex));
+            ShowFatalError("GetInternalVariableValue: Integer variable passed index <1. Index = " + fmt::to_string(keyVarIndex));
         }
 
         // must use %Which, %Value is always zero if variable is not a requested report variable

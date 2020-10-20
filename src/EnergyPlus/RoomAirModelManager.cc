@@ -615,14 +615,14 @@ namespace RoomAirModelManager {
         }
 
         if (TotalRoomAirPatternTooLow > 0) {
-            ShowWarningError("GetUserDefinedPatternData: RoomAirModelUserTempPattern: " + RoundSigDigits(TotalRoomAirPatternTooLow) +
+            ShowWarningError("GetUserDefinedPatternData: RoomAirModelUserTempPattern: " + fmt::to_string(TotalRoomAirPatternTooLow) +
                              " problem(s) in non-dimensional height calculations, too low surface height(s) in relation to floor height of zone(s).");
             ShowContinueError("...Use OutputDiagnostics,DisplayExtraWarnings; to see details.");
             TotalWarningErrors += TotalRoomAirPatternTooLow;
         }
         if (TotalRoomAirPatternTooHigh > 0) {
             ShowWarningError(
-                "GetUserDefinedPatternData: RoomAirModelUserTempPattern: " + RoundSigDigits(TotalRoomAirPatternTooHigh) +
+                "GetUserDefinedPatternData: RoomAirModelUserTempPattern: " + fmt::to_string(TotalRoomAirPatternTooHigh) +
                 " problem(s) in non-dimensional height calculations, too high surface height(s) in relation to ceiling height of zone(s).");
             ShowContinueError("...Use OutputDiagnostics,DisplayExtraWarnings; to see details.");
             TotalWarningErrors += TotalRoomAirPatternTooHigh;
@@ -1635,7 +1635,7 @@ namespace RoomAirModelManager {
             if (mod((NumAlphas + NumNumbers - 1), 3) != 0) {
                 ShowSevereError("GetRoomAirflowNetworkData: For " + cCurrentModuleObject + ": " + cAlphaArgs(1));
                 ShowContinueError("Extensible field set are not evenly divisable by 3. Number of data entries = " +
-                                  RoundSigDigits(NumAlphas + NumNumbers - 1));
+                                  fmt::to_string(NumAlphas + NumNumbers - 1));
                 ErrorsFound = true;
                 break;
             }
@@ -1706,7 +1706,7 @@ namespace RoomAirModelManager {
             if (mod((NumAlphas + NumNumbers - 1), 4) != 0) {
                 ShowSevereError("GetRoomAirflowNetworkData: For " + cCurrentModuleObject + ": " + cAlphaArgs(1));
                 ShowContinueError("Extensible field set are not evenly divisable by 4. Number of data entries = " +
-                                  RoundSigDigits(NumAlphas + NumNumbers - 1));
+                                  fmt::to_string(NumAlphas + NumNumbers - 1));
                 ErrorsFound = true;
                 break;
             }

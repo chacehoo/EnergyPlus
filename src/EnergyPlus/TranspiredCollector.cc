@@ -160,12 +160,12 @@ namespace TranspiredCollector {
         } else {
             UTSCNum = CompIndex;
             if (UTSCNum > state.dataTranspiredCollector->NumUTSC || UTSCNum < 1) {
-                ShowFatalError("SimTranspiredCollector: Invalid CompIndex passed=" + TrimSigDigits(UTSCNum) +
-                               ", Number of Transpired Collectors=" + TrimSigDigits(state.dataTranspiredCollector->NumUTSC) + ", UTSC name=" + CompName);
+                ShowFatalError("SimTranspiredCollector: Invalid CompIndex passed=" + fmt::to_string(UTSCNum) +
+                               ", Number of Transpired Collectors=" + fmt::to_string(state.dataTranspiredCollector->NumUTSC) + ", UTSC name=" + CompName);
             }
             if (state.dataTranspiredCollector->CheckEquipName(UTSCNum)) {
                 if (CompName != state.dataTranspiredCollector->UTSC(UTSCNum).Name) {
-                    ShowFatalError("SimTranspiredCollector: Invalid CompIndex passed=" + TrimSigDigits(UTSCNum) + ", Transpired Collector name=" +
+                    ShowFatalError("SimTranspiredCollector: Invalid CompIndex passed=" + fmt::to_string(UTSCNum) + ", Transpired Collector name=" +
                                    CompName + ", stored Transpired Collector Name for that index=" + state.dataTranspiredCollector->UTSC(UTSCNum).Name);
                 }
                 state.dataTranspiredCollector->CheckEquipName(UTSCNum) = false;
@@ -288,7 +288,7 @@ namespace TranspiredCollector {
 
         if (MaxNumNumbers != 11) {
             ShowSevereError("GetTranspiredCollectorInput: " + CurrentModuleObject +
-                            " Object Definition indicates not = 11 Number Objects, Number Indicated=" + TrimSigDigits(MaxNumNumbers));
+                            " Object Definition indicates not = 11 Number Objects, Number Indicated=" + fmt::to_string(MaxNumNumbers));
             ErrorsFound = true;
         }
         Alphas.allocate(MaxNumAlphas);
@@ -326,7 +326,7 @@ namespace TranspiredCollector {
 
                 if (MaxNumNumbersSplit != 0) {
                     ShowSevereError("GetTranspiredCollectorInput: " + CurrentModuleMultiObject +
-                                    " Object Definition indicates not = 0 Number Objects, Number Indicated=" + TrimSigDigits(MaxNumNumbersSplit));
+                                    " Object Definition indicates not = 0 Number Objects, Number Indicated=" + fmt::to_string(MaxNumNumbersSplit));
                     ErrorsFound = true;
                 }
                 if (!allocated(AlphasSplit)) AlphasSplit.allocate(MaxNumAlphasSplit);

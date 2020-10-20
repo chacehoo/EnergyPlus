@@ -1256,8 +1256,8 @@ namespace AirflowNetworkBalanceManager {
         CurrentModuleObject = "AirflowNetwork:Distribution:Component:Fan";
         state.dataAirflowNetworkBalanceManager->DisSysNumOfCVFs = inputProcessor->getNumObjectsFound(CurrentModuleObject);
         if (state.dataAirflowNetworkBalanceManager->DisSysNumOfCVFs > 0 && state.dataAirflowNetworkBalanceManager->DisSysNumOfCVFs != inputProcessor->getNumObjectsFound("AirLoopHVAC")) {
-            ShowSevereError("The number of entered AirflowNetwork:Distribution:Component:Fan objects is " + RoundSigDigits(state.dataAirflowNetworkBalanceManager->DisSysNumOfCVFs));
-            ShowSevereError("The number of entered AirLoopHVAC objects is " + RoundSigDigits(inputProcessor->getNumObjectsFound("AirLoopHVAC")));
+            ShowSevereError("The number of entered AirflowNetwork:Distribution:Component:Fan objects is " + fmt::to_string(state.dataAirflowNetworkBalanceManager->DisSysNumOfCVFs));
+            ShowSevereError("The number of entered AirLoopHVAC objects is " + fmt::to_string(inputProcessor->getNumObjectsFound("AirLoopHVAC")));
             ShowContinueError("Both numbers should be equal. Please check your inputs.");
             success = false;
         }
@@ -2819,8 +2819,8 @@ namespace AirflowNetworkBalanceManager {
                                 "surfaces defined in " +
                                 CurrentModuleObject + " objects ");
                 ShowContinueError("has to be equal to the number of AirflowNetwork:MultiZone:ExternalNode objects.");
-                ShowContinueError("The entered number of external nodes is " + RoundSigDigits(state.dataAirflowNetworkBalanceManager->AirflowNetworkNumOfExtNode) +
-                                  ". The entered number of external surfaces is " + RoundSigDigits(state.dataAirflowNetworkBalanceManager->AirflowNetworkNumOfExtSurfaces) + '.');
+                ShowContinueError("The entered number of external nodes is " + fmt::to_string(state.dataAirflowNetworkBalanceManager->AirflowNetworkNumOfExtNode) +
+                                  ". The entered number of external surfaces is " + fmt::to_string(state.dataAirflowNetworkBalanceManager->AirflowNetworkNumOfExtSurfaces) + '.');
                 ErrorsFound = true;
             }
         }
@@ -3033,7 +3033,7 @@ namespace AirflowNetworkBalanceManager {
                 ShowWarningError(RoutineName + "SurfaceAverageCalculation is entered for field = Wind Pressure Coefficient Type.");
                 ShowContinueError(
                     "The AirflowNetwork model provides wind pressure coefficients for 4 vertical exterior orientations and 1 horizontal roof.");
-                ShowContinueError(" There are only " + RoundSigDigits(n) +
+                ShowContinueError(" There are only " + fmt::to_string(n) +
                                   " exterior surface orientations defined in this input file using AirflowNetwork:MultiZone:Surface objects.");
                 ShowContinueError("Reconsider if this is your modeling intent. Simulation continues.");
             }
@@ -4687,7 +4687,7 @@ namespace AirflowNetworkBalanceManager {
                                     "The inputs of component name field as a heat exchanger in AIRFLOWNETWORK:DISTRIBUTION:LINKAGE is not correct");
                     ShowContinueError("The entered name of heat exchanger is " + DisSysCompHXData(i).name +
                                       " in AirflowNetwork:Distribution:Component:HeatExchanger objects");
-                    ShowContinueError("The correct appearance number is 2. The entered appearance number is " + RoundSigDigits(count));
+                    ShowContinueError("The correct appearance number is 2. The entered appearance number is " + fmt::to_string(count));
                     ErrorsFound = true;
                 }
                 if ((!DisSysCompHXData(i).CoilParentExists) && count != 1) {
@@ -4695,7 +4695,7 @@ namespace AirflowNetworkBalanceManager {
                                     "The inputs of component name field as a heat exchanger in AIRFLOWNETWORK:DISTRIBUTION:LINKAGE is not correct");
                     ShowContinueError("The entered name of heat exchanger is " + DisSysCompHXData(i).name +
                                       " in AirflowNetwork:Distribution:Component:HeatExchanger objects");
-                    ShowContinueError("The correct appearance number is 1. The entered appearance number is " + RoundSigDigits(count));
+                    ShowContinueError("The correct appearance number is 1. The entered appearance number is " + fmt::to_string(count));
                     ErrorsFound = true;
                 }
             }
@@ -6380,7 +6380,7 @@ namespace AirflowNetworkBalanceManager {
                 } // End of wind direction loop
                 // Add new table
                 vals[12] = vals[0]; // Enforce periodicity
-                curveIndex[FacadeNum - 1] = AirflowNetworkBalanceManager::makeTable(state, "!WPCTABLE" + std::to_string(FacadeNum), dirs30GridIndex, vals);
+                curveIndex[FacadeNum - 1] = AirflowNetworkBalanceManager::makeTable(state, "!WPCTABLE" + fmt::to_string(FacadeNum), dirs30GridIndex, vals);
             } // End of facade number loop
 
         } else { //-calculate the advanced single sided wind pressure coefficients
@@ -6458,14 +6458,14 @@ namespace AirflowNetworkBalanceManager {
 
             for (FacadeNum = 1; FacadeNum <= 4; ++FacadeNum) {
                 valsByFacade[FacadeNum - 1].push_back(valsByFacade[FacadeNum - 1][0]); // Enforce periodicity
-                curveIndex[FacadeNum - 1] = AirflowNetworkBalanceManager::makeTable(state, "!SSWPCTABLEFACADE" + std::to_string(FacadeNum), dirs10GridIndex, valsByFacade[FacadeNum - 1]);
+                curveIndex[FacadeNum - 1] = AirflowNetworkBalanceManager::makeTable(state, "!SSWPCTABLEFACADE" + fmt::to_string(FacadeNum), dirs10GridIndex, valsByFacade[FacadeNum - 1]);
             }
             FacadeNum = 5;
             valsByFacade[FacadeNum - 1].push_back(valsByFacade[FacadeNum - 1][0]); // Enforce periodicity
-            curveIndex[FacadeNum - 1] = AirflowNetworkBalanceManager::makeTable(state, "!SSWPCTABLEFACADE" + std::to_string(FacadeNum), dirs30GridIndex, valsByFacade[FacadeNum - 1]);
+            curveIndex[FacadeNum - 1] = AirflowNetworkBalanceManager::makeTable(state, "!SSWPCTABLEFACADE" + fmt::to_string(FacadeNum), dirs30GridIndex, valsByFacade[FacadeNum - 1]);
             for (unsigned facadeNum = 6; facadeNum <= valsByFacade.size(); ++facadeNum) {
                 valsByFacade[facadeNum - 1].push_back(valsByFacade[facadeNum - 1][0]); // Enforce periodicity
-                curveIndex[facadeNum - 1] = AirflowNetworkBalanceManager::makeTable(state, "!SSWPCTABLE" + std::to_string(facadeNum), dirs10GridIndex, valsByFacade[facadeNum - 1]);
+                curveIndex[facadeNum - 1] = AirflowNetworkBalanceManager::makeTable(state, "!SSWPCTABLE" + fmt::to_string(facadeNum), dirs10GridIndex, valsByFacade[facadeNum - 1]);
             }
         }
         // Connect the external nodes to the new curves
@@ -10357,8 +10357,8 @@ namespace AirflowNetworkBalanceManager {
             if (state.dataAirflowNetworkBalanceManager->NumOfExhaustFans != AirflowNetworkNumOfExhFan) {
                 ShowSevereError(RoutineName + "The number of " + CurrentModuleObject +
                                 " is not equal to the number of Fan:ZoneExhaust fans defined in ZoneHVAC:EquipmentConnections");
-                ShowContinueError("The number of " + CurrentModuleObject + " is " + RoundSigDigits(AirflowNetworkNumOfExhFan));
-                ShowContinueError("The number of Zone exhaust fans defined in ZoneHVAC:EquipmentConnections is " + RoundSigDigits(state.dataAirflowNetworkBalanceManager->NumOfExhaustFans));
+                ShowContinueError("The number of " + CurrentModuleObject + " is " + fmt::to_string(AirflowNetworkNumOfExhFan));
+                ShowContinueError("The number of Zone exhaust fans defined in ZoneHVAC:EquipmentConnections is " + fmt::to_string(state.dataAirflowNetworkBalanceManager->NumOfExhaustFans));
                 ErrorsFound = true;
             }
 
@@ -10678,7 +10678,7 @@ namespace AirflowNetworkBalanceManager {
                 } else if (NumofExtSurfInZone(AFNZnNum) > 2) {
                     ShowWarningError("AirflowNetwork:Multizone:Zone = " + MultizoneZoneData(AFNZnNum).ZoneName +
                                      " has single side wind pressure coefficient type \"ADVANCED\", but has " +
-                                     RoundSigDigits(NumofExtSurfInZone(AFNZnNum)) +
+                                     fmt::to_string(NumofExtSurfInZone(AFNZnNum)) +
                                      " exterior AirflowNetwork:MultiZone:Component:DetailedOpening and/or "
                                      "AirflowNetwork:MultiZone:Component:SimpleOpening objects.");
                     ShowContinueError("Zones must have exactly two openings in order for the \"ADVANCED\" single side wind pressure coefficient "

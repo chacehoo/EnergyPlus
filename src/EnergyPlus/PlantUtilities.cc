@@ -484,7 +484,7 @@ namespace PlantUtilities {
                 }
             } else {
                 ShowFatalError("SetActuatedBranchFlowRate: Flowlock out of range, value=" +
-                                       General::RoundSigDigits(loop_side.FlowLock)); // DEBUG error...should never get here LCOV_EXCL_LINE
+                                       fmt::to_string(loop_side.FlowLock)); // DEBUG error...should never get here LCOV_EXCL_LINE
             }
 
             Real64 const a_node_MasFlowRate(a_node.MassFlowRate);
@@ -1850,8 +1850,8 @@ namespace PlantUtilities {
                 }
                 errFlag = true;
             } else {
-                ShowSevereError("ScanPlantLoopsForObject: Invalid CompType passed [" + RoundSigDigits(CompType) + "], Name=" + CompName);
-                ShowContinueError("Valid CompTypes are in the range [1 - " + RoundSigDigits(DataPlant::NumSimPlantEquipTypes) + "].");
+                ShowSevereError("ScanPlantLoopsForObject: Invalid CompType passed [" + fmt::to_string(CompType) + "], Name=" + CompName);
+                ShowContinueError("Valid CompTypes are in the range [1 - " + fmt::to_string(DataPlant::NumSimPlantEquipTypes) + "].");
                 ShowFatalError("Previous error causes program termination");
             }
         }
@@ -1956,7 +1956,7 @@ namespace PlantUtilities {
             } else {
                 ShowContinueError("during sizing: called by " + CallerName);
             }
-            if (outFoundCount > 0) ShowContinueError("Node was found as outlet node (for component) " + RoundSigDigits(outFoundCount) + " time(s).");
+            if (outFoundCount > 0) ShowContinueError("Node was found as outlet node (for component) " + fmt::to_string(outFoundCount) + " time(s).");
             ShowContinueError("Possible error in Branch inputs.  For more information, look for other error messages related to this node name.");
             // fatal?
         }

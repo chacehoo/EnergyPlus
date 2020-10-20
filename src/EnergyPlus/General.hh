@@ -220,13 +220,13 @@ namespace General {
 
     std::string TrimSigDigits(int const IntegerValue,
                               Optional_int_const SigDigits = _ // ignored
-    );
+    ) = delete;
 
     std::string RoundSigDigits(Real64 const RealValue, int const SigDigits);
 
     std::string RoundSigDigits(int const IntegerValue,
                                Optional_int_const SigDigits = _ // ignored
-    );
+    ) = delete;
 
     std::string RemoveTrailingZeros(std::string const &InputString);
 

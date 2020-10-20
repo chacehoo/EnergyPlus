@@ -162,11 +162,11 @@ namespace VariableSpeedCoils {
         } else {
             DXCoilNum = CompIndex;
             if (DXCoilNum > state.dataVariableSpeedCoils->NumVarSpeedCoils || DXCoilNum < 1) {
-                ShowFatalError("SimVariableSpeedCoils: Invalid CompIndex passed=" + TrimSigDigits(DXCoilNum) +
-                               ", Number of Water to Air HPs=" + TrimSigDigits(state.dataVariableSpeedCoils->NumVarSpeedCoils) + ", WaterToAir HP name=" + CompName);
+                ShowFatalError("SimVariableSpeedCoils: Invalid CompIndex passed=" + fmt::to_string(DXCoilNum) +
+                               ", Number of Water to Air HPs=" + fmt::to_string(state.dataVariableSpeedCoils->NumVarSpeedCoils) + ", WaterToAir HP name=" + CompName);
             }
             if (!CompName.empty() && CompName != state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name) {
-                ShowFatalError("SimVariableSpeedCoils: Invalid CompIndex passed=" + TrimSigDigits(DXCoilNum) + ", WaterToAir HP name=" + CompName +
+                ShowFatalError("SimVariableSpeedCoils: Invalid CompIndex passed=" + fmt::to_string(DXCoilNum) + ", WaterToAir HP name=" + CompName +
                                ", stored WaterToAir HP Name for that index=" + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name);
             }
         }
@@ -3149,12 +3149,12 @@ namespace VariableSpeedCoils {
                     // Check for zero capacity or zero max flow rate
                     if (state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedTotCap(Mode) <= 0.0) {
                         ShowSevereError("Sizing: " + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).VarSpeedCoilType + ' ' + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name +
-                                        " has zero rated total capacity at speed " + TrimSigDigits(Mode));
+                                        " has zero rated total capacity at speed " + fmt::to_string(Mode));
                         ErrorsFound = true;
                     }
                     if (state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode) <= 0.0) {
                         ShowSevereError("Sizing: " + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).VarSpeedCoilType + ' ' + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name +
-                                        " has zero rated air flow rate at speed " + TrimSigDigits(Mode));
+                                        " has zero rated air flow rate at speed " + fmt::to_string(Mode));
                         ErrorsFound = true;
                     }
                     if (ErrorsFound) {
@@ -4449,7 +4449,7 @@ namespace VariableSpeedCoils {
             for (Mode = 1; Mode <= state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).NumOfSpeeds - 1; ++Mode) {
                 if (state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedWaterVolFlowRate(Mode) > state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedWaterVolFlowRate(Mode + 1) * 1.05) {
                     ShowWarningError("SizeDXCoil: " + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).VarSpeedCoilType + ' ' + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name + ", Speed " +
-                                     TrimSigDigits(Mode) + " Rated Air Flow Rate must be less than or equal to Speed " + TrimSigDigits(Mode + 1) +
+                                     fmt::to_string(Mode) + " Rated Air Flow Rate must be less than or equal to Speed " + fmt::to_string(Mode + 1) +
                                      " Rated Air Flow Rate.");
                     ShowContinueError("Instead, " + RoundSigDigits(state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode), 2) + " > " +
                                       RoundSigDigits(state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode + 1), 2));
@@ -4534,7 +4534,7 @@ namespace VariableSpeedCoils {
         for (Mode = 1; Mode <= state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).NumOfSpeeds - 1; ++Mode) {
             if (state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode) > state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode + 1)) {
                 ShowWarningError("SizeDXCoil: " + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).VarSpeedCoilType + ' ' + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name + ", Speed " +
-                                 TrimSigDigits(Mode) + " Rated Air Flow Rate must be less than or equal to Speed " + TrimSigDigits(Mode + 1) +
+                                 fmt::to_string(Mode) + " Rated Air Flow Rate must be less than or equal to Speed " + fmt::to_string(Mode + 1) +
                                  " Rated Air Flow Rate.");
                 ShowContinueError("Instead, " + RoundSigDigits(state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode), 2) + " > " +
                                   RoundSigDigits(state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode + 1), 2));
@@ -4546,8 +4546,8 @@ namespace VariableSpeedCoils {
         for (Mode = 1; Mode <= state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).NumOfSpeeds - 1; ++Mode) {
             if (state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedTotCap(Mode) > state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedTotCap(Mode + 1)) {
                 ShowWarningError("SizeDXCoil: " + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).VarSpeedCoilType + ' ' + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name + ", Speed " +
-                                 TrimSigDigits(Mode) + " Rated Total Cooling Capacity must be less than or equal to Speed " +
-                                 TrimSigDigits(Mode + 1) + " Rated Total Cooling Capacity.");
+                                 fmt::to_string(Mode) + " Rated Total Cooling Capacity must be less than or equal to Speed " +
+                                 fmt::to_string(Mode + 1) + " Rated Total Cooling Capacity.");
                 ShowContinueError("Instead, " + RoundSigDigits(state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedTotCap(Mode), 2) + " > " +
                                   RoundSigDigits(state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedTotCap(Mode + 1), 2));
                 ShowFatalError("Preceding conditions cause termination.");
@@ -7050,8 +7050,8 @@ namespace VariableSpeedCoils {
         }
 
         if (WSHPNum <= 0 || WSHPNum > state.dataVariableSpeedCoils->NumVarSpeedCoils) {
-            ShowSevereError("SetVarSpeedCoilData: called with VS WSHP Coil Number out of range=" + TrimSigDigits(WSHPNum) + " should be >0 and <" +
-                            TrimSigDigits(state.dataVariableSpeedCoils->NumVarSpeedCoils));
+            ShowSevereError("SetVarSpeedCoilData: called with VS WSHP Coil Number out of range=" + fmt::to_string(WSHPNum) + " should be >0 and <" +
+                            fmt::to_string(state.dataVariableSpeedCoils->NumVarSpeedCoils));
             ErrorsFound = true;
             return;
         }

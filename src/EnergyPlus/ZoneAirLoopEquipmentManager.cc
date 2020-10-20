@@ -56,12 +56,10 @@
 #include <EnergyPlus/DataAirLoop.hh>
 #include <EnergyPlus/DataDefineEquip.hh>
 #include <EnergyPlus/DataHeatBalance.hh>
-#include <EnergyPlus/DataHVACGlobals.hh>
 #include <EnergyPlus/DataLoopNode.hh>
 #include <EnergyPlus/DataSizing.hh>
 #include <EnergyPlus/DataZoneEquipment.hh>
 #include <EnergyPlus/DualDuct.hh>
-#include <EnergyPlus/General.hh>
 #include <EnergyPlus/GeneralRoutines.hh>
 #include <EnergyPlus/HVACCooledBeam.hh>
 #include <EnergyPlus/HVACFourPipeBeam.hh>
@@ -90,7 +88,6 @@ namespace ZoneAirLoopEquipmentManager {
     using DataGlobals::BeginHourFlag;
     using DataGlobals::BeginTimeStepFlag;
     using DataGlobals::NumOfZones;
-    using DataHVACGlobals::FirstTimeStepSysFlag;
     using namespace DataDefineEquip;
 
     void ManageZoneAirLoopEquipment(EnergyPlusData &state, std::string const &ZoneAirLoopEquipName,
@@ -112,7 +109,6 @@ namespace ZoneAirLoopEquipmentManager {
         // (water-air, refrigerant-air, steam-air, electric-electric,
         // water-water, etc)
 
-        using General::TrimSigDigits;
 
         int AirDistUnitNum;
 
@@ -130,11 +126,11 @@ namespace ZoneAirLoopEquipmentManager {
         } else {
             AirDistUnitNum = CompIndex;
             if (AirDistUnitNum > NumAirDistUnits || AirDistUnitNum < 1) {
-                ShowFatalError("ManageZoneAirLoopEquipment:  Invalid CompIndex passed=" + TrimSigDigits(AirDistUnitNum) +
-                               ", Number of Units=" + TrimSigDigits(NumAirDistUnits) + ", Entered Unit name=" + ZoneAirLoopEquipName);
+                ShowFatalError("ManageZoneAirLoopEquipment:  Invalid CompIndex passed=" + fmt::to_string(AirDistUnitNum) +
+                               ", Number of Units=" + fmt::to_string(NumAirDistUnits) + ", Entered Unit name=" + ZoneAirLoopEquipName);
             }
             if (ZoneAirLoopEquipName != AirDistUnit(AirDistUnitNum).Name) {
-                ShowFatalError("ManageZoneAirLoopEquipment: Invalid CompIndex passed=" + TrimSigDigits(AirDistUnitNum) +
+                ShowFatalError("ManageZoneAirLoopEquipment: Invalid CompIndex passed=" + fmt::to_string(AirDistUnitNum) +
                                ", Unit name=" + ZoneAirLoopEquipName + ", stored Unit Name for that index=" + AirDistUnit(AirDistUnitNum).Name);
             }
         }

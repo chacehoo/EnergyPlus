@@ -842,18 +842,18 @@ TEST(RE2, FullMatchTypeTests) {
     ASSERT_TRUE(RE2::FullMatch("100",  "(-?\\d+)", &v)); ASSERT_EQ(v, 100);
     ASSERT_TRUE(RE2::FullMatch("-100", "(-?\\d+)", &v)); ASSERT_EQ(v, -100);
 
-    str = std::to_string(max);
+    str = fmt::to_string(max);
     ASSERT_TRUE(RE2::FullMatch(str,    "(-?\\d+)", &v)); ASSERT_EQ(v, max);
 
-    str = std::to_string(min);
+    str = fmt::to_string(min);
     ASSERT_TRUE(RE2::FullMatch(str,    "(-?\\d+)", &v)); ASSERT_EQ(v, min);
 
-    str = std::to_string(max);
+    str = fmt::to_string(max);
     ASSERT_NE(str.back(), '9');
     str.back()++;
     ASSERT_FALSE(RE2::FullMatch(str,   "(-?\\d+)", &v));
 
-    str = std::to_string(min);
+    str = fmt::to_string(min);
     ASSERT_NE(str.back(), '9');
     str.back()++;
     ASSERT_FALSE(RE2::FullMatch(str,   "(-?\\d+)", &v));
@@ -867,7 +867,7 @@ TEST(RE2, FullMatchTypeTests) {
     ASSERT_TRUE(RE2::FullMatch("100",  "(-?\\d+)", &v));  ASSERT_EQ(v, 100);
     ASSERT_TRUE(RE2::FullMatch("-100", "(-?\\d+)", &v2)); ASSERT_EQ(v2, -100);
 
-    str = std::to_string(max);
+    str = fmt::to_string(max);
     ASSERT_TRUE(RE2::FullMatch(str,    "(-?\\d+)", &v)); ASSERT_EQ(v, max);
 
     ASSERT_NE(str.back(), '9');

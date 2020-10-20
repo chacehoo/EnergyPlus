@@ -49,14 +49,11 @@
 #include <EnergyPlus/BranchNodeConnections.hh>
 #include <EnergyPlus/Data/EnergyPlusData.hh>
 #include <EnergyPlus/DataContaminantBalance.hh>
-#include <EnergyPlus/DataHVACGlobals.hh>
 #include <EnergyPlus/DataIPShortCuts.hh>
 #include <EnergyPlus/DataLoopNode.hh>
-#include <EnergyPlus/General.hh>
 #include <EnergyPlus/HVACDuct.hh>
 #include <EnergyPlus/InputProcessing/InputProcessor.hh>
 #include <EnergyPlus/NodeInputManager.hh>
-#include <EnergyPlus/OutputProcessor.hh>
 #include <EnergyPlus/UtilityRoutines.hh>
 
 namespace EnergyPlus {
@@ -91,7 +88,6 @@ namespace HVACDuct {
     // <use statements for data only modules>
     // Using/Aliasing
     using DataGlobals::BeginEnvrnFlag;
-    using namespace DataHVACGlobals;
     using namespace DataLoopNode;
 
     // <use statements for access to subroutines in other modules>
@@ -140,7 +136,6 @@ namespace HVACDuct {
         // Manage the simulation of a duct component
 
         // Using/Aliasing
-        using General::TrimSigDigits;
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int DuctNum;                    // index of duct being simulated
@@ -160,12 +155,12 @@ namespace HVACDuct {
         } else {
             DuctNum = CompIndex;
             if (DuctNum > NumDucts || DuctNum < 1) {
-                ShowFatalError("SimDuct:  Invalid CompIndex passed=" + TrimSigDigits(DuctNum) + ", Number of Components=" + TrimSigDigits(NumDucts) +
+                ShowFatalError("SimDuct:  Invalid CompIndex passed=" + fmt::to_string(DuctNum) + ", Number of Components=" + fmt::to_string(NumDucts) +
                                ", Entered Component name=" + CompName);
             }
             if (CheckEquipName(DuctNum)) {
                 if (CompName != Duct(DuctNum).Name) {
-                    ShowFatalError("SimDuct: Invalid CompIndex passed=" + TrimSigDigits(DuctNum) + ", Component name=" + CompName +
+                    ShowFatalError("SimDuct: Invalid CompIndex passed=" + fmt::to_string(DuctNum) + ", Component name=" + CompName +
                                    ", stored Component Name for that index=" + Duct(DuctNum).Name);
                 }
                 CheckEquipName(DuctNum) = false;

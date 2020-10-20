@@ -53,7 +53,6 @@
 #include <ObjexxFCL/gio.hh>
 
 // EnergyPlus Headers
-#include <EnergyPlus/DataGlobals.hh>
 #include <EnergyPlus/DataPrecisionGlobals.hh>
 #include <EnergyPlus/General.hh>
 #include <EnergyPlus/RootFinder.hh>
@@ -176,7 +175,6 @@ namespace RootFinder {
     // Use statements for data only modules
     // Using/Aliasing
     using namespace DataRootFinder;
-    using namespace DataGlobals;
     using General::TrimSigDigits;
 
     // Data
@@ -245,8 +243,8 @@ namespace RootFinder {
         // Load assumed action for underlying function F(X)
         if (SlopeType != iSlopeIncreasing && SlopeType != iSlopeDecreasing) {
             ShowSevereError("SetupRootFinder: Invalid function slope specification. Valid choices are:");
-            ShowContinueError("SetupRootFinder: iSlopeIncreasing=" + TrimSigDigits(iSlopeIncreasing));
-            ShowContinueError("SetupRootFinder: iSlopeDecreasing=" + TrimSigDigits(iSlopeDecreasing));
+            ShowContinueError("SetupRootFinder: iSlopeIncreasing=" + fmt::to_string(iSlopeIncreasing));
+            ShowContinueError("SetupRootFinder: iSlopeDecreasing=" + fmt::to_string(iSlopeDecreasing));
             ShowFatalError("SetupRootFinder: Preceding error causes program termination.");
         }
         RootFinderData.Controls.SlopeType = SlopeType;
@@ -255,10 +253,10 @@ namespace RootFinder {
         if (MethodType != iMethodBisection && MethodType != iMethodFalsePosition && MethodType != iMethodSecant && MethodType != iMethodBrent) {
 
             ShowSevereError("SetupRootFinder: Invalid solution method specification. Valid choices are:");
-            ShowContinueError("SetupRootFinder: iMethodBisection=" + TrimSigDigits(iMethodBisection));
-            ShowContinueError("SetupRootFinder: iMethodFalsePosition=" + TrimSigDigits(iMethodFalsePosition));
-            ShowContinueError("SetupRootFinder: iMethodSecant=" + TrimSigDigits(iMethodSecant));
-            ShowContinueError("SetupRootFinder: iMethodBrent=" + TrimSigDigits(iMethodBrent));
+            ShowContinueError("SetupRootFinder: iMethodBisection=" + fmt::to_string(iMethodBisection));
+            ShowContinueError("SetupRootFinder: iMethodFalsePosition=" + fmt::to_string(iMethodFalsePosition));
+            ShowContinueError("SetupRootFinder: iMethodSecant=" + fmt::to_string(iMethodSecant));
+            ShowContinueError("SetupRootFinder: iMethodBrent=" + fmt::to_string(iMethodBrent));
             ShowFatalError("SetupRootFinder: Preceding error causes program termination.");
         }
         RootFinderData.Controls.MethodType = MethodType;
@@ -760,8 +758,8 @@ namespace RootFinder {
                 } else {
                     // Should never happen
                     ShowSevereError("CheckInternalConsistency: Invalid function slope specification. Valid choices are:");
-                    ShowContinueError("CheckInternalConsistency: iSlopeIncreasing=" + TrimSigDigits(iSlopeIncreasing));
-                    ShowContinueError("CheckInternalConsistency: iSlopeDecreasing=" + TrimSigDigits(iSlopeDecreasing));
+                    ShowContinueError("CheckInternalConsistency: iSlopeIncreasing=" + fmt::to_string(iSlopeIncreasing));
+                    ShowContinueError("CheckInternalConsistency: iSlopeDecreasing=" + fmt::to_string(iSlopeDecreasing));
                     ShowFatalError("CheckInternalConsistency: Preceding error causes program termination.");
                 }
             }
@@ -795,8 +793,8 @@ namespace RootFinder {
                 } else {
                     // Should never happen
                     ShowSevereError("CheckInternalConsistency: Invalid function slope specification. Valid choices are:");
-                    ShowContinueError("CheckInternalConsistency: iSlopeIncreasing=" + TrimSigDigits(iSlopeIncreasing));
-                    ShowContinueError("CheckInternalConsistency: iSlopeDecreasing=" + TrimSigDigits(iSlopeDecreasing));
+                    ShowContinueError("CheckInternalConsistency: iSlopeIncreasing=" + fmt::to_string(iSlopeIncreasing));
+                    ShowContinueError("CheckInternalConsistency: iSlopeDecreasing=" + fmt::to_string(iSlopeDecreasing));
                     ShowFatalError("CheckInternalConsistency: Preceding error causes program termination.");
                 }
             }
@@ -821,8 +819,8 @@ namespace RootFinder {
                 } else {
                     // Should never happen
                     ShowSevereError("CheckInternalConsistency: Invalid function slope specification. Valid choices are:");
-                    ShowContinueError("CheckInternalConsistency: iSlopeIncreasing=" + TrimSigDigits(iSlopeIncreasing));
-                    ShowContinueError("CheckInternalConsistency: iSlopeDecreasing=" + TrimSigDigits(iSlopeDecreasing));
+                    ShowContinueError("CheckInternalConsistency: iSlopeIncreasing=" + fmt::to_string(iSlopeIncreasing));
+                    ShowContinueError("CheckInternalConsistency: iSlopeDecreasing=" + fmt::to_string(iSlopeDecreasing));
                     ShowFatalError("CheckInternalConsistency: Preceding error causes program termination.");
                 }
             }
@@ -1080,8 +1078,8 @@ namespace RootFinder {
             } else {
                 // Should never happen
                 ShowSevereError("CheckSlope: Invalid function slope specification. Valid choices are:");
-                ShowContinueError("CheckSlope: iSlopeIncreasing=" + TrimSigDigits(iSlopeIncreasing));
-                ShowContinueError("CheckSlope: iSlopeDecreasing=" + TrimSigDigits(iSlopeDecreasing));
+                ShowContinueError("CheckSlope: iSlopeIncreasing=" + fmt::to_string(iSlopeIncreasing));
+                ShowContinueError("CheckSlope: iSlopeDecreasing=" + fmt::to_string(iSlopeDecreasing));
                 ShowFatalError("CheckSlope: Preceding error causes program termination.");
             }
         }
@@ -1224,8 +1222,8 @@ namespace RootFinder {
             } else {
                 // Should never happen
                 ShowSevereError("CheckMinConstraint: Invalid function slope specification. Valid choices are:");
-                ShowContinueError("CheckMinConstraint: iSlopeIncreasing=" + TrimSigDigits(iSlopeIncreasing));
-                ShowContinueError("CheckMinConstraint: iSlopeDecreasing=" + TrimSigDigits(iSlopeDecreasing));
+                ShowContinueError("CheckMinConstraint: iSlopeIncreasing=" + fmt::to_string(iSlopeIncreasing));
+                ShowContinueError("CheckMinConstraint: iSlopeDecreasing=" + fmt::to_string(iSlopeDecreasing));
                 ShowFatalError("CheckMinConstraint: Preceding error causes program termination.");
             }
         }
@@ -1298,8 +1296,8 @@ namespace RootFinder {
             } else {
                 // Should never happen
                 ShowSevereError("CheckMaxConstraint: Invalid function slope specification. Valid choices are:");
-                ShowContinueError("CheckMaxConstraint: iSlopeIncreasing=" + TrimSigDigits(iSlopeIncreasing));
-                ShowContinueError("CheckMaxConstraint: iSlopeDecreasing=" + TrimSigDigits(iSlopeDecreasing));
+                ShowContinueError("CheckMaxConstraint: iSlopeIncreasing=" + fmt::to_string(iSlopeIncreasing));
+                ShowContinueError("CheckMaxConstraint: iSlopeDecreasing=" + fmt::to_string(iSlopeDecreasing));
                 ShowFatalError("CheckMaxConstraint: Preceding error causes program termination.");
             }
         }
@@ -1645,8 +1643,8 @@ namespace RootFinder {
             } else {
                 // Should never happen
                 ShowSevereError("UpdateBracket: Invalid function slope specification. Valid choices are:");
-                ShowContinueError("UpdateBracket: iSlopeIncreasing=" + TrimSigDigits(iSlopeIncreasing));
-                ShowContinueError("UpdateBracket: iSlopeDecreasing=" + TrimSigDigits(iSlopeDecreasing));
+                ShowContinueError("UpdateBracket: iSlopeIncreasing=" + fmt::to_string(iSlopeIncreasing));
+                ShowContinueError("UpdateBracket: iSlopeDecreasing=" + fmt::to_string(iSlopeDecreasing));
                 ShowFatalError("UpdateBracket: Preceding error causes program termination.");
             }
         }
@@ -1999,10 +1997,10 @@ namespace RootFinder {
                             RootFinderData.XCandidate = BrentMethod(RootFinderData);
                         } else {
                             ShowSevereError("AdvanceRootFinder: Invalid solution method specification. Valid choices are:");
-                            ShowContinueError("AdvanceRootFinder: iMethodBisection=" + TrimSigDigits(iMethodBisection));
-                            ShowContinueError("AdvanceRootFinder: iMethodFalsePosition=" + TrimSigDigits(iMethodFalsePosition));
-                            ShowContinueError("AdvanceRootFinder: iMethodSecant=" + TrimSigDigits(iMethodSecant));
-                            ShowContinueError("AdvanceRootFinder: iMethodBrent=" + TrimSigDigits(iMethodBrent));
+                            ShowContinueError("AdvanceRootFinder: iMethodBisection=" + fmt::to_string(iMethodBisection));
+                            ShowContinueError("AdvanceRootFinder: iMethodFalsePosition=" + fmt::to_string(iMethodFalsePosition));
+                            ShowContinueError("AdvanceRootFinder: iMethodSecant=" + fmt::to_string(iMethodSecant));
+                            ShowContinueError("AdvanceRootFinder: iMethodBrent=" + fmt::to_string(iMethodBrent));
                             ShowFatalError("AdvanceRootFinder: Preceding error causes program termination.");
                         }
                     }

@@ -214,12 +214,12 @@ namespace WaterThermalTanks {
         } else {
             CompNum = CompIndex;
             if (CompNum > state.dataWaterThermalTanks->numWaterThermalTank || CompNum < 1) {
-                ShowFatalError("SimWaterThermalTank_WaterTank:  Invalid CompIndex passed=" + General::TrimSigDigits(CompNum) +
-                               ", Number of Units=" + General::TrimSigDigits(state.dataWaterThermalTanks->numWaterThermalTank) + ", Entered Unit name=" + CompName);
+                ShowFatalError("SimWaterThermalTank_WaterTank:  Invalid CompIndex passed=" + fmt::to_string(CompNum) +
+                               ", Number of Units=" + fmt::to_string(state.dataWaterThermalTanks->numWaterThermalTank) + ", Entered Unit name=" + CompName);
             }
             if (state.dataWaterThermalTanks->WaterThermalTank(CompNum).CheckWTTEquipName) {
                 if (CompName != state.dataWaterThermalTanks->WaterThermalTank(CompNum).Name) {
-                    ShowFatalError("SimWaterThermalTank_WaterTank: Invalid CompIndex passed=" + General::TrimSigDigits(CompNum) +
+                    ShowFatalError("SimWaterThermalTank_WaterTank: Invalid CompIndex passed=" + fmt::to_string(CompNum) +
                                    ", Unit name=" + CompName + ", stored Unit Name for that index=" + state.dataWaterThermalTanks->WaterThermalTank(CompNum).Name);
                 }
                 state.dataWaterThermalTanks->WaterThermalTank(CompNum).CheckWTTEquipName = false;
@@ -247,12 +247,12 @@ namespace WaterThermalTanks {
         } else {
             CompNum = CompIndex;
             if (CompNum > state.dataWaterThermalTanks->numWaterThermalTank || CompNum < 1) {
-                ShowFatalError("SimWaterThermalTank_HeatPump:  Invalid CompIndex passed=" + General::TrimSigDigits(CompNum) +
-                               ", Number of Units=" + General::TrimSigDigits(state.dataWaterThermalTanks->numHeatPumpWaterHeater) + ", Entered Unit name=" + CompName);
+                ShowFatalError("SimWaterThermalTank_HeatPump:  Invalid CompIndex passed=" + fmt::to_string(CompNum) +
+                               ", Number of Units=" + fmt::to_string(state.dataWaterThermalTanks->numHeatPumpWaterHeater) + ", Entered Unit name=" + CompName);
             }
             if (state.dataWaterThermalTanks->HPWaterHeater(CompNum).CheckHPWHEquipName) {
                 if (CompName != state.dataWaterThermalTanks->HPWaterHeater(CompNum).Name) {
-                    ShowFatalError("SimWaterThermalTank_HeatPump: Invalid CompIndex passed=" + General::TrimSigDigits(CompNum) +
+                    ShowFatalError("SimWaterThermalTank_HeatPump: Invalid CompIndex passed=" + fmt::to_string(CompNum) +
                                    ", Unit name=" + CompName + ", stored Unit Name for that index=" + state.dataWaterThermalTanks->HPWaterHeater(CompNum).Name);
                 }
                 state.dataWaterThermalTanks->HPWaterHeater(CompNum).CheckHPWHEquipName = false;
@@ -532,8 +532,8 @@ namespace WaterThermalTanks {
         } else {
             HeatPumpNum = CompIndex;
             if (HeatPumpNum > state.dataWaterThermalTanks->numHeatPumpWaterHeater || HeatPumpNum < 1) {
-                ShowFatalError("SimHeatPumpWaterHeater:  Invalid CompIndex passed=" + General::TrimSigDigits(HeatPumpNum) +
-                               ", Number of Units=" + General::TrimSigDigits(state.dataWaterThermalTanks->numHeatPumpWaterHeater) + ", Entered Unit name=" + CompName);
+                ShowFatalError("SimHeatPumpWaterHeater:  Invalid CompIndex passed=" + fmt::to_string(HeatPumpNum) +
+                               ", Number of Units=" + fmt::to_string(state.dataWaterThermalTanks->numHeatPumpWaterHeater) + ", Entered Unit name=" + CompName);
             }
         }
 
@@ -4643,7 +4643,7 @@ namespace WaterThermalTanks {
         if (this->TypeNum == DataPlant::TypeOf_ChilledWaterTankStratified) {
 
             for (int NodeNum = 1; NodeNum <= this->Nodes; ++NodeNum) {
-                SetupOutputVariable(state, "Chilled Water Thermal Storage Temperature Node " + General::TrimSigDigits(NodeNum) + "",
+                SetupOutputVariable(state, "Chilled Water Thermal Storage Temperature Node " + fmt::to_string(NodeNum),
                                     OutputProcessor::Unit::C,
                                     this->Node(NodeNum).TempAvg,
                                     "System",
@@ -4652,7 +4652,7 @@ namespace WaterThermalTanks {
             }
 
             for (int NodeNum = 1; NodeNum <= this->Nodes; ++NodeNum) {
-                SetupOutputVariable(state, "Chilled Water Thermal Storage Final Temperature Node " + General::TrimSigDigits(NodeNum) + "",
+                SetupOutputVariable(state, "Chilled Water Thermal Storage Final Temperature Node " + fmt::to_string(NodeNum),
                                     OutputProcessor::Unit::C,
                                     this->Node(NodeNum).Temp,
                                     "System",
@@ -5034,7 +5034,7 @@ namespace WaterThermalTanks {
                 "Water Heater Heater 2 Runtime Fraction", OutputProcessor::Unit::None, this->RuntimeFraction2, "System", "Average", this->Name);
 
             for (int NodeNum = 1; NodeNum <= this->Nodes; ++NodeNum) {
-                SetupOutputVariable(state, "Water Heater Temperature Node " + General::TrimSigDigits(NodeNum),
+                SetupOutputVariable(state, "Water Heater Temperature Node " + fmt::to_string(NodeNum),
                                     OutputProcessor::Unit::C,
                                     this->Node(NodeNum).TempAvg,
                                     "System",
@@ -5043,7 +5043,7 @@ namespace WaterThermalTanks {
             }
 
             for (int NodeNum = 1; NodeNum <= this->Nodes; ++NodeNum) {
-                SetupOutputVariable(state, "Water Heater Final Temperature Node " + General::TrimSigDigits(NodeNum),
+                SetupOutputVariable(state, "Water Heater Final Temperature Node " + fmt::to_string(NodeNum),
                                     OutputProcessor::Unit::C,
                                     this->Node(NodeNum).Temp,
                                     "System",
@@ -6059,7 +6059,7 @@ namespace WaterThermalTanks {
                         if (state.dataWaterThermalTanks->HPWaterHeater(HPNum).HPWHAirVolFlowRate(Iter) > state.dataWaterThermalTanks->HPWaterHeater(HPNum).HPWHAirVolFlowRate(Iter + 1)) {
                             ShowContinueError(" The MSHP system flow rate when waterheating is required is reset to the"
                                               " flow rate at higher speed and the simulation continues at Speed" +
-                                              General::TrimSigDigits(Iter) + '.');
+                                              fmt::to_string(Iter) + '.');
                             ShowContinueError(" Occurs in " + state.dataWaterThermalTanks->HPWaterHeater(HPNum).Name);
                             state.dataWaterThermalTanks->HPWaterHeater(HPNum).HPWHAirVolFlowRate(Iter) = state.dataWaterThermalTanks->HPWaterHeater(HPNum).HPWHAirVolFlowRate(Iter + 1);
                         }

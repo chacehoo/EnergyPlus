@@ -65,7 +65,6 @@
 #include <EnergyPlus/Fans.hh>
 #include <EnergyPlus/FaultsManager.hh>
 #include <EnergyPlus/FluidProperties.hh>
-#include <EnergyPlus/General.hh>
 #include <EnergyPlus/GeneralRoutines.hh>
 #include <EnergyPlus/GlobalNames.hh>
 #include <EnergyPlus/HVACFan.hh>
@@ -191,9 +190,6 @@ namespace SteamCoils {
         // PURPOSE OF THIS SUBROUTINE:
         // This subroutine manages SteamCoil component simulation.
 
-        // Using/Aliasing
-        using General::TrimSigDigits;
-
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         Real64 QCoilActualTemp; // coil load actually delivered returned to calling component
         int CoilNum;            // The SteamCoil that you are currently loading input into
@@ -217,12 +213,12 @@ namespace SteamCoils {
         } else {
             CoilNum = CompIndex;
             if (CoilNum > NumSteamCoils || CoilNum < 1) {
-                ShowFatalError("SimulateSteamCoilComponents: Invalid CompIndex passed=" + TrimSigDigits(CoilNum) +
-                               ", Number of Steam Coils=" + TrimSigDigits(NumSteamCoils) + ", Coil name=" + CompName);
+                ShowFatalError("SimulateSteamCoilComponents: Invalid CompIndex passed=" + fmt::to_string(CoilNum) +
+                               ", Number of Steam Coils=" + fmt::to_string(NumSteamCoils) + ", Coil name=" + CompName);
             }
             if (CheckEquipName(CoilNum)) {
                 if (CompName != SteamCoil(CoilNum).Name) {
-                    ShowFatalError("SimulateSteamCoilComponents: Invalid CompIndex passed=" + TrimSigDigits(CoilNum) + ", Coil name=" + CompName +
+                    ShowFatalError("SimulateSteamCoilComponents: Invalid CompIndex passed=" + fmt::to_string(CoilNum) + ", Coil name=" + CompName +
                                    ", stored Coil Name for that index=" + SteamCoil(CoilNum).Name);
                 }
                 CheckEquipName(CoilNum) = false;
@@ -1653,9 +1649,6 @@ namespace SteamCoils {
         // PURPOSE OF THIS SUBROUTINE:
         // Gets the correct schedule value for this coil
 
-        // Using/Aliasing
-        using General::TrimSigDigits;
-
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int CoilNum;
 
@@ -1676,11 +1669,11 @@ namespace SteamCoils {
         } else {
             CoilNum = CompIndex;
             if (CoilNum > NumSteamCoils || CoilNum < 1) {
-                ShowFatalError("SimulateSteamCoilComponents: Invalid CompIndex passed=" + TrimSigDigits(CoilNum) +
-                               ", Number of Steam Coils=" + TrimSigDigits(NumSteamCoils) + ", Coil name=" + CompName);
+                ShowFatalError("SimulateSteamCoilComponents: Invalid CompIndex passed=" + fmt::to_string(CoilNum) +
+                               ", Number of Steam Coils=" + fmt::to_string(NumSteamCoils) + ", Coil name=" + CompName);
             }
             if (CompName != SteamCoil(CoilNum).Name) {
-                ShowFatalError("SimulateSteamCoilComponents: Invalid CompIndex passed=" + TrimSigDigits(CoilNum) + ", Coil name=" + CompName +
+                ShowFatalError("SimulateSteamCoilComponents: Invalid CompIndex passed=" + fmt::to_string(CoilNum) + ", Coil name=" + CompName +
                                ", stored Coil Name for that index=" + SteamCoil(CoilNum).Name);
             }
             Value = GetCurrentScheduleValue(SteamCoil(CoilNum).SchedPtr); // not scheduled?
@@ -2300,17 +2293,14 @@ namespace SteamCoils {
         // PURPOSE OF THIS FUNCTION:
         // This function sets data to water Heating Coil using the coil index and arguments passed
 
-        // Using/Aliasing
-        using General::TrimSigDigits;
-
         if (GetSteamCoilsInputFlag) {
             GetSteamCoilInput(state);
             GetSteamCoilsInputFlag = false;
         }
 
         if (CoilNum <= 0 || CoilNum > NumSteamCoils) {
-            ShowSevereError("SetHeatingCoilData: called with heating coil Number out of range=" + TrimSigDigits(CoilNum) + " should be >0 and <" +
-                            TrimSigDigits(NumSteamCoils));
+            ShowSevereError("SetHeatingCoilData: called with heating coil Number out of range=" + fmt::to_string(CoilNum) + " should be >0 and <" +
+                            fmt::to_string(NumSteamCoils));
             ErrorsFound = true;
             return;
         }

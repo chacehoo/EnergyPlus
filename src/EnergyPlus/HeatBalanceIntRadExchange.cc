@@ -1158,8 +1158,8 @@ namespace HeatBalanceIntRadExchange {
 
             if (NumNums < 3 * pow_2(N)) {
                 ShowSevereError("GetInputViewFactors: " + cCurrentModuleObject + "=\"" + ZoneName + "\", not enough values.");
-                ShowContinueError("...Number of input values [" + TrimSigDigits(NumNums) + "] is less than the required number=[" +
-                                  TrimSigDigits(3 * pow_2(N)) + "].");
+                ShowContinueError("...Number of input values [" + fmt::to_string(NumNums) + "] is less than the required number=[" +
+                                  fmt::to_string(3 * pow_2(N)) + "].");
                 ErrorsFound = true;
                 NumNums = 0;
             }
@@ -1349,8 +1349,8 @@ namespace HeatBalanceIntRadExchange {
 
             if (NumNums < pow_2(N)) {
                 ShowWarningError("GetInputViewFactors: " + cCurrentModuleObject + "=\"" + EnclosureName + "\", not enough values.");
-                ShowContinueError("...Number of input values [" + TrimSigDigits(NumNums) + "] is less than the required number=[" +
-                                  TrimSigDigits(pow_2(N)) + "] Missing surface pairs will have a zero view factor.");
+                ShowContinueError("...Number of input values [" + fmt::to_string(NumNums) + "] is less than the required number=[" +
+                                  fmt::to_string(pow_2(N)) + "] Missing surface pairs will have a zero view factor.");
             }
             F = 0.0;
             numinx1 = 0;
@@ -1711,7 +1711,7 @@ namespace HeatBalanceIntRadExchange {
                     ShowWarningError("FixViewFactors: View factors not complete. Check for bad surface descriptions or unenclosed zone=\"" +
                                      enclName + "\".");
                     ShowContinueError("Enforced reciprocity has tolerance (ideal is 0)=[" + RoundSigDigits(CheckConvergeTolerance, 6) +
-                                      "], Row Sum (ideal is " + RoundSigDigits(N) + ")=[" + RoundSigDigits(RowSum, 2) + "].");
+                                      "], Row Sum (ideal is " + fmt::to_string(N) + ")=[" + RoundSigDigits(RowSum, 2) + "].");
                     ShowContinueError("If zone is unusual, or tolerance is on the order of 0.001, view factors are probably OK.");
                 }
                 if (std::abs(FixedCheckValue) < std::abs(OriginalCheckValue)) {

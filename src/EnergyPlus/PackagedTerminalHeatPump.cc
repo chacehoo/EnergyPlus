@@ -310,12 +310,12 @@ namespace PackagedTerminalHeatPump {
                 }
             }
             if (PTUnitNum > NumPTUs || PTUnitNum < 1) {
-                ShowFatalError("SimPackagedTerminalUnit:  Invalid CompIndex passed=" + TrimSigDigits(PTUnitNum) +
-                               ", Number of Units=" + TrimSigDigits(NumPTUs) + ", Entered Unit name=" + CompName);
+                ShowFatalError("SimPackagedTerminalUnit:  Invalid CompIndex passed=" + fmt::to_string(PTUnitNum) +
+                               ", Number of Units=" + fmt::to_string(NumPTUs) + ", Entered Unit name=" + CompName);
             }
             if (CheckEquipName(PTUnitNum)) {
                 if (CompName != PTUnit(PTUnitNum).Name) {
-                    ShowFatalError("SimPackagedTerminalUnit: Invalid CompIndex passed=" + TrimSigDigits(PTUnitNum) + ", Unit name=" + CompName +
+                    ShowFatalError("SimPackagedTerminalUnit: Invalid CompIndex passed=" + fmt::to_string(PTUnitNum) + ", Unit name=" + CompName +
                                    ", stored Unit Name for that index=" + PTUnit(PTUnitNum).Name);
                 }
                 CheckEquipName(PTUnitNum) = false;
@@ -4197,7 +4197,7 @@ namespace PackagedTerminalHeatPump {
                             if (PTUnit(PTUnitNum).CoolVolumeFlowRate(i) > PTUnit(PTUnitNum).CoolVolumeFlowRate(i + 1)) {
                                 ShowContinueError(" The MSHP system flow rate when cooling is required is reset to the flow rate at higher speed and "
                                                   "the simulation continues at Speed" +
-                                                  TrimSigDigits(i) + '.');
+                                                  fmt::to_string(i) + '.');
                                 ShowContinueError(" Occurs in " + CurrentModuleObject + " = " + PTUnit(PTUnitNum).Name);
                                 PTUnit(PTUnitNum).CoolVolumeFlowRate(i) = PTUnit(PTUnitNum).CoolVolumeFlowRate(i + 1);
                             }
@@ -4217,7 +4217,7 @@ namespace PackagedTerminalHeatPump {
                                 if (PTUnit(PTUnitNum).HeatVolumeFlowRate(i) > PTUnit(PTUnitNum).HeatVolumeFlowRate(i + 1)) {
                                     ShowContinueError(" The MSHP system flow rate when heating is required is reset to the flow rate at higher speed "
                                                       "and the simulation continues at Speed" +
-                                                      TrimSigDigits(i) + '.');
+                                                      fmt::to_string(i) + '.');
                                     ShowContinueError(" Occurs in " + CurrentModuleObject + " system = " + PTUnit(PTUnitNum).Name);
                                     PTUnit(PTUnitNum).HeatVolumeFlowRate(i) = PTUnit(PTUnitNum).HeatVolumeFlowRate(i + 1);
                                 }
@@ -6315,11 +6315,11 @@ namespace PackagedTerminalHeatPump {
                                     ShowWarningMessage("CalcPTUnit: Hot water coil control failed for " + PTUnit(PTUnitNum).UnitType + "=\"" +
                                                        PTUnit(PTUnitNum).Name + "\"");
                                     ShowContinueErrorTimeStamp("");
-                                    ShowContinueError("  Iteration limit [" + RoundSigDigits(SolveMaxIter) +
+                                    ShowContinueError("  Iteration limit [" + fmt::to_string(SolveMaxIter) +
                                                       "] exceeded in calculating hot water mass flow rate");
                                 }
                                 ShowRecurringWarningErrorAtEnd("CalcPTUnit: Hot water coil control failed (iteration limit [" +
-                                                                   RoundSigDigits(SolveMaxIter) + "]) for " + PTUnit(PTUnitNum).UnitType + "=\"" +
+                                                                   fmt::to_string(SolveMaxIter) + "]) for " + PTUnit(PTUnitNum).UnitType + "=\"" +
                                                                    PTUnit(PTUnitNum).Name,
                                                                PTUnit(PTUnitNum).HotWaterCoilMaxIterIndex);
                             } else if (SolFlag == -2) {
@@ -7709,7 +7709,7 @@ namespace PackagedTerminalHeatPump {
                             ++ErrCountVar;
                             ShowWarningError("Iteration limit exceeded calculating VS WSHP unit speed ratio, for unit=" + PTUnit(PTUnitNum).Name);
                             ShowContinueErrorTimeStamp("Speed ratio returned=[" + RoundSigDigits(SpeedRatio, 2) +
-                                                       "], Speed number =" + RoundSigDigits(SpeedNum));
+                                                       "], Speed number =" + fmt::to_string(SpeedNum));
                         } else {
                             ++ErrCountVar;
                             ShowRecurringWarningErrorAtEnd(PTUnit(PTUnitNum).Name +
@@ -8459,11 +8459,11 @@ namespace PackagedTerminalHeatPump {
                                     ShowWarningMessage("RoutineName//Hot water coil control failed for " + PTUnit(PTUnitNum).UnitType + "=\"" +
                                                        PTUnit(PTUnitNum).Name + "\""); // Autodesk:Bug? Meant RoutineName + "Hot water...
                                     ShowContinueErrorTimeStamp("");
-                                    ShowContinueError("  Iteration limit [" + RoundSigDigits(SolveMaxIter) +
+                                    ShowContinueError("  Iteration limit [" + fmt::to_string(SolveMaxIter) +
                                                       "] exceeded in calculating hot water mass flow rate");
                                 }
                                 ShowRecurringWarningErrorAtEnd(
-                                    "RoutineName//Hot water coil control failed (iteration limit [" + RoundSigDigits(SolveMaxIter) + "]) for " +
+                                    "RoutineName//Hot water coil control failed (iteration limit [" + fmt::to_string(SolveMaxIter) + "]) for " +
                                         PTUnit(PTUnitNum).UnitType + "=\"" + PTUnit(PTUnitNum).Name,
                                     PTUnit(PTUnitNum).HotWaterCoilMaxIterIndex); // Autodesk:Bug? Meant RoutineName + "Hot water...
                             } else if (SolFlag == -2) {

@@ -635,8 +635,8 @@ namespace ScheduleManager {
                             if (errFlag) {
                                 ++numerrors;
                                 columnValue = 0.0;
-                                ShowWarningError(RoutineName + ":\"" + ShadingSunlitFracFileName + "\": found error processing column: " + std::to_string(colCnt) +
-                                                 ", row:" + std::to_string(rowCnt) + " in " + ShadingSunlitFracFileName + ".");
+                                ShowWarningError(RoutineName + ":\"" + ShadingSunlitFracFileName + "\": found error processing column: " + fmt::to_string(colCnt) +
+                                                 ", row:" + fmt::to_string(rowCnt) + " in " + ShadingSunlitFracFileName + ".");
                                 ShowContinueError("This value is set to 0.");
                             }
                             CSVAllColumnNameAndValues[colCnt - 1](rowCnt - 1) = columnValue;
@@ -648,13 +648,13 @@ namespace ScheduleManager {
 
             if (rowCnt - 2 != rowLimitCount) {
                 if (rowCnt - 2 < rowLimitCount) {
-                    ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\" " + std::to_string((rowCnt - 2)) + " data values read.");
+                    ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\" " + fmt::to_string((rowCnt - 2)) + " data values read.");
                 }
                 else if (rowCnt - 2 > rowLimitCount) {
                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\" too many data values read.");
                 }
                 ShowContinueError("Number of rows in the shading file must be a full year multiplied by the simulation TimeStep: " +
-                    std::to_string(rowLimitCount) + ".");
+                    fmt::to_string(rowLimitCount) + ".");
                 ShowFatalError("Program terminates due to previous condition.");
             }
 
@@ -662,7 +662,7 @@ namespace ScheduleManager {
             ScheduleFileShadingProcessed = true;
 
             if (numerrors > 0) {
-                ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\" " + RoundSigDigits(numerrors) +
+                ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\" " + fmt::to_string(numerrors) +
                                  " records had errors - these values are set to 0.");
             }
         }
@@ -886,7 +886,7 @@ namespace ScheduleManager {
             // check to see if numfield=0
             if (NumFields == 0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\", Insufficient data entered for a full schedule day.");
-                ShowContinueError("...Number of interval fields = = [" + RoundSigDigits(NumFields) + "].");
+                ShowContinueError("...Number of interval fields = = [" + fmt::to_string(NumFields) + "].");
                 ErrorsFound = true;
             }
 
@@ -1008,14 +1008,14 @@ namespace ScheduleManager {
             // check to see if there are any fields
             if (Numbers(1) <= 0.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\", Insufficient data entered for a full schedule day.");
-                ShowContinueError("...Minutes per Item field = [" + RoundSigDigits(int(Numbers(1))) + "].");
+                ShowContinueError("...Minutes per Item field = [" + fmt::to_string(Numbers(1)) + "].");
                 ErrorsFound = true;
                 continue;
             }
             if (NumNumbers < 25) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\", Insufficient data entered for a full schedule day.");
-                ShowContinueError("...Minutes per Item field = [" + RoundSigDigits(int(Numbers(1))) + "] and only [" +
-                                  RoundSigDigits(NumNumbers - 1) + "] to apply to list fields.");
+                ShowContinueError("...Minutes per Item field = [" + fmt::to_string(Numbers(1)) + "] and only [" +
+                                  fmt::to_string(NumNumbers - 1) + "] to apply to list fields.");
                 ErrorsFound = true;
                 continue;
             }
@@ -1023,15 +1023,15 @@ namespace ScheduleManager {
             NumExpectedItems = 1440 / MinutesPerItem;
             if ((NumNumbers - 1) != NumExpectedItems) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + ", Number of Entered Items=" +
-                                RoundSigDigits(NumNumbers - 1) + " not equal number of expected items=" + RoundSigDigits(NumExpectedItems));
-                ShowContinueError("based on " + cNumericFields(1) + " field value=" + RoundSigDigits(MinutesPerItem));
+                                fmt::to_string(NumNumbers - 1) + " not equal number of expected items=" + fmt::to_string(NumExpectedItems));
+                ShowContinueError("based on " + cNumericFields(1) + " field value=" + fmt::to_string(MinutesPerItem));
                 ErrorsFound = true;
                 continue;
             }
 
             if (mod(60, MinutesPerItem) != 0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1));
-                ShowContinueError("Requested " + cNumericFields(1) + " field value (" + RoundSigDigits(MinutesPerItem) +
+                ShowContinueError("Requested " + cNumericFields(1) + " field value (" + fmt::to_string(MinutesPerItem) +
                                   ") not evenly divisible into 60");
                 ErrorsFound = true;
                 continue;
@@ -1712,7 +1712,7 @@ namespace ScheduleManager {
                 NumExpectedItems = 1440 / MinutesPerItem;
                 if (mod(60, MinutesPerItem) != 0) {
                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1));
-                    ShowContinueError("Requested " + cNumericFields(4) + " field value (" + RoundSigDigits(MinutesPerItem) +
+                    ShowContinueError("Requested " + cNumericFields(4) + " field value (" + fmt::to_string(MinutesPerItem) +
                                       ") not evenly divisible into 60");
                     ErrorsFound = true;
                     continue;
@@ -1861,19 +1861,19 @@ namespace ScheduleManager {
                 // schedule values have been filled into the hourlyFileValues array.
 
                 if (numerrors > 0) {
-                    ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\" " + RoundSigDigits(numerrors) +
+                    ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\" " + fmt::to_string(numerrors) +
                                      " records had errors - these values are set to 0.");
                     ShowContinueError("Use Output:Diagnostics,DisplayExtraWarnings; to see individual records in error.");
                 }
                 if (rowCnt < rowLimitCount) {
-                    ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\" less than " + RoundSigDigits(numHourlyValues) +
+                    ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\" less than " + fmt::to_string(numHourlyValues) +
                                      " hourly values read from file.");
-                    ShowContinueError("..Number read=" + TrimSigDigits((rowCnt * 60) / MinutesPerItem) + '.');
+                    ShowContinueError("..Number read=" + fmt::to_string((rowCnt * 60) / MinutesPerItem) + '.');
                 }
                 if (rowCnt < rowLimitCount) {
                     ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\" less than specified hourly values read from file.");
-                    ShowContinueError("..Specified Number of Hourly Values=" + TrimSigDigits(numHourlyValues) +
-                                      " Actual number of hourly values included=" + TrimSigDigits((rowCnt * 60) / MinutesPerItem));
+                    ShowContinueError("..Specified Number of Hourly Values=" + fmt::to_string(numHourlyValues) +
+                                      " Actual number of hourly values included=" + fmt::to_string((rowCnt * 60) / MinutesPerItem));
                 }
                 // process the data into the normal schedule data structures
                 // note -- schedules are ALWAYS 366 days so some special measures have to be done at 29 Feb "day of year" (60)
@@ -1885,7 +1885,7 @@ namespace ScheduleManager {
                     ++iDay;
                     ++hDay;
                     if (iDay > 366) break;
-                    ExtraField = RoundSigDigits(iDay);
+                    ExtraField = fmt::to_string(iDay);
                     // increment both since a week schedule is being defined for each day so that a day is valid
                     // no matter what the day type that is used in a design day.
                     ++AddWeekSch;
@@ -1975,7 +1975,7 @@ namespace ScheduleManager {
                 if (iDay > 366) {
                     break;
                 }
-                ExtraField = RoundSigDigits(iDay);
+                ExtraField = fmt::to_string(iDay);
                 // increment both since a week schedule is being defined for each day so that a day is valid
                 // no matter what the day type that is used in a design day.
                 ++AddWeekSch;
@@ -4911,7 +4911,7 @@ namespace ScheduleManager {
         }
 
         if (NumCount > 0) {
-            ShowMessage("There are " + RoundSigDigits(NumCount) + " unused schedules in input.");
+            ShowMessage(fmt::format("There are {} unused schedules in input.", NumCount));
             NeedUseMessage = true;
         }
 
@@ -4934,7 +4934,7 @@ namespace ScheduleManager {
         }
 
         if (NumCount > 0) {
-            ShowMessage("There are " + RoundSigDigits(NumCount) + " unused week schedules in input.");
+            ShowMessage(fmt::format("There are {} unused week schedules in input.", NumCount));
             NeedUseMessage = true;
         }
 
@@ -4957,7 +4957,7 @@ namespace ScheduleManager {
         }
 
         if (NumCount > 0) {
-            ShowMessage("There are " + RoundSigDigits(NumCount) + " unused day schedules in input.");
+            ShowMessage(fmt::format("There are {} unused day schedules in input.", NumCount));
             NeedUseMessage = true;
         }
 

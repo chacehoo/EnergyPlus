@@ -290,12 +290,12 @@ namespace DXCoils {
         } else {
             DXCoilNum = CompIndex;
             if (DXCoilNum > NumDXCoils || DXCoilNum < 1) {
-                ShowFatalError("SimDXCoil: Invalid CompIndex passed=" + TrimSigDigits(DXCoilNum) +
-                               ", Number of DX Coils=" + TrimSigDigits(NumDXCoils) + ", Coil name=" + CompName);
+                ShowFatalError("SimDXCoil: Invalid CompIndex passed=" + fmt::to_string(DXCoilNum) +
+                               ", Number of DX Coils=" + fmt::to_string(NumDXCoils) + ", Coil name=" + CompName);
             }
             if (CheckEquipName(DXCoilNum)) {
                 if (!CompName.empty() && CompName != DXCoil(DXCoilNum).Name) {
-                    ShowFatalError("SimDXCoil: Invalid CompIndex passed=" + TrimSigDigits(DXCoilNum) + ", Coil name=" + CompName +
+                    ShowFatalError("SimDXCoil: Invalid CompIndex passed=" + fmt::to_string(DXCoilNum) + ", Coil name=" + CompName +
                                    ", stored Coil Name for that index=" + DXCoil(DXCoilNum).Name);
                 }
                 CheckEquipName(DXCoilNum) = false;
@@ -425,12 +425,12 @@ namespace DXCoils {
         } else {
             DXCoilNum = CompIndex;
             if (DXCoilNum > NumDXCoils || DXCoilNum < 1) {
-                ShowFatalError("SimDXCoilMultiSpeed: Invalid CompIndex passed=" + TrimSigDigits(DXCoilNum) +
-                               ", Number of DX Coils=" + TrimSigDigits(NumDXCoils) + ", Coil name=" + CompName);
+                ShowFatalError("SimDXCoilMultiSpeed: Invalid CompIndex passed=" + fmt::to_string(DXCoilNum) +
+                               ", Number of DX Coils=" + fmt::to_string(NumDXCoils) + ", Coil name=" + CompName);
             }
             if (CheckEquipName(DXCoilNum)) {
                 if (!CompName.empty() && CompName != DXCoil(DXCoilNum).Name) {
-                    ShowFatalError("SimDXCoilMultiSpeed: Invalid CompIndex passed=" + TrimSigDigits(DXCoilNum) + ", Coil name=" + CompName +
+                    ShowFatalError("SimDXCoilMultiSpeed: Invalid CompIndex passed=" + fmt::to_string(DXCoilNum) + ", Coil name=" + CompName +
                                    ", stored Coil Name for that index=" + DXCoil(DXCoilNum).Name);
                 }
                 CheckEquipName(DXCoilNum) = false;
@@ -574,12 +574,12 @@ namespace DXCoils {
         } else {
             DXCoilNum = CompIndex;
             if (DXCoilNum > NumDXCoils || DXCoilNum < 1) {
-                ShowFatalError("SimDXCoilMultiMode: Invalid CompIndex passed=" + TrimSigDigits(DXCoilNum) +
-                               ", Number of DX Coils=" + TrimSigDigits(NumDXCoils) + ", Coil name=" + CompName);
+                ShowFatalError("SimDXCoilMultiMode: Invalid CompIndex passed=" + fmt::to_string(DXCoilNum) +
+                               ", Number of DX Coils=" + fmt::to_string(NumDXCoils) + ", Coil name=" + CompName);
             }
             if (CheckEquipName(DXCoilNum)) {
                 if ((CompName != "") && (CompName != DXCoil(DXCoilNum).Name)) {
-                    ShowFatalError("SimDXCoilMultiMode: Invalid CompIndex passed=" + TrimSigDigits(DXCoilNum) + ", Coil name=" + CompName +
+                    ShowFatalError("SimDXCoilMultiMode: Invalid CompIndex passed=" + fmt::to_string(DXCoilNum) + ", Coil name=" + CompName +
                                    ", stored Coil Name for that index=" + DXCoil(DXCoilNum).Name);
                 }
                 CheckEquipName(DXCoilNum) = false;
@@ -1528,8 +1528,8 @@ namespace DXCoils {
             //  Check if requested number of capacity stages exceeds limits
             if ((DXCoil(DXCoilNum).NumCapacityStages > MaxCapacityStages) || (DXCoil(DXCoilNum).NumCapacityStages < 1)) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("...illegal " + cNumericFields(3) + " = " + TrimSigDigits(DXCoil(DXCoilNum).NumCapacityStages));
-                ShowContinueError("...Valid range is 1 to " + TrimSigDigits(MaxCapacityStages));
+                ShowContinueError("...illegal " + cNumericFields(3) + " = " + fmt::to_string(DXCoil(DXCoilNum).NumCapacityStages));
+                ShowContinueError("...Valid range is 1 to " + fmt::to_string(MaxCapacityStages));
                 ErrorsFound = true;
             }
 
@@ -1538,8 +1538,8 @@ namespace DXCoils {
             //  Check if requested number of enhanced dehumidification modes exceeds limits
             if ((DXCoil(DXCoilNum).NumDehumidModes > MaxDehumidModes) || (DXCoil(DXCoilNum).NumDehumidModes < 0)) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("...illegal " + cNumericFields(4) + " = " + TrimSigDigits(DXCoil(DXCoilNum).NumDehumidModes));
-                ShowContinueError("...Valid range is 0 to " + TrimSigDigits(MaxDehumidModes));
+                ShowContinueError("...illegal " + cNumericFields(4) + " = " + fmt::to_string(DXCoil(DXCoilNum).NumDehumidModes));
+                ShowContinueError("...Valid range is 0 to " + fmt::to_string(MaxDehumidModes));
                 ErrorsFound = true;
             }
 
@@ -1898,7 +1898,7 @@ namespace DXCoils {
                 for (CapacityStageNum = (DXCoil(DXCoilNum).NumCapacityStages + 1); CapacityStageNum <= MaxCapacityStages; ++CapacityStageNum) {
                     if ((AlphaIndex <= NumAlphas) && ((!Alphas(AlphaIndex).empty()) || (!Alphas(AlphaIndex + 1).empty()))) {
                         ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\":");
-                        ShowContinueError("...Capacity Stage " + TrimSigDigits(CapacityStageNum) + " not active. Therefore," +
+                        ShowContinueError("...Capacity Stage " + fmt::to_string(CapacityStageNum) + " not active. Therefore," +
                                           cAlphaFields(AlphaIndex));
                         ShowContinueError("... and " + cAlphaFields(AlphaIndex + 1) + " fields will be ignored.");
                     }
@@ -6474,12 +6474,12 @@ namespace DXCoils {
                     // Check for zero capacity or zero max flow rate
                     if (DXCoil(DXCoilNum).MSRatedTotCap(Mode) <= 0.0) {
                         ShowSevereError("Sizing: " + DXCoil(DXCoilNum).DXCoilType + ' ' + DXCoil(DXCoilNum).Name +
-                                        " has zero rated total capacity at speed " + TrimSigDigits(Mode));
+                                        " has zero rated total capacity at speed " + fmt::to_string(Mode));
                         ErrorsFound = true;
                     }
                     if (DXCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode) <= 0.0) {
                         ShowSevereError("Sizing: " + DXCoil(DXCoilNum).DXCoilType + ' ' + DXCoil(DXCoilNum).Name +
-                                        " has zero rated air flow rate at speed " + TrimSigDigits(Mode));
+                                        " has zero rated air flow rate at speed " + fmt::to_string(Mode));
                         ErrorsFound = true;
                     }
                     if (ErrorsFound) {
@@ -6491,7 +6491,7 @@ namespace DXCoils {
                         ((RatedVolFlowPerRatedTotCap - MaxRatedVolFlowPerRatedTotCap(DXCT)) > SmallDifferenceTest)) {
                         ShowWarningError("Sizing: " + DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
                                          "\": Rated air volume flow rate per watt of rated total cooling capacity is out of range at speed " +
-                                         TrimSigDigits(Mode));
+                                         fmt::to_string(Mode));
                         ShowContinueError("Min Rated Vol Flow Per Watt=[" + TrimSigDigits(MinRatedVolFlowPerRatedTotCap(DXCT), 3) +
                                           "], Rated Vol Flow Per Watt=[" + TrimSigDigits(RatedVolFlowPerRatedTotCap, 3) +
                                           "], Max Rated Vol Flow Per Watt=[" + TrimSigDigits(MaxRatedVolFlowPerRatedTotCap(DXCT), 3) +
@@ -6526,7 +6526,7 @@ namespace DXCoils {
                         ((RatedVolFlowPerRatedTotCap - MaxRatedVolFlowPerRatedTotCap(DXCT)) > SmallDifferenceTest)) {
                         ShowWarningError("Coil:Heating:DX:MultiSpeed " + DXCoil(DXCoilNum).Name +
                                          ": Rated air volume flow rate per watt of rated total heating capacity is out of range at speed " +
-                                         TrimSigDigits(Mode));
+                                         fmt::to_string(Mode));
                         ShowContinueError("Min Rated Vol Flow Per Watt=[" + TrimSigDigits(MinRatedVolFlowPerRatedTotCap(DXCT), 3) +
                                           "], Rated Vol Flow Per Watt=[" + TrimSigDigits(RatedVolFlowPerRatedTotCap, 3) +
                                           "], Max Rated Vol Flow Per Watt=[" + TrimSigDigits(MaxRatedVolFlowPerRatedTotCap(DXCT), 3) +
@@ -7360,8 +7360,8 @@ namespace DXCoils {
             // Ensure flow rate at lower speed must be lower or equal to the flow rate at higher speed. Otherwise, a severe error is isssued.
             for (Mode = 1; Mode <= DXCoil(DXCoilNum).NumOfSpeeds - 1; ++Mode) {
                 if (DXCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode) > DXCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode + 1)) {
-                    ShowWarningError("SizeDXCoil: " + DXCoil(DXCoilNum).DXCoilType + ' ' + DXCoil(DXCoilNum).Name + ", Speed " + TrimSigDigits(Mode) +
-                                     " Rated Air Flow Rate must be less than or equal to Speed " + TrimSigDigits(Mode + 1) + " Rated Air Flow Rate.");
+                    ShowWarningError("SizeDXCoil: " + DXCoil(DXCoilNum).DXCoilType + ' ' + DXCoil(DXCoilNum).Name + ", Speed " + fmt::to_string(Mode) +
+                                     " Rated Air Flow Rate must be less than or equal to Speed " + fmt::to_string(Mode + 1) + " Rated Air Flow Rate.");
                     ShowContinueError("Instead, " + RoundSigDigits(DXCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode), 2) + " > " +
                                       RoundSigDigits(DXCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode + 1), 2));
                     ShowFatalError("Preceding conditions cause termination.");
@@ -7449,8 +7449,8 @@ namespace DXCoils {
             // Ensure capacity at lower speed must be lower or equal to the capacity at higher speed.
             for (Mode = 1; Mode <= DXCoil(DXCoilNum).NumOfSpeeds - 1; ++Mode) {
                 if (DXCoil(DXCoilNum).MSRatedTotCap(Mode) > DXCoil(DXCoilNum).MSRatedTotCap(Mode + 1)) {
-                    ShowWarningError("SizeDXCoil: " + DXCoil(DXCoilNum).DXCoilType + ' ' + DXCoil(DXCoilNum).Name + ", Speed " + TrimSigDigits(Mode) +
-                                     " Rated Total Cooling Capacity must be less than or equal to Speed " + TrimSigDigits(Mode + 1) +
+                    ShowWarningError("SizeDXCoil: " + DXCoil(DXCoilNum).DXCoilType + ' ' + DXCoil(DXCoilNum).Name + ", Speed " + fmt::to_string(Mode) +
+                                     " Rated Total Cooling Capacity must be less than or equal to Speed " + fmt::to_string(Mode + 1) +
                                      " Rated Total Cooling Capacity.");
                     ShowContinueError("Instead, " + RoundSigDigits(DXCoil(DXCoilNum).MSRatedTotCap(Mode), 2) + " > " +
                                       RoundSigDigits(DXCoil(DXCoilNum).MSRatedTotCap(Mode + 1), 2));
@@ -7517,16 +7517,16 @@ namespace DXCoils {
                     DXCoil(DXCoilNum).MSEvapCondAirFlow(Mode) = MSEvapCondAirFlowDes;
                     BaseSizer::reportSizerOutput(DXCoil(DXCoilNum).DXCoilType,
                                                  DXCoil(DXCoilNum).Name,
-                                                 "Design Size Speed " + TrimSigDigits(Mode) + " Evaporative Condenser Air Flow Rate [m3/s]",
+                                                 "Design Size Speed " + fmt::to_string(Mode) + " Evaporative Condenser Air Flow Rate [m3/s]",
                                                  MSEvapCondAirFlowDes);
                 } else {
                     if (DXCoil(DXCoilNum).MSEvapCondAirFlow(Mode) > 0.0 && MSEvapCondAirFlowDes > 0.0 && !HardSizeNoDesRun) {
                         MSEvapCondAirFlowUser = DXCoil(DXCoilNum).MSEvapCondAirFlow(Mode);
                         BaseSizer::reportSizerOutput(DXCoil(DXCoilNum).DXCoilType,
                                                      DXCoil(DXCoilNum).Name,
-                                                     "Design Size Speed " + TrimSigDigits(Mode) + " Evaporative Condenser Air Flow Rate [m3/s]",
+                                                     "Design Size Speed " + fmt::to_string(Mode) + " Evaporative Condenser Air Flow Rate [m3/s]",
                                                      MSEvapCondAirFlowDes,
-                                                     "User-Specified Speed " + TrimSigDigits(Mode) + " Evaporative Condenser Air Flow Rate [m3/s]",
+                                                     "User-Specified Speed " + fmt::to_string(Mode) + " Evaporative Condenser Air Flow Rate [m3/s]",
                                                      MSEvapCondAirFlowUser);
                         if (DisplayExtraWarnings) {
                             if ((std::abs(MSEvapCondAirFlowDes - MSEvapCondAirFlowUser) / MSEvapCondAirFlowUser) > AutoVsHardSizingThreshold) {
@@ -7547,8 +7547,8 @@ namespace DXCoils {
             // Ensure evaporative condenser airflow rate at lower speed must be lower or equal to one at higher speed.
             for (Mode = 1; Mode <= DXCoil(DXCoilNum).NumOfSpeeds - 1; ++Mode) {
                 if (DXCoil(DXCoilNum).MSEvapCondAirFlow(Mode) > DXCoil(DXCoilNum).MSEvapCondAirFlow(Mode + 1)) {
-                    ShowWarningError("SizeDXCoil: " + DXCoil(DXCoilNum).DXCoilType + ' ' + DXCoil(DXCoilNum).Name + ", Speed " + TrimSigDigits(Mode) +
-                                     " Evaporative Condenser Air Flow Rate must be less than or equal to Speed " + TrimSigDigits(Mode + 1) +
+                    ShowWarningError("SizeDXCoil: " + DXCoil(DXCoilNum).DXCoilType + ' ' + DXCoil(DXCoilNum).Name + ", Speed " + fmt::to_string(Mode) +
+                                     " Evaporative Condenser Air Flow Rate must be less than or equal to Speed " + fmt::to_string(Mode + 1) +
                                      " Evaporative Condenser Air Flow Rate.");
                     ShowContinueError("Instead, " + RoundSigDigits(DXCoil(DXCoilNum).MSEvapCondAirFlow(Mode), 2) + " > " +
                                       RoundSigDigits(DXCoil(DXCoilNum).MSEvapCondAirFlow(Mode + 1), 2));
@@ -7575,7 +7575,7 @@ namespace DXCoils {
                     DXCoil(DXCoilNum).MSEvapCondPumpElecNomPower(Mode) = MSEvapCondPumpElecNomPowerDes;
                     BaseSizer::reportSizerOutput(DXCoil(DXCoilNum).DXCoilType,
                                                  DXCoil(DXCoilNum).Name,
-                                                 "Design Size Speed " + TrimSigDigits(Mode) +
+                                                 "Design Size Speed " + fmt::to_string(Mode) +
                                                      " Rated Evaporative Condenser Pump Power Consumption [W]",
                                                  MSEvapCondPumpElecNomPowerDes);
                 } else {
@@ -7584,9 +7584,9 @@ namespace DXCoils {
                         BaseSizer::reportSizerOutput(
                             DXCoil(DXCoilNum).DXCoilType,
                             DXCoil(DXCoilNum).Name,
-                            "Design Size Speed " + TrimSigDigits(Mode) + " Rated Evaporative Condenser Pump Power Consumption [W]",
+                            "Design Size Speed " + fmt::to_string(Mode) + " Rated Evaporative Condenser Pump Power Consumption [W]",
                             MSEvapCondPumpElecNomPowerDes,
-                            "User-Specified Speed " + TrimSigDigits(Mode) + " Rated Evaporative Condenser Pump Power Consumption [W]",
+                            "User-Specified Speed " + fmt::to_string(Mode) + " Rated Evaporative Condenser Pump Power Consumption [W]",
                             MSEvapCondPumpElecNomPowerUser);
                         if (DisplayExtraWarnings) {
                             if ((std::abs(MSEvapCondPumpElecNomPowerDes - MSEvapCondPumpElecNomPowerUser) / MSEvapCondPumpElecNomPowerUser) >
@@ -7608,9 +7608,9 @@ namespace DXCoils {
             // Ensure evaporative condesner pump power at lower speed must be lower or equal to one at higher speed.
             for (Mode = 1; Mode <= DXCoil(DXCoilNum).NumOfSpeeds - 1; ++Mode) {
                 if (DXCoil(DXCoilNum).MSEvapCondPumpElecNomPower(Mode) > DXCoil(DXCoilNum).MSEvapCondPumpElecNomPower(Mode + 1)) {
-                    ShowWarningError("SizeDXCoil: " + DXCoil(DXCoilNum).DXCoilType + ' ' + DXCoil(DXCoilNum).Name + ", Speed " + TrimSigDigits(Mode) +
+                    ShowWarningError("SizeDXCoil: " + DXCoil(DXCoilNum).DXCoilType + ' ' + DXCoil(DXCoilNum).Name + ", Speed " + fmt::to_string(Mode) +
                                      " Rated Evaporative Condenser Pump Power Consumption must be less than or equal to Speed " +
-                                     TrimSigDigits(Mode + 1) + " Rated Evaporative Condenser Pump Power Consumption.");
+                                     fmt::to_string(Mode + 1) + " Rated Evaporative Condenser Pump Power Consumption.");
                     ShowContinueError("Instead, " + RoundSigDigits(DXCoil(DXCoilNum).MSEvapCondPumpElecNomPower(Mode), 2) + " > " +
                                       RoundSigDigits(DXCoil(DXCoilNum).MSEvapCondPumpElecNomPower(Mode + 1), 2));
                     ShowFatalError("Preceding conditions cause termination.");
@@ -7682,8 +7682,8 @@ namespace DXCoils {
             // Ensure flow rate at lower speed must be lower or equal to the flow rate at higher speed. Otherwise, a severe error is isssued.
             for (Mode = 1; Mode <= DXCoil(DXCoilNum).NumOfSpeeds - 1; ++Mode) {
                 if (DXCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode) > DXCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode + 1)) {
-                    ShowWarningError("SizeDXCoil: " + DXCoil(DXCoilNum).DXCoilType + ' ' + DXCoil(DXCoilNum).Name + ", Speed " + TrimSigDigits(Mode) +
-                                     " Rated Air Flow Rate must be less than or equal to Speed " + TrimSigDigits(Mode + 1) + " Rated Air Flow Rate.");
+                    ShowWarningError("SizeDXCoil: " + DXCoil(DXCoilNum).DXCoilType + ' ' + DXCoil(DXCoilNum).Name + ", Speed " + fmt::to_string(Mode) +
+                                     " Rated Air Flow Rate must be less than or equal to Speed " + fmt::to_string(Mode + 1) + " Rated Air Flow Rate.");
                     ShowContinueError("Instead, " + RoundSigDigits(DXCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode), 2) + " > " +
                                       RoundSigDigits(DXCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode + 1), 2));
                     ShowFatalError("Preceding conditions cause termination.");
@@ -7702,16 +7702,16 @@ namespace DXCoils {
                         DXCoil(DXCoilNum).MSSecCoilAirFlow(Mode) = SecCoilAirFlowDes;
                         BaseSizer::reportSizerOutput(DXCoil(DXCoilNum).DXCoilType,
                                                      DXCoil(DXCoilNum).Name,
-                                                     "Design Size Speed " + TrimSigDigits(Mode) + " Secondary Coil Air Flow Rate [m3/s]",
+                                                     "Design Size Speed " + fmt::to_string(Mode) + " Secondary Coil Air Flow Rate [m3/s]",
                                                      SecCoilAirFlowDes);
                     } else {
                         if (DXCoil(DXCoilNum).MSSecCoilAirFlow(Mode) > 0.0 && SecCoilAirFlowDes > 0.0 && !HardSizeNoDesRun) {
                             SecCoilAirFlowUser = DXCoil(DXCoilNum).MSSecCoilAirFlow(Mode);
                             BaseSizer::reportSizerOutput(DXCoil(DXCoilNum).DXCoilType,
                                                          DXCoil(DXCoilNum).Name,
-                                                         "Design Size Speed " + TrimSigDigits(Mode) + " Secondary Coil Air Flow Rate [m3/s]",
+                                                         "Design Size Speed " + fmt::to_string(Mode) + " Secondary Coil Air Flow Rate [m3/s]",
                                                          SecCoilAirFlowDes,
-                                                         "User-Specified Speed " + TrimSigDigits(Mode) + " Secondary Coil Air Flow Rate [m3/s]",
+                                                         "User-Specified Speed " + fmt::to_string(Mode) + " Secondary Coil Air Flow Rate [m3/s]",
                                                          SecCoilAirFlowUser);
                             if (DisplayExtraWarnings) {
                                 if ((std::abs(SecCoilAirFlowDes - SecCoilAirFlowUser) / SecCoilAirFlowUser) > AutoVsHardSizingThreshold) {
@@ -7816,8 +7816,8 @@ namespace DXCoils {
             // Ensure capacity at lower speed must be lower or equal to the capacity at higher speed.
             for (Mode = 1; Mode <= DXCoil(DXCoilNum).NumOfSpeeds - 1; ++Mode) {
                 if (DXCoil(DXCoilNum).MSRatedTotCap(Mode) > DXCoil(DXCoilNum).MSRatedTotCap(Mode + 1)) {
-                    ShowWarningError("SizeDXCoil: " + DXCoil(DXCoilNum).DXCoilType + ' ' + DXCoil(DXCoilNum).Name + ", Speed " + TrimSigDigits(Mode) +
-                                     " Rated Total Heating Capacity must be less than or equal to Speed " + TrimSigDigits(Mode + 1) +
+                    ShowWarningError("SizeDXCoil: " + DXCoil(DXCoilNum).DXCoilType + ' ' + DXCoil(DXCoilNum).Name + ", Speed " + fmt::to_string(Mode) +
+                                     " Rated Total Heating Capacity must be less than or equal to Speed " + fmt::to_string(Mode + 1) +
                                      " Rated Total Heating Capacity.");
                     ShowContinueError("Instead, " + RoundSigDigits(DXCoil(DXCoilNum).MSRatedTotCap(Mode), 2) + " > " +
                                       RoundSigDigits(DXCoil(DXCoilNum).MSRatedTotCap(Mode + 1), 2));
@@ -8793,7 +8793,7 @@ namespace DXCoils {
                                                   TrimSigDigits(CondInletTemp, 1) + '.');
                             }
                             if (Mode > 1) {
-                                ShowContinueError(" Negative output results from stage " + TrimSigDigits(Mode) + " compressor operation.");
+                                ShowContinueError(" Negative output results from stage " + fmt::to_string(Mode) + " compressor operation.");
                             }
                             ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                         }
@@ -8817,7 +8817,7 @@ namespace DXCoils {
                             ShowContinueError(" Negative value occurs using an air flow fraction of " + TrimSigDigits(AirMassFlowRatio, 3) + '.');
                             ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                             if (Mode > 1) {
-                                ShowContinueError(" Negative output results from stage " + TrimSigDigits(Mode) + " compressor operation.");
+                                ShowContinueError(" Negative output results from stage " + fmt::to_string(Mode) + " compressor operation.");
                             }
                         }
                         ShowRecurringWarningErrorAtEnd(
@@ -9165,7 +9165,7 @@ namespace DXCoils {
                                               '.');
                         }
                         if (Mode > 1) {
-                            ShowContinueError(" Negative output results from stage " + TrimSigDigits(Mode) + " compressor operation.");
+                            ShowContinueError(" Negative output results from stage " + fmt::to_string(Mode) + " compressor operation.");
                         }
                         ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                     }
@@ -9189,7 +9189,7 @@ namespace DXCoils {
                         ShowContinueError(" Negative value occurs using an air flow fraction of " + TrimSigDigits(AirMassFlowRatio, 3) + '.');
                         ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                         if (Mode > 1) {
-                            ShowContinueError(" Negative output results from stage " + TrimSigDigits(Mode) + " compressor operation.");
+                            ShowContinueError(" Negative output results from stage " + fmt::to_string(Mode) + " compressor operation.");
                         }
                     }
                     ShowRecurringWarningErrorAtEnd(
@@ -9725,7 +9725,7 @@ namespace DXCoils {
                     ShowContinueError(" Negative value occurs using a condenser inlet temperature of " + TrimSigDigits(CondInletTemp, 1) +
                                       " and an inlet air wet-bulb temperature of " + TrimSigDigits(InletAirWetBulbC, 1) + '.');
                     if (Mode > 1) {
-                        ShowContinueError(" Negative output results from stage " + TrimSigDigits(Mode) + " compressor operation.");
+                        ShowContinueError(" Negative output results from stage " + fmt::to_string(Mode) + " compressor operation.");
                     }
                     ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                 }
@@ -9751,7 +9751,7 @@ namespace DXCoils {
                     ShowContinueError(" Negative value occurs using an air flow fraction of " + TrimSigDigits(AirMassFlowRatio, 3) + '.');
                     ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                     if (Mode > 1) {
-                        ShowContinueError(" Negative output results from stage " + TrimSigDigits(Mode) + " compressor operation.");
+                        ShowContinueError(" Negative output results from stage " + fmt::to_string(Mode) + " compressor operation.");
                     }
                 }
                 ShowRecurringWarningErrorAtEnd(
@@ -11911,7 +11911,7 @@ namespace DXCoils {
                     if (DXCoil(DXCoilNum).MSErrIndex(SpeedNumLS) == 0) {
                         ShowWarningMessage(DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
                                            "\" - Air volume flow rate per watt of rated total cooling capacity is out of range at speed " +
-                                           TrimSigDigits(SpeedNumLS) + '.');
+                                           fmt::to_string(SpeedNumLS) + '.');
                         ShowContinueErrorTimeStamp("");
                         ShowContinueError("Expected range for VolumeFlowPerRatedTotalCapacity=[" +
                                           RoundSigDigits(MinOperVolFlowPerRatedTotCap(DXCT), 3) + "--" +
@@ -11923,7 +11923,7 @@ namespace DXCoils {
                     ShowRecurringWarningErrorAtEnd(
                         DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
                             "\" - Air volume flow rate per watt of rated total cooling capacity is out of range at speed " +
-                            TrimSigDigits(SpeedNumLS) + " error continues...",
+                            fmt::to_string(SpeedNumLS) + " error continues...",
                         DXCoil(DXCoilNum).MSErrIndex(SpeedNumLS),
                         VolFlowperRatedTotCap,
                         VolFlowperRatedTotCap);
@@ -11938,7 +11938,7 @@ namespace DXCoils {
                     if (DXCoil(DXCoilNum).MSErrIndex(SpeedNumHS) == 0) {
                         ShowWarningMessage(DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
                                            "\" - Air volume flow rate per watt of rated total cooling capacity is out of range at speed " +
-                                           TrimSigDigits(SpeedNumHS) + '.');
+                                           fmt::to_string(SpeedNumHS) + '.');
                         ShowContinueErrorTimeStamp("");
                         ShowContinueError("Expected range for VolumeFlowPerRatedTotalCapacity=[" +
                                           RoundSigDigits(MinOperVolFlowPerRatedTotCap(DXCT), 3) + "--" +
@@ -11950,7 +11950,7 @@ namespace DXCoils {
                     ShowRecurringWarningErrorAtEnd(
                         DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
                             "\" - Air volume flow rate per watt of rated total cooling capacity is out of range at speed " +
-                            TrimSigDigits(SpeedNumHS) + " error continues...",
+                            fmt::to_string(SpeedNumHS) + " error continues...",
                         DXCoil(DXCoilNum).MSErrIndex(SpeedNumHS),
                         VolFlowperRatedTotCap,
                         VolFlowperRatedTotCap);
@@ -12233,7 +12233,7 @@ namespace DXCoils {
                     if (DXCoil(DXCoilNum).MSErrIndex(SpeedNum) == 0) {
                         ShowWarningMessage(DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
                                            "\" - Air volume flow rate per watt of rated total cooling capacity is out of range at speed " +
-                                           TrimSigDigits(SpeedNum) + '.');
+                                           fmt::to_string(SpeedNum) + '.');
                         ShowContinueErrorTimeStamp("");
                         ShowContinueError("Expected range for VolumeFlowPerRatedTotalCapacity=[" +
                                           RoundSigDigits(MinOperVolFlowPerRatedTotCap(DXCT), 3) + "--" +
@@ -12245,7 +12245,7 @@ namespace DXCoils {
                     ShowRecurringWarningErrorAtEnd(
                         DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
                             "\" - Air volume flow rate per watt of rated total cooling capacity is out of range at speed " +
-                            TrimSigDigits(SpeedNumHS) + " error continues...",
+                            fmt::to_string(SpeedNumHS) + " error continues...",
                         DXCoil(DXCoilNum).MSErrIndex(SpeedNumHS),
                         VolFlowperRatedTotCap,
                         VolFlowperRatedTotCap);
@@ -12723,7 +12723,7 @@ namespace DXCoils {
                     if (DXCoil(DXCoilNum).MSErrIndex(SpeedNumLS) == 0) {
                         ShowWarningMessage(DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
                                            "\" - Air volume flow rate per watt of rated total heating capacity is out of range at speed " +
-                                           TrimSigDigits(SpeedNumLS) + '.');
+                                           fmt::to_string(SpeedNumLS) + '.');
                         ShowContinueErrorTimeStamp("");
                         ShowContinueError("Expected range for VolumeFlowPerRatedTotalCapacity=[" +
                                           RoundSigDigits(MinOperVolFlowPerRatedTotCap(DXCT), 3) + "--" +
@@ -12735,7 +12735,7 @@ namespace DXCoils {
                     ShowRecurringWarningErrorAtEnd(
                         DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
                             "\" - Air volume flow rate per watt of rated total heating capacity is out of range at speed " +
-                            TrimSigDigits(SpeedNumLS) + " error continues...",
+                            fmt::to_string(SpeedNumLS) + " error continues...",
                         DXCoil(DXCoilNum).MSErrIndex(SpeedNumLS),
                         VolFlowperRatedTotCap,
                         VolFlowperRatedTotCap);
@@ -12750,7 +12750,7 @@ namespace DXCoils {
                     if (DXCoil(DXCoilNum).MSErrIndex(SpeedNumHS) == 0) {
                         ShowWarningMessage(DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
                                            "\" - Air volume flow rate per watt of rated total heating capacity is out of range at speed " +
-                                           TrimSigDigits(SpeedNumHS) + '.');
+                                           fmt::to_string(SpeedNumHS) + '.');
                         ShowContinueErrorTimeStamp("");
                         ShowContinueError("Expected range for VolumeFlowPerRatedTotalCapacity=[" +
                                           RoundSigDigits(MinOperVolFlowPerRatedTotCap(DXCT), 3) + "--" +
@@ -12762,7 +12762,7 @@ namespace DXCoils {
                     ShowRecurringWarningErrorAtEnd(
                         DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
                             "\" - Air volume flow rate per watt of rated total heating capacity is out of range at speed " +
-                            TrimSigDigits(SpeedNumHS) + " error continues...",
+                            fmt::to_string(SpeedNumHS) + " error continues...",
                         DXCoil(DXCoilNum).MSErrIndex(SpeedNumHS),
                         VolFlowperRatedTotCap,
                         VolFlowperRatedTotCap);
@@ -15007,8 +15007,8 @@ namespace DXCoils {
         }
 
         if (DXCoilNum <= 0 || DXCoilNum > NumDXCoils) {
-            ShowSevereError("SetDXCoolingCoilData: called with DX Cooling Coil Number out of range=" + TrimSigDigits(DXCoilNum) +
-                            " should be >0 and <" + TrimSigDigits(NumDXCoils));
+            ShowSevereError("SetDXCoolingCoilData: called with DX Cooling Coil Number out of range=" + fmt::to_string(DXCoilNum) +
+                            " should be >0 and <" + fmt::to_string(NumDXCoils));
             ErrorsFound = true;
             return;
         }

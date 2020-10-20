@@ -365,12 +365,12 @@ namespace Furnaces {
         } else {
             FurnaceNum = CompIndex;
             if (FurnaceNum > NumFurnaces || FurnaceNum < 1) {
-                ShowFatalError("SimFurnace:  Invalid CompIndex passed=" + TrimSigDigits(FurnaceNum) +
-                               ", Number of Units=" + TrimSigDigits(NumFurnaces) + ", Entered Unit name=" + FurnaceName);
+                ShowFatalError("SimFurnace:  Invalid CompIndex passed=" + fmt::to_string(FurnaceNum) +
+                               ", Number of Units=" + fmt::to_string(NumFurnaces) + ", Entered Unit name=" + FurnaceName);
             }
             if (CheckEquipName(FurnaceNum)) {
                 if (FurnaceName != Furnace(FurnaceNum).Name) {
-                    ShowFatalError("SimFurnace: Invalid CompIndex passed=" + TrimSigDigits(FurnaceNum) + ", Unit name=" + FurnaceName +
+                    ShowFatalError("SimFurnace: Invalid CompIndex passed=" + fmt::to_string(FurnaceNum) + ", Unit name=" + FurnaceName +
                                    ", stored Unit Name for that index=" + Furnace(FurnaceNum).Name);
                 }
                 CheckEquipName(FurnaceNum) = false;
@@ -5544,7 +5544,7 @@ namespace Furnaces {
                             if (Furnace(FurnaceNum).CoolVolumeFlowRate(i) > Furnace(FurnaceNum).CoolVolumeFlowRate(i + 1)) {
                                 ShowContinueError(" The MSHP system flow rate when cooling is required is reset to the flow rate at higher speed and "
                                                   "the simulation continues at Speed" +
-                                                  TrimSigDigits(i) + '.');
+                                                  fmt::to_string(i) + '.');
                                 ShowContinueError(" Occurs in " + CurrentModuleObject + " = " + Furnace(FurnaceNum).Name);
                                 Furnace(FurnaceNum).CoolVolumeFlowRate(i) = Furnace(FurnaceNum).CoolVolumeFlowRate(i + 1);
                             }
@@ -5571,7 +5571,7 @@ namespace Furnaces {
                                 if (Furnace(FurnaceNum).HeatVolumeFlowRate(i) > Furnace(FurnaceNum).HeatVolumeFlowRate(i + 1)) {
                                     ShowContinueError(" The MSHP system flow rate when heating is required is reset to the flow rate at higher speed "
                                                       "and the simulation continues at Speed" +
-                                                      TrimSigDigits(i) + '.');
+                                                      fmt::to_string(i) + '.');
                                     ShowContinueError(" Occurs in " + CurrentModuleObject + " system = " + Furnace(FurnaceNum).Name);
                                     Furnace(FurnaceNum).HeatVolumeFlowRate(i) = Furnace(FurnaceNum).HeatVolumeFlowRate(i + 1);
                                 }
@@ -6635,7 +6635,7 @@ namespace Furnaces {
                     if (Iter > MaxIter) {
                         if (Furnace(FurnaceNum).HeatingMaxIterIndex2 == 0) {
                             ShowWarningMessage(cFurnaceTypes(Furnace(FurnaceNum).FurnaceType_Num) + " \"" + Furnace(FurnaceNum).Name +
-                                               "\" -- Exceeded max heating iterations (" + TrimSigDigits(MaxIter) +
+                                               "\" -- Exceeded max heating iterations (" + fmt::to_string(MaxIter) +
                                                ") while adjusting furnace runtime.");
                             ShowContinueErrorTimeStamp("");
                         }
@@ -9765,11 +9765,11 @@ namespace Furnaces {
                                 ShowWarningMessage("CalcNonDXHeatingCoils: Hot water coil control failed for " +
                                                    cFurnaceTypes(Furnace(FurnaceNum).FurnaceType_Num) + "=\"" + Furnace(FurnaceNum).Name + "\"");
                                 ShowContinueErrorTimeStamp("");
-                                ShowContinueError("  Iteration limit [" + RoundSigDigits(SolveMaxIter) +
+                                ShowContinueError("  Iteration limit [" + fmt::to_string(SolveMaxIter) +
                                                   "] exceeded in calculating hot water mass flow rate");
                             }
                             ShowRecurringWarningErrorAtEnd("CalcNonDXHeatingCoils: Hot water coil control failed (iteration limit [" +
-                                                               RoundSigDigits(SolveMaxIter) + "]) for " +
+                                                               fmt::to_string(SolveMaxIter) + "]) for " +
                                                                cFurnaceTypes(Furnace(FurnaceNum).FurnaceType_Num) + "=\"" + Furnace(FurnaceNum).Name,
                                                            Furnace(FurnaceNum).HotWaterCoilMaxIterIndex);
                         } else if (SolFlag == -2) {
@@ -10508,7 +10508,7 @@ namespace Furnaces {
                                 ShowWarningError("Iteration limit exceeded calculating VS WSHP unit speed ratio, for unit=" +
                                                  Furnace(FurnaceNum).Name);
                                 ShowContinueErrorTimeStamp("Speed ratio returned=[" + RoundSigDigits(SpeedRatio, 2) +
-                                                           "], Speed number =" + RoundSigDigits(SpeedNum));
+                                                           "], Speed number =" + fmt::to_string(SpeedNum));
                             } else {
                                 ++ErrCountVar;
                                 ShowRecurringWarningErrorAtEnd(
@@ -10581,7 +10581,7 @@ namespace Furnaces {
                             ++ErrCountVar;
                             ShowWarningError("Iteration limit exceeded calculating VS WSHP unit speed ratio, for unit=" + Furnace(FurnaceNum).Name);
                             ShowContinueErrorTimeStamp("Speed ratio returned=[" + RoundSigDigits(SpeedRatio, 2) +
-                                                       "], Speed number =" + RoundSigDigits(SpeedNum));
+                                                       "], Speed number =" + fmt::to_string(SpeedNum));
                         } else {
                             ++ErrCountVar;
                             ShowRecurringWarningErrorAtEnd(Furnace(FurnaceNum).Name +

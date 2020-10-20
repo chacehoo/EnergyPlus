@@ -904,161 +904,161 @@ namespace PlantCentralGSHP {
 
             for (int ChillerHeaterNum = 1; ChillerHeaterNum <= this->ChillerHeaterNums; ++ChillerHeaterNum) {
 
-                SetupOutputVariable(state, "Chiller Heater Operation Mode Unit " + General::TrimSigDigits(ChillerHeaterNum) + "",
+                SetupOutputVariable(state, "Chiller Heater Operation Mode Unit " + fmt::to_string(ChillerHeaterNum),
                                     OutputProcessor::Unit::None,
                                     this->ChillerHeater(ChillerHeaterNum).Report.CurrentMode,
                                     "System",
                                     "Average",
                                     this->ChillerHeater(ChillerHeaterNum).Name);
 
-                SetupOutputVariable(state, "Chiller Heater Part Load Ratio Unit " + General::TrimSigDigits(ChillerHeaterNum) + "",
+                SetupOutputVariable(state, "Chiller Heater Part Load Ratio Unit " + fmt::to_string(ChillerHeaterNum),
                                     OutputProcessor::Unit::None,
                                     this->ChillerHeater(ChillerHeaterNum).Report.ChillerPartLoadRatio,
                                     "System",
                                     "Average",
                                     this->ChillerHeater(ChillerHeaterNum).Name);
 
-                SetupOutputVariable(state, "Chiller Heater Cycling Ratio Unit " + General::TrimSigDigits(ChillerHeaterNum) + "",
+                SetupOutputVariable(state, "Chiller Heater Cycling Ratio Unit " + fmt::to_string(ChillerHeaterNum),
                                     OutputProcessor::Unit::None,
                                     this->ChillerHeater(ChillerHeaterNum).Report.ChillerCyclingRatio,
                                     "System",
                                     "Average",
                                     this->ChillerHeater(ChillerHeaterNum).Name);
 
-                SetupOutputVariable(state, "Chiller Heater Cooling Electricity Rate Unit " + General::TrimSigDigits(ChillerHeaterNum) + "",
+                SetupOutputVariable(state, "Chiller Heater Cooling Electricity Rate Unit " + fmt::to_string(ChillerHeaterNum),
                                     OutputProcessor::Unit::W,
                                     this->ChillerHeater(ChillerHeaterNum).Report.CoolingPower,
                                     "System",
                                     "Average",
                                     this->ChillerHeater(ChillerHeaterNum).Name);
 
-                SetupOutputVariable(state, "Chiller Heater Heating Electricity Rate Unit " + General::TrimSigDigits(ChillerHeaterNum) + "",
+                SetupOutputVariable(state, "Chiller Heater Heating Electricity Rate Unit " + fmt::to_string(ChillerHeaterNum),
                                     OutputProcessor::Unit::W,
                                     this->ChillerHeater(ChillerHeaterNum).Report.HeatingPower,
                                     "System",
                                     "Average",
                                     this->ChillerHeater(ChillerHeaterNum).Name);
 
-                SetupOutputVariable(state, "Chiller Heater Cooling Electricity Energy Unit " + General::TrimSigDigits(ChillerHeaterNum) + "",
+                SetupOutputVariable(state, "Chiller Heater Cooling Electricity Energy Unit " + fmt::to_string(ChillerHeaterNum),
                                     OutputProcessor::Unit::J,
                                     this->ChillerHeater(ChillerHeaterNum).Report.CoolingEnergy,
                                     "System",
                                     "Sum",
                                     this->ChillerHeater(ChillerHeaterNum).Name);
 
-                SetupOutputVariable(state, "Chiller Heater Heating Electricity Energy Unit " + General::TrimSigDigits(ChillerHeaterNum) + "",
+                SetupOutputVariable(state, "Chiller Heater Heating Electricity Energy Unit " + fmt::to_string(ChillerHeaterNum),
                                     OutputProcessor::Unit::J,
                                     this->ChillerHeater(ChillerHeaterNum).Report.HeatingEnergy,
                                     "System",
                                     "Sum",
                                     this->ChillerHeater(ChillerHeaterNum).Name);
 
-                SetupOutputVariable(state, "Chiller Heater Cooling Rate Unit " + General::TrimSigDigits(ChillerHeaterNum) + "",
+                SetupOutputVariable(state, "Chiller Heater Cooling Rate Unit " + fmt::to_string(ChillerHeaterNum),
                                     OutputProcessor::Unit::W,
                                     this->ChillerHeater(ChillerHeaterNum).Report.QEvap,
                                     "System",
                                     "Average",
                                     this->ChillerHeater(ChillerHeaterNum).Name);
 
-                SetupOutputVariable(state, "Chiller Heater Cooling Energy Unit " + General::TrimSigDigits(ChillerHeaterNum) + "",
+                SetupOutputVariable(state, "Chiller Heater Cooling Energy Unit " + fmt::to_string(ChillerHeaterNum),
                                     OutputProcessor::Unit::J,
                                     this->ChillerHeater(ChillerHeaterNum).Report.EvapEnergy,
                                     "System",
                                     "Sum",
                                     this->ChillerHeater(ChillerHeaterNum).Name);
 
-                SetupOutputVariable(state, "Chiller Heater False Load Heat Transfer Rate Unit " + General::TrimSigDigits(ChillerHeaterNum) + "",
+                SetupOutputVariable(state, "Chiller Heater False Load Heat Transfer Rate Unit " + fmt::to_string(ChillerHeaterNum),
                                     OutputProcessor::Unit::W,
                                     this->ChillerHeater(ChillerHeaterNum).Report.ChillerFalseLoadRate,
                                     "System",
                                     "Average",
                                     this->ChillerHeater(ChillerHeaterNum).Name);
 
-                SetupOutputVariable(state, "Chiller Heater False Load Heat Transfer Energy Unit " + General::TrimSigDigits(ChillerHeaterNum) + "",
+                SetupOutputVariable(state, "Chiller Heater False Load Heat Transfer Energy Unit " + fmt::to_string(ChillerHeaterNum),
                                     OutputProcessor::Unit::J,
                                     this->ChillerHeater(ChillerHeaterNum).Report.ChillerFalseLoad,
                                     "System",
                                     "Sum",
                                     this->ChillerHeater(ChillerHeaterNum).Name);
 
-                SetupOutputVariable(state, "Chiller Heater Evaporator Inlet Temperature Unit " + General::TrimSigDigits(ChillerHeaterNum) + "",
+                SetupOutputVariable(state, "Chiller Heater Evaporator Inlet Temperature Unit " + fmt::to_string(ChillerHeaterNum),
                                     OutputProcessor::Unit::C,
                                     this->ChillerHeater(ChillerHeaterNum).Report.EvapInletTemp,
                                     "System",
                                     "Average",
                                     this->ChillerHeater(ChillerHeaterNum).Name);
 
-                SetupOutputVariable(state, "Chiller Heater Evaporator Outlet Temperature Unit " + General::TrimSigDigits(ChillerHeaterNum) + "",
+                SetupOutputVariable(state, "Chiller Heater Evaporator Outlet Temperature Unit " + fmt::to_string(ChillerHeaterNum),
                                     OutputProcessor::Unit::C,
                                     this->ChillerHeater(ChillerHeaterNum).Report.EvapOutletTemp,
                                     "System",
                                     "Average",
                                     this->ChillerHeater(ChillerHeaterNum).Name);
 
-                SetupOutputVariable(state, "Chiller Heater Evaporator Mass Flow Rate Unit " + General::TrimSigDigits(ChillerHeaterNum) + "",
+                SetupOutputVariable(state, "Chiller Heater Evaporator Mass Flow Rate Unit " + fmt::to_string(ChillerHeaterNum),
                                     OutputProcessor::Unit::kg_s,
                                     this->ChillerHeater(ChillerHeaterNum).Report.Evapmdot,
                                     "System",
                                     "Average",
                                     this->ChillerHeater(ChillerHeaterNum).Name);
 
-                SetupOutputVariable(state, "Chiller Heater Condenser Heat Transfer Rate Unit " + General::TrimSigDigits(ChillerHeaterNum) + "",
+                SetupOutputVariable(state, "Chiller Heater Condenser Heat Transfer Rate Unit " + fmt::to_string(ChillerHeaterNum),
                                     OutputProcessor::Unit::W,
                                     this->ChillerHeater(ChillerHeaterNum).Report.QCond,
                                     "System",
                                     "Average",
                                     this->ChillerHeater(ChillerHeaterNum).Name);
 
-                SetupOutputVariable(state, "Chiller Heater Condenser Heat Transfer Energy Unit " + General::TrimSigDigits(ChillerHeaterNum) + "",
+                SetupOutputVariable(state, "Chiller Heater Condenser Heat Transfer Energy Unit " + fmt::to_string(ChillerHeaterNum),
                                     OutputProcessor::Unit::J,
                                     this->ChillerHeater(ChillerHeaterNum).Report.CondEnergy,
                                     "System",
                                     "Sum",
                                     this->ChillerHeater(ChillerHeaterNum).Name);
 
-                SetupOutputVariable(state, "Chiller Heater COP Unit " + General::TrimSigDigits(ChillerHeaterNum) + "",
+                SetupOutputVariable(state, "Chiller Heater COP Unit " + fmt::to_string(ChillerHeaterNum),
                                     OutputProcessor::Unit::W_W,
                                     this->ChillerHeater(ChillerHeaterNum).Report.ActualCOP,
                                     "System",
                                     "Average",
                                     this->ChillerHeater(ChillerHeaterNum).Name);
 
-                SetupOutputVariable(state, "Chiller Heater Capacity Temperature Modifier Multiplier Unit " + General::TrimSigDigits(ChillerHeaterNum) + "",
+                SetupOutputVariable(state, "Chiller Heater Capacity Temperature Modifier Multiplier Unit " + fmt::to_string(ChillerHeaterNum),
                                     OutputProcessor::Unit::None,
                                     this->ChillerHeater(ChillerHeaterNum).Report.ChillerCapFT,
                                     "System",
                                     "Average",
                                     this->ChillerHeater(ChillerHeaterNum).Name);
 
-                SetupOutputVariable(state, "Chiller Heater EIR Temperature Modifier Multiplier Unit " + General::TrimSigDigits(ChillerHeaterNum) + "",
+                SetupOutputVariable(state, "Chiller Heater EIR Temperature Modifier Multiplier Unit " + fmt::to_string(ChillerHeaterNum),
                                     OutputProcessor::Unit::None,
                                     this->ChillerHeater(ChillerHeaterNum).Report.ChillerEIRFT,
                                     "System",
                                     "Average",
                                     this->ChillerHeater(ChillerHeaterNum).Name);
 
-                SetupOutputVariable(state, "Chiller Heater EIR Part Load Modifier Multiplier Unit " + General::TrimSigDigits(ChillerHeaterNum) + "",
+                SetupOutputVariable(state, "Chiller Heater EIR Part Load Modifier Multiplier Unit " + fmt::to_string(ChillerHeaterNum),
                                     OutputProcessor::Unit::None,
                                     this->ChillerHeater(ChillerHeaterNum).Report.ChillerEIRFPLR,
                                     "System",
                                     "Average",
                                     this->ChillerHeater(ChillerHeaterNum).Name);
 
-                SetupOutputVariable(state, "Chiller Heater Condenser Inlet Temperature Unit " + General::TrimSigDigits(ChillerHeaterNum) + "",
+                SetupOutputVariable(state, "Chiller Heater Condenser Inlet Temperature Unit " + fmt::to_string(ChillerHeaterNum),
                                     OutputProcessor::Unit::C,
                                     this->ChillerHeater(ChillerHeaterNum).Report.CondInletTemp,
                                     "System",
                                     "Average",
                                     this->ChillerHeater(ChillerHeaterNum).Name);
 
-                SetupOutputVariable(state, "Chiller Heater Condenser Outlet Temperature Unit " + General::TrimSigDigits(ChillerHeaterNum) + "",
+                SetupOutputVariable(state, "Chiller Heater Condenser Outlet Temperature Unit " + fmt::to_string(ChillerHeaterNum),
                                     OutputProcessor::Unit::C,
                                     this->ChillerHeater(ChillerHeaterNum).Report.CondOutletTemp,
                                     "System",
                                     "Average",
                                     this->ChillerHeater(ChillerHeaterNum).Name);
 
-                SetupOutputVariable(state, "Chiller Heater Condenser Mass Flow Rate Unit " + General::TrimSigDigits(ChillerHeaterNum) + "",
+                SetupOutputVariable(state, "Chiller Heater Condenser Mass Flow Rate Unit " + fmt::to_string(ChillerHeaterNum),
                                     OutputProcessor::Unit::kg_s,
                                     this->ChillerHeater(ChillerHeaterNum).Report.Condmdot,
                                     "System",
@@ -1798,8 +1798,8 @@ namespace PlantCentralGSHP {
 
             if (CompNum > this->NumOfComp) {
                 ShowSevereError("CalcChillerModel: ChillerHeater=\"" + this->Name + "\", calculated component number too big.");
-                ShowContinueError("Max number of components=[" + General::RoundSigDigits(this->NumOfComp) + "], indicated component number=[" +
-                                  General::RoundSigDigits(CompNum) + "].");
+                ShowContinueError("Max number of components=[" + fmt::to_string(this->NumOfComp) + "], indicated component number=[" +
+                                  fmt::to_string(CompNum) + "].");
                 ShowFatalError("Program terminates due to preceding condition.");
             }
 

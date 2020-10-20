@@ -55,8 +55,6 @@
 #include <EnergyPlus/Autosizing/HeatingCapacitySizing.hh>
 #include <EnergyPlus/BranchNodeConnections.hh>
 #include <EnergyPlus/Data/EnergyPlusData.hh>
-#include <EnergyPlus/DataBranchAirLoopPlant.hh>
-#include <EnergyPlus/DataEnvironment.hh>
 #include <EnergyPlus/DataHVACGlobals.hh>
 #include <EnergyPlus/DataHeatBalFanSys.hh>
 #include <EnergyPlus/DataHeatBalSurface.hh>
@@ -78,7 +76,6 @@
 #include <EnergyPlus/OutputProcessor.hh>
 #include <EnergyPlus/Plant/DataPlant.hh>
 #include <EnergyPlus/PlantUtilities.hh>
-#include <EnergyPlus/Psychrometrics.hh>
 #include <EnergyPlus/ScheduleManager.hh>
 #include <EnergyPlus/SteamBaseboardRadiator.hh>
 #include <EnergyPlus/UtilityRoutines.hh>
@@ -126,10 +123,6 @@ namespace SteamBaseboardRadiator {
     using DataZoneEquipment::CheckZoneEquipmentList;
     using DataZoneEquipment::ZoneEquipConfig;
     using DataZoneEquipment::ZoneEquipInputsFilled;
-
-    // Use statements for access to subroutines in other modules
-    using Psychrometrics::PsyCpAirFnW;
-    using Psychrometrics::PsyRhoAirFnPbTdbW;
 
     // Data
     // MODULE PARAMETER DEFINITIONS
@@ -230,12 +223,12 @@ namespace SteamBaseboardRadiator {
         } else {
             BaseboardNum = CompIndex;
             if (BaseboardNum > NumSteamBaseboards || BaseboardNum < 1) {
-                ShowFatalError("SimSteamBaseboard:  Invalid CompIndex passed=" + TrimSigDigits(BaseboardNum) +
-                               ", Number of Units=" + TrimSigDigits(NumSteamBaseboards) + ", Entered Unit name=" + EquipName);
+                ShowFatalError("SimSteamBaseboard:  Invalid CompIndex passed=" + fmt::to_string(BaseboardNum) +
+                               ", Number of Units=" + fmt::to_string(NumSteamBaseboards) + ", Entered Unit name=" + EquipName);
             }
             if (CheckEquipName(BaseboardNum)) {
                 if (EquipName != SteamBaseboard(BaseboardNum).EquipID) {
-                    ShowFatalError("SimSteamBaseboard: Invalid CompIndex passed=" + TrimSigDigits(BaseboardNum) + ", Unit name=" + EquipName +
+                    ShowFatalError("SimSteamBaseboard: Invalid CompIndex passed=" + fmt::to_string(BaseboardNum) + ", Unit name=" + EquipName +
                                    ", stored Unit Name for that index=" + SteamBaseboard(BaseboardNum).EquipID);
                 }
                 CheckEquipName(BaseboardNum) = false;
@@ -287,7 +280,7 @@ namespace SteamBaseboardRadiator {
                                           SteamBaseboard(BaseboardNum).BranchNum);
                     } else {
                         ShowSevereError("SimSteamBaseboard: Errors in Baseboard=" + SteamBaseboard(BaseboardNum).EquipID);
-                        ShowContinueError("Invalid or unimplemented equipment type=" + TrimSigDigits(SteamBaseboard(BaseboardNum).EquipType));
+                        ShowContinueError("Invalid or unimplemented equipment type=" + fmt::to_string(SteamBaseboard(BaseboardNum).EquipType));
                         ShowFatalError("Preceding condition causes termination.");
                     }
                 }
@@ -564,7 +557,7 @@ namespace SteamBaseboardRadiator {
             if ((SteamBaseboard(BaseboardNum).TotSurfToDistrib < MinDistribSurfaces) && (SteamBaseboard(BaseboardNum).FracRadiant > MinFraction)) {
                 ShowSevereError(RoutineName + cCMO_BBRadiator_Steam + "=\"" + cAlphaArgs(1) +
                                 "\", the number of surface/radiant fraction groups entered was less than the allowable minimum.");
-                ShowContinueError("...the minimum that must be entered=[" + RoundSigDigits(MinDistribSurfaces) + "].");
+                ShowContinueError("...the minimum that must be entered=[" + fmt::to_string(MinDistribSurfaces) + "].");
                 ErrorsFound = true;
                 SteamBaseboard(BaseboardNum).TotSurfToDistrib = 0;
             }
@@ -1595,17 +1588,17 @@ namespace SteamBaseboardRadiator {
         } else {
             BaseboardNum = CompIndex;
             if (BaseboardNum > NumSteamBaseboards || BaseboardNum < 1) {
-                ShowFatalError("UpdateSteamBaseboardPlantConnection:  Invalid CompIndex passed=" + TrimSigDigits(BaseboardNum) +
-                               ", Number of baseboards=" + TrimSigDigits(NumSteamBaseboards) + ", Entered baseboard name=" + BaseboardName);
+                ShowFatalError("UpdateSteamBaseboardPlantConnection:  Invalid CompIndex passed=" + fmt::to_string(BaseboardNum) +
+                               ", Number of baseboards=" + fmt::to_string(NumSteamBaseboards) + ", Entered baseboard name=" + BaseboardName);
             }
             if (KickOffSimulation) {
                 if (BaseboardName != SteamBaseboard(BaseboardNum).EquipID) {
-                    ShowFatalError("UpdateSteamBaseboardPlantConnection: Invalid CompIndex passed=" + TrimSigDigits(BaseboardNum) +
+                    ShowFatalError("UpdateSteamBaseboardPlantConnection: Invalid CompIndex passed=" + fmt::to_string(BaseboardNum) +
                                    ", baseboard name=" + BaseboardName +
                                    ", stored baseboard Name for that index=" + SteamBaseboard(BaseboardNum).EquipID);
                 }
                 if (BaseboardTypeNum != TypeOf_Baseboard_Rad_Conv_Steam) {
-                    ShowFatalError("UpdateSteamBaseboardPlantConnection: Invalid CompIndex passed=" + TrimSigDigits(BaseboardNum) +
+                    ShowFatalError("UpdateSteamBaseboardPlantConnection: Invalid CompIndex passed=" + fmt::to_string(BaseboardNum) +
                                    ", baseboard name=" + BaseboardName +
                                    ", stored baseboard Name for that index=" + ccSimPlantEquipTypes(BaseboardTypeNum));
                 }

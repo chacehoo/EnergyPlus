@@ -65,7 +65,6 @@
 #include <EnergyPlus/Data/EnergyPlusData.hh>
 #include <EnergyPlus/InputProcessing/InputProcessor.hh>
 #include <EnergyPlus/NodeInputManager.hh>
-#include <EnergyPlus/Psychrometrics.hh>
 #include <EnergyPlus/ScheduleManager.hh>
 #include <EnergyPlus/UnitarySystem.hh>
 #include <EnergyPlus/UtilityRoutines.hh>
@@ -403,15 +402,15 @@ namespace DataZoneEquipment {
         UniqueZoneEquipListNames.reserve(NumOfZones);
 
         if (NumOfZoneEquipLists != NumOfControlledZones) {
-            ShowSevereError(RoutineName + "Number of Zone Equipment lists [" + TrimSigDigits(NumOfZoneEquipLists) +
-                            "] not equal Number of Controlled Zones [" + TrimSigDigits(NumOfControlledZones) + ']');
+            ShowSevereError(RoutineName + "Number of Zone Equipment lists [" + fmt::to_string(NumOfZoneEquipLists) +
+                            "] not equal Number of Controlled Zones [" + fmt::to_string(NumOfControlledZones) + ']');
             ShowContinueError("..Each Controlled Zone [ZoneHVAC:EquipmentConnections] must have a corresponding (unique) ZoneHVAC:EquipmentList");
             ShowFatalError("GetZoneEquipment: Incorrect number of zone equipment lists");
         }
 
         if (NumOfControlledZones > NumOfZones) {
-            ShowSevereError(RoutineName + "Number of Controlled Zone objects [" + TrimSigDigits(NumOfControlledZones) +
-                            "] greater than Number of Zones [" + TrimSigDigits(NumOfZones) + ']');
+            ShowSevereError(RoutineName + "Number of Controlled Zone objects [" + fmt::to_string(NumOfControlledZones) +
+                            "] greater than Number of Zones [" + fmt::to_string(NumOfZones) + ']');
             ShowFatalError(RoutineName + "Too many ZoneHVAC:EquipmentConnections objects.");
         }
 
@@ -560,7 +559,7 @@ namespace DataZoneEquipment {
                         continue;
                     }
                     ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + thisZoneEquipList.Name +
-                                     "\", truncated list at blank field; object count=" + RoundSigDigits(maxEquipCount));
+                                     "\", truncated list at blank field; object count=" + fmt::to_string(maxEquipCount));
                     break;
                 }
 
@@ -606,10 +605,10 @@ namespace DataZoneEquipment {
                         (thisZoneEquipList.CoolingPriority(ZoneEquipTypeNum) > thisZoneEquipList.NumOfEquipTypes)) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphArray(1) + "\".");
                         ShowContinueError("invalid " + cNumericFields(nNumsInExtensible * ZoneEquipTypeIdx + nNumsBeforeExtensible + 1) + "=[" +
-                                          RoundSigDigits(thisZoneEquipList.CoolingPriority(ZoneEquipTypeNum)) + "].");
+                                          fmt::to_string(thisZoneEquipList.CoolingPriority(ZoneEquipTypeNum)) + "].");
                         ShowContinueError("equipment sequence must be > 0 and <= number of equipments in the list.");
                         if (thisZoneEquipList.CoolingPriority(ZoneEquipTypeNum) > 0)
-                            ShowContinueError("only " + RoundSigDigits(thisZoneEquipList.NumOfEquipTypes) + " in the list.");
+                            ShowContinueError("only " + fmt::to_string(thisZoneEquipList.NumOfEquipTypes) + " in the list.");
                         GetZoneEquipmentDataErrorsFound = true;
                     }
 
@@ -618,10 +617,10 @@ namespace DataZoneEquipment {
                         (thisZoneEquipList.HeatingPriority(ZoneEquipTypeNum) > thisZoneEquipList.NumOfEquipTypes)) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphArray(1) + "\".");
                         ShowContinueError("invalid " + cNumericFields(nNumsInExtensible * ZoneEquipTypeIdx + nNumsBeforeExtensible + 2) + "=[" +
-                                          RoundSigDigits(thisZoneEquipList.HeatingPriority(ZoneEquipTypeNum)) + "].");
+                                          fmt::to_string(thisZoneEquipList.HeatingPriority(ZoneEquipTypeNum)) + "].");
                         ShowContinueError("equipment sequence must be > 0 and <= number of equipments in the list.");
                         if (thisZoneEquipList.HeatingPriority(ZoneEquipTypeNum) > 0)
-                            ShowContinueError("only " + RoundSigDigits(thisZoneEquipList.NumOfEquipTypes) + " in the list.");
+                            ShowContinueError("only " + fmt::to_string(thisZoneEquipList.NumOfEquipTypes) + " in the list.");
                         GetZoneEquipmentDataErrorsFound = true;
                     }
 
@@ -773,23 +772,23 @@ namespace DataZoneEquipment {
                 for (ZoneEquipTypeNum = 1; ZoneEquipTypeNum <= thisZoneEquipList.NumOfEquipTypes; ++ZoneEquipTypeNum) {
                     if (count_eq(thisZoneEquipList.CoolingPriority, ZoneEquipTypeNum) > 1) {
                         ShowSevereError(RoutineName + CurrentModuleObject + " = " + thisZoneEquipList.Name);
-                        ShowContinueError("...multiple assignments for Zone Equipment Cooling Sequence=" + RoundSigDigits(ZoneEquipTypeNum) +
+                        ShowContinueError("...multiple assignments for Zone Equipment Cooling Sequence=" + fmt::to_string(ZoneEquipTypeNum) +
                                           ", must be 1-1 correspondence between sequence assignments and number of equipments.");
                         GetZoneEquipmentDataErrorsFound = true;
                     } else if (count_eq(thisZoneEquipList.CoolingPriority, ZoneEquipTypeNum) == 0) {
                         ShowWarningError(RoutineName + CurrentModuleObject + " = " + thisZoneEquipList.Name);
-                        ShowContinueError("...zero assigned to Zone Equipment Cooling Sequence=" + RoundSigDigits(ZoneEquipTypeNum) +
+                        ShowContinueError("...zero assigned to Zone Equipment Cooling Sequence=" + fmt::to_string(ZoneEquipTypeNum) +
                                           ", apparent gap in sequence assignments in this equipment list.");
                     }
                     if (count_eq(thisZoneEquipList.HeatingPriority, ZoneEquipTypeNum) > 1) {
                         ShowSevereError(RoutineName + CurrentModuleObject + " = " + thisZoneEquipList.Name);
                         ShowContinueError(
-                            "...multiple assignments for Zone Equipment Heating or No-Load Sequence=" + RoundSigDigits(ZoneEquipTypeNum) +
+                            "...multiple assignments for Zone Equipment Heating or No-Load Sequence=" + fmt::to_string(ZoneEquipTypeNum) +
                             ", must be 1-1 correspondence between sequence assignments and number of equipments.");
                         GetZoneEquipmentDataErrorsFound = true;
                     } else if (count_eq(thisZoneEquipList.HeatingPriority, ZoneEquipTypeNum) == 0) {
                         ShowWarningError(RoutineName + CurrentModuleObject + " = " + thisZoneEquipList.Name);
-                        ShowContinueError("...zero assigned to Zone Equipment Heating or No-Load Sequence=" + RoundSigDigits(ZoneEquipTypeNum) +
+                        ShowContinueError("...zero assigned to Zone Equipment Heating or No-Load Sequence=" + fmt::to_string(ZoneEquipTypeNum) +
                                           ", apparent gap in sequence assignments in this equipment list.");
                     }
                 }
@@ -1381,7 +1380,7 @@ namespace DataZoneEquipment {
                         ReturnAirNodeNumber = thisZoneEquip.ReturnNode(1);
                         if (thisZoneEquip.NumReturnNodes > 1) {
                             ShowWarningError("GetReturnAirNodeForZone: " + calledFromDescription + ", request for zone return node is ambiguous.");
-                            ShowContinueError("Zone=" + thisZoneEquip.ZoneName + " has " + General::RoundSigDigits(thisZoneEquip.NumReturnNodes) +
+                            ShowContinueError("Zone=" + thisZoneEquip.ZoneName + " has " + fmt::to_string(thisZoneEquip.NumReturnNodes) +
                                               " return nodes. First return node will be used.");
                         }
                     } else {

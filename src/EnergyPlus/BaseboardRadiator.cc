@@ -157,12 +157,12 @@ namespace BaseboardRadiator {
         } else {
             BaseboardNum = CompIndex;
             if (BaseboardNum > baseboard->NumBaseboards || BaseboardNum < 1) {
-                ShowFatalError("SimBaseboard:  Invalid CompIndex passed=" + TrimSigDigits(BaseboardNum) +
-                               ", Number of Units=" + TrimSigDigits(baseboard->NumBaseboards) + ", Entered Unit name=" + EquipName);
+                ShowFatalError("SimBaseboard:  Invalid CompIndex passed=" + fmt::to_string(BaseboardNum) +
+                               ", Number of Units=" + fmt::to_string(baseboard->NumBaseboards) + ", Entered Unit name=" + EquipName);
             }
             if (baseboard->Baseboard(BaseboardNum).CheckEquipName) {
                 if (EquipName != baseboard->Baseboard(BaseboardNum).EquipID) {
-                    ShowFatalError("SimBaseboard: Invalid CompIndex passed=" + TrimSigDigits(BaseboardNum) + ", Unit name=" + EquipName +
+                    ShowFatalError("SimBaseboard: Invalid CompIndex passed=" + fmt::to_string(BaseboardNum) + ", Unit name=" + EquipName +
                                    ", stored Unit Name for that index=" + baseboard->Baseboard(BaseboardNum).EquipID);
                 }
                 baseboard->Baseboard(BaseboardNum).CheckEquipName = false;

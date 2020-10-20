@@ -442,7 +442,7 @@ namespace AirLoopHVACDOAS {
                         if (!(CompNum == 1 || CompNum == state.dataAirLoop->OutsideAirSys(thisDOAS.m_OASystemNum).NumComponents)) {
                             ShowSevereError("The fan placement is either first as blow through or last as draw through in" + CurrentModuleObject +
                                             " = " + state.dataAirLoop->OutsideAirSys(thisDOAS.m_OASystemNum).ComponentName(CompNum));
-                            ShowContinueError("The current position is number " + General::RoundSigDigits(CompNum));
+                            ShowContinueError("The current position is number " + fmt::to_string(CompNum));
                             errorsFound = true;
                         }
                     } else if (SELECT_CASE_var == "FAN:COMPONENTMODEL") {
@@ -461,7 +461,7 @@ namespace AirLoopHVACDOAS {
                         if (!(CompNum == 1 || CompNum == state.dataAirLoop->OutsideAirSys(thisDOAS.m_OASystemNum).NumComponents)) {
                             ShowSevereError("The fan placement is either first as blow through or last as draw through in" + CurrentModuleObject +
                                             " = " + state.dataAirLoop->OutsideAirSys(thisDOAS.m_OASystemNum).ComponentName(CompNum));
-                            ShowContinueError("The current position is number " + General::RoundSigDigits(CompNum));
+                            ShowContinueError("The current position is number " + fmt::to_string(CompNum));
                             errorsFound = true;
                         }
                     } else if (SELECT_CASE_var == "COIL:COOLING:WATER") {
@@ -742,8 +742,7 @@ namespace AirLoopHVACDOAS {
                 thisDOAS.NumOfAirLoops = fields.at("number_of_airloophvac"); //
                 if (thisDOAS.NumOfAirLoops < 1) {
                     cFieldName = "Number of AirLoopHVAC";
-                    ShowSevereError(cCurrentModuleObject + ", \"" + thisDOAS.Name + "\" " + cFieldName + " = " +
-                                    General::TrimSigDigits(thisDOAS.NumOfAirLoops));
+                    ShowSevereError(fmt::format("{}, \"{}\" {} = {}", cCurrentModuleObject, thisDOAS.Name, cFieldName, thisDOAS.NumOfAirLoops));
                     ShowContinueError(" The minimum value should be 1.");
                     errorsFound = true;
                 }

@@ -603,8 +603,8 @@ namespace WindowManager {
 
             if (TotalIPhi > state.dataWindowManager->MaxNumOfIncidentAngles) {
                 ShowSevereError("WindowManage::InitGlassOpticalCalculations = " + state.dataConstruction->Construct(ConstrNum).Name +
-                                ", Invalid maximum value of common incidet angles = " + TrimSigDigits(TotalIPhi) + ".");
-                ShowContinueError("The maximum number of incident angles for each construct is " + TrimSigDigits(state.dataWindowManager->MaxNumOfIncidentAngles) +
+                                ", Invalid maximum value of common incidet angles = " + fmt::to_string(TotalIPhi) + ".");
+                ShowContinueError("The maximum number of incident angles for each construct is " + fmt::to_string(state.dataWindowManager->MaxNumOfIncidentAngles) +
                                   ". Please rearrange the dataset.");
                 ShowFatalError("Errors found getting inputs. Previous error(s) cause program termination.");
             }
@@ -1657,10 +1657,10 @@ namespace WindowManager {
 
         if (DifOverrideCount > 0) {
             if (!DisplayExtraWarnings) {
-                ShowWarningError("W5InitGlassParameters: " + RoundSigDigits(DifOverrideCount) +
+                ShowWarningError("W5InitGlassParameters: " + fmt::to_string(DifOverrideCount) +
                                  " Windows had Solar Diffusing=Yes overridden by presence of Window Shading Device.");
             } else {
-                ShowMessage("W5InitGlassParameters: " + RoundSigDigits(DifOverrideCount) +
+                ShowMessage("W5InitGlassParameters: " + fmt::to_string(DifOverrideCount) +
                             " Windows had Solar Diffusing=Yes overridden by presence of Window Shading Device.");
             }
         }
@@ -3415,7 +3415,7 @@ namespace WindowManager {
                     }
 
                 } else {
-                    ShowFatalError("SolveForWindowTemperatures: Invalid number of Glass Layers=" + TrimSigDigits(state.dataWindowManager->ngllayer) + ", up to 4 allowed.");
+                    ShowFatalError("SolveForWindowTemperatures: Invalid number of Glass Layers=" + fmt::to_string(state.dataWindowManager->ngllayer) + ", up to 4 allowed.");
                 }
             }
 
@@ -3575,7 +3575,7 @@ namespace WindowManager {
             if (DisplayExtraWarnings) {
                 // report out temperatures
                 for (i = 1; i <= state.dataWindowManager->nglfacep; ++i) {
-                    ShowContinueError("Glazing face index = " + RoundSigDigits(i) +
+                    ShowContinueError("Glazing face index = " + fmt::to_string(i) +
                                       " ; new temperature =" + RoundSigDigits(state.dataWindowManager->thetas(i) - DataGlobalConstants::KelvinConv(), 4) +
                                       "C  ; previous temperature = " + RoundSigDigits(state.dataWindowManager->thetasPrev(i) - DataGlobalConstants::KelvinConv(), 4) + 'C');
                 }

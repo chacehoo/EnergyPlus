@@ -496,7 +496,7 @@ void ControlCompOutput(EnergyPlusData &state, std::string const &CompName,      
             } else if (Action == iReverseAction) {
                 Denom = -max(std::abs(QZnReq), 100.0);
             } else {
-                ShowFatalError("ControlCompOutput: Illegal Action argument =[" + TrimSigDigits(Action) + ']');
+                ShowFatalError("ControlCompOutput: Illegal Action argument =[" + fmt::to_string(Action) + ']');
             }
         }
 
@@ -594,7 +594,7 @@ void ControlCompOutput(EnergyPlusData &state, std::string const &CompName,      
             break;
 
         default:
-            ShowFatalError("ControlCompOutput: Illegal Component Number argument =[" + TrimSigDigits(SimCompNum) + ']');
+            ShowFatalError("ControlCompOutput: Illegal Component Number argument =[" + fmt::to_string(SimCompNum) + ']');
             break;
         }
 

@@ -1044,7 +1044,7 @@ namespace HeatBalanceHAMTManager {
             print(state.files.eio, "\n");
 
             for (int cellid = Extcell(sid), concell = 1; cellid <= Intcell(sid); ++cellid, ++concell) {
-                SetupOutputVariable(state, "HAMT Surface Temperature Cell " + TrimSigDigits(concell) + "",
+                SetupOutputVariable(state, "HAMT Surface Temperature Cell " + fmt::to_string(concell),
                                     OutputProcessor::Unit::C,
                                     cells(cellid).temp,
                                     "Zone",
@@ -1052,7 +1052,7 @@ namespace HeatBalanceHAMTManager {
                                     Surface(sid).Name);
             }
             for (int cellid = Extcell(sid), concell = 1; cellid <= Intcell(sid); ++cellid, ++concell) {
-                SetupOutputVariable(state, "HAMT Surface Water Content Cell " + TrimSigDigits(concell) + "",
+                SetupOutputVariable(state, "HAMT Surface Water Content Cell " + fmt::to_string(concell),
                                     OutputProcessor::Unit::kg_kg,
                                     cells(cellid).wreport,
                                     "Zone",
@@ -1060,7 +1060,7 @@ namespace HeatBalanceHAMTManager {
                                     Surface(sid).Name);
             }
             for (int cellid = Extcell(sid), concell = 1; cellid <= Intcell(sid); ++cellid, ++concell) {
-                SetupOutputVariable(state, "HAMT Surface Relative Humidity Cell " + TrimSigDigits(concell) + "",
+                SetupOutputVariable(state, "HAMT Surface Relative Humidity Cell " + fmt::to_string(concell),
                                     OutputProcessor::Unit::Perc,
                                     cells(cellid).rhp,
                                     "Zone",

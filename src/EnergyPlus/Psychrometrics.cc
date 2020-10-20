@@ -47,7 +47,6 @@
 
 // C++ Headers
 #include <cstdlib>
-#include <iostream>
 
 // ObjexxFCL Headers
 #include <ObjexxFCL/Fmath.hh>
@@ -715,7 +714,7 @@ namespace Psychrometrics {
         if (iter > itmax) {
             if (!WarmupFlag) {
                 if (iPsyErrIndex(iPsyTwbFnTdbWPb3) == 0) {
-                    ShowWarningMessage("WetBulb not converged after " + TrimSigDigits(iter) + " iterations(PsyTwbFnTdbWPb)");
+                    ShowWarningMessage("WetBulb not converged after " + fmt::to_string(iter) + " iterations(PsyTwbFnTdbWPb)");
                     if (!CalledFrom.empty()) {
                         ShowContinueErrorTimeStamp(" Routine=" + CalledFrom + ',');
                     } else {
@@ -1317,7 +1316,7 @@ namespace Psychrometrics {
                     ShowContinueErrorTimeStamp(" Routine=Unknown,");
                 }
                 ShowContinueError(String);
-                String = "Instead, calculated Humidity Ratio at " + TrimSigDigits(TDP - DeltaT, 1) + " (" + TrimSigDigits(DeltaT) +
+                String = "Instead, calculated Humidity Ratio at " + TrimSigDigits(TDP - DeltaT, 1) + " (" + fmt::to_string(DeltaT) +
                          " degree less) = " + TrimSigDigits(W, 4);
                 ShowContinueError(String + " will be used. Simulation continues.");
             }
@@ -1499,7 +1498,7 @@ namespace Psychrometrics {
         if (iter > itmax) {
             if (!WarmupFlag) {
                 if (iPsyErrIndex(iPsyTsatFnPb2) == 0) {
-                    ShowWarningMessage("Saturation Temperature not converged after " + TrimSigDigits(iter) + " iterations (PsyTsatFnPb)");
+                    ShowWarningMessage("Saturation Temperature not converged after " + fmt::to_string(iter) + " iterations (PsyTsatFnPb)");
                     if (!CalledFrom.empty()) {
                         ShowContinueErrorTimeStamp(" Routine=" + CalledFrom + ',');
                     } else {

@@ -52,7 +52,6 @@
 #include <EnergyPlus/DataContaminantBalance.hh>
 #include <EnergyPlus/DataEnvironment.hh>
 #include <EnergyPlus/DataLoopNode.hh>
-#include <EnergyPlus/General.hh>
 #include <EnergyPlus/InputProcessing/InputProcessor.hh>
 #include <EnergyPlus/MixerComponent.hh>
 #include <EnergyPlus/NodeInputManager.hh>
@@ -145,9 +144,6 @@ namespace MixerComponent {
         // It is called from the SimAirLoopComponent
         // at the system time step.
 
-        // Using/Aliasing
-        using General::TrimSigDigits;
-
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int MixerNum; // The Mixer that you are currently loading input into
         //////////// hoisted into namespace ////////////////////////////////////////////////
@@ -172,12 +168,12 @@ namespace MixerComponent {
         } else {
             MixerNum = CompIndex;
             if (MixerNum > NumMixers || MixerNum < 1) {
-                ShowFatalError("SimAirLoopMixer: Invalid CompIndex passed=" + TrimSigDigits(MixerNum) +
-                               ", Number of Mixers=" + TrimSigDigits(NumMixers) + ", Mixer name=" + CompName);
+                ShowFatalError("SimAirLoopMixer: Invalid CompIndex passed=" + fmt::to_string(MixerNum) +
+                               ", Number of Mixers=" + fmt::to_string(NumMixers) + ", Mixer name=" + CompName);
             }
             if (CheckEquipName(MixerNum)) {
                 if (CompName != MixerCond(MixerNum).MixerName) {
-                    ShowFatalError("SimAirLoopMixer: Invalid CompIndex passed=" + TrimSigDigits(MixerNum) + ", Mixer name=" + CompName +
+                    ShowFatalError("SimAirLoopMixer: Invalid CompIndex passed=" + fmt::to_string(MixerNum) + ", Mixer name=" + CompName +
                                    ", stored Mixer Name for that index=" + MixerCond(MixerNum).MixerName);
                 }
                 CheckEquipName(MixerNum) = false;
@@ -215,7 +211,6 @@ namespace MixerComponent {
         // Uses the status flags to trigger events.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
         using NodeInputManager::GetOnlySingleNode;
 
         // SUBROUTINE PARAMETER DEFINITIONS:
@@ -329,7 +324,7 @@ namespace MixerComponent {
                 ShowSevereError(CurrentModuleObject + " = " + MixerCond(MixerNum).MixerName +
                                 " specifies an inlet node name the same as the outlet node.");
                 ShowContinueError(".." + cAlphaFields(2) + " = " + NodeID(NodeNum));
-                ShowContinueError("..Inlet Node #" + TrimSigDigits(InNodeNum1) + " is duplicate.");
+                ShowContinueError("..Inlet Node #" + fmt::to_string(InNodeNum1) + " is duplicate.");
                 ErrorsFound = true;
             }
             for (InNodeNum1 = 1; InNodeNum1 <= MixerCond(MixerNum).NumInletNodes; ++InNodeNum1) {
@@ -337,8 +332,8 @@ namespace MixerComponent {
                     if (MixerCond(MixerNum).InletNode(InNodeNum1) != MixerCond(MixerNum).InletNode(InNodeNum2)) continue;
                     ShowSevereError(CurrentModuleObject + " = " + MixerCond(MixerNum).MixerName +
                                     " specifies duplicate inlet nodes in its inlet node list.");
-                    ShowContinueError("..Inlet Node #" + TrimSigDigits(InNodeNum1) + " Name=" + NodeID(InNodeNum1));
-                    ShowContinueError("..Inlet Node #" + TrimSigDigits(InNodeNum2) + " is duplicate.");
+                    ShowContinueError("..Inlet Node #" + fmt::to_string(InNodeNum1) + " Name=" + NodeID(InNodeNum1));
+                    ShowContinueError("..Inlet Node #" + fmt::to_string(InNodeNum2) + " is duplicate.");
                     ErrorsFound = true;
                 }
             }

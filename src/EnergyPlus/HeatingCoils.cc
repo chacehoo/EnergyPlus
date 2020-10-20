@@ -59,7 +59,6 @@
 #include <EnergyPlus/CurveManager.hh>
 #include <EnergyPlus/DXCoils.hh>
 #include <EnergyPlus/Data/EnergyPlusData.hh>
-#include <EnergyPlus/DataAirLoop.hh>
 #include <EnergyPlus/DataContaminantBalance.hh>
 #include <EnergyPlus/DataEnvironment.hh>
 #include <EnergyPlus/DataGlobalConstants.hh>
@@ -239,12 +238,12 @@ namespace HeatingCoils {
             } else {
                 CoilNum = CompIndex;
                 if (CoilNum > NumHeatingCoils || CoilNum < 1) {
-                    ShowFatalError("SimulateHeatingCoilComponents: Invalid CompIndex passed=" + TrimSigDigits(CoilNum) +
-                                   ", Number of Heating Coils=" + TrimSigDigits(NumHeatingCoils) + ", Coil name=" + CompName);
+                    ShowFatalError("SimulateHeatingCoilComponents: Invalid CompIndex passed=" + fmt::to_string(CoilNum) +
+                                   ", Number of Heating Coils=" + fmt::to_string(NumHeatingCoils) + ", Coil name=" + CompName);
                 }
                 if (CheckEquipName(CoilNum)) {
                     if (!CompName.empty() && CompName != HeatingCoil(CoilNum).Name) {
-                        ShowFatalError("SimulateHeatingCoilComponents: Invalid CompIndex passed=" + TrimSigDigits(CoilNum) +
+                        ShowFatalError("SimulateHeatingCoilComponents: Invalid CompIndex passed=" + fmt::to_string(CoilNum) +
                                        ", Coil name=" + CompName + ", stored Coil Name for that index=" + HeatingCoil(CoilNum).Name);
                     }
                     CheckEquipName(CoilNum) = false;
@@ -1646,9 +1645,9 @@ namespace HeatingCoils {
             for (StageNum = 1; StageNum <= HeatingCoil(CoilNum).NumOfStages - 1; ++StageNum) {
                 if (HeatingCoil(CoilNum).MSNominalCapacity(StageNum) > HeatingCoil(CoilNum).MSNominalCapacity(StageNum + 1)) {
                     ShowSevereError("SizeHeatingCoil: " + HeatingCoil(CoilNum).HeatingCoilType + ' ' + HeatingCoil(CoilNum).Name + ", Stage " +
-                                    TrimSigDigits(StageNum) + " Nominal Capacity (" +
+                                    fmt::to_string(StageNum) + " Nominal Capacity (" +
                                     RoundSigDigits(HeatingCoil(CoilNum).MSNominalCapacity(StageNum), 2) + " W) must be less than or equal to Stage " +
-                                    TrimSigDigits(StageNum + 1) + " Nominal Capacity (" +
+                                    fmt::to_string(StageNum + 1) + " Nominal Capacity (" +
                                     RoundSigDigits(HeatingCoil(CoilNum).MSNominalCapacity(StageNum + 1), 2) + " W).");
                     ShowFatalError("Preceding conditions cause termination.");
                 }
@@ -3008,11 +3007,11 @@ namespace HeatingCoils {
         } else {
             CoilNum = CompIndex;
             if (CoilNum > NumHeatingCoils || CoilNum < 1) {
-                ShowFatalError("CheckHeatingCoilSchedule: Invalid CompIndex passed=" + TrimSigDigits(CoilNum) +
-                               ", Number of Heating Coils=" + TrimSigDigits(NumHeatingCoils) + ", Coil name=" + CompName);
+                ShowFatalError("CheckHeatingCoilSchedule: Invalid CompIndex passed=" + fmt::to_string(CoilNum) +
+                               ", Number of Heating Coils=" + fmt::to_string(NumHeatingCoils) + ", Coil name=" + CompName);
             }
             if (CompName != HeatingCoil(CoilNum).Name) {
-                ShowSevereError("CheckHeatingCoilSchedule: Invalid CompIndex passed=" + TrimSigDigits(CoilNum) + ", Coil name=" + CompName +
+                ShowSevereError("CheckHeatingCoilSchedule: Invalid CompIndex passed=" + fmt::to_string(CoilNum) + ", Coil name=" + CompName +
                                 ", stored Coil Name for that index=" + HeatingCoil(CoilNum).Name);
                 ShowContinueError("...expected type=\"" + CompType + "\", actual type=\"" + cAllCoilTypes(HeatingCoil(CoilNum).HCoilType_Num) +
                                   "\".");
@@ -3596,8 +3595,8 @@ namespace HeatingCoils {
         }
 
         if (CoilNum <= 0 || CoilNum > NumHeatingCoils) {
-            ShowSevereError("SetHeatingCoilData: called with heating coil Number out of range=" + TrimSigDigits(CoilNum) + " should be >0 and <" +
-                            TrimSigDigits(NumHeatingCoils));
+            ShowSevereError("SetHeatingCoilData: called with heating coil Number out of range=" + fmt::to_string(CoilNum) + " should be >0 and <" +
+                            fmt::to_string(NumHeatingCoils));
             ErrorsFound = true;
             return;
         }

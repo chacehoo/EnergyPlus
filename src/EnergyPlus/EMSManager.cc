@@ -846,7 +846,7 @@ namespace EMSManager {
 
                     int nHandle = EMSActuatorAvailable(ActuatorVariableNum).handleCount;
                     if (nHandle > 0) {
-                        EnergyPlus::ShowWarningError("Seems like you already tried to get a Handle on this Actuator " + std::to_string(nHandle) + "times.");
+                        EnergyPlus::ShowWarningError("Seems like you already tried to get a Handle on this Actuator " + fmt::to_string(nHandle) + "times.");
                         EnergyPlus::ShowContinueError("Occurred for componentType='" +  EMSActuatorUsed(ActuatorNum).ComponentTypeName
                                 + "', controlType='" + EMSActuatorUsed(ActuatorNum).ControlTypeName
                                 + "', uniqueKey='" + EMSActuatorUsed(ActuatorNum).UniqueIDName + "'.");
@@ -1220,7 +1220,7 @@ namespace EMSManager {
                 EMSActuatorUsed(ActuatorNum).CheckedOkay = true;
                 int nHandle = EMSActuatorAvailable(ActuatorVariableNum).handleCount;
                 if (nHandle > 0) {
-                    EnergyPlus::ShowWarningError("Seems like you already tried to get a Handle on this Actuator " + std::to_string(nHandle) + "times.");
+                    EnergyPlus::ShowWarningError("Seems like you already tried to get a Handle on this Actuator " + fmt::to_string(nHandle) + "times.");
                     EnergyPlus::ShowContinueError("Occurred for componentType='" +  EMSActuatorUsed(ActuatorNum).ComponentTypeName
                             + "', controlType='" + EMSActuatorUsed(ActuatorNum).ControlTypeName
                             + "', uniqueKey='" + EMSActuatorUsed(ActuatorNum).UniqueIDName + "'.");

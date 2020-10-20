@@ -816,7 +816,7 @@ namespace PipeHeatTransfer {
             this->InsulationOD = this->PipeOD + 2.0 * this->InsulationThickness;
 
         } else {
-            ShowSevereError(PipeType + ": invalid " + FieldName + "=\"" + ConstructionName + "\", too many layers=[" + TrimSigDigits(TotalLayers) +
+            ShowSevereError(PipeType + ": invalid " + FieldName + "=\"" + ConstructionName + "\", too many layers=[" + fmt::to_string(TotalLayers) +
                             "], only 1 or 2 allowed.");
             ErrorsFound = true;
         }

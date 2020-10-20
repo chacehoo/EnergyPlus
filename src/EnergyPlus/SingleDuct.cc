@@ -266,12 +266,12 @@ namespace SingleDuct {
         } else {
             SysNum = CompIndex;
             if (SysNum > NumSDAirTerminal || SysNum < 1) {
-                ShowFatalError("SimulateSingleDuct: Invalid CompIndex passed=" + TrimSigDigits(CompIndex) +
-                               ", Number of Systems=" + TrimSigDigits(NumSDAirTerminal) + ", System name=" + CompName);
+                ShowFatalError("SimulateSingleDuct: Invalid CompIndex passed=" + fmt::to_string(CompIndex) +
+                               ", Number of Systems=" + fmt::to_string(NumSDAirTerminal) + ", System name=" + CompName);
             }
             if (CheckEquipName(SysNum)) {
                 if (CompName != sd_airterminal(SysNum).SysName) {
-                    ShowFatalError("SimulateSingleDuct: Invalid CompIndex passed=" + TrimSigDigits(CompIndex) + ", System name=" + CompName +
+                    ShowFatalError("SimulateSingleDuct: Invalid CompIndex passed=" + fmt::to_string(CompIndex) + ", System name=" + CompName +
                                    ", stored System Name for that index=" + sd_airterminal(SysNum).SysName);
                 }
                 CheckEquipName(SysNum) = false;

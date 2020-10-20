@@ -2250,7 +2250,7 @@ namespace SurfaceGeometry {
                 }
             }
             if (iTmp1 > 0) {
-                ShowWarningError(RoutineName + "Surfaces use InfraredTransparent constructions " + TrimSigDigits(iTmp1) +
+                ShowWarningError(RoutineName + "Surfaces use InfraredTransparent constructions " + fmt::to_string(iTmp1) +
                                  " in non-interzone surfaces. (illegal use)");
                 ShowContinueError("For explicit details on each use, use Output:Diagnostics,DisplayExtraWarnings;");
             }
@@ -2259,7 +2259,7 @@ namespace SurfaceGeometry {
         // Note, could do same for Window Area and detecting if Interzone Surface in Zone
 
         if (Warning1Count > 0) {
-            ShowWarningMessage(RoutineName + "Window dimensions differ from Window 5/6 data file dimensions, " + TrimSigDigits(Warning1Count) +
+            ShowWarningMessage(RoutineName + "Window dimensions differ from Window 5/6 data file dimensions, " + fmt::to_string(Warning1Count) +
                                " times.");
             ShowContinueError("This will affect the frame heat transfer calculation if the frame in the Data File entry");
             ShowContinueError("is not uniform, i.e., has sections with different geometry and/or thermal properties.");
@@ -2267,32 +2267,32 @@ namespace SurfaceGeometry {
         }
         if (Warning2Count > 0) {
             ShowWarningMessage(RoutineName + "Exterior Windows have been replaced with Window 5/6 two glazing systems, " +
-                               TrimSigDigits(Warning2Count) + " times.");
+                               fmt::to_string(Warning2Count) + " times.");
             ShowContinueError("Note that originally entered dimensions are overridden.");
             ShowContinueError("For explicit details on each window, use Output:Diagnostics,DisplayExtraWarnings;");
         }
         if (Warning3Count > 0) {
             ShowWarningMessage(RoutineName + "Interior Windows have been replaced with Window 5/6 two glazing systems, " +
-                               TrimSigDigits(Warning3Count) + " times.");
+                               fmt::to_string(Warning3Count) + " times.");
             ShowContinueError("Note that originally entered dimensions are overridden.");
             ShowContinueError("For explicit details on each window, use Output:Diagnostics,DisplayExtraWarnings;");
         }
 
         if (TotalMultipliedWindows > 0) {
-            ShowWarningMessage(RoutineName + "There are " + TrimSigDigits(TotalMultipliedWindows) +
+            ShowWarningMessage(RoutineName + "There are " + fmt::to_string(TotalMultipliedWindows) +
                                " window/glass door(s) that may cause inaccurate shadowing due to Solar Distribution.");
             ShowContinueError("For explicit details on each window, use Output:Diagnostics,DisplayExtraWarnings;");
             TotalWarningErrors += TotalMultipliedWindows;
         }
         if (TotalCoincidentVertices > 0) {
             ShowWarningMessage(
-                RoutineName + "There are " + TrimSigDigits(TotalCoincidentVertices) +
+                RoutineName + "There are " + fmt::to_string(TotalCoincidentVertices) +
                 " coincident/collinear vertices; These have been deleted unless the deletion would bring the number of surface sides < 3.");
             ShowContinueError("For explicit details on each problem surface, use Output:Diagnostics,DisplayExtraWarnings;");
             TotalWarningErrors += TotalCoincidentVertices;
         }
         if (TotalDegenerateSurfaces > 0) {
-            ShowSevereMessage(RoutineName + "There are " + TrimSigDigits(TotalDegenerateSurfaces) +
+            ShowSevereMessage(RoutineName + "There are " + fmt::to_string(TotalDegenerateSurfaces) +
                               " degenerate surfaces; Degenerate surfaces are those with number of sides < 3.");
             ShowContinueError("These surfaces should be deleted.");
             ShowContinueError("For explicit details on each problem surface, use Output:Diagnostics,DisplayExtraWarnings;");
@@ -2743,7 +2743,7 @@ namespace SurfaceGeometry {
             inputProcessor->getObjectDefMaxArgs(cCurrentModuleObject, Loop, NumAlphas, NumNumbers);
             if (NumAlphas != 2) {
                 ShowSevereError(cCurrentModuleObject +
-                                ": Object Definition indicates not = 2 Alpha Objects, Number Indicated=" + TrimSigDigits(NumAlphas));
+                                ": Object Definition indicates not = 2 Alpha Objects, Number Indicated=" + fmt::to_string(NumAlphas));
                 ErrorsFound = true;
             }
 
@@ -2815,11 +2815,11 @@ namespace SurfaceGeometry {
                     SurfaceTmp(SurfNum).Sides = numSides;
                     if (mod(NumNumbers - 1, 3) != 0) {
                         ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", " + cNumericFieldNames(1) +
-                                         " not even multiple of 3. Will read in " + TrimSigDigits(SurfaceTmp(SurfNum).Sides));
+                                         " not even multiple of 3. Will read in " + fmt::to_string(SurfaceTmp(SurfNum).Sides));
                     }
                     if (numSides < 3) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", " + cNumericFieldNames(1) +
-                                        " (autocalculate) must be >= 3. Only " + TrimSigDigits(SurfaceTmp(SurfNum).Sides) + " provided.");
+                                        " (autocalculate) must be >= 3. Only " + fmt::to_string(SurfaceTmp(SurfNum).Sides) + " provided.");
                         ErrorsFound = true;
                         continue;
                     }
@@ -2828,8 +2828,8 @@ namespace SurfaceGeometry {
                     SurfaceTmp(SurfNum).Sides = rNumericArgs(1);
                     if (numSides > SurfaceTmp(SurfNum).Sides) {
                         ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", field " + cNumericFieldNames(1) + '=' +
-                                         TrimSigDigits(SurfaceTmp(SurfNum).Sides));
-                        ShowContinueError("...but " + TrimSigDigits(numSides) + " were entered. Only the indicated " + cNumericFieldNames(1) +
+                                         fmt::to_string(SurfaceTmp(SurfNum).Sides));
+                        ShowContinueError("...but " + fmt::to_string(numSides) + " were entered. Only the indicated " + cNumericFieldNames(1) +
                                           " will be used.");
                     }
                 }
@@ -2898,7 +2898,7 @@ namespace SurfaceGeometry {
             inputProcessor->getObjectDefMaxArgs(cCurrentModuleObject, Loop, NumAlphas, NumNumbers);
             if (NumAlphas != 1) {
                 ShowSevereError(cCurrentModuleObject +
-                                ": Object Definition indicates not = 1 Alpha Objects, Number Indicated=" + TrimSigDigits(NumAlphas));
+                                ": Object Definition indicates not = 1 Alpha Objects, Number Indicated=" + fmt::to_string(NumAlphas));
                 ErrorsFound = true;
             }
 
@@ -3128,13 +3128,13 @@ namespace SurfaceGeometry {
             if (Item == 1) {
                 if (SurfaceNumAlpha != 8) {
                     ShowSevereError(cCurrentModuleObject +
-                                    ": Object Definition indicates not = 8 Alpha Objects, Number Indicated=" + TrimSigDigits(SurfaceNumAlpha));
+                                    ": Object Definition indicates not = 8 Alpha Objects, Number Indicated=" + fmt::to_string(SurfaceNumAlpha));
                     ErrorsFound = true;
                 }
             } else {
                 if (SurfaceNumAlpha != 7) {
                     ShowSevereError(cCurrentModuleObject +
-                                    ": Object Definition indicates not = 7 Alpha Objects, Number Indicated=" + TrimSigDigits(SurfaceNumAlpha));
+                                    ": Object Definition indicates not = 7 Alpha Objects, Number Indicated=" + fmt::to_string(SurfaceNumAlpha));
                     ErrorsFound = true;
                 }
             }
@@ -3421,11 +3421,11 @@ namespace SurfaceGeometry {
                     SurfaceTmp(SurfNum).Sides = numSides;
                     if (mod(SurfaceNumProp - 2, 3) != 0) {
                         ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", " + cNumericFieldNames(2) +
-                                         " not even multiple of 3. Will read in " + TrimSigDigits(SurfaceTmp(SurfNum).Sides));
+                                         " not even multiple of 3. Will read in " + fmt::to_string(SurfaceTmp(SurfNum).Sides));
                     }
                     if (numSides < 3) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", " + cNumericFieldNames(2) +
-                                        " (autocalculate) must be >= 3. Only " + TrimSigDigits(SurfaceTmp(SurfNum).Sides) + " provided.");
+                                        " (autocalculate) must be >= 3. Only " + fmt::to_string(SurfaceTmp(SurfNum).Sides) + " provided.");
                         ErrorsFound = true;
                         continue;
                     }
@@ -3434,8 +3434,8 @@ namespace SurfaceGeometry {
                     SurfaceTmp(SurfNum).Sides = rNumericArgs(2);
                     if (numSides > SurfaceTmp(SurfNum).Sides) {
                         ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", field " + cNumericFieldNames(2) + '=' +
-                                         TrimSigDigits(SurfaceTmp(SurfNum).Sides));
-                        ShowContinueError("...but " + TrimSigDigits(numSides) + " were entered. Only the indicated " + cNumericFieldNames(2) +
+                                         fmt::to_string(SurfaceTmp(SurfNum).Sides));
+                        ShowContinueError("...but " + fmt::to_string(numSides) + " were entered. Only the indicated " + cNumericFieldNames(2) +
                                           " will be used.");
                     }
                 }
@@ -3452,8 +3452,8 @@ namespace SurfaceGeometry {
                 if (UtilityRoutines::SameString(cAlphaArgs(5), "Surface")) {
                     if (SurfaceTmp(SurfNum).Sides != static_cast<int>(SurfaceTmp(SurfNum).Vertex.size())) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name +
-                                        "\", After CheckConvexity, mismatch between Sides (" + TrimSigDigits(SurfaceTmp(SurfNum).Sides) +
-                                        ") and size of Vertex (" + TrimSigDigits(SurfaceTmp(SurfNum).Vertex.size()) + ").");
+                                        "\", After CheckConvexity, mismatch between Sides (" + fmt::to_string(SurfaceTmp(SurfNum).Sides) +
+                                        ") and size of Vertex (" + fmt::to_string(SurfaceTmp(SurfNum).Vertex.size()) + ").");
                         ShowContinueError("CheckConvexity is used to verify the convexity of a surface and detect collinear points.");
                         ErrorsFound = true;
                     }
@@ -3498,8 +3498,8 @@ namespace SurfaceGeometry {
                 } else if (SurfaceTmp(i).Vertex.size() != SurfaceTmp(ExtSurfNum).Vertex.size()) {
                     ShowSevereError(cCurrentModuleObject + "=\"" + SurfaceTmp(i).Name + "\", Vertex size mismatch between base surface :" +
                                     SurfaceTmp(i).Name + " and outside boundary surface: " + SurfaceTmp(ExtSurfNum).Name);
-                    ShowContinueError("The vertex sizes are " + TrimSigDigits(SurfaceTmp(i).Vertex.size()) + " for base surface and " +
-                                      TrimSigDigits(SurfaceTmp(ExtSurfNum).Vertex.size()) + " for outside boundary surface. Please check inputs.");
+                    ShowContinueError("The vertex sizes are " + fmt::to_string(SurfaceTmp(i).Vertex.size()) + " for base surface and " +
+                                      fmt::to_string(SurfaceTmp(ExtSurfNum).Vertex.size()) + " for outside boundary surface. Please check inputs.");
                     ErrorsFound = true;
                 }
             }
@@ -3650,7 +3650,7 @@ namespace SurfaceGeometry {
 
                 if (NumNumbers < 7) {
                     ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", Too few number of numeric args=[" +
-                                    TrimSigDigits(NumNumbers) + "].");
+                                    fmt::to_string(NumNumbers) + "].");
                     ErrorsFound = true;
                 }
 
@@ -4112,13 +4112,13 @@ namespace SurfaceGeometry {
 
         if (SurfaceNumAlpha != 6) {
             ShowSevereError(cCurrentModuleObject +
-                            ": Object Definition indicates not = 6 Alpha Objects, Number Indicated=" + TrimSigDigits(SurfaceNumAlpha));
+                            ": Object Definition indicates not = 6 Alpha Objects, Number Indicated=" + fmt::to_string(SurfaceNumAlpha));
             ErrorsFound = true;
         }
 
         if (SurfaceNumProp != 15) {
             ShowSevereError(cCurrentModuleObject +
-                            ": Object Definition indicates > 15 Numeric Objects, Number Indicated=" + TrimSigDigits(SurfaceNumAlpha));
+                            ": Object Definition indicates > 15 Numeric Objects, Number Indicated=" + fmt::to_string(SurfaceNumAlpha));
             ErrorsFound = true;
         }
         NeedToAddSurfaces = 0;
@@ -4143,7 +4143,7 @@ namespace SurfaceGeometry {
 
             if (SurfaceNumProp < 12) {
                 ShowSevereError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", Too few number of numeric args=[" +
-                                TrimSigDigits(SurfaceNumProp) + "].");
+                                fmt::to_string(SurfaceNumProp) + "].");
                 ErrorsFound = true;
             }
 
@@ -4292,11 +4292,11 @@ namespace SurfaceGeometry {
                 SurfaceTmp(SurfNum).Sides = rNumericArgs(3);
                 if (mod(SurfaceNumProp - 3, 3) != 0) {
                     ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", " + cNumericFieldNames(3) +
-                                     " not even multiple of 3. Will read in " + TrimSigDigits(SurfaceTmp(SurfNum).Sides));
+                                     " not even multiple of 3. Will read in " + fmt::to_string(SurfaceTmp(SurfNum).Sides));
                 }
                 if (rNumericArgs(3) < 3) {
                     ShowSevereError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", " + cNumericFieldNames(3) +
-                                    " (autocalculate) must be >= 3. Only " + TrimSigDigits(SurfaceTmp(SurfNum).Sides) + " provided.");
+                                    " (autocalculate) must be >= 3. Only " + fmt::to_string(SurfaceTmp(SurfNum).Sides) + " provided.");
                     ErrorsFound = true;
                     continue;
                 }
@@ -4305,8 +4305,8 @@ namespace SurfaceGeometry {
                 SurfaceTmp(SurfNum).Sides = rNumericArgs(3);
                 if (numSides > SurfaceTmp(SurfNum).Sides) {
                     ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", field " + cNumericFieldNames(3) + '=' +
-                                     TrimSigDigits(SurfaceTmp(SurfNum).Sides));
-                    ShowContinueError("...but " + TrimSigDigits(numSides) + " were entered. Only the indicated " + cNumericFieldNames(3) +
+                                     fmt::to_string(SurfaceTmp(SurfNum).Sides));
+                    ShowContinueError("...but " + fmt::to_string(numSides) + " were entered. Only the indicated " + cNumericFieldNames(3) +
                                       " will be used.");
                 }
             }
@@ -4498,7 +4498,7 @@ namespace SurfaceGeometry {
 
                 if (NumNumbers < 5) {
                     ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", Too few number of numeric args=[" +
-                                    TrimSigDigits(NumNumbers) + "].");
+                                    fmt::to_string(NumNumbers) + "].");
                     ErrorsFound = true;
                 }
 
@@ -5325,7 +5325,7 @@ namespace SurfaceGeometry {
         inputProcessor->getObjectDefMaxArgs(cCurrentModuleObject, Loop, NumAlphas, NumNumbers);
         if (NumAlphas != 3) {
             ShowSevereError(cCurrentModuleObject +
-                            ": Object Definition indicates not = 3 Alpha Objects, Number Indicated=" + TrimSigDigits(NumAlphas));
+                            ": Object Definition indicates not = 3 Alpha Objects, Number Indicated=" + fmt::to_string(NumAlphas));
             ErrorsFound = true;
         }
 
@@ -5427,11 +5427,11 @@ namespace SurfaceGeometry {
                 SurfaceTmp(SurfNum).Sides = rNumericArgs(1);
                 if (mod(NumNumbers - 1, 3) != 0) {
                     ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", " + cNumericFieldNames(1) +
-                                     " not even multiple of 3. Will read in " + TrimSigDigits(SurfaceTmp(SurfNum).Sides));
+                                     " not even multiple of 3. Will read in " + fmt::to_string(SurfaceTmp(SurfNum).Sides));
                 }
                 if (rNumericArgs(1) < 3) {
                     ShowSevereError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", " + cNumericFieldNames(1) +
-                                    " (autocalculate) must be >= 3. Only " + TrimSigDigits(SurfaceTmp(SurfNum).Sides) + " provided.");
+                                    " (autocalculate) must be >= 3. Only " + fmt::to_string(SurfaceTmp(SurfNum).Sides) + " provided.");
                     ErrorsFound = true;
                     continue;
                 }
@@ -6246,7 +6246,7 @@ namespace SurfaceGeometry {
 
         if (MaxNumNumbers != 8) {
             ShowSevereError(cCurrentModuleObject +
-                            ": Object Definition indicates not = 8 Number Objects, Number Indicated=" + TrimSigDigits(MaxNumNumbers));
+                            ": Object Definition indicates not = 8 Number Objects, Number Indicated=" + fmt::to_string(MaxNumNumbers));
             ErrorsFound = true;
         }
 
@@ -6540,8 +6540,8 @@ namespace SurfaceGeometry {
                     if (data.exposedFraction > 1 + tolerance) {
                         ShowWarningError(cCurrentModuleObject + ": " + Surface(Found).Name + ", " + cNumericFieldNames(numF) +
                                          " is greater than the perimeter of " + Surface(Found).Name);
-                        ShowContinueError(Surface(Found).Name + " perimeter = " + RoundSigDigits(Surface(Found).Perimeter) + ", " +
-                                          cCurrentModuleObject + " exposed perimeter = " + RoundSigDigits(rNumericArgs(numF)));
+                        ShowContinueError(Surface(Found).Name + " perimeter = " + fmt::to_string(Surface(Found).Perimeter) + ", " +
+                                          cCurrentModuleObject + " exposed perimeter = " + fmt::to_string(rNumericArgs(numF)));
                         ShowContinueError(cNumericFieldNames(numF) + " will be set equal to " + Surface(Found).Name + " perimeter");
                         data.exposedFraction = 1.0;
                     }
@@ -6586,8 +6586,8 @@ namespace SurfaceGeometry {
                         ShowSevereError(cCurrentModuleObject + ": " + Surface(Found).Name +
                                         ", must have equal number of segments as the floor has vertices." + cAlphaFieldNames(alpF) + "\" and \"" +
                                         cNumericFieldNames(numF - 1) + "\"");
-                        ShowContinueError(Surface(Found).Name + " number of vertices = " + TrimSigDigits(Surface(Found).Vertex.size()) + ", " +
-                                          cCurrentModuleObject + " number of segments = " + TrimSigDigits(numRemainingFields));
+                        ShowContinueError(Surface(Found).Name + " number of vertices = " + fmt::to_string(Surface(Found).Vertex.size()) + ", " +
+                                          cCurrentModuleObject + " number of segments = " + fmt::to_string(numRemainingFields));
                         ErrorsFound = true;
                     }
                     for (int segNum = 0; segNum < numRemainingFields; segNum++) {
@@ -7360,23 +7360,23 @@ namespace SurfaceGeometry {
 
         if (NumEMPDMat > 0 && !DataHeatBalance::AnyEMPD) {
             ShowWarningError(
-                "The input file includes " + RoundSigDigits(NumEMPDMat) +
+                "The input file includes " + fmt::to_string(NumEMPDMat) +
                 " MaterialProperty:MoisturePenetrationDepth:Settings objects but the moisture penetration depth algorithm is not used anywhere.");
             msgneeded = true;
         }
         if (NumPCMat > 0 && !DataHeatBalance::AnyCondFD) {
-            ShowWarningError("The input file includes " + RoundSigDigits(NumPCMat) +
+            ShowWarningError("The input file includes " + fmt::to_string(NumPCMat) +
                              " MaterialProperty:PhaseChange objects but the conduction finite difference algorithm is not used anywhere.");
             msgneeded = true;
         }
         if (NumVTCMat > 0 && !DataHeatBalance::AnyCondFD) {
             ShowWarningError(
-                "The input file includes " + RoundSigDigits(NumVTCMat) +
+                "The input file includes " + fmt::to_string(NumVTCMat) +
                 " MaterialProperty:VariableThermalConductivity objects but the conduction finite difference algorithm is not used anywhere.");
             msgneeded = true;
         }
         if (SumHAMTMat > 0 && !DataHeatBalance::AnyHAMT) {
-            ShowWarningError("The input file includes " + RoundSigDigits(SumHAMTMat) +
+            ShowWarningError("The input file includes " + fmt::to_string(SumHAMTMat) +
                              " MaterialProperty:HeatAndMoistureTransfer:* objects but the combined heat and moisture finite difference algorithm is "
                              "not used anywhere.");
             msgneeded = true;
@@ -7660,24 +7660,24 @@ namespace SurfaceGeometry {
                 if (DisplayExtraWarnings) {
                     ShowWarningError(RoutineName + "Distance between two vertices < .01, possibly coincident. for Surface=" +
                                      SurfaceTmp(SurfNum).Name + ", in Zone=" + SurfaceTmp(SurfNum).ZoneName);
-                    ShowContinueError("Vertex [" + RoundSigDigits(SurfaceTmp(SurfNum).Sides) + "]=(" +
+                    ShowContinueError("Vertex [" + fmt::to_string(SurfaceTmp(SurfNum).Sides) + "]=(" +
                                       RoundSigDigits(SurfaceTmp(SurfNum).Vertex(SurfaceTmp(SurfNum).Sides).x, 2) + ',' +
                                       RoundSigDigits(SurfaceTmp(SurfNum).Vertex(SurfaceTmp(SurfNum).Sides).y, 2) + ',' +
                                       RoundSigDigits(SurfaceTmp(SurfNum).Vertex(SurfaceTmp(SurfNum).Sides).z, 2) + ')');
-                    ShowContinueError("Vertex [" + RoundSigDigits(1) + "]=(" + RoundSigDigits(SurfaceTmp(SurfNum).Vertex(1).x, 2) + ',' +
+                    ShowContinueError("Vertex [" + fmt::to_string(1) + "]=(" + RoundSigDigits(SurfaceTmp(SurfNum).Vertex(1).x, 2) + ',' +
                                       RoundSigDigits(SurfaceTmp(SurfNum).Vertex(1).y, 2) + ',' + RoundSigDigits(SurfaceTmp(SurfNum).Vertex(1).z, 2) +
                                       ')');
                 }
                 ++TotalCoincidentVertices;
                 if (SurfaceTmp(SurfNum).Sides > 3) {
                     if (DisplayExtraWarnings) {
-                        ShowContinueError("Dropping Vertex [" + RoundSigDigits(SurfaceTmp(SurfNum).Sides) + "].");
+                        ShowContinueError("Dropping Vertex [" + fmt::to_string(SurfaceTmp(SurfNum).Sides) + "].");
                     }
                     --SurfaceTmp(SurfNum).Sides;
                     SurfaceTmp(SurfNum).Vertex.redimension(SurfaceTmp(SurfNum).Sides);
                 } else {
                     if (DisplayExtraWarnings) {
-                        ShowContinueError("Cannot Drop Vertex [" + RoundSigDigits(SurfaceTmp(SurfNum).Sides) +
+                        ShowContinueError("Cannot Drop Vertex [" + fmt::to_string(SurfaceTmp(SurfNum).Sides) +
                                           "]; Number of Surface Sides at minimum. This surface is now a degenerate surface.");
                     }
                     ++TotalDegenerateSurfaces;
@@ -7694,10 +7694,10 @@ namespace SurfaceGeometry {
                     if (DisplayExtraWarnings) {
                         ShowWarningError(RoutineName + "Distance between two vertices < .01, possibly coincident. for Surface=" +
                                          SurfaceTmp(SurfNum).Name + ", in Zone=" + SurfaceTmp(SurfNum).ZoneName);
-                        ShowContinueError("Vertex [" + RoundSigDigits(Vrt) + "]=(" + RoundSigDigits(SurfaceTmp(SurfNum).Vertex(Vrt).x, 2) + ',' +
+                        ShowContinueError("Vertex [" + fmt::to_string(Vrt) + "]=(" + RoundSigDigits(SurfaceTmp(SurfNum).Vertex(Vrt).x, 2) + ',' +
                                           RoundSigDigits(SurfaceTmp(SurfNum).Vertex(Vrt).y, 2) + ',' +
                                           RoundSigDigits(SurfaceTmp(SurfNum).Vertex(Vrt).z, 2) + ')');
-                        ShowContinueError("Vertex [" + RoundSigDigits(Vrt - 1) + "]=(" + RoundSigDigits(SurfaceTmp(SurfNum).Vertex(Vrt - 1).x, 2) +
+                        ShowContinueError("Vertex [" + fmt::to_string(Vrt - 1) + "]=(" + RoundSigDigits(SurfaceTmp(SurfNum).Vertex(Vrt - 1).x, 2) +
                                           ',' + RoundSigDigits(SurfaceTmp(SurfNum).Vertex(Vrt - 1).y, 2) + ',' +
                                           RoundSigDigits(SurfaceTmp(SurfNum).Vertex(Vrt - 1).z, 2) + ')');
                     }
@@ -7705,13 +7705,13 @@ namespace SurfaceGeometry {
                     if (Vrt == SurfaceTmp(SurfNum).Sides) {
                         if (SurfaceTmp(SurfNum).Sides > 3) {
                             if (DisplayExtraWarnings) {
-                                ShowContinueError("Dropping Vertex [" + RoundSigDigits(SurfaceTmp(SurfNum).Sides) + "].");
+                                ShowContinueError("Dropping Vertex [" + fmt::to_string(SurfaceTmp(SurfNum).Sides) + "].");
                             }
                             --SurfaceTmp(SurfNum).Sides;
                             SurfaceTmp(SurfNum).Vertex.redimension(SurfaceTmp(SurfNum).Sides);
                         } else {
                             if (DisplayExtraWarnings) {
-                                ShowContinueError("Cannot Drop Vertex [" + RoundSigDigits(SurfaceTmp(SurfNum).Sides) +
+                                ShowContinueError("Cannot Drop Vertex [" + fmt::to_string(SurfaceTmp(SurfNum).Sides) +
                                                   "]; Number of Surface Sides at minimum. This surface is now a degenerate surface.");
                             }
                             ++TotalDegenerateSurfaces;
@@ -7721,7 +7721,7 @@ namespace SurfaceGeometry {
                     } else {
                         if (SurfaceTmp(SurfNum).Sides > 3) {
                             if (DisplayExtraWarnings) {
-                                ShowContinueError("Dropping Vertex [" + RoundSigDigits(Vrt) + "].");
+                                ShowContinueError("Dropping Vertex [" + fmt::to_string(Vrt) + "].");
                             }
                             for (n = Vrt; n <= SurfaceTmp(SurfNum).Sides - 1; ++n) {
                                 SurfaceTmp(SurfNum).Vertex(n).x = SurfaceTmp(SurfNum).Vertex(n + 1).x;
@@ -7732,7 +7732,7 @@ namespace SurfaceGeometry {
                             SurfaceTmp(SurfNum).Vertex.redimension(SurfaceTmp(SurfNum).Sides);
                         } else {
                             if (DisplayExtraWarnings) {
-                                ShowContinueError("Cannot Drop Vertex [" + RoundSigDigits(SurfaceTmp(SurfNum).Sides) +
+                                ShowContinueError("Cannot Drop Vertex [" + fmt::to_string(SurfaceTmp(SurfNum).Sides) +
                                                   "]; Number of Surface Sides at minimum. This surface is now a degenerate surface.");
                             }
                             ++TotalDegenerateSurfaces;
@@ -8747,7 +8747,7 @@ namespace SurfaceGeometry {
 
             if (StormWindow(StormWinNum).DateOn == StormWindow(StormWinNum).DateOff) {
                 ShowSevereError(cCurrentModuleObject + ": Date On = Date Off -- not allowed, occurred in WindowProperty:StormWindow Input #" +
-                                TrimSigDigits(StormWinNum));
+                                fmt::to_string(StormWinNum));
                 ErrorsFound = true;
             }
 
@@ -8757,25 +8757,25 @@ namespace SurfaceGeometry {
                 if ((SELECT_CASE_var == 1) || (SELECT_CASE_var == 3) || (SELECT_CASE_var == 5) || (SELECT_CASE_var == 7) || (SELECT_CASE_var == 8) ||
                     (SELECT_CASE_var == 10) || (SELECT_CASE_var == 12)) {
                     if (StormWindow(StormWinNum).DayOfMonthOn > 31) {
-                        ShowSevereError(cCurrentModuleObject + ": Date On (Day of Month) [" + TrimSigDigits(StormWindow(StormWinNum).DayOfMonthOn) +
-                                        "], invalid for WindowProperty:StormWindow Input #" + TrimSigDigits(StormWinNum));
+                        ShowSevereError(cCurrentModuleObject + ": Date On (Day of Month) [" + fmt::to_string(StormWindow(StormWinNum).DayOfMonthOn) +
+                                        "], invalid for WindowProperty:StormWindow Input #" + fmt::to_string(StormWinNum));
                         ErrorsFound = true;
                     }
                 } else if ((SELECT_CASE_var == 4) || (SELECT_CASE_var == 6) || (SELECT_CASE_var == 9) || (SELECT_CASE_var == 11)) {
                     if (StormWindow(StormWinNum).DayOfMonthOn > 30) {
-                        ShowSevereError(cCurrentModuleObject + ": Date On (Day of Month) [" + TrimSigDigits(StormWindow(StormWinNum).DayOfMonthOn) +
-                                        "], invalid for WindowProperty:StormWindow Input #" + TrimSigDigits(StormWinNum));
+                        ShowSevereError(cCurrentModuleObject + ": Date On (Day of Month) [" + fmt::to_string(StormWindow(StormWinNum).DayOfMonthOn) +
+                                        "], invalid for WindowProperty:StormWindow Input #" + fmt::to_string(StormWinNum));
                         ErrorsFound = true;
                     }
                 } else if (SELECT_CASE_var == 2) {
                     if (StormWindow(StormWinNum).DayOfMonthOn > 29) {
-                        ShowSevereError(cCurrentModuleObject + ": Date On (Day of Month) [" + TrimSigDigits(StormWindow(StormWinNum).DayOfMonthOn) +
-                                        "], invalid for WindowProperty:StormWindow Input #" + TrimSigDigits(StormWinNum));
+                        ShowSevereError(cCurrentModuleObject + ": Date On (Day of Month) [" + fmt::to_string(StormWindow(StormWinNum).DayOfMonthOn) +
+                                        "], invalid for WindowProperty:StormWindow Input #" + fmt::to_string(StormWinNum));
                         ErrorsFound = true;
                     }
                 } else {
-                    ShowSevereError(cCurrentModuleObject + ": Date On Month [" + TrimSigDigits(StormWindow(StormWinNum).MonthOn) +
-                                    "], invalid for WindowProperty:StormWindow Input #" + TrimSigDigits(StormWinNum));
+                    ShowSevereError(cCurrentModuleObject + ": Date On Month [" + fmt::to_string(StormWindow(StormWinNum).MonthOn) +
+                                    "], invalid for WindowProperty:StormWindow Input #" + fmt::to_string(StormWinNum));
                     ErrorsFound = true;
                 }
             }
@@ -8785,25 +8785,25 @@ namespace SurfaceGeometry {
                 if ((SELECT_CASE_var == 1) || (SELECT_CASE_var == 3) || (SELECT_CASE_var == 5) || (SELECT_CASE_var == 7) || (SELECT_CASE_var == 8) ||
                     (SELECT_CASE_var == 10) || (SELECT_CASE_var == 12)) {
                     if (StormWindow(StormWinNum).DayOfMonthOff > 31) {
-                        ShowSevereError(cCurrentModuleObject + ": Date Off (Day of Month) [" + TrimSigDigits(StormWindow(StormWinNum).DayOfMonthOff) +
-                                        "], invalid for WindowProperty:StormWindow Input #" + TrimSigDigits(StormWinNum));
+                        ShowSevereError(cCurrentModuleObject + ": Date Off (Day of Month) [" + fmt::to_string(StormWindow(StormWinNum).DayOfMonthOff) +
+                                        "], invalid for WindowProperty:StormWindow Input #" + fmt::to_string(StormWinNum));
                         ErrorsFound = true;
                     }
                 } else if ((SELECT_CASE_var == 4) || (SELECT_CASE_var == 6) || (SELECT_CASE_var == 9) || (SELECT_CASE_var == 11)) {
                     if (StormWindow(StormWinNum).DayOfMonthOff > 30) {
-                        ShowSevereError(cCurrentModuleObject + ": Date Off (Day of Month) [" + TrimSigDigits(StormWindow(StormWinNum).DayOfMonthOff) +
-                                        "], invalid for WindowProperty:StormWindow Input #" + TrimSigDigits(StormWinNum));
+                        ShowSevereError(cCurrentModuleObject + ": Date Off (Day of Month) [" + fmt::to_string(StormWindow(StormWinNum).DayOfMonthOff) +
+                                        "], invalid for WindowProperty:StormWindow Input #" + fmt::to_string(StormWinNum));
                         ErrorsFound = true;
                     }
                 } else if (SELECT_CASE_var == 2) {
                     if (StormWindow(StormWinNum).DayOfMonthOff > 29) {
-                        ShowSevereError(cCurrentModuleObject + ": Date Off (Day of Month) [" + TrimSigDigits(StormWindow(StormWinNum).DayOfMonthOff) +
-                                        "], invalid for WindowProperty:StormWindow Input #" + TrimSigDigits(StormWinNum));
+                        ShowSevereError(cCurrentModuleObject + ": Date Off (Day of Month) [" + fmt::to_string(StormWindow(StormWinNum).DayOfMonthOff) +
+                                        "], invalid for WindowProperty:StormWindow Input #" + fmt::to_string(StormWinNum));
                         ErrorsFound = true;
                     }
                 } else {
-                    ShowSevereError(cCurrentModuleObject + ": Date Off Month [" + TrimSigDigits(StormWindow(StormWinNum).MonthOff) +
-                                    "], invalid for WindowProperty:StormWindow Input #" + TrimSigDigits(StormWinNum));
+                    ShowSevereError(cCurrentModuleObject + ": Date Off Month [" + fmt::to_string(StormWindow(StormWinNum).MonthOff) +
+                                    "], invalid for WindowProperty:StormWindow Input #" + fmt::to_string(StormWinNum));
                     ErrorsFound = true;
                 }
             }
@@ -8857,11 +8857,11 @@ namespace SurfaceGeometry {
                 if ((Latitude > 0.0 && (StormWindow(StormWinNum).MonthOn < StormWindow(StormWinNum).MonthOff)) ||
                     (Latitude <= 0.0 && (StormWindow(StormWinNum).MonthOn > StormWindow(StormWinNum).MonthOff))) {
                     ShowWarningError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" check times that storm window");
-                    ShowContinueError("is put on (month=" + TrimSigDigits(StormWindow(StormWinNum).MonthOn) +
-                                      ", day=" + TrimSigDigits(StormWindow(StormWinNum).DayOfMonthOn) +
-                                      ") and taken off (month=" + TrimSigDigits(StormWindow(StormWinNum).MonthOff) +
-                                      ", day=" + TrimSigDigits(StormWindow(StormWinNum).DayOfMonthOff) + ");");
-                    ShowContinueError("these times may be reversed for your building latitude=" + TrimSigDigits(Latitude, 2) + " deg.");
+                    ShowContinueError("is put on (month=" + fmt::to_string(StormWindow(StormWinNum).MonthOn) +
+                                      ", day=" + fmt::to_string(StormWindow(StormWinNum).DayOfMonthOn) +
+                                      ") and taken off (month=" + fmt::to_string(StormWindow(StormWinNum).MonthOff) +
+                                      ", day=" + fmt::to_string(StormWindow(StormWinNum).DayOfMonthOff) + ");");
+                    ShowContinueError("these times may be reversed for your building latitude=" + General::RoundSigDigits(Latitude, 2) + " deg.");
                 }
             }
         }
@@ -9526,7 +9526,7 @@ namespace SurfaceGeometry {
                     int numBlocks = numRemainingFields / 4;
                     if (mod(numRemainingFields, 4) != 0) {
                         ShowWarningError(cCurrentModuleObject + "=\"" + fndInput.name +
-                                         "\", number of Block fields not even multiple of 4. Will read in " + General::TrimSigDigits(numBlocks));
+                                         "\", number of Block fields not even multiple of 4. Will read in " + fmt::to_string(numBlocks));
                     }
                     for (int blockNum = 0; blockNum < numBlocks; blockNum++) {
                         Kiva::InputBlock block;
@@ -10415,7 +10415,7 @@ namespace SurfaceGeometry {
                 ShowWarningError(
                     "CalculateZoneVolume: 1 zone is not fully enclosed. For more details use:  Output:Diagnostics,DisplayExtrawarnings; ");
             } else if (countNotFullyEnclosedZones > 1) {
-                ShowWarningError("CalculateZoneVolume: " + RoundSigDigits(countNotFullyEnclosedZones) +
+                ShowWarningError("CalculateZoneVolume: " + fmt::to_string(countNotFullyEnclosedZones) +
                                  " zones are not fully enclosed. For more details use:  Output:Diagnostics,DisplayExtrawarnings; ");
             }
         }
@@ -11043,10 +11043,10 @@ namespace SurfaceGeometry {
             if (!IsCoPlanar) {
                 if (OutOfLine > 0.01) {
                     ShowSevereError(RoutineName + "Suspected non-planar surface:\"" + Surface(ThisSurf).Name +
-                                    "\", Max \"out of line\"=" + TrimSigDigits(OutOfLine, 5) + " at Vertex # " + TrimSigDigits(LastVertexInError));
+                                    "\", Max \"out of line\"=" + TrimSigDigits(OutOfLine, 5) + " at Vertex # " + fmt::to_string(LastVertexInError));
                 } else {
                     ShowWarningError(RoutineName + "Possible non-planar surface:\"" + Surface(ThisSurf).Name +
-                                     "\", Max \"out of line\"=" + TrimSigDigits(OutOfLine, 5) + " at Vertex # " + TrimSigDigits(LastVertexInError));
+                                     "\", Max \"out of line\"=" + TrimSigDigits(OutOfLine, 5) + " at Vertex # " + fmt::to_string(LastVertexInError));
                 }
                 //       ErrorInSurface=.TRUE.
             }
@@ -12750,11 +12750,11 @@ namespace SurfaceGeometry {
 
                     if (!surface.Name.empty()) {
                         ShowWarningError("CalcSurfaceCentroid: caught problem with # of sides, for surface=" + surface.Name);
-                        ShowContinueError("... number of sides must be >= 3, this surface # sides=" + RoundSigDigits(surface.Sides));
+                        ShowContinueError("... number of sides must be >= 3, this surface # sides=" + fmt::to_string(surface.Sides));
                     } else {
-                        ShowWarningError("CalcSurfaceCentroid: caught problem with # of sides, for surface=#" + RoundSigDigits(ThisSurf));
+                        ShowWarningError("CalcSurfaceCentroid: caught problem with # of sides, for surface=#" + fmt::to_string(ThisSurf));
                         ShowContinueError("...surface name is blank. Examine surfaces -- this may be a problem with ill-formed interzone surfaces.");
-                        ShowContinueError("... number of sides must be >= 3, this surface # sides=" + RoundSigDigits(surface.Sides));
+                        ShowContinueError("... number of sides must be >= 3, this surface # sides=" + fmt::to_string(surface.Sides));
                     }
                     centroid = 0.0;
                 }
@@ -12770,7 +12770,7 @@ namespace SurfaceGeometry {
         } // loop through surfaces
 
         if (negZcount > 0) {
-            ShowWarningError("CalcSurfaceCentroid: " + RoundSigDigits(negZcount) + " Surfaces have the Z coordinate < 0.");
+            ShowWarningError("CalcSurfaceCentroid: " + fmt::to_string(negZcount) + " Surfaces have the Z coordinate < 0.");
             ShowContinueError("...in any calculations, Wind Speed will be 0.0 for these surfaces.");
             ShowContinueError("...in any calculations, Outside temperatures will be the outside temperature + " +
                               RoundSigDigits(WeatherFileTempModCoeff, 3) + " for these surfaces.");
@@ -12975,7 +12975,7 @@ namespace SurfaceGeometry {
                             ++enclosureNum;
                             auto &thisEnclosure(Enclosures(enclosureNum));
                             thisSideEnclosureNum = enclosureNum;
-                            thisEnclosure.Name = RadiantOrSolar + " Enclosure " + General::RoundSigDigits(enclosureNum);
+                            thisEnclosure.Name = RadiantOrSolar + " Enclosure " + fmt::to_string(enclosureNum);
                             thisEnclosure.ZoneNames.push_back(surf.ZoneName);
                             thisEnclosure.ZoneNums.push_back(surf.Zone);
                             thisEnclosure.FloorArea += Zone(surf.Zone).FloorArea;
@@ -13098,7 +13098,7 @@ namespace SurfaceGeometry {
                 }
             }
             if (errorCount > 0) {
-                ShowSevereError(RoutineName + ": " + General::TrimSigDigits(errorCount) +
+                ShowSevereError(RoutineName + ": " + fmt::to_string(errorCount) +
                                 " surfaces use Construction:AirBoundary in non-interzone surfaces.");
                 ShowContinueError("For explicit details on each use, use Output:Diagnostics,DisplayExtraWarnings;");
             }
@@ -13354,13 +13354,13 @@ namespace SurfaceGeometry {
                         if (Np1 > NSides) Np1 -= NSides;
                         Np2 = n + 2;
                         if (Np2 > NSides) Np2 -= NSides;
-                        ShowContinueError("...vertex " + RoundSigDigits(n) + " to vertex " + RoundSigDigits(Np1) + " to vertex " +
-                                          RoundSigDigits(Np2));
-                        ShowContinueError("...vertex " + RoundSigDigits(n) + "=[" + RoundSigDigits(X(n), 2) + ',' + RoundSigDigits(Y(n), 2) + ',' +
+                        ShowContinueError("...vertex " + fmt::to_string(n) + " to vertex " + fmt::to_string(Np1) + " to vertex " +
+                                          fmt::to_string(Np2));
+                        ShowContinueError("...vertex " + fmt::to_string(n) + "=[" + RoundSigDigits(X(n), 2) + ',' + RoundSigDigits(Y(n), 2) + ',' +
                                           RoundSigDigits(Z(n), 2) + ']');
-                        ShowContinueError("...vertex " + RoundSigDigits(Np1) + "=[" + RoundSigDigits(X(n + 1), 2) + ',' +
+                        ShowContinueError("...vertex " + fmt::to_string(Np1) + "=[" + RoundSigDigits(X(n + 1), 2) + ',' +
                                           RoundSigDigits(Y(n + 1), 2) + ',' + RoundSigDigits(Z(n + 1), 2) + ']');
-                        ShowContinueError("...vertex " + RoundSigDigits(Np2) + "=[" + RoundSigDigits(X(n + 2), 2) + ',' +
+                        ShowContinueError("...vertex " + fmt::to_string(Np2) + "=[" + RoundSigDigits(X(n + 2), 2) + ',' +
                                           RoundSigDigits(Y(n + 2), 2) + ',' + RoundSigDigits(Z(n + 2), 2) + ']');
                         //          CALL ShowContinueError('...theta angle=['//TRIM(RoundSigDigits(Theta,6))//']')
                         //          CALL ShowContinueError('...last theta angle=['//TRIM(RoundSigDigits(LastTheta,6))//']')
@@ -13379,7 +13379,7 @@ namespace SurfaceGeometry {
                 SurfaceTmp(SurfNum).Sides = NSides - M;
             } else { // too many
                 if (DisplayExtraWarnings) {
-                    ShowWarningError("CheckConvexity: Surface=\"" + SurfaceTmp(SurfNum).Name + "\" has [" + RoundSigDigits(M) +
+                    ShowWarningError("CheckConvexity: Surface=\"" + SurfaceTmp(SurfNum).Name + "\" has [" + fmt::to_string(M) +
                                      "] collinear points.");
                     ShowContinueError("...too many to remove all.  Will leave the surface with 3 sides. But this is now a degenerate surface");
                 }
@@ -13410,7 +13410,7 @@ namespace SurfaceGeometry {
             OldVertex.deallocate();
             if (DisplayExtraWarnings) {
                 ShowWarningError("CheckConvexity: Surface=\"" + SurfaceTmp(SurfNum).Name +
-                                 "\": The vertex points has been reprocessed as Sides = " + RoundSigDigits(SurfaceTmp(SurfNum).Sides));
+                                 "\": The vertex points has been reprocessed as Sides = " + fmt::to_string(SurfaceTmp(SurfNum).Sides));
             }
         }
     }

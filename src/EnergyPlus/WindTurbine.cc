@@ -136,11 +136,11 @@ namespace WindTurbine {
         } else {
             WindTurbineNum = GeneratorIndex;
             if (WindTurbineNum > state.dataWindTurbine->NumWindTurbines || WindTurbineNum < 1) {
-                ShowFatalError("SimWindTurbine: Invalid GeneratorIndex passed=" + TrimSigDigits(WindTurbineNum) +
-                               ", Number of Wind Turbine Generators=" + TrimSigDigits(state.dataWindTurbine->NumWindTurbines) + ", Generator name=" + GeneratorName);
+                ShowFatalError("SimWindTurbine: Invalid GeneratorIndex passed=" + fmt::to_string(WindTurbineNum) +
+                               ", Number of Wind Turbine Generators=" + fmt::to_string(state.dataWindTurbine->NumWindTurbines) + ", Generator name=" + GeneratorName);
             }
             if (GeneratorName != state.dataWindTurbine->WindTurbineSys(WindTurbineNum).Name) {
-                ShowFatalError("SimMWindTurbine: Invalid GeneratorIndex passed=" + TrimSigDigits(WindTurbineNum) +
+                ShowFatalError("SimMWindTurbine: Invalid GeneratorIndex passed=" + fmt::to_string(WindTurbineNum) +
                                ", Generator name=" + GeneratorName + ", stored Generator Name for that index=" + state.dataWindTurbine->WindTurbineSys(WindTurbineNum).Name);
             }
         }

@@ -152,12 +152,12 @@ namespace CoolingPanelSimple {
         } else {
             CoolingPanelNum = CompIndex;
             if (CoolingPanelNum > state.dataChilledCeilingPanelSimple->NumCoolingPanels || CoolingPanelNum < 1) {
-                ShowFatalError("SimCoolingPanelSimple:  Invalid CompIndex passed=" + TrimSigDigits(CoolingPanelNum) +
-                               ", Number of Units=" + TrimSigDigits(state.dataChilledCeilingPanelSimple->NumCoolingPanels) + ", Entered Unit name=" + EquipName);
+                ShowFatalError("SimCoolingPanelSimple:  Invalid CompIndex passed=" + fmt::to_string(CoolingPanelNum) +
+                               ", Number of Units=" + fmt::to_string(state.dataChilledCeilingPanelSimple->NumCoolingPanels) + ", Entered Unit name=" + EquipName);
             }
             if (state.dataChilledCeilingPanelSimple->CheckEquipName(CoolingPanelNum)) {
                 if (EquipName != state.dataChilledCeilingPanelSimple->CoolingPanel(CoolingPanelNum).EquipID) {
-                    ShowFatalError("SimCoolingPanelSimple: Invalid CompIndex passed=" + TrimSigDigits(CoolingPanelNum) + ", Unit name=" + EquipName +
+                    ShowFatalError("SimCoolingPanelSimple: Invalid CompIndex passed=" + fmt::to_string(CoolingPanelNum) + ", Unit name=" + EquipName +
                                    ", stored Unit Name for that index=" + state.dataChilledCeilingPanelSimple->CoolingPanel(CoolingPanelNum).EquipID);
                 }
                 state.dataChilledCeilingPanelSimple->CheckEquipName(CoolingPanelNum) = false;
@@ -189,7 +189,7 @@ namespace CoolingPanelSimple {
                     ThisCP.CalcCoolingPanel(state, CoolingPanelNum);
                 } else {
                     ShowSevereError("SimCoolingPanelSimple: Errors in CoolingPanel=" + state.dataChilledCeilingPanelSimple->CoolingPanel(CoolingPanelNum).EquipID);
-                    ShowContinueError("Invalid or unimplemented equipment type=" + TrimSigDigits(state.dataChilledCeilingPanelSimple->CoolingPanel(CoolingPanelNum).EquipType));
+                    ShowContinueError("Invalid or unimplemented equipment type=" + fmt::to_string(state.dataChilledCeilingPanelSimple->CoolingPanel(CoolingPanelNum).EquipType));
                     ShowFatalError("Preceding condition causes termination.");
                 }
             }
@@ -528,7 +528,7 @@ namespace CoolingPanelSimple {
             if ((ThisCP.TotSurfToDistrib < MinDistribSurfaces) && (ThisCP.FracRadiant > MinFraction)) {
                 ShowSevereError(RoutineName + cCMO_CoolingPanel_Simple + "=\"" + cAlphaArgs(1) +
                                 "\", the number of surface/radiant fraction groups entered was less than the allowable minimum.");
-                ShowContinueError("...the minimum that must be entered=[" + RoundSigDigits(MinDistribSurfaces) + "].");
+                ShowContinueError("...the minimum that must be entered=[" + fmt::to_string(MinDistribSurfaces) + "].");
                 ErrorsFound = true;
                 ThisCP.TotSurfToDistrib = 0; // error
             }

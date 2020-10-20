@@ -46,6 +46,7 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 #include <EnergyPlus/InputProcessing/IdfParser.hh>
+#include <fmt/format.h>
 #include <milo/dtoa.h>
 #include <milo/itoa.h>
 
@@ -212,7 +213,7 @@ json IdfParser::parse_idf(std::string const &idf, size_t &index, bool &success, 
             next_token(idf, index);
             continue;
         } else if (token == Token::COMMA) {
-            errors_.emplace_back("Line: " + std::to_string(cur_line_num) + " Index: " + std::to_string(index_into_cur_line) +
+            errors_.emplace_back("Line: " + fmt::to_string(cur_line_num) + " Index: " + fmt::to_string(index_into_cur_line) +
                                  " - Extraneous comma found.");
             success = false;
             return root;
@@ -223,18 +224,18 @@ json IdfParser::parse_idf(std::string const &idf, size_t &index, bool &success, 
             auto const parsed_obj_name = parse_string(idf, index, success);
             auto const obj_name = normalizeObjectType(parsed_obj_name);
             if (obj_name.empty()) {
-                errors_.emplace_back("Line: " + std::to_string(cur_line_num) + " Index: " + std::to_string(index_into_cur_line) + " - \"" +
+                errors_.emplace_back("Line: " + fmt::to_string(cur_line_num) + " Index: " + fmt::to_string(index_into_cur_line) + " - \"" +
                                      parsed_obj_name + "\" is not a valid Object Type.");
                 while (token != Token::SEMICOLON && token != Token::END)
                     token = next_token(idf, index);
                 continue;
             } else if (obj_name.find("Parametric:") != std::string::npos) {
-                errors_.emplace_back("Line: " + std::to_string(cur_line_num) + " You must run Parametric Preprocessor for \"" + obj_name + "\"");
+                errors_.emplace_back("Line: " + fmt::to_string(cur_line_num) + " You must run Parametric Preprocessor for \"" + obj_name + "\"");
                 while (token != Token::SEMICOLON && token != Token::END)
                     token = next_token(idf, index);
                 continue;
             } else if (obj_name.find("Template") != std::string::npos) {
-                errors_.emplace_back("Line: " + std::to_string(cur_line_num) + " You must run the ExpandObjects program for \"" + obj_name + "\"");
+                errors_.emplace_back("Line: " + fmt::to_string(cur_line_num) + " You must run the ExpandObjects program for \"" + obj_name + "\"");
                 while (token != Token::SEMICOLON && token != Token::END)
                     token = next_token(idf, index);
                 continue;
@@ -250,7 +251,7 @@ json IdfParser::parse_idf(std::string const &idf, size_t &index, bool &success, 
                 if (found_index != std::string::npos) {
                     line = idf.substr(beginning_of_line_index, found_index - beginning_of_line_index);
                 }
-                errors_.emplace_back("Line: " + std::to_string(cur_line_num) + " Index: " + std::to_string(index_into_cur_line) +
+                errors_.emplace_back("Line: " + fmt::to_string(cur_line_num) + " Index: " + fmt::to_string(index_into_cur_line) +
                                      " - Error parsing \"" + obj_name + "\". Error in following line.");
                 errors_.emplace_back("~~~ " + line);
                 success = false;
@@ -383,7 +384,7 @@ json IdfParser::parse_object(
             eat_comment(idf, index);
         } else if (legacy_idd_index >= legacy_idd_fields_array.size()) {
             if (legacy_idd_extensibles_iter == legacy_idd.end()) {
-                errors_.emplace_back("Line: " + std::to_string(cur_line_num) + " Index: " + std::to_string(index_into_cur_line) +
+                errors_.emplace_back("Line: " + fmt::to_string(cur_line_num) + " Index: " + fmt::to_string(index_into_cur_line) +
                                      " - Object contains more field values than maximum number of IDD fields and is not extensible.");
                 success = false;
                 return root;
@@ -524,7 +525,7 @@ json IdfParser::parse_value(std::string const &idf, size_t &index, bool &success
             auto const &anyOf_it = field_loc.find("anyOf");
 
             if (anyOf_it == field_loc.end()) {
-                errors_.emplace_back("Line: " + std::to_string(cur_line_num) + " Index: " + std::to_string(index_into_cur_line) + " - Field cannot be Autosize or Autocalculate");
+                errors_.emplace_back("Line: " + fmt::to_string(cur_line_num) + " Index: " + fmt::to_string(index_into_cur_line) + " - Field cannot be Autosize or Autocalculate");
                 return parsed_string;
             }
             // The following is hacky because it abuses knowing the consistent generated structure

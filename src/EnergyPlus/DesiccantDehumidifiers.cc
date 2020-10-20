@@ -235,11 +235,11 @@ namespace DesiccantDehumidifiers {
         } else {
             DesicDehumNum = CompIndex;
             if (DesicDehumNum > NumDesicDehums || DesicDehumNum < 1) {
-                ShowFatalError("SimDesiccantDehumidifier:  Invalid CompIndex passed=" + TrimSigDigits(DesicDehumNum) +
-                               ", Number of Units=" + TrimSigDigits(NumDesicDehums) + ", Entered Unit name=" + CompName);
+                ShowFatalError("SimDesiccantDehumidifier:  Invalid CompIndex passed=" + fmt::to_string(DesicDehumNum) +
+                               ", Number of Units=" + fmt::to_string(NumDesicDehums) + ", Entered Unit name=" + CompName);
             }
             if (CompName != DesicDehum(DesicDehumNum).Name) {
-                ShowFatalError("SimDesiccantDehumidifier: Invalid CompIndex passed=" + TrimSigDigits(DesicDehumNum) + ", Unit name=" + CompName +
+                ShowFatalError("SimDesiccantDehumidifier: Invalid CompIndex passed=" + fmt::to_string(DesicDehumNum) + ", Unit name=" + CompName +
                                ", stored Unit Name for that index=" + DesicDehum(DesicDehumNum).Name);
             }
         }
@@ -2332,7 +2332,7 @@ namespace DesiccantDehumidifiers {
                 } else {
 
                     ShowFatalError("Invalid performance model in desiccant dehumidifier = " +
-                                   TrimSigDigits(DesicDehum(DesicDehumNum).PerformanceModel_Num));
+                                   fmt::to_string(DesicDehum(DesicDehumNum).PerformanceModel_Num));
                 }
             } // Performance Model Part A
 
@@ -2446,7 +2446,7 @@ namespace DesiccantDehumidifiers {
                 } else {
 
                     ShowFatalError("Invalid performance model in desiccant dehumidifier = " +
-                                   TrimSigDigits(DesicDehum(DesicDehumNum).PerformanceModel_Num));
+                                   fmt::to_string(DesicDehum(DesicDehumNum).PerformanceModel_Num));
 
                     // Suppress uninitialized warnings
                     ProcAirOutTemp = 0.0;
@@ -3300,11 +3300,11 @@ namespace DesiccantDehumidifiers {
                                 ShowWarningMessage("CalcNonDXHeatingCoils: Hot water coil control failed for " + DesicDehum(DesicDehumNum).DehumType +
                                                    "=\"" + DesicDehum(DesicDehumNum).Name + "\"");
                                 ShowContinueErrorTimeStamp("");
-                                ShowContinueError("...Iteration limit [" + RoundSigDigits(SolveMaxIter) +
+                                ShowContinueError("...Iteration limit [" + fmt::to_string(SolveMaxIter) +
                                                   "] exceeded in calculating hot water mass flow rate");
                             }
                             ShowRecurringWarningErrorAtEnd("CalcNonDXHeatingCoils: Hot water coil control failed (iteration limit [" +
-                                                               RoundSigDigits(SolveMaxIter) + "]) for " + DesicDehum(DesicDehumNum).DehumType +
+                                                               fmt::to_string(SolveMaxIter) + "]) for " + DesicDehum(DesicDehumNum).DehumType +
                                                                "=\"" + DesicDehum(DesicDehumNum).Name + "\"",
                                                            DesicDehum(DesicDehumNum).HotWaterCoilMaxIterIndex);
                         } else if (SolFlag == -2) {

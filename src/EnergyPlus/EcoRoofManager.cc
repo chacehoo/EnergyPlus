@@ -60,14 +60,12 @@
 #include <EnergyPlus/DataHeatBalFanSys.hh>
 #include <EnergyPlus/DataHeatBalSurface.hh>
 #include <EnergyPlus/DataHeatBalance.hh>
-#include <EnergyPlus/DataLoopNode.hh>
 #include <EnergyPlus/DataSurfaces.hh>
 #include <EnergyPlus/DataWater.hh>
 #include <EnergyPlus/EcoRoofManager.hh>
 #include <EnergyPlus/General.hh>
 #include <EnergyPlus/Material.hh>
 #include <EnergyPlus/OutputProcessor.hh>
-#include <EnergyPlus/Psychrometrics.hh>
 #include <EnergyPlus/UtilityRoutines.hh>
 
 namespace EnergyPlus {
@@ -98,7 +96,6 @@ namespace EcoRoofManager {
     // Using/Aliasing
     using namespace DataSurfaces;
     using namespace DataGlobals;
-    using namespace DataLoopNode;
     using namespace DataHeatBalance;
     using DataWater::Irrigation;
     using DataWater::IrrSchedDesign;
@@ -175,7 +172,6 @@ namespace EcoRoofManager {
         using namespace DataHeatBalance;
         using namespace DataHeatBalSurface;
         using namespace DataSurfaces;
-        using namespace Psychrometrics;
         using ConvectionCoefficients::InitExteriorConvectionCoeff;
         using ConvectionCoefficients::SetExtConvectionCoeff;
         using ConvectionCoefficients::SetIntConvectionCoeff;
@@ -821,15 +817,15 @@ namespace EcoRoofManager {
                 if (index1 > 1) {
                     ShowWarningError("CalcEcoRoof: Too few time steps per hour for stability.");
                     if (ceil(60 * index1 / MinutesPerTimeStep) <= 60) {
-                        ShowContinueError("...Entered Timesteps per hour=[" + RoundSigDigits(NumOfTimeStepInHour) +
-                                          "], Change to some value greater than or equal to [" + RoundSigDigits(60 * index1 / MinutesPerTimeStep) +
+                        ShowContinueError("...Entered Timesteps per hour=[" + fmt::to_string(NumOfTimeStepInHour) +
+                                          "], Change to some value greater than or equal to [" + fmt::to_string(60 * index1 / MinutesPerTimeStep) +
                                           "] for assured stability.");
                         ShowContinueError("...Note that EnergyPlus has a maximum of 60 timesteps per hour");
                         ShowContinueError("...The program will continue, but if the simulation fails due to too low/high temperatures, instability "
                                           "here could be the reason.");
                     } else {
-                        ShowContinueError("...Entered Timesteps per hour=[" + RoundSigDigits(NumOfTimeStepInHour) +
-                                          "], however the required frequency for stability [" + RoundSigDigits(60 * index1 / MinutesPerTimeStep) +
+                        ShowContinueError("...Entered Timesteps per hour=[" + fmt::to_string(NumOfTimeStepInHour) +
+                                          "], however the required frequency for stability [" + fmt::to_string(60 * index1 / MinutesPerTimeStep) +
                                           "] is over the EnergyPlus maximum of 60.");
                         ShowContinueError("...Consider using the simple moisture diffusion calculation method for this application");
                         ShowContinueError("...The program will continue, but if the simulation fails due to too low/high temperatures, instability "

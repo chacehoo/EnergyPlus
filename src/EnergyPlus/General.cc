@@ -1592,23 +1592,9 @@ namespace General {
         return format("{:.{}T}", RealValue, SigDigits);
     }
 
-    std::string TrimSigDigits(int const IntegerValue,
-                              Optional_int_const EP_UNUSED(SigDigits) // ignored
-    )
-    {
-        return format("{}", IntegerValue);
-    }
-
     std::string RoundSigDigits(Real64 const RealValue, int const SigDigits)
     {
         return format("{:.{}R}", RealValue, SigDigits);
-    }
-
-    std::string RoundSigDigits(int const IntegerValue,
-                               Optional_int_const EP_UNUSED(SigDigits) // ignored
-    )
-    {
-        return format("{}", IntegerValue);
     }
 
     std::string RemoveTrailingZeros(std::string const &InputString)
@@ -3594,9 +3580,9 @@ namespace General {
             ShowWarningError(calledFrom + CurrentObject + " Combination of ZoneList and Object Name generate a name too long.");
             ShowContinueError("Object Name=\"" + ItemName + "\".");
             ShowContinueError("ZoneList/Zone Name=\"" + ZoneName + "\".");
-            ShowContinueError("Item length=[" + RoundSigDigits(int(ItemLength)) + "] > Maximum Length=[" + RoundSigDigits(DataGlobalConstants::MaxNameLength()) +
+            ShowContinueError("Item length=[" + fmt::to_string(ItemLength) + "] > Maximum Length=[" + fmt::to_string(DataGlobalConstants::MaxNameLength()) +
                               "]. You may need to shorten the names.");
-            ShowContinueError("Shortening the Object Name by [" + RoundSigDigits(int(MaxZoneNameLength + 1 + ItemNameLength - DataGlobalConstants::MaxNameLength())) +
+            ShowContinueError("Shortening the Object Name by [" + fmt::to_string(MaxZoneNameLength + 1 + ItemNameLength - DataGlobalConstants::MaxNameLength()) +
                               "] characters will assure uniqueness for this ZoneList.");
             ShowContinueError("name that will be used (may be needed in reporting)=\"" + ResultName + "\".");
             TooLong = true;
@@ -3607,7 +3593,7 @@ namespace General {
         if (FoundItem != 0) {
             ShowSevereError(calledFrom + CurrentObject + "=\"" + ItemName + "\", Duplicate Generated name encountered.");
             ShowContinueError("name=\"" + ResultName + "\" has already been generated or entered as " + CurrentObject + " item=[" +
-                              RoundSigDigits(FoundItem) + "].");
+                              fmt::to_string(FoundItem) + "].");
             if (TooLong) ShowContinueError("Duplicate name likely caused by the previous \"too long\" warning.");
             ResultName = "xxxxxxx";
             errFlag = true;

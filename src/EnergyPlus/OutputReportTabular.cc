@@ -122,7 +122,6 @@
 #include <EnergyPlus/ScheduleManager.hh>
 #include <EnergyPlus/ThermalComfort.hh>
 #include <EnergyPlus/UtilityRoutines.hh>
-#include <EnergyPlus/VariableSpeedCoils.hh>
 #include <EnergyPlus/VentilatedSlab.hh>
 #include <EnergyPlus/WaterThermalTanks.hh>
 #include <EnergyPlus/WeatherManager.hh>
@@ -2237,7 +2236,7 @@ namespace OutputReportTabular {
                     }
                 }
                 if (!nameFound) {
-                    ShowSevereError(CurrentModuleObject + " Field[" + RoundSigDigits(iReport) + "]=\"" + AlphArray(iReport) +
+                    ShowSevereError(CurrentModuleObject + " Field[" + fmt::to_string(iReport) + "]=\"" + AlphArray(iReport) +
                                     "\", invalid report name -- will not be reported.");
                     //      ErrorsFound=.TRUE.
                 }
@@ -2590,14 +2589,14 @@ namespace OutputReportTabular {
         namedMonthly(63).title = "HeatEmissionsReportMonthly";
 
         if (numNamedMonthly != NumMonthlyReports) {
-            ShowFatalError("InitializePredefinedMonthlyTitles: Number of Monthly Reports in OutputReportTabular=[" + RoundSigDigits(numNamedMonthly) +
-                           "] does not match number in DataOutputs=[" + RoundSigDigits(NumMonthlyReports) + "].");
+            ShowFatalError("InitializePredefinedMonthlyTitles: Number of Monthly Reports in OutputReportTabular=[" + fmt::to_string(numNamedMonthly) +
+                           "] does not match number in DataOutputs=[" + fmt::to_string(NumMonthlyReports) + "].");
         } else {
             for (xcount = 1; xcount <= numNamedMonthly; ++xcount) {
                 if (!UtilityRoutines::SameString(MonthlyNamedReports(xcount), namedMonthly(xcount).title)) {
                     ShowSevereError(
                         "InitializePredefinedMonthlyTitles: Monthly Report Titles in OutputReportTabular do not match titles in DataOutput.");
-                    ShowContinueError("first mismatch at ORT [" + RoundSigDigits(numNamedMonthly) + "] =\"" + namedMonthly(xcount).title + "\".");
+                    ShowContinueError("first mismatch at ORT [" + fmt::to_string(numNamedMonthly) + "] =\"" + namedMonthly(xcount).title + "\".");
                     ShowContinueError("same location in DO =\"" + MonthlyNamedReports(xcount) + "\".");
                     ShowFatalError("Preceding condition causes termination.");
                 }
@@ -7310,7 +7309,7 @@ namespace OutputReportTabular {
             tableBody(1, 1) = "less than";
             tableBody(1, 2) = RealToStr(curIntervalStart, numIntervalDigits);
             for (nCol = 1; nCol <= curIntervalCount; ++nCol) {
-                columnHead(nCol + 1) = std::to_string(nCol) + " [hr]";
+                columnHead(nCol + 1) = fmt::to_string(nCol) + " [hr]";
                 // beginning of interval
                 tableBody(nCol + 1, 1) = RealToStr(curIntervalStart + (nCol - 1) * curIntervalSize, numIntervalDigits) + "<=";
                 // end of interval
@@ -10200,7 +10199,7 @@ namespace OutputReportTabular {
         columnWidth = {7, 30, 16, 10, 16, 16}; // array assignment - for all columns
 
         for (item = 1; item <= state.dataCostEstimateManager->NumLineItems; ++item) {
-            tableBody(1, item) = std::to_string(state.dataCostEstimateManager->CostLineItem(item).LineNumber);
+            tableBody(1, item) = fmt::to_string(state.dataCostEstimateManager->CostLineItem(item).LineNumber);
             tableBody(2, item) = state.dataCostEstimateManager->CostLineItem(item).LineName;
             if (unitsStyle == unitsStyleInchPound) {
                 LookupSItoIP(state.dataCostEstimateManager->CostLineItem(item).Units, unitConvIndex, IPunitName);
@@ -10499,7 +10498,7 @@ namespace OutputReportTabular {
             tableBody(1, 8) = RealToStr(BuildingAzimuth, 2);           // north axis angle
             tableBody(1, 9) = RealToStr(BuildingRotationAppendixG, 2); // Rotation for Appendix G
             tableBody(1, 10) = RealToStr(gatherElapsedTimeBEPS, 2);    // hours simulated
-            //  tableBody(9,1) = TRIM(std::to_string(numTableEntry)) !number of table entries for predefined tables
+            //  tableBody(9,1) = TRIM(fmt::to_string(numTableEntry)) !number of table entries for predefined tables
 
             WriteSubtitle("General");
             WriteTable(state, tableBody, rowHead, columnHead, columnWidth);
@@ -12100,7 +12099,7 @@ namespace OutputReportTabular {
                                 ++rowNum;
                                 if (rowNum > countOfMatchingLines) break; // should never happen since same test as original could
                                 std::vector<std::string> dataFields = splitCommaString(bodyLine);
-                                rowHead(rowNum) = std::to_string(rowNum);
+                                rowHead(rowNum) = fmt::to_string(rowNum);
                                 for (int iCol = 1; iCol <= numCols && iCol < int(dataFields.size()); ++iCol) {
                                     if (unitsStyle == unitsStyleInchPound || unitsStyle == unitsStyleJtoKWH) {
                                         if (isNumber(dataFields[iCol]) && colUnitConv(iCol) > 0) { // if it is a number that has a conversion
@@ -13676,8 +13675,8 @@ namespace OutputReportTabular {
             if (isCooling) {
                 // Time of Peak Load
                 if ((size_t)desDaySelected <= state.dataWeatherManager->DesDayInput.size()) {
-                    compLoad.peakDateHrMin = General::TrimSigDigits(state.dataWeatherManager->DesDayInput(desDaySelected).Month) + "/" +
-                                             General::TrimSigDigits(state.dataWeatherManager->DesDayInput(desDaySelected).DayOfMonth) + " " +
+                    compLoad.peakDateHrMin = fmt::to_string(state.dataWeatherManager->DesDayInput(desDaySelected).Month) + "/" +
+                                             fmt::to_string(state.dataWeatherManager->DesDayInput(desDaySelected).DayOfMonth) + " " +
                                              coilSelectionReportObj->getTimeText(timeOfMax);
                 } else {
                     compLoad.peakDateHrMin = CoolPeakDateHrMin(zoneIndex);
@@ -13729,8 +13728,8 @@ namespace OutputReportTabular {
             } else {
                 // Time of Peak Load
                 if ((size_t)desDaySelected <= state.dataWeatherManager->DesDayInput.size()) {
-                    compLoad.peakDateHrMin = General::TrimSigDigits(state.dataWeatherManager->DesDayInput(desDaySelected).Month) + "/" +
-                                             General::TrimSigDigits(state.dataWeatherManager->DesDayInput(desDaySelected).DayOfMonth) + " " +
+                    compLoad.peakDateHrMin = fmt::to_string(state.dataWeatherManager->DesDayInput(desDaySelected).Month) + "/" +
+                                             fmt::to_string(state.dataWeatherManager->DesDayInput(desDaySelected).DayOfMonth) + " " +
                                              coilSelectionReportObj->getTimeText(timeOfMax);
                 } else {
                     compLoad.peakDateHrMin = HeatPeakDateHrMin(zoneIndex);
@@ -14387,7 +14386,7 @@ namespace OutputReportTabular {
 
                     columnHead(1) = "Zone Name";
                     for (int zi = 1; zi <= maxRow; ++zi) {
-                        rowHead(zi) = std::to_string(zi);
+                        rowHead(zi) = fmt::to_string(zi);
                         if (curCompLoad.zoneIndices(zi) > 0) {
                             tableBody(1, zi) = Zone(curCompLoad.zoneIndices(zi)).Name;
                         }
@@ -16603,7 +16602,7 @@ namespace OutputReportTabular {
         }
         // For debugging only
         // CALL  ShowWarningError('LookupSItoIP in: ' // TRIM(stringInWithSI) // ' out: ' // TRIM(stringOutWithIP))
-        // IF (foundConv .NE. 0) CALL  ShowWarningError('   Hint ' // TRIM(UnitConv(foundConv)%hint) // std::to_string(foundConv) )
+        // IF (foundConv .NE. 0) CALL  ShowWarningError('   Hint ' // TRIM(UnitConv(foundConv)%hint) // fmt::to_string(foundConv) )
 
         unitConvIndex = selectedConv;
 

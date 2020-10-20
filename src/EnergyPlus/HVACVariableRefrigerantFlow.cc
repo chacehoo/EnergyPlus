@@ -66,7 +66,6 @@
 #include <EnergyPlus/CurveManager.hh>
 #include <EnergyPlus/DXCoils.hh>
 #include <EnergyPlus/Data/EnergyPlusData.hh>
-#include <EnergyPlus/DataAirLoop.hh>
 #include <EnergyPlus/DataAirSystems.hh>
 #include <EnergyPlus/DataDefineEquip.hh>
 #include <EnergyPlus/DataEnvironment.hh>
@@ -292,12 +291,12 @@ namespace HVACVariableRefrigerantFlow {
         } else {
             VRFTUNum = CompIndex;
             if (VRFTUNum > NumVRFTU || VRFTUNum < 1) {
-                ShowFatalError("SimulateVRF: Invalid CompIndex passed=" + TrimSigDigits(VRFTUNum) +
-                               ", Number of VRF Terminal Units = " + TrimSigDigits(NumVRFTU) + ", VRF Terminal Unit name = " + CompName);
+                ShowFatalError("SimulateVRF: Invalid CompIndex passed=" + fmt::to_string(VRFTUNum) +
+                               ", Number of VRF Terminal Units = " + fmt::to_string(NumVRFTU) + ", VRF Terminal Unit name = " + CompName);
             }
             if (CheckEquipName(VRFTUNum)) {
                 if (!CompName.empty() && CompName != VRFTU(VRFTUNum).Name) {
-                    ShowFatalError("SimulateVRF: Invalid CompIndex passed=" + TrimSigDigits(VRFTUNum) + ", VRF Terminal Unit name=" + CompName +
+                    ShowFatalError("SimulateVRF: Invalid CompIndex passed=" + fmt::to_string(VRFTUNum) + ", VRF Terminal Unit name=" + CompName +
                                    ", stored VRF TU Name for that index=" + VRFTU(VRFTUNum).Name);
                 }
                 CheckEquipName(VRFTUNum) = false;
@@ -4565,8 +4564,8 @@ namespace HVACVariableRefrigerantFlow {
 
         //   warn when number of ZoneTerminalUnitList different from number of AirConditioner:VariableRefrigerantFlow
         if (NumVRFTULists != NumVRFCond) {
-            ShowSevereError("The number of AirConditioner:VariableRefrigerantFlow objects (" + TrimSigDigits(NumVRFCond) +
-                            ") does not match the number of ZoneTerminalUnitList objects (" + TrimSigDigits(NumVRFTULists) + ").");
+            ShowSevereError("The number of AirConditioner:VariableRefrigerantFlow objects (" + fmt::to_string(NumVRFCond) +
+                            ") does not match the number of ZoneTerminalUnitList objects (" + fmt::to_string(NumVRFTULists) + ").");
             for (NumCond = 1; NumCond <= NumVRFCond; ++NumCond) {
                 if (VRF(NumCond).ZoneTUListPtr > 0) {
                     ShowContinueError("...AirConditioner:VariableRefrigerantFlow = " + VRF(NumCond).Name +

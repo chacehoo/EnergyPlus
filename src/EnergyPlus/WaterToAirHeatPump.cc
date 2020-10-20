@@ -161,12 +161,12 @@ namespace WaterToAirHeatPump {
         } else {
             HPNum = CompIndex;
             if (HPNum > state.dataWaterToAirHeatPump->NumWatertoAirHPs || HPNum < 1) {
-                ShowFatalError("SimWatertoAirHP: Invalid CompIndex passed=" + TrimSigDigits(HPNum) +
-                               ", Number of Water to Air HPs=" + TrimSigDigits(state.dataWaterToAirHeatPump->NumWatertoAirHPs) + ", WaterToAir HP name=" + CompName);
+                ShowFatalError("SimWatertoAirHP: Invalid CompIndex passed=" + fmt::to_string(HPNum) +
+                               ", Number of Water to Air HPs=" + fmt::to_string(state.dataWaterToAirHeatPump->NumWatertoAirHPs) + ", WaterToAir HP name=" + CompName);
             }
             if (state.dataWaterToAirHeatPump->CheckEquipName(HPNum)) {
                 if (!CompName.empty() && CompName != state.dataWaterToAirHeatPump->WatertoAirHP(HPNum).Name) {
-                    ShowFatalError("SimWatertoAirHP: Invalid CompIndex passed=" + TrimSigDigits(HPNum) + ", WaterToAir HP name=" + CompName +
+                    ShowFatalError("SimWatertoAirHP: Invalid CompIndex passed=" + fmt::to_string(HPNum) + ", WaterToAir HP name=" + CompName +
                                    ", stored WaterToAir HP Name for that index=" + state.dataWaterToAirHeatPump->WatertoAirHP(HPNum).Name);
                 }
                 state.dataWaterToAirHeatPump->CheckEquipName(HPNum) = false;

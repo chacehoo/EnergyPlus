@@ -204,12 +204,12 @@ namespace HWBaseboardRadiator {
         } else {
             BaseboardNum = CompIndex;
             if (BaseboardNum > NumHWBaseboards || BaseboardNum < 1) {
-                ShowFatalError("SimHWBaseboard:  Invalid CompIndex passed=" + TrimSigDigits(BaseboardNum) +
-                               ", Number of Units=" + TrimSigDigits(NumHWBaseboards) + ", Entered Unit name=" + EquipName);
+                ShowFatalError("SimHWBaseboard:  Invalid CompIndex passed=" + fmt::to_string(BaseboardNum) +
+                               ", Number of Units=" + fmt::to_string(NumHWBaseboards) + ", Entered Unit name=" + EquipName);
             }
             if (CheckEquipName(BaseboardNum)) {
                 if (EquipName != HWBaseboard(BaseboardNum).EquipID) {
-                    ShowFatalError("SimHWBaseboard: Invalid CompIndex passed=" + TrimSigDigits(BaseboardNum) + ", Unit name=" + EquipName +
+                    ShowFatalError("SimHWBaseboard: Invalid CompIndex passed=" + fmt::to_string(BaseboardNum) + ", Unit name=" + EquipName +
                                    ", stored Unit Name for that index=" + HWBaseboard(BaseboardNum).EquipID);
                 }
                 CheckEquipName(BaseboardNum) = false;
@@ -258,7 +258,7 @@ namespace HWBaseboardRadiator {
                                       HWBaseboard(BaseboardNum).BranchNum);
                 } else {
                     ShowSevereError("SimBaseboard: Errors in Baseboard=" + HWBaseboard(BaseboardNum).EquipID);
-                    ShowContinueError("Invalid or unimplemented equipment type=" + TrimSigDigits(HWBaseboard(BaseboardNum).EquipType));
+                    ShowContinueError("Invalid or unimplemented equipment type=" + fmt::to_string(HWBaseboard(BaseboardNum).EquipType));
                     ShowFatalError("Preceding condition causes termination.");
                 }
             }
@@ -551,7 +551,7 @@ namespace HWBaseboardRadiator {
             if ((HWBaseboard(BaseboardNum).TotSurfToDistrib < MinDistribSurfaces) && (HWBaseboard(BaseboardNum).FracRadiant > MinFraction)) {
                 ShowSevereError(RoutineName + cCMO_BBRadiator_Water + "=\"" + cAlphaArgs(1) +
                                 "\", the number of surface/radiant fraction groups entered was less than the allowable minimum.");
-                ShowContinueError("...the minimum that must be entered=[" + RoundSigDigits(MinDistribSurfaces) + "].");
+                ShowContinueError("...the minimum that must be entered=[" + fmt::to_string(MinDistribSurfaces) + "].");
                 ErrorsFound = true;
                 HWBaseboard(BaseboardNum).TotSurfToDistrib = 0; // error
             }
@@ -1808,16 +1808,16 @@ namespace HWBaseboardRadiator {
         } else {
             BaseboardNum = CompIndex;
             if (BaseboardNum > NumHWBaseboards || BaseboardNum < 1) {
-                ShowFatalError("UpdateHWBaseboardPlantConnection:  Invalid CompIndex passed=" + TrimSigDigits(BaseboardNum) +
-                               ", Number of baseboards=" + TrimSigDigits(NumHWBaseboards) + ", Entered baseboard name=" + BaseboardName);
+                ShowFatalError("UpdateHWBaseboardPlantConnection:  Invalid CompIndex passed=" + fmt::to_string(BaseboardNum) +
+                               ", Number of baseboards=" + fmt::to_string(NumHWBaseboards) + ", Entered baseboard name=" + BaseboardName);
             }
             if (KickOffSimulation) {
                 if (BaseboardName != HWBaseboard(BaseboardNum).EquipID) {
-                    ShowFatalError("UpdateHWBaseboardPlantConnection: Invalid CompIndex passed=" + TrimSigDigits(BaseboardNum) + ", baseboard name=" +
+                    ShowFatalError("UpdateHWBaseboardPlantConnection: Invalid CompIndex passed=" + fmt::to_string(BaseboardNum) + ", baseboard name=" +
                                    BaseboardName + ", stored baseboard Name for that index=" + HWBaseboard(BaseboardNum).EquipID);
                 }
                 if (BaseboardTypeNum != TypeOf_Baseboard_Rad_Conv_Water) {
-                    ShowFatalError("UpdateHWBaseboardPlantConnection: Invalid CompIndex passed=" + TrimSigDigits(BaseboardNum) + ", baseboard name=" +
+                    ShowFatalError("UpdateHWBaseboardPlantConnection: Invalid CompIndex passed=" + fmt::to_string(BaseboardNum) + ", baseboard name=" +
                                    BaseboardName + ", stored baseboard Name for that index=" + ccSimPlantEquipTypes(BaseboardTypeNum));
                 }
             }

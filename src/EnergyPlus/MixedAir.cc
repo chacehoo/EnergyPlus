@@ -64,7 +64,6 @@
 #include <EnergyPlus/DataContaminantBalance.hh>
 #include <EnergyPlus/DataDefineEquip.hh>
 #include <EnergyPlus/DataEnvironment.hh>
-#include <EnergyPlus/DataHeatBalFanSys.hh>
 #include <EnergyPlus/DataHeatBalance.hh>
 #include <EnergyPlus/DataIPShortCuts.hh>
 #include <EnergyPlus/DataLoopNode.hh>
@@ -96,7 +95,6 @@
 #include <EnergyPlus/OutputProcessor.hh>
 #include <EnergyPlus/OutputReportPredefined.hh>
 #include <EnergyPlus/PhotovoltaicThermalCollectors.hh>
-#include <EnergyPlus/Plant/PlantLocation.hh>
 #include <EnergyPlus/Psychrometrics.hh>
 #include <EnergyPlus/ScheduleManager.hh>
 #include <EnergyPlus/SetPointManager.hh>
@@ -3570,7 +3568,6 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
         using CurveManager::CurveValue;
         using DataGlobals::DoingSizing;
         using DataGlobals::WarmupFlag;
-        using DataHeatBalFanSys::ZoneAirHumRat;
         using General::RoundSigDigits;
 
         // Locals
@@ -5551,8 +5548,8 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
         }
 
         if (OAMixerNum > NumOAMixers) {
-            ShowFatalError("GetOAMixerReliefNodeNumber: Requested Mixer #=" + TrimSigDigits(OAMixerNum) +
-                           ", which is > number of OA Mixers=" + TrimSigDigits(NumOAMixers));
+            ShowFatalError("GetOAMixerReliefNodeNumber: Requested Mixer #=" + fmt::to_string(OAMixerNum) +
+                           ", which is > number of OA Mixers=" + fmt::to_string(NumOAMixers));
         }
 
         ReliefNodeNumber = OAMixer(OAMixerNum).RelNode;

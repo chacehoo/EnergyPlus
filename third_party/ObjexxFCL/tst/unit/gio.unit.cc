@@ -127,7 +127,7 @@ TEST( GioTest, BasicEOF )
 	while ( ! rflags.end() ) {
 		read( unit1, "(A)", rflags ) >> line;
 		if ( ! rflags.end() ) {
-			EXPECT_EQ( "Line " + std::to_string( ++i ), line );
+			EXPECT_EQ( "Line " + fmt::to_string( ++i ), line );
 		}
 	}
 	EXPECT_EQ( 2, i );

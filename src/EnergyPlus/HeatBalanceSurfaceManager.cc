@@ -4502,7 +4502,6 @@ namespace HeatBalanceSurfaceManager {
         // Using/Aliasing
         using DataRuntimeLanguage::EMSConstructActuatorChecked;
         using DataRuntimeLanguage::EMSConstructActuatorIsOkay;
-        using General::TrimSigDigits;
         using HeatBalFiniteDiffManager::ConstructFD;
 
         // Locals
@@ -4558,11 +4557,11 @@ namespace HeatBalanceSurfaceManager {
                                                  "CTF timescales are being used.");
                                 ShowContinueError(
                                     "Construction named = " + state.dataConstruction->Construct(Surface(SurfNum).Construction).Name +
-                                    " has CTF timesteps = " + TrimSigDigits(state.dataConstruction->Construct(Surface(SurfNum).Construction).NumHistories));
+                                    " has CTF timesteps = " + fmt::to_string(state.dataConstruction->Construct(Surface(SurfNum).Construction).NumHistories));
                                 ShowContinueError(
                                     "While construction named = " + state.dataConstruction->Construct(Surface(SurfNum).EMSConstructionOverrideValue).Name +
                                     " has CTF timesteps = " +
-                                    TrimSigDigits(state.dataConstruction->Construct(Surface(SurfNum).EMSConstructionOverrideValue).NumHistories));
+                                    fmt::to_string(state.dataConstruction->Construct(Surface(SurfNum).EMSConstructionOverrideValue).NumHistories));
                                 ShowContinueError("Transient heat transfer modeling may not be valid for surface name = " + Surface(SurfNum).Name +
                                                   ", and the simulation continues");
                             }
@@ -4573,11 +4572,11 @@ namespace HeatBalanceSurfaceManager {
                                                  "CTF terms are being used.");
                                 ShowContinueError("Construction named = " + state.dataConstruction->Construct(Surface(SurfNum).Construction).Name +
                                                   " has number of CTF terms = " +
-                                                  TrimSigDigits(state.dataConstruction->Construct(Surface(SurfNum).Construction).NumCTFTerms));
+                                                  fmt::to_string(state.dataConstruction->Construct(Surface(SurfNum).Construction).NumCTFTerms));
                                 ShowContinueError(
                                     "While construction named = " + state.dataConstruction->Construct(Surface(SurfNum).EMSConstructionOverrideValue).Name +
                                     " has number of CTF terms = " +
-                                    TrimSigDigits(state.dataConstruction->Construct(Surface(SurfNum).EMSConstructionOverrideValue).NumCTFTerms));
+                                    fmt::to_string(state.dataConstruction->Construct(Surface(SurfNum).EMSConstructionOverrideValue).NumCTFTerms));
                                 ShowContinueError(
                                     "The actuator is allowed but the transient heat transfer modeling may not be valid for surface name = " +
                                     Surface(SurfNum).Name + ", and the simulation continues");
@@ -4612,11 +4611,11 @@ namespace HeatBalanceSurfaceManager {
                                 ShowSevereError("InitEMSControlledConstructions: EMS Construction State Actuator not valid.");
                                 ShowContinueError(
                                     "Construction named = " + state.dataConstruction->Construct(Surface(SurfNum).Construction).Name +
-                                    " has number of finite difference nodes =" + TrimSigDigits(ConstructFD(Surface(SurfNum).Construction).TotNodes));
+                                    " has number of finite difference nodes =" + fmt::to_string(ConstructFD(Surface(SurfNum).Construction).TotNodes));
                                 ShowContinueError(
                                     "While construction named = " + state.dataConstruction->Construct(Surface(SurfNum).EMSConstructionOverrideValue).Name +
                                     "has number of finite difference nodes =" +
-                                    TrimSigDigits(ConstructFD(Surface(SurfNum).EMSConstructionOverrideValue).TotNodes));
+                                    fmt::to_string(ConstructFD(Surface(SurfNum).EMSConstructionOverrideValue).TotNodes));
                                 ShowContinueError("This actuator is not allowed for surface name = " + Surface(SurfNum).Name +
                                                   ", and the simulation continues without the override");
 

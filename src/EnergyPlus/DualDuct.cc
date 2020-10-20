@@ -52,12 +52,10 @@
 // ObjexxFCL Headers
 #include <ObjexxFCL/Array.functions.hh>
 #include <ObjexxFCL/Fmath.hh>
-#include <ObjexxFCL/gio.hh>
 
 // EnergyPlus Headers
 #include <EnergyPlus/Autosizing/Base.hh>
 #include <EnergyPlus/BranchNodeConnections.hh>
-#include <EnergyPlus/DataAirLoop.hh>
 #include <EnergyPlus/DataContaminantBalance.hh>
 #include <EnergyPlus/DataConvergParams.hh>
 #include <EnergyPlus/DataDefineEquip.hh>
@@ -200,12 +198,12 @@ namespace DualDuct {
         } else {
             DDNum = CompIndex;
             if (DDNum > NumDDAirTerminal || DDNum < 1) {
-                ShowFatalError("SimulateDualDuct: Invalid CompIndex passed=" + TrimSigDigits(CompIndex) +
-                               ", Number of Dampers=" + TrimSigDigits(NumDDAirTerminal) + ", Damper name=" + CompName);
+                ShowFatalError("SimulateDualDuct: Invalid CompIndex passed=" + fmt::to_string(CompIndex) +
+                               ", Number of Dampers=" + fmt::to_string(NumDDAirTerminal) + ", Damper name=" + CompName);
             }
             if (CheckEquipName(DDNum)) {
                 if (CompName != dd_airterminal(DDNum).Name) {
-                    ShowFatalError("SimulateDualDuct: Invalid CompIndex passed=" + TrimSigDigits(CompIndex) + ", Damper name=" + CompName +
+                    ShowFatalError("SimulateDualDuct: Invalid CompIndex passed=" + fmt::to_string(CompIndex) + ", Damper name=" + CompName +
                                    ", stored Damper Name for that index=" + dd_airterminal(DDNum).Name);
                 }
                 CheckEquipName(DDNum) = false;

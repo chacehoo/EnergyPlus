@@ -674,7 +674,7 @@ namespace SurfaceGroundHeatExchanger {
                 if (iter > Maxiter) {
                     if (this->ConvErrIndex1 == 0) {
                         ShowWarningMessage("CalcSurfaceGroundHeatExchanger=\"" + this->Name +
-                                           "\", Did not converge (part 1), Iterations=" + TrimSigDigits(Maxiter));
+                                           "\", Did not converge (part 1), Iterations=" + fmt::to_string(Maxiter));
                         ShowContinueErrorTimeStamp("");
                     }
                     ShowRecurringWarningErrorAtEnd("CalcSurfaceGroundHeatExchanger=\"" + this->Name + "\", Did not converge (part 1)",
@@ -734,7 +734,7 @@ namespace SurfaceGroundHeatExchanger {
                     ++iter1;
                     // update top coefficients
                     CalcTopFluxCoefficents(TempBtm, TempTop);
-                    // calc top surface fluxe
+                    // calc top surface flux
                     FluxTop = this->QtopConstCoef + this->QtopVarCoef * state.dataSurfaceGroundHeatExchangers->SourceFlux;
                     // calc new surface temps
                     CalcTopSurfTemp(-FluxTop,
@@ -769,7 +769,7 @@ namespace SurfaceGroundHeatExchanger {
                     if (iter1 > Maxiter1) {
                         if (this->ConvErrIndex2 == 0) {
                             ShowWarningMessage("CalcSurfaceGroundHeatExchanger=\"" + this->Name +
-                                               "\", Did not converge (part 2), Iterations=" + TrimSigDigits(Maxiter));
+                                               "\", Did not converge (part 2), Iterations=" + fmt::to_string(Maxiter));
                             ShowContinueErrorTimeStamp("");
                         }
                         ShowRecurringWarningErrorAtEnd("CalcSurfaceGroundHeatExchanger=\"" + this->Name + "\", Did not converge (part 2)",
@@ -788,7 +788,7 @@ namespace SurfaceGroundHeatExchanger {
                 if (iter > Maxiter) {
                     if (this->ConvErrIndex3 == 0) {
                         ShowWarningMessage("CalcSurfaceGroundHeatExchanger=\"" + this->Name +
-                                           "\", Did not converge (part 3), Iterations=" + TrimSigDigits(Maxiter));
+                                           "\", Did not converge (part 3), Iterations=" + fmt::to_string(Maxiter));
                         ShowContinueErrorTimeStamp("");
                     }
                     ShowRecurringWarningErrorAtEnd("CalcSurfaceGroundHeatExchanger=\"" + this->Name + "\", Did not converge (part 3)",
