@@ -50,7 +50,6 @@
 
 // ObjexxFCL Headers
 #include <ObjexxFCL/Fmath.hh>
-#include <ObjexxFCL/gio.hh>
 #include <ObjexxFCL/string.functions.hh>
 
 // EnergyPlus Headers
@@ -1316,7 +1315,7 @@ namespace Psychrometrics {
                     ShowContinueErrorTimeStamp(" Routine=Unknown,");
                 }
                 ShowContinueError(String);
-                String = "Instead, calculated Humidity Ratio at " + TrimSigDigits(TDP - DeltaT, 1) + " (" + fmt::to_string(DeltaT) +
+                String = "Instead, calculated Humidity Ratio at " + TrimSigDigits(TDP - DeltaT, 1) + " (" + fmt::to_string(static_cast<int>(DeltaT)) +
                          " degree less) = " + TrimSigDigits(W, 4);
                 ShowContinueError(String + " will be used. Simulation continues.");
             }

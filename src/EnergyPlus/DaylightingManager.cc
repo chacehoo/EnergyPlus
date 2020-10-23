@@ -57,7 +57,6 @@
 #include <ObjexxFCL/Vector2.hh>
 #include <ObjexxFCL/Vector3.hh>
 #include <ObjexxFCL/Vector4.hh>
-#include <ObjexxFCL/gio.hh>
 #include <ObjexxFCL/member.functions.hh>
 #include <ObjexxFCL/random.hh>
 #include <ObjexxFCL/string.functions.hh>
@@ -529,7 +528,6 @@ namespace DaylightingManager {
         // na
 
         // SUBROUTINE PARAMETER DEFINITIONS:
-        static ObjexxFCL::gio::Fmt fmtA("(A)");
 
         // INTERFACE BLOCK SPECIFICATIONS
         // na
@@ -571,7 +569,7 @@ namespace DaylightingManager {
         // exterior windows in Daylighting:Detailed zones. Note that it is possible for a
         // Daylighting:Detailed zone to have zero exterior windows of its own, but it may have an interior
         // through which daylight passes from adjacent zones with exterior windows.
-        if (BeginSimFlag) {
+        if (state.dataGlobal->BeginSimFlag) {
             TotWindowsWithDayl = 0;
             for (ZoneNum = 1; ZoneNum <= NumOfZones; ++ZoneNum) {
                 TotWindowsWithDayl += ZoneDaylight(ZoneNum).NumOfDayltgExtWins;
@@ -591,7 +589,7 @@ namespace DaylightingManager {
             }
         }
 
-        if (BeginSimFlag) {
+        if (state.dataGlobal->BeginSimFlag) {
 
             // Find minimum solid angle subtended by an interior window in Daylighting:Detailed zones.
             // Used in calculating daylighting through interior windows.
@@ -632,7 +630,7 @@ namespace DaylightingManager {
         }
 
         if (!DetailedSolarTimestepIntegration) {
-            if (BeginDayFlag) {
+            if (state.dataGlobal->BeginDayFlag) {
                 // Calculate hourly sun angles, clear sky zenith luminance, and exterior horizontal illuminance
                 PHSUN = 0.0;
                 SPHSUN = 0.0;
@@ -3399,26 +3397,9 @@ namespace DaylightingManager {
         // METHODOLOGY EMPLOYED:
         // switch as need to serve both reference points and map points based on calledFrom
 
-        // REFERENCES:
-        // na
-
-        // Using/Aliasing
         using DataSystemVariables::DetailedSkyDiffuseAlgorithm;
         using General::BlindBeamBeamTrans;
         using General::POLYF;
-        using SolarReflectionManager::SolReflRecSurf;
-
-        // Locals
-        // SUBROUTINE ARGUMENT DEFINITIONS:
-
-        // SUBROUTINE PARAMETER DEFINITIONS:
-        // na
-
-        // INTERFACE BLOCK SPECIFICATIONS:
-        // na
-
-        // DERIVED TYPE DEFINITIONS:
-        // na
 
         if (SUNCOSHR(iHour, 3) < SunIsUpValue) return;
 
@@ -3891,10 +3872,10 @@ namespace DaylightingManager {
                 // Receiving surface number corresponding this window
                 RecSurfNum = Surface(IWin2).ShadowSurfRecSurfNum;
                 if (RecSurfNum > 0) { // interior windows do not apply
-                    if (SolReflRecSurf(RecSurfNum).NumPossibleObs > 0) {
+                    if (state.dataSolarReflectionManager->SolReflRecSurf(RecSurfNum).NumPossibleObs > 0) {
                         // This window has associated obstructions that could reflect beam onto the window
-                        for (int loop = 1, loop_end = SolReflRecSurf(RecSurfNum).NumPossibleObs; loop <= loop_end; ++loop) {
-                            ReflSurfNum = SolReflRecSurf(RecSurfNum).PossibleObsSurfNums(loop);
+                        for (int loop = 1, loop_end = state.dataSolarReflectionManager->SolReflRecSurf(RecSurfNum).NumPossibleObs; loop <= loop_end; ++loop) {
+                            ReflSurfNum = state.dataSolarReflectionManager->SolReflRecSurf(RecSurfNum).PossibleObsSurfNums(loop);
                             ReflSurfNumX = ReflSurfNum;
                             // Each shadowing surface has a "mirror" duplicate surface facing in the opposite direction.
                             // The following gets the correct side of a shadowing surface for reflection.
@@ -3927,8 +3908,8 @@ namespace DaylightingManager {
                                 ReflDistance = std::sqrt(ReflDistanceSq);
                                 // Is ray from ref. pt. to reflection point (HitPtRefl) obstructed?
                                 hitObsRefl = false;
-                                for (int loop2 = 1, loop2_end = SolReflRecSurf(RecSurfNum).NumPossibleObs; loop2 <= loop2_end; ++loop2) {
-                                    int const ObsSurfNum = SolReflRecSurf(RecSurfNum).PossibleObsSurfNums(loop2);
+                                for (int loop2 = 1, loop2_end = state.dataSolarReflectionManager->SolReflRecSurf(RecSurfNum).NumPossibleObs; loop2 <= loop2_end; ++loop2) {
+                                    int const ObsSurfNum = state.dataSolarReflectionManager->SolReflRecSurf(RecSurfNum).PossibleObsSurfNums(loop2);
                                     if (ObsSurfNum == ReflSurfNum || ObsSurfNum == Surface(ReflSurfNum).BaseSurf) continue;
                                     PierceSurface(ObsSurfNum, RREF2, SunVecMir, ReflDistance, HitPtObs, hitObs); // ReflDistance cutoff added
                                     if (hitObs) { // => Could skip distance check (unless < vs <= ReflDistance really matters)
@@ -3948,8 +3929,8 @@ namespace DaylightingManager {
                                     ReflSurfRecNum = Surface(ReflSurfNum).ShadowSurfRecSurfNum;
                                     if (ReflSurfRecNum > 0) {
                                         // Loop over possible obstructions for this reflecting window
-                                        for (int loop2 = 1, loop2_end = SolReflRecSurf(ReflSurfRecNum).NumPossibleObs; loop2 <= loop2_end; ++loop2) {
-                                            int const ObsSurfNum = SolReflRecSurf(ReflSurfRecNum).PossibleObsSurfNums(loop2);
+                                        for (int loop2 = 1, loop2_end = state.dataSolarReflectionManager->SolReflRecSurf(ReflSurfRecNum).NumPossibleObs; loop2 <= loop2_end; ++loop2) {
+                                            int const ObsSurfNum = state.dataSolarReflectionManager->SolReflRecSurf(ReflSurfRecNum).PossibleObsSurfNums(loop2);
                                             PierceSurface(ObsSurfNum, HitPtRefl, RAYCOS, HitPtObs, hitObs);
                                             if (hitObs) break;
                                         }
@@ -4378,8 +4359,6 @@ namespace DaylightingManager {
         using namespace DataIPShortCuts;
         using namespace DElightManagerF; // Module for managing DElight subroutines
 
-        static ObjexxFCL::gio::Fmt fmtA("(A)");
-
         int TotDaylightingControls;  // Total Daylighting:Controls inputs (splitflux or delight type)
         bool ErrorsFound;            // Error flag
         Real64 dLatitude;       // double for argument passing
@@ -4683,8 +4662,6 @@ namespace DaylightingManager {
         using DataStringGlobals::CharSpace;
         using DataStringGlobals::CharTab;
         using General::RoundSigDigits;
-
-        static ObjexxFCL::gio::Fmt fmtA("(A)");
 
         Array1D_int ZoneMapCount;
         int MapNum;
@@ -5121,10 +5098,10 @@ namespace DaylightingManager {
                     ShowWarningError("Invalid " + cAlphaFieldNames(4) + " = " + cAlphaArgs(4) + ", occurs in " + cCurrentModuleObject +
                                      "object for " + cCurrentModuleObject + "=\"" + cAlphaArgs(1));
                     ShowContinueError("Schedule was not found so controls will always be available, and the simulation continues.");
-                    zone_daylight.AvailSchedNum = ScheduleAlwaysOn;
+                    zone_daylight.AvailSchedNum = DataGlobalConstants::ScheduleAlwaysOn();
                 }
             } else {
-                zone_daylight.AvailSchedNum = ScheduleAlwaysOn;
+                zone_daylight.AvailSchedNum = DataGlobalConstants::ScheduleAlwaysOn();
             }
 
             if (UtilityRoutines::SameString(cAlphaArgs(5), "CONTINUOUS")) { // Field: Lighting Control Type
@@ -5293,8 +5270,6 @@ namespace DaylightingManager {
         using InternalHeatGains::GetDesignLightingLevelForZone;
         using namespace OutputReportPredefined;
         using ScheduleManager::GetScheduleIndex;
-
-        static ObjexxFCL::gio::Fmt fmtA("(A)");
 
         int refPtNum;
         std::string refName;
@@ -5522,7 +5497,6 @@ namespace DaylightingManager {
         // na
 
         // SUBROUTINE PARAMETER DEFINITIONS:
-        static ObjexxFCL::gio::Fmt fmtA("(A)");
 
         // INTERFACE BLOCK SPECIFICATIONS
         // na
@@ -9953,8 +9927,6 @@ namespace DaylightingManager {
         // SUBROUTINE ARGUMENT DEFINITIONS:
 
         // SUBROUTINE PARAMETER DEFINITIONS:
-        static ObjexxFCL::gio::Fmt FmtA("(A)");
-
 
         // INTERFACE BLOCK SPECIFICATIONS:
         // na
@@ -10109,7 +10081,7 @@ namespace DaylightingManager {
 
                     // We need DataGlobals::CalendarYear, and not DataEnvironment::Year because
                     // otherwise if you run a TMY file, you'll get for eg 1977, 1981, etc
-                    SQYear = DataGlobals::CalendarYear;
+                    SQYear = state.dataGlobal->CalendarYear;
                     SQMonth = Month;
                     SQDayOfMonth = DayOfMonth;
 
@@ -10163,7 +10135,6 @@ namespace DaylightingManager {
         // na
 
         // SUBROUTINE PARAMETER DEFINITIONS:
-        static ObjexxFCL::gio::Fmt FmtA("(A)");
 
         // INTERFACE BLOCK SPECIFICATIONS
         // na
