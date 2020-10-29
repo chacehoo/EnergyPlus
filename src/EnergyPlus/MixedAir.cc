@@ -2525,8 +2525,8 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
                         ShowContinueError("... A fixed minimum outside air flow rate and high humidity control have been specified.");
                         ShowContinueError("... The " + cNumericFields(7) +
                                           " is less than the ratio of the outside air controllers minimum to maximum outside air flow rate.");
-                        ShowContinueError("... Controller " + cNumericFields(1) + format(" = {:.4T}", OAController(OutAirNum).MinOA) + " m3/s.");
-                        ShowContinueError("... Controller " + cNumericFields(2) + format(" = {:.4T}", OAController(OutAirNum).MaxOA) + " m3/s.");
+                        ShowContinueError("... Controller " + cNumericFields(1) + format(" = {:.4T} m3/s.", OAController(OutAirNum).MinOA));
+                        ShowContinueError("... Controller " + cNumericFields(2) + format(" = {:.4T} m3/s.", OAController(OutAirNum).MaxOA));
                         ShowContinueError(format("... Controller minimum to maximum flow ratio = {:.4T}", OAFlowRatio) + '.');
                         ShowContinueError("... " + cNumericFields(7) + format(" = {:.4T}", OAController(OutAirNum).HighRHOAFlowRatio) + '.');
                     }
@@ -4152,7 +4152,7 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
                                                                   "zone outdoor air rate (" +
                                                                   format("{:.4R}", ZoneOAMax) +
                                                                   "), is not greater than minimum zone outdoor air rate (" +
-                                                                  format("{:.4R}", ZoneOAMin) + ").");
+                                                                  format("{:.4R}).", ZoneOAMin));
                                                 ShowContinueError(" The minimum zone outdoor air rate is set to the maximum zone outdoor air rate. "
                                                                   "Simulation continues...");
                                                 ShowContinueErrorTimeStamp("");
@@ -4198,7 +4198,7 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
                                                                           "concentration (" +
                                                                           format("{:.2R}", ZoneMaxCO2) +
                                                                           "), is not greater than minimum target CO2 concentration (" +
-                                                                          format("{:.2R}", ZoneMinCO2) + ").");
+                                                                          format("{:.2R}).", ZoneMinCO2));
                                                         ShowContinueError("\"ProportionalControlBasedonOccupancySchedule\" will not be modeled. "
                                                                           "Default \"VentilationRateProcedure\" will be modeled. Simulation "
                                                                           "continues...");
@@ -4220,7 +4220,7 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
                                                                           "concentration (" +
                                                                           format("{:.2R}", ZoneMaxCO2) +
                                                                           "), is not greater than minimum target CO2 concentration (" +
-                                                                          format("{:.2R}", ZoneMinCO2) + ").");
+                                                                          format("{:.2R}).", ZoneMinCO2));
                                                         ShowContinueError("\"ProportionalControlBasedonDesignOccupancy\" will not be modeled. "
                                                                           "Default \"VentilationRateProcedure\" will be modeled. Simulation "
                                                                           "continues...");
@@ -4241,7 +4241,7 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
                                                                           "maximum target CO2 concentration (" +
                                                                           format("{:.2R}", ZoneMaxCO2) +
                                                                           "), is not greater than minimum target CO2 concentration (" +
-                                                                          format("{:.2R}", ZoneMinCO2) + ").");
+                                                                          format("{:.2R}).", ZoneMinCO2));
                                                         ShowContinueError("\"ProportionalControlBasedOnDesignOARate\" will not be modeled. Default "
                                                                           "\"VentilationRateProcedure\" will be modeled. Simulation continues...");
                                                         ShowContinueErrorTimeStamp("");
@@ -5000,8 +5000,8 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
                         ShowContinueError("... A fixed minimum outdoor air flow rate and high humidity control have been specified.");
                         ShowContinueError("... The High Humidity Outdoor Air Flow Ratio is less than the ratio of the outdoor air controllers "
                                           "minimum to maximum outside air flow rate.");
-                        ShowContinueError(format("... Controller minimum flow rate = {:.4T}", this->MinOA) + " m3/s.");
-                        ShowContinueError(format("... Controller maximum flow rate = {:.4T}", this->MaxOA) + " m3/s.");
+                        ShowContinueError(format("... Controller minimum flow rate = {:.4T} m3/s.", this->MinOA));
+                        ShowContinueError(format("... Controller maximum flow rate = {:.4T} m3/s.", this->MaxOA));
                         ShowContinueError(format("... Controller minimum to maximum flow ratio = {:.4T}", OAFlowRatio) + '.');
                         ShowContinueError(format("... High humidity control flow ratio = {:.4T}", this->HighRHOAFlowRatio) + '.');
                     }

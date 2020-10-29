@@ -595,7 +595,7 @@ namespace Boilers {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpNomCap - NomCapUser) / NomCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeBoilerHotWater: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError(format("User-Specified Nominal Capacity of {:.2R}", NomCapUser) + " [W]");
+                                    ShowContinueError(format("User-Specified Nominal Capacity of {:.2R} [W]", NomCapUser));
                                     ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R}", tmpNomCap) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
@@ -650,7 +650,7 @@ namespace Boilers {
                                     ShowContinueError(format("User-Specified Design Water Flow Rate of {:.2R}", VolFlowRateUser) +
                                                       " [m3/s]");
                                     ShowContinueError("differs from Design Size Design Water Flow Rate of " +
-                                                      format("{:.2R}", tmpBoilerVolFlowRate) + " [m3/s]");
+                                                      format("{:.2R} [m3/s]", tmpBoilerVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }

@@ -480,10 +480,10 @@ namespace UnitVentilator {
                                 if (FanVolFlow != AutoSize && state.dataUnitVentilators->UnitVent(UnitVentNum).MaxAirVolFlow != AutoSize &&
                                     FanVolFlow < state.dataUnitVentilators->UnitVent(UnitVentNum).MaxAirVolFlow) {
                                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + state.dataUnitVentilators->UnitVent(UnitVentNum).Name + "\"");
-                                    ShowContinueError(format("...air flow rate [{:.7T}", FanVolFlow) + "] in fan object " +
+                                    ShowContinueError(format("...air flow rate [{:.7T}] in fan object ", FanVolFlow) +
                                                       state.dataUnitVentilators->UnitVent(UnitVentNum).FanName +
                                                       " is less than the unit ventilator maximum supply air flow rate [" +
-                                                      format("{:.7T}", state.dataUnitVentilators->UnitVent(UnitVentNum).MaxAirVolFlow) + "].");
+                                                      format("{:.7T}].", state.dataUnitVentilators->UnitVent(UnitVentNum).MaxAirVolFlow));
                                     ShowContinueError(
                                         "...the fan flow rate must be greater than or equal to the unit ventilator maximum supply air flow rate.");
                                     ErrorsFound = true;
@@ -520,9 +520,9 @@ namespace UnitVentilator {
                     if (FanVolFlow != AutoSize && state.dataUnitVentilators->UnitVent(UnitVentNum).MaxAirVolFlow != AutoSize &&
                         FanVolFlow < state.dataUnitVentilators->UnitVent(UnitVentNum).MaxAirVolFlow) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + state.dataUnitVentilators->UnitVent(UnitVentNum).Name + "\"");
-                        ShowContinueError(format("...air flow rate [{:.7T}", FanVolFlow) + "] in fan object " + state.dataUnitVentilators->UnitVent(UnitVentNum).FanName +
+                        ShowContinueError(format("...air flow rate [{:.7T}] in fan object ", FanVolFlow) + state.dataUnitVentilators->UnitVent(UnitVentNum).FanName +
                                           " is less than the unit ventilator maximum supply air flow rate [" +
-                                          format("{:.7T}", state.dataUnitVentilators->UnitVent(UnitVentNum).MaxAirVolFlow) + "].");
+                                          format("{:.7T}].", state.dataUnitVentilators->UnitVent(UnitVentNum).MaxAirVolFlow));
                         ShowContinueError("...the fan flow rate must be greater than or equal to the unit ventilator maximum supply air flow rate.");
                         ErrorsFound = true;
                     } else if (FanVolFlow == AutoSize && state.dataUnitVentilators->UnitVent(UnitVentNum).MaxAirVolFlow != AutoSize) {
@@ -2049,7 +2049,7 @@ namespace UnitVentilator {
                                 ShowContinueError(format("User-Specified Minimum Outdoor Air Flow Rate of {:.5R}", MinOutAirVolFlowUser) +
                                                   " [m3/s]");
                                 ShowContinueError("differs from Design Size Minimum Outdoor Air Flow Rate of " +
-                                                  format("{:.5R}", MinOutAirVolFlowDes) + " [m3/s]");
+                                                  format("{:.5R} [m3/s]", MinOutAirVolFlowDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }
@@ -2181,7 +2181,7 @@ namespace UnitVentilator {
                                     ShowContinueError(format("User-Specified Maximum Hot Water Flow of {:.5R}", MaxVolHotWaterFlowUser) +
                                                       " [m3/s]");
                                     ShowContinueError("differs from Design Size Maximum Hot Water Flow of " +
-                                                      format("{:.5R}", MaxVolHotWaterFlowDes) + " [m3/s]");
+                                                      format("{:.5R} [m3/s]", MaxVolHotWaterFlowDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -2417,8 +2417,8 @@ namespace UnitVentilator {
                                     ShowWarningError("Autosizing of water flow resulted in negative value.");
                                     ShowContinueError("Occurs in " + state.dataUnitVentilators->cMO_UnitVentilator + " Object=" + state.dataUnitVentilators->UnitVent(UnitVentNum).Name);
                                     ShowContinueError("...Sizing information found during sizing simulation:");
-                                    ShowContinueError(format("...Calculated coil design load = {:.3T}", DesCoolingLoad) + " W");
-                                    ShowContinueError(format("...Calculated water flow rate  = {:.3T}", MaxVolColdWaterFlowDes) + " m3/s");
+                                    ShowContinueError(format("...Calculated coil design load = {:.3T} W", DesCoolingLoad));
+                                    ShowContinueError(format("...Calculated water flow rate  = {:.3T} m3/s", MaxVolColdWaterFlowDes));
                                     ShowContinueError("...Water flow rate will be set to 0. Check sizing inputs for zone and plant, inputs for water "
                                                       "cooling coil object, and design day specifications.");
                                     ShowContinueError("...Consider autosizing all inputs if not already doing so.");
@@ -2450,7 +2450,7 @@ namespace UnitVentilator {
                                     ShowContinueError(format("User-Specified Maximum Cold Water Flow of {:.5R}", MaxVolColdWaterFlowUser) +
                                                       " [m3/s]");
                                     ShowContinueError("differs from Design Size Maximum Cold Water Flow of " +
-                                                      format("{:.5R}", MaxVolColdWaterFlowDes) + " [m3/s]");
+                                                      format("{:.5R} [m3/s]", MaxVolColdWaterFlowDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }

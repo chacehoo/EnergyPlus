@@ -1708,7 +1708,7 @@ namespace DataZoneEquipment {
                                                               "target CO2 concentration (" +
                                                               format("{:.2R}", ZoneMaxCO2) +
                                                               "), is not greater than minimum target CO2 concentration (" +
-                                                              format("{:.2R}", ZoneMinCO2) + ").");
+                                                              format("{:.2R}).", ZoneMinCO2));
                                             ShowContinueError("\"ProportionalControlBasedonOccupancySchedule\" will not be modeled. Default "
                                                               "\"Flow/Person+Flow/Area\" will be modeled. Simulation continues...");
                                             ShowContinueErrorTimeStamp("");
@@ -1728,7 +1728,7 @@ namespace DataZoneEquipment {
                                                               "target CO2 concentration (" +
                                                               format("{:.2R}", ZoneMaxCO2) +
                                                               "), is not greater than minimum target CO2 concentration (" +
-                                                              format("{:.2R}", ZoneMinCO2) + ").");
+                                                              format("{:.2R}).", ZoneMinCO2));
                                             ShowContinueError("\"ProportionalControlBasedonDesignOccupancy\" will not be modeled. Default "
                                                               "\"Flow/Person+Flow/Area\" will be modeled. Simulation continues...");
                                             ShowContinueErrorTimeStamp("");

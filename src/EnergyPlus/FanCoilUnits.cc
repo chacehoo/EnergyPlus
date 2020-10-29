@@ -688,9 +688,9 @@ namespace FanCoilUnits {
                                 FanCoil(FanCoilNum).FanAirVolFlow != AutoSize) {
                                 ShowWarningError(RoutineName + FanCoil(FanCoilNum).UnitType + ": " + FanCoil(FanCoilNum).Name);
                                 ShowContinueError("... " + cNumericFields(1) + " is greater than the maximum fan flow rate.");
-                                ShowContinueError(format("... Fan Coil Unit flow = {:.5T}", FanCoil(FanCoilNum).MaxAirVolFlow) + " m3/s.");
+                                ShowContinueError(format("... Fan Coil Unit flow = {:.5T} m3/s.", FanCoil(FanCoilNum).MaxAirVolFlow));
                                 ShowContinueError("... Fan = " + cFanTypes(FanCoil(FanCoilNum).FanType_Num) + ": " + FanCoil(FanCoilNum).FanName);
-                                ShowContinueError(format("... Fan flow = {:.5T}", FanCoil(FanCoilNum).FanAirVolFlow) + " m3/s.");
+                                ShowContinueError(format("... Fan flow = {:.5T} m3/s.", FanCoil(FanCoilNum).FanAirVolFlow));
                                 ShowContinueError("... Fan Coil Unit flow rate reduced to match the fan flow rate and the simulation continues.");
                                 FanCoil(FanCoilNum).MaxAirVolFlow = FanCoil(FanCoilNum).FanAirVolFlow;
                             }
@@ -727,9 +727,9 @@ namespace FanCoilUnits {
                     if (FanCoil(FanCoilNum).MaxAirVolFlow > FanCoil(FanCoilNum).FanAirVolFlow && FanCoil(FanCoilNum).FanAirVolFlow != AutoSize) {
                         ShowWarningError(RoutineName + FanCoil(FanCoilNum).UnitType + ": " + FanCoil(FanCoilNum).Name);
                         ShowContinueError("... " + cNumericFields(1) + " is greater than the maximum fan flow rate.");
-                        ShowContinueError(format("... Fan Coil Unit flow = {:.5T}", FanCoil(FanCoilNum).MaxAirVolFlow) + " m3/s.");
+                        ShowContinueError(format("... Fan Coil Unit flow = {:.5T} m3/s.", FanCoil(FanCoilNum).MaxAirVolFlow));
                         ShowContinueError("... Fan = " + cFanTypes(FanCoil(FanCoilNum).FanType_Num) + ": " + FanCoil(FanCoilNum).FanName);
-                        ShowContinueError(format("... Fan flow = {:.5T}", FanCoil(FanCoilNum).FanAirVolFlow) + " m3/s.");
+                        ShowContinueError(format("... Fan flow = {:.5T} m3/s.", FanCoil(FanCoilNum).FanAirVolFlow));
                         ShowContinueError("... Fan Coil Unit flow rate reduced to match the fan flow rate and the simulation continues.");
                         FanCoil(FanCoilNum).MaxAirVolFlow = FanCoil(FanCoilNum).FanAirVolFlow;
                     }
@@ -911,8 +911,8 @@ namespace FanCoilUnits {
                     if (FanCoil(FanCoilNum).DesignMaxOutletTemp < FanCoil(FanCoilNum).DesignMinOutletTemp) {
                         ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + FanCoil(FanCoilNum).Name + "\",");
                         ShowContinueError("... " + cNumericFields(11) + " is greater than " + cNumericFields(12) + ".");
-                        ShowContinueError("... " + cNumericFields(11) + format(" = {:.2T}", FanCoil(FanCoilNum).DesignMinOutletTemp) + " [C].");
-                        ShowContinueError("... " + cNumericFields(12) + format(" = {:.2T}", FanCoil(FanCoilNum).DesignMaxOutletTemp) + " [C].");
+                        ShowContinueError("... " + cNumericFields(11) + format(" = {:.2T} [C].", FanCoil(FanCoilNum).DesignMinOutletTemp));
+                        ShowContinueError("... " + cNumericFields(12) + format(" = {:.2T} [C].", FanCoil(FanCoilNum).DesignMaxOutletTemp));
                         ErrorsFound = true;
                     }
                 }
@@ -1667,9 +1667,9 @@ namespace FanCoilUnits {
                 if (MaxAirVolFlowDes > FanCoil(FanCoilNum).FanAirVolFlow) {
                     ShowWarningError(RoutineName + FanCoil(FanCoilNum).UnitType + ": " + FanCoil(FanCoilNum).Name);
                     ShowContinueError("... Maximum supply air flow rate is greater than the maximum fan flow rate.");
-                    ShowContinueError(format("... Fan Coil Unit flow = {:.5T}", MaxAirVolFlowDes) + " [m3/s].");
+                    ShowContinueError(format("... Fan Coil Unit flow = {:.5T} [m3/s].", MaxAirVolFlowDes));
                     ShowContinueError("... Fan = " + cFanTypes(FanCoil(FanCoilNum).FanType_Num) + ": " + FanCoil(FanCoilNum).FanName);
-                    ShowContinueError(format("... Fan flow = {:.5T}", FanCoil(FanCoilNum).FanAirVolFlow) + " [m3/s].");
+                    ShowContinueError(format("... Fan flow = {:.5T} [m3/s].", FanCoil(FanCoilNum).FanAirVolFlow));
                     ShowContinueError("... Fan Coil Unit flow rate reduced to match the fan flow rate and the simulation continues.");
                     MaxAirVolFlowDes = FanCoil(FanCoilNum).FanAirVolFlow;
                 }
@@ -1707,9 +1707,9 @@ namespace FanCoilUnits {
             if (FanCoil(FanCoilNum).MaxAirVolFlow > FanCoil(FanCoilNum).FanAirVolFlow) {
                 ShowWarningError(RoutineName + FanCoil(FanCoilNum).UnitType + ": " + FanCoil(FanCoilNum).Name);
                 ShowContinueError("... Maximum supply air flow rate is greater than the maximum fan flow rate.");
-                ShowContinueError(format("... Fan Coil Unit flow = {:.5T}", FanCoil(FanCoilNum).MaxAirVolFlow) + " m3/s.");
+                ShowContinueError(format("... Fan Coil Unit flow = {:.5T} m3/s.", FanCoil(FanCoilNum).MaxAirVolFlow));
                 ShowContinueError("... Fan = " + cFanTypes(FanCoil(FanCoilNum).FanType_Num) + ": " + FanCoil(FanCoilNum).FanName);
-                ShowContinueError(format("... Fan flow = {:.5T}", FanCoil(FanCoilNum).FanAirVolFlow) + " m3/s.");
+                ShowContinueError(format("... Fan flow = {:.5T} m3/s.", FanCoil(FanCoilNum).FanAirVolFlow));
                 ShowContinueError("... Fan Coil Unit flow rate reduced to match the fan flow rate and the simulation continues.");
                 FanCoil(FanCoilNum).MaxAirVolFlow = FanCoil(FanCoilNum).FanAirVolFlow;
             }
@@ -3310,8 +3310,8 @@ namespace FanCoilUnits {
                             ShowWarningMessage("ZoneHVAC:FourPipeFanCoil=\"" + FanCoil(FanCoilNum).Name +
                                                "\" -- Exceeded max iterations while adjusting cycling fan sensible runtime to meet the zone load "
                                                "within the heating convergence tolerance.");
-                            ShowContinueError(format("...Requested zone load = {:.3T}", QZnReq) + " [W]");
-                            ShowContinueError(format("...Fan coil capacity   = {:.3T}", QUnitOut) + " [W]");
+                            ShowContinueError(format("...Requested zone load = {:.3T} [W]", QZnReq));
+                            ShowContinueError(format("...Fan coil capacity   = {:.3T} [W]", QUnitOut));
                             ShowContinueErrorTimeStamp("Iterations=" + fmt::to_string(MaxIterCycl));
                         }
                         ShowRecurringWarningErrorAtEnd("ZoneHVAC:FourPipeFanCoil=\"" + FanCoil(FanCoilNum).Name +

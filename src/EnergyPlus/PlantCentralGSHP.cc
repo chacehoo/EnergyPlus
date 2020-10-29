@@ -315,9 +315,9 @@ namespace PlantCentralGSHP {
                                         ShowMessage("SizeChillerHeaterPerformanceElectricEIR: Potential issue with equipment sizing for " +
                                                     this->ChillerHeater(NumChillerHeater).Name);
                                         ShowContinueError("User-Specified Reference Chilled Water Flow Rate of " +
-                                                          format("{:.5R}", EvapVolFlowRateUser) + " [m3/s]");
+                                                          format("{:.5R} [m3/s]", EvapVolFlowRateUser));
                                         ShowContinueError("differs from Design Size Reference Chilled Water Flow Rate of " +
-                                                          format("{:.5R}", tmpEvapVolFlowRate) + " [m3/s]");
+                                                          format("{:.5R} [m3/s]", tmpEvapVolFlowRate));
                                         ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                         ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                     }
@@ -407,7 +407,7 @@ namespace PlantCentralGSHP {
                                     if ((std::abs(tmpNomCap - NomCapUser) / NomCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                         ShowMessage("SizeChillerHeaterPerformanceElectricEIR: Potential issue with equipment sizing for " +
                                                     this->ChillerHeater(NumChillerHeater).Name);
-                                        ShowContinueError(format("User-Specified Reference Capacity of {:.2R}", NomCapUser) + " [W]");
+                                        ShowContinueError(format("User-Specified Reference Capacity of {:.2R} [W]", NomCapUser));
                                         ShowContinueError(format("differs from Design Size Reference Capacity of {:.2R}", tmpNomCap) +
                                                           " [W]");
                                         ShowContinueError("This may, or may not, indicate mismatched component sizes.");
@@ -495,9 +495,9 @@ namespace PlantCentralGSHP {
                                         ShowMessage("SizeChillerHeaterPerformanceElectricEIR: Potential issue with equipment sizing for " +
                                                     this->ChillerHeater(NumChillerHeater).Name);
                                         ShowContinueError("User-Specified Reference Condenser Water Flow Rate of " +
-                                                          format("{:.5R}", CondVolFlowRateUser) + " [m3/s]");
+                                                          format("{:.5R} [m3/s]", CondVolFlowRateUser));
                                         ShowContinueError("differs from Design Size Reference Condenser Water Flow Rate of " +
-                                                          format("{:.5R}", tmpCondVolFlowRate) + " [m3/s]");
+                                                          format("{:.5R} [m3/s]", tmpCondVolFlowRate));
                                         ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                         ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                     }
@@ -1890,7 +1890,7 @@ namespace PlantCentralGSHP {
                 } else {
                     ShowWarningError("ChillerHeaterPerformance:Electric:EIR \"" + this->ChillerHeater(ChillerHeaterNum).Name + "\":");
                     ShowContinueError("Chiller condenser temperature for curve fit are not decided, defalt value= cond_leaving (" +
-                                      format("{:.3R}", ChillerCapFT) + ").");
+                                      format("{:.3R}).", ChillerCapFT));
                     CondTempforCurve = CondOutletTemp;
                 }
 
@@ -1913,9 +1913,9 @@ namespace PlantCentralGSHP {
                         ++this->ChillerHeater(ChillerHeaterNum).ChillerCapFTError;
                         ShowWarningError("ChillerHeaterPerformance:Electric:EIR \"" + this->ChillerHeater(ChillerHeaterNum).Name + "\":");
                         ShowContinueError(" ChillerHeater Capacity as a Function of Temperature curve output is negative (" +
-                                          format("{:.3R}", ChillerCapFT) + ").");
+                                          format("{:.3R}).", ChillerCapFT));
                         ShowContinueError(" Negative value occurs using an Evaporator Outlet Temp of " +
-                                          format("{:.1R}", EvapOutletTempSetPoint) + " and a Condenser Inlet Temp of " +
+                                          format("{:.1R} and a Condenser Inlet Temp of ", EvapOutletTempSetPoint) +
                                           format("{:.1R}", CondInletTemp) + '.');
                         ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                     } else if (!DataGlobals::WarmupFlag) {
@@ -2275,7 +2275,7 @@ namespace PlantCentralGSHP {
                                           this->ChillerHeater(ChillerHeaterNum).Name + "\", DeltaTemp < 0");
                         ShowContinueError(" Reference Simultaneous Cooling-Heating Mode Leaving Condenser Water Temperature [" +
                                           format("{:.1R}", CondOutletTemp) + ']');
-                        ShowContinueError(format("is below condenser inlet temperature of [{:.1R}", CondInletTemp) + "].");
+                        ShowContinueError(format("is below condenser inlet temperature of [{:.1R}].", CondInletTemp));
                         ShowContinueErrorTimeStamp("");
                         ShowContinueError(" Reset reference temperature to one greater than the inlet temperature ");
                     }
@@ -2389,7 +2389,7 @@ namespace PlantCentralGSHP {
                     } else {
                         ShowWarningError("ChillerHeaterPerformance:Electric:EIR \"" + this->ChillerHeater(ChillerHeaterNum).Name + "\":");
                         ShowContinueError("Chiller condensor temperature for curve fit are not decided, defalt value= cond_leaving (" +
-                                          format("{:.3R}", ChillerCapFT) + ").");
+                                          format("{:.3R}).", ChillerCapFT));
                         CondTempforCurve = DataLoopNode::Node(DataPlant::PlantLoop(this->HWLoopNum).TempSetPointNodeNum).TempSetPoint;
                     }
 
@@ -2410,9 +2410,9 @@ namespace PlantCentralGSHP {
                             ++this->ChillerHeater(ChillerHeaterNum).ChillerCapFTError;
                             ShowWarningError("ChillerHeaterPerformance:Electric:EIR \"" + this->ChillerHeater(ChillerHeaterNum).Name + "\":");
                             ShowContinueError(" ChillerHeater Capacity as a Function of Temperature curve output is negative (" +
-                                              format("{:.3R}", ChillerCapFT) + ").");
+                                              format("{:.3R}).", ChillerCapFT));
                             ShowContinueError(" Negative value occurs using an Evaporator Outlet Temp of " +
-                                              format("{:.1R}", EvapOutletTempSetPoint) + " and a Condenser Inlet Temp of " +
+                                              format("{:.1R} and a Condenser Inlet Temp of ", EvapOutletTempSetPoint) +
                                               format("{:.1R}", CondInletTemp) + '.');
                             ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                         } else if (!DataGlobals::WarmupFlag) {

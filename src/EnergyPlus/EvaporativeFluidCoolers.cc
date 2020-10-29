@@ -1250,7 +1250,7 @@ namespace EvaporativeFluidCoolers {
                 ShowSevereError("Error when autosizing the UA value for Evaporative Fluid Cooler = " + this->Name + '.');
                 ShowContinueError(format("Design Loop Exit Temperature ({:.2R}", DataSizing::PlantSizData(PltSizCondNum).ExitTemp) +
                                   " C) must be greater than design entering air wet-bulb temperature (" +
-                                  format("{:.2R}", DesignEnteringAirWetBulb) + " C) when autosizing the Evaporative Fluid Cooler UA.");
+                                  format("{:.2R} C) when autosizing the Evaporative Fluid Cooler UA.", DesignEnteringAirWetBulb));
                 ShowContinueError("It is recommended that the Design Loop Exit Temperature = Design Entering Air Wet-bulb Temp plus the Evaporative "
                                   "Fluid Cooler design approach temperature (e.g., 4 C).");
                 ShowContinueError("If using HVACTemplate:Plant:ChilledWaterLoop, then check that input field Condenser Water Design Setpoint must be "
@@ -1459,7 +1459,7 @@ namespace EvaporativeFluidCoolers {
                     if (SolFla == -1) {
                         ShowWarningError("Iteration limit exceeded in calculating evaporative fluid cooler UA.");
                         ShowContinueError("Autosizing of fluid cooler UA failed for evaporative fluid cooler = " + this->Name);
-                        ShowContinueError(format("The final UA value = {:.2R}", UA) + "W/C, and the simulation continues...");
+                        ShowContinueError(format("The final UA value = {:.2R}W/C, and the simulation continues...", UA));
                     } else if (SolFla == -2) {
                         this->SimSimpleEvapFluidCooler(state, Par(2), Par(3), UA0, OutWaterTempAtUA0);
                         this->SimSimpleEvapFluidCooler(state, Par(2), Par(3), UA1, OutWaterTempAtUA1);
@@ -1568,7 +1568,7 @@ namespace EvaporativeFluidCoolers {
                 if (SolFla == -1) {
                     ShowWarningError("Iteration limit exceeded in calculating evaporative fluid cooler UA.");
                     ShowContinueError("Autosizing of fluid cooler UA failed for evaporative fluid cooler = " + this->Name);
-                    ShowContinueError(format("The final UA value = {:.2R}", UA) + "W/C, and the simulation continues...");
+                    ShowContinueError(format("The final UA value = {:.2R}W/C, and the simulation continues...", UA));
                 } else if (SolFla == -2) {
                     ShowSevereError(CalledFrom + ": The combination of design input values did not allow the calculation of a ");
                     ShowContinueError("reasonable UA value. Review and revise design input values as appropriate. ");
@@ -1639,7 +1639,7 @@ namespace EvaporativeFluidCoolers {
                 if (SolFla == -1) {
                     ShowWarningError("Iteration limit exceeded in calculating evaporative fluid cooler UA.");
                     ShowContinueError("Autosizing of fluid cooler UA failed for evaporative fluid cooler = " + this->Name);
-                    ShowContinueError(format("The final UA value = {:.2R}", UA) + "W/C, and the simulation continues...");
+                    ShowContinueError(format("The final UA value = {:.2R}W/C, and the simulation continues...", UA));
                 } else if (SolFla == -2) {
                     this->SimSimpleEvapFluidCooler(state, Par(2), Par(3), UA0, OutWaterTempAtUA0);
                     this->SimSimpleEvapFluidCooler(state, Par(2), Par(3), UA1, OutWaterTempAtUA1);
@@ -1780,7 +1780,7 @@ namespace EvaporativeFluidCoolers {
                 if (SolFla == -1) {
                     ShowWarningError("Iteration limit exceeded in calculating evaporative fluid cooler UA.");
                     ShowContinueError("Autosizing of fluid cooler UA failed for evaporative fluid cooler = " + this->Name);
-                    ShowContinueError(format("The final UA value = {:.2R}", UA) + "W/C, and the simulation continues...");
+                    ShowContinueError(format("The final UA value = {:.2R}W/C, and the simulation continues...", UA));
                 } else if (SolFla == -2) {
                     ShowSevereError(CalledFrom + ": The combination of design input values did not allow the calculation of a ");
                     ShowContinueError("reasonable low-speed UA value. Review and revise design input values as appropriate. ");

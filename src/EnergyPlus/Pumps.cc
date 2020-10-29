@@ -441,8 +441,8 @@ namespace Pumps {
                 // Check that the minimum isn't greater than the maximum
                 ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + PumpEquip(PumpNum).Name + "\", Invalid '" + cNumericFieldNames(10) +
                                  "'");
-                ShowContinueError(format("Entered Value=[{:.5T}", PumpEquip(PumpNum).MinVolFlowRate) + "] is above the " +
-                                  cNumericFieldNames(1) + format("=[{:.5T}", PumpEquip(PumpNum).NomVolFlowRate) + "].");
+                ShowContinueError(format("Entered Value=[{:.5T}] is above the ", PumpEquip(PumpNum).MinVolFlowRate) +
+                                  cNumericFieldNames(1) + format("=[{:.5T}].", PumpEquip(PumpNum).NomVolFlowRate));
                 ShowContinueError("Reseting value of '" + cNumericFieldNames(10) + "' to the value of '" + cNumericFieldNames(1) + "'.");
                 // Set min to roughly max, but not quite, otherwise it can't turn on, ever
                 PumpEquip(PumpNum).MinVolFlowRate = 0.99 * PumpEquip(PumpNum).NomVolFlowRate;
@@ -1388,24 +1388,24 @@ namespace Pumps {
                     ShowContinueError(format("Calculated Pump_Efficiency % =Total_Efficiency % [{:.1R}", TotalEffic * 100.0) +
                                       format("] / Motor_Efficiency % [{:.1R}", PumpEquip(PumpNum).MotorEffic * 100.0) + ']');
                     ShowContinueError(format("Total_Efficiency % =(Rated_Volume_Flow_Rate [{:.1R}", PumpEquip(PumpNum).NomVolFlowRate) +
-                                      format("] * Rated_Pump_Head [{:.1R}", PumpEquip(PumpNum).NomPumpHead) + "] / Rated_Power_Use [" +
-                                      format("{:.1R}", PumpEquip(PumpNum).NomPowerUse) + "]) * 100.");
+                                      format("] * Rated_Pump_Head [{:.1R}] / Rated_Power_Use [", PumpEquip(PumpNum).NomPumpHead) +
+                                      format("{:.1R}]) * 100.", PumpEquip(PumpNum).NomPowerUse));
                 } else if ((PumpEquip(PumpNum).PumpEffic > 0.95) && (PumpEquip(PumpNum).PumpEffic <= 1.0)) {
                     ShowWarningError(format("Check input.  Calculated Pump Efficiency={:.2R}", PumpEquip(PumpNum).PumpEffic * 100.0) +
                                      "% is approaching 100%, for pump=" + PumpEquip(PumpNum).Name);
                     ShowContinueError(format("Calculated Pump_Efficiency % =Total_Efficiency % [{:.1R}", TotalEffic * 100.0) +
                                       format("] / Motor_Efficiency % [{:.1R}", PumpEquip(PumpNum).MotorEffic * 100.0) + ']');
                     ShowContinueError(format("Total_Efficiency % =(Rated_Volume_Flow_Rate [{:.1R}", PumpEquip(PumpNum).NomVolFlowRate) +
-                                      format("] * Rated_Pump_Head [{:.1R}", PumpEquip(PumpNum).NomPumpHead) + "] / Rated_Power_Use [" +
-                                      format("{:.1R}", PumpEquip(PumpNum).NomPowerUse) + "]) * 100.");
+                                      format("] * Rated_Pump_Head [{:.1R}] / Rated_Power_Use [", PumpEquip(PumpNum).NomPumpHead) +
+                                      format("{:.1R}]) * 100.", PumpEquip(PumpNum).NomPowerUse));
                 } else if (PumpEquip(PumpNum).PumpEffic > 1.0) {
                     ShowSevereError(format("Check input.  Calculated Pump Efficiency={:.3R}", PumpEquip(PumpNum).PumpEffic * 100.0) +
                                     "% which is bigger than 100%, for pump=" + PumpEquip(PumpNum).Name);
                     ShowContinueError(format("Calculated Pump_Efficiency % =Total_Efficiency % [{:.1R}", TotalEffic * 100.0) +
                                       format("] / Motor_Efficiency % [{:.1R}", PumpEquip(PumpNum).MotorEffic * 100.0) + ']');
                     ShowContinueError(format("Total_Efficiency % =(Rated_Volume_Flow_Rate [{:.1R}", PumpEquip(PumpNum).NomVolFlowRate) +
-                                      format("] * Rated_Pump_Head [{:.1R}", PumpEquip(PumpNum).NomPumpHead) + "] / Rated_Power_Use [" +
-                                      format("{:.1R}", PumpEquip(PumpNum).NomPowerUse) + "]) * 100.");
+                                      format("] * Rated_Pump_Head [{:.1R}] / Rated_Power_Use [", PumpEquip(PumpNum).NomPumpHead) +
+                                      format("{:.1R}]) * 100.", PumpEquip(PumpNum).NomPowerUse));
                     ShowFatalError("Errors found in Pump input");
                 }
             } else {
@@ -2128,7 +2128,7 @@ namespace Pumps {
                     if (PlantFinalSizesOkayToReport) {
                         PumpEquip(PumpNum).NomVolFlowRate = 0.0;
                         ShowWarningError("SizePump: Calculated Pump Nominal Volume Flow Rate=[" +
-                                         format("{:.2R}", PlantSizData(PlantSizNum).DesVolFlowRate) + "] is too small. Set to 0.0");
+                                         format("{:.2R}] is too small. Set to 0.0", PlantSizData(PlantSizNum).DesVolFlowRate));
                         ShowContinueError("..occurs for Pump=" + PumpEquip(PumpNum).Name);
                     }
                 }

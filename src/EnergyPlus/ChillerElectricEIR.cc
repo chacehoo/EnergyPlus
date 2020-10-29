@@ -1280,9 +1280,9 @@ namespace ChillerElectricEIR {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerElectricEIR: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Reference Chilled Water Flow Rate of " +
-                                                      format("{:.5R}", EvapVolFlowRateUser) + " [m3/s]");
+                                                      format("{:.5R} [m3/s]", EvapVolFlowRateUser));
                                     ShowContinueError("differs from Design Size Reference Chilled Water Flow Rate of " +
-                                                      format("{:.5R}", tmpEvapVolFlowRate) + " [m3/s]");
+                                                      format("{:.5R} [m3/s]", tmpEvapVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1346,7 +1346,7 @@ namespace ChillerElectricEIR {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpNomCap - RefCapUser) / RefCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerElectricEIR: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError(format("User-Specified Reference Capacity of {:.2R}", RefCapUser) + " [W]");
+                                    ShowContinueError(format("User-Specified Reference Capacity of {:.2R} [W]", RefCapUser));
                                     ShowContinueError(format("differs from Design Size Reference Capacity of {:.2R}", tmpNomCap) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
@@ -1414,9 +1414,9 @@ namespace ChillerElectricEIR {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerElectricEIR: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Reference Condenser Fluid Flow Rate of " +
-                                                      format("{:.5R}", CondVolFlowRateUser) + " [m3/s]");
+                                                      format("{:.5R} [m3/s]", CondVolFlowRateUser));
                                     ShowContinueError("differs from Design Size Reference Condenser Fluid Flow Rate of " +
-                                                      format("{:.5R}", tmpCondVolFlowRate) + " [m3/s]");
+                                                      format("{:.5R} [m3/s]", tmpCondVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1499,9 +1499,9 @@ namespace ChillerElectricEIR {
                                 DataSizing::AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeChillerElectricEIR: Potential issue with equipment sizing for " + this->Name);
                                 ShowContinueError("User-Specified Heat Recovery Water Flow Rate of " +
-                                                  format("{:.5R}", nomHeatRecVolFlowRateUser) + " [m3/s]");
+                                                  format("{:.5R} [m3/s]", nomHeatRecVolFlowRateUser));
                                 ShowContinueError("differs from Design Size Heat Recovery Water Flow Rate of " +
-                                                  format("{:.5R}", tempHeatRecVolFlowRate) + " [m3/s]");
+                                                  format("{:.5R} [m3/s]", tempHeatRecVolFlowRate));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }
@@ -1805,7 +1805,7 @@ namespace ChillerElectricEIR {
                 ++this->ChillerCapFTError;
                 ShowWarningError("CHILLER:ELECTRIC:EIR \"" + this->Name + "\":");
                 ShowContinueError(" Chiller Capacity as a Function of Temperature curve output is negative (" +
-                                  format("{:.3R}", this->ChillerCapFT) + ").");
+                                  format("{:.3R}).", this->ChillerCapFT));
                 ShowContinueError(format(" Negative value occurs using an Evaporator Outlet Temp of {:.1R}", EvapOutletTempSetPoint) +
                                   format(" and a Condenser Inlet Temp of {:.1R}", condInletTemp) + '.');
                 ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
@@ -2095,7 +2095,7 @@ namespace ChillerElectricEIR {
                 ++this->ChillerEIRFTError;
                 ShowWarningError("CHILLER:ELECTRIC:EIR \"" + this->Name + "\":");
                 ShowContinueError(" Chiller EIR as a Function of Temperature curve output is negative (" +
-                                  format("{:.3R}", this->ChillerEIRFT) + ").");
+                                  format("{:.3R}).", this->ChillerEIRFT));
                 ShowContinueError(format(" Negative value occurs using an Evaporator Outlet Temp of {:.1R}", this->EvapOutletTemp) +
                                   format(" and a Condenser Inlet Temp of {:.1R}", condInletTemp) + '.');
                 ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");

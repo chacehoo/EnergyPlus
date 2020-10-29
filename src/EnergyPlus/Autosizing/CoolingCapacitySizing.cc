@@ -220,19 +220,19 @@ Real64 CoolingCapacitySizer::size(EnergyPlusData &state, Real64 _originalValue, 
                 this->dataDesAccountForFanHeat = true; // reset for next water coil
                 if (DataGlobals::DisplayExtraWarnings && this->autoSizedValue <= 0.0) {
                     ShowWarningMessage(this->callingRoutine + ": Potential issue with equipment sizing for " + this->compType + ' ' + this->compName);
-                    ShowContinueError(format("...Rated Total Cooling Capacity = {:.2T}", this->autoSizedValue) + " [W]");
+                    ShowContinueError(format("...Rated Total Cooling Capacity = {:.2T} [W]", this->autoSizedValue));
                     if (this->zoneEqSizing(this->curZoneEqNum).CoolingCapacity) {
                         ShowContinueError("...Capacity passed by parent object to size child component = " +
-                                          format("{:.2T}", this->autoSizedValue) + " [W]");
+                                          format("{:.2T} [W]", this->autoSizedValue));
                     } else {
                         if (UtilityRoutines::SameString(this->compType, "COIL:COOLING:WATER") ||
                             UtilityRoutines::SameString(this->compType, "COIL:COOLING:WATER:DETAILEDGEOMETRY") ||
                             UtilityRoutines::SameString(this->compType, "ZONEHVAC:IDEALLOADSAIRSYSTEM")) {
                             if (this->termUnitIU || this->zoneEqFanCoil) {
                                 ShowContinueError("...Capacity passed by parent object to size child component = " +
-                                                  format("{:.2T}", this->autoSizedValue) + " [W]");
+                                                  format("{:.2T} [W]", this->autoSizedValue));
                             } else {
-                                ShowContinueError(format("...Air flow rate used for sizing = {:.5T}", DesVolFlow) + " [m3/s]");
+                                ShowContinueError(format("...Air flow rate used for sizing = {:.5T} [m3/s]", DesVolFlow));
                                 ShowContinueError(format("...Coil inlet air temperature used for sizing = {:.2T}", CoilInTemp) +
                                                   " [C]");
                                 ShowContinueError(format("...Coil outlet air temperature used for sizing = {:.2T}", CoilOutTemp) +
@@ -240,7 +240,7 @@ Real64 CoolingCapacitySizer::size(EnergyPlusData &state, Real64 _originalValue, 
                             }
                         } else {
                             if (CoilOutTemp > -999.0) {
-                                ShowContinueError(format("...Air flow rate used for sizing = {:.5T}", DesVolFlow) + " [m3/s]");
+                                ShowContinueError(format("...Air flow rate used for sizing = {:.5T} [m3/s]", DesVolFlow));
                                 ShowContinueError(format("...Coil inlet air temperature used for sizing = {:.2T}", CoilInTemp) +
                                                   " [C]");
                                 ShowContinueError(format("...Coil outlet air temperature used for sizing = {:.2T}", CoilOutTemp) +
@@ -445,18 +445,18 @@ Real64 CoolingCapacitySizer::size(EnergyPlusData &state, Real64 _originalValue, 
                 this->dataDesAccountForFanHeat = true;                                 // reset for next water coil
                 if (DataGlobals::DisplayExtraWarnings && this->autoSizedValue <= 0.0) {
                     ShowWarningMessage(this->callingRoutine + ": Potential issue with equipment sizing for " + this->compType + ' ' + this->compName);
-                    ShowContinueError(format("...Rated Total Cooling Capacity = {:.2T}", this->autoSizedValue) + " [W]");
+                    ShowContinueError(format("...Rated Total Cooling Capacity = {:.2T} [W]", this->autoSizedValue));
                     if (this->oaSysFlag || this->airLoopSysFlag ||
                         this->finalSysSizing(this->curSysNum).CoolingCapMethod == DataSizing::CapacityPerFloorArea ||
                         (this->finalSysSizing(this->curSysNum).CoolingCapMethod == DataSizing::CoolingDesignCapacity &&
                          this->finalSysSizing(this->curSysNum).CoolingTotalCapacity)) {
                         ShowContinueError("...Capacity passed by parent object to size child component = " +
-                                          format("{:.2T}", this->autoSizedValue) + " [W]");
+                                          format("{:.2T} [W]", this->autoSizedValue));
                     } else {
-                        ShowContinueError(format("...Air flow rate used for sizing = {:.5T}", DesVolFlow) + " [m3/s]");
+                        ShowContinueError(format("...Air flow rate used for sizing = {:.5T} [m3/s]", DesVolFlow));
                         ShowContinueError(format("...Outdoor air fraction used for sizing = {:.2T}", OutAirFrac));
-                        ShowContinueError(format("...Coil inlet air temperature used for sizing = {:.2T}", CoilInTemp) + " [C]");
-                        ShowContinueError(format("...Coil outlet air temperature used for sizing = {:.2T}", CoilOutTemp) + " [C]");
+                        ShowContinueError(format("...Coil inlet air temperature used for sizing = {:.2T} [C]", CoilInTemp));
+                        ShowContinueError(format("...Coil outlet air temperature used for sizing = {:.2T} [C]", CoilOutTemp));
                     }
                 }
             }

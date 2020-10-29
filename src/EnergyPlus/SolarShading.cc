@@ -426,7 +426,7 @@ namespace SolarShading {
         }
         if (state.dataSolarShading->ShadowingCalcFrequency > 31) {
             ShowWarningError(cCurrentModuleObject + ": suspect " + cNumericFieldNames(1));
-            ShowContinueError(format("Value entered=[{:.0R}", rNumericArgs(1)) + "], Shadowing Calculations will be inaccurate.");
+            ShowContinueError(format("Value entered=[{:.0R}], Shadowing Calculations will be inaccurate.", rNumericArgs(1)));
         }
 
         if (rNumericArgs(2) > 199.0) {
@@ -2931,7 +2931,7 @@ namespace SolarShading {
                 thisEnclosure.FloorArea = HorizAreaSum;
                 ShowWarningError("ComputeIntSolarAbsorpFactors: Solar distribution model is set to place solar gains on the zone floor,");
                 ShowContinueError("...Enclosure=\"" + thisEnclosure.Name + "\" has no floor, but has approximate horizontal surfaces.");
-                ShowContinueError(format("...these Tilt > 120 degrees, (area=[{:.2R}", HorizAreaSum) + "] m2) will be used.");
+                ShowContinueError(format("...these Tilt > 120 degrees, (area=[{:.2R}] m2) will be used.", HorizAreaSum));
             }
 
             // Compute ISABSF

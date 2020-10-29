@@ -399,12 +399,12 @@ namespace HWBaseboardRadiator {
             if (HWBaseboard(BaseboardNum).WaterTempAvg > MaxWaterTempAvg + 0.001) {
                 ShowWarningError(RoutineName + cCMO_BBRadiator_Water + "=\"" + cAlphaArgs(1) + "\", " + cNumericFieldNames(1) +
                                  " was higher than the allowable maximum.");
-                ShowContinueError(format("...reset to maximum value=[{:.2R}", MaxWaterTempAvg) + "].");
+                ShowContinueError(format("...reset to maximum value=[{:.2R}].", MaxWaterTempAvg));
                 HWBaseboard(BaseboardNum).WaterTempAvg = MaxWaterTempAvg;
             } else if (HWBaseboard(BaseboardNum).WaterTempAvg < MinWaterTempAvg - 0.001) {
                 ShowWarningError(RoutineName + cCMO_BBRadiator_Water + "=\"" + cAlphaArgs(1) + "\", " + cNumericFieldNames(1) +
                                  " was lower than the allowable minimum.");
-                ShowContinueError(format("...reset to minimum value=[{:.2R}", MinWaterTempAvg) + "].");
+                ShowContinueError(format("...reset to minimum value=[{:.2R}].", MinWaterTempAvg));
                 HWBaseboard(BaseboardNum).WaterTempAvg = MinWaterTempAvg;
             }
 
@@ -413,7 +413,7 @@ namespace HWBaseboardRadiator {
                 HWBaseboard(BaseboardNum).WaterMassFlowRateStd > HighWaterMassFlowRate + 0.0001) {
                 ShowWarningError(RoutineName + cCMO_BBRadiator_Water + "=\"" + cAlphaArgs(1) + "\", " + cNumericFieldNames(2) +
                                  " is an invalid Standard Water mass flow rate.");
-                ShowContinueError(format("...reset to a default value=[{:.1R}", WaterMassFlowDefault) + "].");
+                ShowContinueError(format("...reset to a default value=[{:.1R}].", WaterMassFlowDefault));
                 HWBaseboard(BaseboardNum).WaterMassFlowRateStd = WaterMassFlowDefault;
             }
 
@@ -483,12 +483,12 @@ namespace HWBaseboardRadiator {
             if (std::abs(HWBaseboard(BaseboardNum).WaterVolFlowRateMax) <= MinWaterFlowRate) {
                 ShowWarningError(RoutineName + cCMO_BBRadiator_Water + "=\"" + cAlphaArgs(1) + "\", " + cNumericFieldNames(6) +
                                  " was less than the allowable minimum.");
-                ShowContinueError(format("...reset to minimum value=[{:.2R}", MinWaterFlowRate) + "].");
+                ShowContinueError(format("...reset to minimum value=[{:.2R}].", MinWaterFlowRate));
                 HWBaseboard(BaseboardNum).WaterVolFlowRateMax = MinWaterFlowRate;
             } else if (HWBaseboard(BaseboardNum).WaterVolFlowRateMax > MaxWaterFlowRate) {
                 ShowWarningError(RoutineName + cCMO_BBRadiator_Water + "=\"" + cAlphaArgs(1) + "\", " + cNumericFieldNames(6) +
                                  " was higher than the allowable maximum.");
-                ShowContinueError(format("...reset to maximum value=[{:.2R}", MaxWaterFlowRate) + "].");
+                ShowContinueError(format("...reset to maximum value=[{:.2R}].", MaxWaterFlowRate));
                 HWBaseboard(BaseboardNum).WaterVolFlowRateMax = MaxWaterFlowRate;
             }
 
@@ -497,7 +497,7 @@ namespace HWBaseboardRadiator {
             if (HWBaseboard(BaseboardNum).Offset <= 0.0) {
                 ShowWarningError(RoutineName + cCMO_BBRadiator_Water + "=\"" + cAlphaArgs(1) + "\", " + cNumericFieldNames(7) +
                                  " was less than the allowable minimum.");
-                ShowContinueError(format("...reset to a default value=[{:.2R}", MaxFraction) + "].");
+                ShowContinueError(format("...reset to a default value=[{:.2R}].", MaxFraction));
                 HWBaseboard(BaseboardNum).Offset = 0.001;
             }
 
@@ -505,13 +505,13 @@ namespace HWBaseboardRadiator {
             if (HWBaseboard(BaseboardNum).FracRadiant < MinFraction) {
                 ShowWarningError(RoutineName + cCMO_BBRadiator_Water + "=\"" + cAlphaArgs(1) + "\", " + cNumericFieldNames(8) +
                                  " was lower than the allowable minimum.");
-                ShowContinueError(format("...reset to minimum value=[{:.2R}", MinFraction) + "].");
+                ShowContinueError(format("...reset to minimum value=[{:.2R}].", MinFraction));
                 HWBaseboard(BaseboardNum).FracRadiant = MinFraction;
             }
             if (HWBaseboard(BaseboardNum).FracRadiant > MaxFraction) {
                 ShowWarningError(RoutineName + cCMO_BBRadiator_Water + "=\"" + cAlphaArgs(1) + "\", " + cNumericFieldNames(8) +
                                  " was higher than the allowable maximum.");
-                ShowContinueError(format("...reset to maximum value=[{:.2R}", MaxFraction) + "].");
+                ShowContinueError(format("...reset to maximum value=[{:.2R}].", MaxFraction));
                 HWBaseboard(BaseboardNum).FracRadiant = MaxFraction;
             }
 
@@ -530,13 +530,13 @@ namespace HWBaseboardRadiator {
             if (HWBaseboard(BaseboardNum).FracDistribPerson < MinFraction) {
                 ShowWarningError(RoutineName + cCMO_BBRadiator_Water + "=\"" + cAlphaArgs(1) + "\", " + cNumericFieldNames(9) +
                                  " was lower than the allowable minimum.");
-                ShowContinueError(format("...reset to minimum value=[{:.3R}", MinFraction) + "].");
+                ShowContinueError(format("...reset to minimum value=[{:.3R}].", MinFraction));
                 HWBaseboard(BaseboardNum).FracDistribPerson = MinFraction;
             }
             if (HWBaseboard(BaseboardNum).FracDistribPerson > MaxFraction) {
                 ShowWarningError(RoutineName + cCMO_BBRadiator_Water + "=\"" + cAlphaArgs(1) + "\", " + cNumericFieldNames(9) +
                                  " was higher than the allowable maximum.");
-                ShowContinueError(format("...reset to maximum value=[{:.3R}", MaxFraction) + "].");
+                ShowContinueError(format("...reset to maximum value=[{:.3R}].", MaxFraction));
                 HWBaseboard(BaseboardNum).FracDistribPerson = MaxFraction;
             }
 
@@ -592,13 +592,13 @@ namespace HWBaseboardRadiator {
                 if (HWBaseboard(BaseboardNum).FracDistribToSurf(SurfNum) > MaxFraction) {
                     ShowWarningError(RoutineName + cCMO_BBRadiator_Water + "=\"" + cAlphaArgs(1) + "\", " + cNumericFieldNames(SurfNum + 9) +
                                      "was greater than the allowable maximum.");
-                    ShowContinueError(format("...reset to maximum value=[{:.2R}", MaxFraction) + "].");
+                    ShowContinueError(format("...reset to maximum value=[{:.2R}].", MaxFraction));
                     HWBaseboard(BaseboardNum).TotSurfToDistrib = MaxFraction;
                 }
                 if (HWBaseboard(BaseboardNum).FracDistribToSurf(SurfNum) < MinFraction) {
                     ShowWarningError(RoutineName + cCMO_BBRadiator_Water + "=\"" + cAlphaArgs(1) + "\", " + cNumericFieldNames(SurfNum + 9) +
                                      "was less than the allowable minimum.");
-                    ShowContinueError(format("...reset to maximum value=[{:.2R}", MinFraction) + "].");
+                    ShowContinueError(format("...reset to maximum value=[{:.2R}].", MinFraction));
                     HWBaseboard(BaseboardNum).TotSurfToDistrib = MinFraction;
                 }
                 if (HWBaseboard(BaseboardNum).SurfacePtr(SurfNum) != 0) {
@@ -1125,7 +1125,7 @@ namespace HWBaseboardRadiator {
                                     ShowContinueError(format("User-Specified Maximum Water Flow Rate of {:.5R}", WaterVolFlowRateMaxUser) +
                                                       " [m3/s]");
                                     ShowContinueError("differs from Design Size Maximum Water Flow Rate of " +
-                                                      format("{:.5R}", WaterVolFlowRateMaxDes) + " [m3/s]");
+                                                      format("{:.5R} [m3/s]", WaterVolFlowRateMaxDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1164,19 +1164,19 @@ namespace HWBaseboardRadiator {
                     if (AirOutletTempStd >= WaterInletTempStd) {
                         ShowSevereError("SizeHWBaseboard: ZoneHVAC:Baseboard:RadiantConvective:Water=\"" + HWBaseboard(BaseboardNum).EquipID + "\".");
                         ShowContinueError("...Air Outlet temperature must be below the Water Inlet temperature");
-                        ShowContinueError(format("...Air Outlet Temperature=[{:.2R}", AirOutletTempStd) + "], Water Inlet Temperature=[" +
-                                          format("{:.2R}", WaterInletTempStd) + "].");
+                        ShowContinueError(format("...Air Outlet Temperature=[{:.2R}], Water Inlet Temperature=[", AirOutletTempStd) +
+                                          format("{:.2R}].", WaterInletTempStd));
                         AirOutletTempStd = WaterInletTempStd - 0.01;
-                        ShowContinueError(format("...Air Outlet Temperature set to [{:.2R}", AirOutletTempStd) + "].");
+                        ShowContinueError(format("...Air Outlet Temperature set to [{:.2R}].", AirOutletTempStd));
                     }
                     // Check Tw,out < Ta,in
                     if (AirInletTempStd >= WaterOutletTempStd) {
                         ShowSevereError("SizeHWBaseboard: ZoneHVAC:Baseboard:RadiantConvective:Water=\"" + HWBaseboard(BaseboardNum).EquipID + "\".");
                         ShowContinueError("...Water Outlet temperature must be below the Air Inlet temperature");
-                        ShowContinueError(format("...Air Inlet Temperature=[{:.2R}", AirInletTempStd) + "], Water Outlet Temperature=[" +
-                                          format("{:.2R}", WaterOutletTempStd) + "].");
+                        ShowContinueError(format("...Air Inlet Temperature=[{:.2R}], Water Outlet Temperature=[", AirInletTempStd) +
+                                          format("{:.2R}].", WaterOutletTempStd));
                         WaterOutletTempStd = AirInletTempStd + 0.01;
-                        ShowContinueError(format("...Water Outlet Temperature set to [{:.2R}", WaterOutletTempStd) + "].");
+                        ShowContinueError(format("...Water Outlet Temperature set to [{:.2R}].", WaterOutletTempStd));
                     }
                     // LMTD calculation
                     DeltaT1 = WaterInletTempStd - AirOutletTempStd;
@@ -1220,19 +1220,19 @@ namespace HWBaseboardRadiator {
                 if (AirOutletTempStd >= WaterInletTempStd) {
                     ShowSevereError("SizeHWBaseboard: ZoneHVAC:Baseboard:RadiantConvective:Water=\"" + HWBaseboard(BaseboardNum).EquipID + "\".");
                     ShowContinueError("...Air Outlet temperature must be below the Water Inlet temperature");
-                    ShowContinueError(format("...Air Outlet Temperature=[{:.2R}", AirOutletTempStd) + "], Water Inlet Temperature=[" +
-                                      format("{:.2R}", WaterInletTempStd) + "].");
+                    ShowContinueError(format("...Air Outlet Temperature=[{:.2R}], Water Inlet Temperature=[", AirOutletTempStd) +
+                                      format("{:.2R}].", WaterInletTempStd));
                     AirOutletTempStd = WaterInletTempStd - 0.01;
-                    ShowContinueError(format("...Air Outlet Temperature set to [{:.2R}", AirOutletTempStd) + "].");
+                    ShowContinueError(format("...Air Outlet Temperature set to [{:.2R}].", AirOutletTempStd));
                 }
                 // Check Tw,out < Ta,in
                 if (AirInletTempStd >= WaterOutletTempStd) {
                     ShowSevereError("SizeHWBaseboard: ZoneHVAC:Baseboard:RadiantConvective:Water=\"" + HWBaseboard(BaseboardNum).EquipID + "\".");
                     ShowContinueError("...Water Outlet temperature must be below the Air Inlet temperature");
-                    ShowContinueError(format("...Air Inlet Temperature=[{:.2R}", AirInletTempStd) + "], Water Outlet Temperature=[" +
-                                      format("{:.2R}", WaterOutletTempStd) + "].");
+                    ShowContinueError(format("...Air Inlet Temperature=[{:.2R}], Water Outlet Temperature=[", AirInletTempStd) +
+                                      format("{:.2R}].", WaterOutletTempStd));
                     WaterOutletTempStd = AirInletTempStd + 0.01;
-                    ShowContinueError(format("...Water Outlet Temperature set to [{:.2R}", WaterOutletTempStd) + "].");
+                    ShowContinueError(format("...Water Outlet Temperature set to [{:.2R}].", WaterOutletTempStd));
                 }
                 // LMTD calculation
                 DeltaT1 = WaterInletTempStd - AirOutletTempStd;
@@ -1631,16 +1631,16 @@ namespace HWBaseboardRadiator {
                     if (ThisSurfIntensity > MaxRadHeatFlux) {
                         ShowSevereError("DistributeBBRadGains:  excessive thermal radiation heat flux intensity detected");
                         ShowContinueError("Surface = " + Surface(SurfNum).Name);
-                        ShowContinueError(format("Surface area = {:.3R}", Surface(SurfNum).Area) + " [m2]");
+                        ShowContinueError(format("Surface area = {:.3R} [m2]", Surface(SurfNum).Area));
                         ShowContinueError("Occurs in " + cCMO_BBRadiator_Water + " = " + HWBaseboard(BaseboardNum).EquipID);
-                        ShowContinueError(format("Radiation intensity = {:.2R}", ThisSurfIntensity) + " [W/m2]");
+                        ShowContinueError(format("Radiation intensity = {:.2R} [W/m2]", ThisSurfIntensity));
                         ShowContinueError("Assign a larger surface area or more surfaces in " + cCMO_BBRadiator_Water);
                         ShowFatalError("DistributeBBRadGains:  excessive thermal radiation heat flux intensity detected");
                     }
                 } else {
                     ShowSevereError("DistributeBBRadGains:  surface not large enough to receive thermal radiation heat flux");
                     ShowContinueError("Surface = " + Surface(SurfNum).Name);
-                    ShowContinueError(format("Surface area = {:.3R}", Surface(SurfNum).Area) + " [m2]");
+                    ShowContinueError(format("Surface area = {:.3R} [m2]", Surface(SurfNum).Area));
                     ShowContinueError("Occurs in " + cCMO_BBRadiator_Water + " = " + HWBaseboard(BaseboardNum).EquipID);
                     ShowContinueError("Assign a larger surface area or more surfaces in " + cCMO_BBRadiator_Water);
                     ShowFatalError("DistributeBBRadGains:  surface not large enough to receive thermal radiation heat flux");

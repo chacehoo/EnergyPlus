@@ -829,7 +829,7 @@ namespace InternalHeatGains {
                                             ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(9) +
                                                              ", maximum is > 1.0");
                                             ShowContinueError("Schedule=\"" + AlphaName(9) + "\"; Entered min/max range=[" +
-                                                              format("{:.1R}", SchMin) + ',' + format("{:.1R}", SchMax) + "] Work Efficiency.");
+                                                              format("{:.1R}", SchMin) + ',' + format("{:.1R}] Work Efficiency.", SchMax));
                                         }
                                     }
                                 }
@@ -862,7 +862,7 @@ namespace InternalHeatGains {
                                                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " +
                                                                         cAlphaFieldNames(12) + ", minimum is < 0.0");
                                                         ShowContinueError("Schedule=\"" + AlphaName(12) + "\". Minimum is [" +
-                                                                          format("{:.1R}", SchMin) + "]. Values must be >= 0.0.");
+                                                                          format("{:.1R}]. Values must be >= 0.0.", SchMin));
                                                         ErrorsFound = true;
                                                     }
                                                 }
@@ -871,7 +871,7 @@ namespace InternalHeatGains {
                                                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " +
                                                                         cAlphaFieldNames(12) + ", maximum is < 0.0");
                                                         ShowContinueError("Schedule=\"" + AlphaName(12) + "\". Maximum is [" +
-                                                                          format("{:.1R}", SchMax) + "]. Values must be >= 0.0.");
+                                                                          format("{:.1R}]. Values must be >= 0.0.", SchMax));
                                                         ErrorsFound = true;
                                                     }
                                                 }
@@ -881,7 +881,7 @@ namespace InternalHeatGains {
                                                     ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " +
                                                                      cAlphaFieldNames(12) + ", maximum is > 2.0");
                                                     ShowContinueError("Schedule=\"" + AlphaName(12) + "\"; Entered min/max range=[" +
-                                                                      format("{:.1R}", SchMin) + ',' + format("{:.1R}", SchMax) + "] Clothing.");
+                                                                      format("{:.1R}", SchMin) + ',' + format("{:.1R}] Clothing.", SchMax));
                                                 }
                                             }
                                         }
@@ -1098,7 +1098,7 @@ namespace InternalHeatGains {
                 if (Zone(Loop).FloorArea > 0.0 && Zone(Loop).FloorArea / Zone(Loop).TotOccupants < 0.1) {
                     ShowWarningError(RoutineName + "Zone=\"" + Zone(Loop).Name + "\" occupant density is extremely high.");
                     if (Zone(Loop).FloorArea > 0.0) {
-                        ShowContinueError(format("Occupant Density=[{:.0R}", Zone(Loop).TotOccupants / Zone(Loop).FloorArea) + "] person/m2.");
+                        ShowContinueError(format("Occupant Density=[{:.0R}] person/m2.", Zone(Loop).TotOccupants / Zone(Loop).FloorArea));
                     }
                     ShowContinueError(format("Occupant Density=[{:.3R}", Zone(Loop).FloorArea / Zone(Loop).TotOccupants) +
                                       "] m2/person. Problems in Temperature Out of Bounds may result.");
@@ -1117,7 +1117,7 @@ namespace InternalHeatGains {
                         ShowWarningError(RoutineName + "Zone=\"" + Zone(Loop).Name +
                                          "\" occupant density at a maximum schedule value is extremely high.");
                         if (Zone(Loop).FloorArea > 0.0) {
-                            ShowContinueError(format("Occupant Density=[{:.0R}", maxOccupLoad / Zone(Loop).FloorArea) + "] person/m2.");
+                            ShowContinueError(format("Occupant Density=[{:.0R}] person/m2.", maxOccupLoad / Zone(Loop).FloorArea));
                         }
                         ShowContinueError(format("Occupant Density=[{:.3R}", Zone(Loop).FloorArea / maxOccupLoad) +
                                           "] m2/person. Problems in Temperature Out of Bounds may result.");

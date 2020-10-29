@@ -2158,7 +2158,7 @@ namespace AirflowNetworkBalanceManager {
             }
             if (MultizoneZoneData(i).OpenFactor > 1.0 || MultizoneZoneData(i).OpenFactor < 0.0) {
                 ShowWarningError(RoutineName + CurrentModuleObject + " object, " + cNumericFields(1) + " is out of range [0.0,1.0]");
-                ShowContinueError(format("..Input value = {:.2R}", MultizoneZoneData(i).OpenFactor) + ", Value will be set to 1.0");
+                ShowContinueError(format("..Input value = {:.2R}, Value will be set to 1.0", MultizoneZoneData(i).OpenFactor));
                 MultizoneZoneData(i).OpenFactor = 1.0;
             }
 
@@ -2167,13 +2167,13 @@ namespace AirflowNetworkBalanceManager {
                 if (SELECT_CASE_var == "TEMPERATURE") { // checks on Temperature control
                     if (MultizoneZoneData(i).LowValueTemp < 0.0) {
                         ShowWarningError(RoutineName + CurrentModuleObject + " object, " + cNumericFields(2) + " < 0.0");
-                        ShowContinueError(format("..Input value = {:.1R}", MultizoneZoneData(i).LowValueTemp) + ", Value will be set to 0.0");
+                        ShowContinueError(format("..Input value = {:.1R}, Value will be set to 0.0", MultizoneZoneData(i).LowValueTemp));
                         ShowContinueError("..for " + cAlphaFields(1) + " = \"" + MultizoneZoneData(i).ZoneName);
                         MultizoneZoneData(i).LowValueTemp = 0.0;
                     }
                     if (MultizoneZoneData(i).LowValueTemp >= 100.0) {
                         ShowWarningError(RoutineName + CurrentModuleObject + " object, " + cNumericFields(2) + " >= 100.0");
-                        ShowContinueError(format("..Input value = {:.1R}", MultizoneZoneData(i).LowValueTemp) + ", Value will be reset to 0.0");
+                        ShowContinueError(format("..Input value = {:.1R}, Value will be reset to 0.0", MultizoneZoneData(i).LowValueTemp));
                         ShowContinueError("..for " + cAlphaFields(1) + " = \"" + MultizoneZoneData(i).ZoneName);
                         MultizoneZoneData(i).LowValueTemp = 0.0;
                     }
@@ -2188,7 +2188,7 @@ namespace AirflowNetworkBalanceManager {
                 } else if (SELECT_CASE_var == "ENTHALPY") { // checks for Enthalpy control
                     if (MultizoneZoneData(i).LowValueEnth < 0.0) {
                         ShowWarningError(RoutineName + CurrentModuleObject + " object, " + cNumericFields(4) + " < 0.0");
-                        ShowContinueError(format("..Input value = {:.1R}", MultizoneZoneData(i).LowValueEnth) + ", Value will be reset to 0.0");
+                        ShowContinueError(format("..Input value = {:.1R}, Value will be reset to 0.0", MultizoneZoneData(i).LowValueEnth));
                         ShowContinueError("..for " + cAlphaFields(1) + " = \"" + MultizoneZoneData(i).ZoneName);
                         MultizoneZoneData(i).LowValueEnth = 0.0;
                     }
@@ -2398,7 +2398,7 @@ namespace AirflowNetworkBalanceManager {
                 if (MultizoneSurfaceData(i).Factor > 1.0 || MultizoneSurfaceData(i).Factor <= 0.0) {
                     ShowWarningError(RoutineName + CurrentModuleObject + " object=" + MultizoneSurfaceData(i).SurfName + ", " + cNumericFields(1) +
                                      " is out of range (0.0,1.0]");
-                    ShowContinueError(format("..Input value = {:.2R}", MultizoneSurfaceData(i).Factor) + ", Value will be set to 1.0");
+                    ShowContinueError(format("..Input value = {:.2R}, Value will be set to 1.0", MultizoneSurfaceData(i).Factor));
                     MultizoneSurfaceData(i).Factor = 1.0;
                 }
                 // Get input of ventilation control and associated data
@@ -8953,7 +8953,7 @@ namespace AirflowNetworkBalanceManager {
                                              NodeID(AirflowNetworkNodeData(Node3).EPlusNodeNum) + "' and AFN Link = '" +
                                              AirflowNetworkLinkageData(i).Name + "'.");
                             ShowContinueError(format("The system node max mass flow rate = {:.3R}", NodeMass) +
-                                              format(" kg/s. The AFN node mass flow rate = {:.3R}", AFNMass) + " kg.s.");
+                                              format(" kg/s. The AFN node mass flow rate = {:.3R} kg.s.", AFNMass));
                             WriteFlag = true;
                         }
                     }

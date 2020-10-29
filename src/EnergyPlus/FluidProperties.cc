@@ -739,7 +739,7 @@ namespace FluidProperties {
                     ShowSevereError(RoutineName + CurrentModuleObject + " name=" + FluidTemps(Loop).Name +
                                     ", lists must have data in ascending order");
                     ShowContinueError("First out of order occurrence at Temperature #(" + fmt::to_string(TempLoop - 1) + ") {" +
-                                      format("{:.3R}", FluidTemps(Loop).Temps(TempLoop - 1)) + "} >= Temp(" + fmt::to_string(TempLoop) + ") {" +
+                                      format("{:.3R}) {", FluidTemps(Loop).Temps(TempLoop - 1)) + "} >= Temp(" + fmt::to_string(TempLoop) +
                                       format("{:.3R}", FluidTemps(Loop).Temps(TempLoop)) + '}');
                     ErrorsFound = true;
                     break;
@@ -1482,7 +1482,7 @@ namespace FluidProperties {
                         ShowSevereError(RoutineName + CurrentModuleObject + " Name=" + RefrigData(Loop).Name);
                         ShowContinueError("Pressures must be entered in ascending order for fluid property data");
                         ShowContinueError("First Occurrence at Pressure(" + fmt::to_string(InData - 1) + ") {" +
-                                          format("{:.3R}", RefrigData(Loop).SHPress(InData - 1)) + "} >= Pressure(" + fmt::to_string(InData) +
+                                          format("{:.3R}} >= Pressure(", RefrigData(Loop).SHPress(InData - 1)) + fmt::to_string(InData) +
                                           format(") {{:.3R}", RefrigData(Loop).SHPress(InData)) + '}');
                         ErrorsFound = true;
                         break;
@@ -1605,7 +1605,7 @@ namespace FluidProperties {
                         ShowWarningError(RoutineName + CurrentModuleObject + " Name=" + RefrigData(Loop).Name);
                         ShowContinueError(cAlphaFieldNames(2) + "=\"" + Alphas(2) + "\" is not valid.");
                         ShowContinueError("Valid choices are \"" + Enthalpy + "\", \"" + Density + "\".");
-                        ShowContinueError(format("Pressure value of this item=[{:.2R}", Numbers(1)) + "].");
+                        ShowContinueError(format("Pressure value of this item=[{:.2R}].", Numbers(1)));
                         ShowContinueError("This fluid property will not be processed nor available for the simulation.");
                     }
                     ++iTemp;
@@ -6269,7 +6269,7 @@ CurrentModuleObject,
 
         if ((Quality < 0.0) || (Quality > 1.0)) {
             ShowSevereError(RoutineName + ": Refrigerant \"" + Refrigerant + "\", invalid quality, called from " + CalledFrom);
-            ShowContinueError(format("Saturated refrigerant quality must be between 0 and 1, entered value=[{:.4R}", Quality) + "].");
+            ShowContinueError(format("Saturated refrigerant quality must be between 0 and 1, entered value=[{:.4R}].", Quality));
             ShowFatalError("Program terminates due to preceding condition.");
         }
 
@@ -6362,7 +6362,7 @@ CurrentModuleObject,
 
         if ((Quality < 0.0) || (Quality > 1.0)) {
             ShowSevereError(RoutineName + "Refrigerant \"" + Refrigerant + "\", invalid quality, called from " + CalledFrom);
-            ShowContinueError(format("Saturated density quality must be between 0 and 1, entered value=[{:.4R}", Quality) + "].");
+            ShowContinueError(format("Saturated density quality must be between 0 and 1, entered value=[{:.4R}].", Quality));
             ShowFatalError("Program terminates due to preceding condition.");
         }
 
@@ -6509,7 +6509,7 @@ CurrentModuleObject,
 
         if ((Quality < 0.0) || (Quality > 1.0)) {
             ShowSevereError(RoutineName + "Refrigerant \"" + Refrigerant + "\", invalid quality, called from " + CalledFrom);
-            ShowContinueError(format("Saturated density quality must be between 0 and 1, entered value=[{:.4R}", Quality) + "].");
+            ShowContinueError(format("Saturated density quality must be between 0 and 1, entered value=[{:.4R}].", Quality));
             ShowFatalError("Program terminates due to preceding condition.");
         }
 
@@ -7628,7 +7628,7 @@ CurrentModuleObject,
                 if (LowTempLimitErr <= GlycolErrorLimitTest) {
                     ShowWarningMessage(RoutineName + "Temperature is out of range (too low) for fluid [" + glycol_data.Name +
                                        "] specific heat supplied values **");
-                    ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}", Temperature) + "], supplied data range=[" +
+                    ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}], supplied data range=[", Temperature) +
                                       format("{:.2R}", glycol_data.CpLowTempValue) + ',' + format("{:.2R}", glycol_data.CpHighTempValue) + ']');
                     ShowContinueErrorTimeStamp("");
                 }
@@ -7647,7 +7647,7 @@ CurrentModuleObject,
                 HighTempLimitErr = ++GlycolErrorTracking(GlycolIndex).SpecHeatHighErrCount;
                 if (HighTempLimitErr <= GlycolErrorLimitTest) {
                     ShowWarningMessage(RoutineName + "Temperature is out of range (too high) for fluid [" + glycol_data.Name + "] specific heat **");
-                    ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}", Temperature) + "], supplied data range=[" +
+                    ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}], supplied data range=[", Temperature) +
                                       format("{:.2R}", glycol_data.CpLowTempValue) + ',' + format("{:.2R}", glycol_data.CpHighTempValue) + ']');
                     ShowContinueErrorTimeStamp("");
                 }
@@ -7807,7 +7807,7 @@ CurrentModuleObject,
 
             if ((LowErrorThisTime) && (LowTempLimitErr <= GlycolErrorLimitTest)) {
                 ShowWarningMessage(RoutineName + "Temperature is out of range (too low) for fluid [" + GlycolData(GlycolIndex).Name + "] density **");
-                ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}", Temperature) + "], supplied data range=[" +
+                ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}], supplied data range=[", Temperature) +
                                   format("{:.2R}", GlycolData(GlycolIndex).RhoLowTempValue) + ',' +
                                   format("{:.2R}", GlycolData(GlycolIndex).RhoHighTempValue) + ']');
                 ShowContinueErrorTimeStamp("");
@@ -7826,7 +7826,7 @@ CurrentModuleObject,
             if ((HighErrorThisTime) && (HighTempLimitErr <= GlycolErrorLimitTest)) {
                 ShowWarningMessage(RoutineName + "Temperature is out of range (too high) for fluid [" + GlycolData(GlycolIndex).Name +
                                    "] density **");
-                ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}", Temperature) + "], supplied data range=[" +
+                ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}], supplied data range=[", Temperature) +
                                   format("{:.2R}", GlycolData(GlycolIndex).RhoLowTempValue) + ',' +
                                   format("{:.2R}", GlycolData(GlycolIndex).RhoHighTempValue) + ']');
                 ShowContinueErrorTimeStamp("");
@@ -7971,7 +7971,7 @@ CurrentModuleObject,
             if ((LowErrorThisTime) && (LowTempLimitErr <= GlycolErrorLimitTest)) {
                 ShowWarningMessage(RoutineName + "Temperature is out of range (too low) for fluid [" + GlycolData(GlycolIndex).Name +
                                    "] conductivity **");
-                ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}", Temperature) + "], supplied data range=[" +
+                ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}], supplied data range=[", Temperature) +
                                   format("{:.2R}", GlycolData(GlycolIndex).CondLowTempValue) + ',' +
                                   format("{:.2R}", GlycolData(GlycolIndex).CondHighTempValue) + ']');
                 ShowContinueErrorTimeStamp("");
@@ -7990,7 +7990,7 @@ CurrentModuleObject,
             if ((HighErrorThisTime) && (HighTempLimitErr <= GlycolErrorLimitTest)) {
                 ShowWarningMessage(RoutineName + "Temperature is out of range (too high) for fluid [" + GlycolData(GlycolIndex).Name +
                                    "] conductivity **");
-                ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}", Temperature) + "], supplied data range=[" +
+                ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}], supplied data range=[", Temperature) +
                                   format("{:.2R}", GlycolData(GlycolIndex).CondLowTempValue) + ',' +
                                   format("{:.2R}", GlycolData(GlycolIndex).CondHighTempValue) + ']');
                 ShowContinueErrorTimeStamp("");
@@ -8135,7 +8135,7 @@ CurrentModuleObject,
             if ((LowErrorThisTime) && (LowTempLimitErr <= GlycolErrorLimitTest)) {
                 ShowWarningMessage(RoutineName + "Temperature is out of range (too low) for fluid [" + GlycolData(GlycolIndex).Name +
                                    "] viscosity **");
-                ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}", Temperature) + "], supplied data range=[" +
+                ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}], supplied data range=[", Temperature) +
                                   format("{:.2R}", GlycolData(GlycolIndex).ViscLowTempValue) + ',' +
                                   format("{:.2R}", GlycolData(GlycolIndex).ViscHighTempValue) + ']');
                 ShowContinueErrorTimeStamp("");
@@ -8154,7 +8154,7 @@ CurrentModuleObject,
             if ((HighErrorThisTime) && (HighTempLimitErr <= GlycolErrorLimitTest)) {
                 ShowWarningMessage(RoutineName + "Temperature is out of range (too high) for fluid [" + GlycolData(GlycolIndex).Name +
                                    "] viscosity **");
-                ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}", Temperature) + "], supplied data range=[" +
+                ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}], supplied data range=[", Temperature) +
                                   format("{:.2R}", GlycolData(GlycolIndex).ViscLowTempValue) + ',' +
                                   format("{:.2R}", GlycolData(GlycolIndex).ViscHighTempValue) + ']');
                 ShowContinueErrorTimeStamp("");

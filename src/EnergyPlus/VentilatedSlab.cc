@@ -1958,7 +1958,7 @@ namespace VentilatedSlab {
                                 ShowContinueError(format("User-Specified Minimum Outdoor Air Flow Rate of {:.5R}", MinOutAirVolFlowUser) +
                                                   " [m3/s]");
                                 ShowContinueError("differs from Design Size Minimum Outdoor Air Flow Rate of " +
-                                                  format("{:.5R}", MinOutAirVolFlowDes) + " [m3/s]");
+                                                  format("{:.5R} [m3/s]", MinOutAirVolFlowDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }
@@ -2086,7 +2086,7 @@ namespace VentilatedSlab {
                                     ShowContinueError(format("User-Specified Maximum Hot Water Flow of {:.5R}", MaxVolHotWaterFlowUser) +
                                                       " [m3/s]");
                                     ShowContinueError("differs from Design Size Maximum Hot Water Flow of " +
-                                                      format("{:.5R}", MaxVolHotWaterFlowDes) + " [m3/s]");
+                                                      format("{:.5R} [m3/s]", MaxVolHotWaterFlowDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }

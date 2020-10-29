@@ -765,13 +765,13 @@ namespace ScheduleManager {
                 if (ScheduleType(LoopIndex).Minimum > ScheduleType(LoopIndex).Maximum) {
                     if (ScheduleType(LoopIndex).IsReal) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\", " + cNumericFields(1) + " [" +
-                                        format("{:.2R}", ScheduleType(LoopIndex).Minimum) + "] > " + cNumericFields(2) + " [" +
-                                        format("{:.2R}", ScheduleType(LoopIndex).Maximum) + "].");
+                                        format("{:.2R} [", ScheduleType(LoopIndex).Minimum) + "] > " + cNumericFields(2) +
+                                        format("{:.2R}].", ScheduleType(LoopIndex).Maximum));
                         ShowContinueError("  Other warning/severes about schedule values may appear.");
                     } else {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\", " + cNumericFields(1) + " [" +
-                                        format("{:.0R}", ScheduleType(LoopIndex).Minimum) + "] > " + cNumericFields(2) + " [" +
-                                        format("{:.0R}", ScheduleType(LoopIndex).Maximum) + "].");
+                                        format("{:.0R} [", ScheduleType(LoopIndex).Minimum) + "] > " + cNumericFields(2) +
+                                        format("{:.0R}].", ScheduleType(LoopIndex).Maximum));
                         ShowContinueError("  Other warning/severes about schedule values may appear.");
                     }
                 }
@@ -1668,7 +1668,7 @@ namespace ScheduleManager {
             if (Numbers(3) != 8760 && Numbers(3) != 8784) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\", " + cNumericFields(3) +
                                 " must = 8760 or 8784 (for a leap year)");
-                ShowContinueError(format("..Value for field = {:.0T}", Numbers(3)) + ", Schedule not processed.");
+                ShowContinueError(format("..Value for field = {:.0T}, Schedule not processed.", Numbers(3)));
                 ErrorsFound = true;
                 continue;
             }

@@ -1622,7 +1622,7 @@ namespace HeatingCoils {
                             if (DisplayExtraWarnings) {
                                 if ((std::abs(NominalCapacityDes - NominalCapacityUser) / NominalCapacityUser) > AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeHeatingCoil: Potential issue with equipment sizing for " + CompType + ", " + CompName);
-                                    ShowContinueError(format("User-Specified Nominal Capacity of {:.2R}", NominalCapacityUser) + " [W]");
+                                    ShowContinueError(format("User-Specified Nominal Capacity of {:.2R} [W]", NominalCapacityUser));
                                     ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R}", NominalCapacityDes) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
@@ -1646,9 +1646,9 @@ namespace HeatingCoils {
                 if (HeatingCoil(CoilNum).MSNominalCapacity(StageNum) > HeatingCoil(CoilNum).MSNominalCapacity(StageNum + 1)) {
                     ShowSevereError("SizeHeatingCoil: " + HeatingCoil(CoilNum).HeatingCoilType + ' ' + HeatingCoil(CoilNum).Name + ", Stage " +
                                     fmt::to_string(StageNum) + " Nominal Capacity (" +
-                                    format("{:.2R}", HeatingCoil(CoilNum).MSNominalCapacity(StageNum)) + " W) must be less than or equal to Stage " +
+                                    format("{:.2R} W) must be less than or equal to Stage ", HeatingCoil(CoilNum).MSNominalCapacity(StageNum)) +
                                     fmt::to_string(StageNum + 1) + " Nominal Capacity (" +
-                                    format("{:.2R}", HeatingCoil(CoilNum).MSNominalCapacity(StageNum + 1)) + " W).");
+                                    format("{:.2R} W).", HeatingCoil(CoilNum).MSNominalCapacity(StageNum + 1)));
                     ShowFatalError("Preceding conditions cause termination.");
                 }
             }
@@ -2249,7 +2249,7 @@ namespace HeatingCoils {
                         ++HeatingCoil(CoilNum).RTFErrorCount;
                         ShowWarningError("CalcFuelHeatingCoil: " + cAllCoilTypes(HeatingCoil(CoilNum).HCoilType_Num) + "=\"" +
                                          HeatingCoil(CoilNum).Name + "\", runtime fraction");
-                        ShowContinueError(format("The runtime fraction exceeded 1.0. [{:.4T}", HeatingCoil(CoilNum).RTF) + "].");
+                        ShowContinueError(format("The runtime fraction exceeded 1.0. [{:.4T}].", HeatingCoil(CoilNum).RTF));
                         ShowContinueError("Runtime fraction is set to 1.0 and the simulation continues...");
                         ShowContinueError("Check the IO reference manual for PLF curve guidance [Coil:Heating:Fuel].");
                     } else {
@@ -2545,7 +2545,7 @@ namespace HeatingCoils {
                         ++HeatingCoil(CoilNum).RTFErrorCount;
                         ShowWarningError("CalcFuelHeatingCoil: " + cAllCoilTypes(HeatingCoil(CoilNum).HCoilType_Num) + "=\"" +
                                          HeatingCoil(CoilNum).Name + "\", runtime fraction");
-                        ShowContinueError(format("The runtime fraction exceeded 1.0. [{:.4T}", HeatingCoil(CoilNum).RTF) + "].");
+                        ShowContinueError(format("The runtime fraction exceeded 1.0. [{:.4T}].", HeatingCoil(CoilNum).RTF));
                         ShowContinueError("Runtime fraction is set to 1.0 and the simulation continues...");
                         ShowContinueError("Check the IO reference manual for PLF curve guidance [Coil:Heating:Fuel].");
                     } else {

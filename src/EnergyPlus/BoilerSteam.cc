@@ -517,7 +517,7 @@ namespace BoilerSteam {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpNomCap - NomCapUser) / NomCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizePump: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError(format("User-Specified Nominal Capacity of {:.2R}", NomCapUser) + " [W]");
+                                    ShowContinueError(format("User-Specified Nominal Capacity of {:.2R} [W]", NomCapUser));
                                     ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R}", tmpNomCap) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
@@ -609,8 +609,8 @@ namespace BoilerSteam {
             if (this->PressErrIndex == 0) {
                 ShowSevereError("Boiler:Steam=\"" + this->Name + "\", Saturation Pressure is greater than Maximum Operating Pressure,");
                 ShowContinueError("Lower Input Temperature");
-                ShowContinueError(format("Steam temperature=[{:.2R}", this->BoilerOutletTemp) + "] C");
-                ShowContinueError(format("Refrigerant Saturation Pressure =[{:.0R}", this->BoilerPressCheck) + "] Pa");
+                ShowContinueError(format("Steam temperature=[{:.2R}] C", this->BoilerOutletTemp));
+                ShowContinueError(format("Refrigerant Saturation Pressure =[{:.0R}] Pa", this->BoilerPressCheck));
             }
             ShowRecurringSevereErrorAtEnd("Boiler:Steam=\"" + this->Name +
                                               "\", Saturation Pressure is greater than Maximum Operating Pressure..continues",

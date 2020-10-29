@@ -1633,19 +1633,19 @@ namespace HybridEvapCoolingModel {
         // day, so report", but that doesn't seem to exist.
         if ((TimeElapsed > 24) && WarnOnceFlag && !WarmupFlag) {
             if (count_EnvironmentConditionsNotMet > 0)
-                ShowWarningError(format("In day {:.1R}", (Real64)state.dataGlobal->DayOfSim) + " of simulation, " + Name.c_str() + " was unable to operate for " +
+                ShowWarningError(format("In day {:.1R} was unable to operate for ", (Real64)state.dataGlobal->DayOfSim) + " of simulation, " + Name.c_str() +
                                  format("{:.1R}", (Real64)count_EnvironmentConditionsNotMet) +
                                  " timesteps because environment conditions were beyond the allowable operating range for any mode.");
             if (count_SAHR_OC_MetOnce > 0)
-                ShowWarningError(format("In day {:.1R}", (Real64)state.dataGlobal->DayOfSim) + " of simulation, " + Name.c_str() +
+                ShowWarningError(format("In day {:.1R} of simulation, ", (Real64)state.dataGlobal->DayOfSim) + Name.c_str() +
                                  format(" failed to meet supply air humidity ratio for {:.1R}", Real64(count_SAHR_OC_MetOnce)) +
                                  " time steps. For these time steps For these time steps" + Name.c_str() + " was set to mode 0");
             if (count_SAT_OC_MetOnce > 0)
-                ShowWarningError(format("In day {:.1R}", (Real64)state.dataGlobal->DayOfSim) + " of simulation, " + Name.c_str() +
+                ShowWarningError(format("In day {:.1R} of simulation, ", (Real64)state.dataGlobal->DayOfSim) + Name.c_str() +
                                  format(" failed to meet supply air temperature constraints for {:.1R}", Real64(count_SAT_OC_MetOnce)) +
                                  " time steps. For these time steps For these time steps" + Name.c_str() + " was set to mode 0");
 
-            ShowWarningError(format("In day {:.1R}", (Real64)state.dataGlobal->DayOfSim) + " of simulation, " + Name.c_str() +
+            ShowWarningError(format("In day {:.1R} of simulation, ", (Real64)state.dataGlobal->DayOfSim) + Name.c_str() +
                              format(" failed to  satisfy sensible load for {:.1R}", (Real64)count_DidWeNotMeetLoad) +
                              " time steps. For these time steps settings were selected to provide as much sensible cooling or heating as possible, "
                              "given other constraints.");

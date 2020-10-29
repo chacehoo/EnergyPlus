@@ -1079,8 +1079,8 @@ namespace SetPointManager {
             OutAirSetPtMgr(SetPtMgrNum).CtrlNodeListName = cAlphaArgs(3);
             if (OutAirSetPtMgr(SetPtMgrNum).OutHigh1 < OutAirSetPtMgr(SetPtMgrNum).OutLow1) {
                 ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid setpoints.");
-                ShowContinueError("..." + cNumericFieldNames(4) + format("=[{:.1R}", OutAirSetPtMgr(SetPtMgrNum).OutHigh1) + "] is less than " +
-                                  cNumericFieldNames(2) + format("=[{:.1R}", OutAirSetPtMgr(SetPtMgrNum).OutLow1) + "].");
+                ShowContinueError("..." + cNumericFieldNames(4) + format("=[{:.1R}] is less than ", OutAirSetPtMgr(SetPtMgrNum).OutHigh1) +
+                                  cNumericFieldNames(2) + format("=[{:.1R}].", OutAirSetPtMgr(SetPtMgrNum).OutLow1));
             }
             // Get optional input: schedule and 2nd reset rule
             if (NumAlphas == 4 && NumNums == 8) {
@@ -2142,7 +2142,7 @@ namespace SetPointManager {
                 ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\",");
                 ShowContinueError("..." + cNumericFieldNames(2) + format("=[{:.1R}", WarmestSetPtMgrTempFlow(SetPtMgrNum).MaxSetTemp) +
                                   "] is less than " + cNumericFieldNames(1) + "=[" +
-                                  format("{:.1R}", WarmestSetPtMgrTempFlow(SetPtMgrNum).MinSetTemp) + "].");
+                                  format("{:.1R}].", WarmestSetPtMgrTempFlow(SetPtMgrNum).MinSetTemp));
             }
             WarmestSetPtMgrTempFlow(SetPtMgrNum).MinTurndown = rNumericArgs(3);
             if (WarmestSetPtMgrTempFlow(SetPtMgrNum).MinTurndown >= 0.8) {
@@ -2309,7 +2309,7 @@ namespace SetPointManager {
                 ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\",");
                 ShowContinueError("..." + cNumericFieldNames(2) + format("=[{:.1R}", MZAverageCoolingSetPtMgr(SetPtMgrNum).MaxSetTemp) +
                                   "] is less than " + cNumericFieldNames(1) + "=[" +
-                                  format("{:.1R}", MZAverageCoolingSetPtMgr(SetPtMgrNum).MinSetTemp) + "].");
+                                  format("{:.1R}].", MZAverageCoolingSetPtMgr(SetPtMgrNum).MinSetTemp));
             }
 
             NodeListError = false;
@@ -2389,7 +2389,7 @@ namespace SetPointManager {
                 ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\",");
                 ShowContinueError("..." + cNumericFieldNames(2) + format("=[{:.1R}", MZAverageHeatingSetPtMgr(SetPtMgrNum).MaxSetTemp) +
                                   "] is less than " + cNumericFieldNames(1) + "=[" +
-                                  format("{:.1R}", MZAverageHeatingSetPtMgr(SetPtMgrNum).MinSetTemp) + "].");
+                                  format("{:.1R}].", MZAverageHeatingSetPtMgr(SetPtMgrNum).MinSetTemp));
             }
 
             NodeListError = false;
@@ -2469,7 +2469,7 @@ namespace SetPointManager {
                 ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\",");
                 ShowContinueError("..." + cNumericFieldNames(2) + format("=[{:.3R}", MZAverageMinHumSetPtMgr(SetPtMgrNum).MaxSetHum) +
                                   "] is less than " + cNumericFieldNames(1) + "=[" +
-                                  format("{:.3R}", MZAverageMinHumSetPtMgr(SetPtMgrNum).MinSetHum) + "].");
+                                  format("{:.3R}].", MZAverageMinHumSetPtMgr(SetPtMgrNum).MinSetHum));
             }
 
             NodeListError = false;
@@ -2550,7 +2550,7 @@ namespace SetPointManager {
                 ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\",");
                 ShowContinueError("..." + cNumericFieldNames(2) + format("=[{:.3R}", MZAverageMaxHumSetPtMgr(SetPtMgrNum).MaxSetHum) +
                                   "] is less than " + cNumericFieldNames(1) + "=[" +
-                                  format("{:.3R}", MZAverageMaxHumSetPtMgr(SetPtMgrNum).MinSetHum) + "].");
+                                  format("{:.3R}].", MZAverageMaxHumSetPtMgr(SetPtMgrNum).MinSetHum));
             }
 
             NodeListError = false;
@@ -2923,7 +2923,7 @@ namespace SetPointManager {
                 ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\",");
                 ShowContinueError("..." + cNumericFieldNames(2) + format("=[{:.1R}", FollowSysNodeTempSetPtMgr(SetPtMgrNum).MaxSetTemp) +
                                   "] is less than " + cNumericFieldNames(3) + "=[" +
-                                  format("{:.1R}", FollowSysNodeTempSetPtMgr(SetPtMgrNum).MinSetTemp) + "].");
+                                  format("{:.1R}].", FollowSysNodeTempSetPtMgr(SetPtMgrNum).MinSetTemp));
             }
 
             NodeListError = false;
@@ -3016,7 +3016,7 @@ namespace SetPointManager {
                     if (!GroundTempObjInput) {
                         ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) +
                                          "\" requires \"Site:GroundTemperature:BuildingSurface\" in the input.");
-                        ShowContinueError(format("Defaults, constant throughout the year of ({:.1R}", GroundTemp) + ") will be used.");
+                        ShowContinueError(format("Defaults, constant throughout the year of ({:.1R}) will be used.", GroundTemp));
                     }
                     NoSurfaceGroundTempObjWarning = false;
                 }
@@ -3026,7 +3026,7 @@ namespace SetPointManager {
                     if (!GroundTemp_SurfaceObjInput) {
                         ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) +
                                          "\" requires \"Site:GroundTemperature:Shallow\" in the input.");
-                        ShowContinueError(format("Defaults, constant throughout the year of ({:.1R}", GroundTemp_Surface) + ") will be used.");
+                        ShowContinueError(format("Defaults, constant throughout the year of ({:.1R}) will be used.", GroundTemp_Surface));
                     }
                     NoShallowGroundTempObjWarning = false;
                 }
@@ -3036,7 +3036,7 @@ namespace SetPointManager {
                     if (!GroundTemp_DeepObjInput) {
                         ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) +
                                          "\" requires \"Site:GroundTemperature:Deep\" in the input.");
-                        ShowContinueError(format("Defaults, constant throughout the year of ({:.1R}", GroundTemp_Deep) + ") will be used.");
+                        ShowContinueError(format("Defaults, constant throughout the year of ({:.1R}) will be used.", GroundTemp_Deep));
                     }
                     NoDeepGroundTempObjWarning = false;
                 }
@@ -3046,7 +3046,7 @@ namespace SetPointManager {
                     if (!FCGroundTemps) {
                         ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) +
                                          "\" requires \"Site:GroundTemperature:FCfactorMethod\" in the input.");
-                        ShowContinueError(format("Defaults, constant throughout the year of ({:.1R}", GroundTempFC) + ") will be used.");
+                        ShowContinueError(format("Defaults, constant throughout the year of ({:.1R}) will be used.", GroundTempFC));
                     }
                     NoFCGroundTempObjWarning = false;
                 }
@@ -3174,7 +3174,7 @@ namespace SetPointManager {
                 ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\",");
                 ShowContinueError("..." + cNumericFieldNames(2) + format("=[{:.1R}", CondEntSetPtMgr(SetPtMgrNum).MaxCondEntTemp) +
                                   "] is less than " + cNumericFieldNames(1) + "=[" +
-                                  format("{:.1R}", CondEntSetPtMgr(SetPtMgrNum).TowerDsnInletAirWetBulb) + "].");
+                                  format("{:.1R}].", CondEntSetPtMgr(SetPtMgrNum).TowerDsnInletAirWetBulb));
             }
 
             NodeListError = false;
@@ -3335,7 +3335,7 @@ namespace SetPointManager {
                 ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\",");
                 ShowContinueError("..." + cNumericFieldNames(2) + format("=[{:.1R}", SZOneStageCoolingSetPtMgr(SetPtMgrNum).CoolingOffTemp) +
                                   "] is less than " + cNumericFieldNames(1) + "=[" +
-                                  format("{:.1R}", SZOneStageCoolingSetPtMgr(SetPtMgrNum).CoolingOnTemp) + "].");
+                                  format("{:.1R}].", SZOneStageCoolingSetPtMgr(SetPtMgrNum).CoolingOnTemp));
             }
 
             SZOneStageCoolingSetPtMgr(SetPtMgrNum).ControlZoneName = cAlphaArgs(2);
@@ -3430,7 +3430,7 @@ namespace SetPointManager {
                 ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\",");
                 ShowContinueError("..." + cNumericFieldNames(2) + format("=[{:.1R}", SZOneStageHeatingSetPtMgr(SetPtMgrNum).HeatingOnTemp) +
                                   "] is less than " + cNumericFieldNames(1) + "=[" +
-                                  format("{:.1R}", SZOneStageHeatingSetPtMgr(SetPtMgrNum).HeatingOffTemp) + "].");
+                                  format("{:.1R}].", SZOneStageHeatingSetPtMgr(SetPtMgrNum).HeatingOffTemp));
             }
 
             SZOneStageHeatingSetPtMgr(SetPtMgrNum).ControlZoneName = cAlphaArgs(2);

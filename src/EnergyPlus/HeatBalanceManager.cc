@@ -2103,28 +2103,28 @@ namespace HeatBalanceManager {
                         if (minAngValue > 1.0e-6) {
                             ErrorsFound = true;
                             ShowSevereError(CurrentModuleObject + "=\"" + MaterialNames(1) +
-                                            format("\", Invalid minimum value of angle = {:.2R}", minAngValue) + ".");
+                                            format("\", Invalid minimum value of angle = {:.2R}.", minAngValue));
                             ShowContinueError(cAlphaFieldNames(5) +
                                               " requires the minumum value = 0.0 in the entered table name=" + MaterialNames(5));
                         }
                         if (std::abs(maxAngValue - 90.0) > 1.0e-6) {
                             ErrorsFound = true;
                             ShowSevereError(CurrentModuleObject + "=\"" + MaterialNames(1) +
-                                            format("\", Invalid maximum value of angle = {:.2R}", maxAngValue) + ".");
+                                            format("\", Invalid maximum value of angle = {:.2R}.", maxAngValue));
                             ShowContinueError(cAlphaFieldNames(5) +
                                               " requires the maximum value = 90.0 in the entered table name=" + MaterialNames(5));
                         }
                         if (minLamValue < 0.1) {
                             ErrorsFound = true;
                             ShowSevereError(CurrentModuleObject + "=\"" + MaterialNames(1) +
-                                            format("\", Invalid minimum value of wavelength = {:.2R}", minLamValue) + ".");
+                                            format("\", Invalid minimum value of wavelength = {:.2R}.", minLamValue));
                             ShowContinueError(cAlphaFieldNames(5) +
                                               " requires the minumum value = 0.1 micron in the entered table name=" + MaterialNames(5));
                         }
                         if (maxLamValue > 4.0) {
                             ErrorsFound = true;
                             ShowSevereError(CurrentModuleObject + "=\"" + MaterialNames(1) +
-                                            format("\", Invalid maximum value of wavelength = {:.2R}", maxLamValue) + ".");
+                                            format("\", Invalid maximum value of wavelength = {:.2R}.", maxLamValue));
                             ShowContinueError(cAlphaFieldNames(5) +
                                               " requires the maximum value = 4.0 microns in the entered table name=" + MaterialNames(5));
                         }
@@ -2152,28 +2152,28 @@ namespace HeatBalanceManager {
                         if (minAngValue > 1.0e-6) {
                             ErrorsFound = true;
                             ShowSevereError(CurrentModuleObject + "=\"" + MaterialNames(1) +
-                                            format("\", Invalid minimum value of angle = {:.2R}", minAngValue) + ".");
+                                            format("\", Invalid minimum value of angle = {:.2R}.", minAngValue));
                             ShowContinueError(cAlphaFieldNames(5) +
                                               " requires the minumum value = 0.0 in the entered table name=" + MaterialNames(5));
                         }
                         if (std::abs(maxAngValue - 90.0) > 1.0e-6) {
                             ErrorsFound = true;
                             ShowSevereError(CurrentModuleObject + "=\"" + MaterialNames(1) +
-                                            format("\", Invalid maximum value of angle = {:.2R}", maxAngValue) + ".");
+                                            format("\", Invalid maximum value of angle = {:.2R}.", maxAngValue));
                             ShowContinueError(cAlphaFieldNames(5) +
                                               " requires the maximum value = 90.0 in the entered table name=" + MaterialNames(5));
                         }
                         if (minLamValue < 0.1) {
                             ErrorsFound = true;
                             ShowSevereError(CurrentModuleObject + "=\"" + MaterialNames(1) +
-                                            format("\", Invalid minimum value of wavelength = {:.2R}", minLamValue) + ".");
+                                            format("\", Invalid minimum value of wavelength = {:.2R}.", minLamValue));
                             ShowContinueError(cAlphaFieldNames(5) +
                                               " requires the minumum value = 0.1 micron in the entered table name=" + MaterialNames(5));
                         }
                         if (maxLamValue > 4.0) {
                             ErrorsFound = true;
                             ShowSevereError(CurrentModuleObject + "=\"" + MaterialNames(1) +
-                                            format("\", Invalid maximum value of wavelength = {:.2R}", maxLamValue) + ".");
+                                            format("\", Invalid maximum value of wavelength = {:.2R}.", maxLamValue));
                             ShowContinueError(cAlphaFieldNames(5) +
                                               " requires the maximum value = 4.0 microns in the entered table name=" + MaterialNames(5));
                         }
@@ -2201,28 +2201,28 @@ namespace HeatBalanceManager {
                         if (minAngValue > 1.0e-6) {
                             ErrorsFound = true;
                             ShowSevereError(CurrentModuleObject + "=\"" + MaterialNames(1) +
-                                            format("\", Invalid minimum value of angle = {:.2R}", minAngValue) + ".");
+                                            format("\", Invalid minimum value of angle = {:.2R}.", minAngValue));
                             ShowContinueError(cAlphaFieldNames(5) +
                                               " requires the minumum value = 0.0 in the entered table name=" + MaterialNames(5));
                         }
                         if (std::abs(maxAngValue - 90.0) > 1.0e-6) {
                             ErrorsFound = true;
                             ShowSevereError(CurrentModuleObject + "=\"" + MaterialNames(1) +
-                                            format("\", Invalid maximum value of angle = {:.2R}", maxAngValue) + ".");
+                                            format("\", Invalid maximum value of angle = {:.2R}.", maxAngValue));
                             ShowContinueError(cAlphaFieldNames(5) +
                                               " requires the maximum value = 90.0 in the entered table name=" + MaterialNames(5));
                         }
                         if (minLamValue < 0.1) {
                             ErrorsFound = true;
                             ShowSevereError(CurrentModuleObject + "=\"" + MaterialNames(1) +
-                                            format("\", Invalid minimum value of wavelength = {:.2R}", minLamValue) + ".");
+                                            format("\", Invalid minimum value of wavelength = {:.2R}.", minLamValue));
                             ShowContinueError(cAlphaFieldNames(5) +
                                               " requires the minumum value = 0.1 micron in the entered table name=" + MaterialNames(5));
                         }
                         if (maxLamValue > 4.0) {
                             ErrorsFound = true;
                             ShowSevereError(CurrentModuleObject + "=\"" + MaterialNames(1) +
-                                            format("\", Invalid maximum value of wavelength = {:.2R}", maxLamValue) + ".");
+                                            format("\", Invalid maximum value of wavelength = {:.2R}.", maxLamValue));
                             ShowContinueError(cAlphaFieldNames(5) +
                                               " requires the maximum value = 4.0 microns in the entered table name=" + MaterialNames(5));
                         }
@@ -2507,7 +2507,7 @@ namespace HeatBalanceManager {
                 } else {
                     ShowSevereError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Illegal value.");
                     ShowContinueError("Nominal resistance of gap at room temperature calculated at a negative Conductivity=[" +
-                                      format("{:.3R}", DenomRGas) + "].");
+                                      format("{:.3R}].", DenomRGas));
                     ErrorsFound = true;
                 }
             }
@@ -2628,7 +2628,7 @@ namespace HeatBalanceManager {
                 } else {
                     ShowSevereError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Illegal value.");
                     ShowContinueError("Nominal resistance of gap at room temperature calculated at a negative Conductivity=[" +
-                                      format("{:.3R}", DenomRGas) + "].");
+                                      format("{:.3R}].", DenomRGas));
                     ErrorsFound = true;
                 }
             }
@@ -3214,7 +3214,7 @@ namespace HeatBalanceManager {
                         dataMaterial.Material(MaterNum).ScreenWireDiameter =
                             dataMaterial.Material(MaterNum).ScreenWireSpacing * (1.0 - std::sqrt(dataMaterial.Material(MaterNum).TausFrontBeamBeam));
                         ShowContinueError(" ...Recalculated " + cNumericFieldNames(10) + '=' +
-                                          format("{:.4R}", dataMaterial.Material(MaterNum).ScreenWireDiameter) + " m");
+                                          format("{:.4R} m", dataMaterial.Material(MaterNum).ScreenWireDiameter));
                     }
                 }
             }
@@ -3320,8 +3320,8 @@ namespace HeatBalanceManager {
 
             if (Blind(Loop).SlatWidth < Blind(Loop).SlatSeparation) {
                 ShowWarningError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Slat Angles/Widths");
-                ShowContinueError(cNumericFieldNames(1) + format(" [{:.2R}", Blind(Loop).SlatWidth) + "] is less than " +
-                                  cNumericFieldNames(2) + format(" [{:.2R}", Blind(Loop).SlatSeparation) + "].");
+                ShowContinueError(cNumericFieldNames(1) + format(" [{:.2R}] is less than ", Blind(Loop).SlatWidth) +
+                                  cNumericFieldNames(2) + format(" [{:.2R}].", Blind(Loop).SlatSeparation));
                 ShowContinueError("This will allow direct beam to be transmitted when Slat angle = 0.");
             }
 
@@ -3596,8 +3596,8 @@ namespace HeatBalanceManager {
             }
             if (dataMaterial.Material(MaterNum).SlatWidth < dataMaterial.Material(MaterNum).SlatSeparation) {
                 ShowWarningError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Slat Seperation/Width");
-                ShowContinueError(cNumericFieldNames(1) + format(" [{:.2R}", dataMaterial.Material(MaterNum).SlatWidth) + "] is less than " +
-                                  cNumericFieldNames(2) + format(" [{:.2R}", dataMaterial.Material(MaterNum).SlatSeparation) + "].");
+                ShowContinueError(cNumericFieldNames(1) + format(" [{:.2R}] is less than ", dataMaterial.Material(MaterNum).SlatWidth) +
+                                  cNumericFieldNames(2) + format(" [{:.2R}].", dataMaterial.Material(MaterNum).SlatSeparation));
                 ShowContinueError("This will allow direct beam to be transmitted when Slat angle = 0.");
             }
             if (dataMaterial.Material(MaterNum).SlatSeparation < 0.001) {
@@ -3733,10 +3733,10 @@ namespace HeatBalanceManager {
             if (dataMaterial.Material(MaterNum).InitMoisture > dataMaterial.Material(MaterNum).Porosity) {
                 ShowWarningError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Illegal value combination.");
                 ShowContinueError(cNumericFieldNames(15) + " is greater than " + cNumericFieldNames(13) + ". It must be less or equal.");
-                ShowContinueError(cNumericFieldNames(13) + format(" = {:.3T}", dataMaterial.Material(MaterNum).Porosity) + ".");
-                ShowContinueError(cNumericFieldNames(15) + format(" = {:.3T}", dataMaterial.Material(MaterNum).InitMoisture) + ".");
+                ShowContinueError(cNumericFieldNames(13) + format(" = {:.3T}.", dataMaterial.Material(MaterNum).Porosity));
+                ShowContinueError(cNumericFieldNames(15) + format(" = {:.3T}.", dataMaterial.Material(MaterNum).InitMoisture));
                 ShowContinueError(cNumericFieldNames(15) +
-                                  format(" is reset to the maximum (saturation) value = {:.3T}", dataMaterial.Material(MaterNum).Porosity) + ".");
+                                  format(" is reset to the maximum (saturation) value = {:.3T}.", dataMaterial.Material(MaterNum).Porosity));
                 ShowContinueError("Simulation continues.");
                 dataMaterial.Material(MaterNum).InitMoisture = dataMaterial.Material(MaterNum).Porosity;
             }
@@ -4057,7 +4057,7 @@ namespace HeatBalanceManager {
                     ErrorsFound = true;
                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + SpecDataNames(1) + "\" invalid value.");
                     ShowContinueError("... A wavelength is not in the range 0.1 to 4.0 microns; at wavelength#=" + fmt::to_string(LamNum) +
-                                      format(", value=[{:.4T}", Lam) + "].");
+                                      format(", value=[{:.4T}].", Lam));
                 }
 
                 // TH 2/15/2011. CR 8343
@@ -4074,17 +4074,17 @@ namespace HeatBalanceManager {
                     ErrorsFound = true;
                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + SpecDataNames(1) + "\" invalid value.");
                     ShowContinueError("... A reflectance is < 0.0 or > 1.0; at wavelength#=" + fmt::to_string(LamNum) + ", RhoF value=[" +
-                                      format("{:.4T}", RhoF) + "].");
+                                      format("{:.4T}].", RhoF));
                     ShowContinueError("... A reflectance is < 0.0 or > 1.0; at wavelength#=" + fmt::to_string(LamNum) + ", RhoB value=[" +
-                                      format("{:.4T}", RhoB) + "].");
+                                      format("{:.4T}].", RhoB));
                 }
 
                 if ((Tau + RhoF) > 1.03 || (Tau + RhoB) > 1.03) {
                     ErrorsFound = true;
                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + SpecDataNames(1) + "\" invalid value.");
                     ShowContinueError("... Transmittance + reflectance) > 1.0 for an entry; at wavelength#=" + fmt::to_string(LamNum) +
-                                      format(", value(Tau+RhoF)=[{:.4T}", (Tau + RhoF)) + "], value(Tau+RhoB)=[" +
-                                      format("{:.4T}", (Tau + RhoB)) + "].");
+                                      format(", value(Tau+RhoF)=[{:.4T}], value(Tau+RhoB)=[", (Tau + RhoF)) +
+                                      format("{:.4T}].", (Tau + RhoB)));
                 }
             }
         }
@@ -5736,16 +5736,16 @@ namespace HeatBalanceManager {
                         }
 
                         ShowContinueError(format("..Max Temp Comparison = {:.2R}", WarmupConvergenceValues(ZoneNum).TestMaxTempValue) +
-                                          format(" vs Temperature Convergence Tolerance={:.2R}", TempConvergTol) + " - " +
+                                          format(" vs Temperature Convergence Tolerance={:.2R} - ", TempConvergTol) +
                                           PassFail(WarmupConvergenceValues(ZoneNum).PassFlag(1)) + " Convergence");
                         ShowContinueError(format("..Min Temp Comparison = {:.2R}", WarmupConvergenceValues(ZoneNum).TestMinTempValue) +
-                                          format(" vs Temperature Convergence Tolerance={:.2R}", TempConvergTol) + " - " +
+                                          format(" vs Temperature Convergence Tolerance={:.2R} - ", TempConvergTol) +
                                           PassFail(WarmupConvergenceValues(ZoneNum).PassFlag(2)) + " Convergence");
                         ShowContinueError(format("..Max Heat Load Comparison = {:.4R}", WarmupConvergenceValues(ZoneNum).TestMaxHeatLoadValue) +
-                                          format(" vs Loads Convergence Tolerance={:.2R}", LoadsConvergTol) + " - " +
+                                          format(" vs Loads Convergence Tolerance={:.2R} - ", LoadsConvergTol) +
                                           PassFail(WarmupConvergenceValues(ZoneNum).PassFlag(3)) + " Convergence");
                         ShowContinueError(format("..Max Cool Load Comparison = {:.4R}", WarmupConvergenceValues(ZoneNum).TestMaxCoolLoadValue) +
-                                          format(" vs Loads Convergence Tolerance={:.2R}", LoadsConvergTol) + " - " +
+                                          format(" vs Loads Convergence Tolerance={:.2R} - ", LoadsConvergTol) +
                                           PassFail(WarmupConvergenceValues(ZoneNum).PassFlag(4)) + " Convergence");
                     }
                 }
@@ -7291,7 +7291,7 @@ namespace HeatBalanceManager {
             Rfic = Reff - Rcon;
             if (Rfic <= 0.0) {
                 ShowSevereError(CurrentModuleObject + "=\"" + ConstructAlphas(1) + "\" has calculated R value <= 0.0, must be > 0.0.");
-                ShowContinueError(format("Calculated value=[{:.2R}", Rfic) + "] Check definition.");
+                ShowContinueError(format("Calculated value=[{:.2R}] Check definition.", Rfic));
                 ErrorsFound = true;
             }
 
@@ -7374,7 +7374,7 @@ namespace HeatBalanceManager {
             Rfic = Reff - Rcon;
             if (Rfic <= 0) {
                 ShowSevereError(CurrentModuleObject + "=\"" + ConstructAlphas(1) + "\" has calculated R value <= 0.0, must be > 0.0.");
-                ShowContinueError(format("Calculated value=[{:.2R}", Rfic) + "] Check definition.");
+                ShowContinueError(format("Calculated value=[{:.2R}] Check definition.", Rfic));
                 ErrorsFound = true;
             }
 

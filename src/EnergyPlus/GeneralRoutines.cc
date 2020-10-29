@@ -629,12 +629,12 @@ void ControlCompOutput(EnergyPlusData &state, std::string const &CompName,      
         if ((Iter > MaxIter) && (!WarmupFlag)) {
             // if ( CompErrIndex == 0 ) {
             ShowWarningMessage("ControlCompOutput: Maximum iterations exceeded for " + CompType + " = " + CompName);
-            ShowContinueError(format("... Load met       = {:.5T}", LoadMet) + " W.");
-            ShowContinueError(format("... Load requested = {:.5T}", QZnReq) + " W.");
-            ShowContinueError(format("... Error          = {:.8T}", std::abs((LoadMet - QZnReq) * 100.0 / Denom)) + " %.");
-            ShowContinueError(format("... Tolerance      = {:.8T}", ControlOffset * 100.0) + " %.");
+            ShowContinueError(format("... Load met       = {:.5T} W.", LoadMet));
+            ShowContinueError(format("... Load requested = {:.5T} W.", QZnReq));
+            ShowContinueError(format("... Error          = {:.8T} %.", std::abs((LoadMet - QZnReq) * 100.0 / Denom)));
+            ShowContinueError(format("... Tolerance      = {:.8T} %.", ControlOffset * 100.0));
             ShowContinueError("... Error          = (Load met - Load requested) / MAXIMUM(Load requested, 100)");
-            ShowContinueError(format("... Actuated Node Mass Flow Rate ={:.9R}", Node(ActuatedNode).MassFlowRate) + " kg/s");
+            ShowContinueError(format("... Actuated Node Mass Flow Rate ={:.9R} kg/s", Node(ActuatedNode).MassFlowRate));
             ShowContinueErrorTimeStamp("");
             ShowRecurringWarningErrorAtEnd("ControlCompOutput: Maximum iterations error for " + CompType + " = " + CompName,
                                            CompErrIndex,

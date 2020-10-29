@@ -3769,8 +3769,8 @@ bool ElectricStorage::determineCurrentForBatteryDischarge(EnergyPlusData &state,
             ShowWarningError(
                 "ElectricStorage::determineCurrentForBatteryDischarge, iteration limit exceeded, failed to solve for discharge current.");
             ShowContinueError(format("Last timestep charge available, q0 = {:.5R}", q0));
-            ShowContinueError(format("New Current, Inew = {:.5R}", Inew) + " [Amps]");
-            ShowContinueError(format("Power discharge per module cell, Pw = {:.5R}", Pw) + " ");
+            ShowContinueError(format("New Current, Inew = {:.5R} [Amps]", Inew));
+            ShowContinueError(format("Power discharge per module cell, Pw = {:.5R} ", Pw));
             ShowContinueError("Charge Conversion Rate, [1/h] change rate from bound charge energy to available charge, parameter k = " +
                               format("{:.5R}", k));
             ShowContinueError(format("parameter c = {:.5R}", c));
@@ -4027,7 +4027,7 @@ ElectricTransformer::ElectricTransformer(EnergyPlusData &state, std::string cons
             } else if (maxPUL_ <= 0 || maxPUL_ > 1) {
                 ShowSevereError(routineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\", invalid entry.");
                 ShowContinueError("Invalid " + DataIPShortCuts::cNumericFieldNames(11) + "=[" +
-                                  format("{:.3R}", DataIPShortCuts::rNumericArgs(11)) + "].");
+                                  format("{:.3R}].", DataIPShortCuts::rNumericArgs(11)));
                 ShowContinueError("Entered value must be > 0 and <= 1.");
                 errorsFound = true;
             }

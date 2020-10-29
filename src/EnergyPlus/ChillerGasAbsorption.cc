@@ -970,7 +970,7 @@ namespace ChillerGasAbsorption {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpNomCap - NomCapUser) / NomCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerHeaterAbsorptionDirectFired: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError(format("User-Specified Nominal Capacity of {:.2R}", NomCapUser) + " [W]");
+                                    ShowContinueError(format("User-Specified Nominal Capacity of {:.2R} [W]", NomCapUser));
                                     ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R}", tmpNomCap) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
@@ -1037,9 +1037,9 @@ namespace ChillerGasAbsorption {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerAbsorptionDirectFired: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Design Chilled Water Flow Rate of " +
-                                                      format("{:.5R}", EvapVolFlowRateUser) + " [m3/s]");
+                                                      format("{:.5R} [m3/s]", EvapVolFlowRateUser));
                                     ShowContinueError("differs from Design Size Design Chilled Water Flow Rate of " +
-                                                      format("{:.5R}", tmpEvapVolFlowRate) + " [m3/s]");
+                                                      format("{:.5R} [m3/s]", tmpEvapVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1109,9 +1109,9 @@ namespace ChillerGasAbsorption {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerHeaterAbsorptionDirectFired: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Design Hot Water Flow Rate of " +
-                                                      format("{:.5R}", HeatRecVolFlowRateUser) + " [m3/s]");
+                                                      format("{:.5R} [m3/s]", HeatRecVolFlowRateUser));
                                     ShowContinueError("differs from Design Size Design Hot Water Flow Rate of " +
-                                                      format("{:.5R}", tmpHeatRecVolFlowRate) + " [m3/s]");
+                                                      format("{:.5R} [m3/s]", tmpHeatRecVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1193,9 +1193,9 @@ namespace ChillerGasAbsorption {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerAbsorptionDirectFired: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Design Condenser Water Flow Rate of " +
-                                                      format("{:.5R}", CondVolFlowRateUser) + " [m3/s]");
+                                                      format("{:.5R} [m3/s]", CondVolFlowRateUser));
                                     ShowContinueError("differs from Design Size Design Condenser Water Flow Rate of " +
-                                                      format("{:.5R}", tmpCondVolFlowRate) + " [m3/s]");
+                                                      format("{:.5R} [m3/s]", tmpCondVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }

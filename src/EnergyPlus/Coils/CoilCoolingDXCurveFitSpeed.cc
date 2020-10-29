@@ -174,7 +174,7 @@ void CoilCoolingDXCurveFitSpeed::instantiateFromInputSpec(EnergyPlus::EnergyPlus
         if (MinCurveVal < 0.7) {
             ShowWarningError(routineName + this->object_name + "=\"" + this->name + "\", invalid");
             ShowContinueError("..." + fieldName + "=\"" + curveName + "\" has out of range values.");
-            ShowContinueError(format("...Curve minimum must be >= 0.7, curve min at PLR = {:.2T}", MinCurvePLR) + " is " +
+            ShowContinueError(format("...Curve minimum must be >= 0.7, curve min at PLR = {:.2T} is ", MinCurvePLR) +
                               format("{:.3T}", MinCurveVal));
             ShowContinueError("...Setting curve minimum to 0.7 and simulation continues.");
             CurveManager::SetCurveOutputMinMaxValues(state, this->indexPLRFPLF, errorsFound, 0.7, _);
@@ -183,7 +183,7 @@ void CoilCoolingDXCurveFitSpeed::instantiateFromInputSpec(EnergyPlus::EnergyPlus
         if (MaxCurveVal > 1.0) {
             ShowWarningError(routineName + this->object_name + "=\"" + this->name + "\", invalid");
             ShowContinueError("..." + fieldName + " = " + curveName + " has out of range value.");
-            ShowContinueError(format("...Curve maximum must be <= 1.0, curve max at PLR = {:.2T}", MaxCurvePLR) + " is " +
+            ShowContinueError(format("...Curve maximum must be <= 1.0, curve max at PLR = {:.2T} is ", MaxCurvePLR) +
                               format("{:.3T}", MaxCurveVal));
             ShowContinueError("...Setting curve maximum to 1.0 and simulation continues.");
             CurveManager::SetCurveOutputMinMaxValues(state, this->indexPLRFPLF, errorsFound, _, 1.0);
@@ -418,7 +418,7 @@ void CoilCoolingDXCurveFitSpeed::CalcSpeedOutput(EnergyPlus::EnergyPlusData &sta
         A0 = -std::log(RatedCBF) * RatedAirMassFlowRate;
     } else {
         // This is bad - results in CBF = 1.0 which results in divide by zero below: hADP = inletState.h - hDelta / (1.0 - CBF)
-        ShowFatalError(RoutineName + format("Rated CBF={:.6R}", RatedCBF) + " is <= 0.0 for " + object_name + "=" + name);
+        ShowFatalError(RoutineName + format("Rated CBF={:.6R} is <= 0.0 for ", RatedCBF) + object_name + "=" + name);
         A0 = 0.0;
     }
     Real64 ADiff = -A0 / AirMassFlow;

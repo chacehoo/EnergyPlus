@@ -855,7 +855,7 @@ namespace FluidCoolers {
                 ShowSevereError("Error when autosizing the UA value for fluid cooler = " + this->Name + '.');
                 ShowContinueError(format("Design Loop Exit Temperature ({:.2R}", DataSizing::PlantSizData(PltSizCondNum).ExitTemp) +
                                   " C) must be greater than design entering air dry-bulb temperature (" +
-                                  format("{:.2R}", this->DesignEnteringAirTemp) + " C) when autosizing the fluid cooler UA.");
+                                  format("{:.2R} C) when autosizing the fluid cooler UA.", this->DesignEnteringAirTemp));
                 ShowContinueError("It is recommended that the Design Loop Exit Temperature = design inlet air dry-bulb temp plus the Fluid Cooler "
                                   "design approach temperature (e.g., 4 C).");
                 ShowContinueError("If using HVACTemplate:Plant:ChilledWaterLoop, then check that input field Condenser Water Design Setpoint must be "
@@ -904,7 +904,7 @@ namespace FluidCoolers {
                             ShowContinueError("Design Loop Exit Temperature (" +
                                               format("{:.2R}", DataSizing::PlantSizData(PltSizCondNum).ExitTemp) +
                                               " C) must be greater than design entering air dry-bulb temperature (" +
-                                              format("{:.2R}", this->DesignEnteringAirTemp) + " C) when autosizing the fluid cooler UA.");
+                                              format("{:.2R} C) when autosizing the fluid cooler UA.", this->DesignEnteringAirTemp));
                             ShowContinueError("It is recommended that the Design Loop Exit Temperature = design inlet air dry-bulb temp plus the "
                                               "Fluid Cooler design approach temperature (e.g., 4 C).");
                             ShowContinueError("If using HVACTemplate:Plant:ChilledWaterLoop, then check that input field Condenser Water Design "
@@ -977,7 +977,7 @@ namespace FluidCoolers {
                             ShowContinueError("Design Loop Exit Temperature (" +
                                               format("{:.2R}", DataSizing::PlantSizData(PltSizCondNum).ExitTemp) +
                                               " C) must be greater than design entering air dry-bulb temperature (" +
-                                              format("{:.2R}", this->DesignEnteringAirTemp) + " C) when autosizing the fluid cooler UA.");
+                                              format("{:.2R} C) when autosizing the fluid cooler UA.", this->DesignEnteringAirTemp));
                             ShowContinueError("It is recommended that the Design Loop Exit Temperature = design inlet air dry-bulb temp plus the "
                                               "Fluid Cooler design approach temperature (e.g., 4 C).");
                             ShowContinueError("If using HVACTemplate:Plant:ChilledWaterLoop, then check that input field Condenser Water Design "
@@ -1042,7 +1042,7 @@ namespace FluidCoolers {
                         ShowContinueError("Design Loop Exit Temperature (" +
                                           format("{:.2R}", DataSizing::PlantSizData(PltSizCondNum).ExitTemp) +
                                           " C) must be greater than design entering air dry-bulb temperature (" +
-                                          format("{:.2R}", this->DesignEnteringAirTemp) + " C) when autosizing the fluid cooler UA.");
+                                          format("{:.2R} C) when autosizing the fluid cooler UA.", this->DesignEnteringAirTemp));
                         ShowContinueError("It is recommended that the Design Loop Exit Temperature = design inlet air dry-bulb temp plus the Fluid "
                                           "Cooler design approach temperature (e.g., 4 C).");
                         ShowContinueError("If using HVACTemplate:Plant:ChilledWaterLoop, then check that input field Condenser Water Design Setpoint "
@@ -1076,7 +1076,7 @@ namespace FluidCoolers {
                     if (SolFla == -1) {
                         ShowWarningError("Iteration limit exceeded in calculating fluid cooler UA.");
                         ShowContinueError("Autosizing of fluid cooler UA failed for fluid cooler = " + this->Name);
-                        ShowContinueError(format("The final UA value ={:.2R}", UA) + " W/K, and the simulation continues...");
+                        ShowContinueError(format("The final UA value ={:.2R} W/K, and the simulation continues...", UA));
                     } else if (SolFla == -2) {
                         CalcFluidCoolerOutlet(state, int(Par(2)), Par(3), Par(4), UA0, OutWaterTempAtUA0);
                         CalcFluidCoolerOutlet(state, int(Par(2)), Par(3), Par(4), UA1, OutWaterTempAtUA1);
@@ -1185,7 +1185,7 @@ namespace FluidCoolers {
                     if (PltSizCondNum > 0) {
                         ShowContinueError("Autosizing of fluid cooler UA failed for fluid cooler = " + this->Name);
                     }
-                    ShowContinueError(format("The final UA value ={:.2R}", UA) + " W/K, and the simulation continues...");
+                    ShowContinueError(format("The final UA value ={:.2R} W/K, and the simulation continues...", UA));
                 } else if (SolFla == -2) {
                     CalcFluidCoolerOutlet(state, int(Par(2)), Par(3), Par(4), UA0, OutWaterTempAtUA0);
                     CalcFluidCoolerOutlet(state, int(Par(2)), Par(3), Par(4), UA1, OutWaterTempAtUA1);

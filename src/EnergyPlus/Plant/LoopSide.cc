@@ -1674,8 +1674,8 @@ namespace DataPlant {
                     // Call fatal diagnostic error. !The math should work out!
                     ShowSevereError("ResolveParallelFlows: Dev note, failed to redistribute restricted flow");
                     ShowContinueErrorTimeStamp("");
-                    ShowContinueError(format("Loop side flow = {:.8R}", ThisLoopSideFlow) + " (kg/s)");
-                    ShowContinueError(format("Flow Remaining = {:.8R}", FlowRemaining) + " (kg/s)");
+                    ShowContinueError(format("Loop side flow = {:.8R} (kg/s)", ThisLoopSideFlow));
+                    ShowContinueError(format("Flow Remaining = {:.8R} (kg/s)", FlowRemaining));
                     ShowContinueError(format("Parallel Branch requests  = {:.8R}", TotParallelBranchFlowReq) +
                                       " (kg/s)");
                 }

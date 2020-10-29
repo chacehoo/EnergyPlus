@@ -1274,9 +1274,9 @@ namespace ConvectionCoefficients {
                                 if (Numbers(NumField) < LowHConvLimit || Numbers(NumField) > HighHConvLimit) {
                                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + ", out of range value");
                                     ShowContinueError(cAlphaFieldNames(Ptr) + '=' + Alphas(Ptr) + ", " + cNumericFieldNames(NumField) + "=[" +
-                                                      format("{:.5R}", Numbers(NumField)) + "].");
+                                                      format("{:.5R}].", Numbers(NumField)));
                                     ShowContinueError(format("Out-of-range from low/high limits=[>={:.9R}", LowHConvLimit) +
-                                                      format(", <={:.1R}", HighHConvLimit) + "].");
+                                                      format(", <={:.1R}].", HighHConvLimit));
                                     ShowContinueError("Limits are set (or default) in HeatBalanceAlgorithm object.");
                                     ErrorsFound = true;
                                 }
@@ -1353,9 +1353,9 @@ namespace ConvectionCoefficients {
                                 if (Numbers(NumField) < LowHConvLimit || Numbers(NumField) > HighHConvLimit) {
                                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + ", out of range value");
                                     ShowContinueError(cAlphaFieldNames(Ptr) + '=' + Alphas(Ptr) + ", " + cNumericFieldNames(NumField) + "=[" +
-                                                      format("{:.5R}", Numbers(NumField)) + "].");
+                                                      format("{:.5R}].", Numbers(NumField)));
                                     ShowContinueError(format("Out-of-range from low/high limits=[>={:.9R}", LowHConvLimit) +
-                                                      format(", <={:.1R}", HighHConvLimit) + "].");
+                                                      format(", <={:.1R}].", HighHConvLimit));
                                     ShowContinueError("Limits are set (or default) in HeatBalanceAlgorithm object.");
                                     ErrorsFound = true;
                                 }
@@ -1485,9 +1485,9 @@ namespace ConvectionCoefficients {
                                 if (Numbers(NumField) < LowHConvLimit || Numbers(NumField) > HighHConvLimit) {
                                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + ", out of range value");
                                     ShowContinueError(cAlphaFieldNames(Ptr) + '=' + Alphas(Ptr) + ", " + cNumericFieldNames(NumField) + "=[" +
-                                                      format("{:.5R}", Numbers(NumField)) + "].");
+                                                      format("{:.5R}].", Numbers(NumField)));
                                     ShowContinueError(format("Out-of-range from low/high limits=[>={:.9R}", LowHConvLimit) +
-                                                      format(", <={:.1R}", HighHConvLimit) + "].");
+                                                      format(", <={:.1R}].", HighHConvLimit));
                                     ShowContinueError("Limits are set (or default) in HeatBalanceAlgorithm object.");
                                     ErrorsFound = true;
                                 }
@@ -1566,9 +1566,9 @@ namespace ConvectionCoefficients {
                                 if (Numbers(NumField) < LowHConvLimit || Numbers(NumField) > HighHConvLimit) {
                                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + ", out of range value");
                                     ShowContinueError(cAlphaFieldNames(Ptr) + '=' + Alphas(Ptr) + ", " + cNumericFieldNames(NumField) + "=[" +
-                                                      format("{:.5R}", Numbers(NumField)) + "].");
+                                                      format("{:.5R}].", Numbers(NumField)));
                                     ShowContinueError(format("Out-of-range from low/high limits=[>={:.9R}", LowHConvLimit) +
-                                                      format(", <={:.1R}", HighHConvLimit) + "].");
+                                                      format(", <={:.1R}].", HighHConvLimit));
                                     ShowContinueError("Limits are set (or default) in HeatBalanceAlgorithm object.");
                                     ErrorsFound = true;
                                 }

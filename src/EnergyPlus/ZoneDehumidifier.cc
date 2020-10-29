@@ -775,7 +775,7 @@ namespace ZoneDehumidifier {
                 if (state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).WaterRemovalCurveErrorCount < 1) {
                     ++state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).WaterRemovalCurveErrorCount;
                     ShowWarningError(state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).UnitType + " \"" + state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).Name + "\":");
-                    ShowContinueError(format(" Water Removal Rate Curve output is <= 0.0 ({:.5T}", WaterRemovalRateFactor) + ").");
+                    ShowContinueError(format(" Water Removal Rate Curve output is <= 0.0 ({:.5T}).", WaterRemovalRateFactor));
                     ShowContinueError(format(" Negative value occurs using an inlet air dry-bulb temperature of {:.2T}", InletAirTemp) +
                                       format(" and an inlet air relative humidity of {:.1T}", InletAirRH) + '.');
                     ShowContinueErrorTimeStamp(" Dehumidifier turned off for this time step but simulation continues.");
@@ -809,7 +809,7 @@ namespace ZoneDehumidifier {
                 if (state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).EnergyFactorCurveErrorCount < 1) {
                     ++state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).EnergyFactorCurveErrorCount;
                     ShowWarningError(state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).UnitType + " \"" + state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).Name + "\":");
-                    ShowContinueError(format(" Energy Factor Curve output is <= 0.0 ({:.5T}", EnergyFactorAdjFactor) + ").");
+                    ShowContinueError(format(" Energy Factor Curve output is <= 0.0 ({:.5T}).", EnergyFactorAdjFactor));
                     ShowContinueError(format(" Negative value occurs using an inlet air dry-bulb temperature of {:.2T}", InletAirTemp) +
                                       format(" and an inlet air relative humidity of {:.1T}", InletAirRH) + '.');
                     ShowContinueErrorTimeStamp(" Dehumidifier turned off for this time step but simulation continues.");
@@ -874,7 +874,7 @@ namespace ZoneDehumidifier {
                         ++state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).PLFPLRErrorCount;
                         ShowWarningError(state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).UnitType + " \"" + state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).Name + "\":");
                         ShowContinueError("The part load fraction was less than the part load ratio calculated for this time step [PLR=" +
-                                          format("{:.4T}", PLR) + format(", PLF={:.4T}", PLF) + "].");
+                                          format("{:.4T}", PLR) + format(", PLF={:.4T}].", PLF));
                         ShowContinueError("Runtime fraction reset to 1 and the simulation will continue.");
                         ShowContinueErrorTimeStamp("");
                     } else {

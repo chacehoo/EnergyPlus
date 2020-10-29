@@ -3313,8 +3313,8 @@ namespace DesiccantDehumidifiers {
                                                    DesicDehum(DesicDehumNum).DehumType + "=\"" + DesicDehum(DesicDehumNum).Name + "\"");
                                 ShowContinueErrorTimeStamp("");
                                 ShowContinueError("...Bad hot water maximum flow rate limits");
-                                ShowContinueError(format("...Given minimum water flow rate={:.3R}", MinWaterFlow) + " kg/s");
-                                ShowContinueError(format("...Given maximum water flow rate={:.3R}", MaxHotWaterFlow) + " kg/s");
+                                ShowContinueError(format("...Given minimum water flow rate={:.3R} kg/s", MinWaterFlow));
+                                ShowContinueError(format("...Given maximum water flow rate={:.3R} kg/s", MaxHotWaterFlow));
                             }
                             ShowRecurringWarningErrorAtEnd("CalcNonDXHeatingCoils: Hot water coil control failed (flow limits) for " +
                                                                DesicDehum(DesicDehumNum).DehumType + "=\"" + DesicDehum(DesicDehumNum).Name + "\"",

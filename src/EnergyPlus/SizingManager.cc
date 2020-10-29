@@ -3448,7 +3448,7 @@ namespace SizingManager {
             } else if (rNumericArgs(iDesignOAVolFlowNumericNum) < 0.0 && rNumericArgs(iDesignOAVolFlowNumericNum) != AutoSize) {
                 ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(iNameAlphaNum) + "\", invalid data.");
                 ShowContinueError("... incorrect " + cNumericFieldNames(iDesignOAVolFlowNumericNum) + "=[" +
-                                  format("{:.2R}", rNumericArgs(iDesignOAVolFlowNumericNum)) + "],  value should not be negative.");
+                                  format("{:.2R}],  value should not be negative.", rNumericArgs(iDesignOAVolFlowNumericNum)));
                 ErrorsFound = true;
             } else {
                 SysSizInput(SysSizIndex).DesOutAirVolFlow = rNumericArgs(iDesignOAVolFlowNumericNum);
@@ -3468,7 +3468,7 @@ namespace SizingManager {
             } else if ((rNumericArgs(iMinSysAirFlowRatioNumericNum) < 0.0) && (rNumericArgs(iMinSysAirFlowRatioNumericNum) != DataSizing::AutoSize)) {
                 ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(iMinSysAirFlowRatioNumericNum) + "\", invalid data.");
                 ShowContinueError("... incorrect " + cNumericFieldNames(iMinSysAirFlowRatioNumericNum) + "=[" +
-                                  format("{:.2R}", rNumericArgs(iMinSysAirFlowRatioNumericNum)) + "],  value should not be negative.");
+                                  format("{:.2R}],  value should not be negative.", rNumericArgs(iMinSysAirFlowRatioNumericNum)));
                 ErrorsFound = true;
             } else {
                 SysSizInput(SysSizIndex).SysAirMinFlowRat = rNumericArgs(iMinSysAirFlowRatioNumericNum);
@@ -3511,7 +3511,7 @@ namespace SizingManager {
             } else if (rNumericArgs(iMaxCoolAirVolFlowNumericNum) < 0.0) {
                 ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(iNameAlphaNum) + "\", invalid data.");
                 ShowContinueError("... incorrect " + cNumericFieldNames(iMaxCoolAirVolFlowNumericNum) + "=[" +
-                                  format("{:.2R}", rNumericArgs(iMaxCoolAirVolFlowNumericNum)) + "],  value should not be negative.");
+                                  format("{:.2R}],  value should not be negative.", rNumericArgs(iMaxCoolAirVolFlowNumericNum)));
                 ErrorsFound = true;
             } else {
                 SysSizInput(SysSizIndex).DesCoolAirFlow = rNumericArgs(iMaxCoolAirVolFlowNumericNum);
@@ -3536,7 +3536,7 @@ namespace SizingManager {
             } else if (rNumericArgs(iMaxHeatAirVolFlowNumericNum) < 0.0) {
                 ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(iNameAlphaNum) + "\", invalid data.");
                 ShowContinueError("... incorrect " + cNumericFieldNames(iMaxHeatAirVolFlowNumericNum) + "=[" +
-                                  format("{:.2R}", rNumericArgs(iMaxHeatAirVolFlowNumericNum)) + "],  value should not be negative.");
+                                  format("{:.2R}],  value should not be negative.", rNumericArgs(iMaxHeatAirVolFlowNumericNum)));
                 ErrorsFound = true;
             } else {
                 SysSizInput(SysSizIndex).DesHeatAirFlow = rNumericArgs(iMaxHeatAirVolFlowNumericNum);
@@ -3555,7 +3555,7 @@ namespace SizingManager {
             } else if (rNumericArgs(iZoneMaxOAFractionNumericNum) < 0.0) {
                 ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(iNameAlphaNum) + "\", invalid data.");
                 ShowContinueError("... incorrect " + cNumericFieldNames(iZoneMaxOAFractionNumericNum) + "=[" +
-                                  format("{:.2R}", rNumericArgs(iZoneMaxOAFractionNumericNum)) + "],  value should not be negative.");
+                                  format("{:.2R}],  value should not be negative.", rNumericArgs(iZoneMaxOAFractionNumericNum)));
                 ErrorsFound = true;
             } else {
                 SysSizInput(SysSizIndex).MaxZoneOAFraction = rNumericArgs(iZoneMaxOAFractionNumericNum);

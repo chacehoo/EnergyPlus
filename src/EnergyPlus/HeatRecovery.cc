@@ -1373,10 +1373,10 @@ namespace HeatRecovery {
                         ShowContinueError("  the mass flow ratio is out of bounds");
                         ShowContinueError(format("The mass flow ratio is (Min_Mass_Flow_Rate / Max_Mass_Flow_Rate) = {:.2R}", Z));
                         ShowContinueError("The mass flow ratio should be >= 0.0 and <= 1.0");
-                        ShowContinueError(format("Min_Mass_Flow_Rate = {:.2R}", RhoAir) + " [air density] * " +
+                        ShowContinueError(format("Min_Mass_Flow_Rate = {:.2R} [air density] * ", RhoAir) +
                                           format("{:.1R}", min(ExchCond(ExIndex).NomSupAirVolFlow, ExchCond(ExIndex).NomSecAirVolFlow)) +
                                           " [Min_Vol_Flow_Rate]");
-                        ShowContinueError(format("Max_Mass_Flow_Rate = {:.2R}", RhoAir) + " [air density] * " +
+                        ShowContinueError(format("Max_Mass_Flow_Rate = {:.2R} [air density] * ", RhoAir) +
                                           format("{:.1R}", max(ExchCond(ExIndex).NomSupAirVolFlow, ExchCond(ExIndex).NomSecAirVolFlow)) +
                                           " [Max_Vol_Flow_Rate]");
                     } else if (ErrStat == 2) {
@@ -1388,7 +1388,7 @@ namespace HeatRecovery {
                         ShowContinueError(
                             "Eff = (Nom_Sup_Mass_Flow_Rate/Min_Mass_Flow_Rate)*(T_nom_sup_out-T_nom_sup_in)/(T_nom_sec_in-T_nom_sup_in)");
                         ShowContinueError("The temperatures are user inputs. The mass flow rates are user input volume flow rates");
-                        ShowContinueError(format("  times the density of air [{:.2R}", RhoAir) + " kg/m3]");
+                        ShowContinueError(format("  times the density of air [{:.2R} kg/m3]", RhoAir));
                         ShowContinueError("Change these inputs to obtain a physically realizable heat exchanger effectiveness");
                     } else if (ErrStat == 3) {
                         FatalError = true;
@@ -1399,7 +1399,7 @@ namespace HeatRecovery {
                         ShowContinueError(
                             "Eff = (Nom_Sup_Mass_Flow_Rate/Min_Mass_Flow_Rate)*(T_nom_sup_out-T_nom_sup_in)/(T_nom_sec_in-T_nom_sup_in)");
                         ShowContinueError("The temperatures are user inputs. The mass flow rates are user input volume flow rates");
-                        ShowContinueError(format("  times the density of air [{:.2R}", RhoAir) + " kg/m3]");
+                        ShowContinueError(format("  times the density of air [{:.2R} kg/m3]", RhoAir));
                         ShowContinueError("Change these inputs to obtain a physically realizable heat exchanger effectiveness");
                     } else if (ErrStat == 4) {
                         FatalError = true;
@@ -1410,7 +1410,7 @@ namespace HeatRecovery {
                         ShowContinueError(
                             "Eff_nom = (Nom_Sup_Mass_Flow_Rate/Min_Mass_Flow_Rate) * (T_nom_sup_out - T_nom_sup_in)/(T_nom_sec_in - T_nom_sup_in)");
                         ShowContinueError("The temperatures are user inputs. The mass flow rates are user input volume flow rates");
-                        ShowContinueError(format("  times the density of air [{:.2R}", RhoAir) + " kg/m3]");
+                        ShowContinueError(format("  times the density of air [{:.2R} kg/m3]", RhoAir));
                         ShowContinueError("Change these inputs to obtain a physically realizable product of effectiveness times min/max mass ratio "
                                           "for this heat exchanger");
                     } else if (ErrStat == 5) {
@@ -1422,7 +1422,7 @@ namespace HeatRecovery {
                         ShowContinueError(
                             "Eff = (Nom_Sup_Mass_Flow_Rate/Min_Mass_Flow_Rate)*(T_nom_sup_out-T_nom_sup_in)/(T_nom_sec_in-T_nom_sup_in)");
                         ShowContinueError("The temperatures are user inputs. The mass flow rates are user input volume flow rates");
-                        ShowContinueError(format("  times the density of air [{:.2R}", RhoAir) + " kg/m3]");
+                        ShowContinueError(format("  times the density of air [{:.2R} kg/m3]", RhoAir));
                         ShowContinueError("Change these inputs to obtain a physically realizable heat exchanger effectiveness");
                     }
 
@@ -3400,7 +3400,7 @@ namespace HeatRecovery {
 
         // check input validity
         if (Z < 0.0 || Z > 1.0) {
-            ShowFatalError(format("Variable Z ({:.2R}", Z) + ") out of range [0.0,1.0] in CalculateEpsFromNTUandZ");
+            ShowFatalError(format("Variable Z ({:.2R}) out of range [0.0,1.0] in CalculateEpsFromNTUandZ", Z));
         }
 
         // effectiveness

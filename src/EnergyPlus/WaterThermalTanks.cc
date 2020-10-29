@@ -1213,7 +1213,7 @@ namespace WaterThermalTanks {
                     ShowSevereError(DataIPShortCuts::cCurrentModuleObject + "=\"" + HPWH.Name + "\", ");
                     ShowContinueError(hpwhNumericFieldNames[3] + format(" ({:.6T}", HPWH.WrappedCondenserTopLocation) +
                                       ") must be greater than " + hpwhNumericFieldNames[2] + " (" +
-                                      format("{:.6T}", HPWH.WrappedCondenserBottomLocation) + ").");
+                                      format("{:.6T}).", HPWH.WrappedCondenserBottomLocation));
                     ErrorsFound = true;
                 }
 
@@ -5477,12 +5477,12 @@ namespace WaterThermalTanks {
                         if (TankChangeRateScale < 60.0) { // nominal change over in less than one minute
                             ShowSevereError("InitWaterThermalTank: Detected problem for stratified tank model.  Model cannot be applied.");
                             ShowContinueError("Occurs for stratified tank name = " + this->Name);
-                            ShowContinueError(format("Tank volume = {:.4R}", this->Volume) + " [m3]");
+                            ShowContinueError(format("Tank volume = {:.4R} [m3]", this->Volume));
                             ShowContinueError(format("Tank use side volume flow rate = {:.4R}", this->UseDesignVolFlowRate) +
                                               " [m3/s]");
                             ShowContinueError(format("Tank source side volume flow rate = {:.4R}", this->SourceDesignVolFlowRate) +
                                               " [m3/s]");
-                            ShowContinueError(format("Nominal tank change over rate = {:.2R}", TankChangeRateScale) + " [s]");
+                            ShowContinueError(format("Nominal tank change over rate = {:.2R} [s]", TankChangeRateScale));
                             ShowContinueError(
                                 "Change over rate is too fast, increase tank volume, decrease connection flow rates or use mixed tank model");
 
@@ -5684,7 +5684,7 @@ namespace WaterThermalTanks {
                         ShowSevereError("Water heater = " + this->Name +
                                         ":  Water heater tank set point temperature is greater than the maximum tank temperature limit.");
                         ShowContinueErrorTimeStamp("Water heater tank set point temperature is reset to Tank Temperature Limit minus 1 C (" +
-                                                   format("{:.2T}", this->SetPointTemp) + ") and simulation continues.");
+                                                   format("{:.2T}) and simulation continues.", this->SetPointTemp));
                         this->ShowSetPointWarning = false;
                     }
                 }
@@ -5697,7 +5697,7 @@ namespace WaterThermalTanks {
                         ShowSevereError("Chilled Water Tank = " + this->Name +
                                         ":  Water heater tank set point temperature is lower than the minimum tank temperature limit.");
                         ShowContinueErrorTimeStamp("Chilled water tank set point temperature is reset to Tank Temperature Limit plus 1 C (" +
-                                                   format("{:.2T}", this->SetPointTemp) + ") and simulation continues.");
+                                                   format("{:.2T}) and simulation continues.", this->SetPointTemp));
                         this->ShowSetPointWarning = false;
                     }
                 }
@@ -5755,7 +5755,7 @@ namespace WaterThermalTanks {
                             ":  Heat Pump water heater set point temperature is equal to or greater than the maximum tank temperature limit.");
                         ShowContinueErrorTimeStamp(
                             "Heat Pump water heater tank set point temperature is reset to Tank Temperature Limit minus 1 C (" +
-                            format("{:.2T}", state.dataWaterThermalTanks->HPWaterHeater(this->HeatPumpNum).SetPointTemp) + ") and simulation continues.");
+                            format("{:.2T}) and simulation continues.", state.dataWaterThermalTanks->HPWaterHeater(this->HeatPumpNum).SetPointTemp));
                         state.dataWaterThermalTanks->HPWaterHeater(this->HeatPumpNum).ShowSetPointWarning = false;
                     }
                 }
@@ -6048,7 +6048,7 @@ namespace WaterThermalTanks {
                                      " in fan object "
                                      " is less than the MSHP system air flow rate"
                                      " when waterheating is required(" +
-                                     format("{:.7T}", state.dataWaterThermalTanks->HPWaterHeater(HPNum).HPWHAirVolFlowRate(state.dataWaterThermalTanks->HPWaterHeater(HPNum).NumofSpeed)) + ").");
+                                     format("{:.7T}).", state.dataWaterThermalTanks->HPWaterHeater(HPNum).HPWHAirVolFlowRate(state.dataWaterThermalTanks->HPWaterHeater(HPNum).NumofSpeed)));
                     ShowContinueError(" The MSHP system flow rate when waterheating is required is reset to the"
                                       " fan flow rate and the simulation continues.");
                     ShowContinueError(" Occurs in " + state.dataWaterThermalTanks->HPWaterHeater(HPNum).Name);
@@ -6670,7 +6670,7 @@ namespace WaterThermalTanks {
                 if (this->FreezingErrorIndex == 0) {
                     ShowWarningError(RoutineName + ": " + this->Type + " = '" + this->Name +
                                      "':  Temperature of tank < 2C indicates of possibility of freeze. Tank Temperature = " +
-                                     format("{:.2R}", this->TankTemp) + " C.");
+                                     format("{:.2R} C.", this->TankTemp));
                     ShowContinueErrorTimeStamp("");
                 }
                 ShowRecurringWarningErrorAtEnd(this->Type + " = '" + this->Name + "':  Temperature of tank < 2C indicates of possibility of freeze",
@@ -7537,7 +7537,7 @@ namespace WaterThermalTanks {
                 if (this->FreezingErrorIndex == 0) {
                     ShowWarningError(RoutineName + ": " + this->Type + " = '" + this->Name +
                                      "':  Temperature of tank < 2C indicates of possibility of freeze. Tank Temperature = " +
-                                     format("{:.2R}", this->TankTemp) + " C.");
+                                     format("{:.2R} C.", this->TankTemp));
                     ShowContinueErrorTimeStamp("");
                 }
                 ShowRecurringWarningErrorAtEnd(this->Type + " = '" + this->Name + "':  Temperature of tank < 2C indicates of possibility of freeze",

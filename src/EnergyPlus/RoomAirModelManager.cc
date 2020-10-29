@@ -2089,9 +2089,9 @@ namespace RoomAirModelManager {
 
                 if (std::abs((Z2Zone - Z1Zone) - Zone(ZNum).CeilingHeight) > CeilingHeightDiffMax) {
                     ShowWarningError("RoomAirManager: Inconsistent ceiling heights in Zone: " + Zone(ZNum).Name);
-                    ShowContinueError(format("Lowest height=[{:.3R}", Z1Zone) + "].");
-                    ShowContinueError(format("Highest height=[{:.3R}", Z2Zone) + "].");
-                    ShowContinueError(format("Ceiling height=[{:.3R}", Zone(ZNum).CeilingHeight) + "].");
+                    ShowContinueError(format("Lowest height=[{:.3R}].", Z1Zone));
+                    ShowContinueError(format("Highest height=[{:.3R}].", Z2Zone));
+                    ShowContinueError(format("Ceiling height=[{:.3R}].", Zone(ZNum).CeilingHeight));
                 }
             } // Zones
 

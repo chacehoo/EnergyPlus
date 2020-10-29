@@ -232,7 +232,7 @@ namespace ICEngineElectricGenerator {
                 Real64 xValue = CurveManager::CurveValue(state, ICEngineGenerator(genNum).ExhaustTempCurve, 1.0);
                 if (xValue < ReferenceTemp) {
                     ShowSevereError("GetICEngineGeneratorInput: " + DataIPShortCuts::cAlphaFieldNames(7) + " output has very low value.");
-                    ShowContinueError(format("...curve generates [{:.3R}", xValue) + " C] at PLR=1.0");
+                    ShowContinueError(format("...curve generates [{:.3R} C] at PLR=1.0", xValue));
                     ShowContinueError(format("...this is less than the Reference Temperature [{:.2R}", ReferenceTemp) +
                                       " C] and may cause errors.");
                 }
@@ -578,8 +578,8 @@ namespace ICEngineElectricGenerator {
                 if (this->ErrExhaustTempIndex == 0) {
                     ShowWarningMessage("CalcICEngineGeneratorModel: " + this->TypeOf + "=\"" + this->Name +
                                        "\" low Exhaust Temperature from Curve Value");
-                    ShowContinueError(format("...curve generated temperature=[{:.3R}", exhaustTemp) + " C], PLR=[" +
-                                      format("{:.3R}", PLR) + "].");
+                    ShowContinueError(format("...curve generated temperature=[{:.3R} C], PLR=[", exhaustTemp) +
+                                      format("{:.3R}].", PLR));
                     ShowContinueError("...simulation will continue with exhaust heat reclaim set to 0.");
                 }
                 ShowRecurringWarningErrorAtEnd("CalcICEngineGeneratorModel: " + this->TypeOf + "=\"" + this->Name +

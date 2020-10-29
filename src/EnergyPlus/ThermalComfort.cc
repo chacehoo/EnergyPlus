@@ -1711,7 +1711,7 @@ namespace ThermalComfort {
             if (std::abs(AllAngleFacSummed - 1.0) > AngleFacLimit) {
                 ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid - Sum[AngleFactors]");
                 ShowContinueError(format("...Sum of Angle Factors [{:.3R}", AllAngleFacSummed) +
-                                  format("] exceed expected sum [1.0] by more than limit [{:.3R}", AngleFacLimit) + "].");
+                                  format("] exceed expected sum [1.0] by more than limit [{:.3R}].", AngleFacLimit));
                 ErrorsFound = true;
             }
         }
@@ -2100,7 +2100,7 @@ namespace ThermalComfort {
             }
             // if any zones should be warning print it out
             if (showWarning) {
-                ShowWarningError(format("More than 4% of time ({:.1R}", allowedHours) + " hours) uncomfortable in one or more zones ");
+                ShowWarningError(format("More than 4% of time ({:.1R} hours) uncomfortable in one or more zones ", allowedHours));
                 ShowContinueError("Based on ASHRAE 55-2004 graph (Section 5.2.1.1)");
                 if (RunPeriodEnvironment) {
                     ShowContinueError("During Environment [" + EnvironmentStartEnd + "]: " + EnvironmentName);

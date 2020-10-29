@@ -88,48 +88,48 @@ Real64 WaterHeatingCoilUASizer::size(EnergyPlusData &state, Real64 _originalValu
                     msg = "  Iteration limit exceeded in calculating coil UA";
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Lower UA estimate = {:.6T}", UA0) + " W/m2-K (0.1% of Design Coil Load)";
+                    msg = format("  Lower UA estimate = {:.6T} W/m2-K (0.1% of Design Coil Load)", UA0);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Upper UA estimate = {:.6T}", UA1) + " W/m2-K (100% of Design Coil Load)";
+                    msg = format("  Upper UA estimate = {:.6T} W/m2-K (100% of Design Coil Load)", UA1);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Final UA estimate when iterations exceeded limit = {:.6T}", this->autoSizedValue) + " W/m2-K";
+                    msg = format("  Final UA estimate when iterations exceeded limit = {:.6T} W/m2-K", this->autoSizedValue);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
                     msg = "  Zone \"" + this->finalZoneSizing(this->curZoneEqNum).ZoneName +
                           "\" coil sizing conditions (may be different than Sizing inputs):";
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Coil inlet air temperature     = {:.3T}", this->dataDesInletAirTemp) + " C";
+                    msg = format("  Coil inlet air temperature     = {:.3T} C", this->dataDesInletAirTemp);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Coil inlet air humidity ratio  = {:.3T}", this->dataDesInletAirHumRat) + " kgWater/kgDryAir";
+                    msg = format("  Coil inlet air humidity ratio  = {:.3T} kgWater/kgDryAir", this->dataDesInletAirHumRat);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Coil inlet air mass flow rate  = {:.6T}", this->dataFlowUsedForSizing) + " kg/s";
+                    msg = format("  Coil inlet air mass flow rate  = {:.6T} kg/s", this->dataFlowUsedForSizing);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
                     // TotWaterHeatingCoilRate is set in CALL to CalcSimpleHeatingCoil
-                    msg = format("  Design Coil Capacity           = {:.3T}", this->dataDesignCoilCapacity) + " W";
+                    msg = format("  Design Coil Capacity           = {:.3T} W", this->dataDesignCoilCapacity);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
                     if (this->dataNomCapInpMeth) {
-                        msg = format("  Design Coil Load               = {:.3T}", this->dataCapacityUsedForSizing) + " W";
+                        msg = format("  Design Coil Load               = {:.3T} W", this->dataCapacityUsedForSizing);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
-                        msg = format("  Coil outlet air temperature    = {:.3T}", this->dataDesOutletAirTemp) + " C";
+                        msg = format("  Coil outlet air temperature    = {:.3T} C", this->dataDesOutletAirTemp);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
-                        msg = format("  Coil outlet air humidity ratio = {:.3T}", this->dataDesOutletAirHumRat) + " kgWater/kgDryAir";
+                        msg = format("  Coil outlet air humidity ratio = {:.3T} kgWater/kgDryAir", this->dataDesOutletAirHumRat);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                     } else if (this->termUnitSingDuct || this->termUnitPIU || this->termUnitIU || this->zoneEqFanCoil) {
-                        msg = format("  Design Coil Load               = {:.3T}", this->dataCapacityUsedForSizing) + " W";
+                        msg = format("  Design Coil Load               = {:.3T} W", this->dataCapacityUsedForSizing);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                     } else {
-                        msg = format("  Design Coil Load               = {:.3T}", this->dataCapacityUsedForSizing) + " W";
+                        msg = format("  Design Coil Load               = {:.3T} W", this->dataCapacityUsedForSizing);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                         msg =
@@ -138,7 +138,7 @@ Real64 WaterHeatingCoilUASizer::size(EnergyPlusData &state, Real64 _originalValu
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                         msg = "  Coil outlet air humidity ratio = " +
-                              format("{:.3T}", this->finalZoneSizing(this->curZoneEqNum).HeatDesHumRat) + " kgWater/kgDryAir";
+                              format("{:.3T} kgWater/kgDryAir", this->finalZoneSizing(this->curZoneEqNum).HeatDesHumRat);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                     }
@@ -152,44 +152,44 @@ Real64 WaterHeatingCoilUASizer::size(EnergyPlusData &state, Real64 _originalValu
                     msg = "  Bad starting values for UA";
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Lower UA estimate = {:.6T}", UA0) + " W/m2-K (0.1% of Design Coil Load)";
+                    msg = format("  Lower UA estimate = {:.6T} W/m2-K (0.1% of Design Coil Load)", UA0);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Upper UA estimate = {:.6T}", UA1) + " W/m2-K (100% of Design Coil Load)";
+                    msg = format("  Upper UA estimate = {:.6T} W/m2-K (100% of Design Coil Load)", UA1);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
                     msg = "  Zone \"" + this->finalZoneSizing(this->curZoneEqNum).ZoneName +
                           "\" coil sizing conditions (may be different than Sizing inputs):";
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Coil inlet air temperature     = {:.3T}", this->dataDesInletAirTemp) + " C";
+                    msg = format("  Coil inlet air temperature     = {:.3T} C", this->dataDesInletAirTemp);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Coil inlet air humidity ratio  = {:.3T}", this->dataDesInletAirHumRat) + " kgWater/kgDryAir";
+                    msg = format("  Coil inlet air humidity ratio  = {:.3T} kgWater/kgDryAir", this->dataDesInletAirHumRat);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Coil inlet air mass flow rate  = {:.6T}", this->dataFlowUsedForSizing) + " kg/s";
+                    msg = format("  Coil inlet air mass flow rate  = {:.6T} kg/s", this->dataFlowUsedForSizing);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Design Coil Capacity           = {:.3T}", this->dataDesignCoilCapacity) + " W";
+                    msg = format("  Design Coil Capacity           = {:.3T} W", this->dataDesignCoilCapacity);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
                     if (this->dataNomCapInpMeth) {
-                        msg = format("  Design Coil Load               = {:.3T}", this->dataCapacityUsedForSizing) + " W";
+                        msg = format("  Design Coil Load               = {:.3T} W", this->dataCapacityUsedForSizing);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
-                        msg = format("  Coil outlet air temperature    = {:.3T}", this->dataDesOutletAirTemp) + " C";
+                        msg = format("  Coil outlet air temperature    = {:.3T} C", this->dataDesOutletAirTemp);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
-                        msg = format("  Coil outlet air humidity ratio = {:.3T}", this->dataDesOutletAirHumRat) + " kgWater/kgDryAir";
+                        msg = format("  Coil outlet air humidity ratio = {:.3T} kgWater/kgDryAir", this->dataDesOutletAirHumRat);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                     } else if (this->termUnitSingDuct || this->termUnitPIU || this->termUnitIU || this->zoneEqFanCoil) {
-                        msg = format("  Design Coil Load               = {:.3T}", this->dataCapacityUsedForSizing) + " W";
+                        msg = format("  Design Coil Load               = {:.3T} W", this->dataCapacityUsedForSizing);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                     } else {
-                        msg = format("  Design Coil Load               = {:.3T}", this->dataCapacityUsedForSizing) + " W";
+                        msg = format("  Design Coil Load               = {:.3T} W", this->dataCapacityUsedForSizing);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                         msg =
@@ -198,7 +198,7 @@ Real64 WaterHeatingCoilUASizer::size(EnergyPlusData &state, Real64 _originalValu
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                         msg = "  Coil outlet air humidity ratio = " +
-                              format("{:.3T}", this->finalZoneSizing(this->curZoneEqNum).HeatDesHumRat) + " kgWater/kgDryAir";
+                              format("{:.3T} kgWater/kgDryAir", this->finalZoneSizing(this->curZoneEqNum).HeatDesHumRat);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                     }
@@ -214,10 +214,10 @@ Real64 WaterHeatingCoilUASizer::size(EnergyPlusData &state, Real64 _originalValu
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                         msg = "  Plant design loop exit temperature = " +
-                              format("{:.3T}", this->plantSizData(this->dataPltSizHeatNum).ExitTemp) + " C";
+                              format("{:.3T} C", this->plantSizData(this->dataPltSizHeatNum).ExitTemp);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
-                        msg = format("  Plant design loop delta T          = {:.3T}", this->dataWaterCoilSizHeatDeltaT) + " C";
+                        msg = format("  Plant design loop delta T          = {:.3T} C", this->dataWaterCoilSizHeatDeltaT);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                     }
@@ -267,39 +267,39 @@ Real64 WaterHeatingCoilUASizer::size(EnergyPlusData &state, Real64 _originalValu
                     msg = "  Iteration limit exceeded in calculating coil UA";
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Lower UA estimate = {:.6T}", UA0) + " W/m2-K (1% of Design Coil Load)";
+                    msg = format("  Lower UA estimate = {:.6T} W/m2-K (1% of Design Coil Load)", UA0);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Upper UA estimate = {:.6T}", UA1) + " W/m2-K (100% of Design Coil Load)";
+                    msg = format("  Upper UA estimate = {:.6T} W/m2-K (100% of Design Coil Load)", UA1);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Final UA estimate when iterations exceeded limit = {:.6T}", this->autoSizedValue) + " W/m2-K";
+                    msg = format("  Final UA estimate when iterations exceeded limit = {:.6T} W/m2-K", this->autoSizedValue);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
                     msg = "  AirloopHVAC \"" + this->finalSysSizing(this->curSysNum).AirPriLoopName +
                           "\" coil sizing conditions (may be different than Sizing inputs):";
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Coil inlet air temperature     = {:.3T}", this->dataDesInletAirTemp) + " C";
+                    msg = format("  Coil inlet air temperature     = {:.3T} C", this->dataDesInletAirTemp);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Coil inlet air humidity ratio  = {:.3T}", this->dataDesInletAirHumRat) + " kgWater/kgDryAir";
+                    msg = format("  Coil inlet air humidity ratio  = {:.3T} kgWater/kgDryAir", this->dataDesInletAirHumRat);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Coil inlet air mass flow rate  = {:.6T}", this->dataFlowUsedForSizing) + " kg/s";
+                    msg = format("  Coil inlet air mass flow rate  = {:.6T} kg/s", this->dataFlowUsedForSizing);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Design Coil Capacity           = {:.3T}", this->dataDesignCoilCapacity) + " W";
+                    msg = format("  Design Coil Capacity           = {:.3T} W", this->dataDesignCoilCapacity);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Design Coil Load               = {:.3T}", this->dataCapacityUsedForSizing) + " W";
+                    msg = format("  Design Coil Load               = {:.3T} W", this->dataCapacityUsedForSizing);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
                     if (this->dataNomCapInpMeth) {
-                        msg = format("  Coil outlet air temperature    = {:.3T}", this->dataDesOutletAirTemp) + " C";
+                        msg = format("  Coil outlet air temperature    = {:.3T} C", this->dataDesOutletAirTemp);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
-                        msg = format("  Coil outlet air humidity ratio = {:.3T}", this->dataDesOutletAirHumRat) + " kgWater/kgDryAir";
+                        msg = format("  Coil outlet air humidity ratio = {:.3T} kgWater/kgDryAir", this->dataDesOutletAirHumRat);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                     }
@@ -313,36 +313,36 @@ Real64 WaterHeatingCoilUASizer::size(EnergyPlusData &state, Real64 _originalValu
                     msg = "  Bad starting values for UA";
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Lower UA estimate = {:.6T}", UA0) + " W/m2-K (1% of Design Coil Load)";
+                    msg = format("  Lower UA estimate = {:.6T} W/m2-K (1% of Design Coil Load)", UA0);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Upper UA estimate = {:.6T}", UA1) + " W/m2-K (100% of Design Coil Load)";
+                    msg = format("  Upper UA estimate = {:.6T} W/m2-K (100% of Design Coil Load)", UA1);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
                     msg = "  AirloopHVAC \"" + this->finalSysSizing(this->curSysNum).AirPriLoopName +
                           "\" coil sizing conditions (may be different than Sizing inputs):";
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Coil inlet air temperature     = {:.3T}", this->dataDesInletAirTemp) + " C";
+                    msg = format("  Coil inlet air temperature     = {:.3T} C", this->dataDesInletAirTemp);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Coil inlet air humidity ratio  = {:.3T}", this->dataDesInletAirHumRat) + " kgWater/kgDryAir";
+                    msg = format("  Coil inlet air humidity ratio  = {:.3T} kgWater/kgDryAir", this->dataDesInletAirHumRat);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Coil inlet air mass flow rate  = {:.6T}", this->dataFlowUsedForSizing) + " kg/s";
+                    msg = format("  Coil inlet air mass flow rate  = {:.6T} kg/s", this->dataFlowUsedForSizing);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Design Coil Capacity           = {:.3T}", this->dataDesignCoilCapacity) + " W";
+                    msg = format("  Design Coil Capacity           = {:.3T} W", this->dataDesignCoilCapacity);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = format("  Design Coil Load               = {:.3T}", this->dataCapacityUsedForSizing) + " W";
+                    msg = format("  Design Coil Load               = {:.3T} W", this->dataCapacityUsedForSizing);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
                     if (this->dataNomCapInpMeth) {
-                        msg = format("  Coil outlet air temperature    = {:.3T}", this->dataDesOutletAirTemp) + " C";
+                        msg = format("  Coil outlet air temperature    = {:.3T} C", this->dataDesOutletAirTemp);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
-                        msg = format("  Coil outlet air humidity ratio = {:.3T}", this->dataDesOutletAirHumRat) + " kgWater/kgDryAir";
+                        msg = format("  Coil outlet air humidity ratio = {:.3T} kgWater/kgDryAir", this->dataDesOutletAirHumRat);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                     }
@@ -357,10 +357,10 @@ Real64 WaterHeatingCoilUASizer::size(EnergyPlusData &state, Real64 _originalValu
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                         msg = "  Plant design loop exit temperature = " +
-                              format("{:.3T}", this->plantSizData(this->dataPltSizHeatNum).ExitTemp) + " C";
+                              format("{:.3T} C", this->plantSizData(this->dataPltSizHeatNum).ExitTemp);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
-                        msg = format("  Plant design loop delta T          = {:.3T}", this->dataWaterCoilSizHeatDeltaT) + " C";
+                        msg = format("  Plant design loop delta T          = {:.3T} C", this->dataWaterCoilSizHeatDeltaT);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                     }

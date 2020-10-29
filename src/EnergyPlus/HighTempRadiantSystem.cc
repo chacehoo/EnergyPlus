@@ -1379,16 +1379,16 @@ namespace HighTempRadiantSystem {
                     if (ThisSurfIntensity > MaxRadHeatFlux) { // CR 8074, trap for excessive intensity (throws off surface balance )
                         ShowSevereError("DistributeHTRadGains:  excessive thermal radiation heat flux intensity detected");
                         ShowContinueError("Surface = " + Surface(SurfNum).Name);
-                        ShowContinueError(format("Surface area = {:.3R}", Surface(SurfNum).Area) + " [m2]");
+                        ShowContinueError(format("Surface area = {:.3R} [m2]", Surface(SurfNum).Area));
                         ShowContinueError("Occurs in ZoneHVAC:HighTemperatureRadiant = " + HighTempRadSys(RadSysNum).Name);
-                        ShowContinueError(format("Radiation intensity = {:.2R}", ThisSurfIntensity) + " [W/m2]");
+                        ShowContinueError(format("Radiation intensity = {:.2R} [W/m2]", ThisSurfIntensity));
                         ShowContinueError("Assign a larger surface area or more surfaces in ZoneHVAC:HighTemperatureRadiant");
                         ShowFatalError("DistributeHTRadGains:  excessive thermal radiation heat flux intensity detected");
                     }
                 } else { // small surface
                     ShowSevereError("DistributeHTRadGains:  surface not large enough to receive thermal radiation heat flux");
                     ShowContinueError("Surface = " + Surface(SurfNum).Name);
-                    ShowContinueError(format("Surface area = {:.3R}", Surface(SurfNum).Area) + " [m2]");
+                    ShowContinueError(format("Surface area = {:.3R} [m2]", Surface(SurfNum).Area));
                     ShowContinueError("Occurs in ZoneHVAC:HighTemperatureRadiant = " + HighTempRadSys(RadSysNum).Name);
                     ShowContinueError("Assign a larger surface area or more surfaces in ZoneHVAC:HighTemperatureRadiant");
                     ShowFatalError("DistributeHTRadGains:  surface not large enough to receive thermal radiation heat flux");

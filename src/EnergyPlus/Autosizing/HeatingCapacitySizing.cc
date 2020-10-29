@@ -193,16 +193,16 @@ Real64 HeatingCapacitySizer::size(EnergyPlusData &state, Real64 _originalValue, 
                 }
                 if (DataGlobals::DisplayExtraWarnings && this->autoSizedValue <= 0.0) {
                     ShowWarningMessage(this->callingRoutine + ": Potential issue with equipment sizing for " + this->compType + ' ' + this->compName);
-                    ShowContinueError(format("...Rated Total Heating Capacity = {:.2T}", this->autoSizedValue) + " [W]");
+                    ShowContinueError(format("...Rated Total Heating Capacity = {:.2T} [W]", this->autoSizedValue));
                     if (this->zoneEqSizing(this->curZoneEqNum).HeatingCapacity ||
                         (this->dataCoolCoilCap > 0.0 && this->dataFlowUsedForSizing > 0.0)) {
                         ShowContinueError("...Capacity passed by parent object to size child component = " +
-                                          format("{:.2T}", NominalCapacityDes) + " [W]");
+                                          format("{:.2T} [W]", NominalCapacityDes));
                     } else {
                         if (CoilOutTemp > -999.0) {
-                            ShowContinueError(format("...Air flow rate used for sizing = {:.5T}", DesVolFlow) + " [m3/s]");
-                            ShowContinueError(format("...Coil inlet air temperature used for sizing = {:.2T}", CoilInTemp) + " [C]");
-                            ShowContinueError(format("...Coil outlet air temperature used for sizing = {:.2T}", CoilOutTemp) + " [C]");
+                            ShowContinueError(format("...Air flow rate used for sizing = {:.5T} [m3/s]", DesVolFlow));
+                            ShowContinueError(format("...Coil inlet air temperature used for sizing = {:.2T} [C]", CoilInTemp));
+                            ShowContinueError(format("...Coil outlet air temperature used for sizing = {:.2T} [C]", CoilOutTemp));
                         } else {
                             ShowContinueError("...Capacity used to size child component set to 0 [W]");
                         }
@@ -366,12 +366,12 @@ Real64 HeatingCapacitySizer::size(EnergyPlusData &state, Real64 _originalValue, 
                 this->autoSizedValue = NominalCapacityDes * this->dataHeatSizeRatio * this->dataFracOfAutosizedHeatingCapacity;
                 if (DataGlobals::DisplayExtraWarnings && this->autoSizedValue <= 0.0) {
                     ShowWarningMessage(this->callingRoutine + ": Potential issue with equipment sizing for " + this->compType + ' ' + this->compName);
-                    ShowContinueError(format("...Rated Total Heating Capacity = {:.2T}", this->autoSizedValue) + " [W]");
+                    ShowContinueError(format("...Rated Total Heating Capacity = {:.2T} [W]", this->autoSizedValue));
                     if (CoilOutTemp > -999.0) {
-                        ShowContinueError(format("...Air flow rate used for sizing = {:.5T}", DesVolFlow) + " [m3/s]");
+                        ShowContinueError(format("...Air flow rate used for sizing = {:.5T} [m3/s]", DesVolFlow));
                         ShowContinueError(format("...Outdoor air fraction used for sizing = {:.2T}", OutAirFrac));
-                        ShowContinueError(format("...Coil inlet air temperature used for sizing = {:.2T}", CoilInTemp) + " [C]");
-                        ShowContinueError(format("...Coil outlet air temperature used for sizing = {:.2T}", CoilOutTemp) + " [C]");
+                        ShowContinueError(format("...Coil inlet air temperature used for sizing = {:.2T} [C]", CoilInTemp));
+                        ShowContinueError(format("...Coil outlet air temperature used for sizing = {:.2T} [C]", CoilOutTemp));
                     } else {
                         ShowContinueError(format("...Capacity passed by parent object to size child component = {:.2T}", DesCoilLoad) +
                                           " [W]");

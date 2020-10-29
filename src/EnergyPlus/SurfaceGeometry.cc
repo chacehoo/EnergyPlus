@@ -1754,9 +1754,9 @@ namespace SurfaceGeometry {
                             // Tilt
                             if (std::abs(std::abs(Surface(Found).Tilt + Surface(SurfNum).Tilt) - 180.0) > 1.0) {
                                 ShowWarningError(RoutineName + "InterZone Surface Tilts do not match as expected.");
-                                ShowContinueError("  Tilt=" + format("{:.1T}", Surface(SurfNum).Tilt) + " in Surface=" + Surface(SurfNum).Name +
+                                ShowContinueError("  Tilt=" + format("{:.1T} in Surface=", Surface(SurfNum).Tilt) + Surface(SurfNum).Name +
                                                   ", Zone=" + Surface(SurfNum).ZoneName);
-                                ShowContinueError("  Tilt=" + format("{:.1T}", Surface(Found).Tilt) + " in Surface=" + Surface(Found).Name +
+                                ShowContinueError("  Tilt=" + format("{:.1T} in Surface=", Surface(Found).Tilt) + Surface(Found).Name +
                                                   ", Zone=" + Surface(Found).ZoneName);
                             }
                             // check surface class match.  interzone surface.
@@ -1795,7 +1795,7 @@ namespace SurfaceGeometry {
                                                           ", Tilt=" + format("{:.1T}", Surface(SurfNum).Tilt) +
                                                           ", in Surface=" + Surface(SurfNum).Name + ", Zone=" + Surface(SurfNum).ZoneName);
                                         ShowContinueError("  Azimuth=" + format("{:.1T}", Surface(Found).Azimuth) +
-                                                          ", Tilt=" + format("{:.1T}", Surface(Found).Tilt) + ", in Surface=" + Surface(Found).Name +
+                                                          ", Tilt=" + format("{:.1T}, in Surface=", Surface(Found).Tilt) + Surface(Found).Name +
                                                           ", Zone=" + Surface(Found).ZoneName);
                                         ShowContinueError("..surface class of first surface=" + cSurfaceClass(Surface(SurfNum).Class));
                                         ShowContinueError("..surface class of second surface=" + cSurfaceClass(Surface(Found).Class));
@@ -2363,7 +2363,7 @@ namespace SurfaceGeometry {
                 (std::abs(baseSurface.Tilt - subSurface.Tilt) > errorTolerance)) {
                 surfaceError = true;
                 ShowSevereError("checkSubSurfAzTiltNorm: Outward facing angle of subsurface differs more than " +
-                                format("{:.1R}", errorTolerance) + " degrees from base surface.");
+                                format("{:.1R} degrees from base surface.", errorTolerance));
                 ShowContinueError("Subsurface=\"" + subSurface.Name + "\" Tilt = " + format("{:.1R}", subSurface.Tilt) +
                                   "  Azimuth = " + format("{:.1R}", subSurface.Azimuth));
                 ShowContinueError("Base surface=\"" + baseSurface.Name + "\" Tilt = " + format("{:.1R}", baseSurface.Tilt) +
@@ -2373,12 +2373,12 @@ namespace SurfaceGeometry {
                 ++checkSubSurfAzTiltNormErrCount;
                 if (checkSubSurfAzTiltNormErrCount == 1 && !DisplayExtraWarnings) {
                     ShowWarningError("checkSubSurfAzTiltNorm: Some Outward Facing angles of subsurfaces differ more than " +
-                                     format("{:.1R}", warningTolerance) + " degrees from base surface.");
+                                     format("{:.1R} degrees from base surface.", warningTolerance));
                     ShowContinueError("...use Output:Diagnostics,DisplayExtraWarnings; to show more details on individual surfaces.");
                 }
                 if (DisplayExtraWarnings) {
                     ShowWarningError("checkSubSurfAzTiltNorm: Outward facing angle of subsurface differs more than " +
-                                     format("{:.1R}", warningTolerance) + " degrees from base surface.");
+                                     format("{:.1R} degrees from base surface.", warningTolerance));
                     ShowContinueError("Subsurface=\"" + subSurface.Name + "\" Tilt = " + format("{:.1R}", subSurface.Tilt) +
                                       "  Azimuth = " + format("{:.1R}", subSurface.Azimuth));
                     ShowContinueError("Base surface=\"" + baseSurface.Name + "\" Tilt = " + format("{:.1R}", baseSurface.Tilt) +
@@ -3232,7 +3232,7 @@ namespace SurfaceGeometry {
                         if (!GroundTempObjInput) {
                             ShowWarningError("GetHTSurfaceData: Surfaces with interface to Ground found but no \"Ground Temperatures\" were input.");
                             ShowContinueError("Found first in surface=" + cAlphaArgs(1));
-                            ShowContinueError("Defaults, constant throughout the year of (" + format("{:.1R}", GroundTemp) + ") will be used.");
+                            ShowContinueError("Defaults, constant throughout the year of (" + format("{:.1R}) will be used.", GroundTemp));
                         }
                         NoGroundTempObjWarning = false;
                     }
@@ -3740,7 +3740,7 @@ namespace SurfaceGeometry {
                         if (!GroundTempObjInput) {
                             ShowWarningError("GetRectSurfaces: Surfaces with interface to Ground found but no \"Ground Temperatures\" were input.");
                             ShowContinueError("Found first in surface=" + cAlphaArgs(1));
-                            ShowContinueError("Defaults, constant throughout the year of (" + format("{:.1R}", GroundTemp) + ") will be used.");
+                            ShowContinueError("Defaults, constant throughout the year of (" + format("{:.1R}) will be used.", GroundTemp));
                         }
                         NoGroundTempObjWarning = false;
                     }
@@ -4319,7 +4319,7 @@ namespace SurfaceGeometry {
                  SurfaceTmp(SurfNum).Class != SurfaceClass_Door) &&
                 rNumericArgs(2) > 1.0) {
                 ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", invalid " + cNumericFieldNames(2) + "=[" +
-                                 format("{:.1T}", rNumericArgs(2)) + "].");
+                                 format("{:.1T}].", rNumericArgs(2)));
                 ShowContinueError("...because " + cAlphaFieldNames(2) + '=' + cAlphaArgs(2) + " multiplier will be set to 1.0.");
                 SurfaceTmp(SurfNum).Multiplier = 1.0;
             }
@@ -4643,7 +4643,7 @@ namespace SurfaceGeometry {
                      SurfaceTmp(SurfNum).Class != SurfaceClass_Door) &&
                     rNumericArgs(1) > 1.0) {
                     ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", invalid " + cNumericFieldNames(1) + "=[" +
-                                     format("{:.1T}", rNumericArgs(1)) + "].");
+                                     format("{:.1T}].", rNumericArgs(1)));
                     ShowContinueError("...because " + cAlphaFieldNames(1) + '=' + cAlphaArgs(1) + " multiplier will be set to 1.0.");
                     SurfaceTmp(SurfNum).Multiplier = 1.0;
                 }
@@ -4862,9 +4862,9 @@ namespace SurfaceGeometry {
                                 ShowContinueError("..Material=" + dataMaterial.Material(MatGap).Name + " thickness=" + format("{:.3R}", dataMaterial.Material(MatGap).Thickness) +
                                                   " -");
                                 ShowContinueError("..( Material=" + dataMaterial.Material(MatGap1).Name +
-                                                  " thickness=" + format("{:.3R}", dataMaterial.Material(MatGap1).Thickness) + " +");
+                                                  " thickness=" + format("{:.3R} +", dataMaterial.Material(MatGap1).Thickness));
                                 ShowContinueError("..Material=" + dataMaterial.Material(MatGap2).Name + " thickness=" +
-                                                  format("{:.3R}", dataMaterial.Material(MatGap2).Thickness) + " )=[" + format("{:.3R}", MatGapCalc) + "] >.001");
+                                                  format("{:.3R}", dataMaterial.Material(MatGap2).Thickness) + " )=[" + format("{:.3R}] >.001", MatGapCalc));
                                 ErrorsFound = true;
                             }
                         } else { // Between-glass shade
@@ -4877,11 +4877,11 @@ namespace SurfaceGeometry {
                                 ShowContinueError("..Material=" + dataMaterial.Material(MatGap).Name + " thickness=" + format("{:.3R}", dataMaterial.Material(MatGap).Thickness) +
                                     " -");
                                 ShowContinueError("...( Material=" + dataMaterial.Material(MatGap1).Name +
-                                    " thickness=" + format("{:.3R}", dataMaterial.Material(MatGap1).Thickness) + " +");
+                                    " thickness=" + format("{:.3R} +", dataMaterial.Material(MatGap1).Thickness));
                                 ShowContinueError("..Material=" + dataMaterial.Material(MatGap2).Name +
-                                    " thickness=" + format("{:.3R}", dataMaterial.Material(MatGap2).Thickness) + " +");
+                                    " thickness=" + format("{:.3R} +", dataMaterial.Material(MatGap2).Thickness));
                                 ShowContinueError("..Material=" + dataMaterial.Material(MatSh).Name + " thickness=" + format("{:.3R}", dataMaterial.Material(MatSh).Thickness) +
-                                    " )=[" + format("{:.3R}", MatGapCalc) + "] >.001");
+                                    " )=[" + format("{:.3R}] >.001", MatGapCalc));
                                 ErrorsFound = true;
                             }
                         }
@@ -4934,7 +4934,7 @@ namespace SurfaceGeometry {
                                         ShowContinueError("Divider cannot be specified because the construction has a between-glass shade or blind.");
                                         ShowContinueError("Calculation will proceed without the divider for this window.");
                                         ShowContinueError("Divider width = [" +
-                                                          format("{:.2R}", FrameDivider(SurfaceTmp(SurfNum).FrameDivider).DividerWidth) + "].");
+                                                          format("{:.2R}].", FrameDivider(SurfaceTmp(SurfNum).FrameDivider).DividerWidth));
                                         FrameDivider(SurfaceTmp(SurfNum).FrameDivider).DividerWidth = 0.0;
                                     }
                                 } // End of check if window has divider
@@ -5609,7 +5609,7 @@ namespace SurfaceGeometry {
 
                     if (Length * Depth <= 0.0) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", illegal surface area=[" +
-                                        format("{:.2R}", Length * Depth) + "]. Surface will NOT be entered.");
+                                        format("{:.2R}]. Surface will NOT be entered.", Length * Depth));
                         continue;
                     }
 
@@ -5679,7 +5679,7 @@ namespace SurfaceGeometry {
                     MakeFin = true;
                     if (Length * Depth <= 0.0) {
                         ShowWarningError(cCurrentModuleObject + "=Left Fin of \"" + cAlphaArgs(1) + "\", illegal surface area=[" +
-                                         format("{:.2R}", Length * Depth) + "]. Surface will NOT be entered.");
+                                         format("{:.2R}]. Surface will NOT be entered.", Length * Depth));
                         MakeFin = false;
                     }
 
@@ -5767,7 +5767,7 @@ namespace SurfaceGeometry {
                     MakeFin = true;
                     if (Length * Depth <= 0.0) {
                         ShowWarningError(cCurrentModuleObject + "=Right Fin of \"" + cAlphaArgs(1) + "\", illegal surface area=[" +
-                                         format("{:.2R}", Length * Depth) + "]. Surface will NOT be entered.");
+                                         format("{:.2R}]. Surface will NOT be entered.", Length * Depth));
                         MakeFin = false;
                     }
 
@@ -6419,7 +6419,7 @@ namespace SurfaceGeometry {
                 ShowSevereError(cCurrentModuleObject + "=\"" + ExtVentedCavity(Item).Name + "\", invalid .");
                 ErrorsFound = true;
                 ShowContinueError("...because field \"" + cNumericFieldNames(5) + "\" must be greater than Zero=[" +
-                                  format("{:.2T}", rNumericArgs(5)) + "].");
+                                  format("{:.2T}].", rNumericArgs(5)));
                 continue;
             }
             ExtVentedCavity(Item).AreaRatio = rNumericArgs(6);
@@ -6435,7 +6435,7 @@ namespace SurfaceGeometry {
                 ShowSevereError(cCurrentModuleObject + "=\"" + ExtVentedCavity(Item).Name + "\", invalid .");
                 ErrorsFound = true;
                 ShowContinueError("...because gross area of underlying surfaces must be greater than Zero=[" +
-                                  format("{:.2T}", ExtVentedCavity(Item).ProjArea) + "].");
+                                  format("{:.2T}].", ExtVentedCavity(Item).ProjArea));
                 continue;
             }
             ExtVentedCavity(Item).ActualArea = ExtVentedCavity(Item).ProjArea * ExtVentedCavity(Item).AreaRatio;
@@ -8861,7 +8861,7 @@ namespace SurfaceGeometry {
                                       ", day=" + fmt::to_string(StormWindow(StormWinNum).DayOfMonthOn) +
                                       ") and taken off (month=" + fmt::to_string(StormWindow(StormWinNum).MonthOff) +
                                       ", day=" + fmt::to_string(StormWindow(StormWinNum).DayOfMonthOff) + ");");
-                    ShowContinueError("these times may be reversed for your building latitude=" + format("{:.2R}", Latitude) + " deg.");
+                    ShowContinueError("these times may be reversed for your building latitude=" + format("{:.2R} deg.", Latitude));
                 }
             }
         }
@@ -10314,10 +10314,10 @@ namespace SurfaceGeometry {
                     for (auto edge : listOfedgeNotUsedTwice) {
                         ShowContinueError("  The surface    \"" + Surface(edge.surfNum).Name +
                                           "\" has an edge that is either not an edge on another surface or is an edge on three or more surfaces: ");
-                        ShowContinueError("    Vertex start { " + format("{:.4R}", edge.start.x) + ", " + format("{:.4R}", edge.start.y) + ", " +
-                                          format("{:.4R}", edge.start.z) + "}");
-                        ShowContinueError("    Vertex end   { " + format("{:.4R}", edge.end.x) + ", " + format("{:.4R}", edge.end.y) + ", " +
-                                          format("{:.4R}", edge.end.z) + "}");
+                        ShowContinueError("    Vertex start { " + format("{:.4R}", edge.start.x) + ", " + format("{:.4R}, ", edge.start.y) +
+                                          format("{:.4R}}", edge.start.z));
+                        ShowContinueError("    Vertex end   { " + format("{:.4R}", edge.end.x) + ", " + format("{:.4R}, ", edge.end.y) +
+                                          format("{:.4R}}", edge.end.z));
                     }
                 }
             }
@@ -11043,10 +11043,10 @@ namespace SurfaceGeometry {
             if (!IsCoPlanar) {
                 if (OutOfLine > 0.01) {
                     ShowSevereError(RoutineName + "Suspected non-planar surface:\"" + Surface(ThisSurf).Name +
-                                    "\", Max \"out of line\"=" + format("{:.5T}", OutOfLine) + " at Vertex # " + fmt::to_string(LastVertexInError));
+                                    "\", Max \"out of line\"=" + format("{:.5T} at Vertex # ", OutOfLine) + fmt::to_string(LastVertexInError));
                 } else {
                     ShowWarningError(RoutineName + "Possible non-planar surface:\"" + Surface(ThisSurf).Name +
-                                     "\", Max \"out of line\"=" + format("{:.5T}", OutOfLine) + " at Vertex # " + fmt::to_string(LastVertexInError));
+                                     "\", Max \"out of line\"=" + format("{:.5T} at Vertex # ", OutOfLine) + fmt::to_string(LastVertexInError));
                 }
                 //       ErrorInSurface=.TRUE.
             }
@@ -11203,8 +11203,8 @@ namespace SurfaceGeometry {
                                 ShowContinueError("Window Surface=\"" + Surface(ThisSurf).Name +
                                                   "\" area (with frame) is too large to fit on the surface.");
                                 ShowContinueError("Base surface area (-windows and doors)=[" +
-                                                  format("{:.2T}", Surface(Surface(ThisSurf).BaseSurf).Area) + "] m2, frame area=[" +
-                                                  format("{:.2T}", SurfWinFrameArea(ThisSurf)) + "] m2.");
+                                                  format("{:.2T}] m2, frame area=[", Surface(Surface(ThisSurf).BaseSurf).Area) +
+                                                  format("{:.2T}] m2.", SurfWinFrameArea(ThisSurf)));
                                 ErrorInSurface = true;
                             }
                             Surface(Surface(ThisSurf).BaseSurf).Area -= SurfWinFrameArea(ThisSurf);
@@ -11218,8 +11218,8 @@ namespace SurfaceGeometry {
                             SurfWinDividerArea(ThisSurf) = DivArea * Surface(ThisSurf).Multiplier;
                             if ((Surface(ThisSurf).Area - SurfWinDividerArea(ThisSurf)) <= 0.0) {
                                 ShowSevereError(RoutineName + "Divider area exceeds glazed opening for window " + Surface(ThisSurf).Name);
-                                ShowContinueError("Window surface area=[" + format("{:.2T}", Surface(ThisSurf).Area) + "] m2, divider area=[" +
-                                                  format("{:.2T}", SurfWinDividerArea(ThisSurf)) + "] m2.");
+                                ShowContinueError("Window surface area=[" + format("{:.2T}] m2, divider area=[", Surface(ThisSurf).Area) +
+                                                  format("{:.2T}] m2.", SurfWinDividerArea(ThisSurf)));
                                 ErrorInSurface = true;
                             }
                             Surface(ThisSurf).Area -= SurfWinDividerArea(ThisSurf); // Glazed area
@@ -11983,9 +11983,9 @@ namespace SurfaceGeometry {
                 if (DisplayExtraWarnings) {
                     ShowWarningError("SurfaceGeometry: ModifyWindow: Window " + SurfaceTmp(SurfNum).Name +
                                      " uses the Window5 Data File Construction " + state.dataConstruction->Construct(IConst).Name);
-                    ShowContinueError("The height " + format("{:.3R}", H) + "(m) or width " + format("{:.3R}", W) +
+                    ShowContinueError("The height " + format("{:.3R}(m) or width ", H) + format("{:.3R}", W) +
                                       " (m) of this window differs by more than 10%");
-                    ShowContinueError("from the corresponding height " + format("{:.3R}", h1) + " (m) or width " + format("{:.3R}", w1) +
+                    ShowContinueError("from the corresponding height " + format("{:.3R} (m) or width ", h1) + format("{:.3R}", w1) +
                                       " (m) on the Window5 Data file.");
                     ShowContinueError("This will affect the frame heat transfer calculation if the frame in the Data File entry");
                     ShowContinueError("is not uniform, i.e., has sections with different geometry and/or thermal properties.");
@@ -12773,7 +12773,7 @@ namespace SurfaceGeometry {
             ShowWarningError("CalcSurfaceCentroid: " + fmt::to_string(negZcount) + " Surfaces have the Z coordinate < 0.");
             ShowContinueError("...in any calculations, Wind Speed will be 0.0 for these surfaces.");
             ShowContinueError("...in any calculations, Outside temperatures will be the outside temperature + " +
-                              format("{:.3R}", WeatherFileTempModCoeff) + " for these surfaces.");
+                              format("{:.3R} for these surfaces.", WeatherFileTempModCoeff));
             ShowContinueError("...that is, these surfaces will have conditions as though at ground level.");
         }
     }

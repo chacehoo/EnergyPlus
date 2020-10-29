@@ -377,9 +377,9 @@ namespace UnitHeater {
                         if (FanVolFlow != AutoSize && state.dataUnitHeaters->UnitHeat(UnitHeatNum).MaxAirVolFlow != AutoSize &&
                             FanVolFlow < state.dataUnitHeaters->UnitHeat(UnitHeatNum).MaxAirVolFlow) {
                             ShowSevereError("Specified in " + CurrentModuleObject + " = " + state.dataUnitHeaters->UnitHeat(UnitHeatNum).Name);
-                            ShowContinueError(format("...air flow rate ({:.7T}", FanVolFlow) + ") in fan object " +
+                            ShowContinueError(format("...air flow rate ({:.7T}) in fan object ", FanVolFlow) +
                                               state.dataUnitHeaters->UnitHeat(UnitHeatNum).FanName + " is less than the unit heater maximum supply air flow rate (" +
-                                              format("{:.7T}", state.dataUnitHeaters->UnitHeat(UnitHeatNum).MaxAirVolFlow) + ").");
+                                              format("{:.7T}).", state.dataUnitHeaters->UnitHeat(UnitHeatNum).MaxAirVolFlow));
                             ShowContinueError("...the fan flow rate must be greater than or equal to the unit heater maximum supply air flow rate.");
                             ErrorsFound = true;
                         } else if (FanVolFlow == AutoSize && state.dataUnitHeaters->UnitHeat(UnitHeatNum).MaxAirVolFlow != AutoSize) {
@@ -403,9 +403,9 @@ namespace UnitHeater {
                     if (FanVolFlow != AutoSize && state.dataUnitHeaters->UnitHeat(UnitHeatNum).MaxAirVolFlow != AutoSize &&
                         FanVolFlow < state.dataUnitHeaters->UnitHeat(UnitHeatNum).MaxAirVolFlow) {
                         ShowSevereError("Specified in " + CurrentModuleObject + " = " + state.dataUnitHeaters->UnitHeat(UnitHeatNum).Name);
-                        ShowContinueError(format("...air flow rate ({:.7T}", FanVolFlow) + ") in fan object " + state.dataUnitHeaters->UnitHeat(UnitHeatNum).FanName +
+                        ShowContinueError(format("...air flow rate ({:.7T}) in fan object ", FanVolFlow) + state.dataUnitHeaters->UnitHeat(UnitHeatNum).FanName +
                                           " is less than the unit heater maximum supply air flow rate (" +
-                                          format("{:.7T}", state.dataUnitHeaters->UnitHeat(UnitHeatNum).MaxAirVolFlow) + ").");
+                                          format("{:.7T}).", state.dataUnitHeaters->UnitHeat(UnitHeatNum).MaxAirVolFlow));
                         ShowContinueError("...the fan flow rate must be greater than or equal to the unit heater maximum supply air flow rate.");
                         ErrorsFound = true;
                     } else if (FanVolFlow == AutoSize && state.dataUnitHeaters->UnitHeat(UnitHeatNum).MaxAirVolFlow != AutoSize) {
@@ -1201,7 +1201,7 @@ namespace UnitHeater {
                                     ShowContinueError(format("User-Specified Maximum Hot Water Flow of {:.5R}", MaxVolHotWaterFlowUser) +
                                                       " [m3/s]");
                                     ShowContinueError("differs from Design Size Maximum Hot Water Flow of " +
-                                                      format("{:.5R}", MaxVolHotWaterFlowDes) + " [m3/s]");
+                                                      format("{:.5R} [m3/s]", MaxVolHotWaterFlowDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }

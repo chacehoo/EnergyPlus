@@ -381,8 +381,8 @@ namespace Psychrometrics {
 
 
         if (rhoair < 0.0) {
-            ShowSevereError(format("PsyRhoAirFnPbTdbW: RhoAir (Density of Air) is calculated <= 0 [{:.5R}", rhoair) + "].");
-            ShowContinueError(format("pb =[{:.2R}", pb) + format("], tdb=[{:.2R}", tdb) + format("], w=[{:.7R}", dw) + "].");
+            ShowSevereError(format("PsyRhoAirFnPbTdbW: RhoAir (Density of Air) is calculated <= 0 [{:.5R}].", rhoair));
+            ShowContinueError(format("pb =[{:.2R}", pb) + format("], tdb=[{:.2R}", tdb) + format("], w=[{:.7R}].", dw));
             if (!CalledFrom.empty()) {
                 ShowContinueErrorTimeStamp(" Routine=" + CalledFrom + ',');
             } else {
@@ -981,7 +981,7 @@ namespace Psychrometrics {
                         ShowContinueErrorTimeStamp(" Routine=Unknown,");
                     }
                     ShowContinueError(String);
-                    String = format("Calculated Humidity Ratio= {:.4T}", W) + ", will recalculate Humidity Ratio";
+                    String = format("Calculated Humidity Ratio= {:.4T}, will recalculate Humidity Ratio", W);
                     ShowContinueError(String + " using Relative Humidity .01% (and Dry-Bulb and Pressure as shown)");
                 }
                 ShowRecurringWarningErrorAtEnd(
@@ -1012,7 +1012,7 @@ namespace Psychrometrics {
                     String = format(" Dry-bulb={:.2T}", TDB) + format(" Wet-Bulb (WB)= {:.2T}", TWB) +
                              format(" Pressure= {:.2T}", PB) + format(" Humidity Ratio={:.3T}", W);
                     ShowContinueError(String);
-                    String = format(" Calculated Dew Point Temperature (DPT)= {:.2T}", TDP) + "; Since DPT > WB, DPT will be set to WB";
+                    String = format(" Calculated Dew Point Temperature (DPT)= {:.2T}; Since DPT > WB, DPT will be set to WB", TDP);
                     ShowContinueError(String);
                 }
                 ShowRecurringWarningErrorAtEnd(
@@ -1315,7 +1315,7 @@ namespace Psychrometrics {
                     ShowContinueErrorTimeStamp(" Routine=Unknown,");
                 }
                 ShowContinueError(String);
-                String = format("Instead, calculated Humidity Ratio at {:.1T}", TDP - DeltaT) + " (" + fmt::to_string(static_cast<int>(DeltaT)) +
+                String = format("Instead, calculated Humidity Ratio at {:.1T} (", TDP - DeltaT) + fmt::to_string(static_cast<int>(DeltaT)) +
                          format(" degree less) = {:.4T}", W);
                 ShowContinueError(String + " will be used. Simulation continues.");
             }

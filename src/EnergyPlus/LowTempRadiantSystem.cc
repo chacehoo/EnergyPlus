@@ -2718,7 +2718,7 @@ namespace LowTempRadiantSystem {
                                     ShowContinueError(format("User-Specified Maximum Hot Water Flow of {:.5R}", WaterVolFlowMaxHeatUser) +
                                                       " [m3/s]");
                                     ShowContinueError("differs from Design Size Maximum Hot Water Flow of " +
-                                                      format("{:.5R}", WaterVolFlowMaxHeatDes) + " [m3/s]");
+                                                      format("{:.5R} [m3/s]", WaterVolFlowMaxHeatDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -2878,7 +2878,7 @@ namespace LowTempRadiantSystem {
                                     ShowContinueError(format("User-Specified Maximum Cool Water Flow of {:.5R}", WaterVolFlowMaxCoolUser) +
                                                       " [m3/s]");
                                     ShowContinueError("differs from Design Size Maximum Cool Water Flow of " +
-                                                      format("{:.5R}", WaterVolFlowMaxCoolDes) + " [m3/s]");
+                                                      format("{:.5R} [m3/s]", WaterVolFlowMaxCoolDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -2918,7 +2918,7 @@ namespace LowTempRadiantSystem {
                                     ShowMessage("SizeLowTempRadiantSystem: Potential issue with equipment sizing for "
                                                 "ZoneHVAC:LowTemperatureRadiant:VariableFlow = \"" +
                                                 HydrRadSys(RadSysNum).Name + "\".");
-                                    ShowContinueError(format("User-Specified Hydronic Tubing Length of {:.5R}", TubeLengthUser) + " [m]");
+                                    ShowContinueError(format("User-Specified Hydronic Tubing Length of {:.5R} [m]", TubeLengthUser));
                                     ShowContinueError(format("differs from Design Size Hydronic Tubing Length of {:.5R}", TubeLengthDes) +
                                                       " [m]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
@@ -3070,7 +3070,7 @@ namespace LowTempRadiantSystem {
                                     ShowMessage("SizeLowTempRadiantSystem: Potential issue with equipment sizing for "
                                                 "ZoneHVAC:LowTemperatureRadiant:ConstantFlow = \" " +
                                                 CFloRadSys(RadSysNum).Name + "\".");
-                                    ShowContinueError(format("User-Specified Maximum Water Flow of {:.5R}", WaterVolFlowMaxUser) + " [m3/s]");
+                                    ShowContinueError(format("User-Specified Maximum Water Flow of {:.5R} [m3/s]", WaterVolFlowMaxUser));
                                     ShowContinueError(format("differs from Design Size Maximum Water Flow of {:.5R}", WaterVolFlowMaxDes) +
                                                       " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
@@ -3118,7 +3118,7 @@ namespace LowTempRadiantSystem {
                                     ShowMessage("SizeLowTempRadiantSystem: Potential issue with equipment sizing for "
                                                 "ZoneHVAC:LowTemperatureRadiant:ConstantFlow = \" " +
                                                 CFloRadSys(RadSysNum).Name + "\".");
-                                    ShowContinueError(format("User-Specified Hydronic Tubing Length of {:.5R}", TubeLengthUser) + " [m]");
+                                    ShowContinueError(format("User-Specified Hydronic Tubing Length of {:.5R} [m]", TubeLengthUser));
                                     ShowContinueError(format("differs from Design Size Hydronic Tubing Length of {:.5R}", TubeLengthDes) +
                                                       " [m]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
@@ -4335,7 +4335,7 @@ namespace LowTempRadiantSystem {
             // Error check, just in case
             if (this->WaterRecircRate < 0.0) {
                 ShowWarningError("Flow mismatch in radiant system--result will be an energy imbalance--should not get this error");
-                ShowContinueErrorTimeStamp(format("WaterRecircRate={:.2T}", this->WaterRecircRate) + ", in Radiant System=" + this->Name + ',');
+                ShowContinueErrorTimeStamp(format("WaterRecircRate={:.2T}, in Radiant System=", this->WaterRecircRate) + this->Name + ',');
                 this->WaterRecircRate = 0.0;
                 this->WaterInjectionRate = this->WaterMassFlowRate;
             }
@@ -5221,8 +5221,8 @@ namespace LowTempRadiantSystem {
                 if (this->OutRangeLoErrorCount == 0) {
                     ShowSevereMessage("UpdateLowTempRadiantSystem: model result for fluid outlet temperature is not physical.");
                     ShowContinueError("Occurs for radiant system name = " + this->Name);
-                    ShowContinueError(format("Calculated radiant system outlet temperature = {:.3R}", outletTemp) + " [C]");
-                    ShowContinueError(format("Radiant system inlet temperature = {:.3R}", inletTemp) + " [C]");
+                    ShowContinueError(format("Calculated radiant system outlet temperature = {:.3R} [C]", outletTemp));
+                    ShowContinueError(format("Radiant system inlet temperature = {:.3R} [C]", inletTemp));
                     ShowContinueError(
                         "A possible cause is that the materials used in the internal source construction are not compatible with the model.");
                 }
@@ -5237,8 +5237,8 @@ namespace LowTempRadiantSystem {
                 if (this->OutRangeHiErrorCount == 0) {
                     ShowSevereMessage("UpdateLowTempRadiantSystem: model result for fluid outlet temperature is not physical.");
                     ShowContinueError("Occurs for radiant system name = " + this->Name);
-                    ShowContinueError(format("Calculated radiant system outlet temperature = {:.3R}", outletTemp) + " [C]");
-                    ShowContinueError(format("Radiant system inlet temperature = {:.3R}", inletTemp) + " [C]");
+                    ShowContinueError(format("Calculated radiant system outlet temperature = {:.3R} [C]", outletTemp));
+                    ShowContinueError(format("Radiant system inlet temperature = {:.3R} [C]", inletTemp));
                     ShowContinueError(
                         "A possible cause is that the materials used in the internal source construction are not compatible with the model.");
                 }

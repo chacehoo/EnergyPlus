@@ -3876,7 +3876,7 @@ namespace SystemAvailabilityManager {
                 if (rNumericArgs(1) > 40.0 || rNumericArgs(1) < 0.0) {
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\"");
                     ShowContinueError(cNumericFieldNames(1) + " is beyond the range.");
-                    ShowContinueError(format("The input value is {:.0T}", rNumericArgs(1)) + ". The allowed value must be >= 0 and <= 40 m/s");
+                    ShowContinueError(format("The input value is {:.0T}. The allowed value must be >= 0 and <= 40 m/s", rNumericArgs(1)));
                     ErrorsFound = true;
                 }
             }
@@ -3906,7 +3906,7 @@ namespace SystemAvailabilityManager {
             if (rNumericArgs(2) >= rNumericArgs(3)) {
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" The " + cNumericFieldNames(2) +
                                 " must be less than the " + cNumericFieldNames(3));
-                ShowContinueError("The " + cNumericFieldNames(2) + format(" is {:.0T}", rNumericArgs(2)) + ". The " + cNumericFieldNames(3) +
+                ShowContinueError("The " + cNumericFieldNames(2) + format(" is {:.0T}. The ", rNumericArgs(2)) + cNumericFieldNames(3) +
                                   format(" is {:.0T}", rNumericArgs(3)) + '.');
                 ErrorsFound = true;
             }
@@ -3936,7 +3936,7 @@ namespace SystemAvailabilityManager {
             if (rNumericArgs(4) >= rNumericArgs(5)) {
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" The " + cNumericFieldNames(4) +
                                 " must be less than the " + cNumericFieldNames(5));
-                ShowContinueError("The " + cNumericFieldNames(4) + format(" is {:.0T}", rNumericArgs(4)) + ". The " + cNumericFieldNames(5) +
+                ShowContinueError("The " + cNumericFieldNames(4) + format(" is {:.0T}. The ", rNumericArgs(4)) + cNumericFieldNames(5) +
                                   format(" is {:.0T}", rNumericArgs(5)) + '.');
                 ErrorsFound = true;
             }
@@ -3966,7 +3966,7 @@ namespace SystemAvailabilityManager {
             if (rNumericArgs(6) >= rNumericArgs(7)) {
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" The " + cNumericFieldNames(6) +
                                 " must be less than the " + cNumericFieldNames(7));
-                ShowContinueError("The " + cNumericFieldNames(6) + format(" is {:.0T}", rNumericArgs(6)) + ". The " + cNumericFieldNames(7) +
+                ShowContinueError("The " + cNumericFieldNames(6) + format(" is {:.0T}. The ", rNumericArgs(6)) + cNumericFieldNames(7) +
                                   format(" is {:.0T}", rNumericArgs(7)) + '.');
                 ErrorsFound = true;
             }

@@ -1266,7 +1266,7 @@ namespace EvaporativeCoolers {
                         if ((std::abs(IndirectVolFlowRateDes - IndirectVolFlowRateUser) / IndirectVolFlowRateUser) > AutoVsHardSizingThreshold) {
                             ShowMessage("SizeEvaporativeCooler:Indirect:ResearchSpecial: Potential issue with equipment sizing for " +
                                         EvapCond(EvapCoolNum).EvapCoolerName);
-                            ShowContinueError(format("User-Specified Secondary Fan Flow Rate of {:.5R}", IndirectVolFlowRateUser) + " [m3/s]");
+                            ShowContinueError(format("User-Specified Secondary Fan Flow Rate of {:.5R} [m3/s]", IndirectVolFlowRateUser));
                             ShowContinueError(format("differs from Design Size Secondary Fan Flow Rate of {:.5R}", IndirectVolFlowRateDes) +
                                               " [m3/s]");
                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
@@ -1426,8 +1426,8 @@ namespace EvaporativeCoolers {
                             if ((std::abs(PadAreaDes - PadAreaUser) / PadAreaUser) > AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeEvaporativeCooler:Direct:CelDekPad: Potential issue with equipment sizing for " +
                                             EvapCond(EvapCoolNum).EvapCoolerName);
-                                ShowContinueError(format("User-Specified Celdek Pad Area of{:.2R}", PadAreaUser) + " [m2]");
-                                ShowContinueError(format("differs from Design Size Celdek Pad Area of {:.2R}", PadAreaDes) + " [m2]");
+                                ShowContinueError(format("User-Specified Celdek Pad Area of{:.2R} [m2]", PadAreaUser));
+                                ShowContinueError(format("differs from Design Size Celdek Pad Area of {:.2R} [m2]", PadAreaDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }
@@ -1465,8 +1465,8 @@ namespace EvaporativeCoolers {
                         if ((std::abs(PadDepthDes - PadDepthUser) / PadDepthUser) > AutoVsHardSizingThreshold) {
                             ShowMessage("SizeEvaporativeCooler:Direct:CelDekPad: Potential issue with equipment sizing for " +
                                         EvapCond(EvapCoolNum).EvapCoolerName);
-                            ShowContinueError(format("User-Specified Celdek Pad Depth of{:.2R}", PadDepthUser) + " [m]");
-                            ShowContinueError(format("differs from Design Size Celdek Pad Depth of {:.2R}", PadDepthDes) + " [m]");
+                            ShowContinueError(format("User-Specified Celdek Pad Depth of{:.2R} [m]", PadDepthUser));
+                            ShowContinueError(format("differs from Design Size Celdek Pad Depth of {:.2R} [m]", PadDepthDes));
                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                         }
@@ -1557,8 +1557,8 @@ namespace EvaporativeCoolers {
                             if ((std::abs(PadAreaDes - PadAreaUser) / PadAreaUser) > AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeEvaporativeCooler:Indirect:CelDekPad: Potential issue with equipment sizing for " +
                                             EvapCond(EvapCoolNum).EvapCoolerName);
-                                ShowContinueError(format("User-Specified Celdek Pad Area {:.2R}", PadAreaUser) + " [m2]");
-                                ShowContinueError(format("differs from Design Size Celdek Pad Area of {:.2R}", PadAreaDes) + " [m2]");
+                                ShowContinueError(format("User-Specified Celdek Pad Area {:.2R} [m2]", PadAreaUser));
+                                ShowContinueError(format("differs from Design Size Celdek Pad Area of {:.2R} [m2]", PadAreaDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }
@@ -1594,8 +1594,8 @@ namespace EvaporativeCoolers {
                         if ((std::abs(PadDepthDes - PadDepthUser) / PadDepthUser) > AutoVsHardSizingThreshold) {
                             ShowMessage("SizeEvaporativeCooler:Indirect:CelDekPad: Potential issue with equipment sizing for " +
                                         EvapCond(EvapCoolNum).EvapCoolerName);
-                            ShowContinueError(format("User-Specified Celdek Pad Depth of{:.2R}", PadDepthUser) + " [m]");
-                            ShowContinueError(format("differs from Design Size Celdek Pad Depth of {:.2R}", PadDepthDes) + " [m]");
+                            ShowContinueError(format("User-Specified Celdek Pad Depth of{:.2R} [m]", PadDepthUser));
+                            ShowContinueError(format("differs from Design Size Celdek Pad Depth of {:.2R} [m]", PadDepthDes));
                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                         }
@@ -2571,8 +2571,8 @@ namespace EvaporativeCoolers {
                                             EvapCond(EvapCoolNum).EvapCoolerName);
                             ShowContinueErrorTimeStamp("");
                             ShowContinueError("...Bad secondary air mass flow rate limits");
-                            ShowContinueError(format("...Given minimum secondary air mass flow rate={:.3R}", MassFlowRateSecMin) + " kg/s");
-                            ShowContinueError(format("...Given maximum secondary air mass flow rate={:.3R}", MassFlowRateSecMax) + " kg/s");
+                            ShowContinueError(format("...Given minimum secondary air mass flow rate={:.3R} kg/s", MassFlowRateSecMin));
+                            ShowContinueError(format("...Given maximum secondary air mass flow rate={:.3R} kg/s", MassFlowRateSecMax));
                             ShowContinueError(" Simulation continues");
                         }
                         ShowRecurringWarningErrorAtEnd("Secondary air mass flow control failed in Indirect Evaporative Cooler Research Special = " +
@@ -2633,8 +2633,8 @@ namespace EvaporativeCoolers {
                                             EvapCond(EvapCoolNum).EvapCoolerName);
                             ShowContinueErrorTimeStamp("");
                             ShowContinueError("...Bad secondary air mass flow rate limits");
-                            ShowContinueError(format("...Given minimum secondary air mass flow rate={:.3R}", MassFlowRateSecMin) + " kg/s");
-                            ShowContinueError(format("...Given maximum secondary air mass flow rate={:.3R}", MassFlowRateSecMax) + " kg/s");
+                            ShowContinueError(format("...Given minimum secondary air mass flow rate={:.3R} kg/s", MassFlowRateSecMin));
+                            ShowContinueError(format("...Given maximum secondary air mass flow rate={:.3R} kg/s", MassFlowRateSecMax));
                             ShowContinueError(" Simulation continues");
                         }
                         ShowRecurringWarningErrorAtEnd("Secondary air mass flow control failed in Indirect Evaporative Cooler Research Special = " +
@@ -2682,8 +2682,8 @@ namespace EvaporativeCoolers {
                                             EvapCond(EvapCoolNum).EvapCoolerName);
                             ShowContinueErrorTimeStamp("");
                             ShowContinueError("...Bad secondary air mass flow rate limits");
-                            ShowContinueError(format("...Given minimum secondary air mass flow rate={:.3R}", MassFlowRateSecMin) + " kg/s");
-                            ShowContinueError(format("...Given maximum secondary air mass flow rate={:.3R}", MassFlowRateSecMax) + " kg/s");
+                            ShowContinueError(format("...Given minimum secondary air mass flow rate={:.3R} kg/s", MassFlowRateSecMin));
+                            ShowContinueError(format("...Given maximum secondary air mass flow rate={:.3R} kg/s", MassFlowRateSecMax));
                             ShowContinueError(" Simulation continues");
                         }
                         ShowRecurringWarningErrorAtEnd("Secondary air mass flow control failed in Indirect Evaporative Cooler Research Special = " +
@@ -2754,8 +2754,8 @@ namespace EvaporativeCoolers {
                                             EvapCond(EvapCoolNum).EvapCoolerName);
                             ShowContinueErrorTimeStamp("");
                             ShowContinueError("...Bad secondary air mass flow rate limits");
-                            ShowContinueError(format("...Given minimum secondary air mass flow rate={:.3R}", MassFlowRateSecMin) + " kg/s");
-                            ShowContinueError(format("...Given maximum secondary air mass flow rate={:.3R}", MassFlowRateSecMax) + " kg/s");
+                            ShowContinueError(format("...Given minimum secondary air mass flow rate={:.3R} kg/s", MassFlowRateSecMin));
+                            ShowContinueError(format("...Given maximum secondary air mass flow rate={:.3R} kg/s", MassFlowRateSecMax));
                             ShowContinueError(" Simulation continues");
                         }
                         ShowRecurringWarningErrorAtEnd("Secondary air mass flow control failed in Indirect Evaporative Cooler Research Special = " +
@@ -4147,9 +4147,9 @@ namespace EvaporativeCoolers {
                 if (ZoneEvapUnit(UnitNum).ActualFanVolFlowRate < ZoneEvapUnit(UnitNum).DesignAirVolumeFlowRate) {
                     ShowSevereError("InitZoneEvaporativeCoolerUnit: ZoneHVAC:EvaporativeCoolerUnit = " + ZoneEvapUnit(UnitNum).Name);
                     ShowContinueError("...unit fan volumetric flow rate less than evaporative cooler unit design supply air flow rate.");
-                    ShowContinueError(format("...fan volumetric flow rate = {:.5T}", ZoneEvapUnit(UnitNum).ActualFanVolFlowRate) + " m3/s.");
+                    ShowContinueError(format("...fan volumetric flow rate = {:.5T} m3/s.", ZoneEvapUnit(UnitNum).ActualFanVolFlowRate));
                     ShowContinueError(
-                        format("...evap cooler unit volumetric flow rate = {:.5T}", ZoneEvapUnit(UnitNum).DesignAirVolumeFlowRate) + " m3/s.");
+                        format("...evap cooler unit volumetric flow rate = {:.5T} m3/s.", ZoneEvapUnit(UnitNum).DesignAirVolumeFlowRate));
                     ZoneEvapUnit(UnitNum).DesignAirVolumeFlowRate = ZoneEvapUnit(UnitNum).ActualFanVolFlowRate;
                     ShowContinueError("...evaporative cooler unit design supply air flow rate will match fan flow rate and simulation continues.");
                     ZoneEvapUnit(UnitNum).MyEnvrn = true; // re-initialize to set mass flow rate and max mass flow rate
