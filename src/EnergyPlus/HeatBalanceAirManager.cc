@@ -356,7 +356,7 @@ namespace HeatBalanceAirManager {
         // Using/Aliasing
         using DataGlobals::NumOfZones;
         using General::CheckCreatedZoneItemName;
-        using General::RoundSigDigits;
+
         using ScheduleManager::CheckScheduleValueMinMax;
         using ScheduleManager::GetScheduleIndex;
         using ScheduleManager::GetScheduleMinValue;
@@ -4095,7 +4095,7 @@ namespace HeatBalanceAirManager {
         // na
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
         using ScheduleManager::GetCurrentScheduleValue;
         using ScheduleManager::GetScheduleIndex;
 

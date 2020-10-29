@@ -191,7 +191,7 @@ namespace Fans {
         // This subroutine manages Fan component simulation.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int FanNum; // current fan number
@@ -1190,7 +1190,7 @@ namespace Fans {
         using namespace OutputReportPredefined;
         using CurveManager::CurveValue;
         using CurveManager::GetCurveIndex;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -1906,7 +1906,7 @@ namespace Fans {
 
         // Using/Aliasing
         using CurveManager::CurveValue;
-        using General::TrimSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -2240,7 +2240,7 @@ namespace Fans {
         using DataEnvironment::CurMnDy;
         using DataEnvironment::EnvironmentName;
         using General::CreateSysTimeIntervalString;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -3068,7 +3068,7 @@ namespace Fans {
         // na
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:

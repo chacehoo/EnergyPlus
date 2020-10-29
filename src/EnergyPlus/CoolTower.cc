@@ -134,7 +134,7 @@ namespace CoolTower {
         // and stores it in the Cooltower data structure.
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
         using ScheduleManager::GetScheduleIndex;
         using WaterManager::SetupTankDemandComponent;
 

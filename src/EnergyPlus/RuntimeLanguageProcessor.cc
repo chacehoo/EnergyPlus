@@ -1828,8 +1828,8 @@ namespace RuntimeLanguageProcessor {
         // Using/Aliasing
         using namespace Psychrometrics;
         using CurveManager::CurveValue;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
 
         // Return value
         ErlValueType ReturnValue;
@@ -2628,7 +2628,7 @@ namespace RuntimeLanguageProcessor {
         // Using/Aliasing
         using CurveManager::GetCurveIndex;
         using DataGlobals::TimeStepZone;
-        using General::TrimSigDigits;
+
 
         // Locals
         // SUBROUTINE PARAMETER DEFINITIONS:
@@ -3784,7 +3784,7 @@ namespace RuntimeLanguageProcessor {
         // na
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // Return value
         std::string String;

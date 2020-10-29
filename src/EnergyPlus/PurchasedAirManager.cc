@@ -226,7 +226,7 @@ namespace PurchasedAirManager {
         // at the system time step.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
 
@@ -1119,7 +1119,7 @@ namespace PurchasedAirManager {
         using DataZoneEquipment::ZoneEquipConfig;
         using DataZoneEquipment::ZoneEquipInputsFilled;
         using General::FindNumberInList;
-        using General::RoundSigDigits;
+
         using ZonePlenum::GetReturnPlenumIndex;
         using ZonePlenum::GetReturnPlenumName;
 
@@ -1387,7 +1387,7 @@ namespace PurchasedAirManager {
         using DataHVACGlobals::CoolingCapacitySizing;
         using DataHVACGlobals::HeatingAirflowSizing;
         using DataHVACGlobals::HeatingCapacitySizing;
-        using General::RoundSigDigits;
+
         using Psychrometrics::CPCW;
         using Psychrometrics::CPHW;
         using Psychrometrics::PsyCpAirFnW;
@@ -2008,7 +2008,7 @@ namespace PurchasedAirManager {
         using DataZoneEnergyDemands::ZoneSysMoistureDemand;
         using DataZoneEquipment::PurchasedAir_Num;
         using DataZoneEquipment::ZoneEquipConfig;
-        using General::TrimSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:

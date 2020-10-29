@@ -519,7 +519,7 @@ namespace ExternalInterface {
         // This subroutine is for initializations of the ExternalInterface
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
         using RuntimeLanguageProcessor::FindEMSVariable;
         using RuntimeLanguageProcessor::isExternalInterfaceErlVariable;
         using ScheduleManager::GetDayScheduleIndex;
@@ -734,7 +734,7 @@ namespace ExternalInterface {
         // Using/Aliasing
         using DataGlobals::WarmupFlag;
         using EMSManager::ManageEMS;
-        using General::TrimSigDigits;
+
         using RuntimeLanguageProcessor::ExternalInterfaceSetErlVariable;
         using RuntimeLanguageProcessor::FindEMSVariable;
         using RuntimeLanguageProcessor::isExternalInterfaceErlVariable;
@@ -959,7 +959,7 @@ namespace ExternalInterface {
         // This routine instantiates and initializes FMUs.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int i, j; // Loop counters
@@ -1013,7 +1013,7 @@ namespace ExternalInterface {
         // This routine reinitializes FMUs.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int i, j; // Loop counters
@@ -1089,7 +1089,7 @@ namespace ExternalInterface {
         using DataStringGlobals::CurrentWorkingFolder;
         using DataStringGlobals::pathChar;
         using DataSystemVariables::CheckForActualFileName;
-        using General::TrimSigDigits;
+
         using RuntimeLanguageProcessor::FindEMSVariable;
         using RuntimeLanguageProcessor::isExternalInterfaceErlVariable;
         using ScheduleManager::GetDayScheduleIndex;
@@ -1987,7 +1987,7 @@ namespace ExternalInterface {
         using DataGlobals::WarmupFlag;
         using DataSystemVariables::UpdateDataDuringWarmupExternalInterface;
         using EMSManager::ManageEMS;
-        using General::TrimSigDigits;
+
         using RuntimeLanguageProcessor::ExternalInterfaceSetErlVariable;
         using RuntimeLanguageProcessor::FindEMSVariable;
         using RuntimeLanguageProcessor::isExternalInterfaceErlVariable;
@@ -2287,7 +2287,7 @@ namespace ExternalInterface {
         using DataGlobals::MinutesPerTimeStep;
         using DataGlobals::SimTimeSteps;
         using EMSManager::ManageEMS;
-        using General::TrimSigDigits;
+
         using RuntimeLanguageProcessor::ExternalInterfaceSetErlVariable;
         using ScheduleManager::ExternalInterfaceSetSchedule;
         // using DataPrecisionGlobals;

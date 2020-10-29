@@ -275,7 +275,7 @@ namespace LowTempRadiantSystem {
         //       DATE WRITTEN   November 2000
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int RadSysNum;  // Radiant system number/index in local derived types
@@ -373,7 +373,7 @@ namespace LowTempRadiantSystem {
         using DataSizing::FractionOfAutosizedHeatingCapacity;
         using DataSizing::HeatingDesignCapacity;
         using FluidProperties::FindGlycol;
-        using General::TrimSigDigits;
+
         using NodeInputManager::GetOnlySingleNode;
         using ScheduleManager::GetScheduleIndex;
         using namespace DataLoopNode;
@@ -1714,7 +1714,7 @@ namespace LowTempRadiantSystem {
         using DataZoneEquipment::CheckZoneEquipmentList;
         using DataZoneEquipment::ZoneEquipInputsFilled;
         using FluidProperties::GetDensityGlycol;
-        using General::RoundSigDigits;
+
         using PlantUtilities::InitComponentNodes;
         using PlantUtilities::ScanPlantLoopsForObject;
         using PlantUtilities::SetComponentFlowRate;
@@ -2431,7 +2431,7 @@ namespace LowTempRadiantSystem {
         using DataPlant::PlantLoop;
         using FluidProperties::GetDensityGlycol;
         using FluidProperties::GetSpecificHeatGlycol;
-        using General::RoundSigDigits;
+
         using PlantUtilities::MyPlantSizingIndex;
         using PlantUtilities::RegisterPlantCompDesignFlow;
 
@@ -3389,7 +3389,7 @@ namespace LowTempRadiantSystem {
         using DataSurfaces::HeatTransferModel_CondFD;
         using DataSurfaces::HeatTransferModel_CTF;
         using DataSurfaces::Surface;
-        using General::RoundSigDigits;
+
         using PlantUtilities::SetComponentFlowRate;
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
@@ -3643,7 +3643,7 @@ namespace LowTempRadiantSystem {
                                                   "] temperature below dew-point temperature--potential for condensation exists");
                                 ShowContinueError("Flow to the radiant system will be shut-off to avoid condensation");
                                 ShowContinueError("Predicted radiant system surface temperature = " +
-                                                  RoundSigDigits(TH(2, 1, this->SurfacePtr(RadSurfNum2)), 2));
+                                                  format("{:.2R}", TH(2, 1, this->SurfacePtr(RadSurfNum2))));
                                 ShowContinueError("Zone dew-point temperature + safety delta T= " +
                                                   format("{:.2R}", DewPointTemp + this->CondDewPtDeltaT));
                                 ShowContinueErrorTimeStamp("");
@@ -3809,7 +3809,7 @@ namespace LowTempRadiantSystem {
                                                   "] temperature below dew-point temperature--potential for condensation exists");
                                 ShowContinueError("Flow to the radiant system will be shut-off to avoid condensation");
                                 ShowContinueError("Predicted radiant system surface temperature = " +
-                                                  RoundSigDigits(TH(2, 1, this->SurfacePtr(CondSurfNum)), 2));
+                                                  format("{:.2R}", TH(2, 1, this->SurfacePtr(CondSurfNum))));
                                 ShowContinueError("Zone dew-point temperature + safety delta T= " +
                                                   format("{:.2R}", DewPointTemp + this->CondDewPtDeltaT));
                                 ShowContinueErrorTimeStamp("");
@@ -3882,7 +3882,7 @@ namespace LowTempRadiantSystem {
         using DataHVACGlobals::SmallLoad;
         using DataLoopNode::Node;
         using FluidProperties::GetSpecificHeatGlycol;
-        using General::TrimSigDigits;
+
         using PlantUtilities::SetComponentFlowRate;
         using ScheduleManager::GetCurrentScheduleValue;
 
@@ -4394,7 +4394,7 @@ namespace LowTempRadiantSystem {
         using DataSurfaces::HeatTransferModel_CTF;
         using DataSurfaces::Surface;
         using FluidProperties::GetSpecificHeatGlycol;
-        using General::RoundSigDigits;
+
         using PlantUtilities::SetComponentFlowRate;
 
         // SUBROUTINE PARAMETER DEFINITIONS:
@@ -4742,7 +4742,7 @@ namespace LowTempRadiantSystem {
                                                   "] temperature below dew-point temperature--potential for condensation exists");
                                 ShowContinueError("Flow to the radiant system will be shut-off to avoid condensation");
                                 ShowContinueError("Predicted radiant system surface temperature = " +
-                                                  RoundSigDigits(TH(2, 1, this->SurfacePtr(RadSurfNum2)), 2));
+                                                  format("{:.2R}", TH(2, 1, this->SurfacePtr(RadSurfNum2))));
                                 ShowContinueError("Zone dew-point temperature + safety delta T= " +
                                                   format("{:.2R}", DewPointTemp + this->CondDewPtDeltaT));
                                 ShowContinueErrorTimeStamp("");
@@ -4803,7 +4803,7 @@ namespace LowTempRadiantSystem {
                                                       "] temperature below dew-point temperature--potential for condensation exists");
                                     ShowContinueError("Flow to the radiant system will be shut-off to avoid condensation");
                                     ShowContinueError("Predicted radiant system surface temperature = " +
-                                                      RoundSigDigits(TH(2, 1, this->SurfacePtr(RadSurfNum2)), 2));
+                                                      format("{:.2R}", TH(2, 1, this->SurfacePtr(RadSurfNum2))));
                                     ShowContinueError("Zone dew-point temperature + safety delta T= " +
                                                       format("{:.2R}", DewPointTemp + this->CondDewPtDeltaT));
                                     ShowContinueErrorTimeStamp("");
@@ -5203,7 +5203,7 @@ namespace LowTempRadiantSystem {
         // check for crazy, out of range temperature results for fluid leaving radiant system
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         Real64 const upperRangeLimit(500.0);  // high error trigger limit for when model is not working
         Real64 const lowerRangeLimit(-300.0); // Low error trigger limit for when model is not working

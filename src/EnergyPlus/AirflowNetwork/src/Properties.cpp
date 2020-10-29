@@ -74,7 +74,7 @@ namespace AirflowNetwork {
                 ShowWarningMessage("Air temperature below lower limit of -20C for conductivity calculation");
             }
             ShowRecurringWarningErrorAtEnd("Air temperature below lower limit of -20C for conductivity calculation. "
-                                           "Air temperature of " + General::RoundSigDigits(LowerLimit, 1) +
+                                           "Air temperature of " + format("{:.1R}", LowerLimit) +
                                            " used for conductivity calculation.",
                                            lowerLimitErrIdx);
             T = LowerLimit;
@@ -83,7 +83,7 @@ namespace AirflowNetwork {
                 ShowWarningMessage("Air temperature above upper limit of 70C for conductivity calculation");
             }
             ShowRecurringWarningErrorAtEnd("Air temperature below lower limit of 70C for conductivity calculation. "
-                                           "Air temperature of " + General::RoundSigDigits(UpperLimit, 1) +
+                                           "Air temperature of " + format("{:.1R}", UpperLimit) +
                                            " used for conductivity calculation.",
                                            upperLimitErrIdx);
             T = UpperLimit;

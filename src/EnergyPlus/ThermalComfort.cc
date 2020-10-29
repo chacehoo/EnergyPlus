@@ -1619,7 +1619,7 @@ namespace ThermalComfort {
         using namespace DataHeatBalance;
         using DataSurfaces::Surface;
         using namespace DataIPShortCuts;
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE PARAMETER DEFINITIONS:
         Real64 const AngleFacLimit(0.01); // To set the limit of sum of angle factors
@@ -1978,7 +1978,7 @@ namespace ThermalComfort {
         using DataEnvironment::EnvironmentName;
         using DataEnvironment::EnvironmentStartEnd;
         using DataEnvironment::RunPeriodEnvironment;
-        using General::RoundSigDigits;
+
         using OutputReportTabular::isInQuadrilateral;
         using namespace OutputReportPredefined;
 

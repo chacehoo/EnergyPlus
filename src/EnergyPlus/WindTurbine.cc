@@ -114,7 +114,7 @@ namespace WindTurbine {
         // This drivers manages the calls to all of the other drivers and simulation algorithms.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int WindTurbineNum;
@@ -190,7 +190,7 @@ namespace WindTurbine {
         // and stores it in the wind turbine data structure.
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
         using ScheduleManager::GetScheduleIndex;
 
         // SUBROUTINE PARAMETER DEFINITIONS:

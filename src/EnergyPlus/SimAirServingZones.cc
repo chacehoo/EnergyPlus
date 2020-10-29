@@ -333,7 +333,7 @@ namespace SimAirServingZones {
         using BranchInputManager::NumBranchesInBranchList;
         using BranchInputManager::NumCompsInBranch;
         using DataConvergParams::AirLoopConvergence;
-        using General::RoundSigDigits;
+
         using HVACControllers::CheckCoilWaterInletNode;
         using HVACControllers::GetControllerActuatorNodeNum;
         using MixedAir::FindOAMixerMatchForOASystem;

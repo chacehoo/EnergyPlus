@@ -1715,7 +1715,7 @@ namespace SystemAvailabilityManager {
         // System Availability Manager algorithm.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         {
             auto const SELECT_CASE_var(SysAvailType);
@@ -3753,7 +3753,7 @@ namespace SystemAvailabilityManager {
         using NodeInputManager::GetOnlySingleNode;
         using NodeInputManager::MarkNode;
         using namespace DataLoopNode;
-        using General::TrimSigDigits;
+
         using namespace DataIPShortCuts;
         using CurveManager::CurveValue;
         using CurveManager::GetCurveIndex;
@@ -4929,7 +4929,7 @@ namespace SystemAvailabilityManager {
         // This routine was designed to find whether this zone is controlled by hybrid ventilation
         // ventilation control option.
 
-        using General::TrimSigDigits;
+
 
         // Return value
         bool VentControl; // Set to true if ventilation control in the same zone

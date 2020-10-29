@@ -85,7 +85,7 @@ namespace PVWatts {
         : m_lastCellTemperature(20.0), m_lastPlaneOfArrayIrradiance(0.0), m_cellTemperature(20.0), m_planeOfArrayIrradiance(0.0),
           m_outputDCPower(1000.0)
     {
-        using General::RoundSigDigits;
+
         bool errorsFound(false);
 
         if (name.empty()) {
@@ -464,7 +464,7 @@ namespace PVWatts {
     PVWattsGenerator::powerout(Real64 &shad_beam, Real64 shad_diff, Real64 dni, Real64 alb, Real64 wspd, Real64 tdry, IrradianceOutput &irr_st)
     {
 
-        using General::RoundSigDigits;
+
 
         const Real64 &gcr = m_groundCoverageRatio;
 

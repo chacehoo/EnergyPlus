@@ -1370,8 +1370,8 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
         using DataZoneEquipment::NumOfZoneEquipLists;
         using DataZoneEquipment::ZoneEquipConfig;
         using DataZoneEquipment::ZoneEquipList;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using NodeInputManager::GetOnlySingleNode;
         using namespace OutputReportPredefined;
 
@@ -2264,8 +2264,8 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
         using DataZoneEquipment::NumOfZoneEquipLists;
         using DataZoneEquipment::ZoneEquipConfig;
         using DataZoneEquipment::ZoneEquipList;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using NodeInputManager::GetOnlySingleNode;
         using namespace OutputReportPredefined;
 
@@ -2676,7 +2676,7 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
         using DataHeatBalance::ZoneList;
         using Psychrometrics::PsyRhoAirFnPbTdbW;
 
-        using General::RoundSigDigits;
+
         using namespace OutputReportPredefined;
         using DataAirSystems::PrimaryAirSystem;
         using EMSManager::CheckIfNodeSetPointManagedByEMS;
@@ -3562,7 +3562,7 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
         using CurveManager::CurveValue;
         using DataGlobals::DoingSizing;
         using DataGlobals::WarmupFlag;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS
@@ -3871,7 +3871,7 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
         using DataHeatBalance::ZoneIntGain;
         using DataZoneEnergyDemands::ZoneSysEnergyDemand;
         using DataZoneEquipment::ZoneEquipConfig;
-        using General::RoundSigDigits;
+
         using Psychrometrics::PsyRhoAirFnPbTdbW;
 
         static std::string const RoutineName("CalcMechVentController: ");
@@ -4904,7 +4904,7 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
         // Obtains flow rates from the zone or system sizing arrays.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
         using HVACHXAssistedCoolingCoil::GetHXCoilType;
         using HVACHXAssistedCoolingCoil::GetHXDXCoilName;
         using WaterCoils::SetCoilDesFlow;
@@ -5516,7 +5516,7 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
         // na
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // Return value
         int ReliefNodeNumber; // Relief Node Number

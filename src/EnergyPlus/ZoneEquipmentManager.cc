@@ -446,7 +446,7 @@ namespace ZoneEquipmentManager {
         using DataLoopNode::Node;
         using DataZoneEnergyDemands::DeadBandOrSetback;
         using DataZoneEnergyDemands::ZoneSysEnergyDemand;
-        using General::RoundSigDigits;
+
 
         // Parameters
         static std::string const RoutineName("SizeZoneEquipment");
@@ -1432,7 +1432,7 @@ namespace ZoneEquipmentManager {
         using DataHVACGlobals::SmallTempDiff;
         using EMSManager::ManageEMS;
         using General::MovingAvg;
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE PARAMETER DEFINITIONS:
 
@@ -5781,7 +5781,7 @@ namespace ZoneEquipmentManager {
         // This subroutine writes the DOAS Sizing:Zone input for 1 zone to the eio file
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         // Formats
         static constexpr auto Format_990(

@@ -203,7 +203,7 @@ namespace EvaporativeCoolers {
         // at the system time step.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int EvapCoolNum; // The EvapCooler that you are currently loading input into
@@ -1105,7 +1105,7 @@ namespace EvaporativeCoolers {
         using namespace DataSizing;
         using DataAirSystems::PrimaryAirSystem;
         using Fans::SetFanData;
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         bool CoolerOnOApath(false);
@@ -1661,7 +1661,7 @@ namespace EvaporativeCoolers {
         // na
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -2466,7 +2466,7 @@ namespace EvaporativeCoolers {
         using DataEnvironment::OutBaroPress;
         using DataEnvironment::OutDryBulbTemp;
         using DataHVACGlobals::SmallLoad;
-        using General::RoundSigDigits;
+
         using General::SolveRoot;
         using Psychrometrics::PsyHfgAirFnWTdb;
 
@@ -3589,7 +3589,7 @@ namespace EvaporativeCoolers {
         // public simulation routine for managing zone hvac evaporative cooler unit
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int CompNum;
@@ -3651,7 +3651,7 @@ namespace EvaporativeCoolers {
         using Fans::GetFanOutletNode;
         using Fans::GetFanType;
         using Fans::GetFanVolFlow;
-        using General::TrimSigDigits;
+
         using NodeInputManager::GetOnlySingleNode;
 
         // SUBROUTINE PARAMETER DEFINITIONS:
@@ -4096,7 +4096,7 @@ namespace EvaporativeCoolers {
         using DataZoneEquipment::ZoneEquipInputsFilled;
         using DataZoneEquipment::ZoneEvaporativeCoolerUnit_Num;
         using Fans::GetFanVolFlow;
-        using General::TrimSigDigits;
+
 
         // Locals
 
@@ -4286,7 +4286,7 @@ namespace EvaporativeCoolers {
         using DataSizing::CurZoneEqNum;
         using DataSizing::FinalZoneSizing;
         using DataSizing::ZoneSizingRunDone;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -4748,7 +4748,7 @@ namespace EvaporativeCoolers {
         using DataGlobals::WarmupFlag;
         using DataHVACGlobals::ZoneCompTurnFansOff;
         using DataHVACGlobals::ZoneCompTurnFansOn;
-        using General::RoundSigDigits;
+
         using General::SolveRoot;
         using TempSolveRoot::SolveRoot;
 

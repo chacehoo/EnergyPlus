@@ -157,7 +157,7 @@ namespace Photovoltaics {
         // in this module. provides common entry point for all the models
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int PVnum;                      // index of unit in PV array for Equivalent one-diode model
@@ -293,7 +293,7 @@ namespace Photovoltaics {
         using namespace DataIPShortCuts;
         using DataSurfaces::Surface;
         using namespace DataHeatBalance;
-        using General::RoundSigDigits;
+
         using ScheduleManager::GetScheduleIndex;
         using TranspiredCollector::GetTranspiredCollectorIndex;
 
@@ -1719,7 +1719,7 @@ namespace Photovoltaics {
         // na
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         // Return value
         Real64 FUN(0.0);
@@ -1773,7 +1773,7 @@ namespace Photovoltaics {
         // na
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         // Return value
         Real64 FI(0.0);
@@ -1826,7 +1826,7 @@ namespace Photovoltaics {
         // na
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         // Return value
         Real64 FV(0.0);

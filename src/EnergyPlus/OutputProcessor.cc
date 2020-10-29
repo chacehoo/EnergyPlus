@@ -5468,7 +5468,7 @@ void SetupOutputVariable(EnergyPlusData &state,
 
     // Using/Aliasing
     using namespace OutputProcessor;
-    using General::TrimSigDigits;
+
 
     // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
     int CV;
@@ -5710,7 +5710,7 @@ void SetupOutputVariable(EnergyPlusData &state,
 
     // Using/Aliasing
     using namespace OutputProcessor;
-    using General::TrimSigDigits;
+
 
     // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
     int CV;
@@ -7056,7 +7056,7 @@ void SetInitialMeterReportingAndOutputNames(EnergyPlusData &state,
 
     // Using/Aliasing
     using namespace OutputProcessor;
-    using General::TrimSigDigits;
+
 
     // Locals
     // SUBROUTINE ARGUMENT DEFINITIONS:

@@ -268,7 +268,7 @@ namespace DXCoils {
         // Manages the simulation of a single speed on/off DX coil.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int DXCoilNum;       // index of fan coil unit being simulated
@@ -394,7 +394,7 @@ namespace DXCoils {
         // Manages the simulation of a multi speed DX coil.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -511,7 +511,7 @@ namespace DXCoils {
         // multiple stages, or sub-cool reheat for humidity control.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE PARAMETER DEFINITIONS:
         static std::string const RoutineName("SimDXCoilMultiMode");
@@ -854,7 +854,7 @@ namespace DXCoils {
         using DataHeatBalance::Zone;
         using DataSizing::AutoSize;
         using EMSManager::ManageEMS;
-        using General::TrimSigDigits;
+
         using GlobalNames::VerifyUniqueCoilName;
         using NodeInputManager::GetOnlySingleNode;
         using OutAirNodeManager::CheckOutAirNodeNumber;
@@ -6028,7 +6028,7 @@ namespace DXCoils {
         // Using/Aliasing
         using DataHeatBalFanSys::ZoneAirHumRat;
         using DataHeatBalFanSys::ZT;
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE PARAMETER DEFINITIONS:
         static Real64 SmallDifferenceTest(0.00000001);
@@ -6628,8 +6628,8 @@ namespace DXCoils {
         // Using/Aliasing
         using namespace DataSizing;
         using CurveManager::CurveValue;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using namespace OutputReportPredefined;
         using StandardRatings::CalcDXCoilStandardRating;
 
@@ -8006,7 +8006,7 @@ namespace DXCoils {
         using DataHVACGlobals::DXCoilTotalCapacity;
         using DataHVACGlobals::HPWHInletDBTemp;
         using DataHVACGlobals::HPWHInletWBTemp;
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE PARAMETER DEFINITIONS:
         static std::string const RoutineName("CalcHPWHDXCoil");
@@ -8397,8 +8397,8 @@ namespace DXCoils {
         using DataHVACGlobals::TimeStepSys;
         using DataWater::WaterStorage;
         using General::CreateSysTimeIntervalString;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
 
         // SUBROUTINE PARAMETER DEFINITIONS:
         static std::string const RoutineName("CalcDoe2DXCoil: ");
@@ -9387,8 +9387,8 @@ namespace DXCoils {
         using DataHVACGlobals::TimeStepSys;
         using DataWater::WaterStorage;
         using General::CreateSysTimeIntervalString;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
 
         // SUBROUTINE ARGUMENT DEFINITIONS:
         //  REAL(r64), INTENT(IN), OPTIONAL :: CoolingHeatingPLR   ! used for cycling fan RH control
@@ -9652,7 +9652,7 @@ namespace DXCoils {
                     ShowContinueError("...Volume Flow Rate   = " + format("{:.8R}", AirVolumeFlowRate) + " m3/s.");
                     ShowContinueError("...Air Mass Flow Rate = " + format("{:.8R}", AirMassFlow) + " kg/s.");
                     ShowContinueError("...Air Density        = " +
-                                      RoundSigDigits(PsyRhoAirFnPbTdbW(OutdoorPressure, InletAirDryBulbTemp, InletAirHumRat), 8) + " kg/m3.");
+                                      format("{:.8R}", PsyRhoAirFnPbTdbW(OutdoorPressure, InletAirDryBulbTemp, InletAirHumRat)) + " kg/m3.");
                     ShowContinueError("...Data used for air density calculation:");
                     ShowContinueError("...Outdoor Air Pressure     = " + format("{:.3R}", OutdoorPressure) + " Pa.");
                     ShowContinueError("...Inlet Air Dry-Bulb Temp  = " + format("{:.3R}", InletAirDryBulbTemp) + " C.");
@@ -10040,7 +10040,7 @@ namespace DXCoils {
         using CurveManager::CurveValue;
         using DataHeatBalFanSys::ZoneAirHumRat;
         using DataHeatBalFanSys::ZT;
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE PARAMETER DEFINITIONS:
         static std::string const RoutineName("CalcDXHeatingCoil");
@@ -11093,7 +11093,7 @@ namespace DXCoils {
         // conditions. From this information, coil bypass factor is calculated.
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         // Return value
         Real64 CBF(0.0); // the result - the coil bypass factor
@@ -11712,8 +11712,8 @@ namespace DXCoils {
         using DataHVACGlobals::MSHPMassFlowRateLow;
         using DataHVACGlobals::MSHPWasteHeat;
         using DataWater::WaterStorage;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -12544,8 +12544,8 @@ namespace DXCoils {
         using DataHVACGlobals::MSHPMassFlowRateLow;
         using DataHVACGlobals::MSHPWasteHeat;
         using DataWater::WaterStorage;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
 
         // SUBROUTINE ARGUMENT DEFINITIONS:
         // SpeedRatio varies between 1.0 (maximum speed) and 0.0 (minimum speed)
@@ -13422,7 +13422,7 @@ namespace DXCoils {
         // Using/Aliasing
         using CurveManager::CurveValue;
         using DataEnvironment::OutBaroPress;
-        using General::RoundSigDigits;
+
         using General::SolveRoot;
         using TempSolveRoot::SolveRoot;
         using namespace OutputReportPredefined;
@@ -14998,7 +14998,7 @@ namespace DXCoils {
         // Also, this is an illustration of setting Data from an outside source.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // Obtains and Allocates DXCoils
         if (GetCoilsInputFlag) {
@@ -15682,8 +15682,8 @@ namespace DXCoils {
         using DataHVACGlobals::TimeStepSys;
         using DataWater::WaterStorage;
         using General::CreateSysTimeIntervalString;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using HVACVariableRefrigerantFlow::OACompOffMassFlow;
         using HVACVariableRefrigerantFlow::OACompOnMassFlow;
         using namespace HVACVariableRefrigerantFlow;
@@ -16129,7 +16129,7 @@ namespace DXCoils {
 
         // Using/Aliasing
         using CurveManager::CurveValue;
-        using General::RoundSigDigits;
+
         using HVACVariableRefrigerantFlow::OACompOffMassFlow;
         using HVACVariableRefrigerantFlow::OACompOnMassFlow;
         using namespace HVACVariableRefrigerantFlow;

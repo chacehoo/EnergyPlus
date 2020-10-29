@@ -122,7 +122,7 @@ namespace GroundHeatExchangers {
     using DataHVACGlobals::SysTimeElapsed;
     using DataHVACGlobals::TimeStepSys;
     using namespace DataLoopNode;
-    using General::TrimSigDigits;
+
     using namespace GroundTemperatureManager;
 
     // MODULE PARAMETER DEFINITIONS
@@ -1734,7 +1734,7 @@ namespace GroundHeatExchangers {
         using DataPlant::PlantLoop;
         using FluidProperties::GetDensityGlycol;
         using FluidProperties::GetSpecificHeatGlycol;
-        using General::TrimSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS
@@ -2023,7 +2023,7 @@ namespace GroundHeatExchangers {
         using DataPlant::PlantLoop;
         using FluidProperties::GetDensityGlycol;
         using FluidProperties::GetSpecificHeatGlycol;
-        using General::TrimSigDigits;
+
         using PlantUtilities::SafeCopyPlantNode;
 
         // SUBROUTINE ARGUMENT DEFINITIONS
@@ -2148,8 +2148,8 @@ namespace GroundHeatExchangers {
         // Using/Aliasing
         using BranchNodeConnections::TestCompSet;
         using DataEnvironment::MaxNumberSimYears;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using NodeInputManager::GetOnlySingleNode;
         using PlantUtilities::RegisterPlantCompDesignFlow;
 

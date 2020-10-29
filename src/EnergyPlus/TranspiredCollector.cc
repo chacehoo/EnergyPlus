@@ -138,7 +138,7 @@ namespace TranspiredCollector {
         // Using/Aliasing
         using DataHVACGlobals::TempControlTol;
         using DataLoopNode::Node;
-        using General::TrimSigDigits;
+
         using ScheduleManager::GetCurrentScheduleValue;
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
@@ -239,8 +239,8 @@ namespace TranspiredCollector {
         using DataSurfaces::OtherSideCondModeledExt;
         using DataSurfaces::Surface;
         using DataSurfaces::SurfaceData;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using NodeInputManager::GetOnlySingleNode;
         using ScheduleManager::GetScheduleIndex;
 
@@ -852,7 +852,7 @@ namespace TranspiredCollector {
         using DataHVACGlobals::TimeStepSys;
         using DataSurfaces::Surface;
         using DataSurfaces::SurfaceData;
-        using General::RoundSigDigits;
+
         using Psychrometrics::PsyCpAirFnW;
         using Psychrometrics::PsyHFnTdbW;
         using Psychrometrics::PsyRhoAirFnPbTdbW;

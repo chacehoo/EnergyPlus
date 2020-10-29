@@ -223,7 +223,7 @@ namespace DaylightingDevices {
 
         // Using/Aliasing
         using DataHeatBalance::IntGainTypeOf_DaylightingDeviceTubular;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS: na
@@ -484,7 +484,7 @@ namespace DaylightingDevices {
 
         // Using/Aliasing
         using namespace DataIPShortCuts;
-        using General::RoundSigDigits;
+
         using General::SafeDivide;
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:

@@ -152,7 +152,7 @@ namespace ThermalChimney {
         // stores it in the ThermalChimney data structure.
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
         using ScheduleManager::GetScheduleIndex;
         using namespace DataIPShortCuts;
 

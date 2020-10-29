@@ -143,7 +143,7 @@ namespace SteamBaseboardRadiator {
         // Using/Aliasing
         using DataZoneEnergyDemands::CurDeadBandOrSetback;
         using DataZoneEnergyDemands::ZoneSysEnergyDemand;
-        using General::TrimSigDigits;
+
         using PlantUtilities::SetComponentFlowRate;
         using ScheduleManager::GetCurrentScheduleValue;
 
@@ -276,8 +276,8 @@ namespace SteamBaseboardRadiator {
         using BranchNodeConnections::TestCompSet;
         using DataSurfaces::Surface;
         using FluidProperties::FindRefrigerant;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using GlobalNames::VerifyUniqueBaseboardName;
         using NodeInputManager::GetOnlySingleNode;
         using ScheduleManager::GetCurrentScheduleValue;
@@ -875,7 +875,7 @@ namespace SteamBaseboardRadiator {
         //  USE BranchInputManager,  ONLY: MyPlantSizingIndex
         using DataHeatBalance::Zone;
         using DataHVACGlobals::HeatingCapacitySizing;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -1275,7 +1275,7 @@ namespace SteamBaseboardRadiator {
         using DataHeatBalFanSys::QSteamBaseboardSurf;
         using DataHeatBalFanSys::QSteamBaseboardToPerson;
         using DataSurfaces::Surface;
-        using General::RoundSigDigits;
+
 
         Real64 const SmallestArea(0.001); // Smallest area in meters squared (to avoid a divide by zero)
 
@@ -1440,7 +1440,7 @@ namespace SteamBaseboardRadiator {
         using DataPlant::CriteriaType_MassFlowRate;
         using DataPlant::CriteriaType_Temperature;
         using DataPlant::TypeOf_Baseboard_Rad_Conv_Steam;
-        using General::TrimSigDigits;
+
         using PlantUtilities::PullCompInterconnectTrigger;
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:

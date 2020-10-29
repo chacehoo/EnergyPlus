@@ -227,7 +227,7 @@ void LinesOut(EnergyPlusData &state, std::string const &option)
     // Using/Aliasing
     using namespace DataHeatBalance;
     using namespace DataSurfaces;
-    using General::RoundSigDigits;
+
 
     // Locals
     // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -512,7 +512,7 @@ void DXFOut(EnergyPlusData &state,
     using DataGlobals::NumOfZones;
     using DataStringGlobals::VerString;
     using namespace DXFEarClipping;
-    using General::TrimSigDigits;
+
 
     // Locals
     // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -890,7 +890,7 @@ void DXFOutLines(EnergyPlusData &state, std::string const &ColorScheme)
     using DataDaylighting::ZoneDaylight;
     using DataGlobals::NumOfZones;
     using DataStringGlobals::VerString;
-    using General::TrimSigDigits;
+
 
     // Locals
     // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -1103,7 +1103,7 @@ void DXFOutWireFrame(EnergyPlusData &state, std::string const &ColorScheme)
     using DataDaylighting::ZoneDaylight;
     using DataGlobals::NumOfZones;
     using DataStringGlobals::VerString;
-    using General::TrimSigDigits;
+
 
     // Locals
     // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -1272,8 +1272,8 @@ void DetailsForSurfaces(EnergyPlusData &state, int const RptType) // (1=Vertices
     using namespace DataHeatBalance;
     using namespace DataSurfaces;
     using DataGlobals::NumOfZones;
-    using General::RoundSigDigits;
-    using General::TrimSigDigits;
+
+
     using ScheduleManager::GetScheduleMaxValue;
     using ScheduleManager::GetScheduleMinValue;
     using ScheduleManager::GetScheduleName;

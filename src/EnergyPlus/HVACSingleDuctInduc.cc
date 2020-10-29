@@ -763,7 +763,7 @@ namespace HVACSingleDuctInduc {
         using DataPlant::PlantLoop;
         using FluidProperties::GetDensityGlycol;
         using FluidProperties::GetSpecificHeatGlycol;
-        using General::RoundSigDigits;
+
         using PlantUtilities::MyPlantSizingIndex;
         using WaterCoils::GetCoilWaterInletNode;
         using WaterCoils::GetCoilWaterOutletNode;
@@ -1107,7 +1107,7 @@ namespace HVACSingleDuctInduc {
         // Using/Aliasing
         using namespace DataZoneEnergyDemands;
         using DataPlant::PlantLoop;
-        using General::RoundSigDigits;
+
         using General::SolveRoot;
         using PlantUtilities::SetComponentFlowRate;
         using TempSolveRoot::SolveRoot;

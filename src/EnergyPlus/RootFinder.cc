@@ -174,7 +174,7 @@ namespace RootFinder {
     // Use statements for data only modules
     // Using/Aliasing
     using namespace DataRootFinder;
-    using General::TrimSigDigits;
+
 
     // Data
     // MODULE PARAMETER DEFINITIONS
@@ -2556,7 +2556,7 @@ namespace RootFinder {
         // na
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:

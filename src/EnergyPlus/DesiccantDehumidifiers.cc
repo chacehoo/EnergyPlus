@@ -150,8 +150,8 @@ namespace DesiccantDehumidifiers {
     using namespace CurveManager;
     using namespace Psychrometrics;
     using FluidProperties::GetSatDensityRefrig;
-    using General::RoundSigDigits;
-    using General::TrimSigDigits;
+
+
 
     // Data
     // MODULE PARAMETER DEFINITIONS
@@ -3228,7 +3228,7 @@ namespace DesiccantDehumidifiers {
 
         // Using/Aliasing
         using DataHVACGlobals::SmallLoad;
-        using General::RoundSigDigits;
+
         using General::SolveRoot;
         using TempSolveRoot::SolveRoot;
         using HeatingCoils::SimulateHeatingCoilComponents;

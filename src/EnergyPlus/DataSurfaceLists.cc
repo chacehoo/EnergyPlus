@@ -125,7 +125,7 @@ namespace DataSurfaceLists {
         // Using/Aliasing
         using namespace DataSurfaces;
         using DataHeatBalance::Zone;
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE PARAMETER DEFINITIONS:
         static std::string const CurrentModuleObject1("ZoneHVAC:LowTemperatureRadiant:SurfaceGroup");

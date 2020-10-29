@@ -156,7 +156,7 @@ namespace UnitHeater {
         // Using/Aliasing
         using DataSizing::ZoneEqUnitHeater;
         using DataSizing::ZoneHeatingOnlyFan;
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int UnitHeatNum; // index of unit heater being simulated
@@ -242,7 +242,7 @@ namespace UnitHeater {
         using Fans::GetFanOutletNode;
         using Fans::GetFanType;
         using Fans::GetFanVolFlow;
-        using General::TrimSigDigits;
+
         using NodeInputManager::GetOnlySingleNode;
         using SteamCoils::GetCoilSteamInletNode;
         using SteamCoils::GetSteamCoilIndex;
@@ -925,7 +925,7 @@ namespace UnitHeater {
         using DataHVACGlobals::HeatingAirflowSizing;
         using DataHVACGlobals::HeatingCapacitySizing;
         using DataPlant::PlantLoop;
-        using General::RoundSigDigits;
+
         using PlantUtilities::MyPlantSizingIndex;
         using Psychrometrics::CPHW;
         using SteamCoils::GetCoilSteamInletNode;

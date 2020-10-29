@@ -246,7 +246,7 @@ namespace DataPlant {
         using DataLoopNode::Node;
         using DataLoopNode::NodeID;
         using DataPlant::SupplySide;
-        using General::RoundSigDigits;
+        ;
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int LoopInlet;  // plant loop inlet node num.

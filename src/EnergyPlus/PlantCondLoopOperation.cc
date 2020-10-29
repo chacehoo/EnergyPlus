@@ -185,7 +185,7 @@ namespace PlantCondLoopOperation {
         using DataEnvironment::OutDryBulbTemp;
         using DataEnvironment::OutRelHum;
         using DataEnvironment::OutWetBulbTemp; // Current outdoor relative humidity [%]
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -795,7 +795,7 @@ CurrentModuleObject, PlantOpSchemeName);
         //       PlantEquipmentOperation:Uncontrolled
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE PARAMETER DEFINITIONS:
         int const Plant(1);     // Used to identify whether the current loop is Plant

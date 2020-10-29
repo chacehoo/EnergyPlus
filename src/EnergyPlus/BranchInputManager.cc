@@ -143,7 +143,7 @@ namespace BranchInputManager {
         // returns number and names to the outside calling routine.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         int Found;     // Points to correct Branch List/Branch
         bool ErrFound; // True when error has occurred (cannot find Branch List)
@@ -251,7 +251,7 @@ namespace BranchInputManager {
         // Branch Name and returns it in "list structure" to the calling routine.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int Count; // Loop Counter
@@ -386,7 +386,7 @@ namespace BranchInputManager {
         // routine can either use this flow or use then branch flow for sizing.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // FUNCTION LOCAL VARIABLE DECLARATIONS:
         int CompNum;
@@ -613,7 +613,7 @@ namespace BranchInputManager {
         // if this connector list name is a mixer or not.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int Count;    // Loop Counter
@@ -753,7 +753,7 @@ namespace BranchInputManager {
         // if this connector list name is a splitter or not.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int Count;    // Loop Counter
@@ -1082,7 +1082,7 @@ namespace BranchInputManager {
     {
         // Using
         using CurveManager::GetPressureCurveTypeAndIndex;
-        using General::RoundSigDigits;
+
 
         // Locals
         int PressureCurveType;
@@ -1252,7 +1252,7 @@ namespace BranchInputManager {
         //        \object-list Branches
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE PARAMETER DEFINITIONS:
         static std::string const RoutineName("GetBranchListInput: ");
@@ -1661,7 +1661,7 @@ namespace BranchInputManager {
         //         \object-list Branches
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int NumAlphas;           // Used to retrieve names from IDF
@@ -1888,7 +1888,7 @@ namespace BranchInputManager {
         //         \object-list Branches
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int NumAlphas;           // Used to retrieve names from IDF
@@ -2347,7 +2347,7 @@ namespace BranchInputManager {
 
         // Using/Aliasing
         using DataErrorTracking::TotalSevereErrors;
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int NumDanglingCount;        // when mustprint not true, count and report
@@ -2415,7 +2415,7 @@ namespace BranchInputManager {
         // Also, input and output nodes.
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int Loop;

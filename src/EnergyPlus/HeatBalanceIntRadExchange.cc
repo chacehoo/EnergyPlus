@@ -505,7 +505,7 @@ namespace HeatBalanceIntRadExchange {
 
         // Using/Aliasing
         using namespace DataIPShortCuts;
-        using General::RoundSigDigits;
+
         using General::ScanForReports;
 
         // SUBROUTINE PARAMETER DEFINITIONS:
@@ -1121,7 +1121,7 @@ namespace HeatBalanceIntRadExchange {
 
         // Using/Aliasing
         using namespace DataIPShortCuts;
-        using General::TrimSigDigits;
+
 
         // Argument array dimensioning
         F.dim(N, N);
@@ -1307,7 +1307,7 @@ namespace HeatBalanceIntRadExchange {
 
         // Using/Aliasing
         using namespace DataIPShortCuts;
-        using General::TrimSigDigits;
+
 
         // Argument array dimensioning
         F.dim(N, N);
@@ -1537,7 +1537,7 @@ namespace HeatBalanceIntRadExchange {
         // na
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         // Argument array dimensioning
         EP_SIZE_CHECK(A, N);

@@ -174,8 +174,8 @@ namespace SizingManager {
         using ZoneEquipmentManager::UpdateZoneSizing;
         using namespace OutputReportPredefined;
         using DataHeatBalance::Zone;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using OutputReportTabular::AllocateLoadComponentArrays;
         using OutputReportTabular::ComputeLoadComponentDecayCurve;
         using OutputReportTabular::DeallocateLoadComponentArrays;
@@ -2067,7 +2067,7 @@ namespace SizingManager {
         using ScheduleManager::GetScheduleIndex;
         using ScheduleManager::GetScheduleMaxValue;
         using namespace DataIPShortCuts;
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE PARAMETER DEFINITIONS:
         static std::string const RoutineName("GetOARequirements: "); // include trailing blank space
@@ -2186,7 +2186,7 @@ namespace SizingManager {
         using ScheduleManager::GetScheduleIndex;
         using ScheduleManager::GetScheduleMaxValue;
         using namespace DataIPShortCuts;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -2473,7 +2473,7 @@ namespace SizingManager {
 
         // Using/Aliasing
         using namespace DataIPShortCuts;
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int NumAlphas;  // Number of Alphas for each GetObjectItem call
@@ -2583,7 +2583,7 @@ namespace SizingManager {
 
         // Using/Aliasing
         using namespace DataIPShortCuts;
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int ZoneSizIndex;               // loop index
@@ -3270,8 +3270,8 @@ namespace SizingManager {
 
         // Using/Aliasing
         using namespace DataIPShortCuts;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
 
         // Sizing:System;
         int const iNameAlphaNum = 1;                          // A1, \field AirLoop Name
@@ -4023,7 +4023,7 @@ namespace SizingManager {
 
         // Using/Aliasing
         using DataStringGlobals::VerString;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -4098,7 +4098,7 @@ namespace SizingManager {
                          int const &TimeStepIndex         // time step of the peak
     )
     {
-        using General::RoundSigDigits;
+
 
         if (ReportSysSizingMyOneTimeFlag) {
             print(state.files.eio,
@@ -4155,8 +4155,8 @@ namespace SizingManager {
         using namespace DataIPShortCuts;
         using DataSizing::NumZoneHVACSizing;
         using DataSizing::ZoneHVACSizing;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
 
         // SUBROUTINE PARAMETER DEFINITIONS:
         static std::string const RoutineName("GetZoneHVACSizing: "); // include trailing blank space
@@ -4752,8 +4752,8 @@ namespace SizingManager {
         // appropriate data structure.
 
         using namespace DataIPShortCuts;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
 
         static std::string const RoutineName("GetAirTerminalSizing: "); // include trailing blank space
 

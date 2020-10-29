@@ -233,8 +233,8 @@ namespace ScheduleManager {
 
         // Using/Aliasing
         using General::ProcessDateString;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using DataGlobals::AnyEnergyManagementSystemInModel;
         using DataStringGlobals::CharComma;
         using DataStringGlobals::CharSemicolon;
@@ -2335,7 +2335,7 @@ namespace ScheduleManager {
         // na
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -2477,7 +2477,7 @@ namespace ScheduleManager {
                     }
                     for (Hr = 1; Hr <= 24; ++Hr) {
                         for (TS = 1; TS <= NumOfTimeStepInHour; ++TS) {
-                            RoundTSValue(TS, Hr) = RoundSigDigits(DaySchedule(Count).TSValue(TS, Hr), 2);
+                            RoundTSValue(TS, Hr) = format("{:.2R}", DaySchedule(Count).TSValue(TS, Hr));
                         }
                     }
                     static constexpr auto SchDFmtdata0("DaySchedule,{},{},{},{}");
@@ -4860,7 +4860,7 @@ namespace ScheduleManager {
 
         // Using/Aliasing
         using DataGlobals::DisplayUnusedSchedules;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:

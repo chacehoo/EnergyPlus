@@ -105,7 +105,7 @@ namespace Psychrometrics {
 
     // Use Statements for other routines
 #ifdef EP_psych_errors
-    using General::TrimSigDigits;
+
 #endif
 
     // Data
@@ -333,7 +333,7 @@ namespace Psychrometrics {
         // na
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -378,7 +378,7 @@ namespace Psychrometrics {
     )
     {
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         if (rhoair < 0.0) {
             ShowSevereError("PsyRhoAirFnPbTdbW: RhoAir (Density of Air) is calculated <= 0 [" + format("{:.5R}", rhoair) + "].");

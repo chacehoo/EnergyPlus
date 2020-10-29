@@ -172,7 +172,7 @@ namespace WindowManager {
 
         // Using/Aliasing
         using namespace Vectors;
-        using General::TrimSigDigits;
+
         using WindowEquivalentLayer::InitEquivalentLayerWindowCalculations;
 
         int CoefNum;                    // Polynomial coefficient number
@@ -1519,7 +1519,7 @@ namespace WindowManager {
     {
         // Initializes variables used in the window optical and thermal calculation.
 
-        using General::RoundSigDigits;
+
 
         int ConstrNum;        // Construction number
         int SurfNum;          // Surface number
@@ -2854,8 +2854,8 @@ namespace WindowManager {
         using ConvectionCoefficients::CalcISO15099WindowIntConvCoeff;
         using General::InterpSlatAng;
         using General::InterpSw;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using Psychrometrics::PsyCpAirFnW;
         using Psychrometrics::PsyHFnTdbW;
         using Psychrometrics::PsyRhoAirFnPbTdbW;
@@ -6791,7 +6791,7 @@ namespace WindowManager {
         using DataBSDFWindow::summerCondition;
         using DataBSDFWindow::winterCondition;
         using General::POLYF;
-        using General::RoundSigDigits;
+
         using General::ScanForReports;
         // InterpBlind ! Blind profile angle interpolation function
         using WindowComplexManager::CalcComplexWindowThermal;
@@ -7463,7 +7463,7 @@ namespace WindowManager {
         // Loop through all surfaces to determine which window has an exterior screen. Static
         // variables are defined here, dynamic variables are calculated in CalcScreenTransmittance.
 
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE PARAMETER DEFINITIONS:

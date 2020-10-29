@@ -256,8 +256,8 @@ namespace ZoneTempPredictorCorrector {
         using namespace DataIPShortCuts;
         using General::CheckCreatedZoneItemName;
         using General::FindNumberInList;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using ScheduleManager::CheckScheduleValue;
         using ScheduleManager::CheckScheduleValueMinMax;
         using ScheduleManager::GetScheduleIndex;
@@ -3194,8 +3194,8 @@ namespace ZoneTempPredictorCorrector {
         using DataRoomAirModel::ZTM1OC;
         using DataRoomAirModel::ZTMX;
         using DataRoomAirModel::ZTOC;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using InternalHeatGains::SumAllInternalConvectionGainsExceptPeople;
         using RoomAirModelAirflowNetwork::LoadPredictionRoomAirModelAirflowNetwork;
         using ScheduleManager::GetCurrentScheduleValue;
@@ -3707,7 +3707,7 @@ namespace ZoneTempPredictorCorrector {
         // Using/Aliasing
         using DataZoneControls::OccRoomTSetPointCool;
         using DataZoneControls::OccRoomTSetPointHeat;
-        using General::TrimSigDigits;
+
         using ScheduleManager::GetCurrentScheduleValue;
         using ScheduleManager::GetScheduleValuesForDay;
 
@@ -3933,7 +3933,7 @@ namespace ZoneTempPredictorCorrector {
 
         // Using/Aliasing
         using DataLoopNode::Node;
-        using General::RoundSigDigits;
+
         using ScheduleManager::GetCurrentScheduleValue;
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
@@ -4320,7 +4320,7 @@ namespace ZoneTempPredictorCorrector {
         using DataSurfaces::HeatTransferModel_EMPD;
         using DataSurfaces::HeatTransferModel_HAMT;
         using DataSurfaces::Surface;
-        using General::RoundSigDigits;
+
         using ScheduleManager::GetCurrentScheduleValue;
 
         // SUBROUTINE PARAMETER DEFINITIONS:
@@ -4713,7 +4713,7 @@ namespace ZoneTempPredictorCorrector {
         using DataRoomAirModel::ZTM1OC;
         using DataRoomAirModel::ZTMX;
         using DataRoomAirModel::ZTOC;
-        using General::TrimSigDigits;
+
         using RoomAirModelManager::ManageAirModel;
 
         // HybridModel
@@ -6410,7 +6410,7 @@ namespace ZoneTempPredictorCorrector {
         using DataDefineEquip::AirDistUnit;
         using DataLoopNode::Node;
         using DataZoneEquipment::ZoneEquipConfig;
-        using General::RoundSigDigits;
+
         using InternalHeatGains::SumAllInternalConvectionGains;
         using InternalHeatGains::SumAllReturnAirConvectionGains;
         //using ZonePlenum::ZoneRetPlenCond;
@@ -7022,7 +7022,7 @@ namespace ZoneTempPredictorCorrector {
         // obtained from thermal comfort models.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
         using ScheduleManager::GetCurrentScheduleValue;
         using ThermalComfort::ManageThermalComfort;
 

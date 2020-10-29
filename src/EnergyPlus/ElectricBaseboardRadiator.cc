@@ -165,7 +165,7 @@ namespace ElectricBaseboardRadiator {
         // Water baseboard module
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int BaseboardNum; // Index of unit in baseboard array
@@ -232,7 +232,7 @@ namespace ElectricBaseboardRadiator {
 
         // Using/Aliasing
         using DataSurfaces::Surface;
-        using General::RoundSigDigits;
+
         using GlobalNames::VerifyUniqueBaseboardName;
         using ScheduleManager::GetScheduleIndex;
         using namespace DataIPShortCuts;
@@ -240,7 +240,7 @@ namespace ElectricBaseboardRadiator {
         using DataSizing::CapacityPerFloorArea;
         using DataSizing::FractionOfAutosizedHeatingCapacity;
         using DataSizing::HeatingDesignCapacity;
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE PARAMETER DEFINITIONS:
         static std::string const RoutineName("GetBaseboardInput: "); // include trailing blank space
@@ -692,7 +692,7 @@ namespace ElectricBaseboardRadiator {
         using namespace DataSizing;
         using DataHeatBalance::Zone;
         using DataHVACGlobals::HeatingCapacitySizing;
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE PARAMETER DEFINITIONS:
         static std::string const RoutineName("SizeElectricBaseboard");
@@ -1049,7 +1049,7 @@ namespace ElectricBaseboardRadiator {
         using DataHeatBalFanSys::QElecBaseboardToPerson;
         using DataSurfaces::Surface;
         using DataZoneEquipment::ZoneEquipConfig;
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE PARAMETER DEFINITIONS:
         Real64 const SmallestArea(0.001); // Smallest area in meters squared (to avoid a divide by zero)

@@ -240,7 +240,7 @@ namespace FanCoilUnits {
         // Manages the simulation of a fan coil unit. Called from SimZone Equipment
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int FanCoilNum; // index of fan coil unit being simulated
@@ -319,7 +319,7 @@ namespace FanCoilUnits {
         using BranchNodeConnections::TestCompSet;
         using Fans::GetFanDesignVolumeFlowRate;
         using Fans::GetFanType;
-        using General::TrimSigDigits;
+
         using NodeInputManager::GetOnlySingleNode;
         using WaterCoils::GetCoilWaterInletNode;
         auto &GetHXCoilWaterInletNode(HVACHXAssistedCoolingCoil::GetCoilWaterInletNode);
@@ -1393,8 +1393,8 @@ namespace FanCoilUnits {
         using Fans::GetFanDesignVolumeFlowRate;
         using FluidProperties::GetDensityGlycol;
         using FluidProperties::GetSpecificHeatGlycol;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using HVACHXAssistedCoolingCoil::GetHXCoilType;
         using HVACHXAssistedCoolingCoil::GetHXDXCoilName;
         using PlantUtilities::MyPlantSizingIndex;
@@ -2230,7 +2230,7 @@ namespace FanCoilUnits {
         using DataHeatBalFanSys::TempControlType;
         using DataZoneEquipment::CalcDesignSpecificationOutdoorAir;
         using General::SolveRoot;
-        using General::TrimSigDigits;
+
         using PlantUtilities::SetComponentFlowRate;
         using Psychrometrics::PsyHFnTdbW;
         using Psychrometrics::PsyRhoAirFnPbTdbW;
@@ -4244,7 +4244,7 @@ namespace FanCoilUnits {
         // Using/Aliasing
         using namespace DataZoneEnergyDemands;
         using DataHeatBalFanSys::TempControlType;
-        using General::TrimSigDigits;
+
         using PlantUtilities::SetComponentFlowRate;
 
         // Locals

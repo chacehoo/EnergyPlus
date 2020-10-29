@@ -282,8 +282,8 @@ namespace DataZoneEquipment {
         using BranchNodeConnections::SetUpCompSets;
         using namespace DataLoopNode;
         using DataGlobals::NumOfZones;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using namespace ScheduleManager;
 
         // SUBROUTINE PARAMETER DEFINITIONS:
@@ -1487,7 +1487,7 @@ namespace DataZoneEquipment {
         using DataSizing::ZOAM_IAQP;
         using DataSizing::ZOAM_ProportionalControlDesOcc;
         using DataSizing::ZOAM_ProportionalControlSchOcc;
-        using General::RoundSigDigits;
+
         using ScheduleManager::GetCurrentScheduleValue;
         using ScheduleManager::GetScheduleMaxValue;
 

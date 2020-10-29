@@ -195,7 +195,7 @@ namespace PackagedThermalStorageCoil {
         // <description>
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int TESCoilNum;
@@ -1841,7 +1841,7 @@ namespace PackagedThermalStorageCoil {
         // Using/Aliasing
         using DataPlant::PlantLoop;
         using DataPlant::TypeOf_PackagedTESCoolingCoil;
-        using General::RoundSigDigits;
+
         using PlantUtilities::ScanPlantLoopsForObject;
         using ScheduleManager::GetCurrentScheduleValue;
 
@@ -4116,7 +4116,7 @@ namespace PackagedThermalStorageCoil {
         // na
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
         using General::SolveRoot;
         using TempSolveRoot::SolveRoot;
 

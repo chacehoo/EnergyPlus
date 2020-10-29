@@ -1951,7 +1951,7 @@ namespace OutputReportTabular {
         using DataStringGlobals::CharComma;
         using DataStringGlobals::CharSpace;
         using DataStringGlobals::CharTab;
-        using General::RoundSigDigits;
+
         using OutputProcessor::EndUseCategory;
         using OutputProcessor::MaxNumSubcategories;
         using OutputReportPredefined::numReportName;
@@ -2502,7 +2502,7 @@ namespace OutputReportTabular {
 
         // Using/Aliasing
         using namespace DataOutputs;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -6417,7 +6417,7 @@ namespace OutputReportTabular {
         using DataOutputs::iTotalAutoCalculatableFields;
         using DataOutputs::iTotalAutoSizableFields;
         using DataOutputs::iTotalFieldsWithDefaults;
-        using General::RoundSigDigits;
+
         using ScheduleManager::GetScheduleName;
         using ScheduleManager::ScheduleAverageHoursPerWeek;
 
@@ -10293,7 +10293,7 @@ namespace OutputReportTabular {
         using DataSurfaces::SurfaceClass_Wall;
         using DataSurfaces::SurfaceClass_Window;
         using DataSurfaces::TotSurfaces;
-        using General::RoundSigDigits;
+
         using General::SafeDivide;
         using ScheduleManager::GetScheduleName;
         using ScheduleManager::ScheduleAverageHoursPerWeek;

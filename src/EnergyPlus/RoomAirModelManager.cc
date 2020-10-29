@@ -110,7 +110,7 @@ namespace RoomAirModelManager {
     // Using/Aliasing
     using namespace DataGlobals;
     using namespace DataRoomAirModel;
-    using General::RoundSigDigits;
+
 
     // Data
     // MODULE PARAMETER DEFINITIONS
@@ -325,7 +325,7 @@ namespace RoomAirModelManager {
         using DataSurfaces::SurfaceClass_IntMass;
         using DataZoneEquipment::EquipConfiguration;
         using DataZoneEquipment::ZoneEquipConfig;
-        using General::RoundSigDigits;
+
         using RoomAirModelUserTempPattern::FigureNDheightInZone;
         using ScheduleManager::GetScheduleIndex;
 
@@ -1063,7 +1063,7 @@ namespace RoomAirModelManager {
         using DataSurfaces::Surface;
         using DataHeatBalance::People;
         using DataHeatBalance::TotPeople;
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int IOStat;
@@ -1402,7 +1402,7 @@ namespace RoomAirModelManager {
         using DataHVACGlobals::ZoneHVACTerminalTypes;
         using DataSurfaces::Surface;
         using DataSurfaces::SurfaceClass_IntMass;
-        using General::RoundSigDigits;
+
         using InternalHeatGains::GetInternalGainDeviceIndex;
         using ScheduleManager::GetScheduleIndex;
 

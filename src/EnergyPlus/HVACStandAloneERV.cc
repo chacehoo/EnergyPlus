@@ -193,7 +193,7 @@ namespace HVACStandAloneERV {
         // Manages the simulation of a Stand Alone ERV unit. Called from SimZoneEquipment
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -266,7 +266,7 @@ namespace HVACStandAloneERV {
         using Fans::GetFanIndex;
         using Fans::GetFanOutletNode;
         using Fans::GetFanType;
-        using General::RoundSigDigits;
+
         using MixedAir::OAController;
         using NodeInputManager::GetOnlySingleNode;
         auto &GetGenericSupplyAirFlowRate(HeatRecovery::GetSupplyAirFlowRate);
@@ -1402,7 +1402,7 @@ namespace HVACStandAloneERV {
         using DataZoneEquipment::ZoneEquipConfig;
         using Fans::SetFanData;
         using Fans::SimulateFanComponents;
-        using General::RoundSigDigits;
+
         using HeatRecovery::SetHeatExchangerData;
         using MixedAir::OAController;
         using ScheduleManager::GetScheduleMaxValue;
@@ -1617,7 +1617,7 @@ namespace HVACStandAloneERV {
         using DataHeatBalance::ZoneAirMassFlow;
         using DataZoneEquipment::ZoneEquipConfig;
         using Fans::SimulateFanComponents;
-        using General::RoundSigDigits;
+
         using HeatRecovery::SimHeatRecovery;
         using MixedAir::OAController;
 

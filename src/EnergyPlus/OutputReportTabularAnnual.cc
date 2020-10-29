@@ -1390,31 +1390,31 @@ namespace OutputReportTabularAnnual {
         ret.push_back(fldSt.m_colHead);
         ret.push_back(fldSt.m_variMeter);
         ret.push_back(unitEnumToString(fldSt.m_varUnits));
-        std::string outStr = fmt::to_string(fldSt.m_showDigits);
+        std::string outStr = std::to_string(fldSt.m_showDigits);
         // ints
         ret.push_back(outStr);
-        outStr = fmt::to_string(fldSt.m_typeOfVar);
+        outStr = std::to_string(fldSt.m_typeOfVar);
         ret.push_back(outStr);
-        outStr = fmt::to_string(fldSt.m_keyCount);
+        outStr = std::to_string(fldSt.m_keyCount);
         ret.push_back(outStr);
-        outStr = fmt::to_string(static_cast<int>(fldSt.m_varAvgSum));
+        outStr = std::to_string(static_cast<int>(fldSt.m_varAvgSum));
         ret.push_back(outStr);
-        outStr = fmt::to_string(static_cast<int>(fldSt.m_varStepType));
+        outStr = std::to_string(static_cast<int>(fldSt.m_varStepType));
         ret.push_back(outStr);
-        outStr = fmt::to_string(fldSt.m_aggregate);
+        outStr = std::to_string(fldSt.m_aggregate);
         ret.push_back(outStr);
         // floats
-        outStr = fmt::to_string(fldSt.m_bottomBinValue);
+        outStr = std::to_string(fldSt.m_bottomBinValue);
         ret.push_back(outStr);
-        outStr = fmt::to_string(fldSt.m_topBinValue);
+        outStr = std::to_string(fldSt.m_topBinValue);
         ret.push_back(outStr);
-        outStr = fmt::to_string(fldSt.m_timeAboveTopBinTotal);
+        outStr = std::to_string(fldSt.m_timeAboveTopBinTotal);
         ret.push_back(outStr);
-        outStr = fmt::to_string(fldSt.m_timeBelowBottomBinTotal);
+        outStr = std::to_string(fldSt.m_timeBelowBottomBinTotal);
         ret.push_back(outStr);
         // cell value
         if (fldSt.m_cell.size() > 0) {
-            outStr = fmt::to_string(fldSt.m_cell[0].result);
+            outStr = std::to_string(fldSt.m_cell[0].result);
             ret.push_back(outStr);
         }
         return ret;

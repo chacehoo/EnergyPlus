@@ -263,7 +263,7 @@ namespace PackagedTerminalHeatPump {
         // Manages the simulation of a packaged terminal heat pump. Called from SimZoneEquipment.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
         using namespace DataZoneEnergyDemands;
         using DataHeatBalFanSys::TempControlType;
         using DataZoneEquipment::PkgTermACAirToAir_Num;
@@ -565,8 +565,8 @@ namespace PackagedTerminalHeatPump {
         using Fans::GetFanOutletNode;
         using Fans::GetFanType;
         using Fans::GetFanVolFlow;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using MixedAir::GetOAMixerNodeNumbers;
         auto &GetDXCoilInletNode(DXCoils::GetCoilInletNode);
         auto &GetDXCoilOutletNode(DXCoils::GetCoilOutletNode);
@@ -3778,7 +3778,7 @@ namespace PackagedTerminalHeatPump {
         using Fans::GetFanVolFlow;
         using FluidProperties::GetDensityGlycol;
         using FluidProperties::GetSatDensityRefrig;
-        using General::TrimSigDigits;
+
         using PlantUtilities::InitComponentNodes;
         using PlantUtilities::ScanPlantLoopsForObject;
         using PlantUtilities::SetComponentFlowRate;
@@ -4812,7 +4812,7 @@ namespace PackagedTerminalHeatPump {
         using DataZoneEquipment::PkgTermACAirToAir_Num;
         using DataZoneEquipment::PkgTermHPAirToAir_Num;
         using DataZoneEquipment::PkgTermHPWaterToAir_Num;
-        using General::RoundSigDigits;
+
         using VariableSpeedCoils::GetCoilAirFlowRateVariableSpeed;
         using VariableSpeedCoils::SimVariableSpeedCoils;
         using WaterCoils::SetCoilDesFlow;
@@ -5547,9 +5547,9 @@ namespace PackagedTerminalHeatPump {
         // Using/Aliasing
         using DataEnvironment::OutDryBulbTemp;
         using DataGlobals::WarmupFlag;
-        using General::RoundSigDigits;
+
         using General::SolveRoot;
-        using General::TrimSigDigits;
+
         using HeatingCoils::SimulateHeatingCoilComponents;
         using PlantUtilities::SetComponentFlowRate;
         using Psychrometrics::PsyCpAirFnW;
@@ -5853,7 +5853,7 @@ namespace PackagedTerminalHeatPump {
         using DataEnvironment::OutDryBulbTemp;
         using DataZoneEquipment::ZoneEquipConfig;
         using DXCoils::SimDXCoil;
-        using General::RoundSigDigits;
+
         using General::SolveRoot;
         using HeatingCoils::SimulateHeatingCoilComponents;
         using HVACHXAssistedCoolingCoil::SimHXAssistedCoolingCoil;
@@ -7412,9 +7412,9 @@ namespace PackagedTerminalHeatPump {
         using DataEnvironment::OutDryBulbTemp;
         using DataGlobals::WarmupFlag;
         using DataZoneEnergyDemands::CurDeadBandOrSetback;
-        using General::RoundSigDigits;
+
         using General::SolveRoot;
-        using General::TrimSigDigits;
+
         using HeatingCoils::SimulateHeatingCoilComponents;
         using PlantUtilities::SetComponentFlowRate;
         using Psychrometrics::PsyCpAirFnW;
@@ -8092,7 +8092,7 @@ namespace PackagedTerminalHeatPump {
         using DataEnvironment::OutDryBulbTemp;
         using DataZoneEquipment::ZoneEquipConfig;
         using DXCoils::SimDXCoil;
-        using General::RoundSigDigits;
+
         using General::SolveRoot;
         using HeatingCoils::SimulateHeatingCoilComponents;
         using HVACHXAssistedCoolingCoil::SimHXAssistedCoolingCoil;
@@ -8743,7 +8743,7 @@ namespace PackagedTerminalHeatPump {
 
         // Using/Aliasing
         using DataZoneEnergyDemands::CurDeadBandOrSetback;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:

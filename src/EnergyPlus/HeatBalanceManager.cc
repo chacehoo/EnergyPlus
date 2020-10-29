@@ -498,7 +498,7 @@ namespace HeatBalanceManager {
         // Counts or details unused constructions.
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
         using namespace DataIPShortCuts;
 
         // SUBROUTINE PARAMETER DEFINITIONS:
@@ -686,7 +686,7 @@ namespace HeatBalanceManager {
         // Using/Aliasing
         using DataHVACGlobals::HVACSystemRootFinding;
         using DataSystemVariables::lMinimalShadowing;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -1412,7 +1412,7 @@ namespace HeatBalanceManager {
         // Reads the input data for the SITE ATMOSPHERIC VARIATION object.
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int NumObjects;
@@ -1497,9 +1497,9 @@ namespace HeatBalanceManager {
 
         using CurveManager::GetCurveIndex;
         using CurveManager::GetCurveMinMaxValues;
-        using General::RoundSigDigits;
+
         using General::ScanForReports;
-        using General::TrimSigDigits;
+
 
         // if this has a size, then input has already been gotten
         if (UniqueMaterialNames.size()) {
@@ -3947,7 +3947,7 @@ namespace HeatBalanceManager {
         // na
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -5558,7 +5558,7 @@ namespace HeatBalanceManager {
 
         // Using/Aliasing
         using DataSystemVariables::ReportDetailedWarmupConvergence;
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int ZoneNum;
@@ -5640,7 +5640,7 @@ namespace HeatBalanceManager {
         // na
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -5812,7 +5812,7 @@ namespace HeatBalanceManager {
         // na
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -6201,7 +6201,7 @@ namespace HeatBalanceManager {
         using DataSystemVariables::CheckForActualFileName;
         using DataSystemVariables::iUnicode_end;
         using General::POLYF; // POLYF       ! Polynomial in cosine of angle of incidence
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE PARAMETER DEFINITIONS:
         static Array1D_string const NumName(5, {"1", "2", "3", "4", "5"});
@@ -7156,7 +7156,7 @@ namespace HeatBalanceManager {
 
         // Using/Aliasing
         using namespace DataStringGlobals;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -7513,7 +7513,7 @@ namespace HeatBalanceManager {
         using DataSurfaces::TotFenLayAbsSSG;
         using DataSurfaces::TotSurfaces;
         using DataSurfaces::TotSurfIncSolSSG;
-        using General::TrimSigDigits;
+
         using ScheduleManager::GetScheduleIndex;
 
         // SUBROUTINE PARAMETER DEFINITIONS:
@@ -7832,7 +7832,7 @@ namespace HeatBalanceManager {
 
         // Using/Aliasing
         using namespace DataStringGlobals;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -8108,7 +8108,7 @@ namespace HeatBalanceManager {
         // na
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE ARGUMENT DEFINITIONS:
 
@@ -8500,7 +8500,7 @@ namespace HeatBalanceManager {
         using namespace DataIPShortCuts;
         using namespace MatrixDataManager;
         using namespace DataBSDFWindow;
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE PARAMETER DEFINITIONS:
         static std::string const RoutineName("SetupComlexFenestrationStateInput: ");

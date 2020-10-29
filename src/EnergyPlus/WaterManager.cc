@@ -185,7 +185,7 @@ namespace WaterManager {
         // Using/Aliasing
         using DataHeatBalance::Zone;
         using DataSurfaces::Surface;
-        using General::RoundSigDigits;
+
         using ScheduleManager::CheckScheduleValue;
         using ScheduleManager::CheckScheduleValueMinMax;
         using ScheduleManager::GetScheduleIndex;

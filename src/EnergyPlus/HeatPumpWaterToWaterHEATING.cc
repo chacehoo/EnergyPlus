@@ -560,7 +560,7 @@ namespace HeatPumpWaterToWaterHEATING {
         using namespace FluidProperties;
         using DataBranchAirLoopPlant::MassFlowTolerance;
         using DataPlant::PlantLoop;
-        using General::TrimSigDigits;
+
         using PlantUtilities::SetComponentFlowRate;
 
         // SUBROUTINE PARAMETER DEFINITIONS:

@@ -222,7 +222,7 @@ void ManageHVACSizingSimulation(EnergyPlusData &state, bool &ErrorsFound)
     using DataSystemVariables::ReportDuringHVACSizingSimulation;
     using EMSManager::ManageEMS;
     using ExteriorEnergyUse::ManageExteriorEnergyUse;
-    using General::TrimSigDigits;
+
     using PlantPipingSystemsManager::SimulateGroundDomains;
 
     using namespace WeatherManager;

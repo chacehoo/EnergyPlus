@@ -382,7 +382,7 @@ namespace EconomicTariff {
         using OutputReportTabular::AddTOCEntry;
         using OutputReportTabular::displayTariffReport;
         using namespace DataIPShortCuts;
-        using General::RoundSigDigits;
+
 
         std::string const RoutineName("GetInputEconomicsTariff: ");
         int iInObj;    // loop index variable for reading in objects

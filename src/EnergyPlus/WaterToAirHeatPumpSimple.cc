@@ -170,7 +170,7 @@ namespace WaterToAirHeatPumpSimple {
 
         // Using/Aliasing
         using FluidProperties::FindGlycol;
-        using General::TrimSigDigits;
+
 
         // percent on-time (on-time/cycle time)
         // shut off after compressor cycle off  [s]
@@ -1099,8 +1099,8 @@ namespace WaterToAirHeatPumpSimple {
         using DataHVACGlobals::SmallAirVolFlow;
         using DataHVACGlobals::SmallLoad;
         using DataPlant::PlantLoop;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using PlantUtilities::MyPlantSizingIndex;
         using PlantUtilities::RegisterPlantCompDesignFlow;
         using namespace OutputReportPredefined;
@@ -3170,7 +3170,7 @@ namespace WaterToAirHeatPumpSimple {
 
         // Using/Aliasing
         using FluidProperties::FindGlycol;
-        using General::TrimSigDigits;
+
 
         // Obtains and Allocates WatertoAirHP related parameters from input file
         if (state.dataWaterToAirHeatPumpSimple->GetCoilsInputFlag) { // First time subroutine has been entered

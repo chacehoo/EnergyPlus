@@ -4355,8 +4355,7 @@ namespace WeatherManager {
                     ShowContinueError(
                         "..Time Zone difference=[" + format("{:.1R}", std::abs(DataEnvironment::TimeZoneNumber - state.dataWeatherManager->WeatherFileTimeZone)) +
                         "] hour(s), Elevation difference=[" +
-                        General::RoundSigDigits(
-                            std::abs((DataEnvironment::Elevation - state.dataWeatherManager->WeatherFileElevation) / max(DataEnvironment::Elevation, 1.0)) * 100.0, 2) +
+                        format("{:.2R}", std::abs((DataEnvironment::Elevation - state.dataWeatherManager->WeatherFileElevation) / max(DataEnvironment::Elevation, 1.0) * 100.0)) +
                         "] percent, [" + format("{:.2R}", std::abs(DataEnvironment::Elevation - state.dataWeatherManager->WeatherFileElevation)) + "] meters.");
                 }
             }

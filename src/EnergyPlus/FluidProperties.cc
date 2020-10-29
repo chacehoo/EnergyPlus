@@ -109,7 +109,7 @@ namespace FluidProperties {
     // USE STATEMENTS
     // Using/Aliasing
     using DataGlobals::WarmupFlag;
-    using General::RoundSigDigits;
+
 
     // Data
     // MODULE PARAMETER DEFINITIONS

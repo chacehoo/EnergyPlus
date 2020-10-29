@@ -107,7 +107,7 @@ using namespace EnergyPlus::WaterCoils;
 using DataHeatBalFanSys::TempControlType;
 using DataZoneEnergyDemands::CurDeadBandOrSetback;
 using DataZoneEnergyDemands::ZoneSysEnergyDemand;
-using General::TrimSigDigits;
+
 using MixedAir::OAMixer;
 
 namespace EnergyPlus {

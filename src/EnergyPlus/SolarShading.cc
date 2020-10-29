@@ -372,7 +372,7 @@ namespace SolarShading {
         // This subroutine gets the Shadowing Calculation object.
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
         using namespace DataIPShortCuts;
         using DataSystemVariables::DetailedSkyDiffuseAlgorithm;
         using DataSystemVariables::DetailedSolarTimestepIntegration;
@@ -760,7 +760,7 @@ namespace SolarShading {
         // METHODOLOGY EMPLOYED:
         // Allocation is dependent on the user input file.
 
-        using General::RoundSigDigits;
+
 
         int SurfLoop;
         int I;
@@ -2254,7 +2254,7 @@ namespace SolarShading {
 
         // Using/Aliasing
         using DataSystemVariables::DetailedSkyDiffuseAlgorithm;
-        using General::TrimSigDigits;
+
 
         // Locals
         // SUBROUTINE PARAMETER DEFINITIONS:
@@ -2899,7 +2899,7 @@ namespace SolarShading {
         // REFERENCES:
         // BLAST/IBLAST code, original author George Walton
 
-        using General::RoundSigDigits;
+
         using namespace DataWindowEquivalentLayer;
 
         Real64 AreaSum;       // Intermediate calculation value
@@ -3209,7 +3209,7 @@ namespace SolarShading {
         // 'CRC Math Tables', 22 ED, 'Analytic Geometry', P.369
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -3274,7 +3274,7 @@ namespace SolarShading {
     )
     {
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         if (NS > 2 * state.dataSolarShading->MaxHCS) {
             ShowFatalError("Solar Shading: HTrans0: Too many Figures (>" + fmt::to_string(state.dataSolarShading->MaxHCS) + ')');
@@ -3318,7 +3318,7 @@ namespace SolarShading {
     )
     {
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         if (NS > 2 * state.dataSolarShading->MaxHCS) {
             ShowFatalError("Solar Shading: HTrans1: Too many Figures (>" + fmt::to_string(state.dataSolarShading->MaxHCS) + ')');
@@ -4342,7 +4342,7 @@ namespace SolarShading {
 
         // Using/Aliasing
         using DataSystemVariables::SutherlandHodgman;
-        using General::RoundSigDigits;
+
 
         int N;    // Loop index
         int NV1;  // Number of vertices of figure NS1
@@ -4807,7 +4807,7 @@ namespace SolarShading {
 
         // Using/Aliasing
         using namespace DataErrorTracking;
-        using General::TrimSigDigits;
+
 
         Array1D_int GSS;             // List of shadowing surfaces numbers for a receiving surface
         Array1D_int BKS;             // List of back surface numbers for a receiving surface
@@ -10980,7 +10980,7 @@ namespace SolarShading {
         // errors in the error file.
 
         using namespace DataErrorTracking; // for error tracking
-        using General::RoundSigDigits;
+
 
         static Array1D_string const MSG(4, {"misses", "", "within", "overlaps"});
 

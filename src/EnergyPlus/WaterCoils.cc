@@ -184,7 +184,7 @@ namespace WaterCoils {
         // This subroutine manages WaterCoil component simulation.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int CoilNum;         // The WaterCoil that you are currently loading input into
@@ -897,7 +897,7 @@ namespace WaterCoils {
 
         // Using/Aliasing
         using General::Iterate;
-        using General::RoundSigDigits;
+
         using General::SafeDivide;
         using General::SolveRoot;
         using namespace OutputReportPredefined;
@@ -2042,8 +2042,8 @@ namespace WaterCoils {
         // Using/Aliasing
         using namespace DataSizing;
         using DataEnvironment::StdBaroPress;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using PlantUtilities::RegisterPlantCompDesignFlow;
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -2946,7 +2946,7 @@ namespace WaterCoils {
         // Re-engineered for EnergyPlus by Richard Liesen PhD in 1998
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -5610,7 +5610,7 @@ namespace WaterCoils {
         // <description>
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int CoilNum;
@@ -6187,7 +6187,7 @@ namespace WaterCoils {
         // none
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
         using General::SolveRoot;
 
         // Return value
@@ -6484,7 +6484,7 @@ namespace WaterCoils {
         using DataLoopNode::Node;
         using DataPlant::ccSimPlantEquipTypes;
         using DataPlant::PlantLoop;
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
 
@@ -6619,7 +6619,7 @@ namespace WaterCoils {
         // This function sets data to water Heating Coil using the coil index and arguments passed
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         if (state.dataWaterCoils->GetWaterCoilsInputFlag) {
             GetWaterCoilInput(state);

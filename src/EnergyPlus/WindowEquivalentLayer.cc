@@ -129,7 +129,7 @@ namespace WindowEquivalentLayer {
     using DataGlobals::HourOfDay;
     using DataGlobals::TimeStep;
     using DataGlobals::WarmupFlag;
-    using General::TrimSigDigits;
+
 
     void InitEquivalentLayerWindowCalculations(EnergyPlusData &state)
     {

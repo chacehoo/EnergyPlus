@@ -626,7 +626,7 @@ namespace UtilityRoutines {
         using BranchNodeConnections::TestCompSetInletOutletNodes;
         using ExternalInterface::CloseSocket;
         using ExternalInterface::NumExternalInterfaces;
-        using General::RoundSigDigits;
+
         using NodeInputManager::CheckMarkedNodes;
         using NodeInputManager::SetupNodeVarsForReporting;
         using PlantManager::CheckPlantOnAbort;
@@ -842,7 +842,7 @@ namespace UtilityRoutines {
         using ExternalInterface::CloseSocket;
         using ExternalInterface::haveExternalInterfaceBCVTB;
         using ExternalInterface::NumExternalInterfaces;
-        using General::RoundSigDigits;
+
         using SolarShading::ReportSurfaceErrors;
 
         // Locals
@@ -1124,7 +1124,7 @@ namespace UtilityRoutines {
 
         // Using/Aliasing
         using namespace DataErrorTracking;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -1935,7 +1935,7 @@ namespace UtilityRoutines {
 
         // Using/Aliasing
         using namespace DataErrorTracking;
-        using General::RoundSigDigits;
+
         using General::strip_trailing_zeros;
 
         // Locals

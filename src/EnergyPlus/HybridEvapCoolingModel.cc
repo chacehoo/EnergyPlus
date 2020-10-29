@@ -1248,7 +1248,7 @@ namespace HybridEvapCoolingModel {
         // na
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
         // The CStepInputs are defined in the CStepInputs class definition.

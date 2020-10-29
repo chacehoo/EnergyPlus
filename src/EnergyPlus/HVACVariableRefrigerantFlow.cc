@@ -256,7 +256,7 @@ namespace HVACVariableRefrigerantFlow {
 
         using DXCoils::DXCoilTotalCooling;
         using DXCoils::DXCoilTotalHeating;
-        using General::TrimSigDigits;
+
 
         int VRFTUNum;             // current VRF system terminal unit index
         int VRFCondenser;         // index to VRF AC system object - AirConditioner:VariableRefrigerantFlow
@@ -464,7 +464,7 @@ namespace HVACVariableRefrigerantFlow {
         using DXCoils::DXCoilHeatInletAirDBTemp;
         using DXCoils::DXCoilHeatInletAirWBTemp;
         using FluidProperties::GetSpecificHeatGlycol;
-        using General::TrimSigDigits;
+
         using PlantUtilities::SetComponentFlowRate;
         using Psychrometrics::RhoH2O;
 
@@ -1427,7 +1427,7 @@ namespace HVACVariableRefrigerantFlow {
         using Fans::GetFanInletNode;
         using Fans::GetFanOutletNode;
         using Fans::GetFanType;
-        using General::TrimSigDigits;
+
         using MixedAir::GetOAMixerNodeNumbers;
         using NodeInputManager::GetOnlySingleNode;
         using ScheduleManager::CheckScheduleValueMinMax;
@@ -5089,8 +5089,8 @@ namespace HVACVariableRefrigerantFlow {
         using DataZoneEquipment::ZoneEquipList;
         using Fans::GetFanVolFlow;
         using FluidProperties::GetDensityGlycol;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using MixedAir::SimOAMixer;
         using PlantUtilities::InitComponentNodes;
         using ScheduleManager::GetCurrentScheduleValue;
@@ -6998,7 +6998,7 @@ namespace HVACVariableRefrigerantFlow {
         using DataHVACGlobals::CoolingCapacitySizing;
         using DataHVACGlobals::HeatingAirflowSizing;
         using DataHVACGlobals::HeatingCapacitySizing;
-        using General::RoundSigDigits;
+
         using PlantUtilities::RegisterPlantCompDesignFlow;
 
         static std::string const RoutineName("SizeVRF: "); // include trailing blank space
@@ -10159,7 +10159,7 @@ namespace HVACVariableRefrigerantFlow {
         using FluidProperties::GetSupHeatTempRefrig;
         using FluidProperties::RefrigData;
         using General::SolveRoot;
-        using General::TrimSigDigits;
+
         using PlantUtilities::SetComponentFlowRate;
         using Psychrometrics::RhoH2O;
         using TempSolveRoot::SolveRoot;
@@ -11487,9 +11487,9 @@ namespace HVACVariableRefrigerantFlow {
         // Use RegulaFalsi technique to iterate on part-load ratio until convergence is achieved.
 
         using DataEnvironment::OutDryBulbTemp;
-        using General::RoundSigDigits;
+
         using General::SolveRoot;
-        using General::TrimSigDigits;
+
         using HeatingCoils::SimulateHeatingCoilComponents;
         using ScheduleManager::GetCurrentScheduleValue;
         using TempSolveRoot::SolveRoot;
@@ -12297,7 +12297,7 @@ namespace HVACVariableRefrigerantFlow {
         // METHODOLOGY EMPLOYED:
         //        This is part of the physics based VRF model applicable for Fluid Temperature Control.
         //
-        using General::TrimSigDigits;
+
 
         Real64 BF;              // VRF OU bypass  [-]
         Real64 deltaT;          // Difference between Te/Tc and air temperature at coil surface [C]
@@ -12380,7 +12380,7 @@ namespace HVACVariableRefrigerantFlow {
         //        This is part of the physics based VRF model applicable for Fluid Temperature Control.
 
         using DataEnvironment::OutBaroPress;
-        using General::TrimSigDigits;
+
 
         Real64 BF;              // VRF OU bypass [-]
         Real64 deltaT;          // Difference between Te/Tc and air temperature at coil surface [C]
@@ -12464,7 +12464,7 @@ namespace HVACVariableRefrigerantFlow {
         //        This is part of the physics based VRF model applicable for Fluid Temperature Control.
 
         using DataEnvironment::OutBaroPress;
-        using General::TrimSigDigits;
+
 
         Real64 BF;              // VRF OU bypass [-]
         Real64 deltaT;          // Difference between Te/Tc and air temperature at coil surface [C]
@@ -12542,7 +12542,7 @@ namespace HVACVariableRefrigerantFlow {
         //        This is part of the physics based VRF model applicable for Fluid Temperature Control.
 
         using DataEnvironment::OutBaroPress;
-        using General::TrimSigDigits;
+
 
         Real64 BF;              // VRF OU bypass [-]
         Real64 deltaT;          // Difference between Te/Tc and air temperature at coil surface [C]
@@ -13693,7 +13693,7 @@ namespace HVACVariableRefrigerantFlow {
         using FluidProperties::GetSupHeatEnthalpyRefrig;
         using FluidProperties::RefrigData;
         using General::SolveRoot;
-        using General::TrimSigDigits;
+
         using TempSolveRoot::SolveRoot;
 
         Array1D<Real64> Par(7);     // Parameters passed to RegulaFalsi

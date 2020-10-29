@@ -632,7 +632,7 @@ namespace PlantUtilities {
         using DataPlant::DemandSide;
         using DataPlant::PlantLoop;
         using DataPlant::SupplySide;
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int MixerOutletNode;
@@ -751,7 +751,7 @@ namespace PlantUtilities {
         using DataPlant::DemandSide;
         using DataPlant::PlantLoop;
         using DataPlant::SupplySide;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -1374,7 +1374,7 @@ namespace PlantUtilities {
 
         // Using/Aliasing
         using namespace DataPlant;
-        using General::RoundSigDigits;
+
 
         // Object Data
         PlantCallingOrderInfoStruct RecordToMoveInPlantCallingOrderInfo;
@@ -1760,7 +1760,7 @@ namespace PlantUtilities {
         // Using/Aliasing
         using namespace DataGlobals;
         using BranchInputManager::AuditBranches;
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int LoopCtr;
@@ -1887,7 +1887,7 @@ namespace PlantUtilities {
 
         // Using/Aliasing
         using namespace DataGlobals;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:

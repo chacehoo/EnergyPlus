@@ -169,7 +169,7 @@ namespace Humidifiers {
         // Manage the simulation of an air humidifier
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int HumNum;            // index of humidifier unit being simulated
@@ -735,7 +735,7 @@ namespace Humidifiers {
         using FluidProperties::FindRefrigerant;
         using FluidProperties::GetSatEnthalpyRefrig;
         using FluidProperties::GetSpecificHeatGlycol;
-        using General::RoundSigDigits;
+
         using Psychrometrics::PsyRhoAirFnPbTdbW;
         using Psychrometrics::RhoH2O;
 

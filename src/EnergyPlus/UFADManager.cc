@@ -116,7 +116,7 @@ namespace UFADManager {
     using DataHVACGlobals::ShortenTimeStepSysRoomAir;
     using DataHVACGlobals::SysTimeElapsed;
     using namespace DataUCSDSharedData;
-    using General::RoundSigDigits;
+
 
     // Data
     // MODULE VARIABLE DECLARATIONS:

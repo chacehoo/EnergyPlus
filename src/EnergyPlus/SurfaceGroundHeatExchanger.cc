@@ -186,7 +186,7 @@ namespace SurfaceGroundHeatExchanger {
         using DataEnvironment::GroundTemp_SurfaceObjInput;
         using FluidProperties::CheckFluidPropertyName;
         using FluidProperties::FindGlycol;
-        using General::RoundSigDigits;
+
         using NodeInputManager::GetOnlySingleNode;
         using namespace DataLoopNode;
 
@@ -589,7 +589,7 @@ namespace SurfaceGroundHeatExchanger {
         using DataLoopNode::Node;
         using namespace DataEnvironment;
         using DataPlant::PlantLoop;
-        using General::TrimSigDigits;
+
 
         Real64 const SurfFluxTol(0.001); // tolerance on the surface fluxes
         Real64 const SrcFluxTol(0.001);  // tolerance on the source flux
@@ -1054,7 +1054,7 @@ namespace SurfaceGroundHeatExchanger {
         // Using/Aliasing
         using DataPlant::PlantLoop;
         using FluidProperties::GetSpecificHeatGlycol;
-        using General::RoundSigDigits;
+
 
         // Return value
         Real64 CalcHXEffectTerm;

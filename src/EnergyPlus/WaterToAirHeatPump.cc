@@ -135,7 +135,7 @@ namespace WaterToAirHeatPump {
 
         // Using/Aliasing
         using FluidProperties::FindGlycol;
-        using General::TrimSigDigits;
+
 
         // shut off after compressor cycle off  [s]
         // cycling fan/cycling compressor
@@ -1051,7 +1051,7 @@ namespace WaterToAirHeatPump {
         // Using/Aliasing
         using namespace FluidProperties;
         using DataPlant::PlantLoop;
-        using General::RoundSigDigits;
+
         using General::SolveRoot;
         using Psychrometrics::PsyCpAirFnW;
         using Psychrometrics::PsyHFnTdbW; // ,PsyHFnTdbRhPb,PsyWFnTdpPb
@@ -1721,7 +1721,7 @@ namespace WaterToAirHeatPump {
         using Psychrometrics::PsyWFnTdbH;
         //  USE DataZoneEnergyDemands
         using DataPlant::PlantLoop;
-        using General::RoundSigDigits;
+
         using General::SolveRoot;
 
         // Locals

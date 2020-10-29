@@ -260,7 +260,7 @@ namespace CurveManager {
 
         // Using/Aliasing
         using namespace DataIPShortCuts; // Data for field names, blank numerics
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int NumBiQuad;                   // Number of biquadratic curve objects in the input data file
@@ -2656,7 +2656,7 @@ namespace CurveManager {
         // Certain curve types have set limits (e.g., PLF curve should not be greater than 1 or less than 0.7).
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         if (CurveIndex > 0 && CurveIndex <= state.dataCurveManager->NumCurves) {
 
@@ -2938,7 +2938,7 @@ namespace CurveManager {
         //   Trans. ASIVIE, J. of Fluids Engineering 103: 89-90.
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         // Return value
         Real64 CalculateMoodyFrictionFactor;

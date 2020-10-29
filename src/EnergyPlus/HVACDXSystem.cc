@@ -204,7 +204,7 @@ namespace HVACDXSystem {
         using DXCoils::SimDXCoil;
         using DXCoils::SimDXCoilMultiMode;
         using DXCoils::SimDXCoilMultiSpeed;
-        using General::TrimSigDigits;
+
         using HVACHXAssistedCoolingCoil::SimHXAssistedCoolingCoil;
         using PackagedThermalStorageCoil::SimTESCoil;
         using VariableSpeedCoils::SimVariableSpeedCoils;
@@ -1027,7 +1027,7 @@ namespace HVACDXSystem {
         using DXCoils::SimDXCoilMultiMode;
         using DXCoils::SimDXCoilMultiSpeed;
         using FaultsManager::FaultsCoilSATSensor;
-        using General::RoundSigDigits;
+
         using General::SolveRoot;
         using TempSolveRoot::SolveRoot;
         using HVACHXAssistedCoolingCoil::HXAssistedCoilOutletHumRat;

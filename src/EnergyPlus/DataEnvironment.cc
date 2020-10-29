@@ -369,7 +369,7 @@ namespace DataEnvironment {
         // 1976 U.S. Standard Atmosphere. 1976. U.S. Government Printing Office, Washington, D.C.
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         // Return value
         Real64 LocalOutDryBulbTemp; // Return result for function (C)
@@ -418,7 +418,7 @@ namespace DataEnvironment {
         // 1976 U.S. Standard Atmosphere. 1976. U.S. Government Printing Office, Washington, D.C.
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         // Return value
         Real64 LocalOutWetBulbTemp; // Return result for function (C)
@@ -468,7 +468,7 @@ namespace DataEnvironment {
         // 1976 U.S. Standard Atmosphere. 1976. U.S. Government Printing Office, Washington, D.C.
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         // Return value
         Real64 LocalOutDewPointTemp; // Return result for function (C)
@@ -588,7 +588,7 @@ namespace DataEnvironment {
     void SetOutBulbTempAt_error(std::string const &Settings, Real64 const max_height, std::string const &SettingsName)
     {
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         ShowSevereError("SetOutBulbTempAt: " + Settings + " Outdoor Temperatures < -100 C");
         ShowContinueError("...check " + Settings + " Heights - Maximum " + Settings + " Height=[" + format("{:.0R}", max_height) + "].");

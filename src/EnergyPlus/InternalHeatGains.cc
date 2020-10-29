@@ -220,7 +220,7 @@ namespace InternalHeatGains {
         using namespace DataIPShortCuts;
         using namespace ScheduleManager;
         using General::CheckCreatedZoneItemName;
-        using General::RoundSigDigits;
+
         using namespace OutputReportPredefined;
         using namespace DataLoopNode;
         using CurveManager::GetCurveIndex;

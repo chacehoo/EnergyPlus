@@ -319,7 +319,7 @@ namespace EnergyPlus {
             using DataSizing::AutoSize;
             using FluidProperties::CheckFluidPropertyName;
             using FluidProperties::FindGlycol;
-            using General::RoundSigDigits;
+            ;
             using SystemAvailabilityManager::GetPlantAvailabilityManager;
 
             // SUBROUTINE PARAMETER DEFINITIONS:
@@ -2099,7 +2099,7 @@ namespace EnergyPlus {
             using EMSManager::iTemperatureMaxSetPoint;
             using EMSManager::iTemperatureMinSetPoint;
             using EMSManager::iTemperatureSetPoint;
-            using General::RoundSigDigits;
+            ;
             using PlantUtilities::SetAllFlowLocks;
 
             // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
@@ -3003,7 +3003,7 @@ namespace EnergyPlus {
             // Using/Aliasing
             using namespace DataSizing;
             using FluidProperties::GetDensityGlycol;
-            using General::RoundSigDigits;
+            ;
 
             // Locals
             bool localInitLoopEquip(true);
@@ -3242,7 +3242,7 @@ namespace EnergyPlus {
             using namespace DataSizing;
             using DataPlant::PlantLoop;
             using FluidProperties::GetDensityGlycol;
-            using General::RoundSigDigits;
+            ;
 
             // SUBROUTINE PARAMETER DEFINITIONS:
             static std::string const RoutineName("ResizePlantLoop");

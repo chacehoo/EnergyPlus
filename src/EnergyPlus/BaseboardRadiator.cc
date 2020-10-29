@@ -131,7 +131,7 @@ namespace BaseboardRadiator {
         // Using/Aliasing
         using DataLoopNode::Node;
         using DataZoneEnergyDemands::ZoneSysEnergyDemand;
-        using General::TrimSigDigits;
+
         using PlantUtilities::SetActuatedBranchFlowRate;
 
         int BaseboardNum; // index of unit in baseboard array
@@ -261,7 +261,7 @@ namespace BaseboardRadiator {
         using GlobalNames::VerifyUniqueBaseboardName;
         using namespace DataIPShortCuts;
         using namespace DataSizing;
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE PARAMETER DEFINITIONS:
         static std::string const RoutineName("GetBaseboardInput: "); // include trailing blank space
@@ -641,7 +641,7 @@ namespace BaseboardRadiator {
         using DataHeatBalance::Zone;
         using DataHVACGlobals::HeatingCapacitySizing;
         using DataLoopNode::Node;
-        using General::RoundSigDigits;
+
         using General::SolveRoot;
         using PlantUtilities::RegisterPlantCompDesignFlow;
 

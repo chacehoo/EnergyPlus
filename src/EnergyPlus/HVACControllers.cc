@@ -307,7 +307,7 @@ namespace HVACControllers {
         using namespace DataSystemVariables;
         using DataPlant::FlowLocked;
         using DataPlant::PlantLoop;
-        using General::TrimSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -1458,7 +1458,7 @@ namespace HVACControllers {
         // na
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
         using RootFinder::CheckRootFinderCandidate;
         using RootFinder::InitializeRootFinder;
 
@@ -1546,16 +1546,16 @@ namespace HVACControllers {
                 ShowSevereError("CalcSimpleController: Root finder failed at " + CreateHVACStepFullString());
                 ShowContinueError(" Controller name=\"" + ControllerName + "\"");
                 ShowContinueError(" Minimum bound must remain invariant during successive iterations.");
-                ShowContinueError(" Minimum root finder point=" + TrimSigDigits(RootFinders(ControlNum).MinPoint.X, NumSigDigits));
-                ShowContinueError(" Minimum avail actuated=" + TrimSigDigits(ControllerProps(ControlNum).MinAvailActuated, NumSigDigits));
+                ShowContinueError(" Minimum root finder point=" + format("{:.{}T}", RootFinders(ControlNum).MinPoint.X, NumSigDigits));
+                ShowContinueError(" Minimum avail actuated=" + format("{:.{}T}", ControllerProps(ControlNum).MinAvailActuated, NumSigDigits));
                 ShowFatalError("Preceding error causes program termination.");
             }
             if (RootFinders(ControlNum).MaxPoint.X != ControllerProps(ControlNum).MaxAvailActuated) {
                 ShowSevereError("CalcSimpleController: Root finder failed at " + CreateHVACStepFullString());
                 ShowContinueError(" Controller name=\"" + ControllerName + "\"");
                 ShowContinueError(" Maximum bound must remain invariant during successive iterations.");
-                ShowContinueError(" Maximum root finder point=" + TrimSigDigits(RootFinders(ControlNum).MaxPoint.X, NumSigDigits));
-                ShowContinueError(" Maximum avail actuated=" + TrimSigDigits(ControllerProps(ControlNum).MaxAvailActuated, NumSigDigits));
+                ShowContinueError(" Maximum root finder point=" + format("{:.{}T}", RootFinders(ControlNum).MaxPoint.X, NumSigDigits));
+                ShowContinueError(" Maximum avail actuated=" + format("{:.{}T}", ControllerProps(ControlNum).MaxAvailActuated, NumSigDigits));
                 ShowFatalError("Preceding error causes program termination.");
             }
 
@@ -1589,7 +1589,7 @@ namespace HVACControllers {
         // REFERENCES:
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
         using RootFinder::CheckRootFinderCandidate;
         using RootFinder::IterateRootFinder;
 
@@ -1697,10 +1697,10 @@ namespace HVACControllers {
             } else if (SELECT_CASE_var == iStatusErrorRange) {
                 ShowSevereError("FindRootSimpleController: Root finder failed at " + CreateHVACStepFullString());
                 ShowContinueError(" Controller name=\"" + ControllerName + "\"");
-                ShowContinueError(" Root candidate x=" + TrimSigDigits(ControllerProps(ControlNum).ActuatedValue, NumSigDigits) +
+                ShowContinueError(" Root candidate x=" + format("{:.{}T}", ControllerProps(ControlNum).ActuatedValue, NumSigDigits) +
                                   " does not lie within the min/max bounds.");
-                ShowContinueError(" Min bound is x=" + TrimSigDigits(RootFinders(ControlNum).MinPoint.X, NumSigDigits));
-                ShowContinueError(" Max bound is x=" + TrimSigDigits(RootFinders(ControlNum).MaxPoint.X, NumSigDigits));
+                ShowContinueError(" Min bound is x=" + format("{:.{}T}", RootFinders(ControlNum).MinPoint.X, NumSigDigits));
+                ShowContinueError(" Max bound is x=" + format("{:.{}T}", RootFinders(ControlNum).MaxPoint.X, NumSigDigits));
                 ShowFatalError("Preceding error causes program termination.");
 
                 // Abnormal case: should never happen
@@ -1708,13 +1708,13 @@ namespace HVACControllers {
                 ShowSevereError("FindRootSimpleController: Root finder failed at " + CreateHVACStepFullString());
                 ShowContinueError(" Controller name=" + ControllerProps(ControlNum).ControllerName);
                 ShowContinueError(" Controller action=" + ActionTypes(ControllerProps(ControlNum).Action));
-                ShowContinueError(" Root candidate x=" + TrimSigDigits(ControllerProps(ControlNum).ActuatedValue, NumSigDigits) +
+                ShowContinueError(" Root candidate x=" + format("{:.{}T}", ControllerProps(ControlNum).ActuatedValue, NumSigDigits) +
                                   " does not lie within the lower/upper brackets.");
                 if (RootFinders(ControlNum).LowerPoint.DefinedFlag) {
-                    ShowContinueError(" Lower bracket is x=" + TrimSigDigits(RootFinders(ControlNum).LowerPoint.X, NumSigDigits));
+                    ShowContinueError(" Lower bracket is x=" + format("{:.{}T}", RootFinders(ControlNum).LowerPoint.X, NumSigDigits));
                 }
                 if (RootFinders(ControlNum).UpperPoint.DefinedFlag) {
-                    ShowContinueError(" Upper bracket is x=" + TrimSigDigits(RootFinders(ControlNum).UpperPoint.X, NumSigDigits));
+                    ShowContinueError(" Upper bracket is x=" + format("{:.{}T}", RootFinders(ControlNum).UpperPoint.X, NumSigDigits));
                 }
                 ShowFatalError("Preceding error causes program termination.");
 
@@ -1847,7 +1847,7 @@ namespace HVACControllers {
         // REFERENCES:
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
         using RootFinder::CheckRootFinderConvergence;
 
         // Locals
@@ -2543,7 +2543,7 @@ namespace HVACControllers {
 
         // Using/Aliasing
         using namespace DataAirSystems;
-        using General::TrimSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -2691,7 +2691,7 @@ namespace HVACControllers {
 
         // Using/Aliasing
         using DataAirSystems::PrimaryAirSystem;
-        using General::TrimSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -2855,7 +2855,7 @@ namespace HVACControllers {
         using DataGlobals::ZoneSizingCalc;
         using DataHVACGlobals::FirstTimeStepSysFlag;
         using General::LogicalToInteger;
-        using General::TrimSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -2912,7 +2912,7 @@ namespace HVACControllers {
         // na
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -3026,7 +3026,7 @@ namespace HVACControllers {
         // Using/Aliasing
         using DataEnvironment::CurEnvirNum;
         using General::LogicalToInteger;
-        using General::TrimSigDigits;
+
         using RootFinder::WriteRootFinderTrace;
 
         // Locals

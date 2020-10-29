@@ -112,7 +112,7 @@ namespace ConvectionCoefficients {
     using namespace DataHeatBalance;
     using namespace DataSurfaces;
     using namespace DataVectorTypes;
-    using General::RoundSigDigits;
+
 
     // Coefficients that modify the convection coeff based on surface roughness
     Array1D<Real64> const RoughnessMultiplier(6, {2.17, 1.67, 1.52, 1.13, 1.11, 1.0});
@@ -1858,7 +1858,7 @@ namespace ConvectionCoefficients {
         // type to that surface.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int SurfNum;
@@ -3395,7 +3395,7 @@ namespace ConvectionCoefficients {
         // for adaptive convection algorithm
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
         using General::ScanForReports;
         using Vectors::CreateNewellAreaVector;
         using Vectors::CreateNewellSurfaceNormalVector;
@@ -4236,7 +4236,7 @@ namespace ConvectionCoefficients {
         //  - then calls a routine with a large case statement that calls model equations.
 
         // USE STATEMENTS:
-        using General::TrimSigDigits;
+
 
         // this next call sets up the flow regime and assigns a classification to surface
         //  TODO: candidate for rework to do zone level calcs once rather than for each surface
@@ -4990,7 +4990,7 @@ namespace ConvectionCoefficients {
         //       RE-ENGINEERED  na
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         {
             auto const SELECT_CASE_var(Surface(SurfNum).OutConvClassification);

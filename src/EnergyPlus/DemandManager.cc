@@ -661,7 +661,7 @@ namespace DemandManager {
         using DataHeatBalance::ZoneElectricObjects;
         using DataZoneControls::TempControlledZone;
         using DataZoneControls::TStatObjects;
-        using General::RoundSigDigits;
+
         using MixedAir::GetOAController;
         using ScheduleManager::GetScheduleIndex;
 

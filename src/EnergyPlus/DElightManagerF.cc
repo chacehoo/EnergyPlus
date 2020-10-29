@@ -133,7 +133,7 @@ namespace DElightManagerF {
         using namespace DataSurfaces;      // Gives access to Surface data
         using namespace DataStringGlobals; // Gives access to Program Path and Current Time/Date
         using namespace DataDaylighting;
-        using General::RoundSigDigits;
+
         using InternalHeatGains::CheckLightsReplaceableMinMaxForZone;
         using InternalHeatGains::GetDesignLightingLevelForZone;
 

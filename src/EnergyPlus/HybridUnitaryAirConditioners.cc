@@ -120,7 +120,7 @@ namespace HybridUnitaryAirConditioners {
         // na
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int CompNum;
         bool errorsfound = false;

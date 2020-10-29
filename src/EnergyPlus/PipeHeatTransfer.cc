@@ -257,7 +257,7 @@ namespace PipeHeatTransfer {
         using DataHeatBalance::Zone;
         using namespace DataIPShortCuts; // Data for field names, blank numerics
         using BranchNodeConnections::TestCompSet;
-        using General::RoundSigDigits;
+
         using NodeInputManager::GetOnlySingleNode;
         using namespace DataLoopNode;
         using OutAirNodeManager::CheckOutAirNodeNumber;
@@ -748,7 +748,7 @@ namespace PipeHeatTransfer {
         // na
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:

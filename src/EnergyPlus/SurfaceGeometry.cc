@@ -382,7 +382,7 @@ namespace SurfaceGeometry {
 
         using namespace DataVectorTypes;
         using namespace OutputReportPredefined;
-        using General::RoundSigDigits;
+
         using namespace DataReportingFlags;
 
 
@@ -1024,8 +1024,8 @@ namespace SurfaceGeometry {
         //  Surface%Vertex(1:<number-of-sides>)
 
         using namespace DataIPShortCuts;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using namespace Vectors;
         using ScheduleManager::GetScheduleMaxValue;
         using ScheduleManager::GetScheduleMinValue;
@@ -2702,7 +2702,7 @@ namespace SurfaceGeometry {
         // Using/Aliasing
         using namespace DataIPShortCuts;
         using namespace DataReportingFlags;
-        using General::TrimSigDigits;
+
         using ScheduleManager::CheckScheduleValueMinMax;
         using ScheduleManager::GetScheduleIndex;
         using ScheduleManager::GetScheduleMaxValue;
@@ -2864,7 +2864,7 @@ namespace SurfaceGeometry {
         // Using/Aliasing
         using namespace DataIPShortCuts;
         using namespace DataReportingFlags;
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE PARAMETER DEFINITIONS:
         static Array1D_string const cModuleObjects(2, {"Shading:Site", "Shading:Building"});
@@ -3082,8 +3082,8 @@ namespace SurfaceGeometry {
 
         // Using/Aliasing
         using namespace DataIPShortCuts;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
 
         // SUBROUTINE PARAMETER DEFINITIONS:
         static Array1D_string const cModuleObjects(4, {"BuildingSurface:Detailed", "Wall:Detailed", "Floor:Detailed", "RoofCeiling:Detailed"});
@@ -3535,8 +3535,8 @@ namespace SurfaceGeometry {
 
         // Using/Aliasing
         using namespace DataIPShortCuts;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
 
         // SUBROUTINE PARAMETER DEFINITIONS:
         static Array1D_string const cModuleObjects(10,
@@ -4089,8 +4089,8 @@ namespace SurfaceGeometry {
 
         // Using/Aliasing
         using namespace DataIPShortCuts;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -4405,8 +4405,8 @@ namespace SurfaceGeometry {
 
         // Using/Aliasing
         using namespace DataIPShortCuts;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -4711,8 +4711,8 @@ namespace SurfaceGeometry {
 
         // Using/Aliasing
         using namespace DataIPShortCuts;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int ConstrNumSh;    // Construction number with Shade
@@ -4975,8 +4975,8 @@ namespace SurfaceGeometry {
         // This routine performs miscellaneous checks on subsurfaces: Windows, GlassDoors, Doors, Tubular Devices.
 
         // Using/Aliasing
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using namespace DataErrorTracking;
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
@@ -5301,7 +5301,7 @@ namespace SurfaceGeometry {
 
         // Using/Aliasing
         using namespace DataIPShortCuts;
-        using General::TrimSigDigits;
+
         using ScheduleManager::CheckScheduleValueMinMax;
         using ScheduleManager::GetScheduleIndex;
         using ScheduleManager::GetScheduleMaxValue;
@@ -5479,8 +5479,8 @@ namespace SurfaceGeometry {
 
         // Using/Aliasing
         using namespace DataIPShortCuts;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using namespace DataReportingFlags;
         using namespace Vectors;
 
@@ -6069,7 +6069,7 @@ namespace SurfaceGeometry {
 
         // Using/Aliasing
         using namespace DataIPShortCuts;
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
 
@@ -6220,7 +6220,7 @@ namespace SurfaceGeometry {
 
         // Using/Aliasing
         using namespace DataIPShortCuts;
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
 
@@ -6483,8 +6483,8 @@ namespace SurfaceGeometry {
     {
         using namespace DataIPShortCuts;
         using DataSurfaces::Surface;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
 
         int IOStatus; // Used in GetObjectItem
         int NumAlphas;
@@ -6927,7 +6927,7 @@ namespace SurfaceGeometry {
         using DataHeatBalance::LowHConvLimit;
         using DataHeatBalSurface::MaxSurfaceTempLimit;
         using DataSurfaces::Surface;
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int CountHTAlgoObjectsSingleSurf;
@@ -7521,7 +7521,7 @@ namespace SurfaceGeometry {
 
         // Using/Aliasing
         using namespace Vectors;
-        using General::RoundSigDigits;
+
         using namespace DataErrorTracking;
 
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -7860,7 +7860,7 @@ namespace SurfaceGeometry {
 
         // Using/Aliasing
         using namespace Vectors;
-        using General::RoundSigDigits;
+
 
 
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -8698,7 +8698,7 @@ namespace SurfaceGeometry {
 
         // Using/Aliasing
         using namespace DataIPShortCuts;
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
 
@@ -9667,7 +9667,7 @@ namespace SurfaceGeometry {
 
         // Using/Aliasing
         using namespace DataIPShortCuts;
-        using General::RoundSigDigits;
+
         using ScheduleManager::GetScheduleIndex;
 
         // Locals
@@ -9999,8 +9999,8 @@ namespace SurfaceGeometry {
 
         // Using/Aliasing
         using namespace DataIPShortCuts;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using ScheduleManager::GetScheduleIndex;
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
@@ -10161,7 +10161,7 @@ namespace SurfaceGeometry {
 
         // Using/Aliasing
         using namespace Vectors;
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE PARAMETER DEFINITIONS:
 
@@ -10965,7 +10965,7 @@ namespace SurfaceGeometry {
         // Detached Shading, Base Surfaces, Attached Shading surfaces are represented in the
         // same manner as original.  Subsurfaces (windows, doors) are a "relative coordinate".
 
-        using General::TrimSigDigits;
+
         using namespace Vectors;
 
         static std::string const RoutineName("ProcessSurfaceVertices: ");
@@ -11913,7 +11913,7 @@ namespace SurfaceGeometry {
         // the glazing systems.
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
         using namespace Vectors;
 
         // Locals
@@ -12071,7 +12071,7 @@ namespace SurfaceGeometry {
         // specific warnings or errors issued.
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
         using namespace Vectors;
 
         // Locals
@@ -12630,7 +12630,7 @@ namespace SurfaceGeometry {
 
         // Using/Aliasing
         using namespace Vectors;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -13186,7 +13186,7 @@ namespace SurfaceGeometry {
         // http://mathworld.wolfram.com/ConvexPolygon.html
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
         using namespace DataErrorTracking;
 
         // Locals

@@ -586,7 +586,7 @@ namespace SetPointManager {
         using DataZoneControls::StageZoneLogic;
         using DataZoneEquipment::GetSystemNodeNumberForZone;
         using General::FindNumberInList;
-        using General::RoundSigDigits;
+
         using NodeInputManager::GetNodeNums;
         using NodeInputManager::GetOnlySingleNode;
         using ScheduleManager::CheckScheduleValueMinMax;

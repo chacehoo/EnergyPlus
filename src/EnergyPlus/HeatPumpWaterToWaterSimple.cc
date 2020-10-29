@@ -106,7 +106,7 @@ namespace HeatPumpWaterToWaterSimple {
     using DataGlobals::TimeStep;
     using DataGlobals::TimeStepZone;
     using DataGlobals::WarmupFlag;
-    using General::TrimSigDigits;
+
     using namespace DataLoopNode;
 
     // MODULE PARAMETER DEFINITIONS

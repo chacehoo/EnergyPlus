@@ -839,7 +839,7 @@ namespace RoomAirModelUserTempPattern {
         using DataSurfaces::SurfaceClass_Floor;
         using DataSurfaces::SurfaceClass_Wall;
         using DataVectorTypes::Vector;
-        using General::RoundSigDigits;
+
 
         // Return value
         Real64 FigureNDheightInZone;

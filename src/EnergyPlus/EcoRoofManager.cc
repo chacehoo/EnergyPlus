@@ -717,7 +717,7 @@ namespace EcoRoofManager {
         using namespace DataEnvironment;
         using namespace DataSurfaces;
         using DataWater::RainFall;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:

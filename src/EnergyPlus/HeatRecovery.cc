@@ -120,7 +120,7 @@ namespace HeatRecovery {
 
     // Use statements for access to subroutines in other modules
     using namespace ScheduleManager;
-    using General::RoundSigDigits;
+
     using General::SolveRoot;
     using namespace Psychrometrics;
 
@@ -238,7 +238,7 @@ namespace HeatRecovery {
         // Manage the simulation of a heat recovery unit
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int HeatExchNum; // index of unit being simulated
@@ -1273,7 +1273,7 @@ namespace HeatRecovery {
         // Using/Aliasing
         using DXCoils::DXCoilFullLoadOutAirHumRat;
         using DXCoils::DXCoilFullLoadOutAirTemp;
-        using General::RoundSigDigits;
+
         //  USE DataZoneEquipment,  ONLY: ZoneEquipInputsFilled,CheckZoneEquipmentList
         using DataGlobals::AnyEnergyManagementSystemInModel;
         using EMSManager::CheckIfNodeSetPointManagedByEMS;
@@ -1374,10 +1374,10 @@ namespace HeatRecovery {
                         ShowContinueError("The mass flow ratio is (Min_Mass_Flow_Rate / Max_Mass_Flow_Rate) = " + format("{:.2R}", Z));
                         ShowContinueError("The mass flow ratio should be >= 0.0 and <= 1.0");
                         ShowContinueError("Min_Mass_Flow_Rate = " + format("{:.2R}", RhoAir) + " [air density] * " +
-                                          RoundSigDigits(min(ExchCond(ExIndex).NomSupAirVolFlow, ExchCond(ExIndex).NomSecAirVolFlow), 1) +
+                                          format("{:.1R}", min(ExchCond(ExIndex).NomSupAirVolFlow, ExchCond(ExIndex).NomSecAirVolFlow)) +
                                           " [Min_Vol_Flow_Rate]");
                         ShowContinueError("Max_Mass_Flow_Rate = " + format("{:.2R}", RhoAir) + " [air density] * " +
-                                          RoundSigDigits(max(ExchCond(ExIndex).NomSupAirVolFlow, ExchCond(ExIndex).NomSecAirVolFlow), 1) +
+                                          format("{:.1R}", max(ExchCond(ExIndex).NomSupAirVolFlow, ExchCond(ExIndex).NomSecAirVolFlow)) +
                                           " [Max_Vol_Flow_Rate]");
                     } else if (ErrStat == 2) {
                         FatalError = true;
@@ -3694,7 +3694,7 @@ namespace HeatRecovery {
         using DataHVACGlobals::SysTimeElapsed;
         using DataHVACGlobals::TimeStepSys;
         using General::CreateSysTimeIntervalString;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS
@@ -4044,7 +4044,7 @@ namespace HeatRecovery {
         using DataHVACGlobals::SysTimeElapsed;
         using DataHVACGlobals::TimeStepSys;
         using General::CreateSysTimeIntervalString;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -4392,7 +4392,7 @@ namespace HeatRecovery {
         using DataHVACGlobals::SysTimeElapsed;
         using DataHVACGlobals::TimeStepSys;
         using General::CreateSysTimeIntervalString;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -4561,7 +4561,7 @@ namespace HeatRecovery {
         using DataHVACGlobals::SysTimeElapsed;
         using DataHVACGlobals::TimeStepSys;
         using General::CreateSysTimeIntervalString;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS
@@ -4731,7 +4731,7 @@ namespace HeatRecovery {
         using DataHVACGlobals::SysTimeElapsed;
         using DataHVACGlobals::TimeStepSys;
         using General::CreateSysTimeIntervalString;
-        using General::RoundSigDigits;
+
         using Psychrometrics::PsyRhFnTdbWPb;
 
         // Locals
@@ -4918,7 +4918,7 @@ namespace HeatRecovery {
         using DataHVACGlobals::SysTimeElapsed;
         using DataHVACGlobals::TimeStepSys;
         using General::CreateSysTimeIntervalString;
-        using General::RoundSigDigits;
+
         using Psychrometrics::PsyRhFnTdbWPb;
 
         // Locals
@@ -5099,7 +5099,7 @@ namespace HeatRecovery {
         using DataHVACGlobals::SysTimeElapsed;
         using DataHVACGlobals::TimeStepSys;
         using General::CreateSysTimeIntervalString;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS
@@ -5446,7 +5446,7 @@ namespace HeatRecovery {
         // na
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:

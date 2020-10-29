@@ -207,7 +207,7 @@ namespace HeatingCoils {
         // This subroutine manages HeatingCoil component simulation.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -1505,8 +1505,8 @@ namespace HeatingCoils {
 
         // Using/Aliasing
         using namespace DataSizing;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using namespace OutputReportPredefined;
 
         // Locals
@@ -1891,8 +1891,8 @@ namespace HeatingCoils {
         using DataHVACGlobals::ElecHeatingCoilPower;
         using DataHVACGlobals::MSHPMassFlowRateHigh;
         using DataHVACGlobals::MSHPMassFlowRateLow;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using Psychrometrics::PsyRhFnTdbWPb;
         using Psychrometrics::PsyTdbFnHW;
         using Psychrometrics::PsyTsatFnHPb;
@@ -2107,7 +2107,7 @@ namespace HeatingCoils {
         using DataGlobals::WarmupFlag;
         using DataHVACGlobals::TempControlTol;
         using FaultsManager::FaultsCoilSATSensor;
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE ARGUMENT DEFINITIONS:
 
@@ -2324,8 +2324,8 @@ namespace HeatingCoils {
         using DataHVACGlobals::ElecHeatingCoilPower;
         using DataHVACGlobals::MSHPMassFlowRateHigh;
         using DataHVACGlobals::MSHPMassFlowRateLow;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using Psychrometrics::PsyRhFnTdbWPb;
         using Psychrometrics::PsyTdbFnHW;
         using Psychrometrics::PsyTsatFnHPb;
@@ -2979,7 +2979,7 @@ namespace HeatingCoils {
         // the heating coil is scheduled to be on.
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int CoilNum;
@@ -3587,7 +3587,7 @@ namespace HeatingCoils {
         // This function sets data to Heating Coil using the coil index and arguments passed
 
         // Using/Aliasing
-        using General::TrimSigDigits;
+
 
         if (GetCoilsInputFlag) {
             GetHeatingCoilInput(state);

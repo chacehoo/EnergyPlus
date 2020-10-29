@@ -164,7 +164,7 @@ namespace HVACDXHeatPumpSystem {
 
         // Using/Aliasing
         using DXCoils::SimDXCoil;
-        using General::TrimSigDigits;
+
         using VariableSpeedCoils::SimVariableSpeedCoils;
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
@@ -594,7 +594,7 @@ namespace HVACDXHeatPumpSystem {
         using DXCoils::DXCoilOutletTemp;
         using DXCoils::SimDXCoil;
         using FaultsManager::FaultsCoilSATSensor;
-        using General::RoundSigDigits;
+
         using General::SolveRoot;
         using TempSolveRoot::SolveRoot;
         using Psychrometrics::PsyHFnTdbW;

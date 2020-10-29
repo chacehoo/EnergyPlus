@@ -111,7 +111,7 @@ namespace ZoneDehumidifier {
     using namespace DataLoopNode;
     using DataEnvironment::OutBaroPress;
     using DataEnvironment::StdBaroPress;
-    using General::TrimSigDigits;
+
     using namespace ScheduleManager;
 
     void SimZoneDehumidifier(EnergyPlusData &state,

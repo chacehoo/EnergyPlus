@@ -239,7 +239,7 @@ namespace HeatBalFiniteDiffManager {
         using DataHeatBalance::CondFDRelaxFactor;
         using DataHeatBalance::CondFDRelaxFactorInput;
         using DataHeatBalance::MaxAllowedDelTempCondFD;
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int IOStat;                         // IO Status when calling get input subroutine
@@ -383,7 +383,7 @@ namespace HeatBalFiniteDiffManager {
                     ShowSevereError("GetCondFDInput: " + cCurrentModuleObject + "=\"" + MaterialNames(1) +
                                     "\", non increasing Temperatures. Temperatures must be strictly increasing.");
                     ShowContinueError("...occurs first at item=[" + fmt::to_string(inegptr) + "], value=[" +
-                                      RoundSigDigits(MaterialFD(MaterNum).TempEnth(1, inegptr), 2) + "].");
+                                      format("{:.2R}", MaterialFD(MaterNum).TempEnth(1, inegptr)) + "].");
                     ErrorsFound = true;
                 }
                 nonInc = false;
@@ -397,7 +397,7 @@ namespace HeatBalFiniteDiffManager {
                 if (nonInc) {
                     ShowSevereError("GetCondFDInput: " + cCurrentModuleObject + "=\"" + MaterialNames(1) + "\", non increasing Enthalpy.");
                     ShowContinueError("...occurs first at item=[" + fmt::to_string(inegptr) + "], value=[" +
-                                      RoundSigDigits(MaterialFD(MaterNum).TempEnth(2, inegptr), 2) + "].");
+                                      format("{:.2R}", MaterialFD(MaterNum).TempEnth(2, inegptr)) + "].");
                     ShowContinueError("...These values may be Cp (Specific Heat) rather than Enthalpy.  Please correct.");
                     ErrorsFound = true;
                 }
@@ -473,7 +473,7 @@ namespace HeatBalFiniteDiffManager {
                     ShowSevereError("GetCondFDInput: " + cCurrentModuleObject + "=\"" + MaterialNames(1) +
                                     "\", non increasing Temperatures. Temperatures must be strictly increasing.");
                     ShowContinueError("...occurs first at item=[" + fmt::to_string(inegptr) + "], value=[" +
-                                      RoundSigDigits(MaterialFD(MaterNum).TempCond(1, inegptr), 2) + "].");
+                                      format("{:.2R}", MaterialFD(MaterNum).TempCond(1, inegptr)) + "].");
                     ErrorsFound = true;
                 }
             }
@@ -615,8 +615,8 @@ namespace HeatBalFiniteDiffManager {
         using DataHeatBalance::HighDiffusivityThreshold;
         using DataHeatBalance::ThinMaterialLayerThreshold;
         using DataSurfaces::HeatTransferModel_CondFD;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int Lay;
@@ -1205,7 +1205,7 @@ namespace HeatBalFiniteDiffManager {
         // Using/Aliasing
         using DataHeatBalance::CondFDRelaxFactorInput;
         using DataHeatBalance::MaxAllowedDelTempCondFD;
-        using General::RoundSigDigits;
+
         using General::ScanForReports;
 
         // SUBROUTINE PARAMETER DEFINITIONS:
@@ -2243,7 +2243,7 @@ namespace HeatBalFiniteDiffManager {
         // Use methodology similar to HBSurfaceManager
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int ZoneNum;
@@ -2354,7 +2354,7 @@ namespace HeatBalFiniteDiffManager {
         //       DATE WRITTEN   Sept-Nov 2015
         // PURPOSE OF THIS SUBROUTINE:
         // Calculate flux at each condFD node
-        using General::RoundSigDigits;
+
 
         int node; // node counter
 

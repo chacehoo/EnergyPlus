@@ -140,7 +140,7 @@ namespace GeneratorFuelSupply {
         using DataLoopNode::NodeConnectionType_Sensor;
         using DataLoopNode::NodeType_Air;
         using DataLoopNode::ObjectIsNotParent;
-        using General::RoundSigDigits;
+
         using NodeInputManager::GetOnlySingleNode;
         using ScheduleManager::GetScheduleIndex;
 

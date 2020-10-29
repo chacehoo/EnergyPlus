@@ -164,7 +164,7 @@ namespace VentilatedSlab {
 
         // Using/Aliasing
         using DataSizing::ZoneEqVentedSlab;
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int Item; // index of ventilated slab being simulated
@@ -1654,7 +1654,7 @@ namespace VentilatedSlab {
         using DataPlant::PlantLoop;
         using FluidProperties::GetDensityGlycol;
         using FluidProperties::GetSpecificHeatGlycol;
-        using General::RoundSigDigits;
+
         using HVACHXAssistedCoolingCoil::GetHXCoilType;
         using HVACHXAssistedCoolingCoil::GetHXDXCoilName;
         using PlantUtilities::MyPlantSizingIndex;
@@ -2428,7 +2428,7 @@ namespace VentilatedSlab {
         using DataHVACGlobals::ZoneCompTurnFansOff;
         using DataHVACGlobals::ZoneCompTurnFansOn;
         using DataLoopNode::Node;
-        using General::TrimSigDigits;
+
         using HeatingCoils::CheckHeatingCoilSchedule;
         using HVACHXAssistedCoolingCoil::CheckHXAssistedCoolingCoilSchedule;
         using NodeInputManager::GetOnlySingleNode;
@@ -3410,7 +3410,7 @@ namespace VentilatedSlab {
 
         // Using/Aliasing
         using DataEnvironment::OutBaroPress;
-        using General::RoundSigDigits;
+
 
         using DataHeatBalance::Zone;
         using DataHeatBalFanSys::CTFTsrcConstPart;
@@ -3707,7 +3707,7 @@ namespace VentilatedSlab {
                                                           "] temperature below dew-point temperature--potential for condensation exists");
                                         ShowContinueError("Flow to the ventilated slab system will be shut-off to avoid condensation");
                                         ShowContinueError("Predicted radiant system surface temperature = " +
-                                                          RoundSigDigits(TH(2, 1, state.dataVentilatedSlab->VentSlab(Item).SurfacePtr(RadSurfNum2)), 2));
+                                                          format("{:.2R}", TH(2, 1, state.dataVentilatedSlab->VentSlab(Item).SurfacePtr(RadSurfNum2))));
                                         ShowContinueError("Zone dew-point temperature + safety factor delta= " +
                                                           format("{:.2R}", DewPointTemp + CondDeltaTemp));
                                         ShowContinueErrorTimeStamp("");
@@ -3956,7 +3956,7 @@ namespace VentilatedSlab {
                                                           "] temperature below dew-point temperature--potential for condensation exists");
                                         ShowContinueError("Flow to the ventilated slab system will be shut-off to avoid condensation");
                                         ShowContinueError("Predicted radiant system surface temperature = " +
-                                                          RoundSigDigits(TH(2, 1, state.dataVentilatedSlab->VentSlab(Item).SurfacePtr(RadSurfNum2)), 2));
+                                                          format("{:.2R}", TH(2, 1, state.dataVentilatedSlab->VentSlab(Item).SurfacePtr(RadSurfNum2))));
                                         ShowContinueError("Zone dew-point temperature + safety factor delta= " +
                                                           format("{:.2R}", DewPointTemp + CondDeltaTemp));
                                         ShowContinueErrorTimeStamp("");

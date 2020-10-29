@@ -195,7 +195,7 @@ namespace PoweredInductionUnits {
 
         // Using/Aliasing
         using DataSizing::TermUnitPIU;
-        using General::TrimSigDigits;
+
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         int PIUNum; // index of powered induction unit being simulated
@@ -1005,7 +1005,7 @@ namespace PoweredInductionUnits {
         using DataPlant::PlantLoop;
         using FluidProperties::GetDensityGlycol;
         using FluidProperties::GetSpecificHeatGlycol;
-        using General::RoundSigDigits;
+
         using PlantUtilities::MyPlantSizingIndex;
 
         // SUBROUTINE PARAMETER DEFINITIONS:

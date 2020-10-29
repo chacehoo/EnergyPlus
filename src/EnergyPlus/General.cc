@@ -1587,15 +1587,6 @@ namespace General {
         return POLY2F;
     }
 
-    std::string TrimSigDigits(Real64 const RealValue, int const SigDigits)
-    {
-        return format("{:.{}T}", RealValue, SigDigits);
-    }
-
-    std::string RoundSigDigits(Real64 const RealValue, int const SigDigits)
-    {
-        return format("{:.{}R}", RealValue, SigDigits);
-    }
 
     std::string RemoveTrailingZeros(std::string const &InputString)
     {

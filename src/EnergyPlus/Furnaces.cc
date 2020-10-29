@@ -323,7 +323,7 @@ namespace Furnaces {
         using HVACHXAssistedCoolingCoil::SimHXAssistedCoolingCoil;
         using namespace DataZoneEnergyDemands;
         using DataHeatBalFanSys::TempControlType;
-        using General::TrimSigDigits;
+
         using IntegratedHeatPump::IntegratedHeatPumps;
         using WaterToAirHeatPumpSimple::SimWatertoAirHPSimple;
 
@@ -902,8 +902,8 @@ namespace Furnaces {
         using Fans::GetFanOutletNode;
         using Fans::GetFanType;
         using FluidProperties::GetSatDensityRefrig;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using OutAirNodeManager::CheckOutAirNodeNumber;
         using SteamCoils::GetTypeOfCoil;
         using namespace DataIPShortCuts;
@@ -4802,8 +4802,8 @@ namespace Furnaces {
         using DataZoneEnergyDemands::ZoneSysMoistureDemand;
         using Fans::GetFanDesignVolumeFlowRate;
         using Fans::GetFanSpeedRatioCurveIndex;
-        using General::RoundSigDigits;
-        using General::TrimSigDigits;
+
+
         using PlantUtilities::ScanPlantLoopsForObject;
         using SteamCoils::SimulateSteamCoilComponents;
         auto &GetCoilMaxSteamFlowRate(SteamCoils::GetCoilMaxSteamFlowRate);
@@ -5902,7 +5902,7 @@ namespace Furnaces {
         // na
 
         // Using/Aliasing
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -6060,7 +6060,7 @@ namespace Furnaces {
         // Using/Aliasing
         using namespace DataSizing;
         using EMSManager::ManageEMS;
-        using General::TrimSigDigits;
+
         using HVACHXAssistedCoolingCoil::SimHXAssistedCoolingCoil;
         using IntegratedHeatPump::IntegratedHeatPumps;
         using IntegratedHeatPump::SizeIHP;
@@ -6442,7 +6442,7 @@ namespace Furnaces {
         using HeatingCoils::SimulateHeatingCoilComponents;
         using namespace ScheduleManager;
         using DataHeatBalFanSys::MAT;
-        using General::TrimSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
@@ -6744,7 +6744,7 @@ namespace Furnaces {
         using DXCoils::DXCoil;
         using DXCoils::DXCoilPartLoadRatio;
         using General::SolveRoot;
-        using General::TrimSigDigits;
+
         using TempSolveRoot::SolveRoot;
 
         // Locals
@@ -8059,7 +8059,7 @@ namespace Furnaces {
         // Using/Aliasing
         using DataHeatBalFanSys::MAT;
         using General::SolveRoot;
-        using General::TrimSigDigits;
+
         using HeatingCoils::SimulateHeatingCoilComponents;
         using TempSolveRoot::SolveRoot;
 
@@ -9672,7 +9672,7 @@ namespace Furnaces {
 
         // Using/Aliasing
         using DataHVACGlobals::SmallLoad;
-        using General::RoundSigDigits;
+
         using General::SolveRoot;
         using HeatingCoils::SimulateHeatingCoilComponents;
         using PlantUtilities::SetComponentFlowRate;
@@ -10263,9 +10263,9 @@ namespace Furnaces {
 
         // Using/Aliasing
         using DataGlobals::WarmupFlag;
-        using General::RoundSigDigits;
+
         using General::SolveRoot;
-        using General::TrimSigDigits;
+
         using HeatingCoils::SimulateHeatingCoilComponents;
         using IntegratedHeatPump::GetCurWorkMode;
         using IntegratedHeatPump::GetMaxSpeedNumIHP;
@@ -11775,7 +11775,7 @@ namespace Furnaces {
 
         // Using/Aliasing
         using DataZoneEnergyDemands::CurDeadBandOrSetback;
-        using General::RoundSigDigits;
+
 
         // Locals
         // SUBROUTINE ARGUMENT DEFINITIONS:
