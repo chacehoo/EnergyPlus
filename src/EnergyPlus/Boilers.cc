@@ -223,7 +223,7 @@ namespace Boilers {
             if (DataIPShortCuts::rNumericArgs(1) == 0.0) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\",");
                 ShowContinueError("Invalid " + DataIPShortCuts::cNumericFieldNames(1) + '=' +
-                                  General::RoundSigDigits(DataIPShortCuts::rNumericArgs(1), 2));
+                                  format("{:.2R}", DataIPShortCuts::rNumericArgs(1)));
                 ShowContinueError("..." + DataIPShortCuts::cNumericFieldNames(1) + " must be greater than 0.0");
                 ErrorsFound = true;
             }
@@ -235,7 +235,7 @@ namespace Boilers {
             if (DataIPShortCuts::rNumericArgs(2) == 0.0) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\",");
                 ShowContinueError("Invalid " + DataIPShortCuts::cNumericFieldNames(2) + '=' +
-                                  General::RoundSigDigits(DataIPShortCuts::rNumericArgs(2), 3));
+                                  format("{:.3R}", DataIPShortCuts::rNumericArgs(2)));
                 ShowSevereError("..." + DataIPShortCuts::cNumericFieldNames(2) + " must be greater than 0.0");
                 ErrorsFound = true;
             }
@@ -595,8 +595,8 @@ namespace Boilers {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpNomCap - NomCapUser) / NomCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeBoilerHotWater: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Nominal Capacity of " + General::RoundSigDigits(NomCapUser, 2) + " [W]");
-                                    ShowContinueError("differs from Design Size Nominal Capacity of " + General::RoundSigDigits(tmpNomCap, 2) +
+                                    ShowContinueError("User-Specified Nominal Capacity of " + format("{:.2R}", NomCapUser) + " [W]");
+                                    ShowContinueError("differs from Design Size Nominal Capacity of " + format("{:.2R}", tmpNomCap) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -647,10 +647,10 @@ namespace Boilers {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpBoilerVolFlowRate - VolFlowRateUser) / VolFlowRateUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeBoilerHotWater: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Design Water Flow Rate of " + General::RoundSigDigits(VolFlowRateUser, 2) +
+                                    ShowContinueError("User-Specified Design Water Flow Rate of " + format("{:.2R}", VolFlowRateUser) +
                                                       " [m3/s]");
                                     ShowContinueError("differs from Design Size Design Water Flow Rate of " +
-                                                      General::RoundSigDigits(tmpBoilerVolFlowRate, 2) + " [m3/s]");
+                                                      format("{:.2R}", tmpBoilerVolFlowRate) + " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -850,17 +850,17 @@ namespace Boilers {
                     ++this->EffCurveOutputError;
                     ShowWarningError("Boiler:HotWater \"" + this->Name + "\"");
                     ShowContinueError("...Normalized Boiler Efficiency Curve output is less than or equal to 0.");
-                    ShowContinueError("...Curve input x value (PLR)     = " + General::TrimSigDigits(this->BoilerPLR, 5));
+                    ShowContinueError("...Curve input x value (PLR)     = " + format("{:.5T}", this->BoilerPLR));
                     if (state.dataCurveManager->PerfCurve(this->EfficiencyCurvePtr).NumDims == 2) {
                         if (this->CurveTempMode == TempMode::ENTERINGBOILERTEMP) {
                             ShowContinueError("...Curve input y value (Tinlet) = " +
-                                              General::TrimSigDigits(DataLoopNode::Node(BoilerInletNode).Temp, 2));
+                                              format("{:.2T}", DataLoopNode::Node(BoilerInletNode).Temp));
                         } else if (this->CurveTempMode == TempMode::LEAVINGBOILERTEMP) {
-                            ShowContinueError("...Curve input y value (Toutlet) = " + General::TrimSigDigits(this->BoilerOutletTemp, 2));
+                            ShowContinueError("...Curve input y value (Toutlet) = " + format("{:.2T}", this->BoilerOutletTemp));
                         }
                     }
-                    ShowContinueError("...Curve output (normalized eff) = " + General::TrimSigDigits(EffCurveOutput, 5));
-                    ShowContinueError("...Calculated Boiler efficiency  = " + General::TrimSigDigits(BoilerEff, 5) +
+                    ShowContinueError("...Curve output (normalized eff) = " + format("{:.5T}", EffCurveOutput));
+                    ShowContinueError("...Calculated Boiler efficiency  = " + format("{:.5T}", BoilerEff) +
                                       " (Boiler efficiency = Nominal Thermal Efficiency * Normalized Boiler Efficiency Curve output)");
                     ShowContinueErrorTimeStamp("...Curve output reset to 0.01 and simulation continues.");
                 } else {
@@ -882,17 +882,17 @@ namespace Boilers {
                     ShowWarningError("Boiler:HotWater \"" + this->Name + "\"");
                     ShowContinueError("...Calculated Boiler Efficiency is greater than 1.1.");
                     ShowContinueError("...Boiler Efficiency calculations shown below.");
-                    ShowContinueError("...Curve input x value (PLR)     = " + General::TrimSigDigits(this->BoilerPLR, 5));
+                    ShowContinueError("...Curve input x value (PLR)     = " + format("{:.5T}", this->BoilerPLR));
                     if (state.dataCurveManager->PerfCurve(this->EfficiencyCurvePtr).NumDims == 2) {
                         if (this->CurveTempMode == TempMode::ENTERINGBOILERTEMP) {
                             ShowContinueError("...Curve input y value (Tinlet) = " +
-                                              General::TrimSigDigits(DataLoopNode::Node(BoilerInletNode).Temp, 2));
+                                              format("{:.2T}", DataLoopNode::Node(BoilerInletNode).Temp));
                         } else if (this->CurveTempMode == TempMode::LEAVINGBOILERTEMP) {
-                            ShowContinueError("...Curve input y value (Toutlet) = " + General::TrimSigDigits(this->BoilerOutletTemp, 2));
+                            ShowContinueError("...Curve input y value (Toutlet) = " + format("{:.2T}", this->BoilerOutletTemp));
                         }
                     }
-                    ShowContinueError("...Curve output (normalized eff) = " + General::TrimSigDigits(EffCurveOutput, 5));
-                    ShowContinueError("...Calculated Boiler efficiency  = " + General::TrimSigDigits(BoilerEff, 5) +
+                    ShowContinueError("...Curve output (normalized eff) = " + format("{:.5T}", EffCurveOutput));
+                    ShowContinueError("...Calculated Boiler efficiency  = " + format("{:.5T}", BoilerEff) +
                                       " (Boiler efficiency = Nominal Thermal Efficiency * Normalized Boiler Efficiency Curve output)");
                     ShowContinueErrorTimeStamp("...Curve output reset to 1.1 and simulation continues.");
                 } else {

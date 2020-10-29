@@ -243,7 +243,7 @@ namespace GeneratorFuelSupply {
                     // check for molar fractions summing to 1.0.
                     if (std::abs(sum(FuelSupply(FuelSupNum).ConstitMolalFract) - 1.0) > 0.0001) {
                         ShowSevereError(cCurrentModuleObject + " molar fractions do not sum to 1.0");
-                        ShowContinueError("Sum was=" + RoundSigDigits(sum(FuelSupply(FuelSupNum).ConstitMolalFract), 5));
+                        ShowContinueError("Sum was=" + format("{:.5R}", sum(FuelSupply(FuelSupNum).ConstitMolalFract)));
                         ShowContinueError("Entered in " + cCurrentModuleObject + " = " + AlphArray(1));
                         ErrorsFound = true;
                     }

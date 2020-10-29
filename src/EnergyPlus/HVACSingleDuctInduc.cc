@@ -846,10 +846,10 @@ namespace HVACSingleDuctInduc {
                             if ((std::abs(MaxTotAirVolFlowDes - MaxTotAirVolFlowUser) / MaxTotAirVolFlowUser) > AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeHVACSingleDuctInduction: Potential issue with equipment sizing for " + IndUnit(IUNum).UnitType +
                                             " = \"" + IndUnit(IUNum).Name + "\".");
-                                ShowContinueError("User-Specified Maximum Total Air Flow Rate of " + RoundSigDigits(MaxTotAirVolFlowUser, 5) +
+                                ShowContinueError("User-Specified Maximum Total Air Flow Rate of " + format("{:.5R}", MaxTotAirVolFlowUser) +
                                                   " [m3/s]");
                                 ShowContinueError("differs from Design Size Maximum Total Air Flow Rate of " +
-                                                  RoundSigDigits(MaxTotAirVolFlowDes, 5) + " [m3/s]");
+                                                  format("{:.5R}", MaxTotAirVolFlowDes) + " [m3/s]");
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }
@@ -946,10 +946,10 @@ namespace HVACSingleDuctInduc {
                                 if ((std::abs(MaxVolHotWaterFlowDes - MaxVolHotWaterFlowUser) / MaxVolHotWaterFlowUser) > AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeHVACSingleDuctInduction: Potential issue with equipment sizing for " + IndUnit(IUNum).UnitType +
                                                 " = \"" + IndUnit(IUNum).Name + "\".");
-                                    ShowContinueError("User-Specified Maximum Hot Water Flow Rate of " + RoundSigDigits(MaxVolHotWaterFlowUser, 5) +
+                                    ShowContinueError("User-Specified Maximum Hot Water Flow Rate of " + format("{:.5R}", MaxVolHotWaterFlowUser) +
                                                       " [m3/s]");
                                     ShowContinueError("differs from Design Size Maximum Hot Water Flow Rate of " +
-                                                      RoundSigDigits(MaxVolHotWaterFlowDes, 5) + " [m3/s]");
+                                                      format("{:.5R}", MaxVolHotWaterFlowDes) + " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1038,10 +1038,10 @@ namespace HVACSingleDuctInduc {
                                     AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeHVACSingleDuctInduction: Potential issue with equipment sizing for " + IndUnit(IUNum).UnitType +
                                                 " = \"" + IndUnit(IUNum).Name + "\".");
-                                    ShowContinueError("User-Specified Maximum Cold Water Flow Rate of " + RoundSigDigits(MaxVolColdWaterFlowUser, 5) +
+                                    ShowContinueError("User-Specified Maximum Cold Water Flow Rate of " + format("{:.5R}", MaxVolColdWaterFlowUser) +
                                                       " [m3/s]");
                                     ShowContinueError("differs from Design Size Maximum Cold Water Flow Rate of " +
-                                                      RoundSigDigits(MaxVolColdWaterFlowDes, 5) + " [m3/s]");
+                                                      format("{:.5R}", MaxVolColdWaterFlowDes) + " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1262,8 +1262,8 @@ namespace HVACSingleDuctInduc {
                                                IndUnit(IUNum).UnitType + "=\"" + IndUnit(IUNum).Name + "\"");
                             ShowContinueErrorTimeStamp("");
                             ShowContinueError("...Bad hot water maximum flow rate limits");
-                            ShowContinueError("...Given minimum water flow rate=" + RoundSigDigits(MinHotWaterFlow, 3) + " kg/s");
-                            ShowContinueError("...Given maximum water flow rate=" + RoundSigDigits(MaxHotWaterFlow, 3) + " kg/s");
+                            ShowContinueError("...Given minimum water flow rate=" + format("{:.3R}", MinHotWaterFlow) + " kg/s");
+                            ShowContinueError("...Given maximum water flow rate=" + format("{:.3R}", MaxHotWaterFlow) + " kg/s");
                         }
                         ShowRecurringWarningErrorAtEnd("SimFourPipeIndUnit: Hot water coil control failed (flow limits) for " +
                                                            IndUnit(IUNum).UnitType + "=\"" + IndUnit(IUNum).Name + "\"",
@@ -1311,8 +1311,8 @@ namespace HVACSingleDuctInduc {
                                                IndUnit(IUNum).UnitType + "=\"" + IndUnit(IUNum).Name + "\"");
                             ShowContinueErrorTimeStamp("");
                             ShowContinueError("...Bad cold water maximum flow rate limits");
-                            ShowContinueError("...Given minimum water flow rate=" + RoundSigDigits(MinColdWaterFlow, 3) + " kg/s");
-                            ShowContinueError("...Given maximum water flow rate=" + RoundSigDigits(MaxColdWaterFlow, 3) + " kg/s");
+                            ShowContinueError("...Given minimum water flow rate=" + format("{:.3R}", MinColdWaterFlow) + " kg/s");
+                            ShowContinueError("...Given maximum water flow rate=" + format("{:.3R}", MaxColdWaterFlow) + " kg/s");
                         }
                         ShowRecurringWarningErrorAtEnd("SimFourPipeIndUnit: Cold water coil control failed (flow limits) for " +
                                                            IndUnit(IUNum).UnitType + "=\"" + IndUnit(IUNum).Name + "\"",

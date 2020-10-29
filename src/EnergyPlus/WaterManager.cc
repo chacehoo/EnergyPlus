@@ -332,9 +332,9 @@ namespace WaterManager {
                             ShowContinueError("Entered in " + cCurrentModuleObject + '=' + cAlphaArgs(1));
                             ShowContinueError(cNumericFieldNames(6) + " must be greater than " + cNumericFieldNames(5));
                             ShowContinueError("Check value for " + cNumericFieldNames(5) + " = " +
-                                              RoundSigDigits(WaterStorage(Item).ValveOnCapacity, 5));
+                                              format("{:.5R}", WaterStorage(Item).ValveOnCapacity));
                             ShowContinueError("which must be lower than " + cNumericFieldNames(6) + " = " +
-                                              RoundSigDigits(WaterStorage(Item).ValveOffCapacity, 5));
+                                              format("{:.5R}", WaterStorage(Item).ValveOffCapacity));
                             ErrorsFound = true;
                         }
                     }
@@ -458,12 +458,12 @@ namespace WaterManager {
                     }
                     RainCollector(Item).LossFactor = rNumericArgs(1);
                     if (RainCollector(Item).LossFactor > 1.0) {
-                        ShowWarningError("Invalid " + cNumericFieldNames(1) + '=' + RoundSigDigits(rNumericArgs(1), 2));
+                        ShowWarningError("Invalid " + cNumericFieldNames(1) + '=' + format("{:.2R}", rNumericArgs(1)));
                         ShowContinueError("Entered in " + cCurrentModuleObject + '=' + cAlphaArgs(1));
                         ShowContinueError("found rain water collection loss factor greater than 1.0, simulation continues");
                     }
                     if (RainCollector(Item).LossFactor < 0.0) {
-                        ShowSevereError("Invalid " + cNumericFieldNames(1) + '=' + RoundSigDigits(rNumericArgs(1), 2));
+                        ShowSevereError("Invalid " + cNumericFieldNames(1) + '=' + format("{:.2R}", rNumericArgs(1)));
                         ShowContinueError("Entered in " + cCurrentModuleObject + '=' + cAlphaArgs(1));
                         ShowContinueError("found rain water collection loss factor less than 0.0");
                         ErrorsFound = true;

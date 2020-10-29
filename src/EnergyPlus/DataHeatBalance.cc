@@ -1828,8 +1828,8 @@ namespace DataHeatBalance {
             if (Blind(TotBlinds).MaxSlatAngle < Blind(TotBlinds).MinSlatAngle) {
                 errFlag = true;
                 ShowSevereError("WindowMaterial:Blind=\"" + Blind(inBlindNumber).Name + "\", Illegal value combination.");
-                ShowContinueError("Minimum Slat Angle=[" + RoundSigDigits(Blind(TotBlinds).MinSlatAngle, 1) +
-                                  "], is greater than Maximum Slat Angle=[" + RoundSigDigits(Blind(TotBlinds).MaxSlatAngle, 1) + "] deg.");
+                ShowContinueError("Minimum Slat Angle=[" + format("{:.1R}", Blind(TotBlinds).MinSlatAngle) +
+                                  "], is greater than Maximum Slat Angle=[" + format("{:.1R}", Blind(TotBlinds).MaxSlatAngle) + "] deg.");
             }
 
             // Error if input slat angle not in input min/max range
@@ -1838,8 +1838,8 @@ namespace DataHeatBalance {
                 (Blind(TotBlinds).SlatAngle < Blind(TotBlinds).MinSlatAngle || Blind(TotBlinds).SlatAngle > Blind(TotBlinds).MaxSlatAngle)) {
                 errFlag = true;
                 ShowSevereError("WindowMaterial:Blind=\"" + Blind(inBlindNumber).Name + "\", Illegal value combination.");
-                ShowContinueError("Slat Angle=[" + RoundSigDigits(Blind(TotBlinds).SlatAngle, 1) + "] is outside of the input min/max range, min=[" +
-                                  RoundSigDigits(Blind(TotBlinds).MinSlatAngle, 1) + "], max=[" + RoundSigDigits(Blind(TotBlinds).MaxSlatAngle, 1) +
+                ShowContinueError("Slat Angle=[" + format("{:.1R}", Blind(TotBlinds).SlatAngle) + "] is outside of the input min/max range, min=[" +
+                                  format("{:.1R}", Blind(TotBlinds).MinSlatAngle) + "], max=[" + format("{:.1R}", Blind(TotBlinds).MaxSlatAngle) +
                                   "] deg.");
             }
 
@@ -1847,10 +1847,10 @@ namespace DataHeatBalance {
 
             if (Blind(TotBlinds).MinSlatAngle < MinSlatAngGeom) {
                 ShowWarningError("WindowMaterial:Blind=\"" + Blind(inBlindNumber).Name + "\", Illegal value combination.");
-                ShowContinueError("Minimum Slat Angle=[" + RoundSigDigits(Blind(TotBlinds).MinSlatAngle, 1) +
-                                  "] is less than the smallest allowed by slat dimensions and spacing, min=[" + RoundSigDigits(MinSlatAngGeom, 1) +
+                ShowContinueError("Minimum Slat Angle=[" + format("{:.1R}", Blind(TotBlinds).MinSlatAngle) +
+                                  "] is less than the smallest allowed by slat dimensions and spacing, min=[" + format("{:.1R}", MinSlatAngGeom) +
                                   "] deg.");
-                ShowContinueError("Minimum Slat Angle will be set to " + RoundSigDigits(MinSlatAngGeom, 1) + " deg.");
+                ShowContinueError("Minimum Slat Angle will be set to " + format("{:.1R}", MinSlatAngGeom) + " deg.");
                 Blind(TotBlinds).MinSlatAngle = MinSlatAngGeom;
             }
 
@@ -1858,10 +1858,10 @@ namespace DataHeatBalance {
 
             if (Blind(TotBlinds).MaxSlatAngle > MaxSlatAngGeom) {
                 ShowWarningError("WindowMaterial:Blind=\"" + Blind(inBlindNumber).Name + "\", Illegal value combination.");
-                ShowContinueError("Maximum Slat Angle=[" + RoundSigDigits(Blind(TotBlinds).MaxSlatAngle, 1) +
-                                  "] is greater than the largest allowed by slat dimensions and spacing, [" + RoundSigDigits(MaxSlatAngGeom, 1) +
+                ShowContinueError("Maximum Slat Angle=[" + format("{:.1R}", Blind(TotBlinds).MaxSlatAngle) +
+                                  "] is greater than the largest allowed by slat dimensions and spacing, [" + format("{:.1R}", MaxSlatAngGeom) +
                                   "] deg.");
-                ShowContinueError("Maximum Slat Angle will be set to " + RoundSigDigits(MaxSlatAngGeom, 1) + " deg.");
+                ShowContinueError("Maximum Slat Angle will be set to " + format("{:.1R}", MaxSlatAngGeom) + " deg.");
                 Blind(TotBlinds).MaxSlatAngle = MaxSlatAngGeom;
             }
         } else {

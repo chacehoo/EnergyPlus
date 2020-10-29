@@ -455,14 +455,14 @@ namespace ChillerElectricEIR {
             if (DataIPShortCuts::rNumericArgs(1) == 0.0) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
                 ShowContinueError("Invalid " + DataIPShortCuts::cNumericFieldNames(1) + '=' +
-                                  General::RoundSigDigits(DataIPShortCuts::rNumericArgs(1), 2));
+                                  format("{:.2R}", DataIPShortCuts::rNumericArgs(1)));
                 ErrorsFound = true;
             }
             thisChiller.RefCOP = DataIPShortCuts::rNumericArgs(2);
             if (DataIPShortCuts::rNumericArgs(2) == 0.0) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
                 ShowContinueError("Invalid " + DataIPShortCuts::cNumericFieldNames(2) + '=' +
-                                  General::RoundSigDigits(DataIPShortCuts::rNumericArgs(2), 2));
+                                  format("{:.2R}", DataIPShortCuts::rNumericArgs(2)));
                 ErrorsFound = true;
             }
             thisChiller.TempRefEvapOut = DataIPShortCuts::rNumericArgs(3);
@@ -485,9 +485,9 @@ namespace ChillerElectricEIR {
 
             if (thisChiller.MinPartLoadRat > thisChiller.MaxPartLoadRat) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(7) + " [" + General::RoundSigDigits(DataIPShortCuts::rNumericArgs(7), 3) +
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(7) + " [" + format("{:.3R}", DataIPShortCuts::rNumericArgs(7)) +
                                   "] > " + DataIPShortCuts::cNumericFieldNames(8) + " [" +
-                                  General::RoundSigDigits(DataIPShortCuts::rNumericArgs(8), 3) + ']');
+                                  format("{:.3R}", DataIPShortCuts::rNumericArgs(8)) + ']');
                 ShowContinueError("Minimum part load ratio must be less than or equal to the maximum part load ratio ");
                 ErrorsFound = true;
             }
@@ -495,7 +495,7 @@ namespace ChillerElectricEIR {
             if (thisChiller.MinUnloadRat < thisChiller.MinPartLoadRat ||
                 thisChiller.MinUnloadRat > thisChiller.MaxPartLoadRat) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(10) + " = " + General::RoundSigDigits(DataIPShortCuts::rNumericArgs(10), 3));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(10) + " = " + format("{:.3R}", DataIPShortCuts::rNumericArgs(10)));
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(10) + " must be greater than or equal to the " +
                                   DataIPShortCuts::cNumericFieldNames(7));
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(10) + " must be less than or equal to the " +
@@ -506,7 +506,7 @@ namespace ChillerElectricEIR {
             if (thisChiller.OptPartLoadRat < thisChiller.MinPartLoadRat ||
                 thisChiller.OptPartLoadRat > thisChiller.MaxPartLoadRat) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(9) + " = " + General::RoundSigDigits(DataIPShortCuts::rNumericArgs(9), 3));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(9) + " = " + format("{:.3R}", DataIPShortCuts::rNumericArgs(9)));
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(9) + " must be greater than or equal to the " +
                                   DataIPShortCuts::cNumericFieldNames(7));
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(9) + " must be less than or equal to the " +
@@ -520,7 +520,7 @@ namespace ChillerElectricEIR {
             if (thisChiller.CompPowerToCondenserFrac < 0.0 ||
                 thisChiller.CompPowerToCondenserFrac > 1.0) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(12) + " = " + General::RoundSigDigits(DataIPShortCuts::rNumericArgs(12), 3));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(12) + " = " + format("{:.3R}", DataIPShortCuts::rNumericArgs(12)));
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(12) + " must be greater than or equal to zero");
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(12) + " must be less than or equal to one");
                 ErrorsFound = true;
@@ -644,7 +644,7 @@ namespace ChillerElectricEIR {
                     ShowWarningError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
                     ShowContinueError(
                         "Capacity ratio as a function of temperature curve output is not equal to 1.0 (+ or - 10%) at reference conditions.");
-                    ShowContinueError("Curve output at reference conditions = " + General::TrimSigDigits(CurveVal, 3));
+                    ShowContinueError("Curve output at reference conditions = " + format("{:.3T}", CurveVal));
                 }
             }
 
@@ -656,7 +656,7 @@ namespace ChillerElectricEIR {
                     ShowWarningError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
                     ShowContinueError(
                         "Energy input ratio as a function of temperature curve output is not equal to 1.0 (+ or - 10%) at reference conditions.");
-                    ShowContinueError("Curve output at reference conditions = " + General::TrimSigDigits(CurveVal, 3));
+                    ShowContinueError("Curve output at reference conditions = " + format("{:.3T}", CurveVal));
                 }
             }
 
@@ -667,7 +667,7 @@ namespace ChillerElectricEIR {
                     ShowWarningError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
                     ShowContinueError(
                         "Energy input ratio as a function of part-load ratio curve output is not equal to 1.0 (+ or - 10%) at reference conditions.");
-                    ShowContinueError("Curve output at reference conditions = " + General::TrimSigDigits(CurveVal, 3));
+                    ShowContinueError("Curve output at reference conditions = " + format("{:.3T}", CurveVal));
                 }
             }
 
@@ -1280,9 +1280,9 @@ namespace ChillerElectricEIR {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerElectricEIR: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Reference Chilled Water Flow Rate of " +
-                                                      General::RoundSigDigits(EvapVolFlowRateUser, 5) + " [m3/s]");
+                                                      format("{:.5R}", EvapVolFlowRateUser) + " [m3/s]");
                                     ShowContinueError("differs from Design Size Reference Chilled Water Flow Rate of " +
-                                                      General::RoundSigDigits(tmpEvapVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", tmpEvapVolFlowRate) + " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1346,8 +1346,8 @@ namespace ChillerElectricEIR {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpNomCap - RefCapUser) / RefCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerElectricEIR: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Reference Capacity of " + General::RoundSigDigits(RefCapUser, 2) + " [W]");
-                                    ShowContinueError("differs from Design Size Reference Capacity of " + General::RoundSigDigits(tmpNomCap, 2) +
+                                    ShowContinueError("User-Specified Reference Capacity of " + format("{:.2R}", RefCapUser) + " [W]");
+                                    ShowContinueError("differs from Design Size Reference Capacity of " + format("{:.2R}", tmpNomCap) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -1414,9 +1414,9 @@ namespace ChillerElectricEIR {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerElectricEIR: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Reference Condenser Fluid Flow Rate of " +
-                                                      General::RoundSigDigits(CondVolFlowRateUser, 5) + " [m3/s]");
+                                                      format("{:.5R}", CondVolFlowRateUser) + " [m3/s]");
                                     ShowContinueError("differs from Design Size Reference Condenser Fluid Flow Rate of " +
-                                                      General::RoundSigDigits(tmpCondVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", tmpCondVolFlowRate) + " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1499,9 +1499,9 @@ namespace ChillerElectricEIR {
                                 DataSizing::AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeChillerElectricEIR: Potential issue with equipment sizing for " + this->Name);
                                 ShowContinueError("User-Specified Heat Recovery Water Flow Rate of " +
-                                                  General::RoundSigDigits(nomHeatRecVolFlowRateUser, 5) + " [m3/s]");
+                                                  format("{:.5R}", nomHeatRecVolFlowRateUser) + " [m3/s]");
                                 ShowContinueError("differs from Design Size Heat Recovery Water Flow Rate of " +
-                                                  General::RoundSigDigits(tempHeatRecVolFlowRate, 5) + " [m3/s]");
+                                                  format("{:.5R}", tempHeatRecVolFlowRate) + " [m3/s]");
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }
@@ -1805,9 +1805,9 @@ namespace ChillerElectricEIR {
                 ++this->ChillerCapFTError;
                 ShowWarningError("CHILLER:ELECTRIC:EIR \"" + this->Name + "\":");
                 ShowContinueError(" Chiller Capacity as a Function of Temperature curve output is negative (" +
-                                  General::RoundSigDigits(this->ChillerCapFT, 3) + ").");
-                ShowContinueError(" Negative value occurs using an Evaporator Outlet Temp of " + General::RoundSigDigits(EvapOutletTempSetPoint, 1) +
-                                  " and a Condenser Inlet Temp of " + General::RoundSigDigits(condInletTemp, 1) + '.');
+                                  format("{:.3R}", this->ChillerCapFT) + ").");
+                ShowContinueError(" Negative value occurs using an Evaporator Outlet Temp of " + format("{:.1R}", EvapOutletTempSetPoint) +
+                                  " and a Condenser Inlet Temp of " + format("{:.1R}", condInletTemp) + '.');
                 ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
             } else if (DataPlant::PlantLoop(this->CWLoopNum).LoopSide(this->CWLoopSideNum).FlowLock != 0 && !DataGlobals::WarmupFlag) {
                 ++this->ChillerCapFTError;
@@ -2095,9 +2095,9 @@ namespace ChillerElectricEIR {
                 ++this->ChillerEIRFTError;
                 ShowWarningError("CHILLER:ELECTRIC:EIR \"" + this->Name + "\":");
                 ShowContinueError(" Chiller EIR as a Function of Temperature curve output is negative (" +
-                                  General::RoundSigDigits(this->ChillerEIRFT, 3) + ").");
-                ShowContinueError(" Negative value occurs using an Evaporator Outlet Temp of " + General::RoundSigDigits(this->EvapOutletTemp, 1) +
-                                  " and a Condenser Inlet Temp of " + General::RoundSigDigits(condInletTemp, 1) + '.');
+                                  format("{:.3R}", this->ChillerEIRFT) + ").");
+                ShowContinueError(" Negative value occurs using an Evaporator Outlet Temp of " + format("{:.1R}", this->EvapOutletTemp) +
+                                  " and a Condenser Inlet Temp of " + format("{:.1R}", condInletTemp) + '.');
                 ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
             } else if (DataPlant::PlantLoop(this->CWLoopNum).LoopSide(this->CWLoopSideNum).FlowLock != 0 && !DataGlobals::WarmupFlag) {
                 ++this->ChillerEIRFTError;
@@ -2116,9 +2116,9 @@ namespace ChillerElectricEIR {
                 !DataGlobals::WarmupFlag) {
                 ++this->ChillerEIRFPLRError;
                 ShowWarningError("CHILLER:ELECTRIC:EIR \"" + this->Name + "\":");
-                ShowContinueError(" Chiller EIR as a function of PLR curve output is negative (" + General::RoundSigDigits(this->ChillerEIRFPLR, 3) +
+                ShowContinueError(" Chiller EIR as a function of PLR curve output is negative (" + format("{:.3R}", this->ChillerEIRFPLR) +
                                   ").");
-                ShowContinueError(" Negative value occurs using a part-load ratio of " + General::RoundSigDigits(PartLoadRat, 3) + '.');
+                ShowContinueError(" Negative value occurs using a part-load ratio of " + format("{:.3R}", PartLoadRat) + '.');
                 ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
             } else if (DataPlant::PlantLoop(this->CWLoopNum).LoopSide(this->CWLoopSideNum).FlowLock != 0 && !DataGlobals::WarmupFlag) {
                 ++this->ChillerEIRFPLRError;

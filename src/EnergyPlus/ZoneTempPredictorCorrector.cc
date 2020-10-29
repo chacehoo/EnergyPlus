@@ -519,7 +519,7 @@ namespace ZoneTempPredictorCorrector {
                             if (rNumericArgs(1) > 0.0) state.dataZoneTempPredictorCorrector->NumOnOffCtrZone++;
                         } else {
                             ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + "=[" +
-                                            TrimSigDigits(rNumericArgs(1), 0) + "].");
+                                            format("{:.0T}", rNumericArgs(1)) + "].");
                             ShowContinueError("..Allowable values must be greater or equal to 0");
                             ErrorsFound = true;
                         }
@@ -1150,7 +1150,7 @@ namespace ZoneTempPredictorCorrector {
                         ComfortControlledZone(ComfortControlledZoneNum).TdbMinSetPoint = rNumericArgs(1);
                         if (rNumericArgs(1) > 50 || rNumericArgs(1) < 0) {
                             ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + "=[" +
-                                            TrimSigDigits(rNumericArgs(1), 0) + "].");
+                                            format("{:.0T}", rNumericArgs(1)) + "].");
                             ShowContinueError("..Allowable values must be between 0 C and 50 C");
                             ErrorsFound = true;
                         }
@@ -1159,7 +1159,7 @@ namespace ZoneTempPredictorCorrector {
                         ComfortControlledZone(ComfortControlledZoneNum).TdbMaxSetPoint = rNumericArgs(2);
                         if (rNumericArgs(2) > 50 || rNumericArgs(2) < 0) {
                             ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + " invalid " + cNumericFieldNames(2) + "=[" +
-                                            TrimSigDigits(rNumericArgs(2), 0) + "].");
+                                            format("{:.0T}", rNumericArgs(2)) + "].");
                             ShowContinueError("..Allowable values must be between 0 C and 50 C");
                             ErrorsFound = true;
                         }
@@ -1169,7 +1169,7 @@ namespace ZoneTempPredictorCorrector {
                         ComfortControlledZone(ComfortControlledZoneNum).TdbMaxSetPoint) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1));
                         ShowContinueError(".." + cNumericFieldNames(1) + " > " + cNumericFieldNames(2));
-                        ShowContinueError("..[" + TrimSigDigits(rNumericArgs(1), 0) + "] > [" + TrimSigDigits(rNumericArgs(2), 0) + "].");
+                        ShowContinueError("..[" + format("{:.0T}", rNumericArgs(1)) + "] > [" + format("{:.0T}", rNumericArgs(2)) + "].");
                         ErrorsFound = true;
                     }
                     // If MaxTemp = MinTemp, no thermal comfort control
@@ -1807,13 +1807,13 @@ namespace ZoneTempPredictorCorrector {
                         if ((TempControlledZone(TempControlledZoneNum).FixedRadiativeFraction < 0.0) &&
                             (!(TempControlledZone(TempControlledZoneNum).OpTempCntrlModeScheduled))) {
                             ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + "=[" +
-                                            TrimSigDigits(rNumericArgs(1), 2) + "\" cannot be negative.");
+                                            format("{:.2T}", rNumericArgs(1)) + "\" cannot be negative.");
                             ErrorsFound = true;
                         }
                         if ((TempControlledZone(TempControlledZoneNum).FixedRadiativeFraction >= 0.9) &&
                             (!(TempControlledZone(TempControlledZoneNum).OpTempCntrlModeScheduled))) {
                             ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + "=[" +
-                                            TrimSigDigits(rNumericArgs(1), 2) + "\" cannot >= .9.");
+                                            format("{:.2T}", rNumericArgs(1)) + "\" cannot >= .9.");
                             ErrorsFound = true;
                         }
 
@@ -1894,7 +1894,7 @@ namespace ZoneTempPredictorCorrector {
                             if ((TempControlledZone(TempControlledZoneNum).FixedRadiativeFraction < 0.0) &&
                                 (!(TempControlledZone(TempControlledZoneNum).OpTempCntrlModeScheduled))) {
                                 ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + "=[" +
-                                                TrimSigDigits(rNumericArgs(1), 2) + "\" cannot be negative.");
+                                                format("{:.2T}", rNumericArgs(1)) + "\" cannot be negative.");
                                 ErrorsFound = true;
                             }
                         }
@@ -1902,7 +1902,7 @@ namespace ZoneTempPredictorCorrector {
                             if ((TempControlledZone(TempControlledZoneNum).FixedRadiativeFraction >= 0.9) &&
                                 (!(TempControlledZone(TempControlledZoneNum).OpTempCntrlModeScheduled))) {
                                 ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + "=[" +
-                                                TrimSigDigits(rNumericArgs(1), 2) + "\" cannot >= .9.");
+                                                format("{:.2T}", rNumericArgs(1)) + "\" cannot >= .9.");
                                 ErrorsFound = true;
                             }
                         }
@@ -2022,13 +2022,13 @@ namespace ZoneTempPredictorCorrector {
                         if ((TempControlledZone(TempControlledZoneNum).ZoneOvercoolConstRange < 0.0) &&
                             (!(TempControlledZone(TempControlledZoneNum).OvercoolCntrlModeScheduled))) {
                             ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + "=[" +
-                                            TrimSigDigits(rNumericArgs(1), 2) + "\" cannot be negative.");
+                                            format("{:.2T}", rNumericArgs(1)) + "\" cannot be negative.");
                             ErrorsFound = true;
                         }
                         if ((TempControlledZone(TempControlledZoneNum).ZoneOvercoolConstRange > 3.0) &&
                             (!(TempControlledZone(TempControlledZoneNum).OvercoolCntrlModeScheduled))) {
                             ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + "=[" +
-                                            TrimSigDigits(rNumericArgs(1), 2) + "\" cannot be > 3.0");
+                                            format("{:.2T}", rNumericArgs(1)) + "\" cannot be > 3.0");
                             ErrorsFound = true;
                         }
 
@@ -2047,7 +2047,7 @@ namespace ZoneTempPredictorCorrector {
                         TempControlledZone(TempControlledZoneNum).ZoneOvercoolControlRatio = rNumericArgs(2);
                         if (TempControlledZone(TempControlledZoneNum).ZoneOvercoolControlRatio < 0.0) {
                             ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(2) + " invalid " + cNumericFieldNames(2) + "=[" +
-                                            TrimSigDigits(rNumericArgs(2), 2) + "\" cannot be negative.");
+                                            format("{:.2T}", rNumericArgs(2)) + "\" cannot be negative.");
                             ErrorsFound = true;
                         }
                     }
@@ -2091,7 +2091,7 @@ namespace ZoneTempPredictorCorrector {
                             if ((TempControlledZone(TempControlledZoneNum).ZoneOvercoolConstRange < 0.0) &&
                                 (!(TempControlledZone(TempControlledZoneNum).OvercoolCntrlModeScheduled))) {
                                 ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + "=[" +
-                                                TrimSigDigits(rNumericArgs(1), 2) + "\" cannot be negative.");
+                                                format("{:.2T}", rNumericArgs(1)) + "\" cannot be negative.");
                                 ErrorsFound = true;
                             }
                         }
@@ -2099,7 +2099,7 @@ namespace ZoneTempPredictorCorrector {
                             if ((TempControlledZone(TempControlledZoneNum).ZoneOvercoolConstRange > 3.0) &&
                                 (!(TempControlledZone(TempControlledZoneNum).OvercoolCntrlModeScheduled))) {
                                 ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + "=[" +
-                                                TrimSigDigits(rNumericArgs(1), 2) + "\" cannot > 3.0");
+                                                format("{:.2T}", rNumericArgs(1)) + "\" cannot > 3.0");
                                 ErrorsFound = true;
                             }
                         }
@@ -2121,7 +2121,7 @@ namespace ZoneTempPredictorCorrector {
                         if (Item == 1) {
                             if (TempControlledZone(TempControlledZoneNum).ZoneOvercoolControlRatio < 0.0) {
                                 ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(2) + " invalid " + cNumericFieldNames(2) + "=[" +
-                                                TrimSigDigits(rNumericArgs(2), 2) + "\" cannot be negative.");
+                                                format("{:.2T}", rNumericArgs(2)) + "\" cannot be negative.");
                                 ErrorsFound = true;
                             }
                         }
@@ -2246,7 +2246,7 @@ namespace ZoneTempPredictorCorrector {
                     StageControlledZone(StageControlledZoneNum).NumOfHeatStages = rNumericArgs(1);
                     if (rNumericArgs(1) < 1 || rNumericArgs(1) > 4) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid range " + cNumericFieldNames(1) + "=\"" +
-                                        RoundSigDigits(rNumericArgs(1), 0) + "\"");
+                                        format("{:.0R}", rNumericArgs(1)) + "\"");
                         ShowContinueError("..contains values outside of range [1,4].");
                         ErrorsFound = true;
                     }
@@ -2264,7 +2264,7 @@ namespace ZoneTempPredictorCorrector {
                     StageControlledZone(StageControlledZoneNum).HeatThroRange = rNumericArgs(2);
                     if (rNumericArgs(1) < 0.0) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" negative value is found at " + cNumericFieldNames(2) +
-                                        "=\"" + RoundSigDigits(rNumericArgs(2), 1) + "\"");
+                                        "=\"" + format("{:.1R}", rNumericArgs(2)) + "\"");
                         ShowContinueError(".. The minumum value is 0.");
                         ErrorsFound = true;
                     }
@@ -2275,7 +2275,7 @@ namespace ZoneTempPredictorCorrector {
                             StageControlledZone(StageControlledZoneNum).HeatTOffset(i) = rNumericArgs(2 + i);
                             if (rNumericArgs(2 + i) > 0.0) {
                                 ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" positive value is found at " +
-                                                cNumericFieldNames(2 + i) + "=\"" + RoundSigDigits(rNumericArgs(2 + i), 1) + "\"");
+                                                cNumericFieldNames(2 + i) + "=\"" + format("{:.1R}", rNumericArgs(2 + i)) + "\"");
                                 ShowContinueError(".. The maximum value is 0.");
                                 ErrorsFound = true;
                             }
@@ -2287,8 +2287,8 @@ namespace ZoneTempPredictorCorrector {
                             if (i > 1) {
                                 if (rNumericArgs(2 + i) >= rNumericArgs(1 + i)) {
                                     ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" The value at " + cNumericFieldNames(2 + i) +
-                                                    "=\"" + RoundSigDigits(rNumericArgs(2 + i), 1) + "\" has to be less than ");
-                                    ShowContinueError(cNumericFieldNames(1 + i) + "=\"" + RoundSigDigits(rNumericArgs(1 + i), 1));
+                                                    "=\"" + format("{:.1R}", rNumericArgs(2 + i)) + "\" has to be less than ");
+                                    ShowContinueError(cNumericFieldNames(1 + i) + "=\"" + format("{:.1R}", rNumericArgs(1 + i)));
                                     ErrorsFound = true;
                                 }
                             }
@@ -2298,7 +2298,7 @@ namespace ZoneTempPredictorCorrector {
                     StageControlledZone(StageControlledZoneNum).NumOfCoolStages = rNumericArgs(7);
                     if (rNumericArgs(7) < 1 || rNumericArgs(7) > 4) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid range " + cNumericFieldNames(7) + "=\"" +
-                                        RoundSigDigits(rNumericArgs(7), 0) + "\"");
+                                        format("{:.0R}", rNumericArgs(7)) + "\"");
                         ShowContinueError("..contains values outside of range [1,4].");
                         ErrorsFound = true;
                     }
@@ -2316,7 +2316,7 @@ namespace ZoneTempPredictorCorrector {
                     StageControlledZone(StageControlledZoneNum).CoolThroRange = rNumericArgs(8);
                     if (rNumericArgs(8) < 0.0) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" negative value is found at " + cNumericFieldNames(8) +
-                                        "=\"" + RoundSigDigits(rNumericArgs(8), 1) + "\"");
+                                        "=\"" + format("{:.1R}", rNumericArgs(8)) + "\"");
                         ShowContinueError(".. The minumum value is 0.");
                         ErrorsFound = true;
                     }
@@ -2327,7 +2327,7 @@ namespace ZoneTempPredictorCorrector {
                             StageControlledZone(StageControlledZoneNum).CoolTOffset(i) = rNumericArgs(8 + i);
                             if (rNumericArgs(8 + i) < 0.0) {
                                 ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" negative value is found at " +
-                                                cNumericFieldNames(8 + i) + "=\"" + RoundSigDigits(rNumericArgs(8 + i), 1) + "\"");
+                                                cNumericFieldNames(8 + i) + "=\"" + format("{:.1R}", rNumericArgs(8 + i)) + "\"");
                                 ShowContinueError(".. The minimum value is 0.");
                                 ErrorsFound = true;
                             }
@@ -2339,8 +2339,8 @@ namespace ZoneTempPredictorCorrector {
                             if (i > 1) {
                                 if (rNumericArgs(8 + i) <= rNumericArgs(7 + i)) {
                                     ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" The value at " + cNumericFieldNames(8 + i) +
-                                                    "=\"" + RoundSigDigits(rNumericArgs(8 + i), 1) + "\" has to be greater than ");
-                                    ShowContinueError(cNumericFieldNames(7 + i) + "=\"" + RoundSigDigits(rNumericArgs(7 + i), 1));
+                                                    "=\"" + format("{:.1R}", rNumericArgs(8 + i)) + "\" has to be greater than ");
+                                    ShowContinueError(cNumericFieldNames(7 + i) + "=\"" + format("{:.1R}", rNumericArgs(7 + i)));
                                     ErrorsFound = true;
                                 }
                             }
@@ -3411,8 +3411,8 @@ namespace ZoneTempPredictorCorrector {
                                     "DualSetPointWithDeadBand: When Temperature Difference Between Cutout And Setpoint is applied, the heating "
                                     "setpoint is greater than the cooling setpoint. ");
                                 ShowContinueErrorTimeStamp("occurs in Zone=" + Zone(ZoneNum).Name);
-                                ShowContinueError("Zone Heating ThermostatSetPoint=" + RoundSigDigits(ZoneThermostatSetPointLo(ZoneNum), 2));
-                                ShowContinueError("Zone Cooling ThermostatSetPoint=" + RoundSigDigits(ZoneThermostatSetPointHi(ZoneNum), 2));
+                                ShowContinueError("Zone Heating ThermostatSetPoint=" + format("{:.2R}", ZoneThermostatSetPointLo(ZoneNum)));
+                                ShowContinueError("Zone Cooling ThermostatSetPoint=" + format("{:.2R}", ZoneThermostatSetPointHi(ZoneNum)));
                                 ShowFatalError("Program terminates due to above conditions.");
                             }
                         }
@@ -4063,11 +4063,11 @@ namespace ZoneTempPredictorCorrector {
                     ShowSevereError("SingleHeatCoolSetPoint: Effective heating set-point higher than effective cooling set-point - use "
                                     "DualSetPointWithDeadBand if using unmixed air model");
                     ShowContinueErrorTimeStamp("occurs in Zone=" + Zone(ZoneNum).Name);
-                    ShowContinueError("LoadToHeatingSetPoint=" + RoundSigDigits(LoadToHeatingSetPoint, 3) +
-                                      ", LoadToCoolingSetPoint=" + RoundSigDigits(LoadToCoolingSetPoint, 3));
-                    ShowContinueError("Zone TempDepZnLd=" + RoundSigDigits(state.dataZoneTempPredictorCorrector->TempDepZnLd(ZoneNum), 2));
-                    ShowContinueError("Zone TempIndZnLd=" + RoundSigDigits(state.dataZoneTempPredictorCorrector->TempIndZnLd(ZoneNum), 2));
-                    ShowContinueError("Zone ThermostatSetPoint=" + RoundSigDigits(TempZoneThermostatSetPoint(ZoneNum), 2));
+                    ShowContinueError("LoadToHeatingSetPoint=" + format("{:.3R}", LoadToHeatingSetPoint) +
+                                      ", LoadToCoolingSetPoint=" + format("{:.3R}", LoadToCoolingSetPoint));
+                    ShowContinueError("Zone TempDepZnLd=" + format("{:.2R}", state.dataZoneTempPredictorCorrector->TempDepZnLd(ZoneNum)));
+                    ShowContinueError("Zone TempIndZnLd=" + format("{:.2R}", state.dataZoneTempPredictorCorrector->TempIndZnLd(ZoneNum)));
+                    ShowContinueError("Zone ThermostatSetPoint=" + format("{:.2R}", TempZoneThermostatSetPoint(ZoneNum)));
                     ShowFatalError("Program terminates due to above conditions.");
                 }
 
@@ -4087,11 +4087,11 @@ namespace ZoneTempPredictorCorrector {
                     ShowSevereError(
                         "SingleHeatCoolSetPoint: Unanticipated combination of heating and cooling loads - report to EnergyPlus Development Team");
                     ShowContinueErrorTimeStamp("occurs in Zone=" + Zone(ZoneNum).Name);
-                    ShowContinueError("LoadToHeatingSetPoint=" + RoundSigDigits(LoadToHeatingSetPoint, 3) +
-                                      ", LoadToCoolingSetPoint=" + RoundSigDigits(LoadToCoolingSetPoint, 3));
-                    ShowContinueError("Zone TempDepZnLd=" + RoundSigDigits(state.dataZoneTempPredictorCorrector->TempDepZnLd(ZoneNum), 2));
-                    ShowContinueError("Zone TempIndZnLd=" + RoundSigDigits(state.dataZoneTempPredictorCorrector->TempIndZnLd(ZoneNum), 2));
-                    ShowContinueError("Zone ThermostatSetPoint=" + RoundSigDigits(TempZoneThermostatSetPoint(ZoneNum), 2));
+                    ShowContinueError("LoadToHeatingSetPoint=" + format("{:.3R}", LoadToHeatingSetPoint) +
+                                      ", LoadToCoolingSetPoint=" + format("{:.3R}", LoadToCoolingSetPoint));
+                    ShowContinueError("Zone TempDepZnLd=" + format("{:.2R}", state.dataZoneTempPredictorCorrector->TempDepZnLd(ZoneNum)));
+                    ShowContinueError("Zone TempIndZnLd=" + format("{:.2R}", state.dataZoneTempPredictorCorrector->TempIndZnLd(ZoneNum)));
+                    ShowContinueError("Zone ThermostatSetPoint=" + format("{:.2R}", TempZoneThermostatSetPoint(ZoneNum)));
                     ShowFatalError("Program terminates due to above conditions.");
                 }
 
@@ -4138,12 +4138,12 @@ namespace ZoneTempPredictorCorrector {
                     ShowSevereError("DualSetPointWithDeadBand: Effective heating set-point higher than effective cooling set-point - increase "
                                     "deadband if using unmixed air model");
                     ShowContinueErrorTimeStamp("occurs in Zone=" + Zone(ZoneNum).Name);
-                    ShowContinueError("LoadToHeatingSetPoint=" + RoundSigDigits(LoadToHeatingSetPoint, 3) +
-                                      ", LoadToCoolingSetPoint=" + RoundSigDigits(LoadToCoolingSetPoint, 3));
-                    ShowContinueError("Zone TempDepZnLd=" + RoundSigDigits(state.dataZoneTempPredictorCorrector->TempDepZnLd(ZoneNum), 2));
-                    ShowContinueError("Zone TempIndZnLd=" + RoundSigDigits(state.dataZoneTempPredictorCorrector->TempIndZnLd(ZoneNum), 2));
-                    ShowContinueError("Zone Heating ThermostatSetPoint=" + RoundSigDigits(ZoneThermostatSetPointLo(ZoneNum), 2));
-                    ShowContinueError("Zone Cooling ThermostatSetPoint=" + RoundSigDigits(ZoneThermostatSetPointHi(ZoneNum), 2));
+                    ShowContinueError("LoadToHeatingSetPoint=" + format("{:.3R}", LoadToHeatingSetPoint) +
+                                      ", LoadToCoolingSetPoint=" + format("{:.3R}", LoadToCoolingSetPoint));
+                    ShowContinueError("Zone TempDepZnLd=" + format("{:.2R}", state.dataZoneTempPredictorCorrector->TempDepZnLd(ZoneNum)));
+                    ShowContinueError("Zone TempIndZnLd=" + format("{:.2R}", state.dataZoneTempPredictorCorrector->TempIndZnLd(ZoneNum)));
+                    ShowContinueError("Zone Heating ThermostatSetPoint=" + format("{:.2R}", ZoneThermostatSetPointLo(ZoneNum)));
+                    ShowContinueError("Zone Cooling ThermostatSetPoint=" + format("{:.2R}", ZoneThermostatSetPointHi(ZoneNum)));
                     ShowFatalError("Program terminates due to above conditions.");
                 }
 
@@ -4166,13 +4166,13 @@ namespace ZoneTempPredictorCorrector {
                     ShowSevereError(
                         "DualSetPointWithDeadBand: Unanticipated combination of heating and cooling loads - report to EnergyPlus Development Team");
                     ShowContinueErrorTimeStamp("occurs in Zone=" + Zone(ZoneNum).Name);
-                    ShowContinueError("LoadToHeatingSetPoint=" + RoundSigDigits(LoadToHeatingSetPoint, 3) +
-                                      ", LoadToCoolingSetPoint=" + RoundSigDigits(LoadToCoolingSetPoint, 3));
-                    ShowContinueError("Zone Heating Set-point=" + RoundSigDigits(ZoneThermostatSetPointLo(ZoneNum), 2));
-                    ShowContinueError("Zone Cooling Set-point=" + RoundSigDigits(ZoneThermostatSetPointHi(ZoneNum), 2));
-                    ShowContinueError("Zone TempDepZnLd=" + RoundSigDigits(state.dataZoneTempPredictorCorrector->TempDepZnLd(ZoneNum), 2));
-                    ShowContinueError("Zone TempIndZnLd=" + RoundSigDigits(state.dataZoneTempPredictorCorrector->TempIndZnLd(ZoneNum), 2));
-                    ShowContinueError("Zone ThermostatSetPoint=" + RoundSigDigits(TempZoneThermostatSetPoint(ZoneNum), 2));
+                    ShowContinueError("LoadToHeatingSetPoint=" + format("{:.3R}", LoadToHeatingSetPoint) +
+                                      ", LoadToCoolingSetPoint=" + format("{:.3R}", LoadToCoolingSetPoint));
+                    ShowContinueError("Zone Heating Set-point=" + format("{:.2R}", ZoneThermostatSetPointLo(ZoneNum)));
+                    ShowContinueError("Zone Cooling Set-point=" + format("{:.2R}", ZoneThermostatSetPointHi(ZoneNum)));
+                    ShowContinueError("Zone TempDepZnLd=" + format("{:.2R}", state.dataZoneTempPredictorCorrector->TempDepZnLd(ZoneNum)));
+                    ShowContinueError("Zone TempIndZnLd=" + format("{:.2R}", state.dataZoneTempPredictorCorrector->TempIndZnLd(ZoneNum)));
+                    ShowContinueError("Zone ThermostatSetPoint=" + format("{:.2R}", TempZoneThermostatSetPoint(ZoneNum)));
 
                     ShowFatalError("Program terminates due to above conditions.");
                 }
@@ -4617,10 +4617,10 @@ namespace ZoneTempPredictorCorrector {
                     ShowSevereError(
                         "Humidistat: Unanticipated combination of humidifying and dehumidifying loads - report to EnergyPlus Development Team");
                     ShowContinueErrorTimeStamp("occurs in Zone=" + Zone(ZoneNum).Name);
-                    ShowContinueError("LoadToHumidifySetPoint=" + RoundSigDigits(LoadToHumidifySetPoint, 5) +
-                                      ", LoadToDehumidifySetPoint=" + RoundSigDigits(LoadToDehumidifySetPoint, 5));
-                    ShowContinueError("Zone RH Humidifying Set-point=" + RoundSigDigits(ZoneRHHumidifyingSetPoint, 1));
-                    ShowContinueError("Zone RH Dehumidifying Set-point=" + RoundSigDigits(ZoneRHDehumidifyingSetPoint, 2));
+                    ShowContinueError("LoadToHumidifySetPoint=" + format("{:.5R}", LoadToHumidifySetPoint) +
+                                      ", LoadToDehumidifySetPoint=" + format("{:.5R}", LoadToDehumidifySetPoint));
+                    ShowContinueError("Zone RH Humidifying Set-point=" + format("{:.1R}", ZoneRHHumidifyingSetPoint));
+                    ShowContinueError("Zone RH Dehumidifying Set-point=" + format("{:.2R}", ZoneRHDehumidifyingSetPoint));
                     ShowFatalError("Program terminates due to above conditions.");
                 }
             }
@@ -6689,7 +6689,7 @@ namespace ZoneTempPredictorCorrector {
             if ((std::abs(imBalance) > Threshold) && (!WarmupFlag) && (!DoingSizing)) { // air balance is out by more than threshold
                 if (Zone(ZoneNum).AirHBimBalanceErrIndex == 0) {
                     ShowWarningMessage("Zone Air Heat Balance is out of balance for zone named " + Zone(ZoneNum).Name);
-                    ShowContinueError("Zone Air Heat Balance Deviation Rate is more than " + RoundSigDigits(Threshold, 1) + " {W}");
+                    ShowContinueError("Zone Air Heat Balance Deviation Rate is more than " + format("{:.1R}", Threshold) + " {W}");
                     if (TurnFansOn) {
                         ShowContinueError("Night cycle fan operation may be causing above error");
                     }

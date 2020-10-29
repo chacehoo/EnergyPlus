@@ -258,98 +258,98 @@ namespace CoolTower {
             if (state.dataCoolTower->CoolTowerSys(CoolTowerNum).MaxWaterFlowRate > MaximumWaterFlowRate) {
                 state.dataCoolTower->CoolTowerSys(CoolTowerNum).MaxWaterFlowRate = MaximumWaterFlowRate;
                 ShowWarningError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid " + cNumericFields(1) + "=[" +
-                                 RoundSigDigits(rNumericArgs(1), 2) + "].");
-                ShowContinueError("...Maximum Allowable=[" + RoundSigDigits(MaximumWaterFlowRate, 2) + "].");
+                                 format("{:.2R}", rNumericArgs(1)) + "].");
+                ShowContinueError("...Maximum Allowable=[" + format("{:.2R}", MaximumWaterFlowRate) + "].");
             }
             if (state.dataCoolTower->CoolTowerSys(CoolTowerNum).MaxWaterFlowRate < MinimumWaterFlowRate) {
                 state.dataCoolTower->CoolTowerSys(CoolTowerNum).MaxWaterFlowRate = MinimumWaterFlowRate;
                 ShowWarningError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid " + cNumericFields(1) + "=[" +
-                                 RoundSigDigits(rNumericArgs(1), 2) + "].");
-                ShowContinueError("...Minimum Allowable=[" + RoundSigDigits(MinimumWaterFlowRate, 2) + "].");
+                                 format("{:.2R}", rNumericArgs(1)) + "].");
+                ShowContinueError("...Minimum Allowable=[" + format("{:.2R}", MinimumWaterFlowRate) + "].");
             }
 
             state.dataCoolTower->CoolTowerSys(CoolTowerNum).TowerHeight = rNumericArgs(2); // Get effctive tower height
             if (state.dataCoolTower->CoolTowerSys(CoolTowerNum).TowerHeight > MaxHeight) {
                 state.dataCoolTower->CoolTowerSys(CoolTowerNum).TowerHeight = MaxHeight;
                 ShowWarningError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid " + cNumericFields(2) + "=[" +
-                                 RoundSigDigits(rNumericArgs(2), 2) + "].");
-                ShowContinueError("...Maximum Allowable=[" + RoundSigDigits(MaxHeight, 2) + "].");
+                                 format("{:.2R}", rNumericArgs(2)) + "].");
+                ShowContinueError("...Maximum Allowable=[" + format("{:.2R}", MaxHeight) + "].");
             }
             if (state.dataCoolTower->CoolTowerSys(CoolTowerNum).TowerHeight < MinHeight) {
                 state.dataCoolTower->CoolTowerSys(CoolTowerNum).TowerHeight = MinHeight;
                 ShowWarningError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid " + cNumericFields(2) + "=[" +
-                                 RoundSigDigits(rNumericArgs(2), 2) + "].");
-                ShowContinueError("...Minimum Allowable=[" + RoundSigDigits(MinHeight, 2) + "].");
+                                 format("{:.2R}", rNumericArgs(2)) + "].");
+                ShowContinueError("...Minimum Allowable=[" + format("{:.2R}", MinHeight) + "].");
             }
 
             state.dataCoolTower->CoolTowerSys(CoolTowerNum).OutletArea = rNumericArgs(3); // Get outlet area
             if (state.dataCoolTower->CoolTowerSys(CoolTowerNum).OutletArea > MaxValue) {
                 state.dataCoolTower->CoolTowerSys(CoolTowerNum).OutletArea = MaxValue;
                 ShowWarningError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid " + cNumericFields(3) + "=[" +
-                                 RoundSigDigits(rNumericArgs(3), 2) + "].");
-                ShowContinueError("...Maximum Allowable=[" + RoundSigDigits(MaxValue, 2) + "].");
+                                 format("{:.2R}", rNumericArgs(3)) + "].");
+                ShowContinueError("...Maximum Allowable=[" + format("{:.2R}", MaxValue) + "].");
             }
             if (state.dataCoolTower->CoolTowerSys(CoolTowerNum).OutletArea < MinValue) {
                 state.dataCoolTower->CoolTowerSys(CoolTowerNum).OutletArea = MinValue;
                 ShowWarningError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid " + cNumericFields(3) + "=[" +
-                                 RoundSigDigits(rNumericArgs(3), 2) + "].");
-                ShowContinueError("...Minimum Allowable=[" + RoundSigDigits(MinValue, 2) + "].");
+                                 format("{:.2R}", rNumericArgs(3)) + "].");
+                ShowContinueError("...Minimum Allowable=[" + format("{:.2R}", MinValue) + "].");
             }
 
             state.dataCoolTower->CoolTowerSys(CoolTowerNum).MaxAirVolFlowRate = rNumericArgs(4); // Maximum limit of air flow to the space
             if (state.dataCoolTower->CoolTowerSys(CoolTowerNum).MaxAirVolFlowRate > MaxValue) {
                 state.dataCoolTower->CoolTowerSys(CoolTowerNum).MaxAirVolFlowRate = MaxValue;
                 ShowWarningError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid " + cNumericFields(4) + "=[" +
-                                 RoundSigDigits(rNumericArgs(4), 2) + "].");
-                ShowContinueError("...Maximum Allowable=[" + RoundSigDigits(MaxValue, 2) + "].");
+                                 format("{:.2R}", rNumericArgs(4)) + "].");
+                ShowContinueError("...Maximum Allowable=[" + format("{:.2R}", MaxValue) + "].");
             }
             if (state.dataCoolTower->CoolTowerSys(CoolTowerNum).MaxAirVolFlowRate < MinValue) {
                 state.dataCoolTower->CoolTowerSys(CoolTowerNum).MaxAirVolFlowRate = MinValue;
                 ShowWarningError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid " + cNumericFields(4) + "=[" +
-                                 RoundSigDigits(rNumericArgs(4), 2) + "].");
-                ShowContinueError("...Minimum Allowable=[" + RoundSigDigits(MinValue, 2) + "].");
+                                 format("{:.2R}", rNumericArgs(4)) + "].");
+                ShowContinueError("...Minimum Allowable=[" + format("{:.2R}", MinValue) + "].");
             }
 
             state.dataCoolTower->CoolTowerSys(CoolTowerNum).MinZoneTemp = rNumericArgs(5); // Get minimum temp limit which gets this cooltower off
             if (state.dataCoolTower->CoolTowerSys(CoolTowerNum).MinZoneTemp > MaxValue) {
                 state.dataCoolTower->CoolTowerSys(CoolTowerNum).MinZoneTemp = MaxValue;
                 ShowWarningError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid " + cNumericFields(5) + "=[" +
-                                 RoundSigDigits(rNumericArgs(5), 2) + "].");
-                ShowContinueError("...Maximum Allowable=[" + RoundSigDigits(MaxValue, 2) + "].");
+                                 format("{:.2R}", rNumericArgs(5)) + "].");
+                ShowContinueError("...Maximum Allowable=[" + format("{:.2R}", MaxValue) + "].");
             }
             if (state.dataCoolTower->CoolTowerSys(CoolTowerNum).MinZoneTemp < MinValue) {
                 state.dataCoolTower->CoolTowerSys(CoolTowerNum).MinZoneTemp = MinValue;
                 ShowWarningError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid " + cNumericFields(5) + "=[" +
-                                 RoundSigDigits(rNumericArgs(5), 2) + "].");
-                ShowContinueError("...Minimum Allowable=[" + RoundSigDigits(MinValue, 2) + "].");
+                                 format("{:.2R}", rNumericArgs(5)) + "].");
+                ShowContinueError("...Minimum Allowable=[" + format("{:.2R}", MinValue) + "].");
             }
 
             state.dataCoolTower->CoolTowerSys(CoolTowerNum).FracWaterLoss = rNumericArgs(6); // Fraction of water loss
             if (state.dataCoolTower->CoolTowerSys(CoolTowerNum).FracWaterLoss > MaxFrac) {
                 state.dataCoolTower->CoolTowerSys(CoolTowerNum).FracWaterLoss = MaxFrac;
                 ShowWarningError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid " + cNumericFields(6) + "=[" +
-                                 RoundSigDigits(rNumericArgs(6), 2) + "].");
-                ShowContinueError("...Maximum Allowable=[" + RoundSigDigits(MaxFrac, 2) + "].");
+                                 format("{:.2R}", rNumericArgs(6)) + "].");
+                ShowContinueError("...Maximum Allowable=[" + format("{:.2R}", MaxFrac) + "].");
             }
             if (state.dataCoolTower->CoolTowerSys(CoolTowerNum).FracWaterLoss < MinFrac) {
                 state.dataCoolTower->CoolTowerSys(CoolTowerNum).FracWaterLoss = MinFrac;
                 ShowWarningError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid " + cNumericFields(6) + "=[" +
-                                 RoundSigDigits(rNumericArgs(6), 2) + "].");
-                ShowContinueError("...Minimum Allowable=[" + RoundSigDigits(MinFrac, 2) + "].");
+                                 format("{:.2R}", rNumericArgs(6)) + "].");
+                ShowContinueError("...Minimum Allowable=[" + format("{:.2R}", MinFrac) + "].");
             }
 
             state.dataCoolTower->CoolTowerSys(CoolTowerNum).FracFlowSched = rNumericArgs(7); // Fraction of loss of air flow
             if (state.dataCoolTower->CoolTowerSys(CoolTowerNum).FracFlowSched > MaxFrac) {
                 state.dataCoolTower->CoolTowerSys(CoolTowerNum).FracFlowSched = MaxFrac;
                 ShowWarningError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid " + cNumericFields(7) + "=[" +
-                                 RoundSigDigits(rNumericArgs(7), 2) + "].");
-                ShowContinueError("...Maximum Allowable=[" + RoundSigDigits(MaxFrac, 2) + "].");
+                                 format("{:.2R}", rNumericArgs(7)) + "].");
+                ShowContinueError("...Maximum Allowable=[" + format("{:.2R}", MaxFrac) + "].");
             }
             if (state.dataCoolTower->CoolTowerSys(CoolTowerNum).FracFlowSched < MinFrac) {
                 state.dataCoolTower->CoolTowerSys(CoolTowerNum).FracFlowSched = MinFrac;
                 ShowWarningError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid " + cNumericFields(7) + "=[" +
-                                 RoundSigDigits(rNumericArgs(7), 5) + "].");
-                ShowContinueError("...Minimum Allowable=[" + RoundSigDigits(MinFrac, 2) + "].");
+                                 format("{:.5R}", rNumericArgs(7)) + "].");
+                ShowContinueError("...Minimum Allowable=[" + format("{:.2R}", MinFrac) + "].");
             }
 
             state.dataCoolTower->CoolTowerSys(CoolTowerNum).RatedPumpPower = rNumericArgs(8); // Get rated pump power

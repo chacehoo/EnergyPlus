@@ -260,7 +260,7 @@ namespace BaseboardElectric {
                         if (thisBaseboard.ScaledHeatingCapacity < 0.0 && thisBaseboard.ScaledHeatingCapacity != AutoSize) {
                             ShowSevereError(cCurrentModuleObject + " = " + thisBaseboard.EquipName);
                             ShowContinueError("Illegal " + cNumericFieldNames(iHeatDesignCapacityNumericNum) + " = " +
-                                              TrimSigDigits(rNumericArgs(iHeatDesignCapacityNumericNum), 7));
+                                              format("{:.7T}", rNumericArgs(iHeatDesignCapacityNumericNum)));
                             ErrorsFound = true;
                         }
                     } else {
@@ -277,7 +277,7 @@ namespace BaseboardElectric {
                             ShowSevereError(cCurrentModuleObject + " = " + thisBaseboard.EquipName);
                             ShowContinueError("Input for " + cAlphaFieldNames(iHeatCAPMAlphaNum) + " = " + cAlphaArgs(iHeatCAPMAlphaNum));
                             ShowContinueError("Illegal " + cNumericFieldNames(iHeatCapacityPerFloorAreaNumericNum) + " = " +
-                                              TrimSigDigits(rNumericArgs(iHeatCapacityPerFloorAreaNumericNum), 7));
+                                              format("{:.7T}", rNumericArgs(iHeatCapacityPerFloorAreaNumericNum)));
                             ErrorsFound = true;
                         } else if (thisBaseboard.ScaledHeatingCapacity == AutoSize) {
                             ShowSevereError(cCurrentModuleObject + " = " + thisBaseboard.EquipName);
@@ -298,7 +298,7 @@ namespace BaseboardElectric {
                         if (thisBaseboard.ScaledHeatingCapacity < 0.0) {
                             ShowSevereError(cCurrentModuleObject + " = " + thisBaseboard.EquipName);
                             ShowContinueError("Illegal " + cNumericFieldNames(iHeatFracOfAutosizedCapacityNumericNum) + " = " +
-                                              TrimSigDigits(rNumericArgs(iHeatFracOfAutosizedCapacityNumericNum), 7));
+                                              format("{:.7T}", rNumericArgs(iHeatFracOfAutosizedCapacityNumericNum)));
                             ErrorsFound = true;
                         }
                     } else {

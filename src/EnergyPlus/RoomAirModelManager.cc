@@ -1187,7 +1187,7 @@ namespace RoomAirModelManager {
                             ShowWarningError("Problem with " + cCurrentModuleObject + " = " + cAlphaArgs(1));
                             ShowWarningError("Roomair model will not be applied for Zone=" + cAlphaArgs(1) + '.');
                             ShowContinueError("AirflowNetwrok:Multizone:Surface crack object must have an air flow coefficient = 0.5, value was=" +
-                                              RoundSigDigits(AirflowNetwork::MultizoneSurfaceCrackData(TypeNum).FlowExpo, 2));
+                                              format("{:.2R}", AirflowNetwork::MultizoneSurfaceCrackData(TypeNum).FlowExpo));
                         }
                     }
                 }
@@ -1796,7 +1796,7 @@ namespace RoomAirModelManager {
                     ShowSevereError("GetRoomAirflowNetworkData: Invalid, zone volume fractions do not sum to 1.0");
                     ShowContinueError("Entered in RoomAir:Node:AirflowNetwork with Zone Name = " + Zone(ZoneNum).Name);
                     ShowContinueError("The Fraction of Zone Air Volume values across all the nodes needs to sum to 1.0.");
-                    ShowContinueError("The sum of fractions entered = " + RoundSigDigits(SumFraction, 3));
+                    ShowContinueError("The sum of fractions entered = " + format("{:.3R}", SumFraction));
                     ErrorsFound = true;
                 }
                 // Check internal gain fraction
@@ -1822,7 +1822,7 @@ namespace RoomAirModelManager {
                             ShowContinueError("Entered in RoomAir:Node:AirflowNetwork with Zone Name = " + Zone(ZoneNum).Name +
                                               ", Intrnal gain name = " + Name);
                             ShowContinueError("The Fraction of internal gain across all the nodes needs to sum to 1.0.");
-                            ShowContinueError("The sum of fractions entered = " + RoundSigDigits(SumFraction, 3));
+                            ShowContinueError("The sum of fractions entered = " + format("{:.3R}", SumFraction));
                             ErrorsFound = true;
                         }
                     }
@@ -2089,9 +2089,9 @@ namespace RoomAirModelManager {
 
                 if (std::abs((Z2Zone - Z1Zone) - Zone(ZNum).CeilingHeight) > CeilingHeightDiffMax) {
                     ShowWarningError("RoomAirManager: Inconsistent ceiling heights in Zone: " + Zone(ZNum).Name);
-                    ShowContinueError("Lowest height=[" + RoundSigDigits(Z1Zone, 3) + "].");
-                    ShowContinueError("Highest height=[" + RoundSigDigits(Z2Zone, 3) + "].");
-                    ShowContinueError("Ceiling height=[" + RoundSigDigits(Zone(ZNum).CeilingHeight, 3) + "].");
+                    ShowContinueError("Lowest height=[" + format("{:.3R}", Z1Zone) + "].");
+                    ShowContinueError("Highest height=[" + format("{:.3R}", Z2Zone) + "].");
+                    ShowContinueError("Ceiling height=[" + format("{:.3R}", Zone(ZNum).CeilingHeight) + "].");
                 }
             } // Zones
 

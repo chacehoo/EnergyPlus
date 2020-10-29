@@ -264,10 +264,10 @@ namespace DataPlant {
                                      "\", Error (CheckLoopExitNode) -- Mass Flow Rate Calculation. Outlet and Inlet differ by more than tolerance.");
                     ShowContinueErrorTimeStamp("");
                     ShowContinueError("Loop inlet node=" + NodeID(LoopInlet) + ", flowrate=" +
-                                      RoundSigDigits(Node(LoopInlet).MassFlowRate, 4) +
+                                      format("{:.4R}", Node(LoopInlet).MassFlowRate) +
                                       " kg/s");
                     ShowContinueError("Loop outlet node=" + NodeID(LoopOutlet) + ", flowrate=" +
-                                      RoundSigDigits(Node(LoopOutlet).MassFlowRate, 4) +
+                                      format("{:.4R}", Node(LoopOutlet).MassFlowRate) +
                                       " kg/s");
                     ShowContinueError("This loop might be helped by a bypass.");
                 }

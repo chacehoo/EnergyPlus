@@ -1622,8 +1622,8 @@ namespace HeatingCoils {
                             if (DisplayExtraWarnings) {
                                 if ((std::abs(NominalCapacityDes - NominalCapacityUser) / NominalCapacityUser) > AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeHeatingCoil: Potential issue with equipment sizing for " + CompType + ", " + CompName);
-                                    ShowContinueError("User-Specified Nominal Capacity of " + RoundSigDigits(NominalCapacityUser, 2) + " [W]");
-                                    ShowContinueError("differs from Design Size Nominal Capacity of " + RoundSigDigits(NominalCapacityDes, 2) +
+                                    ShowContinueError("User-Specified Nominal Capacity of " + format("{:.2R}", NominalCapacityUser) + " [W]");
+                                    ShowContinueError("differs from Design Size Nominal Capacity of " + format("{:.2R}", NominalCapacityDes) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -1646,9 +1646,9 @@ namespace HeatingCoils {
                 if (HeatingCoil(CoilNum).MSNominalCapacity(StageNum) > HeatingCoil(CoilNum).MSNominalCapacity(StageNum + 1)) {
                     ShowSevereError("SizeHeatingCoil: " + HeatingCoil(CoilNum).HeatingCoilType + ' ' + HeatingCoil(CoilNum).Name + ", Stage " +
                                     fmt::to_string(StageNum) + " Nominal Capacity (" +
-                                    RoundSigDigits(HeatingCoil(CoilNum).MSNominalCapacity(StageNum), 2) + " W) must be less than or equal to Stage " +
+                                    format("{:.2R}", HeatingCoil(CoilNum).MSNominalCapacity(StageNum)) + " W) must be less than or equal to Stage " +
                                     fmt::to_string(StageNum + 1) + " Nominal Capacity (" +
-                                    RoundSigDigits(HeatingCoil(CoilNum).MSNominalCapacity(StageNum + 1), 2) + " W).");
+                                    format("{:.2R}", HeatingCoil(CoilNum).MSNominalCapacity(StageNum + 1)) + " W).");
                     ShowFatalError("Preceding conditions cause termination.");
                 }
             }
@@ -2230,8 +2230,8 @@ namespace HeatingCoils {
                         ++HeatingCoil(CoilNum).PLFErrorCount;
                         ShowWarningError("CalcFuelHeatingCoil: " + cAllCoilTypes(HeatingCoil(CoilNum).HCoilType_Num) + "=\"" +
                                          HeatingCoil(CoilNum).Name + "\", PLF curve values");
-                        ShowContinueError("The PLF curve value = " + TrimSigDigits(PLF, 5) +
-                                          " for part-load ratio = " + TrimSigDigits(PartLoadRat, 5));
+                        ShowContinueError("The PLF curve value = " + format("{:.5T}", PLF) +
+                                          " for part-load ratio = " + format("{:.5T}", PartLoadRat));
                         ShowContinueError("PLF curve values must be >= 0.7. PLF has been reset to 0.7 and the simulation continues...");
                         ShowContinueError("Check the IO reference manual for PLF curve guidance [Coil:Heating:Fuel].");
                     } else {
@@ -2249,7 +2249,7 @@ namespace HeatingCoils {
                         ++HeatingCoil(CoilNum).RTFErrorCount;
                         ShowWarningError("CalcFuelHeatingCoil: " + cAllCoilTypes(HeatingCoil(CoilNum).HCoilType_Num) + "=\"" +
                                          HeatingCoil(CoilNum).Name + "\", runtime fraction");
-                        ShowContinueError("The runtime fraction exceeded 1.0. [" + TrimSigDigits(HeatingCoil(CoilNum).RTF, 4) + "].");
+                        ShowContinueError("The runtime fraction exceeded 1.0. [" + format("{:.4T}", HeatingCoil(CoilNum).RTF) + "].");
                         ShowContinueError("Runtime fraction is set to 1.0 and the simulation continues...");
                         ShowContinueError("Check the IO reference manual for PLF curve guidance [Coil:Heating:Fuel].");
                     } else {
@@ -2526,8 +2526,8 @@ namespace HeatingCoils {
                         ++HeatingCoil(CoilNum).PLFErrorCount;
                         ShowWarningError("CalcFuelHeatingCoil: " + cAllCoilTypes(HeatingCoil(CoilNum).HCoilType_Num) + "=\"" +
                                          HeatingCoil(CoilNum).Name + "\", PLF curve values");
-                        ShowContinueError("The PLF curve value = " + TrimSigDigits(PLF, 5) +
-                                          " for part-load ratio = " + TrimSigDigits(PartLoadRat, 5));
+                        ShowContinueError("The PLF curve value = " + format("{:.5T}", PLF) +
+                                          " for part-load ratio = " + format("{:.5T}", PartLoadRat));
                         ShowContinueError("PLF curve values must be >= 0.7. PLF has been reset to 0.7 and the simulation continues...");
                         ShowContinueError("Check the IO reference manual for PLF curve guidance [Coil:Heating:Fuel].");
                     } else {
@@ -2545,7 +2545,7 @@ namespace HeatingCoils {
                         ++HeatingCoil(CoilNum).RTFErrorCount;
                         ShowWarningError("CalcFuelHeatingCoil: " + cAllCoilTypes(HeatingCoil(CoilNum).HCoilType_Num) + "=\"" +
                                          HeatingCoil(CoilNum).Name + "\", runtime fraction");
-                        ShowContinueError("The runtime fraction exceeded 1.0. [" + TrimSigDigits(HeatingCoil(CoilNum).RTF, 4) + "].");
+                        ShowContinueError("The runtime fraction exceeded 1.0. [" + format("{:.4T}", HeatingCoil(CoilNum).RTF) + "].");
                         ShowContinueError("Runtime fraction is set to 1.0 and the simulation continues...");
                         ShowContinueError("Check the IO reference manual for PLF curve guidance [Coil:Heating:Fuel].");
                     } else {

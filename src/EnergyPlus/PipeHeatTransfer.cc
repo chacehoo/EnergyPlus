@@ -396,7 +396,7 @@ namespace PipeHeatTransfer {
             // dimensions
             PipeHT(Item).PipeID = rNumericArgs(1);
             if (rNumericArgs(1) <= 0.0) { // not really necessary because idd field has "minimum> 0"
-                ShowSevereError("GetPipesHeatTransfer: invalid " + cNumericFieldNames(1) + " of " + RoundSigDigits(rNumericArgs(1), 4));
+                ShowSevereError("GetPipesHeatTransfer: invalid " + cNumericFieldNames(1) + " of " + format("{:.4R}", rNumericArgs(1)));
                 ShowContinueError(cNumericFieldNames(1) + " must be > 0.0");
                 ShowContinueError("Entered in " + cCurrentModuleObject + '=' + cAlphaArgs(1));
 
@@ -405,7 +405,7 @@ namespace PipeHeatTransfer {
 
             PipeHT(Item).Length = rNumericArgs(2);
             if (rNumericArgs(2) <= 0.0) { // not really necessary because idd field has "minimum> 0"
-                ShowSevereError("GetPipesHeatTransfer: invalid " + cNumericFieldNames(2) + " of " + RoundSigDigits(rNumericArgs(2), 4));
+                ShowSevereError("GetPipesHeatTransfer: invalid " + cNumericFieldNames(2) + " of " + format("{:.4R}", rNumericArgs(2)));
                 ShowContinueError(cNumericFieldNames(2) + " must be > 0.0");
                 ShowContinueError("Entered in " + cCurrentModuleObject + '=' + cAlphaArgs(1));
                 ErrorsFound = true;
@@ -501,7 +501,7 @@ namespace PipeHeatTransfer {
             // dimensions
             PipeHT(Item).PipeID = rNumericArgs(1);
             if (rNumericArgs(1) <= 0.0) { // not really necessary because idd field has "minimum> 0"
-                ShowSevereError("Invalid " + cNumericFieldNames(1) + " of " + RoundSigDigits(rNumericArgs(1), 4));
+                ShowSevereError("Invalid " + cNumericFieldNames(1) + " of " + format("{:.4R}", rNumericArgs(1)));
                 ShowContinueError(cNumericFieldNames(1) + " must be > 0.0");
                 ShowContinueError("Entered in " + cCurrentModuleObject + '=' + cAlphaArgs(1));
                 ErrorsFound = true;
@@ -509,7 +509,7 @@ namespace PipeHeatTransfer {
 
             PipeHT(Item).Length = rNumericArgs(2);
             if (rNumericArgs(2) <= 0.0) { // not really necessary because idd field has "minimum> 0"
-                ShowSevereError("Invalid " + cNumericFieldNames(2) + " of " + RoundSigDigits(rNumericArgs(2), 4));
+                ShowSevereError("Invalid " + cNumericFieldNames(2) + " of " + format("{:.4R}", rNumericArgs(2)));
                 ShowContinueError(cNumericFieldNames(2) + " must be > 0.0");
                 ShowContinueError("Entered in " + cCurrentModuleObject + '=' + cAlphaArgs(1));
                 ErrorsFound = true;
@@ -593,7 +593,7 @@ namespace PipeHeatTransfer {
             // dimensions
             PipeHT(Item).PipeID = rNumericArgs(1);
             if (rNumericArgs(1) <= 0.0) { // not really necessary because idd field has "minimum> 0"
-                ShowSevereError("Invalid " + cNumericFieldNames(1) + " of " + RoundSigDigits(rNumericArgs(1), 4));
+                ShowSevereError("Invalid " + cNumericFieldNames(1) + " of " + format("{:.4R}", rNumericArgs(1)));
                 ShowContinueError(cNumericFieldNames(1) + " must be > 0.0");
                 ShowContinueError("Entered in " + cCurrentModuleObject + '=' + cAlphaArgs(1));
                 ErrorsFound = true;
@@ -601,7 +601,7 @@ namespace PipeHeatTransfer {
 
             PipeHT(Item).Length = rNumericArgs(2);
             if (rNumericArgs(2) <= 0.0) { // not really necessary because idd field has "minimum> 0"
-                ShowSevereError("Invalid " + cNumericFieldNames(2) + " of " + RoundSigDigits(rNumericArgs(2), 4));
+                ShowSevereError("Invalid " + cNumericFieldNames(2) + " of " + format("{:.4R}", rNumericArgs(2)));
                 ShowContinueError(cNumericFieldNames(2) + " must be > 0.0");
                 ShowContinueError("Entered in " + cCurrentModuleObject + '=' + cAlphaArgs(1));
                 ErrorsFound = true;

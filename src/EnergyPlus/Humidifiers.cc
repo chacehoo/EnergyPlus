@@ -879,8 +879,8 @@ namespace Humidifiers {
                             if ((std::abs(NomCapVolDes - NomCapVolUser) / NomCapVolUser) > AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeHumidifier: Potential issue with equipment sizing for " + HumidifierType(HumType_Code) + " = \"" +
                                             Name + "\".");
-                                ShowContinueError("User-Specified Nominal Capacity Volume of " + RoundSigDigits(NomCapVolUser, 2) + " [Wm3/s]");
-                                ShowContinueError("differs from Design Size Nominal Capacity Volume of " + RoundSigDigits(NomCapVolDes, 2) +
+                                ShowContinueError("User-Specified Nominal Capacity Volume of " + format("{:.2R}", NomCapVolUser) + " [Wm3/s]");
+                                ShowContinueError("differs from Design Size Nominal Capacity Volume of " + format("{:.2R}", NomCapVolDes) +
                                                   " [m3/s]");
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -912,11 +912,11 @@ namespace Humidifiers {
                     } else {
                         ShowMessage(CalledFrom + ": capacity and thermal efficiency mismatch for " + HumidifierType(HumType_Code) + " =\"" + Name +
                                     "\".");
-                        ShowContinueError("User-Specified Rated Gas Use Rate of " + RoundSigDigits(NomPower, 2) + " [W]");
-                        ShowContinueError("User-Specified or Autosized Rated Capacity of " + RoundSigDigits(NomCapVol, 2) + " [m3/s]");
-                        ShowContinueError("Rated Gas Use Rate at the Rated Capacity of " + RoundSigDigits(NomCapVol, 2) + " [m3/s]" +
+                        ShowContinueError("User-Specified Rated Gas Use Rate of " + format("{:.2R}", NomPower) + " [W]");
+                        ShowContinueError("User-Specified or Autosized Rated Capacity of " + format("{:.2R}", NomCapVol) + " [m3/s]");
+                        ShowContinueError("Rated Gas Use Rate at the Rated Capacity of " + format("{:.2R}", NomCapVol) + " [m3/s]" +
                                           " must be greater than the ideal, i.e., 100% thermal efficiency gas use rate of " +
-                                          RoundSigDigits(NomPowerDes, 2) + " [W]");
+                                          format("{:.2R}", NomPowerDes) + " [W]");
                         ShowContinueError("Resize the Rated Gas Use Rate by dividing the ideal gas use rate with expected thermal efficiency. ");
                         // Changing this from a hard-stop condition to just a limiting condition of eta=1.0
                         // ErrorsFound = true;
@@ -949,8 +949,8 @@ namespace Humidifiers {
                         if ((std::abs(NomPowerDes - NomPowerUser) / NomPowerUser) > AutoVsHardSizingThreshold) {
                             ShowMessage("SizeHumidifier: Potential issue with equipment sizing for " + HumidifierType(HumType_Code) + " =\"" + Name +
                                         "\".");
-                            ShowContinueError("User-Specified Rated Power of " + RoundSigDigits(NomPowerUser, 2) + " [W]");
-                            ShowContinueError("differs from Design Size Rated Power of " + RoundSigDigits(NomPowerDes, 2) + " [W]");
+                            ShowContinueError("User-Specified Rated Power of " + format("{:.2R}", NomPowerUser) + " [W]");
+                            ShowContinueError("differs from Design Size Rated Power of " + format("{:.2R}", NomPowerDes) + " [W]");
                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                         }
@@ -958,8 +958,8 @@ namespace Humidifiers {
                     if (NomPower < NominalPower) {
                         ShowWarningError(HumidifierType(HumType_Code) + ": specified Rated Power is less than nominal Rated Power for " +
                                          ModuleObjectType + " steam humidifier = " + Name + ". ");
-                        ShowContinueError(" specified Rated Power = " + RoundSigDigits(NomPower, 2));
-                        ShowContinueError(" while expecting a minimum Rated Power = " + RoundSigDigits(NominalPower, 2));
+                        ShowContinueError(" specified Rated Power = " + format("{:.2R}", NomPower));
+                        ShowContinueError(" while expecting a minimum Rated Power = " + format("{:.2R}", NominalPower));
                     }
                 } else {
                     ShowWarningError(HumidifierType(HumType_Code) + ": specified nominal capacity is zero for " + ModuleObjectType +

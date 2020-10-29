@@ -138,7 +138,7 @@ namespace HeatBalanceKivaManager {
         }
 
         ss.dir = FileSystem::getAbsolutePath(DataStringGlobals::outDirPathName) + "/" + DataSurfaces::Surface(floorSurface).Name + " " +
-                 General::RoundSigDigits(ground.foundation.foundationDepth, 2) + " " + constructionName;
+                 format("{:.2R}", ground.foundation.foundationDepth) + " " + constructionName;
 
         debugDir = ss.dir;
         plotNum = 0;
@@ -971,10 +971,10 @@ namespace HeatBalanceKivaManager {
 
                     if (fnd.deepGroundDepth > initDeepGroundDepth) {
                         ShowWarningError("Foundation:Kiva=\"" + foundationInputs[surface.OSCPtr].name + "\", the autocalculated deep ground depth (" +
-                                         General::TrimSigDigits(initDeepGroundDepth, 3) + " m) is shallower than foundation construction elements (" +
-                                         General::TrimSigDigits(fnd.deepGroundDepth - 1.0, 3) + " m)");
+                                         format("{:.3T}", initDeepGroundDepth) + " m) is shallower than foundation construction elements (" +
+                                         format("{:.3T}", fnd.deepGroundDepth - 1.0) + " m)");
                         ShowContinueError("The deep ground depth will be set one meter below the lowest element (" +
-                                          General::TrimSigDigits(fnd.deepGroundDepth, 3) + " m)");
+                                          format("{:.3T}", fnd.deepGroundDepth) + " m)");
                     }
 
                     // polygon

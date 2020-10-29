@@ -441,8 +441,8 @@ namespace Pumps {
                 // Check that the minimum isn't greater than the maximum
                 ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + PumpEquip(PumpNum).Name + "\", Invalid '" + cNumericFieldNames(10) +
                                  "'");
-                ShowContinueError("Entered Value=[" + General::TrimSigDigits(PumpEquip(PumpNum).MinVolFlowRate, 5) + "] is above the " +
-                                  cNumericFieldNames(1) + "=[" + General::TrimSigDigits(PumpEquip(PumpNum).NomVolFlowRate, 5) + "].");
+                ShowContinueError("Entered Value=[" + format("{:.5T}", PumpEquip(PumpNum).MinVolFlowRate) + "] is above the " +
+                                  cNumericFieldNames(1) + "=[" + format("{:.5T}", PumpEquip(PumpNum).NomVolFlowRate) + "].");
                 ShowContinueError("Reseting value of '" + cNumericFieldNames(10) + "' to the value of '" + cNumericFieldNames(1) + "'.");
                 // Set min to roughly max, but not quite, otherwise it can't turn on, ever
                 PumpEquip(PumpNum).MinVolFlowRate = 0.99 * PumpEquip(PumpNum).NomVolFlowRate;
@@ -1383,29 +1383,29 @@ namespace Pumps {
                 TotalEffic = PumpEquip(PumpNum).NomVolFlowRate * PumpEquip(PumpNum).NomPumpHead / PumpEquip(PumpNum).NomPowerUse;
                 PumpEquip(PumpNum).PumpEffic = TotalEffic / PumpEquip(PumpNum).MotorEffic;
                 if (PumpEquip(PumpNum).PumpEffic < 0.50) {
-                    ShowWarningError("Check input. Calculated Pump Efficiency=" + RoundSigDigits(PumpEquip(PumpNum).PumpEffic * 100.0, 2) +
+                    ShowWarningError("Check input. Calculated Pump Efficiency=" + format("{:.2R}", PumpEquip(PumpNum).PumpEffic * 100.0) +
                                      "% which is less than 50%, for pump=" + PumpEquip(PumpNum).Name);
-                    ShowContinueError("Calculated Pump_Efficiency % =Total_Efficiency % [" + RoundSigDigits(TotalEffic * 100.0, 1) +
-                                      "] / Motor_Efficiency % [" + RoundSigDigits(PumpEquip(PumpNum).MotorEffic * 100.0, 1) + ']');
-                    ShowContinueError("Total_Efficiency % =(Rated_Volume_Flow_Rate [" + RoundSigDigits(PumpEquip(PumpNum).NomVolFlowRate, 1) +
-                                      "] * Rated_Pump_Head [" + RoundSigDigits(PumpEquip(PumpNum).NomPumpHead, 1) + "] / Rated_Power_Use [" +
-                                      RoundSigDigits(PumpEquip(PumpNum).NomPowerUse, 1) + "]) * 100.");
+                    ShowContinueError("Calculated Pump_Efficiency % =Total_Efficiency % [" + format("{:.1R}", TotalEffic * 100.0) +
+                                      "] / Motor_Efficiency % [" + format("{:.1R}", PumpEquip(PumpNum).MotorEffic * 100.0) + ']');
+                    ShowContinueError("Total_Efficiency % =(Rated_Volume_Flow_Rate [" + format("{:.1R}", PumpEquip(PumpNum).NomVolFlowRate) +
+                                      "] * Rated_Pump_Head [" + format("{:.1R}", PumpEquip(PumpNum).NomPumpHead) + "] / Rated_Power_Use [" +
+                                      format("{:.1R}", PumpEquip(PumpNum).NomPowerUse) + "]) * 100.");
                 } else if ((PumpEquip(PumpNum).PumpEffic > 0.95) && (PumpEquip(PumpNum).PumpEffic <= 1.0)) {
-                    ShowWarningError("Check input.  Calculated Pump Efficiency=" + RoundSigDigits(PumpEquip(PumpNum).PumpEffic * 100.0, 2) +
+                    ShowWarningError("Check input.  Calculated Pump Efficiency=" + format("{:.2R}", PumpEquip(PumpNum).PumpEffic * 100.0) +
                                      "% is approaching 100%, for pump=" + PumpEquip(PumpNum).Name);
-                    ShowContinueError("Calculated Pump_Efficiency % =Total_Efficiency % [" + RoundSigDigits(TotalEffic * 100.0, 1) +
-                                      "] / Motor_Efficiency % [" + RoundSigDigits(PumpEquip(PumpNum).MotorEffic * 100.0, 1) + ']');
-                    ShowContinueError("Total_Efficiency % =(Rated_Volume_Flow_Rate [" + RoundSigDigits(PumpEquip(PumpNum).NomVolFlowRate, 1) +
-                                      "] * Rated_Pump_Head [" + RoundSigDigits(PumpEquip(PumpNum).NomPumpHead, 1) + "] / Rated_Power_Use [" +
-                                      RoundSigDigits(PumpEquip(PumpNum).NomPowerUse, 1) + "]) * 100.");
+                    ShowContinueError("Calculated Pump_Efficiency % =Total_Efficiency % [" + format("{:.1R}", TotalEffic * 100.0) +
+                                      "] / Motor_Efficiency % [" + format("{:.1R}", PumpEquip(PumpNum).MotorEffic * 100.0) + ']');
+                    ShowContinueError("Total_Efficiency % =(Rated_Volume_Flow_Rate [" + format("{:.1R}", PumpEquip(PumpNum).NomVolFlowRate) +
+                                      "] * Rated_Pump_Head [" + format("{:.1R}", PumpEquip(PumpNum).NomPumpHead) + "] / Rated_Power_Use [" +
+                                      format("{:.1R}", PumpEquip(PumpNum).NomPowerUse) + "]) * 100.");
                 } else if (PumpEquip(PumpNum).PumpEffic > 1.0) {
-                    ShowSevereError("Check input.  Calculated Pump Efficiency=" + RoundSigDigits(PumpEquip(PumpNum).PumpEffic * 100.0, 3) +
+                    ShowSevereError("Check input.  Calculated Pump Efficiency=" + format("{:.3R}", PumpEquip(PumpNum).PumpEffic * 100.0) +
                                     "% which is bigger than 100%, for pump=" + PumpEquip(PumpNum).Name);
-                    ShowContinueError("Calculated Pump_Efficiency % =Total_Efficiency % [" + RoundSigDigits(TotalEffic * 100.0, 1) +
-                                      "] / Motor_Efficiency % [" + RoundSigDigits(PumpEquip(PumpNum).MotorEffic * 100.0, 1) + ']');
-                    ShowContinueError("Total_Efficiency % =(Rated_Volume_Flow_Rate [" + RoundSigDigits(PumpEquip(PumpNum).NomVolFlowRate, 1) +
-                                      "] * Rated_Pump_Head [" + RoundSigDigits(PumpEquip(PumpNum).NomPumpHead, 1) + "] / Rated_Power_Use [" +
-                                      RoundSigDigits(PumpEquip(PumpNum).NomPowerUse, 1) + "]) * 100.");
+                    ShowContinueError("Calculated Pump_Efficiency % =Total_Efficiency % [" + format("{:.1R}", TotalEffic * 100.0) +
+                                      "] / Motor_Efficiency % [" + format("{:.1R}", PumpEquip(PumpNum).MotorEffic * 100.0) + ']');
+                    ShowContinueError("Total_Efficiency % =(Rated_Volume_Flow_Rate [" + format("{:.1R}", PumpEquip(PumpNum).NomVolFlowRate) +
+                                      "] * Rated_Pump_Head [" + format("{:.1R}", PumpEquip(PumpNum).NomPumpHead) + "] / Rated_Power_Use [" +
+                                      format("{:.1R}", PumpEquip(PumpNum).NomPowerUse) + "]) * 100.");
                     ShowFatalError("Errors found in Pump input");
                 }
             } else {
@@ -1923,8 +1923,8 @@ namespace Pumps {
                 ShowWarningMessage(RoutineName + " Calculated Pump Power < 0, Type=" + cPumpTypes(PumpType) + ", Name=\"" + PumpEquip(PumpNum).Name +
                                    "\".");
                 ShowContinueErrorTimeStamp("");
-                ShowContinueError("...PartLoadRatio=[" + RoundSigDigits(PartLoadRatio, 4) +
-                                  "], Fraction Full Load Power=" + RoundSigDigits(FracFullLoadPower, 4) + ']');
+                ShowContinueError("...PartLoadRatio=[" + format("{:.4R}", PartLoadRatio) +
+                                  "], Fraction Full Load Power=" + format("{:.4R}", FracFullLoadPower) + ']');
                 ShowContinueError("...Power is set to 0 for continuing the simulation.");
                 ShowContinueError("...Pump coefficients should be checked for producing this negative value.");
             }
@@ -2128,7 +2128,7 @@ namespace Pumps {
                     if (PlantFinalSizesOkayToReport) {
                         PumpEquip(PumpNum).NomVolFlowRate = 0.0;
                         ShowWarningError("SizePump: Calculated Pump Nominal Volume Flow Rate=[" +
-                                         RoundSigDigits(PlantSizData(PlantSizNum).DesVolFlowRate, 2) + "] is too small. Set to 0.0");
+                                         format("{:.2R}", PlantSizData(PlantSizNum).DesVolFlowRate) + "] is too small. Set to 0.0");
                         ShowContinueError("..occurs for Pump=" + PumpEquip(PumpNum).Name);
                     }
                 }

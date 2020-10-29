@@ -1764,36 +1764,36 @@ namespace HVACControllers {
                     ShowContinueError("  Actuator will be set to maximum action");
                     ShowContinueError("Controller control type=" + ControlVariableTypes(ControllerProps(ControlNum).ControlVar));
                     if (ControllerProps(ControlNum).ControlVar == iTemperature) {
-                        ShowContinueError("Controller temperature setpoint = " + TrimSigDigits(ControllerProps(ControlNum).SetPointValue, 2) +
+                        ShowContinueError("Controller temperature setpoint = " + format("{:.2T}", ControllerProps(ControlNum).SetPointValue) +
                                           " [C]");
-                        ShowContinueError("Controller sensed temperature = " + TrimSigDigits(ControllerProps(ControlNum).SensedValue, 2) + " [C]");
+                        ShowContinueError("Controller sensed temperature = " + format("{:.2T}", ControllerProps(ControlNum).SensedValue) + " [C]");
                     } else if (ControllerProps(ControlNum).ControlVar == iHumidityRatio) {
-                        ShowContinueError("Controller humidity ratio setpoint = " + TrimSigDigits(ControllerProps(ControlNum).SetPointValue, 2) +
+                        ShowContinueError("Controller humidity ratio setpoint = " + format("{:.2T}", ControllerProps(ControlNum).SetPointValue) +
                                           " [kgWater/kgDryAir]");
-                        ShowContinueError("Controller sensed humidity ratio = " + TrimSigDigits(ControllerProps(ControlNum).SensedValue, 2) +
+                        ShowContinueError("Controller sensed humidity ratio = " + format("{:.2T}", ControllerProps(ControlNum).SensedValue) +
                                           " [kgWater/kgDryAir]");
                     } else if (ControllerProps(ControlNum).ControlVar == iTemperatureAndHumidityRatio) {
-                        ShowContinueError("Controller temperature setpoint = " + TrimSigDigits(ControllerProps(ControlNum).SetPointValue, 2) +
+                        ShowContinueError("Controller temperature setpoint = " + format("{:.2T}", ControllerProps(ControlNum).SetPointValue) +
                                           " [C]");
-                        ShowContinueError("Controller sensed temperature = " + TrimSigDigits(ControllerProps(ControlNum).SensedValue, 2) + " [C]");
+                        ShowContinueError("Controller sensed temperature = " + format("{:.2T}", ControllerProps(ControlNum).SensedValue) + " [C]");
                         ShowContinueError("Controller humidity ratio setpoint = " +
-                                          TrimSigDigits(Node(ControllerProps(ControlNum).SensedNode).HumRatMax, 2) + " [kgWater/kgDryAir]");
+                                          format("{:.2T}", Node(ControllerProps(ControlNum).SensedNode).HumRatMax) + " [kgWater/kgDryAir]");
                         ShowContinueError("Controller sensed humidity ratio = " +
-                                          TrimSigDigits(Node(ControllerProps(ControlNum).SensedNode).HumRat, 2) + " [kgWater/kgDryAir]");
+                                          format("{:.2T}", Node(ControllerProps(ControlNum).SensedNode).HumRat) + " [kgWater/kgDryAir]");
                     } else if (ControllerProps(ControlNum).ControlVar == iFlow) {
-                        ShowContinueError("Controller mass flow rate setpoint = " + TrimSigDigits(ControllerProps(ControlNum).SetPointValue, 2) +
+                        ShowContinueError("Controller mass flow rate setpoint = " + format("{:.2T}", ControllerProps(ControlNum).SetPointValue) +
                                           " [kg/s]");
-                        ShowContinueError("Controller sensed mass flow rate = " + TrimSigDigits(ControllerProps(ControlNum).SensedValue, 2) +
+                        ShowContinueError("Controller sensed mass flow rate = " + format("{:.2T}", ControllerProps(ControlNum).SensedValue) +
                                           " [kg/s]");
                     } else {
                         // bad control variable input checked in input routine
                     }
                     if (ControllerProps(ControlNum).ActuatorVar == iFlow) {
                         ShowContinueError("Controller actuator mass flow rate set to " +
-                                          TrimSigDigits(ControllerProps(ControlNum).MaxAvailActuated, 2) + " [kg/s]");
+                                          format("{:.2T}", ControllerProps(ControlNum).MaxAvailActuated) + " [kg/s]");
                         if (ControllerProps(ControlNum).ControlVar == iTemperature) {
                             ShowContinueError("Controller actuator temperature = " +
-                                              TrimSigDigits(Node(ControllerProps(ControlNum).ActuatedNode).Temp, 2) + " [C]");
+                                              format("{:.2T}", Node(ControllerProps(ControlNum).ActuatedNode).Temp) + " [C]");
                             ShowContinueError("  Note: Chilled water coils should be reverse action and the entering chilled");
                             ShowContinueError("        water temperature (controller actuator temperature) should be below the setpoint temperature");
                             ShowContinueError("  Note: Hot water coils should be normal action and the entering hot");

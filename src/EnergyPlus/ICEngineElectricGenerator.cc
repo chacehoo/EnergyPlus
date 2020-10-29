@@ -175,7 +175,7 @@ namespace ICEngineElectricGenerator {
 
             ICEngineGenerator(genNum).RatedPowerOutput = NumArray(1);
             if (NumArray(1) == 0.0) {
-                ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(1) + '=' + General::RoundSigDigits(NumArray(1), 2));
+                ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(1) + '=' + format("{:.2R}", NumArray(1)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + AlphArray(1));
                 ErrorsFound = true;
             }
@@ -232,8 +232,8 @@ namespace ICEngineElectricGenerator {
                 Real64 xValue = CurveManager::CurveValue(state, ICEngineGenerator(genNum).ExhaustTempCurve, 1.0);
                 if (xValue < ReferenceTemp) {
                     ShowSevereError("GetICEngineGeneratorInput: " + DataIPShortCuts::cAlphaFieldNames(7) + " output has very low value.");
-                    ShowContinueError("...curve generates [" + General::RoundSigDigits(xValue, 3) + " C] at PLR=1.0");
-                    ShowContinueError("...this is less than the Reference Temperature [" + General::RoundSigDigits(ReferenceTemp, 2) +
+                    ShowContinueError("...curve generates [" + format("{:.3R}", xValue) + " C] at PLR=1.0");
+                    ShowContinueError("...this is less than the Reference Temperature [" + format("{:.2R}", ReferenceTemp) +
                                       " C] and may cause errors.");
                 }
             }
@@ -578,8 +578,8 @@ namespace ICEngineElectricGenerator {
                 if (this->ErrExhaustTempIndex == 0) {
                     ShowWarningMessage("CalcICEngineGeneratorModel: " + this->TypeOf + "=\"" + this->Name +
                                        "\" low Exhaust Temperature from Curve Value");
-                    ShowContinueError("...curve generated temperature=[" + General::RoundSigDigits(exhaustTemp, 3) + " C], PLR=[" +
-                                      General::RoundSigDigits(PLR, 3) + "].");
+                    ShowContinueError("...curve generated temperature=[" + format("{:.3R}", exhaustTemp) + " C], PLR=[" +
+                                      format("{:.3R}", PLR) + "].");
                     ShowContinueError("...simulation will continue with exhaust heat reclaim set to 0.");
                 }
                 ShowRecurringWarningErrorAtEnd("CalcICEngineGeneratorModel: " + this->TypeOf + "=\"" + this->Name +

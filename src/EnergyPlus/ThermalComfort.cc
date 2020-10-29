@@ -1710,8 +1710,8 @@ namespace ThermalComfort {
 
             if (std::abs(AllAngleFacSummed - 1.0) > AngleFacLimit) {
                 ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid - Sum[AngleFactors]");
-                ShowContinueError("...Sum of Angle Factors [" + RoundSigDigits(AllAngleFacSummed, 3) +
-                                  "] exceed expected sum [1.0] by more than limit [" + RoundSigDigits(AngleFacLimit, 3) + "].");
+                ShowContinueError("...Sum of Angle Factors [" + format("{:.3R}", AllAngleFacSummed) +
+                                  "] exceed expected sum [1.0] by more than limit [" + format("{:.3R}", AngleFacLimit) + "].");
                 ErrorsFound = true;
             }
         }
@@ -2100,7 +2100,7 @@ namespace ThermalComfort {
             }
             // if any zones should be warning print it out
             if (showWarning) {
-                ShowWarningError("More than 4% of time (" + RoundSigDigits(allowedHours, 1) + " hours) uncomfortable in one or more zones ");
+                ShowWarningError("More than 4% of time (" + format("{:.1R}", allowedHours) + " hours) uncomfortable in one or more zones ");
                 ShowContinueError("Based on ASHRAE 55-2004 graph (Section 5.2.1.1)");
                 if (RunPeriodEnvironment) {
                     ShowContinueError("During Environment [" + EnvironmentStartEnd + "]: " + EnvironmentName);
@@ -2110,7 +2110,7 @@ namespace ThermalComfort {
                 for (iZone = 1; iZone <= NumOfZones; ++iZone) {
                     if (state.dataThermalComforts->ThermalComfortInASH55(iZone).Enable55Warning) {
                         if (state.dataThermalComforts->ThermalComfortInASH55(iZone).totalTimeNotEither > allowedHours) {
-                            ShowContinueError(RoundSigDigits(state.dataThermalComforts->ThermalComfortInASH55(iZone).totalTimeNotEither, 1) +
+                            ShowContinueError(format("{:.1R}", state.dataThermalComforts->ThermalComfortInASH55(iZone).totalTimeNotEither) +
                                               " hours were uncomfortable in zone: " + Zone(iZone).Name);
                         }
                     }

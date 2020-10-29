@@ -3135,7 +3135,7 @@ namespace EnergyPlus {
                         PlantLoop(LoopNum).MaxVolFlowRate = 0.0;
                         if (PlantFinalSizesOkayToReport) {
                             ShowWarningError("SizePlantLoop: Calculated Plant Sizing Design Volume Flow Rate=[" +
-                                             RoundSigDigits(PlantSizData(PlantSizNum).DesVolFlowRate, 2) +
+                                             format("{:.2R}", PlantSizData(PlantSizNum).DesVolFlowRate) +
                                              "] is too small. Set to 0.0");
                             ShowContinueError("..occurs for PlantLoop=" + PlantLoop(LoopNum).Name);
                         }
@@ -3298,7 +3298,7 @@ namespace EnergyPlus {
                         PlantLoop(LoopNum).MaxVolFlowRate = 0.0;
                         if (PlantFinalSizesOkayToReport) {
                             ShowWarningError("SizePlantLoop: Calculated Plant Sizing Design Volume Flow Rate=[" +
-                                             RoundSigDigits(PlantSizData(PlantSizNum).DesVolFlowRate, 2) +
+                                             format("{:.2R}", PlantSizData(PlantSizNum).DesVolFlowRate) +
                                              "] is too small. Set to 0.0");
                             ShowContinueError("..occurs for PlantLoop=" + PlantLoop(LoopNum).Name);
                         }

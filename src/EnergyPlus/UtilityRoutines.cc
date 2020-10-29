@@ -892,7 +892,7 @@ namespace UtilityRoutines {
         if (Time_Finish < Time_Start) Time_Finish += 24.0 * 3600.0;
         Elapsed_Time = Time_Finish - Time_Start;
         if (DataGlobals::createPerfLog) {
-            UtilityRoutines::appendPerfLog(state, "Run Time [seconds]", RoundSigDigits(Elapsed_Time, 2));
+            UtilityRoutines::appendPerfLog(state, "Run Time [seconds]", format("{:.2R}", Elapsed_Time));
         }
 #ifdef EP_Detailed_Timings
         epStopTime("EntireRun=");
@@ -2000,19 +2000,19 @@ namespace UtilityRoutines {
                 }
                 StatMessage = "";
                 if (error.ReportMax) {
-                    MaxOut = RoundSigDigits(error.MaxValue, 6);
+                    MaxOut = format("{:.6R}", error.MaxValue);
                     strip_trailing_zeros(MaxOut);
                     StatMessage += "  Max=" + MaxOut;
                     if (!error.MaxUnits.empty()) StatMessage += ' ' + error.MaxUnits;
                 }
                 if (error.ReportMin) {
-                    MinOut = RoundSigDigits(error.MinValue, 6);
+                    MinOut = format("{:.6R}", error.MinValue);
                     strip_trailing_zeros(MinOut);
                     StatMessage += "  Min=" + MinOut;
                     if (!error.MinUnits.empty()) StatMessage += ' ' + error.MinUnits;
                 }
                 if (error.ReportSum) {
-                    SumOut = RoundSigDigits(error.SumValue, 6);
+                    SumOut = format("{:.6R}", error.SumValue);
                     strip_trailing_zeros(SumOut);
                     StatMessage += "  Sum=" + SumOut;
                     if (!error.SumUnits.empty()) StatMessage += ' ' + error.SumUnits;

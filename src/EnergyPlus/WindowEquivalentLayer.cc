@@ -449,7 +449,7 @@ namespace WindowEquivalentLayer {
         }
         if (!CFSURated) {
             ShowWarningMessage(RoutineName + "Fenestration U-Value calculation failed for " + FS.Name);
-            ShowContinueError("...Calculated U-value = " + TrimSigDigits(U, 4));
+            ShowContinueError("...Calculated U-value = " + format("{:.4T}", U));
             ShowContinueError("...Check consistency of inputs");
         }
         UNFRC = U;
@@ -561,8 +561,8 @@ namespace WindowEquivalentLayer {
 
         if (!CFSSHGC) {
             ShowWarningMessage(RoutineName + "Solar heat gain coefficient calculation failed for " + FS.Name);
-            ShowContinueError("...Calculated SHGC = " + TrimSigDigits(SHGC, 4));
-            ShowContinueError("...Calculated U-Value = " + TrimSigDigits(UCG, 4));
+            ShowContinueError("...Calculated SHGC = " + format("{:.4T}", SHGC));
+            ShowContinueError("...Calculated U-Value = " + format("{:.4T}", UCG));
             ShowContinueError("...Check consistency of inputs.");
             return;
         }
@@ -978,7 +978,7 @@ namespace WindowEquivalentLayer {
 
         if (P < -0.05 || P > 1.05) {
             ShowWarningMessage(RoutineName + "property value should have been between 0 and 1");
-            ShowContinueError(WHAT + "=:  property value is =" + TrimSigDigits(P, 4));
+            ShowContinueError(WHAT + "=:  property value is =" + format("{:.4T}", P));
             if (P < 0.0) {
                 ShowContinueError("property value is reset to 0.0");
             } else if (P > 1.0) {
@@ -1103,9 +1103,9 @@ namespace WindowEquivalentLayer {
         if (RHO_DD + TAU_DD > 1.0) {
             SumRefAndTran = RHO_DD + TAU_DD;
             ShowWarningMessage(RoutineName + "Roller blind diffuse-diffuse properties are inconsistent");
-            ShowContinueError("...The diffuse-diffuse reflectance = " + TrimSigDigits(RHO_DD, 4));
-            ShowContinueError("...The diffuse-diffuse tansmittance = " + TrimSigDigits(TAU_DD, 4));
-            ShowContinueError("...Sum of diffuse reflectance and tansmittance = " + TrimSigDigits(SumRefAndTran, 4));
+            ShowContinueError("...The diffuse-diffuse reflectance = " + format("{:.4T}", RHO_DD));
+            ShowContinueError("...The diffuse-diffuse tansmittance = " + format("{:.4T}", TAU_DD));
+            ShowContinueError("...Sum of diffuse reflectance and tansmittance = " + format("{:.4T}", SumRefAndTran));
             ShowContinueError("...This sum cannot be > 1.0. Transmittance will be reset to 1 minus reflectance");
             TAU_DD = 1.0 - RHO_DD;
         }
@@ -1239,9 +1239,9 @@ namespace WindowEquivalentLayer {
         if (RHO_DD + TAU_DD > 1.0) {
             SumRefAndTran = RHO_DD + TAU_DD;
             ShowWarningMessage(RoutineName + "Calculated insect screen diffuse-diffuse properties are inconsistent");
-            ShowContinueError("...The diffuse-diffuse reflectance = " + TrimSigDigits(RHO_DD, 4));
-            ShowContinueError("...The diffuse-diffuse tansmittance = " + TrimSigDigits(TAU_DD, 4));
-            ShowContinueError("...Sum of diffuse reflectance and tansmittance = " + TrimSigDigits(SumRefAndTran, 4));
+            ShowContinueError("...The diffuse-diffuse reflectance = " + format("{:.4T}", RHO_DD));
+            ShowContinueError("...The diffuse-diffuse tansmittance = " + format("{:.4T}", TAU_DD));
+            ShowContinueError("...Sum of diffuse reflectance and tansmittance = " + format("{:.4T}", SumRefAndTran));
             ShowContinueError("...This sum cannot be > 1.0. Transmittance will be reset to 1 minus reflectance");
             TAU_DD = 1.0 - RHO_DD;
         }
@@ -1424,9 +1424,9 @@ namespace WindowEquivalentLayer {
         if (RHO_DD + TAU_DD > 1.0) {
             SumRefAndTran = RHO_DD + TAU_DD;
             ShowWarningMessage(RoutineName + "Calculated drape fabric diffuse-diffuse properties are inconsistent");
-            ShowContinueError("...The diffuse-diffuse reflectance = " + TrimSigDigits(RHO_DD, 4));
-            ShowContinueError("...The diffuse-diffuse tansmittance = " + TrimSigDigits(TAU_DD, 4));
-            ShowContinueError("...Sum of diffuse reflectance and tansmittance = " + TrimSigDigits(SumRefAndTran, 4));
+            ShowContinueError("...The diffuse-diffuse reflectance = " + format("{:.4T}", RHO_DD));
+            ShowContinueError("...The diffuse-diffuse tansmittance = " + format("{:.4T}", TAU_DD));
+            ShowContinueError("...Sum of diffuse reflectance and tansmittance = " + format("{:.4T}", SumRefAndTran));
             ShowContinueError("...This sum cannot be > 1.0. Transmittance will be reset to 1 minus reflectance");
             TAU_DD = 1.0 - RHO_DD;
         }
@@ -4792,8 +4792,8 @@ namespace WindowEquivalentLayer {
                 ++FS.WEQLSolverErrorIndex;
                 ShowSevereError("CONSTRUCTION:WINDOWEQUIVALENTLAYER = \"" + FS.Name + "\"");
                 ShowContinueError(RoutineName + "Net radiation analysis did not converge");
-                ShowContinueError("...Maximum error is = " + TrimSigDigits(MAXERR, 6));
-                ShowContinueError("...Convergence tolerance is = " + TrimSigDigits(TOL, 6));
+                ShowContinueError("...Maximum error is = " + format("{:.6T}", MAXERR));
+                ShowContinueError("...Convergence tolerance is = " + format("{:.6T}", TOL));
                 ShowContinueErrorTimeStamp("");
             } else {
                 ShowRecurringWarningErrorAtEnd("CONSTRUCTION:WINDOWEQUIVALENTLAYER = \"" + FS.Name + "\"; " + RoutineName +
@@ -5268,8 +5268,8 @@ namespace WindowEquivalentLayer {
         //        ++FS.WEQLSolverErrorIndex;
         //        ShowSevereError("CONSTRUCTION:WINDOWEQUIVALENTLAYER = \"" + FS.Name + "\"");
         //        ShowContinueError(RoutineName + "Net radiation analysis did not converge");
-        //        ShowContinueError("...Maximum error is = " + TrimSigDigits(MAXERR, 6));
-        //        ShowContinueError("...Convergence tolerance is = " + TrimSigDigits(TOL, 6));
+        //        ShowContinueError("...Maximum error is = " + format("{:.6T}", MAXERR));
+        //        ShowContinueError("...Convergence tolerance is = " + format("{:.6T}", TOL));
         //        ShowContinueErrorTimeStamp("");
         //    } else {
         //        ShowRecurringWarningErrorAtEnd("CONSTRUCTION:WINDOWEQUIVALENTLAYER = \"" + FS.Name + "\"; " + RoutineName +

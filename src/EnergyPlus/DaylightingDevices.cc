@@ -433,9 +433,9 @@ namespace DaylightingDevices {
 
                 if (Shelf(ShelfNum).ViewFactor + Surface(WinSurf).ViewFactorSky + Surface(WinSurf).ViewFactorGround > 1.0) {
                     ShowWarningError("DaylightingDevice:Shelf = " + Shelf(ShelfNum).Name + ":  Window view factors to sky [" +
-                                     RoundSigDigits(Surface(WinSurf).ViewFactorSky, 2) + "],");
-                    ShowContinueError("ground [" + RoundSigDigits(Surface(WinSurf).ViewFactorGround, 2) + "], and outside shelf [" +
-                                      RoundSigDigits(Shelf(ShelfNum).ViewFactor, 2) + "] add up to > 1.0.");
+                                     format("{:.2R}", Surface(WinSurf).ViewFactorSky) + "],");
+                    ShowContinueError("ground [" + format("{:.2R}", Surface(WinSurf).ViewFactorGround) + "], and outside shelf [" +
+                                      format("{:.2R}", Shelf(ShelfNum).ViewFactor) + "] add up to > 1.0.");
                 }
 
                 // Report calculated view factor so that user knows what to make the view factor to ground
@@ -604,7 +604,7 @@ namespace DaylightingDevices {
                         ShowSevereError(cCurrentModuleObject + " = " + cAlphaArgs(1) + ":  Diffuser " + cAlphaArgs(3) + " construction (" +
                                         state.dataConstruction->Construct(Surface(SurfNum).Construction).Name + ") invalid value.");
                         ShowContinueError("Diffuse solar transmittance of construction [" +
-                                          RoundSigDigits(state.dataConstruction->Construct(Surface(SurfNum).Construction).TransDiff, 4) + "] too small for calculations.");
+                                          format("{:.4R}", state.dataConstruction->Construct(Surface(SurfNum).Construction).TransDiff) + "] too small for calculations.");
                         ErrorsFound = true;
                     }
 
@@ -613,13 +613,13 @@ namespace DaylightingDevices {
                             0.1) { // greater than 10%
                             ShowSevereError(cCurrentModuleObject + " = " + cAlphaArgs(1) +
                                             ":  Dome and diffuser areas are significantly different (>10%).");
-                            ShowContinueError("...Diffuser Area=[" + RoundSigDigits(Surface(SurfNum).Area, 4) + "]; Dome Area=[" +
-                                              RoundSigDigits(Surface(TDDPipe(PipeNum).Dome).Area, 4) + "].");
+                            ShowContinueError("...Diffuser Area=[" + format("{:.4R}", Surface(SurfNum).Area) + "]; Dome Area=[" +
+                                              format("{:.4R}", Surface(TDDPipe(PipeNum).Dome).Area) + "].");
                             ErrorsFound = true;
                         } else {
                             ShowWarningError(cCurrentModuleObject + " = " + cAlphaArgs(1) + ":  Dome and diffuser areas differ by > .1 m2.");
-                            ShowContinueError("...Diffuser Area=[" + RoundSigDigits(Surface(SurfNum).Area, 4) + "]; Dome Area=[" +
-                                              RoundSigDigits(Surface(TDDPipe(PipeNum).Dome).Area, 4) + "].");
+                            ShowContinueError("...Diffuser Area=[" + format("{:.4R}", Surface(SurfNum).Area) + "]; Dome Area=[" +
+                                              format("{:.4R}", Surface(TDDPipe(PipeNum).Dome).Area) + "].");
                         }
                     }
 
@@ -670,13 +670,13 @@ namespace DaylightingDevices {
                         0.1) { // greater than 10%
                         ShowSevereError(cCurrentModuleObject + " = " + cAlphaArgs(1) +
                                         ":  Pipe and dome/diffuser areas are significantly different (>10%).");
-                        ShowContinueError("...Pipe Area=[" + RoundSigDigits(PipeArea, 4) + "]; Dome/Diffuser Area=[" +
-                                          RoundSigDigits(Surface(TDDPipe(PipeNum).Dome).Area, 4) + "].");
+                        ShowContinueError("...Pipe Area=[" + format("{:.4R}", PipeArea) + "]; Dome/Diffuser Area=[" +
+                                          format("{:.4R}", Surface(TDDPipe(PipeNum).Dome).Area) + "].");
                         ErrorsFound = true;
                     } else {
                         ShowWarningError(cCurrentModuleObject + " = " + cAlphaArgs(1) + ":  Pipe and dome/diffuser areas differ by > .1 m2.");
-                        ShowContinueError("...Pipe Area=[" + RoundSigDigits(PipeArea, 4) + "]; Dome/Diffuser Area=[" +
-                                          RoundSigDigits(Surface(TDDPipe(PipeNum).Dome).Area, 4) + "].");
+                        ShowContinueError("...Pipe Area=[" + format("{:.4R}", PipeArea) + "]; Dome/Diffuser Area=[" +
+                                          format("{:.4R}", Surface(TDDPipe(PipeNum).Dome).Area) + "].");
                     }
                 }
 

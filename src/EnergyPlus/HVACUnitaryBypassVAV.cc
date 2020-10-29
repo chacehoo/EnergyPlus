@@ -454,7 +454,7 @@ namespace HVACUnitaryBypassVAV {
 
             CBVAV(CBVAVNum).MaxCoolAirVolFlow = Numbers(1);
             if (CBVAV(CBVAVNum).MaxCoolAirVolFlow <= 0.0 && CBVAV(CBVAVNum).MaxCoolAirVolFlow != DataSizing::AutoSize) {
-                ShowSevereError(CurrentModuleObject + " illegal " + cNumericFields(1) + " = " + General::TrimSigDigits(Numbers(1), 7));
+                ShowSevereError(CurrentModuleObject + " illegal " + cNumericFields(1) + " = " + format("{:.7T}", Numbers(1)));
                 ShowContinueError(cNumericFields(1) + " must be greater than zero.");
                 ShowContinueError("Occurs in " + CurrentModuleObject + " = " + CBVAV(CBVAVNum).Name);
                 ErrorsFound = true;
@@ -462,7 +462,7 @@ namespace HVACUnitaryBypassVAV {
 
             CBVAV(CBVAVNum).MaxHeatAirVolFlow = Numbers(2);
             if (CBVAV(CBVAVNum).MaxHeatAirVolFlow <= 0.0 && CBVAV(CBVAVNum).MaxHeatAirVolFlow != DataSizing::AutoSize) {
-                ShowSevereError(CurrentModuleObject + " illegal " + cNumericFields(2) + " = " + General::TrimSigDigits(Numbers(2), 7));
+                ShowSevereError(CurrentModuleObject + " illegal " + cNumericFields(2) + " = " + format("{:.7T}", Numbers(2)));
                 ShowContinueError(cNumericFields(2) + " must be greater than zero.");
                 ShowContinueError("Occurs in " + CurrentModuleObject + " = " + CBVAV(CBVAVNum).Name);
                 ErrorsFound = true;
@@ -470,7 +470,7 @@ namespace HVACUnitaryBypassVAV {
 
             CBVAV(CBVAVNum).MaxNoCoolHeatAirVolFlow = Numbers(3);
             if (CBVAV(CBVAVNum).MaxNoCoolHeatAirVolFlow < 0.0 && CBVAV(CBVAVNum).MaxNoCoolHeatAirVolFlow != DataSizing::AutoSize) {
-                ShowSevereError(CurrentModuleObject + " illegal " + cNumericFields(3) + " = " + General::TrimSigDigits(Numbers(3), 7));
+                ShowSevereError(CurrentModuleObject + " illegal " + cNumericFields(3) + " = " + format("{:.7T}", Numbers(3)));
                 ShowContinueError(cNumericFields(3) + " must be greater than or equal to zero.");
                 ShowContinueError("Occurs in " + CurrentModuleObject + " = " + CBVAV(CBVAVNum).Name);
                 ErrorsFound = true;
@@ -478,7 +478,7 @@ namespace HVACUnitaryBypassVAV {
 
             CBVAV(CBVAVNum).CoolOutAirVolFlow = Numbers(4);
             if (CBVAV(CBVAVNum).CoolOutAirVolFlow < 0.0 && CBVAV(CBVAVNum).CoolOutAirVolFlow != DataSizing::AutoSize) {
-                ShowSevereError(CurrentModuleObject + " illegal " + cNumericFields(4) + " = " + General::TrimSigDigits(Numbers(4), 7));
+                ShowSevereError(CurrentModuleObject + " illegal " + cNumericFields(4) + " = " + format("{:.7T}", Numbers(4)));
                 ShowContinueError(cNumericFields(4) + " must be greater than or equal to zero.");
                 ShowContinueError("Occurs in " + CurrentModuleObject + " = " + CBVAV(CBVAVNum).Name);
                 ErrorsFound = true;
@@ -486,7 +486,7 @@ namespace HVACUnitaryBypassVAV {
 
             CBVAV(CBVAVNum).HeatOutAirVolFlow = Numbers(5);
             if (CBVAV(CBVAVNum).HeatOutAirVolFlow < 0.0 && CBVAV(CBVAVNum).HeatOutAirVolFlow != DataSizing::AutoSize) {
-                ShowSevereError(CurrentModuleObject + " illegal " + cNumericFields(5) + " = " + General::TrimSigDigits(Numbers(5), 7));
+                ShowSevereError(CurrentModuleObject + " illegal " + cNumericFields(5) + " = " + format("{:.7T}", Numbers(5)));
                 ShowContinueError(cNumericFields(5) + " must be greater than or equal to zero.");
                 ShowContinueError("Occurs in " + CurrentModuleObject + " = " + CBVAV(CBVAVNum).Name);
                 ErrorsFound = true;
@@ -494,7 +494,7 @@ namespace HVACUnitaryBypassVAV {
 
             CBVAV(CBVAVNum).NoCoolHeatOutAirVolFlow = Numbers(6);
             if (CBVAV(CBVAVNum).NoCoolHeatOutAirVolFlow < 0.0 && CBVAV(CBVAVNum).NoCoolHeatOutAirVolFlow != DataSizing::AutoSize) {
-                ShowSevereError(CurrentModuleObject + " illegal " + cNumericFields(6) + " = " + General::TrimSigDigits(Numbers(6), 7));
+                ShowSevereError(CurrentModuleObject + " illegal " + cNumericFields(6) + " = " + format("{:.7T}", Numbers(6)));
                 ShowContinueError(cNumericFields(6) + " must be greater than or equal to zero.");
                 ShowContinueError("Occurs in " + CurrentModuleObject + " = " + CBVAV(CBVAVNum).Name);
                 ErrorsFound = true;
@@ -697,14 +697,14 @@ namespace HVACUnitaryBypassVAV {
 
             if (CBVAV(CBVAVNum).FanVolFlow != DataSizing::AutoSize) {
                 if (CBVAV(CBVAVNum).FanVolFlow < CBVAV(CBVAVNum).MaxCoolAirVolFlow && CBVAV(CBVAVNum).MaxCoolAirVolFlow != DataSizing::AutoSize) {
-                    ShowWarningError(CurrentModuleObject + " - air flow rate = " + General::TrimSigDigits(CBVAV(CBVAVNum).FanVolFlow, 7) + " in " +
+                    ShowWarningError(CurrentModuleObject + " - air flow rate = " + format("{:.7T}", CBVAV(CBVAVNum).FanVolFlow) + " in " +
                                      cAlphaFields(11) + " = " + CBVAV(CBVAVNum).FanName + " is less than the " + cNumericFields(1));
                     ShowContinueError(' ' + cNumericFields(1) + " is reset to the fan flow rate and the simulation continues.");
                     ShowContinueError(" Occurs in " + CurrentModuleObject + " = " + CBVAV(CBVAVNum).Name);
                     CBVAV(CBVAVNum).MaxCoolAirVolFlow = CBVAV(CBVAVNum).FanVolFlow;
                 }
                 if (CBVAV(CBVAVNum).FanVolFlow < CBVAV(CBVAVNum).MaxHeatAirVolFlow && CBVAV(CBVAVNum).MaxHeatAirVolFlow != DataSizing::AutoSize) {
-                    ShowWarningError(CurrentModuleObject + " - air flow rate = " + General::TrimSigDigits(CBVAV(CBVAVNum).FanVolFlow, 7) + " in " +
+                    ShowWarningError(CurrentModuleObject + " - air flow rate = " + format("{:.7T}", CBVAV(CBVAVNum).FanVolFlow) + " in " +
                                      cAlphaFields(11) + " = " + CBVAV(CBVAVNum).FanName + " is less than the " + cNumericFields(2));
                     ShowContinueError(' ' + cNumericFields(2) + " is reset to the fan flow rate and the simulation continues.");
                     ShowContinueError(" Occurs in " + CurrentModuleObject + " = " + CBVAV(CBVAVNum).Name);
@@ -908,7 +908,7 @@ namespace HVACUnitaryBypassVAV {
             if (CBVAV(CBVAVNum).FanVolFlow != DataSizing::AutoSize) {
                 if (CBVAV(CBVAVNum).FanVolFlow < CBVAV(CBVAVNum).MaxNoCoolHeatAirVolFlow &&
                     CBVAV(CBVAVNum).MaxNoCoolHeatAirVolFlow != DataSizing::AutoSize && CBVAV(CBVAVNum).MaxNoCoolHeatAirVolFlow != 0.0) {
-                    ShowWarningError(CurrentModuleObject + " - air flow rate = " + General::TrimSigDigits(CBVAV(CBVAVNum).FanVolFlow, 7) + " in " +
+                    ShowWarningError(CurrentModuleObject + " - air flow rate = " + format("{:.7T}", CBVAV(CBVAVNum).FanVolFlow) + " in " +
                                      cAlphaFields(11) + " = " + CBVAV(CBVAVNum).FanName + " is less than " + cNumericFields(3));
                     ShowContinueError(' ' + cNumericFields(3) + " is reset to the fan flow rate and the simulation continues.");
                     ShowContinueError(" Occurs in " + CurrentModuleObject + " = " + CBVAV(CBVAVNum).Name);
@@ -1646,30 +1646,30 @@ namespace HVACUnitaryBypassVAV {
             if (!DataGlobals::DoingSizing && CBVAV(CBVAVNum).FanVolFlow != DataSizing::AutoSize) {
                 //     Check fan versus system supply air flow rates
                 if (CBVAV(CBVAVNum).FanVolFlow < CBVAV(CBVAVNum).MaxCoolAirVolFlow) {
-                    ShowWarningError(CurrentModuleObject + " - air flow rate = " + General::TrimSigDigits(CBVAV(CBVAVNum).FanVolFlow, 7) +
+                    ShowWarningError(CurrentModuleObject + " - air flow rate = " + format("{:.7T}", CBVAV(CBVAVNum).FanVolFlow) +
                                      " in fan object " + CBVAV(CBVAVNum).FanName +
                                      " is less than the maximum CBVAV system air flow rate when cooling is required (" +
-                                     General::TrimSigDigits(CBVAV(CBVAVNum).MaxCoolAirVolFlow, 7) + ").");
+                                     format("{:.7T}", CBVAV(CBVAVNum).MaxCoolAirVolFlow) + ").");
                     ShowContinueError(
                         " The CBVAV system flow rate when cooling is required is reset to the fan flow rate and the simulation continues.");
                     ShowContinueError(" Occurs in Changeover-bypass VAV system = " + CBVAV(CBVAVNum).Name);
                     CBVAV(CBVAVNum).MaxCoolAirVolFlow = CBVAV(CBVAVNum).FanVolFlow;
                 }
                 if (CBVAV(CBVAVNum).FanVolFlow < CBVAV(CBVAVNum).MaxHeatAirVolFlow) {
-                    ShowWarningError(CurrentModuleObject + " - air flow rate = " + General::TrimSigDigits(CBVAV(CBVAVNum).FanVolFlow, 7) +
+                    ShowWarningError(CurrentModuleObject + " - air flow rate = " + format("{:.7T}", CBVAV(CBVAVNum).FanVolFlow) +
                                      " in fan object " + CBVAV(CBVAVNum).FanName +
                                      " is less than the maximum CBVAV system air flow rate when heating is required (" +
-                                     General::TrimSigDigits(CBVAV(CBVAVNum).MaxHeatAirVolFlow, 7) + ").");
+                                     format("{:.7T}", CBVAV(CBVAVNum).MaxHeatAirVolFlow) + ").");
                     ShowContinueError(
                         " The CBVAV system flow rate when heating is required is reset to the fan flow rate and the simulation continues.");
                     ShowContinueError(" Occurs in Changeover-bypass VAV system = " + CBVAV(CBVAVNum).Name);
                     CBVAV(CBVAVNum).MaxHeatAirVolFlow = CBVAV(CBVAVNum).FanVolFlow;
                 }
                 if (CBVAV(CBVAVNum).FanVolFlow < CBVAV(CBVAVNum).MaxNoCoolHeatAirVolFlow && CBVAV(CBVAVNum).MaxNoCoolHeatAirVolFlow != 0.0) {
-                    ShowWarningError(CurrentModuleObject + " - air flow rate = " + General::TrimSigDigits(CBVAV(CBVAVNum).FanVolFlow, 7) +
+                    ShowWarningError(CurrentModuleObject + " - air flow rate = " + format("{:.7T}", CBVAV(CBVAVNum).FanVolFlow) +
                                      " in fan object " + CBVAV(CBVAVNum).FanName +
                                      " is less than the maximum CBVAV system air flow rate when no heating or cooling is needed (" +
-                                     General::TrimSigDigits(CBVAV(CBVAVNum).MaxNoCoolHeatAirVolFlow, 7) + ").");
+                                     format("{:.7T}", CBVAV(CBVAVNum).MaxNoCoolHeatAirVolFlow) + ").");
                     ShowContinueError(" The CBVAV system flow rate when no heating or cooling is needed is reset to the fan flow rate and the "
                                       "simulation continues.");
                     ShowContinueError(" Occurs in Changeover-bypass VAV system = " + CBVAV(CBVAVNum).Name);
@@ -1677,30 +1677,30 @@ namespace HVACUnitaryBypassVAV {
                 }
                 //     Check fan versus outdoor air flow rates
                 if (CBVAV(CBVAVNum).FanVolFlow < CBVAV(CBVAVNum).CoolOutAirVolFlow) {
-                    ShowWarningError(CurrentModuleObject + " - air flow rate = " + General::TrimSigDigits(CBVAV(CBVAVNum).FanVolFlow, 7) +
+                    ShowWarningError(CurrentModuleObject + " - air flow rate = " + format("{:.7T}", CBVAV(CBVAVNum).FanVolFlow) +
                                      " in fan object " + CBVAV(CBVAVNum).FanName +
                                      " is less than the maximum CBVAV outdoor air flow rate when cooling is required (" +
-                                     General::TrimSigDigits(CBVAV(CBVAVNum).CoolOutAirVolFlow, 7) + ").");
+                                     format("{:.7T}", CBVAV(CBVAVNum).CoolOutAirVolFlow) + ").");
                     ShowContinueError(
                         " The CBVAV outdoor flow rate when cooling is required is reset to the fan flow rate and the simulation continues.");
                     ShowContinueError(" Occurs in Changeover-bypass VAV system = " + CBVAV(CBVAVNum).Name);
                     CBVAV(CBVAVNum).CoolOutAirVolFlow = CBVAV(CBVAVNum).FanVolFlow;
                 }
                 if (CBVAV(CBVAVNum).FanVolFlow < CBVAV(CBVAVNum).HeatOutAirVolFlow) {
-                    ShowWarningError(CurrentModuleObject + " - air flow rate = " + General::TrimSigDigits(CBVAV(CBVAVNum).FanVolFlow, 7) +
+                    ShowWarningError(CurrentModuleObject + " - air flow rate = " + format("{:.7T}", CBVAV(CBVAVNum).FanVolFlow) +
                                      " in fan object " + CBVAV(CBVAVNum).FanName +
                                      " is less than the maximum CBVAV outdoor air flow rate when heating is required (" +
-                                     General::TrimSigDigits(CBVAV(CBVAVNum).HeatOutAirVolFlow, 7) + ").");
+                                     format("{:.7T}", CBVAV(CBVAVNum).HeatOutAirVolFlow) + ").");
                     ShowContinueError(
                         " The CBVAV outdoor flow rate when heating is required is reset to the fan flow rate and the simulation continues.");
                     ShowContinueError(" Occurs in Changeover-bypass VAV system = " + CBVAV(CBVAVNum).Name);
                     CBVAV(CBVAVNum).HeatOutAirVolFlow = CBVAV(CBVAVNum).FanVolFlow;
                 }
                 if (CBVAV(CBVAVNum).FanVolFlow < CBVAV(CBVAVNum).NoCoolHeatOutAirVolFlow) {
-                    ShowWarningError(CurrentModuleObject + " - air flow rate = " + General::TrimSigDigits(CBVAV(CBVAVNum).FanVolFlow, 7) +
+                    ShowWarningError(CurrentModuleObject + " - air flow rate = " + format("{:.7T}", CBVAV(CBVAVNum).FanVolFlow) +
                                      " in fan object " + CBVAV(CBVAVNum).FanName +
                                      " is less than the maximum CBVAV outdoor air flow rate when no heating or cooling is needed (" +
-                                     General::TrimSigDigits(CBVAV(CBVAVNum).NoCoolHeatOutAirVolFlow, 7) + ").");
+                                     format("{:.7T}", CBVAV(CBVAVNum).NoCoolHeatOutAirVolFlow) + ").");
                     ShowContinueError(" The CBVAV outdoor flow rate when no heating or cooling is needed is reset to the fan flow rate and the "
                                       "simulation continues.");
                     ShowContinueError(" Occurs in Changeover-bypass VAV system = " + CBVAV(CBVAVNum).Name);
@@ -2303,7 +2303,7 @@ namespace HVACUnitaryBypassVAV {
                                     ++CBVAV(CBVAVNum).HXDXIterationExceeded;
                                     ShowWarningError("Iteration limit exceeded calculating HX assisted DX unit part-load ratio, for unit = " +
                                                      CBVAV(CBVAVNum).DXCoolCoilName);
-                                    ShowContinueError("Calculated part-load ratio = " + General::RoundSigDigits(PartLoadFrac, 3));
+                                    ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                     ShowContinueErrorTimeStamp(
                                         "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                                 } else {
@@ -2324,7 +2324,7 @@ namespace HVACUnitaryBypassVAV {
                                     ShowSevereError(
                                         "HX assisted DX unit part-load ratio calculation failed: part-load ratio limits exceeded, for unit = " +
                                         CBVAV(CBVAVNum).DXCoolCoilName);
-                                    ShowContinueErrorTimeStamp("An estimated part-load ratio of " + General::RoundSigDigits(PartLoadFrac, 3) +
+                                    ShowContinueErrorTimeStamp("An estimated part-load ratio of " + format("{:.3R}", PartLoadFrac) +
                                                                "will be used and the simulation continues. Occurrence info:");
                                 } else {
                                     ShowRecurringWarningErrorAtEnd(
@@ -2373,7 +2373,7 @@ namespace HVACUnitaryBypassVAV {
                                     ++CBVAV(CBVAVNum).DXIterationExceeded;
                                     ShowWarningError("Iteration limit exceeded calculating DX unit part-load ratio, for unit = " +
                                                      CBVAV(CBVAVNum).DXCoolCoilName);
-                                    ShowContinueError("Calculated part-load ratio = " + General::RoundSigDigits(PartLoadFrac, 3));
+                                    ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                     ShowContinueErrorTimeStamp(
                                         "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                                 } else {
@@ -2393,7 +2393,7 @@ namespace HVACUnitaryBypassVAV {
                                     ++CBVAV(CBVAVNum).DXIterationFailed;
                                     ShowSevereError("DX unit part-load ratio calculation failed: part-load ratio limits exceeded, for unit = " +
                                                     CBVAV(CBVAVNum).DXCoolCoilName);
-                                    ShowContinueErrorTimeStamp("An estimated part-load ratio of " + General::RoundSigDigits(PartLoadFrac, 3) +
+                                    ShowContinueErrorTimeStamp("An estimated part-load ratio of " + format("{:.3R}", PartLoadFrac) +
                                                                "will be used and the simulation continues. Occurrence info:");
                                 } else {
                                     ShowRecurringWarningErrorAtEnd(CBVAV(CBVAVNum).Name +
@@ -2591,7 +2591,7 @@ namespace HVACUnitaryBypassVAV {
                                                 ShowWarningError(CBVAV(CBVAVNum).DXCoolCoilType +
                                                                  " - Iteration limit exceeded calculating VS DX coil speed ratio for coil named " +
                                                                  CBVAV(CBVAVNum).DXCoolCoilName + ", in Unitary system named" + CBVAV(CBVAVNum).Name);
-                                                ShowContinueError("Calculated speed ratio = " + General::RoundSigDigits(SpeedRatio, 4));
+                                                ShowContinueError("Calculated speed ratio = " + format("{:.4R}", SpeedRatio));
                                                 ShowContinueErrorTimeStamp(
                                                     "The calculated speed ratio will be used and the simulation continues. Occurrence info:");
                                             }
@@ -2611,7 +2611,7 @@ namespace HVACUnitaryBypassVAV {
                                                     " - DX unit speed ratio calculation failed: solver limits exceeded, for coil named " +
                                                     CBVAV(CBVAVNum).DXCoolCoilName + ", in Unitary system named" + CBVAV(CBVAVNum).Name);
                                                 ShowContinueError("Estimated speed ratio = " +
-                                                                  General::RoundSigDigits(TempSpeedReqst / TempSpeedOut, 3));
+                                                                  format("{:.3R}", TempSpeedReqst / TempSpeedOut));
                                                 ShowContinueErrorTimeStamp(
                                                     "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                                             }
@@ -2640,8 +2640,8 @@ namespace HVACUnitaryBypassVAV {
                                                     " - Iteration limit exceeded calculating VS DX unit low speed cycling ratio, for coil named " +
                                                     CBVAV(CBVAVNum).DXCoolCoilName + ", in Unitary system named" + CBVAV(CBVAVNum).Name);
                                                 ShowContinueError("Estimated cycling ratio  = " +
-                                                                  General::RoundSigDigits((TempSpeedReqst / TempSpeedOut), 3));
-                                                ShowContinueError("Calculated cycling ratio = " + General::RoundSigDigits(PartLoadFrac, 3));
+                                                                  format("{:.3R}", (TempSpeedReqst / TempSpeedOut)));
+                                                ShowContinueError("Calculated cycling ratio = " + format("{:.3R}", PartLoadFrac));
                                                 ShowContinueErrorTimeStamp(
                                                     "The calculated cycling ratio will be used and the simulation continues. Occurrence info:");
                                             }
@@ -2662,7 +2662,7 @@ namespace HVACUnitaryBypassVAV {
                                                     " - DX unit low speed cycling ratio calculation failed: limits exceeded, for unit = " +
                                                     CBVAV(CBVAVNum).Name);
                                                 ShowContinueError("Estimated low speed cycling ratio = " +
-                                                                  General::RoundSigDigits(TempSpeedReqst / TempSpeedOut, 3));
+                                                                  format("{:.3R}", TempSpeedReqst / TempSpeedOut));
                                                 ShowContinueErrorTimeStamp("The estimated low speed cycling ratio will be used and the simulation "
                                                                            "continues. Occurrence info:");
                                             }
@@ -2732,7 +2732,7 @@ namespace HVACUnitaryBypassVAV {
                                     ++CBVAV(CBVAVNum).MMDXIterationExceeded;
                                     ShowWarningError("Iteration limit exceeded calculating DX unit part-load ratio, for unit=" +
                                                      CBVAV(CBVAVNum).Name);
-                                    ShowContinueErrorTimeStamp("Part-load ratio returned = " + General::RoundSigDigits(PartLoadFrac, 2));
+                                    ShowContinueErrorTimeStamp("Part-load ratio returned = " + format("{:.2R}", PartLoadFrac));
                                     ShowContinueErrorTimeStamp(
                                         "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                                 } else {
@@ -2752,7 +2752,7 @@ namespace HVACUnitaryBypassVAV {
                                     ++CBVAV(CBVAVNum).MMDXIterationFailed;
                                     ShowSevereError("DX unit part-load ratio calculation failed: part-load ratio limits exceeded, for unit=" +
                                                     CBVAV(CBVAVNum).Name);
-                                    ShowContinueError("Estimated part-load ratio = " + General::RoundSigDigits(PartLoadFrac, 3));
+                                    ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                     ShowContinueErrorTimeStamp(
                                         "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                                 } else {
@@ -2802,7 +2802,7 @@ namespace HVACUnitaryBypassVAV {
                                         ++CBVAV(CBVAVNum).DMDXIterationExceeded;
                                         ShowWarningError("Iteration limit exceeded calculating DX unit dehumidifying part-load ratio, for unit = " +
                                                          CBVAV(CBVAVNum).Name);
-                                        ShowContinueErrorTimeStamp("Part-load ratio returned=" + General::RoundSigDigits(PartLoadFrac, 2));
+                                        ShowContinueErrorTimeStamp("Part-load ratio returned=" + format("{:.2R}", PartLoadFrac));
                                         ShowContinueErrorTimeStamp(
                                             "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                                     } else {
@@ -2825,7 +2825,7 @@ namespace HVACUnitaryBypassVAV {
                                         ShowSevereError(
                                             "DX unit dehumidifying part-load ratio calculation failed: part-load ratio limits exceeded, for unit = " +
                                             CBVAV(CBVAVNum).Name);
-                                        ShowContinueError("Estimated part-load ratio = " + General::RoundSigDigits(PartLoadFrac, 3));
+                                        ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                         ShowContinueErrorTimeStamp(
                                             "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                                     } else {
@@ -2887,7 +2887,7 @@ namespace HVACUnitaryBypassVAV {
                                         ++CBVAV(CBVAVNum).CRDXIterationExceeded;
                                         ShowWarningError("Iteration limit exceeded calculating DX unit cool reheat part-load ratio, for unit = " +
                                                          CBVAV(CBVAVNum).Name);
-                                        ShowContinueErrorTimeStamp("Part-load ratio returned = " + General::RoundSigDigits(PartLoadFrac, 2));
+                                        ShowContinueErrorTimeStamp("Part-load ratio returned = " + format("{:.2R}", PartLoadFrac));
                                         ShowContinueErrorTimeStamp(
                                             "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                                     } else {
@@ -2910,7 +2910,7 @@ namespace HVACUnitaryBypassVAV {
                                         ShowSevereError(
                                             "DX unit cool reheat part-load ratio calculation failed: part-load ratio limits exceeded, for unit = " +
                                             CBVAV(CBVAVNum).Name);
-                                        ShowContinueError("Estimated part-load ratio = " + General::RoundSigDigits(PartLoadFrac, 3));
+                                        ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                         ShowContinueErrorTimeStamp(
                                             "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                                     } else {
@@ -3087,13 +3087,13 @@ namespace HVACUnitaryBypassVAV {
                             if (SolFla == -1 && !DataGlobals::WarmupFlag) {
                                 ShowWarningError("Iteration limit exceeded calculating DX unit part-load ratio, for unit = " +
                                                  CBVAV(CBVAVNum).HeatCoilName);
-                                ShowContinueError("Calculated part-load ratio = " + General::RoundSigDigits(PartLoadFrac, 3));
+                                ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                 ShowContinueErrorTimeStamp(
                                     "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                             } else if (SolFla == -2 && !DataGlobals::WarmupFlag) {
                                 ShowSevereError("DX unit part-load ratio calculation failed: part-load ratio limits exceeded, for unit = " +
                                                 CBVAV(CBVAVNum).HeatCoilName);
-                                ShowContinueErrorTimeStamp("A part-load ratio of " + General::RoundSigDigits(PartLoadFrac, 3) +
+                                ShowContinueErrorTimeStamp("A part-load ratio of " + format("{:.3R}", PartLoadFrac) +
                                                            "will be used and the simulation continues. Occurrence info:");
                                 ShowContinueError("Please send this information to the EnergyPlus support group.");
                             }
@@ -3303,7 +3303,7 @@ namespace HVACUnitaryBypassVAV {
                                         ShowWarningError(CBVAV(CBVAVNum).HeatCoilType +
                                                          " - Iteration limit exceeded calculating VS DX coil speed ratio for coil named " +
                                                          CBVAV(CBVAVNum).HeatCoilName + ", in Unitary system named" + CBVAV(CBVAVNum).Name);
-                                        ShowContinueError("Calculated speed ratio = " + General::RoundSigDigits(SpeedRatio, 4));
+                                        ShowContinueError("Calculated speed ratio = " + format("{:.4R}", SpeedRatio));
                                         ShowContinueErrorTimeStamp(
                                             "The calculated speed ratio will be used and the simulation continues. Occurrence info:");
                                     }
@@ -3362,8 +3362,8 @@ namespace HVACUnitaryBypassVAV {
                                             CBVAV(CBVAVNum).HeatCoilType +
                                             " - Iteration limit exceeded calculating VS DX unit low speed cycling ratio, for coil named " +
                                             CBVAV(CBVAVNum).HeatCoilName + ", in Unitary system named" + CBVAV(CBVAVNum).Name);
-                                        ShowContinueError("Estimated cycling ratio  = " + General::RoundSigDigits((DesOutTemp / TempSpeedOut), 3));
-                                        ShowContinueError("Calculated cycling ratio = " + General::RoundSigDigits(PartLoadFrac, 3));
+                                        ShowContinueError("Estimated cycling ratio  = " + format("{:.3R}", (DesOutTemp / TempSpeedOut)));
+                                        ShowContinueError("Calculated cycling ratio = " + format("{:.3R}", PartLoadFrac));
                                         ShowContinueErrorTimeStamp(
                                             "The calculated cycling ratio will be used and the simulation continues. Occurrence info:");
                                     }
@@ -3384,7 +3384,7 @@ namespace HVACUnitaryBypassVAV {
                                                          CBVAV(CBVAVNum).Name);
                                         ShowContinueError(
                                             "Estimated low speed cycling ratio = " +
-                                            General::RoundSigDigits((DesOutTemp - TempNoOutput) / (TempSpeedOutSpeed1 - TempNoOutput), 3));
+                                            format("{:.3R}", (DesOutTemp - TempNoOutput) / (TempSpeedOutSpeed1 - TempNoOutput)));
                                         ShowContinueErrorTimeStamp(
                                             "The estimated low speed cycling ratio will be used and the simulation continues. Occurrence info:");
                                     }
@@ -4075,8 +4075,8 @@ namespace HVACUnitaryBypassVAV {
                                                    CBVAV(CBVAVNum).UnitType + "=\"" + CBVAV(CBVAVNum).Name + "\"");
                                 ShowContinueErrorTimeStamp("");
                                 ShowContinueError("...Bad hot water maximum flow rate limits");
-                                ShowContinueError("...Given minimum water flow rate=" + General::RoundSigDigits(MinWaterFlow, 3) + " kg/s");
-                                ShowContinueError("...Given maximum water flow rate=" + General::RoundSigDigits(MaxHotWaterFlow, 3) + " kg/s");
+                                ShowContinueError("...Given minimum water flow rate=" + format("{:.3R}", MinWaterFlow) + " kg/s");
+                                ShowContinueError("...Given maximum water flow rate=" + format("{:.3R}", MaxHotWaterFlow) + " kg/s");
                             }
                             ShowRecurringWarningErrorAtEnd("CalcNonDXHeatingCoils: Hot water coil control failed (flow limits) for " +
                                                                CBVAV(CBVAVNum).UnitType + "=\"" + CBVAV(CBVAVNum).Name + "\"",

@@ -122,27 +122,27 @@ Real64 WaterHeatingCapacitySizer::size(EnergyPlusData &state, Real64 _originalVa
                 std::string msg = this->callingRoutine + ": Potential issue with equipment sizing for " + this->compType + ' ' + this->compName;
                 this->addErrorMessage(msg);
                 ShowWarningMessage(msg);
-                msg = "...Rated Total Heating Capacity = " + General::TrimSigDigits(this->autoSizedValue, 2) + " [W]";
+                msg = "...Rated Total Heating Capacity = " + format("{:.2T}", this->autoSizedValue) + " [W]";
                 this->addErrorMessage(msg);
                 ShowContinueError(msg);
-                msg = "...Air flow rate used for sizing = " + General::TrimSigDigits(DesMassFlow / DataEnvironment::StdRhoAir, 5) + " [m3/s]";
+                msg = "...Air flow rate used for sizing = " + format("{:.5T}", DesMassFlow / DataEnvironment::StdRhoAir) + " [m3/s]";
                 this->addErrorMessage(msg);
                 ShowContinueError(msg);
                 if (this->termUnitSingDuct || this->termUnitPIU || this->termUnitIU || this->zoneEqFanCoil || this->zoneEqUnitHeater) {
-                    msg = "...Air flow rate used for sizing = " + General::TrimSigDigits(DesMassFlow / DataEnvironment::StdRhoAir, 5) + " [m3/s]";
+                    msg = "...Air flow rate used for sizing = " + format("{:.5T}", DesMassFlow / DataEnvironment::StdRhoAir) + " [m3/s]";
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = "...Plant loop temperature difference = " + General::TrimSigDigits(this->dataWaterCoilSizHeatDeltaT, 2) + " [C]";
+                    msg = "...Plant loop temperature difference = " + format("{:.2T}", this->dataWaterCoilSizHeatDeltaT) + " [C]";
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
                 } else {
-                    msg = "...Coil inlet air temperature used for sizing = " + General::TrimSigDigits(CoilInTemp, 2) + " [C]";
+                    msg = "...Coil inlet air temperature used for sizing = " + format("{:.2T}", CoilInTemp) + " [C]";
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = "...Coil outlet air temperature used for sizing = " + General::TrimSigDigits(CoilOutTemp, 2) + " [C]";
+                    msg = "...Coil outlet air temperature used for sizing = " + format("{:.2T}", CoilOutTemp) + " [C]";
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = "...Coil outlet air humidity ratio used for sizing = " + General::TrimSigDigits(CoilOutHumRat, 2) + " [kgWater/kgDryAir]";
+                    msg = "...Coil outlet air humidity ratio used for sizing = " + format("{:.2T}", CoilOutHumRat) + " [kgWater/kgDryAir]";
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
                 }

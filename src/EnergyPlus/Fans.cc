@@ -1323,7 +1323,7 @@ namespace Fans {
             if (MotorSpeed > (Fan(FanNum).MotorMaxSpd + 1.e-5)) {
                 ShowWarningError("Drive ratio for " + Fan(FanNum).FanType + ": " + Fan(FanNum).FanName +
                                  " is too low at design conditions -- check motor speed and drive ratio inputs");
-                ShowContinueError("...Design fan speed [rev/min]: " + RoundSigDigits(Fan(FanNum).FanSpd, 2));
+                ShowContinueError("...Design fan speed [rev/min]: " + format("{:.2R}", Fan(FanNum).FanSpd));
             }
 
             Fan(FanNum).FanTrq = Fan(FanNum).FanShaftPower / FanSpdRadS; //[N-m]
@@ -1339,7 +1339,7 @@ namespace Fans {
             if (Fan(FanNum).FanTrq > (Fan(FanNum).BeltMaxTorque + 1.e-5)) {
                 ShowWarningError("Belt for " + Fan(FanNum).FanType + ": " + Fan(FanNum).FanName +
                                  " is undersized at design conditions -- check belt inputs");
-                ShowContinueError("...Design belt output torque (without oversizing) [Nm]: " + RoundSigDigits(Fan(FanNum).FanTrq, 2));
+                ShowContinueError("...Design belt output torque (without oversizing) [Nm]: " + format("{:.2R}", Fan(FanNum).FanTrq));
             }
 
             // Calculate belt max efficiency using correlations and coefficients based on AMCA data
@@ -1381,7 +1381,7 @@ namespace Fans {
             if (Fan(FanNum).BeltInputPower > (Fan(FanNum).MotorMaxOutPwr + 1.e-5)) {
                 ShowWarningError("Motor for " + Fan(FanNum).FanType + ": " + Fan(FanNum).FanName +
                                  " is undersized at design conditions -- check motor inputs");
-                ShowContinueError("...Design motor output power (without oversizing) [W]: " + RoundSigDigits(Fan(FanNum).BeltInputPower, 2));
+                ShowContinueError("...Design motor output power (without oversizing) [W]: " + format("{:.2R}", Fan(FanNum).BeltInputPower));
             }
 
             // Calculate motor max efficiency using correlations and coefficients based on MotorMaster+ data
@@ -1422,7 +1422,7 @@ namespace Fans {
                     if (Fan(FanNum).MotorInputPower > (Fan(FanNum).VFDMaxOutPwr + 1.e-5)) {
                         ShowWarningError("VFD for " + Fan(FanNum).FanType + ": " + Fan(FanNum).FanName +
                                          " is undersized at design conditions -- check VFD inputs");
-                        ShowContinueError("...Design VFD output power (without oversizing) [W]: " + RoundSigDigits(Fan(FanNum).MotorInputPower, 2));
+                        ShowContinueError("...Design VFD output power (without oversizing) [W]: " + format("{:.2R}", Fan(FanNum).MotorInputPower));
                     }
 
                     VFDOutPwrRatio = Fan(FanNum).MotorInputPower / Fan(FanNum).VFDMaxOutPwr;       //[-]
@@ -1460,22 +1460,22 @@ namespace Fans {
             BaseSizer::reportSizerOutput(Fan(FanNum).FanType, Fan(FanNum).FanName, "Design Combined Efficiency []", Fan(FanNum).FanEff);
 
             // cpw31Aug2010 Temporary code for debugging fan component model
-            //    WRITE(300,*) TRIM(RoundSigDigits(RhoAir,4))//','//TRIM(RoundSigDigits(FanVolFlow,4)) &
-            //    //','//TRIM(RoundSigDigits(FanOutletVelPress,4))//','//TRIM(RoundSigDigits(Fan(FanNum)%DeltaPress,4)) &
-            //    //','//TRIM(RoundSigDigits(Fan(FanNum)%FanAirPower,4))//','//TRIM(RoundSigDigits(EulerNum,4)) &
-            //    //','//TRIM(RoundSigDigits(NormalizedEulerNum,4))//','//TRIM(RoundSigDigits(Fan(FanNum)%FanWheelEff,4))
-            //    WRITE(301,*) TRIM(RoundSigDigits(Fan(FanNum)%FanShaftPower,4))//','//TRIM(RoundSigDigits(FanDimFlow,4)) &
-            //    //','//TRIM(RoundSigDigits(Fan(FanNum)%FanTrq,4))//','//TRIM(RoundSigDigits(Fan(FanNum)%FanSpd,4)) &
-            //    //','//TRIM(RoundSigDigits(Fan(FanNum)%FanShaftPwrMax,4))//','//TRIM(RoundSigDigits(XbeltMax,4)) &
-            //    //','//TRIM(RoundSigDigits(Fan(FanNum)%BeltMaxEff,4))//','//TRIM(RoundSigDigits(FanTrqRatio,4))
-            //    WRITE(302,*) TRIM(RoundSigDigits(BeltPLEff,4))//','//TRIM(RoundSigDigits(Fan(FanNum)%BeltEff,4)) &
-            //    //','//TRIM(RoundSigDigits(Fan(FanNum)%BeltInputPower,4))//','//TRIM(RoundSigDigits(Fan(FanNum)%MotorMaxOutPwr,4)) &
-            //    //','//TRIM(RoundSigDigits(XmotorMax,4))//','//TRIM(RoundSigDigits(Fan(FanNum)%MotorMaxEff,4)) &
-            //    //','//TRIM(RoundSigDigits(MotorOutPwrRatio,4))//','//TRIM(RoundSigDigits(MotorPLEff,4))
-            //    WRITE(303,*) TRIM(RoundSigDigits(Fan(FanNum)%MotEff,4))//','//TRIM(RoundSigDigits(Fan(FanNum)%MotorInputPower,4)) &
-            //    //','//TRIM(RoundSigDigits(VFDOutPwrRatio,4))//','//TRIM(RoundSigDigits(Fan(FanNum)%VFDEff,4)) &
-            //    //','//TRIM(RoundSigDigits(RatedPower,4))//','//TRIM(RoundSigDigits(Fan(FanNum)%FanEff,4)) &
-            //    //','//TRIM(RoundSigDigits(0.0d0,4))//','//TRIM(RoundSigDigits(0.0d0,4))
+            //    WRITE(300,*) TRIM(format("{:.4R}", RhoAir))//','//TRIM(format("{:.4R}", FanVolFlow)) &
+            //    //','//TRIM(format("{:.4R}", FanOutletVelPress))//','//TRIM(format("{:.4R}", Fan(FanNum)%DeltaPress)) &
+            //    //','//TRIM(format("{:.4R}", Fan(FanNum)%FanAirPower))//','//TRIM(format("{:.4R}", EulerNum)) &
+            //    //','//TRIM(format("{:.4R}", NormalizedEulerNum))//','//TRIM(format("{:.4R}", Fan(FanNum)%FanWheelEff))
+            //    WRITE(301,*) TRIM(format("{:.4R}", Fan(FanNum)%FanShaftPower))//','//TRIM(format("{:.4R}", FanDimFlow)) &
+            //    //','//TRIM(format("{:.4R}", Fan(FanNum)%FanTrq))//','//TRIM(format("{:.4R}", Fan(FanNum)%FanSpd)) &
+            //    //','//TRIM(format("{:.4R}", Fan(FanNum)%FanShaftPwrMax))//','//TRIM(format("{:.4R}", XbeltMax)) &
+            //    //','//TRIM(format("{:.4R}", Fan(FanNum)%BeltMaxEff))//','//TRIM(format("{:.4R}", FanTrqRatio))
+            //    WRITE(302,*) TRIM(format("{:.4R}", BeltPLEff))//','//TRIM(format("{:.4R}", Fan(FanNum)%BeltEff)) &
+            //    //','//TRIM(format("{:.4R}", Fan(FanNum)%BeltInputPower))//','//TRIM(format("{:.4R}", Fan(FanNum)%MotorMaxOutPwr)) &
+            //    //','//TRIM(format("{:.4R}", XmotorMax))//','//TRIM(format("{:.4R}", Fan(FanNum)%MotorMaxEff)) &
+            //    //','//TRIM(format("{:.4R}", MotorOutPwrRatio))//','//TRIM(format("{:.4R}", MotorPLEff))
+            //    WRITE(303,*) TRIM(format("{:.4R}", Fan(FanNum)%MotEff))//','//TRIM(format("{:.4R}", Fan(FanNum)%MotorInputPower)) &
+            //    //','//TRIM(format("{:.4R}", VFDOutPwrRatio))//','//TRIM(format("{:.4R}", Fan(FanNum)%VFDEff)) &
+            //    //','//TRIM(format("{:.4R}", RatedPower))//','//TRIM(format("{:.4R}", Fan(FanNum)%FanEff)) &
+            //    //','//TRIM(format("{:.4R}", 0.0d0))//','//TRIM(format("{:.4R}", 0.0d0))
             //    WRITE(304,*) TRIM("Fan")//','//TRIM("Sizing")
 
             // cpw31Aug2010 Temporary code to write headers for component fan model debug files
@@ -2019,8 +2019,8 @@ namespace Fans {
                         if (Fan(FanNum).OneTimePowerRatioCheck && !WarmupFlag) {
                             ShowSevereError(cFanTypes(Fan(FanNum).FanType_Num) + " = " + Fan(FanNum).FanName + "\"");
                             ShowContinueError("Error in Fan Power Ratio curve. Curve output less than 0.0.");
-                            ShowContinueError("Curve output = " + TrimSigDigits(SpeedRaisedToPower, 5) +
-                                              ", fan speed ratio = " + TrimSigDigits(SpeedRatio, 5));
+                            ShowContinueError("Curve output = " + format("{:.5T}", SpeedRaisedToPower) +
+                                              ", fan speed ratio = " + format("{:.5T}", SpeedRatio));
                             ShowContinueError("Check curve coefficients to ensure proper power ratio as a function of fan speed ratio.");
                             ShowContinueError("Resetting Fan Power Ratio curve output to 0.0 and the simulation continues.");
                             ShowContinueErrorTimeStamp("Occurrence info:");
@@ -2034,8 +2034,8 @@ namespace Fans {
                             if (Fan(FanNum).OneTimeEffRatioCheck && !WarmupFlag) {
                                 ShowSevereError(cFanTypes(Fan(FanNum).FanType_Num) + " = " + Fan(FanNum).FanName + "\"");
                                 ShowContinueError("Error in Fan Efficiency Ratio curve. Curve output less than 0.01.");
-                                ShowContinueError("Curve output = " + TrimSigDigits(EffRatioAtSpeedRatio, 5) +
-                                                  ", fan speed ratio = " + TrimSigDigits(SpeedRatio, 5));
+                                ShowContinueError("Curve output = " + format("{:.5T}", EffRatioAtSpeedRatio) +
+                                                  ", fan speed ratio = " + format("{:.5T}", SpeedRatio));
                                 ShowContinueError("Check curve coefficients to ensure proper efficiency ratio as a function of fan speed ratio.");
                                 ShowContinueError("Resetting Fan Efficiency Ratio curve output to 0.01 and the simulation continues.");
                                 ShowContinueErrorTimeStamp("Occurrence info:");
@@ -2441,22 +2441,22 @@ namespace Fans {
             Fan(FanNum).OutletAirTemp = PsyTdbFnHW(Fan(FanNum).OutletAirEnthalpy, Fan(FanNum).OutletAirHumRat);
 
             // cpw31Aug2010 Temporary code for debugging fan component model
-            //    WRITE(300,*) TRIM(RoundSigDigits(Fan(FanNum)%RhoAirStdInit,4))//','//TRIM(RoundSigDigits(FanVolFlow,4)) &
-            //    //','//TRIM(RoundSigDigits(FanOutletVelPress,4))//','//TRIM(RoundSigDigits(Fan(FanNum)%DeltaPress,4)) &
-            //    //','//TRIM(RoundSigDigits(Fan(FanNum)%FanAirPower,4))//','//TRIM(RoundSigDigits(EulerNum,4)) &
-            //    //','//TRIM(RoundSigDigits(NormalizedEulerNum,4))//','//TRIM(RoundSigDigits(Fan(FanNum)%FanWheelEff,4))
-            //    WRITE(301,*) TRIM(RoundSigDigits(Fan(FanNum)%FanShaftPower,4))//','//TRIM(RoundSigDigits(FanDimFlow,4)) &
-            //    //','//TRIM(RoundSigDigits(Fan(FanNum)%FanTrq,4))//','//TRIM(RoundSigDigits(Fan(FanNum)%FanSpd,4)) &
-            //    //','//TRIM(RoundSigDigits(Fan(FanNum)%FanShaftPwrMax,4))//','//TRIM(" ") &
-            //    //','//TRIM(RoundSigDigits(Fan(FanNum)%BeltMaxEff,4))//','//TRIM(RoundSigDigits(FanTrqRatio,4))
-            //    WRITE(302,*) TRIM(RoundSigDigits(BeltPLEff,4))//','//TRIM(RoundSigDigits(Fan(FanNum)%BeltEff,4)) &
-            //    //','//TRIM(RoundSigDigits(Fan(FanNum)%BeltInputPower,4))//','//TRIM(RoundSigDigits(Fan(FanNum)%MotorMaxOutPwr,4)) &
-            //    //','//TRIM(" ")//','//TRIM(RoundSigDigits(Fan(FanNum)%MotorMaxEff,4)) &
-            //    //','//TRIM(RoundSigDigits(MotorOutPwrRatio,4))//','//TRIM(RoundSigDigits(MotorPLEff,4))
-            //    WRITE(303,*) TRIM(RoundSigDigits(Fan(FanNum)%MotEff,4))//','//TRIM(RoundSigDigits(Fan(FanNum)%MotorInputPower,4)) &
-            //    //','//TRIM(RoundSigDigits(VFDOutPwrRatio,4))//','//TRIM(RoundSigDigits(Fan(FanNum)%VFDEff,4)) &
-            //    //','//TRIM(RoundSigDigits(Fan(FanNum)%FanPower,4))//','//TRIM(RoundSigDigits(Fan(FanNum)%FanEff,4)) &
-            //    //','//TRIM(RoundSigDigits(PowerLossToAir,4))//','//TRIM(RoundSigDigits(FanEnthalpyChange,4))
+            //    WRITE(300,*) TRIM(format("{:.4R}", Fan(FanNum)%RhoAirStdInit))//','//TRIM(format("{:.4R}", FanVolFlow)) &
+            //    //','//TRIM(format("{:.4R}", FanOutletVelPress))//','//TRIM(format("{:.4R}", Fan(FanNum)%DeltaPress)) &
+            //    //','//TRIM(format("{:.4R}", Fan(FanNum)%FanAirPower))//','//TRIM(format("{:.4R}", EulerNum)) &
+            //    //','//TRIM(format("{:.4R}", NormalizedEulerNum))//','//TRIM(format("{:.4R}", Fan(FanNum)%FanWheelEff))
+            //    WRITE(301,*) TRIM(format("{:.4R}", Fan(FanNum)%FanShaftPower))//','//TRIM(format("{:.4R}", FanDimFlow)) &
+            //    //','//TRIM(format("{:.4R}", Fan(FanNum)%FanTrq))//','//TRIM(format("{:.4R}", Fan(FanNum)%FanSpd)) &
+            //    //','//TRIM(format("{:.4R}", Fan(FanNum)%FanShaftPwrMax))//','//TRIM(" ") &
+            //    //','//TRIM(format("{:.4R}", Fan(FanNum)%BeltMaxEff))//','//TRIM(format("{:.4R}", FanTrqRatio))
+            //    WRITE(302,*) TRIM(format("{:.4R}", BeltPLEff))//','//TRIM(format("{:.4R}", Fan(FanNum)%BeltEff)) &
+            //    //','//TRIM(format("{:.4R}", Fan(FanNum)%BeltInputPower))//','//TRIM(format("{:.4R}", Fan(FanNum)%MotorMaxOutPwr)) &
+            //    //','//TRIM(" ")//','//TRIM(format("{:.4R}", Fan(FanNum)%MotorMaxEff)) &
+            //    //','//TRIM(format("{:.4R}", MotorOutPwrRatio))//','//TRIM(format("{:.4R}", MotorPLEff))
+            //    WRITE(303,*) TRIM(format("{:.4R}", Fan(FanNum)%MotEff))//','//TRIM(format("{:.4R}", Fan(FanNum)%MotorInputPower)) &
+            //    //','//TRIM(format("{:.4R}", VFDOutPwrRatio))//','//TRIM(format("{:.4R}", Fan(FanNum)%VFDEff)) &
+            //    //','//TRIM(format("{:.4R}", Fan(FanNum)%FanPower))//','//TRIM(format("{:.4R}", Fan(FanNum)%FanEff)) &
+            //    //','//TRIM(format("{:.4R}", PowerLossToAir))//','//TRIM(format("{:.4R}", FanEnthalpyChange))
             //    WRITE(304,*) TRIM(CurMnDy)//','//TRIM(CreateSysTimeIntervalString())
 
         } else {

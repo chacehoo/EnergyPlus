@@ -925,9 +925,9 @@ CurrentModuleObject, PlantOpSchemeName);
                                                      "\", detected overlapping ranges in " + CurrentModuleObject + " = \"" +
                                                      PlantLoop(LoopNum).OpScheme(SchemeNum).Name + "\".");
                                     ShowContinueError("Range # " + fmt::to_string(InnerListNum) +
-                                                      " Lower limit = " + RoundSigDigits(InnerListNumLowerLimit, 1) + " lies within the Range # " +
-                                                      fmt::to_string(ListNum) + " (" + RoundSigDigits(OuterListNumLowerLimit, 1) + " to " +
-                                                      RoundSigDigits(OuterListNumUpperLimit, 1) + ").");
+                                                      " Lower limit = " + format("{:.1R}", InnerListNumLowerLimit) + " lies within the Range # " +
+                                                      fmt::to_string(ListNum) + " (" + format("{:.1R}", OuterListNumLowerLimit) + " to " +
+                                                      format("{:.1R}", OuterListNumUpperLimit) + ").");
                                     ShowContinueError("Check that input for load range limit values do not overlap, and the simulation continues...");
                                 }
                                 // Check if inner list has an upper limit that is between an outer's lower and upper limit
@@ -936,9 +936,9 @@ CurrentModuleObject, PlantOpSchemeName);
                                                      "\", detected overlapping ranges in " + CurrentModuleObject + " = \"" +
                                                      PlantLoop(LoopNum).OpScheme(SchemeNum).Name + "\".");
                                     ShowContinueError("Range # " + fmt::to_string(InnerListNum) +
-                                                      " Upper limit = " + RoundSigDigits(InnerListNumUpperLimit, 1) + " lies within Range # " +
-                                                      fmt::to_string(ListNum) + " (" + RoundSigDigits(OuterListNumLowerLimit, 1) + " to " +
-                                                      RoundSigDigits(OuterListNumUpperLimit, 1) + ").");
+                                                      " Upper limit = " + format("{:.1R}", InnerListNumUpperLimit) + " lies within Range # " +
+                                                      fmt::to_string(ListNum) + " (" + format("{:.1R}", OuterListNumLowerLimit) + " to " +
+                                                      format("{:.1R}", OuterListNumUpperLimit) + ").");
                                     ShowContinueError("Check that input for load range limit values do not overlap, and the simulation continues...");
                                 }
                             }

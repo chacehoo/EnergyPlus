@@ -489,8 +489,8 @@ namespace EnergyPlus {
                                             ": A pipe was outside of the domain extents after performing corrections for basement or burial depth.");
                             ShowContinueError("Pipe segment name:" + thisSegment->Name);
                             ShowContinueError("Corrected pipe location: ( x,y )=( " +
-                                              General::TrimSigDigits(thisSegment->PipeLocation.X, 2) + ',' +
-                                              General::TrimSigDigits(thisSegment->PipeLocation.Y, 2) + " )");
+                                              format("{:.2T}", thisSegment->PipeLocation.X) + ',' +
+                                              format("{:.2T}", thisSegment->PipeLocation.Y) + " )");
                         }
                     } // segment loop
                 } // circuit loop
@@ -1671,8 +1671,8 @@ namespace EnergyPlus {
                 // Issue a severe if Inner >= Outer diameter
                 if (thisCircuit.PipeSize.InnerDia >= thisCircuit.PipeSize.OuterDia) {
                     ShowSevereError(RoutineName + ": " + ObjName_HorizTrench + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\" has invalid pipe diameters.");
-                    ShowContinueError("Outer diameter [" + General::TrimSigDigits(thisCircuit.PipeSize.OuterDia, 3)
-                            + "] must be greater than inner diameter [" + General::TrimSigDigits(thisCircuit.PipeSize.InnerDia, 3) + "].");
+                    ShowContinueError("Outer diameter [" + format("{:.3T}", thisCircuit.PipeSize.OuterDia)
+                            + "] must be greater than inner diameter [" + format("{:.3T}", thisCircuit.PipeSize.InnerDia) + "].");
                     ErrorsFound = true;
                 }
 
@@ -2280,7 +2280,7 @@ namespace EnergyPlus {
             //       RE-ENGINEERED  na
 
             ShowSevereError(RoutineName + ':' + ObjectName + "=\"" + InstanceName + "\", invalid " + FieldName + "=\"" +
-                            General::TrimSigDigits(FieldEntry, 3) + "\", Condition: " + Condition);
+                            format("{:.3T}", FieldEntry) + "\", Condition: " + Condition);
             ErrorsFound = true;
         }
 

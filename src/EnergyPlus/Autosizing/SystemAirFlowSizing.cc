@@ -882,7 +882,7 @@ Real64 SystemAirFlowSizer::size(EnergyPlusData &state, Real64 _originalValue, bo
             std::string msg = this->callingRoutine + ' ' + this->compType + ' ' + this->compName + ", Developer Error: Component sizing incomplete.";
             ShowSevereError(msg);
             this->addErrorMessage(msg);
-            msg = "SizingString = " + this->sizingString + ", SizingResult = " + General::TrimSigDigits(this->autoSizedValue, 1);
+            msg = "SizingString = " + this->sizingString + ", SizingResult = " + format("{:.1T}", this->autoSizedValue);
             ShowContinueError(msg);
             this->addErrorMessage(msg);
             errorsFound = true;

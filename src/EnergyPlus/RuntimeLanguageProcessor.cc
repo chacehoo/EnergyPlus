@@ -1999,7 +1999,7 @@ namespace RuntimeLanguageProcessor {
                                 // throw Error
                                 ReturnValue.Type = ValueError;
                                 ReturnValue.Error = "EvaluateExpression: Attempted to raise to power with incompatible numbers: " +
-                                                    TrimSigDigits(Operand(1).Number, 6) + " raised to " + TrimSigDigits(Operand(2).Number, 6);
+                                                    format("{:.6T}", Operand(1).Number) + " raised to " + format("{:.6T}", Operand(2).Number);
                                 if (!DoingSizing && !KickOffSimulation && !EMSManager::FinishProcessingUserInput) {
                                     seriousErrorFound = true;
                                 }
@@ -2047,7 +2047,7 @@ namespace RuntimeLanguageProcessor {
                         } else {
                             // throw Error
                             ReturnValue.Error = "EvaluateExpression: Attempted to calculate exponential value of too large a number: " +
-                                                TrimSigDigits(Operand(1).Number, 4);
+                                                format("{:.4T}", Operand(1).Number);
                             ReturnValue.Type = ValueError;
                             if (!DoingSizing && !KickOffSimulation && !EMSManager::FinishProcessingUserInput) {
                                 seriousErrorFound = true;
@@ -2060,7 +2060,7 @@ namespace RuntimeLanguageProcessor {
                             // throw error,
                             ReturnValue.Type = ValueError;
                             ReturnValue.Error =
-                                "EvaluateExpression: Natural Log of zero or less! ln of value = " + TrimSigDigits(Operand(1).Number, 4);
+                                "EvaluateExpression: Natural Log of zero or less! ln of value = " + format("{:.4T}", Operand(1).Number);
                             if (!DoingSizing && !KickOffSimulation && !EMSManager::FinishProcessingUserInput) {
                                 seriousErrorFound = true;
                             }
@@ -2244,16 +2244,16 @@ namespace RuntimeLanguageProcessor {
 
                         ShowSevereError("EMS user program found serious problem and is halting simulation");
                         ShowContinueErrorTimeStamp("");
-                        ShowFatalError("EMS user program halted simulation with error code = " + TrimSigDigits(Operand(1).Number, 2));
+                        ShowFatalError("EMS user program halted simulation with error code = " + format("{:.2T}", Operand(1).Number));
                         ReturnValue = SetErlValueNumber(Operand(1).Number); // returns back the error code
                     } else if (SELECT_CASE_var == FuncSevereWarnEp) {
 
-                        ShowSevereError("EMS user program issued severe warning with error code = " + TrimSigDigits(Operand(1).Number, 2));
+                        ShowSevereError("EMS user program issued severe warning with error code = " + format("{:.2T}", Operand(1).Number));
                         ShowContinueErrorTimeStamp("");
                         ReturnValue = SetErlValueNumber(Operand(1).Number); // returns back the error code
                     } else if (SELECT_CASE_var == FuncWarnEp) {
 
-                        ShowWarningError("EMS user program issued warning with error code = " + TrimSigDigits(Operand(1).Number, 2));
+                        ShowWarningError("EMS user program issued warning with error code = " + format("{:.2T}", Operand(1).Number));
                         ShowContinueErrorTimeStamp("");
                         ReturnValue = SetErlValueNumber(Operand(1).Number); // returns back the error code
                     } else if (SELECT_CASE_var == FuncTrendValue) {
@@ -2558,8 +2558,8 @@ namespace RuntimeLanguageProcessor {
         } else {
             ReturnVal.Type = DataRuntimeLanguage::ValueError;
             ReturnVal.Error = DataRuntimeLanguage::PossibleOperators(FunctionCode).Symbol +
-                              " function called with invalid arguments: Hour=" + General::RoundSigDigits(Operand1, 1) +
-                              ", Timestep=" + General::RoundSigDigits(Operand2, 1);
+                              " function called with invalid arguments: Hour=" + format("{:.1R}", Operand1) +
+                              ", Timestep=" + format("{:.1R}", Operand2);
         }
     }
 
@@ -2578,8 +2578,8 @@ namespace RuntimeLanguageProcessor {
         } else {
             ReturnVal.Type = DataRuntimeLanguage::ValueError;
             ReturnVal.Error = DataRuntimeLanguage::PossibleOperators(FunctionCode).Symbol +
-                              " function called with invalid arguments: Hour=" + General::RoundSigDigits(Operand1, 1) +
-                              ", Timestep=" + General::RoundSigDigits(Operand2, 1);
+                              " function called with invalid arguments: Hour=" + format("{:.1R}", Operand1) +
+                              ", Timestep=" + format("{:.1R}", Operand2);
         }
     }
 
@@ -3122,7 +3122,7 @@ namespace RuntimeLanguageProcessor {
                         }
                     } else {
                         ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + " invalid field.");
-                        ShowContinueError("Invalid " + cNumericFieldNames(1) + '=' + TrimSigDigits(rNumericArgs(1), 2));
+                        ShowContinueError("Invalid " + cNumericFieldNames(1) + '=' + format("{:.2T}", rNumericArgs(1)));
                         ShowContinueError("must be greater than zero");
                         ErrorsFound = true;
                     }
@@ -3801,7 +3801,7 @@ namespace RuntimeLanguageProcessor {
                 if (Value.Number == 0.0) {
                     String = "0.0";
                 } else {
-                    String = TrimSigDigits(Value.Number, 6); //(String)
+                    String = format("{:.6T}", Value.Number); //(String)
                 }
 
             } else if (SELECT_CASE_var == ValueString) {

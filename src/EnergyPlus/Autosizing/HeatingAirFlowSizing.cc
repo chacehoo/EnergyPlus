@@ -246,7 +246,7 @@ Real64 HeatingAirFlowSizer::size(EnergyPlusData &EP_UNUSED(state), Real64 _origi
             std::string msg = this->callingRoutine + ' ' + this->compType + ' ' + this->compName + ", Developer Error: Component sizing incomplete.";
             ShowSevereError(msg);
             this->addErrorMessage(msg);
-            msg = "SizingString = " + this->sizingString + ", SizingResult = " + General::TrimSigDigits(this->autoSizedValue, 1);
+            msg = "SizingString = " + this->sizingString + ", SizingResult = " + format("{:.1T}", this->autoSizedValue);
             ShowContinueError(msg);
             this->addErrorMessage(msg);
             errorsFound = true;

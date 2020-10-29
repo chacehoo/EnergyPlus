@@ -7074,13 +7074,13 @@ namespace HeatBalanceSurfaceManager {
                     if (calcHeatBalInsideSurfErrCount < 16) {
                         if (!DataHeatBalance::AnyCondFD) {
                             ShowWarningError("Inside surface heat balance did not converge with Max Temp Difference [C] =" +
-                                             General::RoundSigDigits(MaxDelTemp, 3) +
-                                             " vs Max Allowed Temp Diff [C] =" + General::RoundSigDigits(MaxAllowedDelTemp, 3));
+                                             format("{:.3R}", MaxDelTemp) +
+                                             " vs Max Allowed Temp Diff [C] =" + format("{:.3R}", MaxAllowedDelTemp));
                             ShowContinueErrorTimeStamp("");
                         } else {
                             ShowWarningError("Inside surface heat balance did not converge with Max Temp Difference [C] =" +
-                                             General::RoundSigDigits(MaxDelTemp, 3) +
-                                             " vs Max Allowed Temp Diff [C] =" + General::RoundSigDigits(MaxAllowedDelTempCondFD, 6));
+                                             format("{:.3R}", MaxDelTemp) +
+                                             " vs Max Allowed Temp Diff [C] =" + format("{:.6R}", MaxAllowedDelTempCondFD));
                             ShowContinueErrorTimeStamp("");
                         }
                     } else {
@@ -7771,8 +7771,8 @@ namespace HeatBalanceSurfaceManager {
                     ++calcHeatBalInsideSurfErrCount;
                     if (calcHeatBalInsideSurfErrCount < 16) {
                         ShowWarningError(
-                            "Inside surface heat balance did not converge with Max Temp Difference [C] =" + General::RoundSigDigits(MaxDelTemp, 3) +
-                            " vs Max Allowed Temp Diff [C] =" + General::RoundSigDigits(MaxAllowedDelTempCondFD, 6));
+                            "Inside surface heat balance did not converge with Max Temp Difference [C] =" + format("{:.3R}", MaxDelTemp) +
+                            " vs Max Allowed Temp Diff [C] =" + format("{:.6R}", MaxAllowedDelTempCondFD));
                         ShowContinueErrorTimeStamp("");
                     } else {
                         ShowRecurringWarningErrorAtEnd("Inside surface heat balance convergence problem continues",
@@ -7856,19 +7856,19 @@ namespace HeatBalanceSurfaceManager {
             if (!WarmupFlag || WarmupSurfTemp > 10 || DisplayExtraWarnings) {
                 if (TH12 < MinSurfaceTempLimit) {
                     if (surface.LowTempErrCount == 0) {
-                        ShowSevereMessage("Temperature (low) out of bounds [" + RoundSigDigits(TH12, 2) + "] for zone=\"" + zone.Name +
+                        ShowSevereMessage("Temperature (low) out of bounds [" + format("{:.2R}", TH12) + "] for zone=\"" + zone.Name +
                                           "\", for surface=\"" + surface.Name + "\"");
                         ShowContinueErrorTimeStamp("");
                         if (!zone.TempOutOfBoundsReported) {
                             ShowContinueError("Zone=\"" + zone.Name + "\", Diagnostic Details:");
                             if (zone.FloorArea > 0.0) {
-                                ShowContinueError("...Internal Heat Gain [" + RoundSigDigits(zone.InternalHeatGains / zone.FloorArea, 3) + "] W/m2");
+                                ShowContinueError("...Internal Heat Gain [" + format("{:.3R}", zone.InternalHeatGains / zone.FloorArea) + "] W/m2");
                             } else {
-                                ShowContinueError("...Internal Heat Gain (no floor) [" + RoundSigDigits(zone.InternalHeatGains, 3) + "] W");
+                                ShowContinueError("...Internal Heat Gain (no floor) [" + format("{:.3R}", zone.InternalHeatGains) + "] W");
                             }
                             if (AirflowNetwork::SimulateAirflowNetwork <= AirflowNetwork::AirflowNetworkControlSimple) {
-                                ShowContinueError("...Infiltration/Ventilation [" + RoundSigDigits(zone.NominalInfilVent, 3) + "] m3/s");
-                                ShowContinueError("...Mixing/Cross Mixing [" + RoundSigDigits(zone.NominalMixing, 3) + "] m3/s");
+                                ShowContinueError("...Infiltration/Ventilation [" + format("{:.3R}", zone.NominalInfilVent) + "] m3/s");
+                                ShowContinueError("...Mixing/Cross Mixing [" + format("{:.3R}", zone.NominalMixing) + "] m3/s");
                             } else {
                                 ShowContinueError("...Airflow Network Simulation: Nominal Infiltration/Ventilation/Mixing not available.");
                             }
@@ -7897,19 +7897,19 @@ namespace HeatBalanceSurfaceManager {
                     }
                 } else {
                     if (surface.HighTempErrCount == 0) {
-                        ShowSevereMessage("Temperature (high) out of bounds (" + RoundSigDigits(TH12, 2) + "] for zone=\"" + zone.Name +
+                        ShowSevereMessage("Temperature (high) out of bounds (" + format("{:.2R}", TH12) + "] for zone=\"" + zone.Name +
                                           "\", for surface=\"" + surface.Name + "\"");
                         ShowContinueErrorTimeStamp("");
                         if (!zone.TempOutOfBoundsReported) {
                             ShowContinueError("Zone=\"" + zone.Name + "\", Diagnostic Details:");
                             if (zone.FloorArea > 0.0) {
-                                ShowContinueError("...Internal Heat Gain [" + RoundSigDigits(zone.InternalHeatGains / zone.FloorArea, 3) + "] W/m2");
+                                ShowContinueError("...Internal Heat Gain [" + format("{:.3R}", zone.InternalHeatGains / zone.FloorArea) + "] W/m2");
                             } else {
-                                ShowContinueError("...Internal Heat Gain (no floor) [" + RoundSigDigits(zone.InternalHeatGains, 3) + "] W");
+                                ShowContinueError("...Internal Heat Gain (no floor) [" + format("{:.3R}", zone.InternalHeatGains) + "] W");
                             }
                             if (AirflowNetwork::SimulateAirflowNetwork <= AirflowNetwork::AirflowNetworkControlSimple) {
-                                ShowContinueError("...Infiltration/Ventilation [" + RoundSigDigits(zone.NominalInfilVent, 3) + "] m3/s");
-                                ShowContinueError("...Mixing/Cross Mixing [" + RoundSigDigits(zone.NominalMixing, 3) + "] m3/s");
+                                ShowContinueError("...Infiltration/Ventilation [" + format("{:.3R}", zone.NominalInfilVent) + "] m3/s");
+                                ShowContinueError("...Mixing/Cross Mixing [" + format("{:.3R}", zone.NominalMixing) + "] m3/s");
                             } else {
                                 ShowContinueError("...Airflow Network Simulation: Nominal Infiltration/Ventilation/Mixing not available.");
                             }
@@ -7951,20 +7951,20 @@ namespace HeatBalanceSurfaceManager {
         if ((TH12 > MaxSurfaceTempLimitBeforeFatal) || (TH12 < MinSurfaceTempLimitBeforeFatal)) {
             if (!WarmupFlag) {
                 if (TH12 < MinSurfaceTempLimitBeforeFatal) {
-                    ShowSevereError("Temperature (low) out of bounds [" + RoundSigDigits(TH12, 2) + "] for zone=\"" + zone.Name +
+                    ShowSevereError("Temperature (low) out of bounds [" + format("{:.2R}", TH12) + "] for zone=\"" + zone.Name +
                                     "\", for surface=\"" + surface.Name + "\"");
                     ShowContinueErrorTimeStamp("");
                     if (!zone.TempOutOfBoundsReported) {
                         ShowContinueError("Zone=\"" + zone.Name + "\", Diagnostic Details:");
                         if (zone.FloorArea > 0.0) {
-                            ShowContinueError("...Internal Heat Gain [" + RoundSigDigits(zone.InternalHeatGains / zone.FloorArea, 3) + "] W/m2");
+                            ShowContinueError("...Internal Heat Gain [" + format("{:.3R}", zone.InternalHeatGains / zone.FloorArea) + "] W/m2");
                         } else {
-                            ShowContinueError("...Internal Heat Gain (no floor) [" + RoundSigDigits(zone.InternalHeatGains / zone.FloorArea, 3) +
+                            ShowContinueError("...Internal Heat Gain (no floor) [" + format("{:.3R}", zone.InternalHeatGains / zone.FloorArea) +
                                               "] W");
                         }
                         if (AirflowNetwork::SimulateAirflowNetwork <= AirflowNetwork::AirflowNetworkControlSimple) {
-                            ShowContinueError("...Infiltration/Ventilation [" + RoundSigDigits(zone.NominalInfilVent, 3) + "] m3/s");
-                            ShowContinueError("...Mixing/Cross Mixing [" + RoundSigDigits(zone.NominalMixing, 3) + "] m3/s");
+                            ShowContinueError("...Infiltration/Ventilation [" + format("{:.3R}", zone.NominalInfilVent) + "] m3/s");
+                            ShowContinueError("...Mixing/Cross Mixing [" + format("{:.3R}", zone.NominalMixing) + "] m3/s");
                         } else {
                             ShowContinueError("...Airflow Network Simulation: Nominal Infiltration/Ventilation/Mixing not available.");
                         }
@@ -7977,20 +7977,20 @@ namespace HeatBalanceSurfaceManager {
                     }
                     ShowFatalError("Program terminates due to preceding condition.");
                 } else {
-                    ShowSevereError("Temperature (high) out of bounds [" + RoundSigDigits(TH12, 2) + "] for zone=\"" + zone.Name +
+                    ShowSevereError("Temperature (high) out of bounds [" + format("{:.2R}", TH12) + "] for zone=\"" + zone.Name +
                                     "\", for surface=\"" + surface.Name + "\"");
                     ShowContinueErrorTimeStamp("");
                     if (!zone.TempOutOfBoundsReported) {
                         ShowContinueError("Zone=\"" + zone.Name + "\", Diagnostic Details:");
                         if (zone.FloorArea > 0.0) {
-                            ShowContinueError("...Internal Heat Gain [" + RoundSigDigits(zone.InternalHeatGains / zone.FloorArea, 3) + "] W/m2");
+                            ShowContinueError("...Internal Heat Gain [" + format("{:.3R}", zone.InternalHeatGains / zone.FloorArea) + "] W/m2");
                         } else {
-                            ShowContinueError("...Internal Heat Gain (no floor) [" + RoundSigDigits(zone.InternalHeatGains / zone.FloorArea, 3) +
+                            ShowContinueError("...Internal Heat Gain (no floor) [" + format("{:.3R}", zone.InternalHeatGains / zone.FloorArea) +
                                               "] W");
                         }
                         if (AirflowNetwork::SimulateAirflowNetwork <= AirflowNetwork::AirflowNetworkControlSimple) {
-                            ShowContinueError("...Infiltration/Ventilation [" + RoundSigDigits(zone.NominalInfilVent, 3) + "] m3/s");
-                            ShowContinueError("...Mixing/Cross Mixing [" + RoundSigDigits(zone.NominalMixing, 3) + "] m3/s");
+                            ShowContinueError("...Infiltration/Ventilation [" + format("{:.3R}", zone.NominalInfilVent) + "] m3/s");
+                            ShowContinueError("...Mixing/Cross Mixing [" + format("{:.3R}", zone.NominalMixing) + "] m3/s");
                         } else {
                             ShowContinueError("...Airflow Network Simulation: Nominal Infiltration/Ventilation/Mixing not available.");
                         }
@@ -8005,7 +8005,7 @@ namespace HeatBalanceSurfaceManager {
                 }
             } else {
                 if (TH12 < -10000. || TH12 > 10000.) {
-                    ShowSevereError("CalcHeatBalanceInsideSurf: The temperature of " + RoundSigDigits(TH12, 2) + " C for zone=\"" + zone.Name +
+                    ShowSevereError("CalcHeatBalanceInsideSurf: The temperature of " + format("{:.2R}", TH12) + " C for zone=\"" + zone.Name +
                                     "\", for surface=\"" + surface.Name + "\"");
                     ShowContinueError("..is very far out of bounds during warmup. This may be an indication of a malformed zone.");
                     ShowContinueErrorTimeStamp("");

@@ -102,10 +102,10 @@ Real64 CoolingWaterDesAirOutletHumRatSizer::size(EnergyPlusData &EP_UNUSED(state
                 this->callingRoutine + ":" + " Coil=\"" + this->compName + "\", Cooling Coil has leaving humidity ratio > entering humidity ratio.";
             this->addErrorMessage(msg);
             ShowWarningError(msg);
-            msg = "    Wair,in =  " + General::RoundSigDigits(this->dataDesInletAirHumRat, 6) + " [kgWater/kgDryAir]";
+            msg = "    Wair,in =  " + format("{:.6R}", this->dataDesInletAirHumRat) + " [kgWater/kgDryAir]";
             this->addErrorMessage(msg);
             ShowContinueError(msg);
-            msg = "    Wair,out = " + General::RoundSigDigits(this->autoSizedValue, 6) + " [kgWater/kgDryAir]";
+            msg = "    Wair,out = " + format("{:.6R}", this->autoSizedValue) + " [kgWater/kgDryAir]";
             this->addErrorMessage(msg);
             ShowContinueError(msg);
             if (this->dataDesInletAirHumRat > 0.016) {
@@ -116,7 +116,7 @@ Real64 CoolingWaterDesAirOutletHumRatSizer::size(EnergyPlusData &EP_UNUSED(state
             msg = "....coil leaving humidity ratio will be reset to:";
             this->addErrorMessage(msg);
             ShowContinueError(msg);
-            msg = "    Wair,out = " + General::RoundSigDigits(this->autoSizedValue, 6) + " [kgWater/kgDryAir]";
+            msg = "    Wair,out = " + format("{:.6R}", this->autoSizedValue) + " [kgWater/kgDryAir]";
             this->addErrorMessage(msg);
             ShowContinueError(msg);
         }
@@ -133,24 +133,24 @@ Real64 CoolingWaterDesAirOutletHumRatSizer::size(EnergyPlusData &EP_UNUSED(state
                                   "temperature > design air entering humidity ratio.";
                 this->addErrorMessage(msg);
                 ShowWarningError(msg);
-                msg = "    Wair,in =  " + General::RoundSigDigits(this->dataDesInletAirHumRat, 6) + " [kgWater/kgDryAir]";
+                msg = "    Wair,in =  " + format("{:.6R}", this->dataDesInletAirHumRat) + " [kgWater/kgDryAir]";
                 this->addErrorMessage(msg);
                 ShowContinueError(msg);
-                msg = "    Wair,out = " + General::RoundSigDigits(this->autoSizedValue, 6) + " [kgWater/kgDryAir]";
+                msg = "    Wair,out = " + format("{:.6R}", this->autoSizedValue) + " [kgWater/kgDryAir]";
                 this->addErrorMessage(msg);
                 ShowContinueError(msg);
-                msg = "    Inlet chilled water temperature = " + General::RoundSigDigits(this->dataDesInletWaterTemp, 3) + " [C]";
+                msg = "    Inlet chilled water temperature = " + format("{:.3R}", this->dataDesInletWaterTemp) + " [C]";
                 this->addErrorMessage(msg);
                 ShowContinueError(msg);
                 msg = "    Minimum humidity ratio at saturation for inlet chilled water temperature = " +
-                      General::RoundSigDigits(desHumRatAtWaterInTemp, 6) + " [kgWater/kgDryAir]";
+                      format("{:.6R}", desHumRatAtWaterInTemp) + " [kgWater/kgDryAir]";
                 this->addErrorMessage(msg);
                 ShowContinueError(msg);
                 this->autoSizedValue = this->dataDesInletAirHumRat;
                 msg = "....coil leaving humidity ratio will be reset to:";
                 this->addErrorMessage(msg);
                 ShowContinueError(msg);
-                msg = "    Wair,out = " + General::RoundSigDigits(this->autoSizedValue, 6) + " [kgWater/kgDryAir]";
+                msg = "    Wair,out = " + format("{:.6R}", this->autoSizedValue) + " [kgWater/kgDryAir]";
                 this->addErrorMessage(msg);
                 ShowContinueError(msg);
             }

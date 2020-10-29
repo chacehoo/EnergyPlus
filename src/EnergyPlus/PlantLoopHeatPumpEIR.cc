@@ -641,8 +641,8 @@ namespace EIRPlantLoopHeatPumps {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpCapacity - hardSizedCapacity) / hardSizedCapacity) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowWarningMessage("EIRPlantLoopHeatPump::size(): Potential issue with equipment sizing for " + this->name);
-                                    ShowContinueError("User-Specified Nominal Capacity of " + General::RoundSigDigits(hardSizedCapacity, 2) + " [W]");
-                                    ShowContinueError("differs from Design Size Nominal Capacity of " + General::RoundSigDigits(tmpCapacity, 2) +
+                                    ShowContinueError("User-Specified Nominal Capacity of " + format("{:.2R}", hardSizedCapacity) + " [W]");
+                                    ShowContinueError("differs from Design Size Nominal Capacity of " + format("{:.2R}", tmpCapacity) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -682,9 +682,9 @@ namespace EIRPlantLoopHeatPumps {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("EIRPlantLoopHeatPump::size(): Potential issue with equipment sizing for " + this->name);
                                     ShowContinueError("User-Specified Load Side Volume Flow Rate of " +
-                                                      General::RoundSigDigits(hardSizedLoadSideFlow, 2) + " [m3/s]");
+                                                      format("{:.2R}", hardSizedLoadSideFlow) + " [m3/s]");
                                     ShowContinueError("differs from Design Size Load Side Volume Flow Rate of " +
-                                                      General::RoundSigDigits(tmpLoadVolFlow, 2) + " [m3/s]");
+                                                      format("{:.2R}", tmpLoadVolFlow) + " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -820,9 +820,9 @@ namespace EIRPlantLoopHeatPumps {
                             DataSizing::AutoVsHardSizingThreshold) {
                             ShowMessage("EIRPlantLoopHeatPump::size(): Potential issue with equipment sizing for " + this->name);
                             ShowContinueError("User-Specified Source Side Volume Flow Rate of " +
-                                              General::RoundSigDigits(hardSizedSourceSideFlow, 2) + " [m3/s]");
+                                              format("{:.2R}", hardSizedSourceSideFlow) + " [m3/s]");
                             ShowContinueError("differs from Design Size Source Side Volume Flow Rate of " +
-                                              General::RoundSigDigits(tmpSourceVolFlow, 2) + " [m3/s]");
+                                              format("{:.2R}", tmpSourceVolFlow) + " [m3/s]");
                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                         }

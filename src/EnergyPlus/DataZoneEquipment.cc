@@ -1706,9 +1706,9 @@ namespace DataZoneEquipment {
                                                             OARequirements(DSOAPtr).Name + "\".");
                                             ShowContinueError("For System Outdoor Air Method = ProportionalControlBasedonOccupancySchedule, maximum "
                                                               "target CO2 concentration (" +
-                                                              RoundSigDigits(ZoneMaxCO2, 2) +
+                                                              format("{:.2R}", ZoneMaxCO2) +
                                                               "), is not greater than minimum target CO2 concentration (" +
-                                                              RoundSigDigits(ZoneMinCO2, 2) + ").");
+                                                              format("{:.2R}", ZoneMinCO2) + ").");
                                             ShowContinueError("\"ProportionalControlBasedonOccupancySchedule\" will not be modeled. Default "
                                                               "\"Flow/Person+Flow/Area\" will be modeled. Simulation continues...");
                                             ShowContinueErrorTimeStamp("");
@@ -1726,9 +1726,9 @@ namespace DataZoneEquipment {
                                                             OARequirements(DSOAPtr).Name + "\".");
                                             ShowContinueError("For System Outdoor Air Method = ProportionalControlBasedonDesignOccupancy, maximum "
                                                               "target CO2 concentration (" +
-                                                              RoundSigDigits(ZoneMaxCO2, 2) +
+                                                              format("{:.2R}", ZoneMaxCO2) +
                                                               "), is not greater than minimum target CO2 concentration (" +
-                                                              RoundSigDigits(ZoneMinCO2, 2) + ").");
+                                                              format("{:.2R}", ZoneMinCO2) + ").");
                                             ShowContinueError("\"ProportionalControlBasedonDesignOccupancy\" will not be modeled. Default "
                                                               "\"Flow/Person+Flow/Area\" will be modeled. Simulation continues...");
                                             ShowContinueErrorTimeStamp("");

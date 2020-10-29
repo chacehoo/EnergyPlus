@@ -765,13 +765,13 @@ namespace ScheduleManager {
                 if (ScheduleType(LoopIndex).Minimum > ScheduleType(LoopIndex).Maximum) {
                     if (ScheduleType(LoopIndex).IsReal) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\", " + cNumericFields(1) + " [" +
-                                        RoundSigDigits(ScheduleType(LoopIndex).Minimum, 2) + "] > " + cNumericFields(2) + " [" +
-                                        RoundSigDigits(ScheduleType(LoopIndex).Maximum, 2) + "].");
+                                        format("{:.2R}", ScheduleType(LoopIndex).Minimum) + "] > " + cNumericFields(2) + " [" +
+                                        format("{:.2R}", ScheduleType(LoopIndex).Maximum) + "].");
                         ShowContinueError("  Other warning/severes about schedule values may appear.");
                     } else {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\", " + cNumericFields(1) + " [" +
-                                        RoundSigDigits(ScheduleType(LoopIndex).Minimum, 0) + "] > " + cNumericFields(2) + " [" +
-                                        RoundSigDigits(ScheduleType(LoopIndex).Maximum, 0) + "].");
+                                        format("{:.0R}", ScheduleType(LoopIndex).Minimum) + "] > " + cNumericFields(2) + " [" +
+                                        format("{:.0R}", ScheduleType(LoopIndex).Maximum) + "].");
                         ShowContinueError("  Other warning/severes about schedule values may appear.");
                     }
                 }
@@ -1668,7 +1668,7 @@ namespace ScheduleManager {
             if (Numbers(3) != 8760 && Numbers(3) != 8784) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\", " + cNumericFields(3) +
                                 " must = 8760 or 8784 (for a leap year)");
-                ShowContinueError("..Value for field = " + TrimSigDigits(Numbers(3), 0) + ", Schedule not processed.");
+                ShowContinueError("..Value for field = " + format("{:.0T}", Numbers(3)) + ", Schedule not processed.");
                 ErrorsFound = true;
                 continue;
             }
@@ -2262,8 +2262,8 @@ namespace ScheduleManager {
             if (CheckScheduleValueMinMax(SchNum, ">=", ScheduleType(NumPointer).Minimum, "<=", ScheduleType(NumPointer).Maximum)) continue;
             ShowSevereError(RoutineName + "Schedule=\"" + Schedule(SchNum).Name + "\" has values outside its Schedule Type (" +
                             ScheduleType(NumPointer).Name + ") range");
-            ShowContinueError("  Minimum should be >=" + RoundSigDigits(ScheduleType(NumPointer).Minimum, 3) +
-                              " and Maximum should be <=" + RoundSigDigits(ScheduleType(NumPointer).Maximum, 3));
+            ShowContinueError("  Minimum should be >=" + format("{:.3R}", ScheduleType(NumPointer).Minimum) +
+                              " and Maximum should be <=" + format("{:.3R}", ScheduleType(NumPointer).Maximum));
             ErrorsFound = true;
         }
 
@@ -2439,9 +2439,9 @@ namespace ScheduleManager {
                 for (Count = 1; Count <= NumScheduleTypes; ++Count) {
                     if (ScheduleType(Count).Limited) {
                         NoAverageLinear = "Average";
-                        Num1 = RoundSigDigits(ScheduleType(Count).Minimum, 2);
+                        Num1 = format("{:.2R}", ScheduleType(Count).Minimum);
                         strip(Num1);
-                        Num2 = RoundSigDigits(ScheduleType(Count).Maximum, 2);
+                        Num2 = format("{:.2R}", ScheduleType(Count).Maximum);
                         strip(Num2);
                         if (ScheduleType(Count).IsReal) {
                             YesNo2 = "Yes";

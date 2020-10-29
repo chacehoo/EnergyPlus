@@ -264,13 +264,13 @@ namespace SurfaceGroundHeatExchanger {
             state.dataSurfaceGroundHeatExchangers->SurfaceGHE(Item).TubeSpacing = rNumericArgs(3);
 
             if (rNumericArgs(2) == 0) {
-                ShowSevereError("Invalid " + cNumericFieldNames(2) + '=' + RoundSigDigits(rNumericArgs(2), 2));
+                ShowSevereError("Invalid " + cNumericFieldNames(2) + '=' + format("{:.2R}", rNumericArgs(2)));
                 ShowContinueError("Entered in " + cCurrentModuleObject + '=' + cAlphaArgs(1));
                 ShowContinueError("Value must be greater than 0.0");
                 ErrorsFound = true;
             }
             if (rNumericArgs(3) == 0.0) {
-                ShowSevereError("Invalid " + cNumericFieldNames(3) + '=' + RoundSigDigits(rNumericArgs(3), 2));
+                ShowSevereError("Invalid " + cNumericFieldNames(3) + '=' + format("{:.2R}", rNumericArgs(3)));
                 ShowContinueError("Entered in " + cCurrentModuleObject + '=' + cAlphaArgs(1));
                 ShowContinueError("Value must be greater than 0.0");
                 ErrorsFound = true;
@@ -280,13 +280,13 @@ namespace SurfaceGroundHeatExchanger {
             state.dataSurfaceGroundHeatExchangers->SurfaceGHE(Item).SurfaceLength = rNumericArgs(4);
             state.dataSurfaceGroundHeatExchangers->SurfaceGHE(Item).SurfaceWidth = rNumericArgs(5);
             if (rNumericArgs(4) <= 0.0) {
-                ShowSevereError("Invalid " + cNumericFieldNames(4) + '=' + RoundSigDigits(rNumericArgs(4), 2));
+                ShowSevereError("Invalid " + cNumericFieldNames(4) + '=' + format("{:.2R}", rNumericArgs(4)));
                 ShowContinueError("Entered in " + cCurrentModuleObject + '=' + cAlphaArgs(1));
                 ShowContinueError("Value must be greater than 0.0");
                 ErrorsFound = true;
             }
             if (rNumericArgs(5) <= 0.0) {
-                ShowSevereError("Invalid " + cNumericFieldNames(5) + '=' + RoundSigDigits(rNumericArgs(5), 2));
+                ShowSevereError("Invalid " + cNumericFieldNames(5) + '=' + format("{:.2R}", rNumericArgs(5)));
                 ShowContinueError("Entered in " + cCurrentModuleObject + '=' + cAlphaArgs(1));
                 ShowContinueError("Value must be greater than 0.0");
                 ErrorsFound = true;
@@ -390,7 +390,7 @@ namespace SurfaceGroundHeatExchanger {
         if (state.dataSurfaceGroundHeatExchangers->NoSurfaceGroundTempObjWarning) {
             if (!GroundTemp_SurfaceObjInput) {
                 ShowWarningError("GetSurfaceGroundHeatExchanger: No \"Site:GroundTemperature:Shallow\" were input.");
-                ShowContinueError("Defaults, constant throughout the year of (" + RoundSigDigits(GroundTemp_Surface, 1) + ") will be used.");
+                ShowContinueError("Defaults, constant throughout the year of (" + format("{:.1R}", GroundTemp_Surface) + ") will be used.");
             }
             state.dataSurfaceGroundHeatExchangers->NoSurfaceGroundTempObjWarning = false;
         }
@@ -1124,7 +1124,7 @@ namespace SurfaceGroundHeatExchanger {
             if (PlantLoop(this->LoopNum).FluidIndex == WaterIndex) {
                 if (this->FrozenErrIndex1 == 0) {
                     ShowWarningMessage("GroundHeatExchanger:Surface=\"" + this->Name +
-                                       "\", water is frozen; Model not valid. Calculated Water Temperature=[" + RoundSigDigits(this->InletTemp, 2) + "] C");
+                                       "\", water is frozen; Model not valid. Calculated Water Temperature=[" + format("{:.2R}", this->InletTemp) + "] C");
                     ShowContinueErrorTimeStamp("");
                 }
                 ShowRecurringWarningErrorAtEnd("GroundHeatExchanger:Surface=\"" + this->Name + "\", water is frozen",

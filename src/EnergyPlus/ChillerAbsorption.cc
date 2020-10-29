@@ -282,7 +282,7 @@ namespace ChillerAbsorption {
             }
             if (DataIPShortCuts::rNumericArgs(1) == 0.0) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(1) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(1), 2));
+                                format("{:.2R}", DataIPShortCuts::rNumericArgs(1)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ErrorsFound = true;
             }
@@ -459,7 +459,7 @@ namespace ChillerAbsorption {
             if (thisChiller.GeneratorVolFlowRate == 0.0 &&
                 thisChiller.GenHeatSourceType == DataLoopNode::NodeType_Water) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(16) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(16), 2));
+                                format("{:.2R}", DataIPShortCuts::rNumericArgs(16)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ShowContinueError("...Generator water flow rate must be greater than 0 when absorber generator fluid type is hot water.");
                 ErrorsFound = true;
@@ -962,8 +962,8 @@ namespace ChillerAbsorption {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpNomCap - NomCapUser) / NomCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerAbsorption: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Nominal Capacity of " + General::RoundSigDigits(NomCapUser, 2) + " [W]");
-                                    ShowContinueError("differs from Design Size Nominal Capacity of " + General::RoundSigDigits(tmpNomCap, 2) +
+                                    ShowContinueError("User-Specified Nominal Capacity of " + format("{:.2R}", NomCapUser) + " [W]");
+                                    ShowContinueError("differs from Design Size Nominal Capacity of " + format("{:.2R}", tmpNomCap) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -1014,8 +1014,8 @@ namespace ChillerAbsorption {
                         if (DataGlobals::DisplayExtraWarnings) {
                             if ((std::abs(tmpNomPumpPower - NomPumpPowerUser) / NomPumpPowerUser) > DataSizing::AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeChillerAbsorption: Potential issue with equipment sizing for " + this->Name);
-                                ShowContinueError("User-Specified Nominal Pumping Power of " + General::RoundSigDigits(NomPumpPowerUser, 2) + " [W]");
-                                ShowContinueError("differs from Design Size Nominal Pumping Power of " + General::RoundSigDigits(tmpNomPumpPower, 2) +
+                                ShowContinueError("User-Specified Nominal Pumping Power of " + format("{:.2R}", NomPumpPowerUser) + " [W]");
+                                ShowContinueError("differs from Design Size Nominal Pumping Power of " + format("{:.2R}", tmpNomPumpPower) +
                                                   " [W]");
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -1061,9 +1061,9 @@ namespace ChillerAbsorption {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerAbsorption: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Design Chilled Water Flow Rate of " +
-                                                      General::RoundSigDigits(EvapVolFlowRateUser, 5) + " [m3/s]");
+                                                      format("{:.5R}", EvapVolFlowRateUser) + " [m3/s]");
                                     ShowContinueError("differs from Design Size Design Chilled Water Flow Rate of " +
-                                                      General::RoundSigDigits(tmpEvapVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", tmpEvapVolFlowRate) + " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1136,9 +1136,9 @@ namespace ChillerAbsorption {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerAbsorption: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Design Condenser Water Flow Rate of " +
-                                                      General::RoundSigDigits(CondVolFlowRateUser, 5) + " [m3/s]");
+                                                      format("{:.5R}", CondVolFlowRateUser) + " [m3/s]");
                                     ShowContinueError("differs from Design Size Design Condenser Water Flow Rate of " +
-                                                      General::RoundSigDigits(tmpCondVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", tmpCondVolFlowRate) + " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1210,9 +1210,9 @@ namespace ChillerAbsorption {
                                             DataSizing::AutoVsHardSizingThreshold) {
                                             ShowMessage("SizeChillerAbsorption: Potential issue with equipment sizing for " + this->Name);
                                             ShowContinueError("User-Specified Design Generator Fluid Flow Rate of " +
-                                                              General::RoundSigDigits(GeneratorVolFlowRateUser, 5) + " [m3/s]");
+                                                              format("{:.5R}", GeneratorVolFlowRateUser) + " [m3/s]");
                                             ShowContinueError("differs from Design Size Design Generator Fluid Flow Rate of " +
-                                                              General::RoundSigDigits(tmpGeneratorVolFlowRate, 5) + " [m3/s]");
+                                                              format("{:.5R}", tmpGeneratorVolFlowRate) + " [m3/s]");
                                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                         }
@@ -1269,9 +1269,9 @@ namespace ChillerAbsorption {
                                             DataSizing::AutoVsHardSizingThreshold) {
                                             ShowMessage("SizeChillerAbsorption: Potential issue with equipment sizing for " + this->Name);
                                             ShowContinueError("User-Specified Design Generator Fluid Flow Rate of " +
-                                                              General::RoundSigDigits(GeneratorVolFlowRateUser, 5) + " [m3/s]");
+                                                              format("{:.5R}", GeneratorVolFlowRateUser) + " [m3/s]");
                                             ShowContinueError("differs from Design Size Design Generator Fluid Flow Rate of " +
-                                                              General::RoundSigDigits(tmpGeneratorVolFlowRate, 5) + " [m3/s]");
+                                                              format("{:.5R}", tmpGeneratorVolFlowRate) + " [m3/s]");
                                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                         }

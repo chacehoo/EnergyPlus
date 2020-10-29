@@ -268,7 +268,7 @@ namespace ChillerIndirectAbsorption {
             }
             if (DataIPShortCuts::rNumericArgs(1) == 0.0) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(1) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(1), 2));
+                                format("{:.2R}", DataIPShortCuts::rNumericArgs(1)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ErrorsFound = true;
             }
@@ -1048,8 +1048,8 @@ namespace ChillerIndirectAbsorption {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpNomCap - NomCapUser) / NomCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerAbsorptionIndirect: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Nominal Capacity of " + General::RoundSigDigits(NomCapUser, 2) + " [W]");
-                                    ShowContinueError("differs from Design Size Nominal Capacity of " + General::RoundSigDigits(tmpNomCap, 2) +
+                                    ShowContinueError("User-Specified Nominal Capacity of " + format("{:.2R}", NomCapUser) + " [W]");
+                                    ShowContinueError("differs from Design Size Nominal Capacity of " + format("{:.2R}", tmpNomCap) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -1104,8 +1104,8 @@ namespace ChillerIndirectAbsorption {
                         if (DataGlobals::DisplayExtraWarnings) {
                             if ((std::abs(tmpNomPumpPower - NomPumpPowerUser) / NomPumpPowerUser) > DataSizing::AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeChillerAbsorptionIndirect: Potential issue with equipment sizing for " + this->Name);
-                                ShowContinueError("User-Specified Nominal Pumping Power of " + General::RoundSigDigits(NomPumpPowerUser, 2) + " [W]");
-                                ShowContinueError("differs from Design Size Nominal Pumping Power of " + General::RoundSigDigits(tmpNomPumpPower, 2) +
+                                ShowContinueError("User-Specified Nominal Pumping Power of " + format("{:.2R}", NomPumpPowerUser) + " [W]");
+                                ShowContinueError("differs from Design Size Nominal Pumping Power of " + format("{:.2R}", tmpNomPumpPower) +
                                                   " [W]");
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -1152,9 +1152,9 @@ namespace ChillerIndirectAbsorption {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerElectricIndirect: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Design Chilled Water Flow Rate of " +
-                                                      General::RoundSigDigits(EvapVolFlowRateUser, 5) + " [m3/s]");
+                                                      format("{:.5R}", EvapVolFlowRateUser) + " [m3/s]");
                                     ShowContinueError("differs from Design Size Design Chilled Water Flow Rate of " +
-                                                      General::RoundSigDigits(tmpEvapVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", tmpEvapVolFlowRate) + " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1236,9 +1236,9 @@ namespace ChillerIndirectAbsorption {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerAbsorptionIndirect: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Design Condenser Water Flow Rate of " +
-                                                      General::RoundSigDigits(CondVolFlowRateUser, 5) + " [m3/s]");
+                                                      format("{:.5R}", CondVolFlowRateUser) + " [m3/s]");
                                     ShowContinueError("differs from Design Size Design Condenser Water Flow Rate of " +
-                                                      General::RoundSigDigits(tmpCondVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", tmpCondVolFlowRate) + " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1323,9 +1323,9 @@ namespace ChillerIndirectAbsorption {
                                             DataSizing::AutoVsHardSizingThreshold) {
                                             ShowMessage("SizeChillerAbsorptionIndirect: Potential issue with equipment sizing for " + this->Name);
                                             ShowContinueError("User-Specified Design Generator Fluid Flow Rate of " +
-                                                              General::RoundSigDigits(GeneratorVolFlowRateUser, 5) + " [m3/s]");
+                                                              format("{:.5R}", GeneratorVolFlowRateUser) + " [m3/s]");
                                             ShowContinueError("differs from Design Size Design Generator Fluid Flow Rate of " +
-                                                              General::RoundSigDigits(tmpGeneratorVolFlowRate, 5) + " [m3/s]");
+                                                              format("{:.5R}", tmpGeneratorVolFlowRate) + " [m3/s]");
                                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                         }
@@ -1398,9 +1398,9 @@ namespace ChillerIndirectAbsorption {
                                             DataSizing::AutoVsHardSizingThreshold) {
                                             ShowMessage("SizeChillerAbsorptionIndirect: Potential issue with equipment sizing for " + this->Name);
                                             ShowContinueError("User-Specified Design Generator Fluid Flow Rate of " +
-                                                              General::RoundSigDigits(GeneratorVolFlowRateUser, 5) + " [m3/s]");
+                                                              format("{:.5R}", GeneratorVolFlowRateUser) + " [m3/s]");
                                             ShowContinueError("differs from Design Size Design Generator Fluid Flow Rate of " +
-                                                              General::RoundSigDigits(tmpGeneratorVolFlowRate, 5) + " [m3/s]");
+                                                              format("{:.5R}", tmpGeneratorVolFlowRate) + " [m3/s]");
                                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                         }
@@ -1535,9 +1535,9 @@ namespace ChillerIndirectAbsorption {
                     ++this->MinCondInletTempCtr;
                     ShowWarningError("Chiller:Absorption:Indirect \"" + this->Name + "\"");
                     ShowContinueError("...Entering condenser water temperature below specified minimum (" +
-                                      General::RoundSigDigits(this->MinCondInletTemp, 3) + " C).");
+                                      format("{:.3R}", this->MinCondInletTemp) + " C).");
                     ShowContinueError("...Entering condenser water temperature = " +
-                                      General::RoundSigDigits(DataLoopNode::Node(this->CondInletNodeNum).Temp, 3) + " C.");
+                                      format("{:.3R}", DataLoopNode::Node(this->CondInletNodeNum).Temp) + " C.");
                     ShowContinueErrorTimeStamp("...simulation continues.");
                 } else {
                     ShowRecurringWarningErrorAtEnd("Entering condenser water temperature below specified minimum error continues.",
@@ -1556,9 +1556,9 @@ namespace ChillerIndirectAbsorption {
                         ++this->MinGenInletTempCtr;
                         ShowWarningError("Chiller:Absorption:Indirect \"" + this->Name + "\"");
                         ShowContinueError("...Entering generator fluid temperature below specified minimum (" +
-                                          General::RoundSigDigits(this->MinGeneratorInletTemp, 3) + " C).");
+                                          format("{:.3R}", this->MinGeneratorInletTemp) + " C).");
                         ShowContinueError("...Entering generator fluid temperature = " +
-                                          General::RoundSigDigits(DataLoopNode::Node(this->GeneratorInletNodeNum).Temp, 3) + " C.");
+                                          format("{:.3R}", DataLoopNode::Node(this->GeneratorInletNodeNum).Temp) + " C.");
                         ShowContinueErrorTimeStamp("...simulation continues.");
                     } else {
                         ShowRecurringWarningErrorAtEnd("Entering generator fluid temperature below specified minimum error continues.",

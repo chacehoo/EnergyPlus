@@ -965,7 +965,7 @@ namespace EcoRoofManager {
             if (RelativeSoilSaturationTop < 0.0001) {
                 if (ErrIndex == 0) {
                     ShowWarningMessage("EcoRoof: UpdateSoilProps: Relative Soil Saturation Top Moisture <= 0.0001, Value=[" +
-                                       RoundSigDigits(RelativeSoilSaturationTop, 5) + "].");
+                                       format("{:.5R}", RelativeSoilSaturationTop) + "].");
                     ShowContinueError("Value is set to 0.0001 and simulation continues.");
                     ShowContinueError("You may wish to increase the number of timesteps to attempt to alleviate the problem.");
                 }

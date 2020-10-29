@@ -238,14 +238,14 @@ namespace BoilerSteam {
             if (DataIPShortCuts::rNumericArgs(5) < 0.0) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\",");
                 ShowContinueError("Invalid " + DataIPShortCuts::cNumericFieldNames(5) + '=' +
-                                  General::RoundSigDigits(DataIPShortCuts::rNumericArgs(5), 3));
+                                  format("{:.3R}", DataIPShortCuts::rNumericArgs(5)));
                 ErrorsFound = true;
             }
 
             if (DataIPShortCuts::rNumericArgs(3) == 0.0) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\",");
                 ShowContinueError("Invalid " + DataIPShortCuts::cNumericFieldNames(3) + '=' +
-                                  General::RoundSigDigits(DataIPShortCuts::rNumericArgs(3), 3));
+                                  format("{:.3R}", DataIPShortCuts::rNumericArgs(3)));
                 ErrorsFound = true;
             }
             thisBoiler.BoilerInletNodeNum = NodeInputManager::GetOnlySingleNode(state,
@@ -517,8 +517,8 @@ namespace BoilerSteam {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpNomCap - NomCapUser) / NomCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizePump: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Nominal Capacity of " + General::RoundSigDigits(NomCapUser, 2) + " [W]");
-                                    ShowContinueError("differs from Design Size Nominal Capacity of " + General::RoundSigDigits(tmpNomCap, 2) +
+                                    ShowContinueError("User-Specified Nominal Capacity of " + format("{:.2R}", NomCapUser) + " [W]");
+                                    ShowContinueError("differs from Design Size Nominal Capacity of " + format("{:.2R}", tmpNomCap) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -609,8 +609,8 @@ namespace BoilerSteam {
             if (this->PressErrIndex == 0) {
                 ShowSevereError("Boiler:Steam=\"" + this->Name + "\", Saturation Pressure is greater than Maximum Operating Pressure,");
                 ShowContinueError("Lower Input Temperature");
-                ShowContinueError("Steam temperature=[" + General::RoundSigDigits(this->BoilerOutletTemp, 2) + "] C");
-                ShowContinueError("Refrigerant Saturation Pressure =[" + General::RoundSigDigits(this->BoilerPressCheck, 0) + "] Pa");
+                ShowContinueError("Steam temperature=[" + format("{:.2R}", this->BoilerOutletTemp) + "] C");
+                ShowContinueError("Refrigerant Saturation Pressure =[" + format("{:.0R}", this->BoilerPressCheck) + "] Pa");
             }
             ShowRecurringSevereErrorAtEnd("Boiler:Steam=\"" + this->Name +
                                               "\", Saturation Pressure is greater than Maximum Operating Pressure..continues",

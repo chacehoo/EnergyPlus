@@ -272,7 +272,7 @@ namespace PlantUtilities {
                 if (!DataLoopNode::Node(InletNode).plantNodeErrorMsgIssued) {
                     ShowSevereError("SetComponentFlowRate: check component model implementation for component with inlet node named=" +
                                             DataLoopNode::NodeID(InletNode));
-                    ShowContinueError("Inlet node MassFlowRatMax = " + General::RoundSigDigits(DataLoopNode::Node(InletNode).MassFlowRateMax, 8));
+                    ShowContinueError("Inlet node MassFlowRatMax = " + format("{:.8R}", DataLoopNode::Node(InletNode).MassFlowRateMax));
                     DataLoopNode::Node(InletNode).plantNodeErrorMsgIssued = true;
                 }
             }
@@ -478,9 +478,9 @@ namespace PlantUtilities {
                 if ((CompFlow - a_node.MassFlowRateMaxAvail > DataBranchAirLoopPlant::MassFlowTolerance) || (a_node.MassFlowRateMinAvail - CompFlow > DataBranchAirLoopPlant::MassFlowTolerance)) {
                     ShowSevereError("SetActuatedBranchFlowRate: Flow rate is out of range"); // DEBUG error...should never get here
                     ShowContinueErrorTimeStamp("");
-                    ShowContinueError("Component flow rate [kg/s] = " + General::RoundSigDigits(CompFlow, 8));
-                    ShowContinueError("Node maximum flow rate available [kg/s] = " + General::RoundSigDigits(a_node.MassFlowRateMaxAvail, 8));
-                    ShowContinueError("Node minimum flow rate available [kg/s] = " + General::RoundSigDigits(a_node.MassFlowRateMinAvail, 8));
+                    ShowContinueError("Component flow rate [kg/s] = " + format("{:.8R}", CompFlow));
+                    ShowContinueError("Node maximum flow rate available [kg/s] = " + format("{:.8R}", a_node.MassFlowRateMaxAvail));
+                    ShowContinueError("Node minimum flow rate available [kg/s] = " + format("{:.8R}", a_node.MassFlowRateMinAvail));
                 }
             } else {
                 ShowFatalError("SetActuatedBranchFlowRate: Flowlock out of range, value=" +
@@ -658,10 +658,10 @@ namespace PlantUtilities {
                         ShowContinueErrorTimeStamp("");
                         ShowContinueError("PlantLoop name= " + PlantLoop(LoopNum).Name);
                         ShowContinueError("Plant Connector:Mixer name= " + PlantLoop(LoopNum).LoopSide(LoopSideNum).Mixer.Name);
-                        ShowContinueError("Mixer outlet mass flow rate= " + RoundSigDigits(Node(MixerOutletNode).MassFlowRate, 6) + " {kg/s}");
+                        ShowContinueError("Mixer outlet mass flow rate= " + format("{:.6R}", Node(MixerOutletNode).MassFlowRate) + " {kg/s}");
                         ShowContinueError("Plant Connector:Splitter name= " + PlantLoop(LoopNum).LoopSide(LoopSideNum).Splitter.Name);
-                        ShowContinueError("Splitter inlet mass flow rate= " + RoundSigDigits(Node(SplitterInletNode).MassFlowRate, 6) + " {kg/s}");
-                        ShowContinueError("Difference in two mass flow rates= " + RoundSigDigits(AbsDifference, 6) + " {kg/s}");
+                        ShowContinueError("Splitter inlet mass flow rate= " + format("{:.6R}", Node(SplitterInletNode).MassFlowRate) + " {kg/s}");
+                        ShowContinueError("Difference in two mass flow rates= " + format("{:.6R}", AbsDifference) + " {kg/s}");
                     }
                     ShowRecurringSevereErrorAtEnd("Plant Flows (Loop=" + PlantLoop(LoopNum).Name +
                                                       ") splitter inlet flow not match mixer outlet flow",
@@ -676,10 +676,10 @@ namespace PlantUtilities {
                         ShowContinueErrorTimeStamp("");
                         ShowContinueError("PlantLoop name= " + PlantLoop(LoopNum).Name);
                         ShowContinueError("Plant Connector:Mixer name= " + PlantLoop(LoopNum).LoopSide(LoopSideNum).Mixer.Name);
-                        ShowContinueError("Mixer outlet mass flow rate= " + RoundSigDigits(Node(MixerOutletNode).MassFlowRate, 6) + " {kg/s}");
+                        ShowContinueError("Mixer outlet mass flow rate= " + format("{:.6R}", Node(MixerOutletNode).MassFlowRate) + " {kg/s}");
                         ShowContinueError("Plant Connector:Splitter name= " + PlantLoop(LoopNum).LoopSide(LoopSideNum).Splitter.Name);
-                        ShowContinueError("Splitter inlet mass flow rate= " + RoundSigDigits(Node(SplitterInletNode).MassFlowRate, 6) + " {kg/s}");
-                        ShowContinueError("Difference in two mass flow rates= " + RoundSigDigits(AbsDifference, 6) + " {kg/s}");
+                        ShowContinueError("Splitter inlet mass flow rate= " + format("{:.6R}", Node(SplitterInletNode).MassFlowRate) + " {kg/s}");
+                        ShowContinueError("Difference in two mass flow rates= " + format("{:.6R}", AbsDifference) + " {kg/s}");
                         ShowFatalError("CheckPlantMixerSplitterConsistency: Simulation terminated because of problems in plant flow resolver");
                     }
                 }
@@ -704,10 +704,10 @@ namespace PlantUtilities {
                         ShowContinueErrorTimeStamp("");
                         ShowContinueError("PlantLoop name= " + PlantLoop(LoopNum).Name);
                         ShowContinueError("Plant Connector:Mixer name= " + PlantLoop(LoopNum).LoopSide(LoopSideNum).Mixer.Name);
-                        ShowContinueError("Sum of Branch outlet mass flow rates= " + RoundSigDigits(SumOutletFlow, 6) + " {kg/s}");
+                        ShowContinueError("Sum of Branch outlet mass flow rates= " + format("{:.6R}", SumOutletFlow) + " {kg/s}");
                         ShowContinueError("Plant Connector:Splitter name= " + PlantLoop(LoopNum).LoopSide(LoopSideNum).Splitter.Name);
-                        ShowContinueError("Splitter inlet mass flow rate= " + RoundSigDigits(Node(SplitterInletNode).MassFlowRate, 6) + " {kg/s}");
-                        ShowContinueError("Difference in two mass flow rates= " + RoundSigDigits(AbsDifference, 6) + " {kg/s}");
+                        ShowContinueError("Splitter inlet mass flow rate= " + format("{:.6R}", Node(SplitterInletNode).MassFlowRate) + " {kg/s}");
+                        ShowContinueError("Difference in two mass flow rates= " + format("{:.6R}", AbsDifference) + " {kg/s}");
                     }
                     ShowRecurringSevereErrorAtEnd("Plant Flows (Loop=" + PlantLoop(LoopNum).Name +
                                                       ") splitter inlet flow does not match branch outlet flows",
@@ -820,7 +820,7 @@ namespace PlantUtilities {
                 DemandSupply = "Unknown";
             }
             ShowContinueError("PlantLoop Name (" + DemandSupply + "Side)= " + PlantLoop(LoopNum).Name);
-            ShowContinueError("PlantLoop Setpoint Temperature=" + RoundSigDigits(Node(PlantLoop(LoopNum).TempSetPointNodeNum).TempSetPoint, 1) +
+            ShowContinueError("PlantLoop Setpoint Temperature=" + format("{:.1R}", Node(PlantLoop(LoopNum).TempSetPointNodeNum).TempSetPoint) +
                               " {C}");
             if (PlantLoop(LoopNum).LoopSide(SupplySide).InletNodeSetPt) {
                 ShowContinueError("PlantLoop Inlet Node (SupplySide) has a Setpoint.");
@@ -843,24 +843,24 @@ namespace PlantUtilities {
                 ShowContinueError("PlantLoop Outlet Node (DemandSide) does not have a Setpoint.");
             }
             ShowContinueError("PlantLoop Outlet Node (" + DemandSupply + "Side) \"" + NodeID(PlantLoop(LoopNum).LoopSide(LoopSideNum).NodeNumOut) +
-                              "\" has temperature=" + RoundSigDigits(Node(PlantLoop(LoopNum).LoopSide(LoopSideNum).NodeNumOut).Temp, 1) + " {C}");
+                              "\" has temperature=" + format("{:.1R}", Node(PlantLoop(LoopNum).LoopSide(LoopSideNum).NodeNumOut).Temp) + " {C}");
             ShowContinueError("PlantLoop Inlet Node (" + DemandSupply + "Side) \"" + NodeID(PlantLoop(LoopNum).LoopSide(LoopSideNum).NodeNumIn) +
-                              "\" has temperature=" + RoundSigDigits(Node(PlantLoop(LoopNum).LoopSide(LoopSideNum).NodeNumIn).Temp, 1) + " {C}");
-            ShowContinueError("PlantLoop Minimum Temperature=" + RoundSigDigits(PlantLoop(LoopNum).MinTemp, 1) + " {C}");
-            ShowContinueError("PlantLoop Maximum Temperature=" + RoundSigDigits(PlantLoop(LoopNum).MaxTemp, 1) + " {C}");
-            ShowContinueError("PlantLoop Flow Request (SupplySide)=" + RoundSigDigits(PlantLoop(LoopNum).LoopSide(SupplySide).FlowRequest, 1) +
+                              "\" has temperature=" + format("{:.1R}", Node(PlantLoop(LoopNum).LoopSide(LoopSideNum).NodeNumIn).Temp) + " {C}");
+            ShowContinueError("PlantLoop Minimum Temperature=" + format("{:.1R}", PlantLoop(LoopNum).MinTemp) + " {C}");
+            ShowContinueError("PlantLoop Maximum Temperature=" + format("{:.1R}", PlantLoop(LoopNum).MaxTemp) + " {C}");
+            ShowContinueError("PlantLoop Flow Request (SupplySide)=" + format("{:.1R}", PlantLoop(LoopNum).LoopSide(SupplySide).FlowRequest) +
                               " {kg/s}");
-            ShowContinueError("PlantLoop Flow Request (DemandSide)=" + RoundSigDigits(PlantLoop(LoopNum).LoopSide(DemandSide).FlowRequest, 1) +
+            ShowContinueError("PlantLoop Flow Request (DemandSide)=" + format("{:.1R}", PlantLoop(LoopNum).LoopSide(DemandSide).FlowRequest) +
                               " {kg/s}");
             ShowContinueError("PlantLoop Node (" + DemandSupply + "Side) \"" + NodeID(PlantLoop(LoopNum).LoopSide(LoopSideNum).NodeNumOut) +
-                              "\" has mass flow rate =" + RoundSigDigits(Node(PlantLoop(LoopNum).LoopSide(LoopSideNum).NodeNumOut).MassFlowRate, 1) +
+                              "\" has mass flow rate =" + format("{:.1R}", Node(PlantLoop(LoopNum).LoopSide(LoopSideNum).NodeNumOut).MassFlowRate) +
                               " {kg/s}");
-            ShowContinueError("PlantLoop PumpHeat (SupplySide)=" + RoundSigDigits(PlantLoop(LoopNum).LoopSide(SupplySide).TotalPumpHeat, 1) + " {W}");
-            ShowContinueError("PlantLoop PumpHeat (DemandSide)=" + RoundSigDigits(PlantLoop(LoopNum).LoopSide(DemandSide).TotalPumpHeat, 1) + " {W}");
-            ShowContinueError("PlantLoop Cooling Demand=" + RoundSigDigits(PlantLoop(LoopNum).CoolingDemand, 1) + " {W}");
-            ShowContinueError("PlantLoop Heating Demand=" + RoundSigDigits(PlantLoop(LoopNum).HeatingDemand, 1) + " {W}");
-            ShowContinueError("PlantLoop Demand not Dispatched=" + RoundSigDigits(PlantLoop(LoopNum).DemandNotDispatched, 1) + " {W}");
-            ShowContinueError("PlantLoop Unmet Demand=" + RoundSigDigits(PlantLoop(LoopNum).UnmetDemand, 1) + " {W}");
+            ShowContinueError("PlantLoop PumpHeat (SupplySide)=" + format("{:.1R}", PlantLoop(LoopNum).LoopSide(SupplySide).TotalPumpHeat) + " {W}");
+            ShowContinueError("PlantLoop PumpHeat (DemandSide)=" + format("{:.1R}", PlantLoop(LoopNum).LoopSide(DemandSide).TotalPumpHeat) + " {W}");
+            ShowContinueError("PlantLoop Cooling Demand=" + format("{:.1R}", PlantLoop(LoopNum).CoolingDemand) + " {W}");
+            ShowContinueError("PlantLoop Heating Demand=" + format("{:.1R}", PlantLoop(LoopNum).HeatingDemand) + " {W}");
+            ShowContinueError("PlantLoop Demand not Dispatched=" + format("{:.1R}", PlantLoop(LoopNum).DemandNotDispatched) + " {W}");
+            ShowContinueError("PlantLoop Unmet Demand=" + format("{:.1R}", PlantLoop(LoopNum).UnmetDemand) + " {W}");
 
             LoopCapacity = 0.0;
             DispatchedCapacity = 0.0;
@@ -879,13 +879,13 @@ namespace PlantUtilities {
                     LoopSupplySideDispatchedCapacity = DispatchedCapacity - LoopDemandSideDispatchedCapacity;
                 }
             }
-            ShowContinueError("PlantLoop Capacity=" + RoundSigDigits(LoopCapacity, 1) + " {W}");
-            ShowContinueError("PlantLoop Capacity (SupplySide)=" + RoundSigDigits(LoopSupplySideCapacity, 1) + " {W}");
-            ShowContinueError("PlantLoop Capacity (DemandSide)=" + RoundSigDigits(LoopDemandSideCapacity, 1) + " {W}");
+            ShowContinueError("PlantLoop Capacity=" + format("{:.1R}", LoopCapacity) + " {W}");
+            ShowContinueError("PlantLoop Capacity (SupplySide)=" + format("{:.1R}", LoopSupplySideCapacity) + " {W}");
+            ShowContinueError("PlantLoop Capacity (DemandSide)=" + format("{:.1R}", LoopDemandSideCapacity) + " {W}");
             ShowContinueError("PlantLoop Operation Scheme=" + PlantLoop(LoopNum).OperationScheme);
-            ShowContinueError("PlantLoop Operation Dispatched Load = " + RoundSigDigits(DispatchedCapacity, 1) + " {W}");
-            ShowContinueError("PlantLoop Operation Dispatched Load (SupplySide)= " + RoundSigDigits(LoopSupplySideDispatchedCapacity, 1) + " {W}");
-            ShowContinueError("PlantLoop Operation Dispatched Load (DemandSide)= " + RoundSigDigits(LoopDemandSideDispatchedCapacity, 1) + " {W}");
+            ShowContinueError("PlantLoop Operation Dispatched Load = " + format("{:.1R}", DispatchedCapacity) + " {W}");
+            ShowContinueError("PlantLoop Operation Dispatched Load (SupplySide)= " + format("{:.1R}", LoopSupplySideDispatchedCapacity) + " {W}");
+            ShowContinueError("PlantLoop Operation Dispatched Load (DemandSide)= " + format("{:.1R}", LoopDemandSideDispatchedCapacity) + " {W}");
             ShowContinueError("Branches on the Loop.");
             ShowBranchesOnLoop(LoopNum);
             ShowContinueError("*************************");

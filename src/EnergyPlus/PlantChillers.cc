@@ -230,14 +230,14 @@ namespace PlantChillers {
             }
             if (DataIPShortCuts::rNumericArgs(1) == 0.0) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(1) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(1), 2));
+                                format("{:.2R}", DataIPShortCuts::rNumericArgs(1)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ErrorsFound = true;
             }
             thisChiller.COP = DataIPShortCuts::rNumericArgs(2);
             if (DataIPShortCuts::rNumericArgs(2) == 0.0) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(2) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(2), 3));
+                                format("{:.3R}", DataIPShortCuts::rNumericArgs(2)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ErrorsFound = true;
             }
@@ -471,7 +471,7 @@ namespace PlantChillers {
                     thisChiller.CondenserType == DataPlant::CondenserType::EVAPCOOLED) {
                     if (thisChiller.CondVolFlowRate <= 0.0) {
                         ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(10) + '=' +
-                                        General::RoundSigDigits(DataIPShortCuts::rNumericArgs(10), 6));
+                                        format("{:.6R}", DataIPShortCuts::rNumericArgs(10)));
                         ShowSevereError("Condenser fluid flow rate must be specified for Heat Reclaim applications.");
                         ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                         ErrorsFound = true;
@@ -1082,8 +1082,8 @@ namespace PlantChillers {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpNomCap - this->NomCap) / this->NomCap) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerElectric: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Nominal Capacity of " + General::RoundSigDigits(this->NomCap, 2) + " [W]");
-                                    ShowContinueError("differs from Design Size Nominal Capacity of " + General::RoundSigDigits(tmpNomCap, 2) +
+                                    ShowContinueError("User-Specified Nominal Capacity of " + format("{:.2R}", this->NomCap) + " [W]");
+                                    ShowContinueError("differs from Design Size Nominal Capacity of " + format("{:.2R}", tmpNomCap) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -1137,9 +1137,9 @@ namespace PlantChillers {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerElectric: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Design Chilled Water Flow Rate of " +
-                                                      General::RoundSigDigits(this->EvapVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", this->EvapVolFlowRate) + " [m3/s]");
                                     ShowContinueError("differs from Design Size Design Chilled Water Flow Rate of " +
-                                                      General::RoundSigDigits(tmpEvapVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", tmpEvapVolFlowRate) + " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1205,9 +1205,9 @@ namespace PlantChillers {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerElectric: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Design Condenser Water Flow Rate of " +
-                                                      General::RoundSigDigits(this->CondVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", this->CondVolFlowRate) + " [m3/s]");
                                     ShowContinueError("differs from Design Size Design Condenser Water Flow Rate of " +
-                                                      General::RoundSigDigits(tmpCondVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", tmpCondVolFlowRate) + " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1266,9 +1266,9 @@ namespace PlantChillers {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerElectric: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Design Heat Recovery Fluid Flow Rate of " +
-                                                      General::RoundSigDigits(this->DesignHeatRecVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", this->DesignHeatRecVolFlowRate) + " [m3/s]");
                                     ShowContinueError("differs from Design Size Design Heat Recovery Fluid Flow Rate of " +
-                                                      General::RoundSigDigits(tmpHeatRecVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", tmpHeatRecVolFlowRate) + " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1843,9 +1843,9 @@ namespace PlantChillers {
                 if (condInletTemp > 70.0) {
                     ShowSevereError("CalcElectricChillerModel: Condenser loop inlet temperatures over 70.0 C for ElectricChiller=" + this->Name);
                     ShowContinueErrorTimeStamp("");
-                    ShowContinueError("Condenser loop water temperatures are too high at" + General::RoundSigDigits(condInletTemp, 2));
+                    ShowContinueError("Condenser loop water temperatures are too high at" + format("{:.2R}", condInletTemp));
                     ShowContinueError("Check input for condenser plant loop, especially cooling tower");
-                    ShowContinueError("Evaporator inlet temperature: " + General::RoundSigDigits(DataLoopNode::Node(this->EvapInletNodeNum).Temp, 2));
+                    ShowContinueError("Evaporator inlet temperature: " + format("{:.2R}", DataLoopNode::Node(this->EvapInletNodeNum).Temp));
 
                     ShowFatalError("Program Terminates due to previous error condition");
                 }
@@ -1855,8 +1855,8 @@ namespace PlantChillers {
                     ShowSevereError("CalcElectricChillerModel: Capacity ratio below zero for ElectricChiller=" + this->Name);
                     ShowContinueErrorTimeStamp("");
                     ShowContinueError("Check input for Capacity Ratio Curve");
-                    ShowContinueError("Condenser inlet temperature: " + General::RoundSigDigits(condInletTemp, 2));
-                    ShowContinueError("Evaporator inlet temperature: " + General::RoundSigDigits(DataLoopNode::Node(this->EvapInletNodeNum).Temp, 2));
+                    ShowContinueError("Condenser inlet temperature: " + format("{:.2R}", condInletTemp));
+                    ShowContinueError("Evaporator inlet temperature: " + format("{:.2R}", DataLoopNode::Node(this->EvapInletNodeNum).Temp));
                     ShowFatalError("Program Terminates due to previous error condition");
                 }
             }
@@ -2131,7 +2131,7 @@ namespace PlantChillers {
             }
             if (DataIPShortCuts::rNumericArgs(1) == 0.0) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(1) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(1), 2));
+                                format("{:.2R}", DataIPShortCuts::rNumericArgs(1)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ErrorsFound = true;
             }
@@ -2139,7 +2139,7 @@ namespace PlantChillers {
             thisChiller.COP = DataIPShortCuts::rNumericArgs(2);
             if (DataIPShortCuts::rNumericArgs(2) == 0.0) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(2) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(2), 2));
+                                format("{:.2R}", DataIPShortCuts::rNumericArgs(2)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ErrorsFound = true;
             }
@@ -2425,7 +2425,7 @@ namespace PlantChillers {
                     thisChiller.CondenserType == DataPlant::CondenserType::EVAPCOOLED) {
                     if (thisChiller.CondVolFlowRate <= 0.0) {
                         ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(10) + '=' +
-                                        General::RoundSigDigits(DataIPShortCuts::rNumericArgs(10), 6));
+                                        format("{:.6R}", DataIPShortCuts::rNumericArgs(10)));
                         ShowSevereError("Condenser fluid flow rate must be specified for Heat Reclaim applications.");
                         ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                         ErrorsFound = true;
@@ -2980,8 +2980,8 @@ namespace PlantChillers {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpNomCap - this->NomCap) / this->NomCap) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerEngineDriven: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Nominal Capacity of " + General::RoundSigDigits(this->NomCap, 2) + " [W]");
-                                    ShowContinueError("differs from Design Size Nominal Capacity of " + General::RoundSigDigits(tmpNomCap, 2) +
+                                    ShowContinueError("User-Specified Nominal Capacity of " + format("{:.2R}", this->NomCap) + " [W]");
+                                    ShowContinueError("differs from Design Size Nominal Capacity of " + format("{:.2R}", tmpNomCap) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -3033,9 +3033,9 @@ namespace PlantChillers {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerEngineDriven: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Design Chilled Water Flow Rate of " +
-                                                      General::RoundSigDigits(this->EvapVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", this->EvapVolFlowRate) + " [m3/s]");
                                     ShowContinueError("differs from Design Size Design Chilled Water Flow Rate of " +
-                                                      General::RoundSigDigits(tmpEvapVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", tmpEvapVolFlowRate) + " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -3101,9 +3101,9 @@ namespace PlantChillers {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerEngineDriven: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Design Condenser Water Flow Rate of " +
-                                                      General::RoundSigDigits(this->CondVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", this->CondVolFlowRate) + " [m3/s]");
                                     ShowContinueError("differs from Design Size Design Condenser Water Flow Rate of " +
-                                                      General::RoundSigDigits(tmpCondVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", tmpCondVolFlowRate) + " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -3169,9 +3169,9 @@ namespace PlantChillers {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeEngineDrivenChiller: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Design Heat Recovery Fluid Flow Rate of " +
-                                                      General::RoundSigDigits(DesignHeatRecVolFlowRateUser, 5) + " [m3/s]");
+                                                      format("{:.5R}", DesignHeatRecVolFlowRateUser) + " [m3/s]");
                                     ShowContinueError("differs from Design Size Design Heat Recovery Fluid Flow Rate of " +
-                                                      General::RoundSigDigits(tmpHeatRecVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", tmpHeatRecVolFlowRate) + " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -3815,9 +3815,9 @@ namespace PlantChillers {
                 if (this->CondInletTemp > 70.0) {
                     ShowSevereError("CalcEngineDrivenChillerModel: Condenser loop inlet temperatures > 70.0 C for EngineDrivenChiller=" + this->Name);
                     ShowContinueErrorTimeStamp("");
-                    ShowContinueError("Condenser loop water temperatures are too high at" + General::RoundSigDigits(this->CondInletTemp, 2));
+                    ShowContinueError("Condenser loop water temperatures are too high at" + format("{:.2R}", this->CondInletTemp));
                     ShowContinueError("Check input for condenser plant loop, especially cooling tower");
-                    ShowContinueError("Evaporator inlet temperature: " + General::RoundSigDigits(DataLoopNode::Node(this->EvapInletNodeNum).Temp, 2));
+                    ShowContinueError("Evaporator inlet temperature: " + format("{:.2R}", DataLoopNode::Node(this->EvapInletNodeNum).Temp));
 
                     ShowFatalError("Program Terminates due to previous error condition");
                 }
@@ -3827,8 +3827,8 @@ namespace PlantChillers {
                     ShowSevereError("CalcEngineDrivenChillerModel: Capacity ratio below zero for EngineDrivenChiller=" + this->Name);
                     ShowContinueErrorTimeStamp("");
                     ShowContinueError("Check input for Capacity Ratio Curve");
-                    ShowContinueError("Condenser inlet temperature: " + General::RoundSigDigits(this->CondInletTemp, 2));
-                    ShowContinueError("Evaporator inlet temperature: " + General::RoundSigDigits(DataLoopNode::Node(this->EvapInletNodeNum).Temp, 2));
+                    ShowContinueError("Condenser inlet temperature: " + format("{:.2R}", this->CondInletTemp));
+                    ShowContinueError("Evaporator inlet temperature: " + format("{:.2R}", DataLoopNode::Node(this->EvapInletNodeNum).Temp));
                     ShowFatalError("Program Terminates due to previous error condition");
                 }
             }
@@ -4065,7 +4065,7 @@ namespace PlantChillers {
             }
             if (DataIPShortCuts::rNumericArgs(1) == 0.0) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(1) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(1), 2));
+                                format("{:.2R}", DataIPShortCuts::rNumericArgs(1)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ErrorsFound = true;
             }
@@ -4073,7 +4073,7 @@ namespace PlantChillers {
             thisChiller.COP = DataIPShortCuts::rNumericArgs(2);
             if (DataIPShortCuts::rNumericArgs(2) == 0.0) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(2) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(2), 2));
+                                format("{:.2R}", DataIPShortCuts::rNumericArgs(2)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ErrorsFound = true;
             }
@@ -4306,7 +4306,7 @@ namespace PlantChillers {
                     thisChiller.CondenserType == DataPlant::CondenserType::EVAPCOOLED) {
                     if (thisChiller.CondVolFlowRate <= 0.0) {
                         ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(10) + '=' +
-                                        General::RoundSigDigits(DataIPShortCuts::rNumericArgs(10), 6));
+                                        format("{:.6R}", DataIPShortCuts::rNumericArgs(10)));
                         ShowSevereError("Condenser fluid flow rate must be specified for Heat Reclaim applications.");
                         ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                         ErrorsFound = true;
@@ -4846,8 +4846,8 @@ namespace PlantChillers {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpNomCap - this->NomCap) / this->NomCap) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeGTChiller: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Nominal Capacity of " + General::RoundSigDigits(this->NomCap, 2) + " [W]");
-                                    ShowContinueError("differs from Design Size Nominal Capacity of " + General::RoundSigDigits(tmpNomCap, 2) +
+                                    ShowContinueError("User-Specified Nominal Capacity of " + format("{:.2R}", this->NomCap) + " [W]");
+                                    ShowContinueError("differs from Design Size Nominal Capacity of " + format("{:.2R}", tmpNomCap) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -4901,9 +4901,9 @@ namespace PlantChillers {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeGTChiller: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Design Chilled Water Flow Rate of " +
-                                                      General::RoundSigDigits(this->EvapVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", this->EvapVolFlowRate) + " [m3/s]");
                                     ShowContinueError("differs from Design Size Design Chilled Water Flow Rate of " +
-                                                      General::RoundSigDigits(tmpEvapVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", tmpEvapVolFlowRate) + " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -4970,9 +4970,9 @@ namespace PlantChillers {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeGTChiller: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Design Condenser Water Flow Rate of " +
-                                                      General::RoundSigDigits(this->CondVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", this->CondVolFlowRate) + " [m3/s]");
                                     ShowContinueError("differs from Design Size Design Condenser Water Flow Rate of " +
-                                                      General::RoundSigDigits(tmpCondVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", tmpCondVolFlowRate) + " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -5024,10 +5024,10 @@ namespace PlantChillers {
                         if ((std::abs(GTEngineCapacityDes - this->GTEngineCapacity) / this->GTEngineCapacity) >
                             DataSizing::AutoVsHardSizingThreshold) {
                             ShowMessage("SizeGTChiller: Potential issue with equipment sizing for " + this->Name);
-                            ShowContinueError("User-Specified Gas Turbine Engine Capacity of " + General::RoundSigDigits(this->GTEngineCapacity, 2) +
+                            ShowContinueError("User-Specified Gas Turbine Engine Capacity of " + format("{:.2R}", this->GTEngineCapacity) +
                                               " [W]");
                             ShowContinueError("differs from Design Size Gas Turbine Engine Capacity of " +
-                                              General::RoundSigDigits(GTEngineCapacityDes, 2) + " [W]");
+                                              format("{:.2R}", GTEngineCapacityDes) + " [W]");
                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                         }
@@ -5076,9 +5076,9 @@ namespace PlantChillers {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeGasTurbineChiller: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Design Heat Recovery Fluid Flow Rate of " +
-                                                      General::RoundSigDigits(DesignHeatRecVolFlowRateUser, 5) + " [m3/s]");
+                                                      format("{:.5R}", DesignHeatRecVolFlowRateUser) + " [m3/s]");
                                     ShowContinueError("differs from Design Size Design Heat Recovery Fluid Flow Rate of " +
-                                                      General::RoundSigDigits(tmpHeatRecVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", tmpHeatRecVolFlowRate) + " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -5722,9 +5722,9 @@ namespace PlantChillers {
                 if (condInletTemp > 70.0) {
                     ShowSevereError("CalcGTChillerModel: Condenser loop inlet temperatures over 70.0 C for GTChiller=" + this->Name);
                     ShowContinueErrorTimeStamp("");
-                    ShowContinueError("Condenser loop water temperatures are too high at" + General::RoundSigDigits(condInletTemp, 2));
+                    ShowContinueError("Condenser loop water temperatures are too high at" + format("{:.2R}", condInletTemp));
                     ShowContinueError("Check input for condenser plant loop, especially cooling tower");
-                    ShowContinueError("Evaporator inlet temperature: " + General::RoundSigDigits(DataLoopNode::Node(this->EvapInletNodeNum).Temp, 2));
+                    ShowContinueError("Evaporator inlet temperature: " + format("{:.2R}", DataLoopNode::Node(this->EvapInletNodeNum).Temp));
 
                     ShowFatalError("Program Terminates due to previous error condition");
                 }
@@ -5734,8 +5734,8 @@ namespace PlantChillers {
                     ShowSevereError("CalcGTChillerModel: Capacity ratio below zero for GTChiller=" + this->Name);
                     ShowContinueErrorTimeStamp("");
                     ShowContinueError("Check input for Capacity Ratio Curve");
-                    ShowContinueError("Condenser inlet temperature: " + General::RoundSigDigits(condInletTemp, 2));
-                    ShowContinueError("Evaporator inlet temperature: " + General::RoundSigDigits(DataLoopNode::Node(this->EvapInletNodeNum).Temp, 2));
+                    ShowContinueError("Condenser inlet temperature: " + format("{:.2R}", condInletTemp));
+                    ShowContinueError("Evaporator inlet temperature: " + format("{:.2R}", DataLoopNode::Node(this->EvapInletNodeNum).Temp));
                     ShowFatalError("Program Terminates due to previous error condition");
                 }
             }
@@ -5922,14 +5922,14 @@ namespace PlantChillers {
             }
             if (DataIPShortCuts::rNumericArgs(1) == 0.0) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(1) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(1), 2));
+                                format("{:.2R}", DataIPShortCuts::rNumericArgs(1)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ErrorsFound = true;
             }
             thisChiller.COP = DataIPShortCuts::rNumericArgs(2);
             if (DataIPShortCuts::rNumericArgs(2) == 0.0) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(2) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(2), 2));
+                                format("{:.2R}", DataIPShortCuts::rNumericArgs(2)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ErrorsFound = true;
             }
@@ -6500,8 +6500,8 @@ namespace PlantChillers {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpNomCap - NomCapUser) / NomCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerConstantCOP: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Nominal Capacity of " + General::RoundSigDigits(NomCapUser, 2) + " [W]");
-                                    ShowContinueError("differs from Design Size Nominal Capacity of " + General::RoundSigDigits(tmpNomCap, 2) +
+                                    ShowContinueError("User-Specified Nominal Capacity of " + format("{:.2R}", NomCapUser) + " [W]");
+                                    ShowContinueError("differs from Design Size Nominal Capacity of " + format("{:.2R}", tmpNomCap) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -6555,9 +6555,9 @@ namespace PlantChillers {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerConstantCOP: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Design Chilled Water Flow Rate of " +
-                                                      General::RoundSigDigits(EvapVolFlowRateUser, 5) + " [m3/s]");
+                                                      format("{:.5R}", EvapVolFlowRateUser) + " [m3/s]");
                                     ShowContinueError("differs from Design Size Design Chilled Water Flow Rate of " +
-                                                      General::RoundSigDigits(tmpEvapVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", tmpEvapVolFlowRate) + " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -6618,9 +6618,9 @@ namespace PlantChillers {
                                         DataSizing::AutoVsHardSizingThreshold) {
                                         ShowMessage("SizeChillerConstantCOP: Potential issue with equipment sizing for " + this->Name);
                                         ShowContinueError("User-Specified Design Condenser Water Flow Rate of " +
-                                                          General::RoundSigDigits(CondVolFlowRateUser, 5) + " [m3/s]");
+                                                          format("{:.5R}", CondVolFlowRateUser) + " [m3/s]");
                                         ShowContinueError("differs from Design Size Design Condenser Water Flow Rate of " +
-                                                          General::RoundSigDigits(tmpCondVolFlowRate, 5) + " [m3/s]");
+                                                          format("{:.5R}", tmpCondVolFlowRate) + " [m3/s]");
                                         ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                         ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                     }
@@ -7123,9 +7123,9 @@ namespace PlantChillers {
                 if (CondInletTemp > 70.0) {
                     ShowSevereError("CalcConstCOPChillerModel: Condenser loop inlet temperatures over 70.0 C for ConstCOPChiller=" + this->Name);
                     ShowContinueErrorTimeStamp("");
-                    ShowContinueError("Condenser loop water temperatures are too high at" + General::RoundSigDigits(CondInletTemp, 2));
+                    ShowContinueError("Condenser loop water temperatures are too high at" + format("{:.2R}", CondInletTemp));
                     ShowContinueError("Check input for condenser plant loop, especially cooling tower");
-                    ShowContinueError("Evaporator inlet temperature: " + General::RoundSigDigits(DataLoopNode::Node(this->EvapInletNodeNum).Temp, 2));
+                    ShowContinueError("Evaporator inlet temperature: " + format("{:.2R}", DataLoopNode::Node(this->EvapInletNodeNum).Temp));
 
                     ShowFatalError("Program Terminates due to previous error condition");
                 }

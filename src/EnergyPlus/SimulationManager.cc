@@ -1299,13 +1299,13 @@ namespace SimulationManager {
                         if (fields.find("maxzonetempdiff") != fields.end()) { // not required field, has default value
                             DataConvergParams::MaxZoneTempDiff = fields.at("maxzonetempdiff");
                             ShowWarningError("PerformancePrecisionTradeoffs using the Advanced Override Mode, MaxZoneTempDiff set to: " +
-                                             RoundSigDigits(DataConvergParams::MaxZoneTempDiff, 4));
+                                             format("{:.4R}", DataConvergParams::MaxZoneTempDiff));
                             advancedModeUsed = true;
                         }
                         if (fields.find("maxalloweddeltemp") != fields.end()) { // not required field, has default value
                             DataHeatBalance::MaxAllowedDelTemp = fields.at("maxalloweddeltemp");
                             ShowWarningError("PerformancePrecisionTradeoffs using the Advanced Override Mode, MaxAllowedDelTemp set to: " +
-                                             RoundSigDigits(DataHeatBalance::MaxAllowedDelTemp, 4));
+                                             format("{:.4R}", DataHeatBalance::MaxAllowedDelTemp));
                             advancedModeUsed = true;
                         }
                         if (advancedModeUsed) {
@@ -1460,9 +1460,9 @@ namespace SimulationManager {
         } else {
             Alphas(7) = "No";
         }
-        Alphas(8) = General::RoundSigDigits(DataConvergParams::MinTimeStepSys * 60.0, 1);
-        Alphas(9) = General::RoundSigDigits(DataConvergParams::MaxZoneTempDiff, 3);
-        Alphas(10) = General::RoundSigDigits(DataHeatBalance::MaxAllowedDelTemp, 4);
+        Alphas(8) = format("{:.1R}", DataConvergParams::MinTimeStepSys * 60.0);
+        Alphas(9) = format("{:.3R}", DataConvergParams::MaxZoneTempDiff);
+        Alphas(10) = format("{:.4R}", DataHeatBalance::MaxAllowedDelTemp);
         std::string pptHeader = "! <Performance Precision Tradeoffs>, Use Coil Direct Simulation, "
                                 "Zone Radiant Exchange Algorithm, Override Mode, Number of Timestep In Hour, "
                                 "Force Euler Method, Minimum Number of Warmup Days, Force Suppress All Begin Environment Resets, "
@@ -1519,9 +1519,9 @@ namespace SimulationManager {
         UtilityRoutines::appendPerfLog(state, "Number of Timesteps per Hour", fmt::to_string(DataGlobals::NumOfTimeStepInHour));
         UtilityRoutines::appendPerfLog(state, "Minimum Number of Warmup Days", fmt::to_string(DataHeatBalance::MinNumberOfWarmupDays));
         UtilityRoutines::appendPerfLog(state, "SuppressAllBeginEnvironmentResets", bool_to_string(DataEnvironment::forceBeginEnvResetSuppress));
-        UtilityRoutines::appendPerfLog(state, "Minimum System Timestep", General::RoundSigDigits(DataConvergParams::MinTimeStepSys * 60.0, 1));
-        UtilityRoutines::appendPerfLog(state, "MaxZoneTempDiff", General::RoundSigDigits(DataConvergParams::MaxZoneTempDiff, 2));
-        UtilityRoutines::appendPerfLog(state, "MaxAllowedDelTemp", General::RoundSigDigits(DataHeatBalance::MaxAllowedDelTemp, 4));
+        UtilityRoutines::appendPerfLog(state, "Minimum System Timestep", format("{:.1R}", DataConvergParams::MinTimeStepSys * 60.0));
+        UtilityRoutines::appendPerfLog(state, "MaxZoneTempDiff", format("{:.2R}", DataConvergParams::MaxZoneTempDiff));
+        UtilityRoutines::appendPerfLog(state, "MaxAllowedDelTemp", format("{:.4R}", DataHeatBalance::MaxAllowedDelTemp));
     }
 
     std::string bool_to_string(bool logical)

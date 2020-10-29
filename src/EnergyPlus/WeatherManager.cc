@@ -2262,7 +2262,7 @@ namespace WeatherManager {
                                                    (DryBulb >= -90.0),
                                                    "<= 70",
                                                    (DryBulb <= 70.0),
-                                                   General::RoundSigDigits(DryBulb, 2),
+                                                   format("{:.2R}", DryBulb),
                                                    DataEnvironment::WeatherFileLocationTitle);
                     if (DewPoint < 99.9)
                         inputProcessor->rangeCheck(ErrorsFound,
@@ -2273,7 +2273,7 @@ namespace WeatherManager {
                                                    (DewPoint >= -90.0),
                                                    "<= 70",
                                                    (DewPoint <= 70.0),
-                                                   General::RoundSigDigits(DewPoint, 2),
+                                                   format("{:.2R}", DewPoint),
                                                    DataEnvironment::WeatherFileLocationTitle);
                     if (RelHum < 999.0)
                         inputProcessor->rangeCheck(ErrorsFound,
@@ -2284,7 +2284,7 @@ namespace WeatherManager {
                                                    (RelHum >= 0.0),
                                                    "<= 110",
                                                    (RelHum <= 110.0),
-                                                   General::RoundSigDigits(RelHum, 0),
+                                                   format("{:.0R}", RelHum),
                                                    DataEnvironment::WeatherFileLocationTitle);
                     if (AtmPress < 999999.0)
                         inputProcessor->rangeCheck(ErrorsFound,
@@ -2295,7 +2295,7 @@ namespace WeatherManager {
                                                    (AtmPress > 31000.0),
                                                    "<=120000",
                                                    (AtmPress <= 120000.0),
-                                                   General::RoundSigDigits(AtmPress, 0),
+                                                   format("{:.0R}", AtmPress),
                                                    DataEnvironment::WeatherFileLocationTitle);
                     if (DirectRad < 9999.0)
                         inputProcessor->rangeCheck(ErrorsFound,
@@ -2328,7 +2328,7 @@ namespace WeatherManager {
                                                    (WindDir >= 0.0),
                                                    "<=360",
                                                    (WindDir <= 360.0),
-                                                   General::RoundSigDigits(WindDir, 0),
+                                                   format("{:.0R}", WindDir),
                                                    DataEnvironment::WeatherFileLocationTitle);
                     if (WindSpeed < 999.0)
                         inputProcessor->rangeCheck(ErrorsFound,
@@ -2339,7 +2339,7 @@ namespace WeatherManager {
                                                    (WindSpeed >= 0.0),
                                                    "<=40",
                                                    (WindSpeed <= 40.0),
-                                                   General::RoundSigDigits(WindSpeed, 2),
+                                                   format("{:.2R}", WindSpeed),
                                                    DataEnvironment::WeatherFileLocationTitle);
                     if (ErrorsFound) {
                         ShowSevereError("Out of Range errors found with initial day of WeatherFile");
@@ -3416,8 +3416,8 @@ namespace WeatherManager {
         if (state.dataWeatherManager->DesDayInput(EnvrnNum).PressureEntered) {
             if (std::abs((state.dataWeatherManager->DesDayInput(EnvrnNum).PressBarom - DataEnvironment::StdBaroPress) / DataEnvironment::StdBaroPress) > 0.1) { // 10% off
                 ShowWarningError(
-                    "SetUpDesignDay: Entered DesignDay Barometric Pressure=" + General::RoundSigDigits(state.dataWeatherManager->DesDayInput(EnvrnNum).PressBarom, 0) +
-                    " differs by more than 10% from Standard Barometric Pressure=" + General::RoundSigDigits(DataEnvironment::StdBaroPress, 0) + '.');
+                    "SetUpDesignDay: Entered DesignDay Barometric Pressure=" + format("{:.0R}", state.dataWeatherManager->DesDayInput(EnvrnNum).PressBarom) +
+                    " differs by more than 10% from Standard Barometric Pressure=" + format("{:.0R}", DataEnvironment::StdBaroPress) + '.');
                 ShowContinueError("...occurs in DesignDay=" + DataEnvironment::EnvironmentName +
                                   ", Standard Pressure (based on elevation) will be used.");
                 state.dataWeatherManager->DesDayInput(EnvrnNum).PressBarom = DataEnvironment::StdBaroPress;
@@ -3489,21 +3489,21 @@ namespace WeatherManager {
 
             // Hum Ind Type, Hum Ind Value at Max Temp, Hum Ind Units
             if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::WetBulb) {
-                StringOut = "Wetbulb," + General::RoundSigDigits(state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue, 2) + ",{C},";
+                StringOut = "Wetbulb," + format("{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{C},";
             } else if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::DewPoint) {
-                StringOut = "Dewpoint," + General::RoundSigDigits(state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue, 2) + ",{C},";
+                StringOut = "Dewpoint," + format("{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{C},";
             } else if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::Enthalpy) {
-                StringOut = "Enthalpy," + General::RoundSigDigits(state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue, 2) + ",{J/kgDryAir},";
+                StringOut = "Enthalpy," + format("{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{J/kgDryAir},";
             } else if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::HumRatio) {
-                StringOut = "HumidityRatio," + General::RoundSigDigits(state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue, 4) + ",{kgWater/kgDryAir},";
+                StringOut = "HumidityRatio," + format("{:.4R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{kgWater/kgDryAir},";
             } else if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::RelHumSch) {
                 StringOut = "Schedule,<schedule values from 0.0 to 100.0>,{percent},";
             } else if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::WBProfDef) {
-                StringOut = "WetBulbProfileDefaultMultipliers," + General::RoundSigDigits(state.dataWeatherManager->DesDayInput(state.dataWeatherManager->Envrn).HumIndValue, 2) + ",{C},";
+                StringOut = "WetBulbProfileDefaultMultipliers," + format("{:.2R}", state.dataWeatherManager->DesDayInput(state.dataWeatherManager->Envrn).HumIndValue) + ",{C},";
             } else if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::WBProfDif) {
-                StringOut = "WetBulbProfileDifferenceSchedule," + General::RoundSigDigits(state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue, 2) + ",{C},";
+                StringOut = "WetBulbProfileDifferenceSchedule," + format("{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{C},";
             } else if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::WBProfMul) {
-                StringOut = "WetBulbProfileMultiplierSchedule," + General::RoundSigDigits(state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue, 2) + ",{C},";
+                StringOut = "WetBulbProfileMultiplierSchedule," + format("{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{C},";
             }
             print(state.files.eio, "{}", StringOut);
             print(state.files.eio, "{:.0R},", state.dataWeatherManager->DesDayInput(EnvrnNum).PressBarom);
@@ -4349,15 +4349,15 @@ namespace WeatherManager {
                     ShowContinueError("..Location object=" + state.dataWeatherManager->LocationTitle);
                     ShowContinueError("..Weather File Location=" + DataEnvironment::WeatherFileLocationTitle);
                     ShowContinueError("..due to location differences, Latitude difference=[" +
-                                      General::RoundSigDigits(std::abs(DataEnvironment::Latitude - state.dataWeatherManager->WeatherFileLatitude), 2) +
+                                      format("{:.2R}", std::abs(DataEnvironment::Latitude - state.dataWeatherManager->WeatherFileLatitude)) +
                                       "] degrees, Longitude difference=[" +
-                                      General::RoundSigDigits(std::abs(DataEnvironment::Longitude - state.dataWeatherManager->WeatherFileLongitude), 2) + "] degrees.");
+                                      format("{:.2R}", std::abs(DataEnvironment::Longitude - state.dataWeatherManager->WeatherFileLongitude)) + "] degrees.");
                     ShowContinueError(
-                        "..Time Zone difference=[" + General::RoundSigDigits(std::abs(DataEnvironment::TimeZoneNumber - state.dataWeatherManager->WeatherFileTimeZone), 1) +
+                        "..Time Zone difference=[" + format("{:.1R}", std::abs(DataEnvironment::TimeZoneNumber - state.dataWeatherManager->WeatherFileTimeZone)) +
                         "] hour(s), Elevation difference=[" +
                         General::RoundSigDigits(
                             std::abs((DataEnvironment::Elevation - state.dataWeatherManager->WeatherFileElevation) / max(DataEnvironment::Elevation, 1.0)) * 100.0, 2) +
-                        "] percent, [" + General::RoundSigDigits(std::abs(DataEnvironment::Elevation - state.dataWeatherManager->WeatherFileElevation), 2) + "] meters.");
+                        "] percent, [" + format("{:.2R}", std::abs(DataEnvironment::Elevation - state.dataWeatherManager->WeatherFileElevation)) + "] meters.");
                 }
             }
 
@@ -4417,17 +4417,17 @@ namespace WeatherManager {
         }
 
         if ((DataEnvironment::Latitude < -90.0) || (DataEnvironment::Latitude > 90.0)) {
-            ShowSevereError("Latitude must be between -90 and 90; Entered=" + General::RoundSigDigits(DataEnvironment::Latitude, 2));
+            ShowSevereError("Latitude must be between -90 and 90; Entered=" + format("{:.2R}", DataEnvironment::Latitude));
             LocationError = true;
         }
 
         if ((DataEnvironment::Longitude < -180.0) || (DataEnvironment::Longitude > 180.0)) {
-            ShowSevereError("Longitude must be between -180 and 180; Entered=" + General::RoundSigDigits(DataEnvironment::Longitude, 2));
+            ShowSevereError("Longitude must be between -180 and 180; Entered=" + format("{:.2R}", DataEnvironment::Longitude));
             LocationError = true;
         }
 
         if ((DataEnvironment::TimeZoneNumber < -12.00) || (DataEnvironment::TimeZoneNumber > 14.00)) {
-            ShowSevereError("Time Zone must be between -12 and +14; Entered=" + General::RoundSigDigits(DataEnvironment::TimeZoneNumber, 2));
+            ShowSevereError("Time Zone must be between -12 and +14; Entered=" + format("{:.2R}", DataEnvironment::TimeZoneNumber));
             LocationError = true;
         }
 
@@ -4446,11 +4446,11 @@ namespace WeatherManager {
                 if (DiffCalc > 1.0 && DiffCalc < 24.0) {
                     if (DiffCalc < 3.0) {
                         ShowWarningError("Standard Time Meridian and Time Zone differ by more than 1, Difference=\"" +
-                                         General::RoundSigDigits(DiffCalc, 1) + "\"");
+                                         format("{:.1R}", DiffCalc) + "\"");
                         ShowContinueError("Solar Positions may be incorrect");
                     } else {
                         ShowSevereError("Standard Time Meridian and Time Zone differ by more than 2, Difference=\"" +
-                                        General::RoundSigDigits(DiffCalc, 1) + "\"");
+                                        format("{:.1R}", DiffCalc) + "\"");
                         ShowContinueError("Solar Positions will be incorrect");
                         //          LocationError=.TRUE.
                     }
@@ -5510,7 +5510,7 @@ namespace WeatherManager {
                 state.dataWeatherManager->SpecialDays(Count).Duration = int(Duration(1));
             } else {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + ": " + AlphArray(1) + " Invalid " + DataIPShortCuts::cNumericFieldNames(1) +
-                                '=' + General::TrimSigDigits(Duration(1), 0));
+                                '=' + format("{:.0T}", Duration(1)));
                 ErrorsFound = true;
             }
 
@@ -5959,9 +5959,9 @@ namespace WeatherManager {
                             if (MaxDryBulbEntered) {
                                 ShowWarningError(DataIPShortCuts::cCurrentModuleObject + "=\"" + state.dataWeatherManager->DesDayInput(EnvrnNum).Title + "\", data override.");
                                 ShowContinueError(".." + DataIPShortCuts::cNumericFieldNames(3) + "=[" +
-                                                  General::RoundSigDigits(state.dataWeatherManager->DesDayInput(EnvrnNum).MaxDryBulb, 2) + "] will be overwritten.");
+                                                  format("{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).MaxDryBulb) + "] will be overwritten.");
                                 ShowContinueError(".." + DataIPShortCuts::cAlphaFieldNames(3) + "=\"" + DataIPShortCuts::cAlphaArgs(3) + "\".");
-                                ShowContinueError("..with max value=[" + General::RoundSigDigits(testval, 2) + "].");
+                                ShowContinueError("..with max value=[" + format("{:.2R}", testval) + "].");
                             }
                             state.dataWeatherManager->DesDayInput(EnvrnNum).MaxDryBulb = testval;
                         }
@@ -6253,8 +6253,8 @@ namespace WeatherManager {
                 if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue > state.dataWeatherManager->DesDayInput(EnvrnNum).MaxDryBulb) {
                     ShowWarningError(DataIPShortCuts::cCurrentModuleObject + "=\"" + state.dataWeatherManager->DesDayInput(EnvrnNum).Title + "\", range check data.");
                     ShowContinueError(
-                        "..Humidity Indicator Temperature at Max Temperature=" + General::RoundSigDigits(state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue, 1) +
-                        " > Max DryBulb=" + General::RoundSigDigits(state.dataWeatherManager->DesDayInput(EnvrnNum).MaxDryBulb, 1));
+                        "..Humidity Indicator Temperature at Max Temperature=" + format("{:.1R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) +
+                        " > Max DryBulb=" + format("{:.1R}", state.dataWeatherManager->DesDayInput(EnvrnNum).MaxDryBulb));
                     ShowContinueError(".." + DataIPShortCuts::cAlphaFieldNames(5) + "=\"" + DataIPShortCuts::cAlphaArgs(5) + "\".");
                     ShowContinueError("..Conditions for day will be set to Relative Humidity = 100%");
                     if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::DewPoint) {
@@ -8617,8 +8617,8 @@ namespace WeatherManager {
         case WaterMainsTempCalcMethod::Schedule:
             *eiostream << "Site Water Mains Temperature Information,";
             *eiostream << calcMethodMap.at(state.dataWeatherManager->WaterMainsTempsMethod) << "," << state.dataWeatherManager->WaterMainsTempsScheduleName << ",";
-            *eiostream << General::RoundSigDigits(state.dataWeatherManager->WaterMainsTempsAnnualAvgAirTemp, 2) << ","
-                       << General::RoundSigDigits(state.dataWeatherManager->WaterMainsTempsMaxDiffAirTemp, 2) << ",";
+            *eiostream << format("{:.2R}", state.dataWeatherManager->WaterMainsTempsAnnualAvgAirTemp) << ","
+                       << format("{:.2R}", state.dataWeatherManager->WaterMainsTempsMaxDiffAirTemp) << ",";
             *eiostream << "NA\n";
             break;
         case WaterMainsTempCalcMethod::Correlation:
@@ -8626,8 +8626,8 @@ namespace WeatherManager {
             *eiostream << calcMethodMap.at(state.dataWeatherManager->WaterMainsTempsMethod) << ","
                        << "NA"
                        << ",";
-            *eiostream << General::RoundSigDigits(state.dataWeatherManager->WaterMainsTempsAnnualAvgAirTemp, 2) << ","
-                       << General::RoundSigDigits(state.dataWeatherManager->WaterMainsTempsMaxDiffAirTemp, 2) << ",";
+            *eiostream << format("{:.2R}", state.dataWeatherManager->WaterMainsTempsAnnualAvgAirTemp) << ","
+                       << format("{:.2R}", state.dataWeatherManager->WaterMainsTempsMaxDiffAirTemp) << ",";
             *eiostream << "NA\n";
             break;
         case WaterMainsTempCalcMethod::CorrelationFromWeatherFile:
@@ -8636,8 +8636,8 @@ namespace WeatherManager {
                 *eiostream << calcMethodMap.at(state.dataWeatherManager->WaterMainsTempsMethod) << ","
                            << "NA"
                            << ",";
-                *eiostream << General::RoundSigDigits(state.dataWeatherManager->OADryBulbAverage.AnnualAvgOADryBulbTemp, 2) << ","
-                           << General::RoundSigDigits(state.dataWeatherManager->OADryBulbAverage.MonthlyAvgOADryBulbTempMaxDiff, 2) << ","
+                *eiostream << format("{:.2R}", state.dataWeatherManager->OADryBulbAverage.AnnualAvgOADryBulbTemp) << ","
+                           << format("{:.2R}", state.dataWeatherManager->OADryBulbAverage.MonthlyAvgOADryBulbTempMaxDiff) << ","
                            << "NA\n";
             } else {
                 *eiostream << "Site Water Mains Temperature Information,";
@@ -8648,7 +8648,7 @@ namespace WeatherManager {
                            << "NA"
                            << ","
                            << "NA"
-                           << "," << General::RoundSigDigits(10.0, 1) << '\n';
+                           << "," << format("{:.1R}", 10.0) << '\n';
             }
             break;
         default:
@@ -8660,7 +8660,7 @@ namespace WeatherManager {
                        << "NA"
                        << ","
                        << "NA"
-                       << "," << General::RoundSigDigits(10.0, 1) << '\n';
+                       << "," << format("{:.1R}", 10.0) << '\n';
             break;
         }
 

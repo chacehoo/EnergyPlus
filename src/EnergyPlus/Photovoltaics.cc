@@ -374,7 +374,7 @@ namespace Photovoltaics {
                     ShowWarningError("Suspected input problem with " + cAlphaFieldNames(2) + " = " + cAlphaArgs(2));
                     ShowContinueError("Entered in " + cCurrentModuleObject + " = " + cAlphaArgs(1));
                     ShowContinueError("Surface used for solar collector faces down");
-                    ShowContinueError("Surface tilt angle (degrees from ground outward normal) = " + RoundSigDigits(Surface(SurfNum).Tilt, 2));
+                    ShowContinueError("Surface tilt angle (degrees from ground outward normal) = " + format("{:.2R}", Surface(SurfNum).Tilt));
                 }
             }
 
@@ -1745,8 +1745,8 @@ namespace Photovoltaics {
             ShowSevereError("EquivalentOneDiode Photovoltaic model failed to find maximum power point");
             ShowContinueError("Numerical solver failed trying to take exponential of too large a number");
             ShowContinueError("Check input data in " + cPVEquiv1DiodePerfObjectName);
-            ShowContinueError("VV (voltage) = " + RoundSigDigits(VV, 5));
-            ShowContinueError("II (current) = " + RoundSigDigits(II, 5));
+            ShowContinueError("VV (voltage) = " + format("{:.5R}", VV));
+            ShowContinueError("II (current) = " + format("{:.5R}", II));
             ShowFatalError("FUN: EnergyPlus terminates because of numerical problem in EquivalentOne-Diode PV model");
         }
 
@@ -1798,8 +1798,8 @@ namespace Photovoltaics {
             ShowSevereError("EquivalentOneDiode Photovoltaic model failed to find maximum power point");
             ShowContinueError("Numerical solver failed trying to take exponential of too large a number");
             ShowContinueError("Check input data in " + cPVEquiv1DiodePerfObjectName);
-            ShowContinueError("VV (voltage) = " + RoundSigDigits(VV, 5));
-            ShowContinueError("II (current) = " + RoundSigDigits(II, 5));
+            ShowContinueError("VV (voltage) = " + format("{:.5R}", VV));
+            ShowContinueError("II (current) = " + format("{:.5R}", II));
             ShowFatalError("FI: EnergyPlus terminates because of numerical problem in EquivalentOne-Diode PV model");
         }
 
@@ -1852,8 +1852,8 @@ namespace Photovoltaics {
             ShowSevereError("EquivalentOneDiode Photovoltaic model failed to find maximum power point");
             ShowContinueError("Numerical solver failed trying to take exponential of too large a number");
             ShowContinueError("Check input data in " + cPVEquiv1DiodePerfObjectName);
-            ShowContinueError("VV (voltage) = " + RoundSigDigits(VV, 5));
-            ShowContinueError("II (current) = " + RoundSigDigits(II, 5));
+            ShowContinueError("VV (voltage) = " + format("{:.5R}", VV));
+            ShowContinueError("II (current) = " + format("{:.5R}", II));
             ShowFatalError("FI: EnergyPlus terminates because of numerical problem in EquivalentOne-Diode PV model");
         }
 

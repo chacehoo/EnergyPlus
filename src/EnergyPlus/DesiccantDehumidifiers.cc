@@ -687,13 +687,13 @@ namespace DesiccantDehumidifiers {
                 if (DesicDehum(DesicDehumNum).NomProcAirVel > 4.064) {
                     ShowWarningError(CurrentModuleObject + " = " + Alphas(1));
                     ShowContinueError(cNumericFields(3) +
-                                      " > 4.064 m/s.; Value in input=" + RoundSigDigits(DesicDehum(DesicDehumNum).NomProcAirVel, 3));
+                                      " > 4.064 m/s.; Value in input=" + format("{:.3R}", DesicDehum(DesicDehumNum).NomProcAirVel));
                     ShowContinueError("DEFAULT performance curves not valid outside 2.032 to 4.064 m/s (400 to 800 fpm).");
                 }
                 if (DesicDehum(DesicDehumNum).NomProcAirVel < 2.032) {
                     ShowWarningError(CurrentModuleObject + " = " + Alphas(1));
                     ShowContinueError(cNumericFields(3) +
-                                      " < 2.032 m/s.; Value in input=" + RoundSigDigits(DesicDehum(DesicDehumNum).NomProcAirVel, 3));
+                                      " < 2.032 m/s.; Value in input=" + format("{:.3R}", DesicDehum(DesicDehumNum).NomProcAirVel));
                     ShowContinueError("DEFAULT performance curves not valid outside 2.032 to 4.064 m/s (400 to 800 fpm).");
                 }
                 // Validate regen fan type, for default curves, can only variable volume
@@ -997,7 +997,7 @@ namespace DesiccantDehumidifiers {
 
                     if (RegenCoilControlNodeNum > 0) {
                         ShowSevereError(DesicDehum(DesicDehumNum).DehumType + " \"" + DesicDehum(DesicDehumNum).Name + "\"");
-                        ShowContinueError(cNumericFields(1) + " is specified as " + RoundSigDigits(DesicDehum(DesicDehumNum).RegenSetPointTemp, 3) +
+                        ShowContinueError(cNumericFields(1) + " is specified as " + format("{:.3R}", DesicDehum(DesicDehumNum).RegenSetPointTemp) +
                                           " C in this object.");
                         ShowContinueError(" Do not specify a coil temperature setpoint node name in the regeneration air heater object.");
                         ShowContinueError("..." + cAlphaFields(9) + " = " + DesicDehum(DesicDehumNum).RegenCoilType);
@@ -1142,7 +1142,7 @@ namespace DesiccantDehumidifiers {
 
                     if (RegenCoilControlNodeNum > 0) {
                         ShowSevereError(DesicDehum(DesicDehumNum).DehumType + " \"" + DesicDehum(DesicDehumNum).Name + "\"");
-                        ShowContinueError(cNumericFields(1) + " is specified as " + RoundSigDigits(DesicDehum(DesicDehumNum).RegenSetPointTemp, 3) +
+                        ShowContinueError(cNumericFields(1) + " is specified as " + format("{:.3R}", DesicDehum(DesicDehumNum).RegenSetPointTemp) +
                                           " C in this object.");
                         ShowContinueError(" Do not specify a coil temperature setpoint node name in the regeneration air heater object.");
                         ShowContinueError("..." + cAlphaFields(9) + " = " + DesicDehum(DesicDehumNum).RegenCoilType);
@@ -2075,7 +2075,7 @@ namespace DesiccantDehumidifiers {
                             HumRatNeeded = DesicDehum(DesicDehumNum).HumRatSet;
                             if (HumRatNeeded <= 0.0) {
                                 ShowSevereError("Dehumidifier:Desiccant:NoFans: " + DesicDehum(DesicDehumNum).Name);
-                                ShowContinueError("Invalid Leaving Max Humidity Ratio Setpoint=" + TrimSigDigits(HumRatNeeded, 8));
+                                ShowContinueError("Invalid Leaving Max Humidity Ratio Setpoint=" + format("{:.8T}", HumRatNeeded));
                                 ShowFatalError("must be > 0.0");
                             }
 
@@ -3313,8 +3313,8 @@ namespace DesiccantDehumidifiers {
                                                    DesicDehum(DesicDehumNum).DehumType + "=\"" + DesicDehum(DesicDehumNum).Name + "\"");
                                 ShowContinueErrorTimeStamp("");
                                 ShowContinueError("...Bad hot water maximum flow rate limits");
-                                ShowContinueError("...Given minimum water flow rate=" + RoundSigDigits(MinWaterFlow, 3) + " kg/s");
-                                ShowContinueError("...Given maximum water flow rate=" + RoundSigDigits(MaxHotWaterFlow, 3) + " kg/s");
+                                ShowContinueError("...Given minimum water flow rate=" + format("{:.3R}", MinWaterFlow) + " kg/s");
+                                ShowContinueError("...Given maximum water flow rate=" + format("{:.3R}", MaxHotWaterFlow) + " kg/s");
                             }
                             ShowRecurringWarningErrorAtEnd("CalcNonDXHeatingCoils: Hot water coil control failed (flow limits) for " +
                                                                DesicDehum(DesicDehumNum).DehumType + "=\"" + DesicDehum(DesicDehumNum).Name + "\"",

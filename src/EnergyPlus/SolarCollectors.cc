@@ -322,7 +322,7 @@ namespace SolarCollectors {
                         ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + " = " + DataIPShortCuts::cAlphaArgs(1));
                         ShowContinueError("Surface used for solar collector faces down");
                         ShowContinueError("Surface tilt angle (degrees from ground outward normal) = " +
-                                          General::RoundSigDigits(DataSurfaces::Surface(SurfNum).Tilt, 2));
+                                          format("{:.2R}", DataSurfaces::Surface(SurfNum).Tilt));
                     }
 
                     // Check to make sure other solar collectors are not using the same surface
@@ -419,7 +419,7 @@ namespace SolarCollectors {
                 if (DataIPShortCuts::rNumericArgs(1) <= 0.0) {
                     ShowSevereError(CurrentModuleParamObject + " = " + DataIPShortCuts::cAlphaArgs(1));
                     ShowContinueError("Illegal " + DataIPShortCuts::cNumericFieldNames(1) + " = " +
-                                      General::RoundSigDigits(DataIPShortCuts::rNumericArgs(1), 2));
+                                      format("{:.2R}", DataIPShortCuts::rNumericArgs(1)));
                     ShowContinueError(" Collector gross area must be always gretaer than zero.");
                     ErrorsFound = true;
                 }
@@ -427,7 +427,7 @@ namespace SolarCollectors {
                 if (DataIPShortCuts::rNumericArgs(2) <= 0.0) {
                     ShowSevereError(CurrentModuleParamObject + " = " + DataIPShortCuts::cAlphaArgs(1));
                     ShowContinueError("Illegal " + DataIPShortCuts::cNumericFieldNames(2) + " = " +
-                                      General::RoundSigDigits(DataIPShortCuts::rNumericArgs(2), 2));
+                                      format("{:.2R}", DataIPShortCuts::rNumericArgs(2)));
                     ShowContinueError(" Collector water volume must be always gretaer than zero.");
                     ErrorsFound = true;
                 }
@@ -468,7 +468,7 @@ namespace SolarCollectors {
                 } else {
                     ShowSevereError(CurrentModuleParamObject + " = " + DataIPShortCuts::cAlphaArgs(1));
                     ShowContinueError("Illegal " + DataIPShortCuts::cNumericFieldNames(8) + " = " +
-                                      General::RoundSigDigits(DataIPShortCuts::rNumericArgs(8), 2));
+                                      format("{:.2R}", DataIPShortCuts::rNumericArgs(8)));
                     ErrorsFound = true;
                 }
                 // Solar absorptance of the absorber plate
@@ -553,7 +553,7 @@ namespace SolarCollectors {
                         ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + " = " + DataIPShortCuts::cAlphaArgs(1));
                         ShowContinueError("Surface used for solar collector faces down");
                         ShowContinueError("Surface tilt angle (degrees from ground outward normal) = " +
-                                          General::RoundSigDigits(DataSurfaces::Surface(SurfNum).Tilt, 2));
+                                          format("{:.2R}", DataSurfaces::Surface(SurfNum).Tilt));
                     }
 
                     // Check to make sure other solar collectors are not using the same surface

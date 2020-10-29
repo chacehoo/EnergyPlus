@@ -1201,8 +1201,8 @@ namespace HVACDXSystem {
                                                     DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                     " - Iteration limit exceeded calculating DX unit sensible part-load ratio for unit = " +
                                                     DXCoolingSystem(DXSystemNum).Name);
-                                                ShowContinueError("Estimated part-load ratio  = " + RoundSigDigits((ReqOutput / FullOutput), 3));
-                                                ShowContinueError("Calculated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                                ShowContinueError("Estimated part-load ratio  = " + format("{:.3R}", (ReqOutput / FullOutput)));
+                                                ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                                 ShowContinueErrorTimeStamp(
                                                     "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                                             }
@@ -1224,7 +1224,7 @@ namespace HVACDXSystem {
                                                                  " - DX unit sensible part-load ratio calculation failed: part-load ratio limits "
                                                                  "exceeded, for unit = " +
                                                                  DXCoolingSystem(DXSystemNum).Name);
-                                                ShowContinueError("Estimated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                                ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                                 ShowContinueErrorTimeStamp(
                                                     "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                                             }
@@ -1283,8 +1283,8 @@ namespace HVACDXSystem {
                                                     DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                     " - Iteration limit exceeded calculating DX unit latent part-load ratio for unit = " +
                                                     DXCoolingSystem(DXSystemNum).Name);
-                                                ShowContinueError("Estimated part-load ratio   = " + RoundSigDigits((ReqOutput / FullOutput), 3));
-                                                ShowContinueError("Calculated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                                ShowContinueError("Estimated part-load ratio   = " + format("{:.3R}", (ReqOutput / FullOutput)));
+                                                ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                                 ShowContinueErrorTimeStamp(
                                                     "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                                             }
@@ -1310,7 +1310,7 @@ namespace HVACDXSystem {
                                                                  " - DX unit latent part-load ratio calculation failed: part-load ratio limits "
                                                                  "exceeded, for unit = " +
                                                                  DXCoolingSystem(DXSystemNum).Name);
-                                                ShowContinueError("Estimated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                                ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                                 ShowContinueErrorTimeStamp(
                                                     "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                                             }
@@ -1459,8 +1459,8 @@ namespace HVACDXSystem {
                                                     DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                     " - Iteration limit exceeded calculating DX unit sensible part-load ratio for unit = " +
                                                     DXCoolingSystem(DXSystemNum).Name);
-                                                ShowContinueError("Estimated part-load ratio   = " + RoundSigDigits((ReqOutput / FullOutput), 3));
-                                                ShowContinueError("Calculated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                                ShowContinueError("Estimated part-load ratio   = " + format("{:.3R}", (ReqOutput / FullOutput)));
+                                                ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                                 ShowContinueErrorTimeStamp(
                                                     "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                                             }
@@ -1481,7 +1481,7 @@ namespace HVACDXSystem {
                                                                  " - DX unit sensible part-load ratio calculation unexpectedly failed: part-load "
                                                                  "ratio limits exceeded, for unit = " +
                                                                  DXCoolingSystem(DXSystemNum).Name);
-                                                ShowContinueError("Estimated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                                ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                                 ShowContinueErrorTimeStamp(
                                                     "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                                             }
@@ -1504,7 +1504,7 @@ namespace HVACDXSystem {
                                                              " - DX unit sensible part-load ratio calculation failed: part-load ratio limits "
                                                              "exceeded, for unit = " +
                                                              DXCoolingSystem(DXSystemNum).Name);
-                                            ShowContinueError("Estimated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                            ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                             ShowContinueErrorTimeStamp(
                                                 "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                                         }
@@ -1587,8 +1587,8 @@ namespace HVACDXSystem {
                                             ShowWarningError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                              " - Iteration limit exceeded calculating DX unit latent part-load ratio for unit = " +
                                                              DXCoolingSystem(DXSystemNum).Name);
-                                            ShowContinueError("Estimated latent part-load ratio   = " + RoundSigDigits((ReqOutput / FullOutput), 3));
-                                            ShowContinueError("Calculated latent part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                            ShowContinueError("Estimated latent part-load ratio   = " + format("{:.3R}", (ReqOutput / FullOutput)));
+                                            ShowContinueError("Calculated latent part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                             ShowContinueErrorTimeStamp(
                                                 "The calculated latent part-load ratio will be used and the simulation continues. Occurrence info:");
                                         }
@@ -1609,7 +1609,7 @@ namespace HVACDXSystem {
                                                 DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                 " - DX unit latent part-load ratio calculation failed: part-load ratio limits exceeded, for unit = " +
                                                 DXCoolingSystem(DXSystemNum).Name);
-                                            ShowContinueError("Estimated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                            ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                             ShowContinueErrorTimeStamp(
                                                 "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                                         }
@@ -1705,8 +1705,8 @@ namespace HVACDXSystem {
                                                     " - Iteration limit exceeded calculating DX unit latent part-load ratio for unit = " +
                                                     DXCoolingSystem(DXSystemNum).Name);
                                                 ShowContinueError("Estimated latent part-load ratio   = " +
-                                                                  RoundSigDigits((ReqOutput / FullOutput), 3));
-                                                ShowContinueError("Calculated latent part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                                                  format("{:.3R}", (ReqOutput / FullOutput)));
+                                                ShowContinueError("Calculated latent part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                                 ShowContinueErrorTimeStamp("The calculated latent part-load ratio will be used and the simulation "
                                                                            "continues. Occurrence info:");
                                             }
@@ -1728,7 +1728,7 @@ namespace HVACDXSystem {
                                                                  " - DX unit latent part-load ratio calculation failed unexpectedly: part-load ratio "
                                                                  "limits exceeded, for unit = " +
                                                                  DXCoolingSystem(DXSystemNum).Name);
-                                                ShowContinueError("Estimated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                                ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                                 ShowContinueErrorTimeStamp(
                                                     "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                                             }
@@ -1750,7 +1750,7 @@ namespace HVACDXSystem {
                                                 DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                 " - DX unit latent part-load ratio calculation failed: part-load ratio limits exceeded, for unit = " +
                                                 DXCoolingSystem(DXSystemNum).Name);
-                                            ShowContinueError("Estimated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                            ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                             ShowContinueErrorTimeStamp(
                                                 "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                                         }
@@ -1792,7 +1792,7 @@ namespace HVACDXSystem {
                                             ShowWarningError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                              " - Iteration limit exceeded calculating DX unit sensible speed ratio for unit = " +
                                                              DXCoolingSystem(DXSystemNum).Name);
-                                            ShowContinueError("Calculated speed ratio = " + RoundSigDigits(SpeedRatio, 3));
+                                            ShowContinueError("Calculated speed ratio = " + format("{:.3R}", SpeedRatio));
                                             ShowContinueErrorTimeStamp(
                                                 "The calculated speed ratio will be used and the simulation continues. Occurrence info:");
                                         }
@@ -1825,7 +1825,7 @@ namespace HVACDXSystem {
                                         ShowWarningError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                          " - Iteration limit exceeded calculating DX unit sensible cycling ratio for unit = " +
                                                          DXCoolingSystem(DXSystemNum).Name);
-                                        ShowContinueError("Calculated cycling ratio = " + RoundSigDigits(CycRatio, 3));
+                                        ShowContinueError("Calculated cycling ratio = " + format("{:.3R}", CycRatio));
                                         ShowContinueErrorTimeStamp(
                                             "The calculated cycling ratio will be used and the simulation continues. Occurrence info:");
                                     }
@@ -1883,7 +1883,7 @@ namespace HVACDXSystem {
                                                         DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                         " - Iteration limit exceeded calculating DX unit latent speed ratio for unit = " +
                                                         DXCoolingSystem(DXSystemNum).Name);
-                                                    ShowContinueError("Calculated speed ratio = " + RoundSigDigits(SpeedRatio, 3));
+                                                    ShowContinueError("Calculated speed ratio = " + format("{:.3R}", SpeedRatio));
                                                     ShowContinueErrorTimeStamp(
                                                         "The calculated speed ratio will be used and the simulation continues. Occurrence info:");
                                                 }
@@ -1916,7 +1916,7 @@ namespace HVACDXSystem {
                                                 ShowWarningError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                                  " - Iteration limit exceeded calculating DX unit latent cycling ratio for unit = " +
                                                                  DXCoolingSystem(DXSystemNum).Name);
-                                                ShowContinueError("Calculated cycling ratio = " + RoundSigDigits(CycRatio, 3));
+                                                ShowContinueError("Calculated cycling ratio = " + format("{:.3R}", CycRatio));
                                                 ShowContinueErrorTimeStamp(
                                                     "The calculated cycling ratio will be used and the simulation continues. Occurrence info:");
                                             }
@@ -1987,8 +1987,8 @@ namespace HVACDXSystem {
                                             ShowWarningError(DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                              " - Iteration limit exceeded calculating DX unit sensible part-load ratio for unit = " +
                                                              DXCoolingSystem(DXSystemNum).Name);
-                                            ShowContinueError("Estimated part-load ratio  = " + RoundSigDigits((ReqOutput / FullOutput), 3));
-                                            ShowContinueError("Calculated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                            ShowContinueError("Estimated part-load ratio  = " + format("{:.3R}", (ReqOutput / FullOutput)));
+                                            ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                             ShowContinueErrorTimeStamp(
                                                 "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                                         }
@@ -2074,8 +2074,8 @@ namespace HVACDXSystem {
                                                 } else {
                                                     TempMinPLR = PartLoadFrac + 0.001;
                                                 }
-                                                ShowContinueError("Estimated part-load ratio  = " + RoundSigDigits(TempMinPLR, 3));
-                                                ShowContinueError("Calculated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                                ShowContinueError("Estimated part-load ratio  = " + format("{:.3R}", TempMinPLR));
+                                                ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                                 ShowContinueErrorTimeStamp(
                                                     "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                                             }
@@ -2112,8 +2112,8 @@ namespace HVACDXSystem {
                                                     DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                     " - Iteration limit exceeded calculating DX unit multimode latent part-load ratio for unit = " +
                                                     DXCoolingSystem(DXSystemNum).Name);
-                                                ShowContinueError("Estimated part-load ratio  = " + RoundSigDigits((ReqOutput / FullOutput), 3));
-                                                ShowContinueError("Calculated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                                ShowContinueError("Estimated part-load ratio  = " + format("{:.3R}", (ReqOutput / FullOutput)));
+                                                ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                                 ShowContinueErrorTimeStamp(
                                                     "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                                             }
@@ -2175,8 +2175,8 @@ namespace HVACDXSystem {
                                                 DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                 " - Iteration limit exceeded calculating DX unit coolreheat latent part-load ratio for unit = " +
                                                 DXCoolingSystem(DXSystemNum).Name);
-                                            ShowContinueError("Estimated part-load ratio  = " + RoundSigDigits((ReqOutput / FullOutput), 3));
-                                            ShowContinueError("Calculated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                            ShowContinueError("Estimated part-load ratio  = " + format("{:.3R}", (ReqOutput / FullOutput)));
+                                            ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                             ShowContinueErrorTimeStamp(
                                                 "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                                         }
@@ -2304,8 +2304,8 @@ namespace HVACDXSystem {
                                                     " - Iteration limit exceeded calculating DX unit sensible part-load ratio for unit = " +
                                                     DXCoolingSystem(DXSystemNum).Name);
                                                 ShowContinueError("Estimated part-load ratio  = " +
-                                                                  RoundSigDigits((TempSpeedOut / TempSpeedReqst), 3));
-                                                ShowContinueError("Calculated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                                                  format("{:.3R}", (TempSpeedOut / TempSpeedReqst)));
+                                                ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                                 ShowContinueErrorTimeStamp(
                                                     "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                                             }
@@ -2326,7 +2326,7 @@ namespace HVACDXSystem {
                                                                  " - DX unit sensible part-load ratio calculation failed: part-load ratio limits "
                                                                  "exceeded, for unit = " +
                                                                  DXCoolingSystem(DXSystemNum).Name);
-                                                ShowContinueError("Estimated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                                ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                                 ShowContinueErrorTimeStamp(
                                                     "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                                             }
@@ -2411,8 +2411,8 @@ namespace HVACDXSystem {
                                                         DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                         " - Iteration limit exceeded calculating DX unit sensible part-load ratio for unit = " +
                                                         DXCoolingSystem(DXSystemNum).Name);
-                                                    ShowContinueError("Estimated part-load ratio  = " + RoundSigDigits((ReqOutput / FullOutput), 3));
-                                                    ShowContinueError("Calculated part-load ratio = " + RoundSigDigits(SpeedRatio, 3));
+                                                    ShowContinueError("Estimated part-load ratio  = " + format("{:.3R}", (ReqOutput / FullOutput)));
+                                                    ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", SpeedRatio));
                                                     ShowContinueErrorTimeStamp(
                                                         "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                                                 }
@@ -2433,7 +2433,7 @@ namespace HVACDXSystem {
                                                                      " - DX unit sensible part-load ratio calculation failed: part-load ratio limits "
                                                                      "exceeded, for unit = " +
                                                                      DXCoolingSystem(DXSystemNum).Name);
-                                                    ShowContinueError("Estimated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                                    ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                                     ShowContinueErrorTimeStamp(
                                                         "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                                                 }
@@ -2536,8 +2536,8 @@ namespace HVACDXSystem {
                                                         DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                         " - Iteration limit exceeded calculating DX unit latent part-load ratio for unit = " +
                                                         DXCoolingSystem(DXSystemNum).Name);
-                                                    ShowContinueError("Estimated part-load ratio  = " + RoundSigDigits((ReqOutput / FullOutput), 3));
-                                                    ShowContinueError("Calculated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                                    ShowContinueError("Estimated part-load ratio  = " + format("{:.3R}", (ReqOutput / FullOutput)));
+                                                    ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                                     ShowContinueErrorTimeStamp(
                                                         "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                                                 }
@@ -2558,7 +2558,7 @@ namespace HVACDXSystem {
                                                                      " - DX unit latent part-load ratio calculation failed: part-load ratio limits "
                                                                      "exceeded, for unit = " +
                                                                      DXCoolingSystem(DXSystemNum).Name);
-                                                    ShowContinueError("Estimated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                                    ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                                     ShowContinueErrorTimeStamp(
                                                         "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                                                 }
@@ -2592,8 +2592,8 @@ namespace HVACDXSystem {
                                                     DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                     " - Iteration limit exceeded calculating DX unit latent part-load ratio for unit = " +
                                                     DXCoolingSystem(DXSystemNum).Name);
-                                                ShowContinueError("Estimated part-load ratio   = " + RoundSigDigits((ReqOutput / FullOutput), 3));
-                                                ShowContinueError("Calculated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                                ShowContinueError("Estimated part-load ratio   = " + format("{:.3R}", (ReqOutput / FullOutput)));
+                                                ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                                 ShowContinueErrorTimeStamp(
                                                     "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                                             }
@@ -2614,7 +2614,7 @@ namespace HVACDXSystem {
                                                                  " - DX unit latent part-load ratio calculation failed: part-load ratio limits "
                                                                  "exceeded, for unit = " +
                                                                  DXCoolingSystem(DXSystemNum).Name);
-                                                ShowContinueError("Estimated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                                ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                                 ShowContinueErrorTimeStamp(
                                                     "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                                             }

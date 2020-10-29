@@ -978,8 +978,8 @@ namespace ChillerExhaustAbsorption {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpNomCap - NomCapUser) / NomCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerHeaterAbsorptionDoubleEffect: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Nominal Capacity of " + General::RoundSigDigits(NomCapUser, 2) + " [W]");
-                                    ShowContinueError("differs from Design Size Nominal Capacity of " + General::RoundSigDigits(tmpNomCap, 2) +
+                                    ShowContinueError("User-Specified Nominal Capacity of " + format("{:.2R}", NomCapUser) + " [W]");
+                                    ShowContinueError("differs from Design Size Nominal Capacity of " + format("{:.2R}", tmpNomCap) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -1046,9 +1046,9 @@ namespace ChillerExhaustAbsorption {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerAbsorptionDoubleEffect: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Design Chilled Water Flow Rate of " +
-                                                      General::RoundSigDigits(EvapVolFlowRateUser, 5) + " [m3/s]");
+                                                      format("{:.5R}", EvapVolFlowRateUser) + " [m3/s]");
                                     ShowContinueError("differs from Design Size Design Chilled Water Flow Rate of " +
-                                                      General::RoundSigDigits(tmpEvapVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", tmpEvapVolFlowRate) + " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1118,9 +1118,9 @@ namespace ChillerExhaustAbsorption {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerHeaterAbsorptionDoubleEffect: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Design Hot Water Flow Rate of " +
-                                                      General::RoundSigDigits(HeatRecVolFlowRateUser, 5) + " [m3/s]");
+                                                      format("{:.5R}", HeatRecVolFlowRateUser) + " [m3/s]");
                                     ShowContinueError("differs from Design Size Design Hot Water Flow Rate of " +
-                                                      General::RoundSigDigits(tmpHeatRecVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", tmpHeatRecVolFlowRate) + " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1201,9 +1201,9 @@ namespace ChillerExhaustAbsorption {
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerAbsorptionDoubleEffect: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError("User-Specified Design Condenser Water Flow Rate of " +
-                                                      General::RoundSigDigits(CondVolFlowRateUser, 5) + " [m3/s]");
+                                                      format("{:.5R}", CondVolFlowRateUser) + " [m3/s]");
                                     ShowContinueError("differs from Design Size Design Condenser Water Flow Rate of " +
-                                                      General::RoundSigDigits(tmpCondVolFlowRate, 5) + " [m3/s]");
+                                                      format("{:.5R}", tmpCondVolFlowRate) + " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1602,9 +1602,9 @@ namespace ChillerExhaustAbsorption {
                     ShowWarningError("ChillerHeater:Absorption:DoubleEffect \"" + this->Name + "\"");
                     ShowContinueError(
                         "...Exhaust temperature and flow input from Micro Turbine is not sufficient during cooling to run the chiller ");
-                    ShowContinueError("...Value of Exhaust air inlet temp =" + General::TrimSigDigits(lExhaustInTemp, 4) + " C.");
-                    ShowContinueError("... and Exhaust air flow rate of " + General::TrimSigDigits(lExhaustInFlow, 2) + " kg/s.");
-                    ShowContinueError("...Value of minimum absorber leaving temp =" + General::TrimSigDigits(AbsLeavingTemp, 4) + " C.");
+                    ShowContinueError("...Value of Exhaust air inlet temp =" + format("{:.4T}", lExhaustInTemp) + " C.");
+                    ShowContinueError("... and Exhaust air flow rate of " + format("{:.2T}", lExhaustInFlow) + " kg/s.");
+                    ShowContinueError("...Value of minimum absorber leaving temp =" + format("{:.4T}", AbsLeavingTemp) + " C.");
                     ShowContinueError("...Either increase the Exhaust temperature (min required = 350 C )  or flow or both of Micro Turbine to meet "
                                       "the min available potential criteria.");
                     ShowContinueErrorTimeStamp("... Simulation will continue.");
@@ -1891,9 +1891,9 @@ namespace ChillerExhaustAbsorption {
                     ShowWarningError("ChillerHeater:Absorption:DoubleEffect \"" + this->Name + "\"");
                     ShowContinueError(
                         "...Exhaust temperature and flow input from Micro Turbine is not sufficient to run the chiller during heating .");
-                    ShowContinueError("...Value of Exhaust air inlet temp =" + General::TrimSigDigits(lExhaustInTemp, 4) + " C.");
-                    ShowContinueError("... and Exhaust air flow rate of " + General::TrimSigDigits(lExhaustInFlow, 2) + " kg/s.");
-                    ShowContinueError("...Value of minimum absorber leaving temp =" + General::TrimSigDigits(AbsLeavingTemp, 4) + " C.");
+                    ShowContinueError("...Value of Exhaust air inlet temp =" + format("{:.4T}", lExhaustInTemp) + " C.");
+                    ShowContinueError("... and Exhaust air flow rate of " + format("{:.2T}", lExhaustInFlow) + " kg/s.");
+                    ShowContinueError("...Value of minimum absorber leaving temp =" + format("{:.4T}", AbsLeavingTemp) + " C.");
                     ShowContinueError("...Either increase the Exhaust temperature (min required = 350 C  )  or flow or both of Micro Turbine to meet "
                                       "the min available potential criteria.");
                     ShowContinueErrorTimeStamp("... Simulation will continue.");

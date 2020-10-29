@@ -234,15 +234,15 @@ namespace Construction {
                                             dataMaterial.Material(CurrentLayer).Name);
                             ShowContinueError("High conductivity Material layers are not well supported for internal source constructions, "
                                               "material conductivity = " +
-                                              General::RoundSigDigits(dataMaterial.Material(CurrentLayer).Conductivity, 3) + " [W/m-K]");
-                            ShowContinueError("Material thermal diffusivity = " + General::RoundSigDigits(Alpha, 3) + " [m2/s]");
+                                              format("{:.3R}", dataMaterial.Material(CurrentLayer).Conductivity) + " [W/m-K]");
+                            ShowContinueError("Material thermal diffusivity = " + format("{:.3R}", Alpha) + " [m2/s]");
                             ShowContinueError("Material with this thermal diffusivity should have thickness > " +
-                                                      General::RoundSigDigits(ThicknessThreshold, 5) + " [m]");
+                                                      format("{:.5R}", ThicknessThreshold) + " [m]");
                             if (dataMaterial.Material(CurrentLayer).Thickness < DataHeatBalance::ThinMaterialLayerThreshold) {
                                 ShowContinueError("Material may be too thin to be modeled well, thickness = " +
-                                                          General::RoundSigDigits(dataMaterial.Material(CurrentLayer).Thickness, 5) + " [m]");
+                                                          format("{:.5R}", dataMaterial.Material(CurrentLayer).Thickness) + " [m]");
                                 ShowContinueError("Material with this thermal diffusivity should have thickness > " +
-                                                  General::RoundSigDigits(DataHeatBalance::ThinMaterialLayerThreshold, 5) + " [m]");
+                                                  format("{:.5R}", DataHeatBalance::ThinMaterialLayerThreshold) + " [m]");
                             }
                             dataMaterial.Material(CurrentLayer).WarnedForHighDiffusivity = true;
                         }
@@ -275,8 +275,8 @@ namespace Construction {
 
                     ShowSevereError("InitConductionTransferFunctions: Material=" + dataMaterial.Material(CurrentLayer).Name +
                                     "R Value below lowest allowed value");
-                    ShowContinueError("Lowest allowed value=[" + General::RoundSigDigits(RValueLowLimit, 3) + "], Material R Value=[" +
-                                      General::RoundSigDigits(lr(Layer), 3) + "].");
+                    ShowContinueError("Lowest allowed value=[" + format("{:.3R}", RValueLowLimit) + "], Material R Value=[" +
+                                      format("{:.3R}", lr(Layer)) + "].");
                     ErrorsFound = true;
 
                 } else { // A valid user defined R-value is available.

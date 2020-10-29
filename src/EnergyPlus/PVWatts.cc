@@ -146,7 +146,7 @@ namespace PVWatts {
         }
 
         if (systemLosses > 1.0 || systemLosses < 0.0) {
-            ShowSevereError("PVWatts: Invalid system loss value " + RoundSigDigits(systemLosses, 2));
+            ShowSevereError("PVWatts: Invalid system loss value " + format("{:.2R}", systemLosses));
             errorsFound = true;
         }
         m_systemLosses = systemLosses;
@@ -155,12 +155,12 @@ namespace PVWatts {
 
         if (m_geometryType == GeometryType::TILT_AZIMUTH) {
             if (tilt < 0 || tilt > 90) {
-                ShowSevereError("PVWatts: Invalid tilt: " + RoundSigDigits(tilt, 2));
+                ShowSevereError("PVWatts: Invalid tilt: " + format("{:.2R}", tilt));
                 errorsFound = true;
             }
             m_tilt = tilt;
             if (azimuth < 0 || azimuth >= 360) {
-                ShowSevereError("PVWatts: Invalid azimuth: " + RoundSigDigits(azimuth, 2));
+                ShowSevereError("PVWatts: Invalid azimuth: " + format("{:.2R}", azimuth));
             }
             m_azimuth = azimuth;
         } else if (m_geometryType == GeometryType::SURFACE) {
@@ -178,7 +178,7 @@ namespace PVWatts {
         }
 
         if (groundCoverageRatio > 1.0 || groundCoverageRatio < 0.0) {
-            ShowSevereError("PVWatts: Invalid ground coverage ratio: " + RoundSigDigits(groundCoverageRatio, 2));
+            ShowSevereError("PVWatts: Invalid ground coverage ratio: " + format("{:.2R}", groundCoverageRatio));
             errorsFound = true;
         }
         m_groundCoverageRatio = groundCoverageRatio;
@@ -505,14 +505,14 @@ namespace PVWatts {
                     if (Fskydiff >= 0 && Fskydiff <= 1)
                         irr_st.iskydiff *= Fskydiff;
                     else
-                        ShowWarningError("PVWatts: sky diffuse reduction factor invalid: fskydiff=" + RoundSigDigits(Fskydiff, 7) +
-                                         ", stilt=" + RoundSigDigits(irr_st.stilt, 7));
+                        ShowWarningError("PVWatts: sky diffuse reduction factor invalid: fskydiff=" + format("{:.7R}", Fskydiff) +
+                                         ", stilt=" + format("{:.7R}", irr_st.stilt));
 
                     if (Fgnddiff >= 0 && Fgnddiff <= 1)
                         irr_st.ignddiff *= Fgnddiff;
                     else
-                        ShowWarningError("PVWatts: gnd diffuse reduction factor invalid: fgnddiff=" + RoundSigDigits(Fgnddiff, 7) +
-                                         ", stilt=" + RoundSigDigits(irr_st.stilt, 7));
+                        ShowWarningError("PVWatts: gnd diffuse reduction factor invalid: fgnddiff=" + format("{:.7R}", Fgnddiff) +
+                                         ", stilt=" + format("{:.7R}", irr_st.stilt));
                 }
             }
 

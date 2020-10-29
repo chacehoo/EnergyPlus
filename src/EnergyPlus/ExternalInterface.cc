@@ -2322,7 +2322,7 @@ namespace ExternalInterface {
         if (noMoreValues && showContinuationWithoutUpdate) {
             if (haveExternalInterfaceBCVTB) {
                 ShowWarningError("ExternalInterface: Continue simulation without updated values from server at t =" +
-                                 TrimSigDigits(preSimTim / 3600.0, 2) + " hours");
+                                 format("{:.2T}", preSimTim / 3600.0) + " hours");
             }
             showContinuationWithoutUpdate = false;
         }

@@ -3576,8 +3576,8 @@ namespace WindowManager {
                 // report out temperatures
                 for (i = 1; i <= state.dataWindowManager->nglfacep; ++i) {
                     ShowContinueError("Glazing face index = " + fmt::to_string(i) +
-                                      " ; new temperature =" + RoundSigDigits(state.dataWindowManager->thetas(i) - DataGlobalConstants::KelvinConv(), 4) +
-                                      "C  ; previous temperature = " + RoundSigDigits(state.dataWindowManager->thetasPrev(i) - DataGlobalConstants::KelvinConv(), 4) + 'C');
+                                      " ; new temperature =" + format("{:.4R}", state.dataWindowManager->thetas(i) - DataGlobalConstants::KelvinConv()) +
+                                      "C  ; previous temperature = " + format("{:.4R}", state.dataWindowManager->thetasPrev(i) - DataGlobalConstants::KelvinConv()) + 'C');
                 }
             }
 
@@ -7247,8 +7247,8 @@ namespace WindowManager {
         //      CALL CalcComplexWindowThermal(ThisNum, TempVar, TempVar, TempVar, TempVar, summerCondition)
         //      Write(OutputFileInits,800) TRIM(Construct(SurfConstr)%Name), TRIM(RoundSigDigits(SurfConstr)), &
         //                                 TRIM(RoundSigDigits(Construct(SurfConstr)%TotSolidLayers)), &
-        //                                 TRIM(RoundSigDigits(NominalU(SurfConstr),3)), &
-        //                                 TRIM(RoundSigDigits(Construct(SurfConstr)%SummerSHGC,3))
+        //                                 TRIM(format("{:.3R}", NominalU(SurfConstr))), &
+        //                                 TRIM(format("{:.3R}", Construct(SurfConstr)%SummerSHGC))
         //    END IF
         //  END IF
         // ENDDO

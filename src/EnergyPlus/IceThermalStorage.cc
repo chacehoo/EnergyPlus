@@ -770,7 +770,7 @@ namespace IceThermalStorage {
             if (DataIPShortCuts::rNumericArgs(1) == 0.0) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ShowContinueError("Invalid " + DataIPShortCuts::cNumericFieldNames(1) + '=' +
-                                  General::RoundSigDigits(DataIPShortCuts::rNumericArgs(1), 2));
+                                  format("{:.2R}", DataIPShortCuts::rNumericArgs(1)));
                 ErrorsFound = true;
             }
 
@@ -870,7 +870,7 @@ namespace IceThermalStorage {
 
             if (DataIPShortCuts::rNumericArgs(1) <= 0.0) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(1) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(1), 2));
+                                format("{:.2R}", DataIPShortCuts::rNumericArgs(1)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ErrorsFound = true;
             }
@@ -986,7 +986,7 @@ namespace IceThermalStorage {
             DetailedIceStorage(iceNum).CurveFitTimeStep = DataIPShortCuts::rNumericArgs(2);
             if ((DetailedIceStorage(iceNum).CurveFitTimeStep <= 0.0) || (DetailedIceStorage(iceNum).CurveFitTimeStep > 1.0)) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(2) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(2), 3));
+                                format("{:.3R}", DataIPShortCuts::rNumericArgs(2)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ShowContinueError("Curve fit time step invalid, less than zero or greater than 1 for " + DataIPShortCuts::cAlphaArgs(1));
                 ErrorsFound = true;
@@ -1014,7 +1014,7 @@ namespace IceThermalStorage {
 
             if ((DetailedIceStorage(iceNum).DischargeParaElecLoad < 0.0) || (DetailedIceStorage(iceNum).DischargeParaElecLoad > 1.0)) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(3) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(3), 3));
+                                format("{:.3R}", DataIPShortCuts::rNumericArgs(3)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ShowContinueError("Value is either less than/equal to zero or greater than 1");
                 ErrorsFound = true;
@@ -1022,7 +1022,7 @@ namespace IceThermalStorage {
 
             if ((DetailedIceStorage(iceNum).ChargeParaElecLoad < 0.0) || (DetailedIceStorage(iceNum).ChargeParaElecLoad > 1.0)) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(4) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(4), 3));
+                                format("{:.3R}", DataIPShortCuts::rNumericArgs(4)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ShowContinueError("Value is either less than/equal to zero or greater than 1");
                 ErrorsFound = true;
@@ -1030,7 +1030,7 @@ namespace IceThermalStorage {
 
             if ((DetailedIceStorage(iceNum).TankLossCoeff < 0.0) || (DetailedIceStorage(iceNum).TankLossCoeff > 0.1)) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(5) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(5), 3));
+                                format("{:.3R}", DataIPShortCuts::rNumericArgs(5)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ShowContinueError("Value is either less than/equal to zero or greater than 0.1 (10%)");
                 ErrorsFound = true;
@@ -1038,7 +1038,7 @@ namespace IceThermalStorage {
 
             if ((DetailedIceStorage(iceNum).FreezingTemp < -10.0) || (DetailedIceStorage(iceNum).FreezingTemp > 10.0)) {
                 ShowWarningError("Potentially invalid " + DataIPShortCuts::cNumericFieldNames(6) + '=' +
-                                 General::RoundSigDigits(DataIPShortCuts::rNumericArgs(6), 3));
+                                 format("{:.3R}", DataIPShortCuts::rNumericArgs(6)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ShowContinueError("Value is either less than -10.0C or greater than 10.0C");
                 ShowContinueError("This value will be allowed but the user should verify that this temperature is correct");

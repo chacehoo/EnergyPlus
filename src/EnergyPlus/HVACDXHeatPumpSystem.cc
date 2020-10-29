@@ -739,8 +739,8 @@ namespace HVACDXHeatPumpSystem {
                                                 ShowWarningError(DXHeatPumpSystem(DXSystemNum).DXHeatPumpSystemType +
                                                                  " - Iteration limit exceeded calculating DX unit sensible part-load ratio for unit = " +
                                                                  DXHeatPumpSystem(DXSystemNum).Name);
-                                                ShowContinueError("Estimated part-load ratio  = " + RoundSigDigits((ReqOutput / FullOutput), 3));
-                                                ShowContinueError("Calculated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                                ShowContinueError("Estimated part-load ratio  = " + format("{:.3R}", (ReqOutput / FullOutput)));
+                                                ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                                 ShowContinueErrorTimeStamp(
                                                     "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                                             } else {
@@ -762,7 +762,7 @@ namespace HVACDXHeatPumpSystem {
                                                                  " - DX unit sensible part-load ratio calculation failed: part-load ratio limits "
                                                                  "exceeded, for unit = " +
                                                                  DXHeatPumpSystem(DXSystemNum).Name);
-                                                ShowContinueError("Estimated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                                ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                                 ShowContinueErrorTimeStamp(
                                                     "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                                             } else {
@@ -945,8 +945,8 @@ namespace HVACDXHeatPumpSystem {
                                                         DXHeatPumpSystem(DXSystemNum).DXHeatPumpSystemType +
                                                         " - Iteration limit exceeded calculating DX unit sensible part-load ratio for unit = " +
                                                         DXHeatPumpSystem(DXSystemNum).Name);
-                                                    ShowContinueError("Estimated part-load ratio  = " + RoundSigDigits((ReqOutput / FullOutput), 3));
-                                                    ShowContinueError("Calculated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                                    ShowContinueError("Estimated part-load ratio  = " + format("{:.3R}", (ReqOutput / FullOutput)));
+                                                    ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                                     ShowContinueErrorTimeStamp(
                                                         "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                                                 } else {
@@ -968,7 +968,7 @@ namespace HVACDXHeatPumpSystem {
                                                                      " - DX unit sensible part-load ratio calculation failed: part-load ratio limits "
                                                                      "exceeded, for unit = " +
                                                                      DXHeatPumpSystem(DXSystemNum).Name);
-                                                    ShowContinueError("Estimated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                                    ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                                     ShowContinueErrorTimeStamp(
                                                         "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                                                 } else {
@@ -1012,8 +1012,8 @@ namespace HVACDXHeatPumpSystem {
                                                         DXHeatPumpSystem(DXSystemNum).DXHeatPumpSystemType +
                                                         " - Iteration limit exceeded calculating DX unit sensible part-load ratio for unit = " +
                                                         DXHeatPumpSystem(DXSystemNum).Name);
-                                                    ShowContinueError("Estimated part-load ratio  = " + RoundSigDigits((ReqOutput / FullOutput), 3));
-                                                    ShowContinueError("Calculated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                                    ShowContinueError("Estimated part-load ratio  = " + format("{:.3R}", (ReqOutput / FullOutput)));
+                                                    ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                                     ShowContinueErrorTimeStamp(
                                                         "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                                                 } else {
@@ -1035,7 +1035,7 @@ namespace HVACDXHeatPumpSystem {
                                                                      " - DX unit sensible part-load ratio calculation failed: part-load ratio limits "
                                                                      "exceeded, for unit = " +
                                                                      DXHeatPumpSystem(DXSystemNum).Name);
-                                                    ShowContinueError("Estimated part-load ratio = " + RoundSigDigits(PartLoadFrac, 3));
+                                                    ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
                                                     ShowContinueErrorTimeStamp(
                                                         "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                                                 } else {

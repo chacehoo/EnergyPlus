@@ -377,14 +377,14 @@ namespace CurveManager {
 
             if (Numbers(7) > Numbers(8)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(7) + " [" + RoundSigDigits(Numbers(7), 2) + "] > " + cNumericFieldNames(8) + " [" +
-                                  RoundSigDigits(Numbers(8), 2) + ']');
+                ShowContinueError(cNumericFieldNames(7) + " [" + format("{:.2R}", Numbers(7)) + "] > " + cNumericFieldNames(8) + " [" +
+                                  format("{:.2R}", Numbers(8)) + ']');
                 ErrorsFound = true;
             }
             if (Numbers(9) > Numbers(10)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(9) + " [" + RoundSigDigits(Numbers(9), 2) + "] > " + cNumericFieldNames(10) + " [" +
-                                  RoundSigDigits(Numbers(10), 2) + ']');
+                ShowContinueError(cNumericFieldNames(9) + " [" + format("{:.2R}", Numbers(9)) + "] > " + cNumericFieldNames(10) + " [" +
+                                  format("{:.2R}", Numbers(10)) + ']');
                 ErrorsFound = true;
             }
             if (NumAlphas >= 2) {
@@ -518,8 +518,8 @@ namespace CurveManager {
 
             if (Numbers(5) > Numbers(6)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(5) + '[' + RoundSigDigits(Numbers(5), 2) + "] > " + cNumericFieldNames(6) + " [" +
-                                  RoundSigDigits(Numbers(6), 2) + ']');
+                ShowContinueError(cNumericFieldNames(5) + '[' + format("{:.2R}", Numbers(5)) + "] > " + cNumericFieldNames(6) + " [" +
+                                  format("{:.2R}", Numbers(6)) + ']');
                 ErrorsFound = true;
             }
             if (NumAlphas >= 2) {
@@ -574,8 +574,8 @@ namespace CurveManager {
 
             if (Numbers(6) > Numbers(7)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(6) + '[' + RoundSigDigits(Numbers(6), 2) + "] > " + cNumericFieldNames(7) + " [" +
-                                  RoundSigDigits(Numbers(7), 2) + ']');
+                ShowContinueError(cNumericFieldNames(6) + '[' + format("{:.2R}", Numbers(6)) + "] > " + cNumericFieldNames(7) + " [" +
+                                  format("{:.2R}", Numbers(7)) + ']');
                 ErrorsFound = true;
             }
             if (NumAlphas >= 2) {
@@ -628,8 +628,8 @@ namespace CurveManager {
 
             if (Numbers(4) > Numbers(5)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(4) + " [" + RoundSigDigits(Numbers(4), 2) + "] > " + cNumericFieldNames(5) + " [" +
-                                  RoundSigDigits(Numbers(5), 2) + ']');
+                ShowContinueError(cNumericFieldNames(4) + " [" + format("{:.2R}", Numbers(4)) + "] > " + cNumericFieldNames(5) + " [" +
+                                  format("{:.2R}", Numbers(5)) + ']');
                 ErrorsFound = true;
             }
             if (NumAlphas >= 2) {
@@ -687,14 +687,14 @@ namespace CurveManager {
 
             if (Numbers(7) > Numbers(8)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(7) + " [" + RoundSigDigits(Numbers(7), 2) + "] > " + cNumericFieldNames(8) + " [" +
-                                  RoundSigDigits(Numbers(8), 2) + ']');
+                ShowContinueError(cNumericFieldNames(7) + " [" + format("{:.2R}", Numbers(7)) + "] > " + cNumericFieldNames(8) + " [" +
+                                  format("{:.2R}", Numbers(8)) + ']');
                 ErrorsFound = true;
             }
             if (Numbers(9) > Numbers(10)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(9) + " [" + RoundSigDigits(Numbers(9), 2) + "] > " + cNumericFieldNames(10) + " [" +
-                                  RoundSigDigits(Numbers(10), 2) + ']');
+                ShowContinueError(cNumericFieldNames(9) + " [" + format("{:.2R}", Numbers(9)) + "] > " + cNumericFieldNames(10) + " [" +
+                                  format("{:.2R}", Numbers(10)) + ']');
                 ErrorsFound = true;
             }
             if (NumAlphas >= 2) {
@@ -757,14 +757,14 @@ namespace CurveManager {
 
             if (Numbers(7) > Numbers(8)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(7) + " [" + RoundSigDigits(Numbers(7), 2) + "] > " + cNumericFieldNames(8) + " [" +
-                                  RoundSigDigits(Numbers(8), 2) + ']');
+                ShowContinueError(cNumericFieldNames(7) + " [" + format("{:.2R}", Numbers(7)) + "] > " + cNumericFieldNames(8) + " [" +
+                                  format("{:.2R}", Numbers(8)) + ']');
                 ErrorsFound = true;
             }
             if (Numbers(9) > Numbers(10)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(9) + " [" + RoundSigDigits(Numbers(9), 2) + "] > " + cNumericFieldNames(10) + " [" +
-                                  RoundSigDigits(Numbers(10), 2) + ']');
+                ShowContinueError(cNumericFieldNames(9) + " [" + format("{:.2R}", Numbers(9)) + "] > " + cNumericFieldNames(10) + " [" +
+                                  format("{:.2R}", Numbers(10)) + ']');
                 ErrorsFound = true;
             }
             if (NumAlphas >= 2) {
@@ -821,8 +821,8 @@ namespace CurveManager {
 
             if (Numbers(3) > Numbers(4)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(3) + " [" + RoundSigDigits(Numbers(3), 2) + "] > " + cNumericFieldNames(4) + " [" +
-                                  RoundSigDigits(Numbers(4), 2) + ']');
+                ShowContinueError(cNumericFieldNames(3) + " [" + format("{:.2R}", Numbers(3)) + "] > " + cNumericFieldNames(4) + " [" +
+                                  format("{:.2R}", Numbers(4)) + ']');
                 ErrorsFound = true;
             }
             if (NumAlphas >= 2) {
@@ -884,14 +884,14 @@ namespace CurveManager {
 
             if (Numbers(11) > Numbers(12)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(11) + " [" + RoundSigDigits(Numbers(11), 2) + "] > " + cNumericFieldNames(12) + " [" +
-                                  RoundSigDigits(Numbers(12), 2) + ']');
+                ShowContinueError(cNumericFieldNames(11) + " [" + format("{:.2R}", Numbers(11)) + "] > " + cNumericFieldNames(12) + " [" +
+                                  format("{:.2R}", Numbers(12)) + ']');
                 ErrorsFound = true;
             }
             if (Numbers(13) > Numbers(14)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(13) + " [" + RoundSigDigits(Numbers(13), 2) + "] > " + cNumericFieldNames(14) + " [" +
-                                  RoundSigDigits(Numbers(14), 2) + ']');
+                ShowContinueError(cNumericFieldNames(13) + " [" + format("{:.2R}", Numbers(13)) + "] > " + cNumericFieldNames(14) + " [" +
+                                  format("{:.2R}", Numbers(14)) + ']');
                 ErrorsFound = true;
             }
             if (NumAlphas >= 2) {
@@ -980,20 +980,20 @@ namespace CurveManager {
 
             if (Numbers(28) > Numbers(29)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(28) + " [" + RoundSigDigits(Numbers(28), 2) + "] > " + cNumericFieldNames(29) + " [" +
-                                  RoundSigDigits(Numbers(29), 2) + ']');
+                ShowContinueError(cNumericFieldNames(28) + " [" + format("{:.2R}", Numbers(28)) + "] > " + cNumericFieldNames(29) + " [" +
+                                  format("{:.2R}", Numbers(29)) + ']');
                 ErrorsFound = true;
             }
             if (Numbers(30) > Numbers(31)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(30) + " [" + RoundSigDigits(Numbers(30), 2) + "] > " + cNumericFieldNames(31) + " [" +
-                                  RoundSigDigits(Numbers(31), 2) + ']');
+                ShowContinueError(cNumericFieldNames(30) + " [" + format("{:.2R}", Numbers(30)) + "] > " + cNumericFieldNames(31) + " [" +
+                                  format("{:.2R}", Numbers(31)) + ']');
                 ErrorsFound = true;
             }
             if (Numbers(32) > Numbers(33)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(32) + " [" + RoundSigDigits(Numbers(32), 2) + "] > " + cNumericFieldNames(33) + " [" +
-                                  RoundSigDigits(Numbers(33), 2) + ']');
+                ShowContinueError(cNumericFieldNames(32) + " [" + format("{:.2R}", Numbers(32)) + "] > " + cNumericFieldNames(33) + " [" +
+                                  format("{:.2R}", Numbers(33)) + ']');
                 ErrorsFound = true;
             }
             if (NumAlphas >= 2) {
@@ -1065,26 +1065,26 @@ namespace CurveManager {
 
             if (Numbers(6) > Numbers(7)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(6) + " [" + RoundSigDigits(Numbers(6), 2) + "] > " + cNumericFieldNames(7) + " [" +
-                                  RoundSigDigits(Numbers(7), 2) + ']');
+                ShowContinueError(cNumericFieldNames(6) + " [" + format("{:.2R}", Numbers(6)) + "] > " + cNumericFieldNames(7) + " [" +
+                                  format("{:.2R}", Numbers(7)) + ']');
                 ErrorsFound = true;
             }
             if (Numbers(8) > Numbers(9)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(8) + " [" + RoundSigDigits(Numbers(8), 2) + "] > " + cNumericFieldNames(9) + " [" +
-                                  RoundSigDigits(Numbers(9), 2) + ']');
+                ShowContinueError(cNumericFieldNames(8) + " [" + format("{:.2R}", Numbers(8)) + "] > " + cNumericFieldNames(9) + " [" +
+                                  format("{:.2R}", Numbers(9)) + ']');
                 ErrorsFound = true;
             }
             if (Numbers(10) > Numbers(11)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(10) + " [" + RoundSigDigits(Numbers(10), 2) + "] > " + cNumericFieldNames(11) + " [" +
-                                  RoundSigDigits(Numbers(11), 2) + ']');
+                ShowContinueError(cNumericFieldNames(10) + " [" + format("{:.2R}", Numbers(10)) + "] > " + cNumericFieldNames(11) + " [" +
+                                  format("{:.2R}", Numbers(11)) + ']');
                 ErrorsFound = true;
             }
             if (Numbers(12) > Numbers(13)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(12) + " [" + RoundSigDigits(Numbers(12), 2) + "] > " + cNumericFieldNames(13) + " [" +
-                                  RoundSigDigits(Numbers(13), 2) + ']');
+                ShowContinueError(cNumericFieldNames(12) + " [" + format("{:.2R}", Numbers(12)) + "] > " + cNumericFieldNames(13) + " [" +
+                                  format("{:.2R}", Numbers(13)) + ']');
                 ErrorsFound = true;
             }
 
@@ -1203,14 +1203,14 @@ namespace CurveManager {
 
             if (Numbers(5) > Numbers(6)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(5) + '[' + RoundSigDigits(Numbers(5), 2) + "] > " + cNumericFieldNames(6) + " [" +
-                                  RoundSigDigits(Numbers(6), 2) + ']');
+                ShowContinueError(cNumericFieldNames(5) + '[' + format("{:.2R}", Numbers(5)) + "] > " + cNumericFieldNames(6) + " [" +
+                                  format("{:.2R}", Numbers(6)) + ']');
                 ErrorsFound = true;
             }
             if (Numbers(7) > Numbers(8)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(7) + '[' + RoundSigDigits(Numbers(7), 2) + "] > " + cNumericFieldNames(8) + " [" +
-                                  RoundSigDigits(Numbers(8), 2) + ']');
+                ShowContinueError(cNumericFieldNames(7) + '[' + format("{:.2R}", Numbers(7)) + "] > " + cNumericFieldNames(8) + " [" +
+                                  format("{:.2R}", Numbers(8)) + ']');
                 ErrorsFound = true;
             }
 
@@ -1256,8 +1256,8 @@ namespace CurveManager {
 
             if (Numbers(5) > Numbers(6)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(5) + '[' + RoundSigDigits(Numbers(5), 2) + "] > " + cNumericFieldNames(6) + " [" +
-                                  RoundSigDigits(Numbers(6), 2) + ']');
+                ShowContinueError(cNumericFieldNames(5) + '[' + format("{:.2R}", Numbers(5)) + "] > " + cNumericFieldNames(6) + " [" +
+                                  format("{:.2R}", Numbers(6)) + ']');
                 ErrorsFound = true;
             }
 
@@ -1314,8 +1314,8 @@ namespace CurveManager {
 
             if (Numbers(6) > Numbers(7)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(6) + '[' + RoundSigDigits(Numbers(6), 2) + "] > " + cNumericFieldNames(7) + " [" +
-                                  RoundSigDigits(Numbers(7), 2) + ']');
+                ShowContinueError(cNumericFieldNames(6) + '[' + format("{:.2R}", Numbers(6)) + "] > " + cNumericFieldNames(7) + " [" +
+                                  format("{:.2R}", Numbers(7)) + ']');
                 ErrorsFound = true;
             }
 
@@ -1370,8 +1370,8 @@ namespace CurveManager {
 
             if (Numbers(4) > Numbers(5)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(4) + '[' + RoundSigDigits(Numbers(4), 2) + "] > " + cNumericFieldNames(5) + " [" +
-                                  RoundSigDigits(Numbers(5), 2) + ']');
+                ShowContinueError(cNumericFieldNames(4) + '[' + format("{:.2R}", Numbers(4)) + "] > " + cNumericFieldNames(5) + " [" +
+                                  format("{:.2R}", Numbers(5)) + ']');
                 ErrorsFound = true;
             }
 
@@ -1426,8 +1426,8 @@ namespace CurveManager {
 
             if (Numbers(4) > Numbers(5)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(4) + '[' + RoundSigDigits(Numbers(4), 2) + "] > " + cNumericFieldNames(5) + " [" +
-                                  RoundSigDigits(Numbers(5), 2) + ']');
+                ShowContinueError(cNumericFieldNames(4) + '[' + format("{:.2R}", Numbers(4)) + "] > " + cNumericFieldNames(5) + " [" +
+                                  format("{:.2R}", Numbers(5)) + ']');
                 ErrorsFound = true;
             }
 
@@ -1482,8 +1482,8 @@ namespace CurveManager {
 
             if (Numbers(4) > Numbers(5)) { // error
                 ShowSevereError("GetCurveInput: For " + CurrentModuleObject + ": " + Alphas(1));
-                ShowContinueError(cNumericFieldNames(4) + '[' + RoundSigDigits(Numbers(4), 2) + "] > " + cNumericFieldNames(5) + " [" +
-                                  RoundSigDigits(Numbers(5), 2) + ']');
+                ShowContinueError(cNumericFieldNames(4) + '[' + format("{:.2R}", Numbers(4)) + "] > " + cNumericFieldNames(5) + " [" +
+                                  format("{:.2R}", Numbers(5)) + ']');
                 ErrorsFound = true;
             }
 
@@ -1590,8 +1590,8 @@ namespace CurveManager {
                             ShowContinueError("has either the same values for two consecutive wind directions, or a lower wind direction value after "
                                               "a higher wind direction value.");
                             ShowContinueError("Wind direction values must be entered in ascending order.");
-                            ShowContinueError(cNumericFieldNames(j) + " = " + RoundSigDigits(windDirs[j - 2], 2) + ' ' + cNumericFieldNames[j + 1] +
-                                              " = " + RoundSigDigits(windDirs[j - 1], 2));
+                            ShowContinueError(cNumericFieldNames(j) + " = " + format("{:.2R}", windDirs[j - 2]) + ' ' + cNumericFieldNames[j + 1] +
+                                              " = " + format("{:.2R}", windDirs[j - 1]));
                             ErrorsFound = true;
                         }
                     }
@@ -1599,7 +1599,7 @@ namespace CurveManager {
                 // Check that the first table value is zero
                 if (dirMin != 0.0) {
                     ShowSevereError("GetCurveInput: An " + CurrentModuleObject + " object ");
-                    ShowContinueError("has a nonzero minimum value of " + RoundSigDigits(dirMin, 2));
+                    ShowContinueError("has a nonzero minimum value of " + format("{:.2R}", dirMin));
                     ShowContinueError("Wind direction values must begin at zero.");
                     ErrorsFound = true;
                 }
@@ -2969,8 +2969,8 @@ namespace CurveManager {
             CalculateMoodyFrictionFactor = std::pow(Term3, -2.0);
         } else {
             if (!state.dataCurveManager->FrictionFactorErrorHasOccurred) {
-                RR = RoundSigDigits(RoughnessRatio, 7);
-                Re = RoundSigDigits(ReynoldsNumber, 1);
+                RR = format("{:.7R}", RoughnessRatio);
+                Re = format("{:.1R}", ReynoldsNumber);
                 ShowSevereError("Plant Pressure System: Error in moody friction factor calculation");
                 ShowContinueError("Current Conditions: Roughness Ratio=" + RR + "; Reynolds Number=" + Re);
                 ShowContinueError("These conditions resulted in an unhandled numeric issue.");
@@ -3013,7 +3013,7 @@ namespace CurveManager {
             if (CurveVal > 1.10 || CurveVal < 0.90) {
                 ShowWarningError(callingRoutineObj + "=\"" + objectName + "\" curve values");
                 ShowContinueError("... " + cFieldName + " = " + cFieldValue + " output is not equal to 1.0 (+ or - 10%) at rated conditions.");
-                ShowContinueError("... Curve output at rated conditions = " + General::TrimSigDigits(CurveVal, 3));
+                ShowContinueError("... Curve output at rated conditions = " + format("{:.3T}", CurveVal));
             }
         }
     }

@@ -266,14 +266,14 @@ namespace PondGroundHeatExchanger {
             PondGHE(Item).Area = DataIPShortCuts::rNumericArgs(2);
             if (DataIPShortCuts::rNumericArgs(1) <= 0.0) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(1) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(1), 2));
+                                format("{:.2R}", DataIPShortCuts::rNumericArgs(1)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ShowContinueError("Value must be greater than 0.0");
                 ErrorsFound = true;
             }
             if (DataIPShortCuts::rNumericArgs(2) <= 0.0) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(2) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(2), 2));
+                                format("{:.2R}", DataIPShortCuts::rNumericArgs(2)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ShowContinueError("Value must be greater than 0.0");
                 ErrorsFound = true;
@@ -285,23 +285,23 @@ namespace PondGroundHeatExchanger {
 
             if (DataIPShortCuts::rNumericArgs(3) <= 0.0) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(3) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(3), 2));
+                                format("{:.2R}", DataIPShortCuts::rNumericArgs(3)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ShowContinueError("Value must be greater than 0.0");
                 ErrorsFound = true;
             }
             if (DataIPShortCuts::rNumericArgs(4) <= 0.0) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(4) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(4), 2));
+                                format("{:.2R}", DataIPShortCuts::rNumericArgs(4)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ShowContinueError("Value must be greater than 0.0");
                 ErrorsFound = true;
             }
             if (DataIPShortCuts::rNumericArgs(3) > DataIPShortCuts::rNumericArgs(4)) { // error
                 ShowSevereError("For " + DataIPShortCuts::cCurrentModuleObject + ": " + DataIPShortCuts::cAlphaArgs(1));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(3) + " [" + General::RoundSigDigits(DataIPShortCuts::rNumericArgs(3), 2) +
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(3) + " [" + format("{:.2R}", DataIPShortCuts::rNumericArgs(3)) +
                                   "] > " + DataIPShortCuts::cNumericFieldNames(4) + " [" +
-                                  General::RoundSigDigits(DataIPShortCuts::rNumericArgs(4), 2) + ']');
+                                  format("{:.2R}", DataIPShortCuts::rNumericArgs(4)) + ']');
                 ErrorsFound = true;
             }
 
@@ -311,14 +311,14 @@ namespace PondGroundHeatExchanger {
 
             if (DataIPShortCuts::rNumericArgs(5) <= 0.0) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(5) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(5), 4));
+                                format("{:.4R}", DataIPShortCuts::rNumericArgs(5)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ShowContinueError("Value must be greater than 0.0");
                 ErrorsFound = true;
             }
             if (DataIPShortCuts::rNumericArgs(6) <= 0.0) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(6) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(6), 4));
+                                format("{:.4R}", DataIPShortCuts::rNumericArgs(6)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ShowContinueError("Value must be greater than 0.0");
                 ErrorsFound = true;
@@ -329,7 +329,7 @@ namespace PondGroundHeatExchanger {
 
             if (DataIPShortCuts::rNumericArgs(7) <= 0) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(7) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(7), 2));
+                                format("{:.2R}", DataIPShortCuts::rNumericArgs(7)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ShowContinueError("Value must be greater than 0.0");
                 ErrorsFound = true;
@@ -337,7 +337,7 @@ namespace PondGroundHeatExchanger {
             PondGHE(Item).CircuitLength = DataIPShortCuts::rNumericArgs(8);
             if (DataIPShortCuts::rNumericArgs(8) <= 0) {
                 ShowSevereError("Invalid " + DataIPShortCuts::cNumericFieldNames(8) + '=' +
-                                General::RoundSigDigits(DataIPShortCuts::rNumericArgs(8), 2));
+                                format("{:.2R}", DataIPShortCuts::rNumericArgs(8)));
                 ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + DataIPShortCuts::cAlphaArgs(1));
                 ShowContinueError("Value must be greater than 0.0");
                 ErrorsFound = true;
@@ -352,7 +352,7 @@ namespace PondGroundHeatExchanger {
 
         if (!DataEnvironment::GroundTemp_DeepObjInput) {
             ShowWarningError("GetPondGroundHeatExchanger:  No \"Site:GroundTemperature:Deep\" were input.");
-            ShowContinueError("Defaults, constant throughout the year of (" + General::RoundSigDigits(DataEnvironment::GroundTemp_Deep, 1) +
+            ShowContinueError("Defaults, constant throughout the year of (" + format("{:.1R}", DataEnvironment::GroundTemp_Deep) +
                               ") will be used.");
         }
     }
@@ -829,7 +829,7 @@ namespace PondGroundHeatExchanger {
             ++this->ConsecutiveFrozen;
             if (this->FrozenErrIndex == 0) {
                 ShowWarningMessage("GroundHeatExchanger:Pond=\"" + this->Name + "\", is frozen; Pond model not valid. Calculated Pond Temperature=[" +
-                                   General::RoundSigDigits(PondTemperature, 2) + "] C");
+                                   format("{:.2R}", PondTemperature) + "] C");
                 ShowContinueErrorTimeStamp("");
             }
             ShowRecurringWarningErrorAtEnd("GroundHeatExchanger:Pond=\"" + this->Name + "\", is frozen",

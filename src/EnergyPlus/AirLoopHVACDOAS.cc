@@ -1021,7 +1021,7 @@ namespace AirLoopHVACDOAS {
                     ++loop.ConveCount;
                     ShowWarningError("Convergence limit is above 1.0e-6 for unit=" + loop.Name);
                     ShowContinueErrorTimeStamp("The max difference of node temperatures between AirLoopDOAS outlet and OA mixer inlet =" +
-                                               General::RoundSigDigits(maxDiff, 6));
+                                               format("{:.6R}", maxDiff));
                 } else {
                     ++loop.ConveCount;
                     ShowRecurringWarningErrorAtEnd(loop.Name +

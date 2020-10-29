@@ -758,12 +758,12 @@ namespace DataPlant {
                                 "below the high setpoint.");
                             ShowContinueError("Occurs in PlantLoop=" + thisPlantLoop.Name);
                             ShowContinueError(
-                                "LoadToHeatingSetPoint=" + General::RoundSigDigits(LoadToHeatingSetPoint, 3) +
-                                ", LoadToCoolingSetPoint=" + General::RoundSigDigits(LoadToCoolingSetPoint, 3));
+                                "LoadToHeatingSetPoint=" + format("{:.3R}", LoadToHeatingSetPoint) +
+                                ", LoadToCoolingSetPoint=" + format("{:.3R}", LoadToCoolingSetPoint));
                             ShowContinueError("Loop Heating Low Setpoint=" +
-                                              General::RoundSigDigits(LoopSetPointTemperatureLo, 2));
+                                              format("{:.2R}", LoopSetPointTemperatureLo));
                             ShowContinueError("Loop Cooling High Setpoint=" +
-                                              General::RoundSigDigits(LoopSetPointTemperatureHi, 2));
+                                              format("{:.2R}", LoopSetPointTemperatureHi));
 
                             ShowFatalError("Program terminates due to above conditions.");
                         }
@@ -780,12 +780,12 @@ namespace DataPlant {
                                 "Development Team");
                             ShowContinueError("occurs in PlantLoop=" + thisPlantLoop.Name);
                             ShowContinueError(
-                                "LoadToHeatingSetPoint=" + General::RoundSigDigits(LoadToHeatingSetPoint, 3) +
-                                ", LoadToCoolingSetPoint=" + General::RoundSigDigits(LoadToCoolingSetPoint, 3));
+                                "LoadToHeatingSetPoint=" + format("{:.3R}", LoadToHeatingSetPoint) +
+                                ", LoadToCoolingSetPoint=" + format("{:.3R}", LoadToCoolingSetPoint));
                             ShowContinueError("Loop Heating Setpoint=" +
-                                              General::RoundSigDigits(LoopSetPointTemperatureLo, 2));
+                                              format("{:.2R}", LoopSetPointTemperatureLo));
                             ShowContinueError("Loop Cooling Setpoint=" +
-                                              General::RoundSigDigits(LoopSetPointTemperatureHi, 2));
+                                              format("{:.2R}", LoopSetPointTemperatureHi));
                             ShowFatalError("Program terminates due to above conditions.");
                         }
                     } else {
@@ -1674,9 +1674,9 @@ namespace DataPlant {
                     // Call fatal diagnostic error. !The math should work out!
                     ShowSevereError("ResolveParallelFlows: Dev note, failed to redistribute restricted flow");
                     ShowContinueErrorTimeStamp("");
-                    ShowContinueError("Loop side flow = " + RoundSigDigits(ThisLoopSideFlow, 8) + " (kg/s)");
-                    ShowContinueError("Flow Remaining = " + RoundSigDigits(FlowRemaining, 8) + " (kg/s)");
-                    ShowContinueError("Parallel Branch requests  = " + RoundSigDigits(TotParallelBranchFlowReq, 8) +
+                    ShowContinueError("Loop side flow = " + format("{:.8R}", ThisLoopSideFlow) + " (kg/s)");
+                    ShowContinueError("Flow Remaining = " + format("{:.8R}", FlowRemaining) + " (kg/s)");
+                    ShowContinueError("Parallel Branch requests  = " + format("{:.8R}", TotParallelBranchFlowReq) +
                                       " (kg/s)");
                 }
 

@@ -1870,17 +1870,17 @@ namespace ZoneEquipmentManager {
                                 }
                                 ShowContinueError("...check zone thermostat set point and design supply air temperatures");
                                 ShowContinueError("...zone name = " + CalcFinalZoneSizing(I).ZoneName);
-                                ShowContinueError("...design sensible cooling load = " + RoundSigDigits(CalcFinalZoneSizing(I).DesCoolLoad, 2) +
+                                ShowContinueError("...design sensible cooling load = " + format("{:.2R}", CalcFinalZoneSizing(I).DesCoolLoad) +
                                                   " W");
-                                ShowContinueError("...thermostat set point temp    = " + RoundSigDigits(CalcFinalZoneSizing(I).CoolTstatTemp, 3) +
+                                ShowContinueError("...thermostat set point temp    = " + format("{:.3R}", CalcFinalZoneSizing(I).CoolTstatTemp) +
                                                   " C");
                                 ShowContinueError(
-                                    "...zone temperature             = " + RoundSigDigits(CalcFinalZoneSizing(I).ZoneTempAtCoolPeak, 3) + " C");
-                                ShowContinueError("...supply air temperature       = " + RoundSigDigits(SupplyTemp, 3) + " C");
-                                ShowContinueError("...temperature difference       = " + RoundSigDigits(DeltaTemp, 5) + " C");
-                                ShowContinueError("...calculated volume flow rate  = " + RoundSigDigits((CalcFinalZoneSizing(I).DesCoolVolFlow), 5) +
+                                    "...zone temperature             = " + format("{:.3R}", CalcFinalZoneSizing(I).ZoneTempAtCoolPeak) + " C");
+                                ShowContinueError("...supply air temperature       = " + format("{:.3R}", SupplyTemp) + " C");
+                                ShowContinueError("...temperature difference       = " + format("{:.5R}", DeltaTemp) + " C");
+                                ShowContinueError("...calculated volume flow rate  = " + format("{:.5R}", (CalcFinalZoneSizing(I).DesCoolVolFlow)) +
                                                   " m3/s");
-                                ShowContinueError("...calculated mass flow rate    = " + RoundSigDigits((CalcFinalZoneSizing(I).DesCoolMassFlow), 5) +
+                                ShowContinueError("...calculated mass flow rate    = " + format("{:.5R}", (CalcFinalZoneSizing(I).DesCoolMassFlow)) +
                                                   " kg/s");
                                 if (SupplyTemp > CalcFinalZoneSizing(I).ZoneTempAtCoolPeak)
                                     ShowContinueError(
@@ -1888,15 +1888,15 @@ namespace ZoneEquipmentManager {
                             } else if (std::abs(DeltaTemp) > SmallTempDiff && SupplyTemp > CalcFinalZoneSizing(I).ZoneTempAtCoolPeak) {
                                 ShowSevereError(
                                     "UpdateZoneSizing: Supply air temperature is greater than zone temperature during cooling air flow calculations");
-                                ShowContinueError("...calculated volume flow rate  = " + RoundSigDigits((CalcFinalZoneSizing(I).DesCoolVolFlow), 5) +
+                                ShowContinueError("...calculated volume flow rate  = " + format("{:.5R}", (CalcFinalZoneSizing(I).DesCoolVolFlow)) +
                                                   " m3/s");
-                                ShowContinueError("...calculated mass flow rate    = " + RoundSigDigits((CalcFinalZoneSizing(I).DesCoolMassFlow), 5) +
+                                ShowContinueError("...calculated mass flow rate    = " + format("{:.5R}", (CalcFinalZoneSizing(I).DesCoolMassFlow)) +
                                                   " kg/s");
-                                ShowContinueError("...thermostat set point temp    = " + RoundSigDigits(CalcFinalZoneSizing(I).CoolTstatTemp, 3) +
+                                ShowContinueError("...thermostat set point temp    = " + format("{:.3R}", CalcFinalZoneSizing(I).CoolTstatTemp) +
                                                   " C");
-                                ShowContinueError("...zone temperature            = " + RoundSigDigits(CalcFinalZoneSizing(I).ZoneTempAtCoolPeak, 3) +
+                                ShowContinueError("...zone temperature            = " + format("{:.3R}", CalcFinalZoneSizing(I).ZoneTempAtCoolPeak) +
                                                   " C");
-                                ShowContinueError("...supply air temperature      = " + RoundSigDigits(SupplyTemp, 3) + " C");
+                                ShowContinueError("...supply air temperature      = " + format("{:.3R}", SupplyTemp) + " C");
                                 ShowContinueError("...occurs in zone              = " + CalcFinalZoneSizing(I).ZoneName);
                                 ShowContinueError(
                                     "...Note: supply air temperature should be less than zone temperature during cooling air flow calculations");
@@ -1921,16 +1921,16 @@ namespace ZoneEquipmentManager {
                                 }
                                 ShowContinueError("...check zone thermostat set point and design supply air temperatures");
                                 ShowContinueError("...zone name = " + CalcFinalZoneSizing(I).ZoneName);
-                                ShowContinueError("...design heating load         = " + RoundSigDigits(CalcFinalZoneSizing(I).DesHeatLoad, 2) + " W");
-                                ShowContinueError("...thermostat set point temp   = " + RoundSigDigits(CalcFinalZoneSizing(I).HeatTstatTemp, 3) +
+                                ShowContinueError("...design heating load         = " + format("{:.2R}", CalcFinalZoneSizing(I).DesHeatLoad) + " W");
+                                ShowContinueError("...thermostat set point temp   = " + format("{:.3R}", CalcFinalZoneSizing(I).HeatTstatTemp) +
                                                   " C");
-                                ShowContinueError("...zone temperature            = " + RoundSigDigits(CalcFinalZoneSizing(I).ZoneTempAtHeatPeak, 3) +
+                                ShowContinueError("...zone temperature            = " + format("{:.3R}", CalcFinalZoneSizing(I).ZoneTempAtHeatPeak) +
                                                   " C");
-                                ShowContinueError("...supply air temperature      = " + RoundSigDigits(SupplyTemp, 3) + " C");
-                                ShowContinueError("...temperature difference      = " + RoundSigDigits(DeltaTemp, 5) + " C");
-                                ShowContinueError("...calculated volume flow rate = " + RoundSigDigits((CalcFinalZoneSizing(I).DesHeatVolFlow), 5) +
+                                ShowContinueError("...supply air temperature      = " + format("{:.3R}", SupplyTemp) + " C");
+                                ShowContinueError("...temperature difference      = " + format("{:.5R}", DeltaTemp) + " C");
+                                ShowContinueError("...calculated volume flow rate = " + format("{:.5R}", (CalcFinalZoneSizing(I).DesHeatVolFlow)) +
                                                   " m3/s");
-                                ShowContinueError("...calculated mass flow rate   = " + RoundSigDigits((CalcFinalZoneSizing(I).DesHeatMassFlow), 5) +
+                                ShowContinueError("...calculated mass flow rate   = " + format("{:.5R}", (CalcFinalZoneSizing(I).DesHeatMassFlow)) +
                                                   " kg/s");
                                 if (SupplyTemp < CalcFinalZoneSizing(I).ZoneTempAtHeatPeak)
                                     ShowContinueError("...Note: supply air temperature should be greater than zone temperature during heating air "
@@ -1939,14 +1939,14 @@ namespace ZoneEquipmentManager {
                                 ShowSevereError(
                                     "UpdateZoneSizing: Supply air temperature is less than zone temperature during heating air flow calculations");
                                 ShowContinueError("...calculated design heating volume flow rate = " +
-                                                  RoundSigDigits((CalcFinalZoneSizing(I).DesHeatVolFlow), 5) + " m3/s");
+                                                  format("{:.5R}", (CalcFinalZoneSizing(I).DesHeatVolFlow)) + " m3/s");
                                 ShowContinueError("...calculated design heating mass flow rate   = " +
-                                                  RoundSigDigits((CalcFinalZoneSizing(I).DesHeatMassFlow), 5) + " kg/s");
-                                ShowContinueError("...thermostat set piont temp   = " + RoundSigDigits(CalcFinalZoneSizing(I).HeatTstatTemp, 3) +
+                                                  format("{:.5R}", (CalcFinalZoneSizing(I).DesHeatMassFlow)) + " kg/s");
+                                ShowContinueError("...thermostat set piont temp   = " + format("{:.3R}", CalcFinalZoneSizing(I).HeatTstatTemp) +
                                                   " C");
-                                ShowContinueError("...zone temperature            = " + RoundSigDigits(CalcFinalZoneSizing(I).ZoneTempAtHeatPeak, 3) +
+                                ShowContinueError("...zone temperature            = " + format("{:.3R}", CalcFinalZoneSizing(I).ZoneTempAtHeatPeak) +
                                                   " C");
-                                ShowContinueError("...supply air temperature      = " + RoundSigDigits(SupplyTemp, 3) + " C");
+                                ShowContinueError("...supply air temperature      = " + format("{:.3R}", SupplyTemp) + " C");
                                 ShowContinueError("...occurs in zone              = " + CalcFinalZoneSizing(I).ZoneName);
                                 ShowContinueError("...Note: supply air temperature should be greater than zone temperature during heating air "
                                                   "flow calculations");
@@ -4170,17 +4170,17 @@ namespace ZoneEquipmentManager {
                                     ShowContinueErrorTimeStamp("");
                                     ShowContinueError(
                                         "  Flows [m3/s]: Inlets: " +
-                                        General::RoundSigDigits(thisZoneEquip.TotInletAirMassFlowRate / DataEnvironment::StdRhoAir, 6) +
-                                        "  Unbalanced exhausts: " + General::RoundSigDigits(sysUnbalExhaust / DataEnvironment::StdRhoAir, 6) +
-                                        "  Returns: " + General::RoundSigDigits(totalZoneReturnMassFlow / DataEnvironment::StdRhoAir, 6));
+                                        format("{:.6R}", thisZoneEquip.TotInletAirMassFlowRate / DataEnvironment::StdRhoAir) +
+                                        "  Unbalanced exhausts: " + format("{:.6R}", sysUnbalExhaust / DataEnvironment::StdRhoAir) +
+                                        "  Returns: " + format("{:.6R}", totalZoneReturnMassFlow / DataEnvironment::StdRhoAir));
                                     ShowContinueError(
-                                        "  Infiltration: " + General::RoundSigDigits(DataHeatBalFanSys::OAMFL(actualZone) / rhoZone, 6) +
-                                        "  Zone Ventilation: " + General::RoundSigDigits(DataHeatBalFanSys::VAMFL(actualZone) / rhoZone, 6) +
+                                        "  Infiltration: " + format("{:.6R}", DataHeatBalFanSys::OAMFL(actualZone) / rhoZone) +
+                                        "  Zone Ventilation: " + format("{:.6R}", DataHeatBalFanSys::VAMFL(actualZone) / rhoZone) +
                                         "  Mixing (incoming): " +
-                                        General::RoundSigDigits(DataHeatBalFanSys::MixingMassFlowZone(actualZone) / rhoZone, 6));
-                                    ShowContinueError("  Imbalance (excess outflow): " + General::RoundSigDigits(unbalancedVolFlow, 6) +
+                                        format("{:.6R}", DataHeatBalFanSys::MixingMassFlowZone(actualZone) / rhoZone));
+                                    ShowContinueError("  Imbalance (excess outflow): " + format("{:.6R}", unbalancedVolFlow) +
                                                       "  Total system OA flow (for all airloops serving this zone): " +
-                                                      General::RoundSigDigits(thisZoneEquip.TotAvailAirLoopOA / DataEnvironment::StdRhoAir, 6));
+                                                      format("{:.6R}", thisZoneEquip.TotAvailAirLoopOA / DataEnvironment::StdRhoAir));
                                     ShowContinueError("  This error will only be reported once per zone.");
                                     thisZoneEquip.FlowError = true;
                                 }

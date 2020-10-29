@@ -686,8 +686,8 @@ namespace UFADManager {
                 if (std::abs(ZInfSurf - ZSupSurf) < 1.e-10) {
                     ShowSevereError("RoomAirModelUFAD:HcUCSDUF: Surface values will cause divide by zero.");
                     ShowContinueError("Zone=\"" + Zone(Surface(SurfNum).Zone).Name + "\", Surface=\"" + Surface(SurfNum).Name + "\".");
-                    ShowContinueError("ZInfSurf=[" + RoundSigDigits(ZInfSurf, 4) + "], LayH=[" + RoundSigDigits(LayH, 4) + "].");
-                    ShowContinueError("ZSupSurf=[" + RoundSigDigits(ZSupSurf, 4) + "], LayH=[" + RoundSigDigits(LayH, 4) + "].");
+                    ShowContinueError("ZInfSurf=[" + format("{:.4R}", ZInfSurf) + "], LayH=[" + format("{:.4R}", LayH) + "].");
+                    ShowContinueError("ZSupSurf=[" + format("{:.4R}", ZSupSurf) + "], LayH=[" + format("{:.4R}", LayH) + "].");
                     ShowFatalError("...Previous condition causes termination.");
                 }
 
