@@ -292,14 +292,14 @@ namespace ZoneContaminantPredictorCorrector {
                     if (SchMin < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", minimum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + "\". Minimum is [" + format("{:.1R}", SchMin) +
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Minimum is [{:.1R}", SchMin) +
                                           "]. Values must be >= 0.0.");
                         ErrorsFound = true;
                     }
                     if (SchMax < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", maximum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + "\". Maximum is [" + format("{:.1R}", SchMax) +
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Maximum is [{:.1R}", SchMax) +
                                           "]. Values must be >= 0.0.");
                         ErrorsFound = true;
                     }
@@ -325,14 +325,14 @@ namespace ZoneContaminantPredictorCorrector {
                     if (SchMin < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(4) +
                                         ", minimum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(4) + "\". Minimum is [" + format("{:.1R}", SchMin) +
+                        ShowContinueError("Schedule=\"" + AlphaName(4) + format("\". Minimum is [{:.1R}", SchMin) +
                                           "]. Values must be >= 0.0.");
                         ErrorsFound = true;
                     }
                     if (SchMax < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(4) +
                                         ", maximum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(4) + "\". Maximum is [" + format("{:.1R}", SchMax) +
+                        ShowContinueError("Schedule=\"" + AlphaName(4) + format("\". Maximum is [{:.1R}", SchMax) +
                                           "]. Values must be >= 0.0.");
                         ErrorsFound = true;
                     }
@@ -428,14 +428,14 @@ namespace ZoneContaminantPredictorCorrector {
                     if (SchMin < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", minimum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + "\". Minimum is [" + format("{:.1R}", SchMin) +
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Minimum is [{:.1R}", SchMin) +
                                           "]. Values must be >= 0.0.");
                         ErrorsFound = true;
                     }
                     if (SchMax < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", maximum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + "\". Maximum is [" + format("{:.1R}", SchMax) +
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Maximum is [{:.1R}", SchMax) +
                                           "]. Values must be >= 0.0.");
                         ErrorsFound = true;
                     }
@@ -446,7 +446,7 @@ namespace ZoneContaminantPredictorCorrector {
             if (IHGNumbers(1) < 0.0) {
                 ShowSevereError(RoutineName + "Negative values are not allowed for " + cNumericFieldNames(1) + " in " + CurrentModuleObject + " = " +
                                 AlphaName(1));
-                ShowContinueError("The input value is " + format("{:.2R}", IHGNumbers(1)));
+                ShowContinueError(format("The input value is {:.2R}", IHGNumbers(1)));
                 ErrorsFound = true;
             }
 
@@ -454,13 +454,13 @@ namespace ZoneContaminantPredictorCorrector {
             if (IHGNumbers(2) <= 0.0) {
                 ShowSevereError(RoutineName + "Negative or zero value is not allowed for " + cNumericFieldNames(2) + " in " + CurrentModuleObject +
                                 " = " + AlphaName(1));
-                ShowContinueError("The input value is " + format("{:.2R}", IHGNumbers(2)));
+                ShowContinueError(format("The input value is {:.2R}", IHGNumbers(2)));
                 ErrorsFound = true;
             }
             if (IHGNumbers(2) > 1.0) {
                 ShowSevereError(RoutineName + "The value greater than 1.0 is not allowed for " + cNumericFieldNames(2) + " in " +
                                 CurrentModuleObject + " = " + AlphaName(1));
-                ShowContinueError("The input value is " + format("{:.2R}", IHGNumbers(2)));
+                ShowContinueError(format("The input value is {:.2R}", IHGNumbers(2)));
                 ErrorsFound = true;
             }
 
@@ -547,14 +547,14 @@ namespace ZoneContaminantPredictorCorrector {
                     if (SchMin < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", minimum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + "\". Minimum is [" + format("{:.1R}", SchMin) +
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Minimum is [{:.1R}", SchMin) +
                                           "]. Values must be >= 0.0.");
                         ErrorsFound = true;
                     }
                     if (SchMax < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", maximum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + "\". Maximum is [" + format("{:.1R}", SchMax) +
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Maximum is [{:.1R}", SchMax) +
                                           "]. Values must be >= 0.0.");
                         ErrorsFound = true;
                     }
@@ -567,13 +567,13 @@ namespace ZoneContaminantPredictorCorrector {
             if (IHGNumbers(1) < 0.0) {
                 ShowSevereError(RoutineName + "Negative values are not allowed for " + cNumericFieldNames(1) + " in " + CurrentModuleObject + " = " +
                                 AlphaName(1));
-                ShowContinueError("The input value is " + format("{:.2R}", IHGNumbers(1)));
+                ShowContinueError(format("The input value is {:.2R}", IHGNumbers(1)));
                 ErrorsFound = true;
             }
             if (IHGNumbers(2) <= 0.0) {
                 ShowSevereError(RoutineName + "Negative values or zero are not allowed for " + cNumericFieldNames(2) + " in " + CurrentModuleObject +
                                 " = " + AlphaName(1));
-                ShowContinueError("The input value is " + format("{:.2R}", IHGNumbers(2)));
+                ShowContinueError(format("The input value is {:.2R}", IHGNumbers(2)));
                 ErrorsFound = true;
             }
 
@@ -655,14 +655,14 @@ namespace ZoneContaminantPredictorCorrector {
                     if (SchMin < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", minimum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + "\". Minimum is [" + format("{:.1R}", SchMin) +
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Minimum is [{:.1R}", SchMin) +
                                           "]. Values must be >= 0.0.");
                         ErrorsFound = true;
                     }
                     if (SchMax < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", maximum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + "\". Maximum is [" + format("{:.1R}", SchMax) +
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Maximum is [{:.1R}", SchMax) +
                                           "]. Values must be >= 0.0.");
                         ErrorsFound = true;
                     }
@@ -675,13 +675,13 @@ namespace ZoneContaminantPredictorCorrector {
             if (IHGNumbers(1) < 0.0) {
                 ShowSevereError(RoutineName + "Negative values are not allowed for " + cNumericFieldNames(1) + " in " + CurrentModuleObject + " = " +
                                 AlphaName(1));
-                ShowContinueError("The input value is " + format("{:.2R}", IHGNumbers(1)));
+                ShowContinueError(format("The input value is {:.2R}", IHGNumbers(1)));
                 ErrorsFound = true;
             }
             if (IHGNumbers(2) <= 0.0) {
                 ShowSevereError(RoutineName + "Negative values or zero are not allowed for " + cNumericFieldNames(2) + " in " + CurrentModuleObject +
                                 " = " + AlphaName(1));
-                ShowContinueError("The input value is " + format("{:.2R}", IHGNumbers(2)));
+                ShowContinueError(format("The input value is {:.2R}", IHGNumbers(2)));
                 ErrorsFound = true;
             }
 
@@ -769,14 +769,14 @@ namespace ZoneContaminantPredictorCorrector {
                     if (SchMin < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", minimum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + "\". Minimum is [" + format("{:.1R}", SchMin) +
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Minimum is [{:.1R}", SchMin) +
                                           "]. Values must be >= 0.0.");
                         ErrorsFound = true;
                     }
                     if (SchMax < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", maximum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + "\". Maximum is [" + format("{:.1R}", SchMax) +
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Maximum is [{:.1R}", SchMax) +
                                           "]. Values must be >= 0.0.");
                         ErrorsFound = true;
                     }
@@ -788,13 +788,13 @@ namespace ZoneContaminantPredictorCorrector {
             if (IHGNumbers(1) < 0.0) {
                 ShowSevereError(RoutineName + "Negative values are not allowed for " + cNumericFieldNames(1) + " in " + CurrentModuleObject + " = " +
                                 AlphaName(1));
-                ShowContinueError("The input value is " + format("{:.2R}", IHGNumbers(1)));
+                ShowContinueError(format("The input value is {:.2R}", IHGNumbers(1)));
                 ErrorsFound = true;
             }
             if (IHGNumbers(2) <= 0.0) {
                 ShowSevereError(RoutineName + "Negative values or zero are not allowed for " + cNumericFieldNames(2) + " in " + CurrentModuleObject +
                                 " = " + AlphaName(1));
-                ShowContinueError("The input value is " + format("{:.2R}", IHGNumbers(2)));
+                ShowContinueError(format("The input value is {:.2R}", IHGNumbers(2)));
                 ErrorsFound = true;
             }
 
@@ -884,14 +884,14 @@ namespace ZoneContaminantPredictorCorrector {
                     if (SchMin < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", minimum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + "\". Minimum is [" + format("{:.1R}", SchMin) +
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Minimum is [{:.1R}", SchMin) +
                                           "]. Values must be >= 0.0.");
                         ErrorsFound = true;
                     }
                     if (SchMax < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", maximum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + "\". Maximum is [" + format("{:.1R}", SchMax) +
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Maximum is [{:.1R}", SchMax) +
                                           "]. Values must be >= 0.0.");
                         ErrorsFound = true;
                     }
@@ -902,7 +902,7 @@ namespace ZoneContaminantPredictorCorrector {
             if (IHGNumbers(1) < 0.0) {
                 ShowSevereError(RoutineName + "Negative values are not allowed for " + cNumericFieldNames(1) + " in " + CurrentModuleObject + " = " +
                                 AlphaName(1));
-                ShowContinueError("The input value is " + format("{:.2R}", IHGNumbers(1)));
+                ShowContinueError(format("The input value is {:.2R}", IHGNumbers(1)));
                 ErrorsFound = true;
             }
 
@@ -984,14 +984,14 @@ namespace ZoneContaminantPredictorCorrector {
                     if (SchMin < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", minimum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + "\". Minimum is [" + format("{:.1R}", SchMin) +
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Minimum is [{:.1R}", SchMin) +
                                           "]. Values must be >= 0.0.");
                         ErrorsFound = true;
                     }
                     if (SchMax < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", maximum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + "\". Maximum is [" + format("{:.1R}", SchMax) +
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Maximum is [{:.1R}", SchMax) +
                                           "]. Values must be >= 0.0.");
                         ErrorsFound = true;
                     }
@@ -1003,7 +1003,7 @@ namespace ZoneContaminantPredictorCorrector {
             if (IHGNumbers(1) < 0.0) {
                 ShowSevereError(RoutineName + "Negative values are not allowed for " + cNumericFieldNames(1) + " in " + CurrentModuleObject + " = " +
                                 AlphaName(1));
-                ShowContinueError("The input value is " + format("{:.2R}", IHGNumbers(1)));
+                ShowContinueError(format("The input value is {:.2R}", IHGNumbers(1)));
                 ErrorsFound = true;
             }
 

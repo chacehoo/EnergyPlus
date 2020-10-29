@@ -672,9 +672,9 @@ namespace HVACStandAloneERV {
                 if (StandAloneERV(StandAloneERVNum).SupplyAirVolFlow > StandAloneERV(StandAloneERVNum).DesignSAFanVolFlowRate) {
                     ShowWarningError(CurrentModuleObject + " = " + StandAloneERV(StandAloneERVNum).Name + " has a " + cNumericFields(1) +
                                      " > Max Volume Flow Rate defined in the associated fan object, should be <=");
-                    ShowContinueError("... Entered value=" + format("{:.2R}", StandAloneERV(StandAloneERVNum).SupplyAirVolFlow) + "... Fan [" +
+                    ShowContinueError(format("... Entered value={:.2R}", StandAloneERV(StandAloneERVNum).SupplyAirVolFlow) + "... Fan [" +
                                       cFanTypes(SAFanTypeNum) + " \"" + StandAloneERV(StandAloneERVNum).SupplyAirFanName +
-                                      "\"] Max Value = " + format("{:.2R}", StandAloneERV(StandAloneERVNum).DesignSAFanVolFlowRate));
+                                      format("\"] Max Value = {:.2R}", StandAloneERV(StandAloneERVNum).DesignSAFanVolFlowRate));
                     ShowContinueError(" The ERV " + cNumericFields(1) + " is reset to the supply air fan flow rate and the simulation continues.");
                     StandAloneERV(StandAloneERVNum).SupplyAirVolFlow = StandAloneERV(StandAloneERVNum).DesignSAFanVolFlowRate;
                 }
@@ -683,7 +683,7 @@ namespace HVACStandAloneERV {
                 if (StandAloneERV(StandAloneERVNum).SupplyAirVolFlow <= 0.0) {
                     ShowSevereError(CurrentModuleObject + " = " + StandAloneERV(StandAloneERVNum).Name + " has a " + cNumericFields(1) +
                                     " <= 0.0, it must be >0.0");
-                    ShowContinueError("... Entered value=" + format("{:.2R}", StandAloneERV(StandAloneERVNum).SupplyAirVolFlow));
+                    ShowContinueError(format("... Entered value={:.2R}", StandAloneERV(StandAloneERVNum).SupplyAirVolFlow));
                     ErrorsFound = true;
                 }
             } else {
@@ -706,9 +706,9 @@ namespace HVACStandAloneERV {
                 if (StandAloneERV(StandAloneERVNum).ExhaustAirVolFlow > StandAloneERV(StandAloneERVNum).DesignEAFanVolFlowRate) {
                     ShowWarningError(CurrentModuleObject + " = " + StandAloneERV(StandAloneERVNum).Name + " has an " + cNumericFields(2) +
                                      " > Max Volume Flow Rate defined in the associated fan object, should be <=");
-                    ShowContinueError("... Entered value=" + format("{:.2R}", StandAloneERV(StandAloneERVNum).ExhaustAirVolFlow) + "... Fan [" +
+                    ShowContinueError(format("... Entered value={:.2R}", StandAloneERV(StandAloneERVNum).ExhaustAirVolFlow) + "... Fan [" +
                                       cFanTypes(EAFanTypeNum) + ':' + StandAloneERV(StandAloneERVNum).ExhaustAirFanName +
-                                      "] Max Value = " + format("{:.2R}", StandAloneERV(StandAloneERVNum).DesignEAFanVolFlowRate));
+                                      format("] Max Value = {:.2R}", StandAloneERV(StandAloneERVNum).DesignEAFanVolFlowRate));
                     ShowContinueError(" The ERV " + cNumericFields(2) + " is reset to the exhaust air fan flow rate and the simulation continues.");
                     StandAloneERV(StandAloneERVNum).ExhaustAirVolFlow = StandAloneERV(StandAloneERVNum).DesignEAFanVolFlowRate;
                 }
@@ -717,7 +717,7 @@ namespace HVACStandAloneERV {
                 if (StandAloneERV(StandAloneERVNum).ExhaustAirVolFlow <= 0.0) {
                     ShowSevereError(CurrentModuleObject + " = " + StandAloneERV(StandAloneERVNum).Name + " has an " + cNumericFields(2) +
                                     " <= 0.0, it must be >0.0");
-                    ShowContinueError("... Entered value=" + format("{:.2R}", StandAloneERV(StandAloneERVNum).ExhaustAirVolFlow));
+                    ShowContinueError(format("... Entered value={:.2R}", StandAloneERV(StandAloneERVNum).ExhaustAirVolFlow));
                     ErrorsFound = true;
                 }
             } else {
@@ -1043,7 +1043,7 @@ namespace HVACStandAloneERV {
                     StandAloneERV(WhichERV).DesignSAFanVolFlowRate != AutoSize) {
                     if (StandAloneERV(WhichERV).SupplyAirVolFlow * HighRHOARatio > StandAloneERV(WhichERV).DesignSAFanVolFlowRate) {
                         ShowWarningError(CurrentModuleObject + " \"" + Alphas(1) + "\"");
-                        ShowContinueError("... A " + cNumericFields(5) + " was entered as " + format("{:.4R}", HighRHOARatio));
+                        ShowContinueError("... A " + cNumericFields(5) + format(" was entered as {:.4R}", HighRHOARatio));
                         ShowContinueError("... This flow ratio results in a Supply Air Volume Flow Rate through the ERV which is greater than the "
                                           "Max Volume specified in the supply air fan object.");
                         ShowContinueError("... Associated fan object = " + cFanTypes(SAFanTypeNum) + " \"" +
@@ -1061,7 +1061,7 @@ namespace HVACStandAloneERV {
                     StandAloneERV(WhichERV).DesignEAFanVolFlowRate != AutoSize) {
                     if (StandAloneERV(WhichERV).ExhaustAirVolFlow * HighRHOARatio > StandAloneERV(WhichERV).DesignEAFanVolFlowRate) {
                         ShowWarningError("ZoneHVAC:EnergyRecoveryVentilator:Controller \"" + Alphas(1) + "\"");
-                        ShowContinueError("... A " + cNumericFields(5) + " was entered as " + format("{:.4R}", HighRHOARatio));
+                        ShowContinueError("... A " + cNumericFields(5) + format(" was entered as {:.4R}", HighRHOARatio));
                         ShowContinueError("... This flow ratio results in an Exhaust Air Volume Flow Rate through the ERV which is greater than the "
                                           "Max Volume specified in the exhaust air fan object.");
                         ShowContinueError("... Associated fan object = " + cFanTypes(EAFanTypeNum) + " \"" +
@@ -1561,9 +1561,9 @@ namespace HVACStandAloneERV {
                         ShowMessage("SizeStandAloneERV: Potential issue with equipment sizing for ZoneHVAC:EnergyRecoveryVentilator " +
                                     cFanTypes(StandAloneERV(StandAloneERVNum).SupplyAirFanType_Num) + ' ' +
                                     StandAloneERV(StandAloneERVNum).SupplyAirFanName);
-                        ShowContinueError("User-Specified Supply Fan Maximum Flow Rate of " + format("{:.5R}", DesignSAFanVolFlowRateUser) +
+                        ShowContinueError(format("User-Specified Supply Fan Maximum Flow Rate of {:.5R}", DesignSAFanVolFlowRateUser) +
                                           " [m3/s]");
-                        ShowContinueError("differs from the ERV Supply Air Flow Rate of " + format("{:.5R}", DesignSAFanVolFlowRateDes) + " [m3/s]");
+                        ShowContinueError(format("differs from the ERV Supply Air Flow Rate of {:.5R}", DesignSAFanVolFlowRateDes) + " [m3/s]");
                         ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                         ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                     }
@@ -1781,8 +1781,8 @@ namespace HVACStandAloneERV {
             if (TotalExhaustMassFlow > TotalSupplyMassFlow && !ZoneAirMassFlow.EnforceZoneMassBalance) {
                 ShowWarningError("For " + StandAloneERV(StandAloneERVNum).UnitType + " \"" + StandAloneERV(StandAloneERVNum).Name +
                                  "\" there is unbalanced exhaust air flow.");
-                ShowContinueError("... The exhaust air mass flow rate = " + format("{:.6R}", Node(ExhaustInletNode).MassFlowRate));
-                ShowContinueError("... The  supply air mass flow rate = " + format("{:.6R}", Node(SupInletNode).MassFlowRate));
+                ShowContinueError(format("... The exhaust air mass flow rate = {:.6R}", Node(ExhaustInletNode).MassFlowRate));
+                ShowContinueError(format("... The  supply air mass flow rate = {:.6R}", Node(SupInletNode).MassFlowRate));
                 ShowContinueErrorTimeStamp("");
                 ShowContinueError("... Unless there is balancing infiltration / ventilation air flow, this will result in");
                 ShowContinueError("... load due to induced outside air being neglected in the simulation.");

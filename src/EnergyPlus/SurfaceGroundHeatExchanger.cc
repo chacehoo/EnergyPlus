@@ -390,7 +390,7 @@ namespace SurfaceGroundHeatExchanger {
         if (state.dataSurfaceGroundHeatExchangers->NoSurfaceGroundTempObjWarning) {
             if (!GroundTemp_SurfaceObjInput) {
                 ShowWarningError("GetSurfaceGroundHeatExchanger: No \"Site:GroundTemperature:Shallow\" were input.");
-                ShowContinueError("Defaults, constant throughout the year of (" + format("{:.1R}", GroundTemp_Surface) + ") will be used.");
+                ShowContinueError(format("Defaults, constant throughout the year of ({:.1R}", GroundTemp_Surface) + ") will be used.");
             }
             state.dataSurfaceGroundHeatExchangers->NoSurfaceGroundTempObjWarning = false;
         }
@@ -1124,7 +1124,7 @@ namespace SurfaceGroundHeatExchanger {
             if (PlantLoop(this->LoopNum).FluidIndex == WaterIndex) {
                 if (this->FrozenErrIndex1 == 0) {
                     ShowWarningMessage("GroundHeatExchanger:Surface=\"" + this->Name +
-                                       "\", water is frozen; Model not valid. Calculated Water Temperature=[" + format("{:.2R}", this->InletTemp) + "] C");
+                                       format("\", water is frozen; Model not valid. Calculated Water Temperature=[{:.2R}", this->InletTemp) + "] C");
                     ShowContinueErrorTimeStamp("");
                 }
                 ShowRecurringWarningErrorAtEnd("GroundHeatExchanger:Surface=\"" + this->Name + "\", water is frozen",

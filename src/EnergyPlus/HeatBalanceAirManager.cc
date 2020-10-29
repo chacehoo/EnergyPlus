@@ -653,7 +653,7 @@ namespace HeatBalanceAirManager {
             if (rNumericArgs(1) < 0.0) {
                 ShowSevereError(
                     RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) +
-                    "\", invalid Induced Outdoor Air Due to Duct Leakage Unbalance specification [<0.0]=" + format("{:.3R}", rNumericArgs(1)));
+                    format("\", invalid Induced Outdoor Air Due to Duct Leakage Unbalance specification [<0.0]={:.3R}", rNumericArgs(1)));
                 ErrorsFound = true;
             }
 
@@ -929,7 +929,7 @@ namespace HeatBalanceAirManager {
                                     }
                                 } else {
                                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + Infiltration(Loop).Name +
-                                                    "\", invalid flow/area specification [<0.0]=" + format("{:.3R}", rNumericArgs(2)));
+                                                    format("\", invalid flow/area specification [<0.0]={:.3R}", rNumericArgs(2)));
                                     ErrorsFound = true;
                                 }
                             }
@@ -949,7 +949,7 @@ namespace HeatBalanceAirManager {
                                     }
                                 } else {
                                     ShowSevereError(RoutineName + cCurrentModuleObject + " = \"" + Infiltration(Loop).Name +
-                                                    "\", invalid flow/exteriorarea specification [<0.0]=" + format("{:.3R}", rNumericArgs(3)));
+                                                    format("\", invalid flow/exteriorarea specification [<0.0]={:.3R}", rNumericArgs(3)));
                                     ErrorsFound = true;
                                 }
                             }
@@ -968,7 +968,7 @@ namespace HeatBalanceAirManager {
                                     }
                                 } else {
                                     ShowSevereError(RoutineName + cCurrentModuleObject + " = \"" + Infiltration(Loop).Name +
-                                                    "\", invalid flow/exteriorwallarea specification [<0.0]=" + format("{:.3R}", rNumericArgs(3)));
+                                                    format("\", invalid flow/exteriorwallarea specification [<0.0]={:.3R}", rNumericArgs(3)));
                                     ErrorsFound = true;
                                 }
                             }
@@ -988,7 +988,7 @@ namespace HeatBalanceAirManager {
                                 } else {
                                     ShowSevereError(
                                         RoutineName + "In " + cCurrentModuleObject + " = \"" + Infiltration(Loop).Name +
-                                        "\", invalid ACH (air changes per hour) specification [<0.0]=" + format("{:.3R}", rNumericArgs(4)));
+                                        format("\", invalid ACH (air changes per hour) specification [<0.0]={:.3R}", rNumericArgs(4)));
                                     ErrorsFound = true;
                                 }
                             }
@@ -1414,7 +1414,7 @@ namespace HeatBalanceAirManager {
                                     }
                                 } else {
                                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + Ventilation(Loop).Name +
-                                                    "\", invalid flow/area specification [<0.0]=" + format("{:.3R}", rNumericArgs(2)));
+                                                    format("\", invalid flow/area specification [<0.0]={:.3R}", rNumericArgs(2)));
                                     ErrorsFound = true;
                                 }
                             }
@@ -1434,7 +1434,7 @@ namespace HeatBalanceAirManager {
                                     }
                                 } else {
                                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + Ventilation(Loop).Name +
-                                                    "\", invalid flow/person specification [<0.0]=" + format("{:.3R}", rNumericArgs(3)));
+                                                    format("\", invalid flow/person specification [<0.0]={:.3R}", rNumericArgs(3)));
                                     ErrorsFound = true;
                                 }
                             }
@@ -1455,7 +1455,7 @@ namespace HeatBalanceAirManager {
                                 } else {
                                     ShowSevereError(
                                         RoutineName + cCurrentModuleObject + "=\"" + Ventilation(Loop).Name +
-                                        "\", invalid ACH (air changes per hour) specification [<0.0]=" + format("{:.3R}", rNumericArgs(5)));
+                                        format("\", invalid ACH (air changes per hour) specification [<0.0]={:.3R}", rNumericArgs(5)));
                                     ErrorsFound = true;
                                 }
                             }
@@ -1556,7 +1556,7 @@ namespace HeatBalanceAirManager {
                         if (Item1 == 1) {
                             ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" must have " + cNumericFieldNames(11) +
                                             " between -100C and 100C.");
-                            ShowContinueError("...value entered=[" + format("{:.2R}", rNumericArgs(11)) + "].");
+                            ShowContinueError(format("...value entered=[{:.2R}", rNumericArgs(11)) + "].");
                             ErrorsFound = true;
                         }
                     }
@@ -1590,7 +1590,7 @@ namespace HeatBalanceAirManager {
                     if (!lNumericFieldBlanks(11) && (!cAlphaArgs(6).empty() && Ventilation(Loop).MinIndoorTempSchedPtr == 0)) {
                         if (Item1 == 1) {
                             ShowWarningError(RoutineName + cAlphaFieldNames(6) + " = " + cAlphaArgs(6) +
-                                             " is invalid. The constant value will be used at " + format("{:.1R}", rNumericArgs(11)) +
+                                             format(" is invalid. The constant value will be used at {:.1R}", rNumericArgs(11)) +
                                              " degrees C ");
                             ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
                         }
@@ -1638,7 +1638,7 @@ namespace HeatBalanceAirManager {
                     if (!lNumericFieldBlanks(12) && ((!lAlphaFieldBlanks(7)) && Ventilation(Loop).MaxIndoorTempSchedPtr == 0)) {
                         if (Item1 == 1) {
                             ShowWarningError(RoutineName + cAlphaFieldNames(7) + " = " + cAlphaArgs(7) +
-                                             " is invalid. The constant value will be used at " + format("{:.1R}", rNumericArgs(12)) +
+                                             format(" is invalid. The constant value will be used at {:.1R}", rNumericArgs(12)) +
                                              " degrees C ");
                             ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
                         }
@@ -1686,7 +1686,7 @@ namespace HeatBalanceAirManager {
                     if (!lNumericFieldBlanks(13) && ((!lAlphaFieldBlanks(8)) && Ventilation(Loop).DeltaTempSchedPtr == 0)) {
                         if (Item1 == 1) {
                             ShowWarningError(RoutineName + cAlphaFieldNames(8) + " = " + cAlphaArgs(8) +
-                                             " is invalid. The constant value will be used at " + format("{:.1R}", rNumericArgs(13)) +
+                                             format(" is invalid. The constant value will be used at {:.1R}", rNumericArgs(13)) +
                                              " degrees C ");
                             ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
                         }
@@ -1731,7 +1731,7 @@ namespace HeatBalanceAirManager {
                         // Check Minimum outdoor temperature value and schedule fields
                         if (!lNumericFieldBlanks(14) && ((!lAlphaFieldBlanks(9)) && Ventilation(Loop).MinOutdoorTempSchedPtr == 0)) {
                             ShowWarningError(RoutineName + cAlphaFieldNames(9) + " = " + cAlphaArgs(9) +
-                                             " is invalid. The constant value will be used at " + format("{:.1R}", rNumericArgs(14)) +
+                                             format(" is invalid. The constant value will be used at {:.1R}", rNumericArgs(14)) +
                                              " degrees C ");
                             ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
                         }
@@ -1775,7 +1775,7 @@ namespace HeatBalanceAirManager {
                         // Check Maximum outdoor temperature value and schedule fields
                         if (!lNumericFieldBlanks(15) && ((!lAlphaFieldBlanks(10)) && Ventilation(Loop).MaxOutdoorTempSchedPtr == 0)) {
                             ShowWarningError(RoutineName + cAlphaFieldNames(10) + " = " + cAlphaArgs(10) +
-                                             "is invalid. The constant value will be used at " + format("{:.1R}", rNumericArgs(15)) + " degrees C ");
+                                             format("is invalid. The constant value will be used at {:.1R}", rNumericArgs(15)) + " degrees C ");
                             ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
                         }
                     }
@@ -2375,7 +2375,7 @@ namespace HeatBalanceAirManager {
                             }
                         } else {
                             ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) +
-                                            "\", invalid flow/person specification [<0.0]=" + format("{:.3R}", rNumericArgs(2)));
+                                            format("\", invalid flow/person specification [<0.0]={:.3R}", rNumericArgs(2)));
                             ErrorsFound = true;
                         }
                     }
@@ -2394,7 +2394,7 @@ namespace HeatBalanceAirManager {
                             }
                         } else {
                             ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) +
-                                            "\", invalid flow/person specification [<0.0]=" + format("{:.3R}", rNumericArgs(3)));
+                                            format("\", invalid flow/person specification [<0.0]={:.3R}", rNumericArgs(3)));
                             ErrorsFound = true;
                         }
                     }
@@ -2413,7 +2413,7 @@ namespace HeatBalanceAirManager {
                             }
                         } else {
                             ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) +
-                                            "\", invalid flow/person specification [<0.0]=" + format("{:.3R}", rNumericArgs(4)));
+                                            format("\", invalid flow/person specification [<0.0]={:.3R}", rNumericArgs(4)));
                             ErrorsFound = true;
                         }
                     }
@@ -2816,7 +2816,7 @@ namespace HeatBalanceAirManager {
                             }
                             else {
                                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) +
-                                    "\", invalid flow/person specification [<0.0]=" + format("{:.3R}", rNumericArgs(2)));
+                                    format("\", invalid flow/person specification [<0.0]={:.3R}", rNumericArgs(2)));
                                 ErrorsFound = true;
                             }
                         }
@@ -2838,7 +2838,7 @@ namespace HeatBalanceAirManager {
                             }
                             else {
                                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) +
-                                    "\", invalid flow/person specification [<0.0]=" + format("{:.3R}", rNumericArgs(3)));
+                                    format("\", invalid flow/person specification [<0.0]={:.3R}", rNumericArgs(3)));
                                 ErrorsFound = true;
                             }
                         }
@@ -2859,7 +2859,7 @@ namespace HeatBalanceAirManager {
                             }
                             else {
                                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) +
-                                    "\", invalid flow/person specification [<0.0]=" + format("{:.3R}", rNumericArgs(4)));
+                                    format("\", invalid flow/person specification [<0.0]={:.3R}", rNumericArgs(4)));
                                 ErrorsFound = true;
                             }
                         }

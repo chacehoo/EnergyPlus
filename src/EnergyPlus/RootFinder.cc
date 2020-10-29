@@ -415,8 +415,8 @@ namespace RootFinder {
             if (XMax == 0.0) {
                 XMinReset = XMax;
             } else {
-                ShowFatalError("InitializeRootFinder: Invalid min/max bounds XMin=" + format("{:.6T}", XMin) +
-                               " must be smaller than XMax=" + format("{:.6T}", XMax));
+                ShowFatalError(format("InitializeRootFinder: Invalid min/max bounds XMin={:.6T}", XMin) +
+                               format(" must be smaller than XMax={:.6T}", XMax));
             }
         }
 
@@ -1550,9 +1550,9 @@ namespace RootFinder {
                         } else {
                             // Should never happen if CheckLowerUpperBracket() is called before
                             ShowSevereError("UpdateBracket: Current iterate is smaller than the lower bracket.");
-                            ShowContinueError("UpdateBracket: X=" + format("{:.15T}", X) + ", Y=" + format("{:.15T}", Y));
-                            ShowContinueError("UpdateBracket: XLower=" + format("{:.15T}", RootFinderData.LowerPoint.X) +
-                                              ", YLower=" + format("{:.15T}", RootFinderData.LowerPoint.Y));
+                            ShowContinueError(format("UpdateBracket: X={:.15T}", X) + format(", Y={:.15T}", Y));
+                            ShowContinueError(format("UpdateBracket: XLower={:.15T}", RootFinderData.LowerPoint.X) +
+                                              format(", YLower={:.15T}", RootFinderData.LowerPoint.Y));
                             ShowFatalError("UpdateBracket: Preceding error causes program termination.");
                         }
                     }
@@ -1576,9 +1576,9 @@ namespace RootFinder {
                         } else {
                             // Should never happen if CheckLowerUpperBracket() is called before
                             ShowSevereError("UpdateBracket: Current iterate is greater than the upper bracket.");
-                            ShowContinueError("UpdateBracket: X=" + format("{:.15T}", X) + ", Y=" + format("{:.15T}", Y));
-                            ShowContinueError("UpdateBracket: XUpper=" + format("{:.15T}", RootFinderData.UpperPoint.X) +
-                                              ", YUpper=" + format("{:.15T}", RootFinderData.UpperPoint.Y));
+                            ShowContinueError(format("UpdateBracket: X={:.15T}", X) + format(", Y={:.15T}", Y));
+                            ShowContinueError(format("UpdateBracket: XUpper={:.15T}", RootFinderData.UpperPoint.X) +
+                                              format(", YUpper={:.15T}", RootFinderData.UpperPoint.Y));
                             ShowFatalError("UpdateBracket: Preceding error causes program termination.");
                         }
                     }
@@ -1605,9 +1605,9 @@ namespace RootFinder {
                         } else {
                             // Should never happen if CheckLowerUpperBracket() is called before
                             ShowSevereError("UpdateBracket: Current iterate is smaller than the lower bracket.");
-                            ShowContinueError("UpdateBracket: X=" + format("{:.15T}", X) + ", Y=" + format("{:.15T}", Y));
-                            ShowContinueError("UpdateBracket: XLower=" + format("{:.15T}", RootFinderData.LowerPoint.X) +
-                                              ", YLower=" + format("{:.15T}", RootFinderData.LowerPoint.Y));
+                            ShowContinueError(format("UpdateBracket: X={:.15T}", X) + format(", Y={:.15T}", Y));
+                            ShowContinueError(format("UpdateBracket: XLower={:.15T}", RootFinderData.LowerPoint.X) +
+                                              format(", YLower={:.15T}", RootFinderData.LowerPoint.Y));
                             ShowFatalError("UpdateBracket: Preceding error causes program termination.");
                         }
                     }
@@ -1631,9 +1631,9 @@ namespace RootFinder {
                         } else {
                             // Should never happen if CheckLowerUpperBracket() is called before
                             ShowSevereError("UpdateBracket: Current iterate is greater than the upper bracket.");
-                            ShowContinueError("UpdateBracket: X=" + format("{:.15T}", X) + ", Y=" + format("{:.15T}", Y));
-                            ShowContinueError("UpdateBracket: XUpper=" + format("{:.15T}", RootFinderData.UpperPoint.X) +
-                                              ", YUpper=" + format("{:.15T}", RootFinderData.UpperPoint.Y));
+                            ShowContinueError(format("UpdateBracket: X={:.15T}", X) + format(", Y={:.15T}", Y));
+                            ShowContinueError(format("UpdateBracket: XUpper={:.15T}", RootFinderData.UpperPoint.X) +
+                                              format(", YUpper={:.15T}", RootFinderData.UpperPoint.Y));
                             ShowFatalError("UpdateBracket: Preceding error causes program termination.");
                         }
                     }
