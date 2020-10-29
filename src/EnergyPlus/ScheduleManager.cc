@@ -1668,7 +1668,7 @@ namespace ScheduleManager {
             if (Numbers(3) != 8760 && Numbers(3) != 8784) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\", " + cNumericFields(3) +
                                 " must = 8760 or 8784 (for a leap year)");
-                ShowContinueError("..Value for field = " + format("{:.0T}", Numbers(3)) + ", Schedule not processed.");
+                ShowContinueError(format("..Value for field = {:.0T}", Numbers(3)) + ", Schedule not processed.");
                 ErrorsFound = true;
                 continue;
             }
@@ -2262,8 +2262,8 @@ namespace ScheduleManager {
             if (CheckScheduleValueMinMax(SchNum, ">=", ScheduleType(NumPointer).Minimum, "<=", ScheduleType(NumPointer).Maximum)) continue;
             ShowSevereError(RoutineName + "Schedule=\"" + Schedule(SchNum).Name + "\" has values outside its Schedule Type (" +
                             ScheduleType(NumPointer).Name + ") range");
-            ShowContinueError("  Minimum should be >=" + format("{:.3R}", ScheduleType(NumPointer).Minimum) +
-                              " and Maximum should be <=" + format("{:.3R}", ScheduleType(NumPointer).Maximum));
+            ShowContinueError(format("  Minimum should be >={:.3R}", ScheduleType(NumPointer).Minimum) +
+                              format(" and Maximum should be <={:.3R}", ScheduleType(NumPointer).Maximum));
             ErrorsFound = true;
         }
 

@@ -853,7 +853,7 @@ namespace FluidCoolers {
             // temperature is less than design inlet air dry bulb temperature
             if (DataSizing::PlantSizData(PltSizCondNum).ExitTemp <= this->DesignEnteringAirTemp && DataPlant::PlantFirstSizesOkayToFinalize) {
                 ShowSevereError("Error when autosizing the UA value for fluid cooler = " + this->Name + '.');
-                ShowContinueError("Design Loop Exit Temperature (" + format("{:.2R}", DataSizing::PlantSizData(PltSizCondNum).ExitTemp) +
+                ShowContinueError(format("Design Loop Exit Temperature ({:.2R}", DataSizing::PlantSizData(PltSizCondNum).ExitTemp) +
                                   " C) must be greater than design entering air dry-bulb temperature (" +
                                   format("{:.2R}", this->DesignEnteringAirTemp) + " C) when autosizing the fluid cooler UA.");
                 ShowContinueError("It is recommended that the Design Loop Exit Temperature = design inlet air dry-bulb temp plus the Fluid Cooler "
@@ -1076,7 +1076,7 @@ namespace FluidCoolers {
                     if (SolFla == -1) {
                         ShowWarningError("Iteration limit exceeded in calculating fluid cooler UA.");
                         ShowContinueError("Autosizing of fluid cooler UA failed for fluid cooler = " + this->Name);
-                        ShowContinueError("The final UA value =" + format("{:.2R}", UA) + " W/K, and the simulation continues...");
+                        ShowContinueError(format("The final UA value ={:.2R}", UA) + " W/K, and the simulation continues...");
                     } else if (SolFla == -2) {
                         CalcFluidCoolerOutlet(state, int(Par(2)), Par(3), Par(4), UA0, OutWaterTempAtUA0);
                         CalcFluidCoolerOutlet(state, int(Par(2)), Par(3), Par(4), UA1, OutWaterTempAtUA1);
@@ -1093,21 +1093,21 @@ namespace FluidCoolers {
                         ShowContinueError("on the autosized values shown below or to adjust design fluid cooler air inlet dry-bulb temperature.");
                         ShowContinueError("Plant:Sizing object inputs also influence these results (e.g. DeltaT and ExitTemp).");
                         ShowContinueError("Inputs to the fluid cooler object:");
-                        ShowContinueError("Design Fluid Cooler Load [W]                       = " + format("{:.2R}", Par(1)));
+                        ShowContinueError(format("Design Fluid Cooler Load [W]                       = {:.2R}", Par(1)));
                         ShowContinueError("Design Fluid Cooler Water Volume Flow Rate [m3/s]  = " +
                                           format("{:.6R}", this->DesignWaterFlowRate));
-                        ShowContinueError("Design Fluid Cooler Air Volume Flow Rate [m3/s]    = " + format("{:.2R}", Par(4)));
-                        ShowContinueError("Design Fluid Cooler Air Inlet Dry-bulb Temp [C]    = " + format("{:.2R}", this->AirTemp));
+                        ShowContinueError(format("Design Fluid Cooler Air Volume Flow Rate [m3/s]    = {:.2R}", Par(4)));
+                        ShowContinueError(format("Design Fluid Cooler Air Inlet Dry-bulb Temp [C]    = {:.2R}", this->AirTemp));
                         ShowContinueError("Inputs to the plant sizing object:");
                         ShowContinueError("Design Exit Water Temp [C]                         = " +
                                           format("{:.2R}", DataSizing::PlantSizData(PltSizCondNum).ExitTemp));
                         ShowContinueError("Loop Design Temperature Difference [C]             = " +
                                           format("{:.2R}", DataSizing::PlantSizData(PltSizCondNum).DeltaT));
-                        ShowContinueError("Design Fluid Cooler Water Inlet Temp [C]           = " + format("{:.2R}", this->WaterTemp));
-                        ShowContinueError("Calculated water outlet temp at low UA [C] (UA = " + format("{:.2R}", UA0) +
-                                          " W/K) = " + format("{:.2R}", OutWaterTempAtUA0));
-                        ShowContinueError("Calculated water outlet temp at high UA [C](UA = " + format("{:.2R}", UA1) +
-                                          " W/K) = " + format("{:.2R}", OutWaterTempAtUA1));
+                        ShowContinueError(format("Design Fluid Cooler Water Inlet Temp [C]           = {:.2R}", this->WaterTemp));
+                        ShowContinueError(format("Calculated water outlet temp at low UA [C] (UA = {:.2R}", UA0) +
+                                          format(" W/K) = {:.2R}", OutWaterTempAtUA0));
+                        ShowContinueError(format("Calculated water outlet temp at high UA [C](UA = {:.2R}", UA1) +
+                                          format(" W/K) = {:.2R}", OutWaterTempAtUA1));
                         ShowFatalError("Autosizing of Fluid Cooler UA failed for fluid cooler = " + this->Name);
                     }
                     tmpHighSpeedEvapFluidCoolerUA = UA;
@@ -1185,7 +1185,7 @@ namespace FluidCoolers {
                     if (PltSizCondNum > 0) {
                         ShowContinueError("Autosizing of fluid cooler UA failed for fluid cooler = " + this->Name);
                     }
-                    ShowContinueError("The final UA value =" + format("{:.2R}", UA) + " W/K, and the simulation continues...");
+                    ShowContinueError(format("The final UA value ={:.2R}", UA) + " W/K, and the simulation continues...");
                 } else if (SolFla == -2) {
                     CalcFluidCoolerOutlet(state, int(Par(2)), Par(3), Par(4), UA0, OutWaterTempAtUA0);
                     CalcFluidCoolerOutlet(state, int(Par(2)), Par(3), Par(4), UA1, OutWaterTempAtUA1);
@@ -1202,11 +1202,11 @@ namespace FluidCoolers {
                     ShowContinueError("on the autosized values shown below or to adjust design fluid cooler air inlet dry-bulb temperature.");
                     ShowContinueError("Plant:Sizing object inputs also influence these results (e.g. DeltaT and ExitTemp).");
                     ShowContinueError("Inputs to the fluid cooler object:");
-                    ShowContinueError("Design Fluid Cooler Load [W]                       = " + format("{:.2R}", Par(1)));
+                    ShowContinueError(format("Design Fluid Cooler Load [W]                       = {:.2R}", Par(1)));
                     ShowContinueError("Design Fluid Cooler Water Volume Flow Rate [m3/s]  = " +
                                       format("{:.6R}", this->DesignWaterFlowRate));
-                    ShowContinueError("Design Fluid Cooler Air Volume Flow Rate [m3/s]    = " + format("{:.2R}", Par(4)));
-                    ShowContinueError("Design Fluid Cooler Air Inlet Dry-bulb Temp [C]    = " + format("{:.2R}", this->AirTemp));
+                    ShowContinueError(format("Design Fluid Cooler Air Volume Flow Rate [m3/s]    = {:.2R}", Par(4)));
+                    ShowContinueError(format("Design Fluid Cooler Air Inlet Dry-bulb Temp [C]    = {:.2R}", this->AirTemp));
                     if (PltSizCondNum > 0) {
                         ShowContinueError("Inputs to the plant sizing object:");
                         ShowContinueError("Design Exit Water Temp [C]                         = " +
@@ -1214,11 +1214,11 @@ namespace FluidCoolers {
                         ShowContinueError("Loop Design Temperature Difference [C]             = " +
                                           format("{:.2R}", DataSizing::PlantSizData(PltSizCondNum).DeltaT));
                     };
-                    ShowContinueError("Design Fluid Cooler Water Inlet Temp [C]           = " + format("{:.2R}", this->WaterTemp));
-                    ShowContinueError("Calculated water outlet temp at low UA [C] (UA = " + format("{:.2R}", UA0) +
-                                      " W/K) = " + format("{:.2R}", OutWaterTempAtUA0));
-                    ShowContinueError("Calculated water outlet temp at high UA [C] (UA = " + format("{:.2R}", UA1) +
-                                      " W/K) = " + format("{:.2R}", OutWaterTempAtUA1));
+                    ShowContinueError(format("Design Fluid Cooler Water Inlet Temp [C]           = {:.2R}", this->WaterTemp));
+                    ShowContinueError(format("Calculated water outlet temp at low UA [C] (UA = {:.2R}", UA0) +
+                                      format(" W/K) = {:.2R}", OutWaterTempAtUA0));
+                    ShowContinueError(format("Calculated water outlet temp at high UA [C] (UA = {:.2R}", UA1) +
+                                      format(" W/K) = {:.2R}", OutWaterTempAtUA1));
                     if (PltSizCondNum > 0) {
                         ShowFatalError("Autosizing of Fluid Cooler UA failed for fluid cooler = " + this->Name);
                     }
@@ -1335,7 +1335,7 @@ namespace FluidCoolers {
                 if (SolFla == -1) {
                     ShowWarningError("Iteration limit exceeded in calculating fluid cooler UA.");
                     ShowContinueError("Autosizing of fluid cooler UA failed for fluid cooler = " + this->Name);
-                    ShowContinueError("The final UA value at low fan speed =" + format("{:.2R}", UA) +
+                    ShowContinueError(format("The final UA value at low fan speed ={:.2R}", UA) +
                                       " W/C, and the simulation continues...");
                 } else if (SolFla == -2) {
                     CalcFluidCoolerOutlet(state, int(Par(2)), Par(3), Par(4), UA0, OutWaterTempAtUA0);
@@ -1353,21 +1353,21 @@ namespace FluidCoolers {
                     ShowContinueError("on the autosized values shown below or to adjust design fluid cooler air inlet dry-bulb temperature.");
                     ShowContinueError("Plant:Sizing object inputs also influence these results (e.g. DeltaT and ExitTemp).");
                     ShowContinueError("Inputs to the fluid cooler object:");
-                    ShowContinueError("Design Fluid Cooler Load [W]                         = " + format("{:.2R}", Par(1)));
+                    ShowContinueError(format("Design Fluid Cooler Load [W]                         = {:.2R}", Par(1)));
                     ShowContinueError("Design Fluid Cooler Water Volume Flow Rate [m3/s]    = " +
                                       format("{:.6R}", this->DesignWaterFlowRate));
-                    ShowContinueError("Design Fluid Cooler Air Volume Flow Rate [m3/s]      = " + format("{:.2R}", Par(4)));
-                    ShowContinueError("Design Fluid Cooler Air Inlet Dry-bulb Temp [C]      = " + format("{:.2R}", this->AirTemp));
+                    ShowContinueError(format("Design Fluid Cooler Air Volume Flow Rate [m3/s]      = {:.2R}", Par(4)));
+                    ShowContinueError(format("Design Fluid Cooler Air Inlet Dry-bulb Temp [C]      = {:.2R}", this->AirTemp));
                     ShowContinueError("Inputs to the plant sizing object:");
                     ShowContinueError("Design Exit Water Temp [C]                           = " +
                                       format("{:.2R}", DataSizing::PlantSizData(PltSizCondNum).ExitTemp));
                     ShowContinueError("Loop Design Temperature Difference [C]               = " +
                                       format("{:.2R}", DataSizing::PlantSizData(PltSizCondNum).DeltaT));
-                    ShowContinueError("Design Fluid Cooler Water Inlet Temp [C]             = " + format("{:.2R}", this->WaterTemp));
-                    ShowContinueError("Calculated water outlet temp at low UA [C](UA = " + format("{:.2R}", UA0) +
-                                      " W/C) = " + format("{:.2R}", OutWaterTempAtUA0));
-                    ShowContinueError("Calculated water outlet temp at high UA [C](UA = " + format("{:.2R}", UA1) +
-                                      " W/C) = " + format("{:.2R}", OutWaterTempAtUA1));
+                    ShowContinueError(format("Design Fluid Cooler Water Inlet Temp [C]             = {:.2R}", this->WaterTemp));
+                    ShowContinueError(format("Calculated water outlet temp at low UA [C](UA = {:.2R}", UA0) +
+                                      format(" W/C) = {:.2R}", OutWaterTempAtUA0));
+                    ShowContinueError(format("Calculated water outlet temp at high UA [C](UA = {:.2R}", UA1) +
+                                      format(" W/C) = {:.2R}", OutWaterTempAtUA1));
                     ShowFatalError("Autosizing of Fluid Cooler UA failed for fluid cooler = " + this->Name);
                 }
                 if (DataPlant::PlantFirstSizesOkayToFinalize) this->LowSpeedFluidCoolerUA = UA;
@@ -1772,8 +1772,8 @@ namespace FluidCoolers {
             if (this->HighMassFlowErrorCount < 2) {
                 ShowWarningError(this->FluidCoolerType + " \"" + this->Name + "\"");
                 ShowContinueError(" Condenser Loop Mass Flow Rate is much greater than the fluid coolers design mass flow rate.");
-                ShowContinueError(" Condenser Loop Mass Flow Rate = " + format("{:.6T}", DataLoopNode::Node(waterOutletNode).MassFlowRate));
-                ShowContinueError(" Fluid Cooler Design Mass Flow Rate   = " + format("{:.6T}", this->DesWaterMassFlowRate));
+                ShowContinueError(format(" Condenser Loop Mass Flow Rate = {:.6T}", DataLoopNode::Node(waterOutletNode).MassFlowRate));
+                ShowContinueError(format(" Fluid Cooler Design Mass Flow Rate   = {:.6T}", this->DesWaterMassFlowRate));
                 ShowContinueErrorTimeStamp("");
             } else {
                 ShowRecurringWarningErrorAtEnd(
@@ -1814,7 +1814,7 @@ namespace FluidCoolers {
                 ShowWarningError(this->FluidCoolerType + " \"" + this->Name + "\"");
                 ShowContinueError(" Fluid cooler water mass flow rate near zero.");
                 ShowContinueErrorTimeStamp("");
-                ShowContinueError("Actual Mass flow = " + format("{:.2T}", this->WaterMassFlowRate));
+                ShowContinueError(format("Actual Mass flow = {:.2T}", this->WaterMassFlowRate));
             } else {
                 ShowRecurringWarningErrorAtEnd(this->FluidCoolerType + " \"" + this->Name +
                                                    "\" Fluid cooler water mass flow rate near zero error continues...",

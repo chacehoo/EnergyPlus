@@ -1671,8 +1671,8 @@ namespace EnergyPlus {
                 // Issue a severe if Inner >= Outer diameter
                 if (thisCircuit.PipeSize.InnerDia >= thisCircuit.PipeSize.OuterDia) {
                     ShowSevereError(RoutineName + ": " + ObjName_HorizTrench + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\" has invalid pipe diameters.");
-                    ShowContinueError("Outer diameter [" + format("{:.3T}", thisCircuit.PipeSize.OuterDia)
-                            + "] must be greater than inner diameter [" + format("{:.3T}", thisCircuit.PipeSize.InnerDia) + "].");
+                    ShowContinueError(format("Outer diameter [{:.3T}", thisCircuit.PipeSize.OuterDia)
+                            + format("] must be greater than inner diameter [{:.3T}", thisCircuit.PipeSize.InnerDia) + "].");
                     ErrorsFound = true;
                 }
 

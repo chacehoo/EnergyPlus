@@ -144,7 +144,7 @@ void CoilCoolingDXCurveFitSpeed::instantiateFromInputSpec(EnergyPlus::EnergyPlus
             ShowContinueError("Waste Heat Modifier Function of Temperature Curve Name = " + input_data.waste_heat_function_of_temperature_curve_name);
             ShowContinueError(
                 "...Waste Heat Modifier Function of Temperature Curve Name output is not equal to 1.0 (+ or - 10%) at rated conditions.");
-            ShowContinueError("...Curve output at rated conditions = " + format("{:.3T}", CurveVal));
+            ShowContinueError(format("...Curve output at rated conditions = {:.3T}", CurveVal));
         }
     }
 
@@ -174,7 +174,7 @@ void CoilCoolingDXCurveFitSpeed::instantiateFromInputSpec(EnergyPlus::EnergyPlus
         if (MinCurveVal < 0.7) {
             ShowWarningError(routineName + this->object_name + "=\"" + this->name + "\", invalid");
             ShowContinueError("..." + fieldName + "=\"" + curveName + "\" has out of range values.");
-            ShowContinueError("...Curve minimum must be >= 0.7, curve min at PLR = " + format("{:.2T}", MinCurvePLR) + " is " +
+            ShowContinueError(format("...Curve minimum must be >= 0.7, curve min at PLR = {:.2T}", MinCurvePLR) + " is " +
                               format("{:.3T}", MinCurveVal));
             ShowContinueError("...Setting curve minimum to 0.7 and simulation continues.");
             CurveManager::SetCurveOutputMinMaxValues(state, this->indexPLRFPLF, errorsFound, 0.7, _);
@@ -183,7 +183,7 @@ void CoilCoolingDXCurveFitSpeed::instantiateFromInputSpec(EnergyPlus::EnergyPlus
         if (MaxCurveVal > 1.0) {
             ShowWarningError(routineName + this->object_name + "=\"" + this->name + "\", invalid");
             ShowContinueError("..." + fieldName + " = " + curveName + " has out of range value.");
-            ShowContinueError("...Curve maximum must be <= 1.0, curve max at PLR = " + format("{:.2T}", MaxCurvePLR) + " is " +
+            ShowContinueError(format("...Curve maximum must be <= 1.0, curve max at PLR = {:.2T}", MaxCurvePLR) + " is " +
                               format("{:.3T}", MaxCurveVal));
             ShowContinueError("...Setting curve maximum to 1.0 and simulation continues.");
             CurveManager::SetCurveOutputMinMaxValues(state, this->indexPLRFPLF, errorsFound, _, 1.0);
@@ -418,7 +418,7 @@ void CoilCoolingDXCurveFitSpeed::CalcSpeedOutput(EnergyPlus::EnergyPlusData &sta
         A0 = -std::log(RatedCBF) * RatedAirMassFlowRate;
     } else {
         // This is bad - results in CBF = 1.0 which results in divide by zero below: hADP = inletState.h - hDelta / (1.0 - CBF)
-        ShowFatalError(RoutineName + "Rated CBF=" + format("{:.6R}", RatedCBF) + " is <= 0.0 for " + object_name + "=" + name);
+        ShowFatalError(RoutineName + format("Rated CBF={:.6R}", RatedCBF) + " is <= 0.0 for " + object_name + "=" + name);
         A0 = 0.0;
     }
     Real64 ADiff = -A0 / AirMassFlow;
@@ -556,8 +556,8 @@ Real64 CoilCoolingDXCurveFitSpeed::CalcBypassFactor(Real64 tdb, Real64 w, Real64
             Real64 adjustedSHR = (Psychrometrics::PsyHFnTdbW(tdb, outw) - outh) / deltaH;
             ShowWarningError(RoutineName + object_name + " \"" + name +
                              "\", SHR adjusted to achieve valid outlet air properties and the simulation continues.");
-            ShowContinueError("Initial SHR = " + format("{:.5R}", this->grossRatedSHR));
-            ShowContinueError("Adjusted SHR = " + format("{:.5R}", adjustedSHR));
+            ShowContinueError(format("Initial SHR = {:.5R}", this->grossRatedSHR));
+            ShowContinueError(format("Adjusted SHR = {:.5R}", adjustedSHR));
         }
     }
 
@@ -578,7 +578,7 @@ Real64 CoilCoolingDXCurveFitSpeed::CalcBypassFactor(Real64 tdb, Real64 w, Real64
     if (slopeAtConds <= 0.0) {
         // TODO: old dx coil protects against slopeAtConds < 0, but no = 0 - not sure why, 'cause that'll cause divide by zero
         ShowSevereError(RoutineName + object_name + " \"" + name + "\" -- coil bypass factor calculation invalid input conditions.");
-        ShowContinueError("deltaT = " + format("{:.3R}", deltaT) + " and deltaHumRat = " + format("{:.3R}", deltaHumRat));
+        ShowContinueError(format("deltaT = {:.3R}", deltaT) + format(" and deltaHumRat = {:.3R}", deltaHumRat));
         ShowFatalError("Errors found in calculating coil bypass factors");
     }
 
@@ -611,7 +611,7 @@ Real64 CoilCoolingDXCurveFitSpeed::CalcBypassFactor(Real64 tdb, Real64 w, Real64
 
     if (iter > maxIter) {
         ShowSevereError(RoutineName + object_name + " \"" + name + "\" -- coil bypass factor calculation did not converge after max iterations.");
-        ShowContinueError("The RatedSHR of [" + format("{:.3R}", this->grossRatedSHR) +
+        ShowContinueError(format("The RatedSHR of [{:.3R}", this->grossRatedSHR) +
                           "], entered by the user or autosized (see *.eio file),");
         ShowContinueError("may be causing this. The line defined by the coil rated inlet air conditions");
         ShowContinueError("(26.7C drybulb and 19.4C wetbulb) and the RatedSHR (i.e., slope of the line) must intersect");

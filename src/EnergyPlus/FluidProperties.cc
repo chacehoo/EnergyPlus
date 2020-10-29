@@ -1437,7 +1437,7 @@ namespace FluidProperties {
                     ++NumOfPressPts;
                     if (Numbers(1) <= 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + " Name=" + RefrigData(Loop).Name);
-                        ShowContinueError("Negative pressures not allowed in fluid property input data, Value =[" + format("{:.3R}", Numbers(1)) +
+                        ShowContinueError(format("Negative pressures not allowed in fluid property input data, Value =[{:.3R}", Numbers(1)) +
                                           "].");
                         ErrorsFound = true;
                     }
@@ -1483,7 +1483,7 @@ namespace FluidProperties {
                         ShowContinueError("Pressures must be entered in ascending order for fluid property data");
                         ShowContinueError("First Occurrence at Pressure(" + fmt::to_string(InData - 1) + ") {" +
                                           format("{:.3R}", RefrigData(Loop).SHPress(InData - 1)) + "} >= Pressure(" + fmt::to_string(InData) +
-                                          ") {" + format("{:.3R}", RefrigData(Loop).SHPress(InData)) + '}');
+                                          format(") {{:.3R}", RefrigData(Loop).SHPress(InData)) + '}');
                         ErrorsFound = true;
                         break;
                     }
@@ -1524,7 +1524,7 @@ namespace FluidProperties {
                     ++NumOfPressPts;
                     if (Numbers(1) <= 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + " Name=" + RefrigData(Loop).Name);
-                        ShowContinueError("Negative pressures not allowed in fluid property input data, Value =[" + format("{:.3R}", Numbers(1)) +
+                        ShowContinueError(format("Negative pressures not allowed in fluid property input data, Value =[{:.3R}", Numbers(1)) +
                                           "].");
                         ErrorsFound = true;
                     }
@@ -1605,7 +1605,7 @@ namespace FluidProperties {
                         ShowWarningError(RoutineName + CurrentModuleObject + " Name=" + RefrigData(Loop).Name);
                         ShowContinueError(cAlphaFieldNames(2) + "=\"" + Alphas(2) + "\" is not valid.");
                         ShowContinueError("Valid choices are \"" + Enthalpy + "\", \"" + Density + "\".");
-                        ShowContinueError("Pressure value of this item=[" + format("{:.2R}", Numbers(1)) + "].");
+                        ShowContinueError(format("Pressure value of this item=[{:.2R}", Numbers(1)) + "].");
                         ShowContinueError("This fluid property will not be processed nor available for the simulation.");
                     }
                     ++iTemp;
@@ -4892,13 +4892,13 @@ CurrentModuleObject,
         // Then, interpolate if necessary.
         if (Concentration < RawConcData(1)) { // Concentration too low
             ShowWarningError(RoutineName +
-                             "Glycol concentration out of range for data (too low), concentration = " + format("{:.3R}", Concentration));
+                             format("Glycol concentration out of range for data (too low), concentration = {:.3R}", Concentration));
             ShowContinueError("Check your data or the definition of your glycols in the GlycolConcentrations input");
             ShowContinueError("Property data set to data for lowest concentration entered");
             InterpData = RawPropData(_, 1);
         } else if (Concentration > RawConcData(NumOfConcs)) { // Concentration too high
             ShowWarningError(RoutineName +
-                             "Glycol concentration out of range for data (too high), concentration = " + format("{:.3R}", Concentration));
+                             format("Glycol concentration out of range for data (too high), concentration = {:.3R}", Concentration));
             ShowContinueError("Check your data or the definition of your glycols in the GlycolConcentrations input");
             ShowContinueError("Property data set to data for highest concentration entered");
             InterpData = RawPropData(_, NumOfConcs);
@@ -4996,13 +4996,13 @@ CurrentModuleObject,
         // Then, interpolate if necessary.
         if (Concentration < RawConcData(1)) { // Concentration too low
             ShowWarningError(RoutineName +
-                             "Glycol concentration out of range for data (too low), concentration = " + format("{:.3R}", Concentration));
+                             format("Glycol concentration out of range for data (too low), concentration = {:.3R}", Concentration));
             ShowContinueError("Check your data or the definition of your glycols in the GlycolConcentrations input");
             ShowContinueError("Property data set to data for lowest concentration entered");
             InterpData = RawPropData(1, _);
         } else if (Concentration > RawConcData(NumOfConcs)) { // Concentration too high
             ShowWarningError(RoutineName +
-                             "Glycol concentration out of range for data (too high), concentration = " + format("{:.3R}", Concentration));
+                             format("Glycol concentration out of range for data (too high), concentration = {:.3R}", Concentration));
             ShowContinueError("Check your data or the definition of your glycols in the GlycolConcentrations input");
             ShowContinueError("Property data set to data for highest concentration entered");
             InterpData = RawPropData(NumOfConcs, _);
@@ -6069,8 +6069,8 @@ CurrentModuleObject,
                 ShowContinueError("...Called From:" + CalledFrom + ", supplied data range=[" +
                                   format("{:.2R}", refrig.PsTemps(refrig.PsLowTempIndex)) + ',' +
                                   format("{:.2R}", refrig.PsTemps(refrig.PsHighTempIndex)) + ']');
-                ShowContinueError("...Supplied Refrigerant Temperature=" + format("{:.2R}", Temperature) +
-                                  " Returned saturated pressure value = " + format("{:.0R}", ReturnValue));
+                ShowContinueError(format("...Supplied Refrigerant Temperature={:.2R}", Temperature) +
+                                  format(" Returned saturated pressure value = {:.0R}", ReturnValue));
                 ShowContinueErrorTimeStamp("");
             }
             ShowRecurringSevereErrorAtEnd(RoutineName + "Saturation temperature is out of range for refrigerant [" +
@@ -6191,8 +6191,8 @@ CurrentModuleObject,
                 ShowContinueError("...Called From:" + CalledFrom + ", supplied data range=[" +
                                   format("{:.0R}", refrig.PsValues(refrig.PsLowPresIndex)) + ',' +
                                   format("{:.0R}", refrig.PsValues(refrig.PsHighPresIndex)) + ']');
-                ShowContinueError("...Supplied Refrigerant Pressure=" + format("{:.0R}", Pressure) +
-                                  " Returned saturated temperature value =" + format("{:.2R}", ReturnValue));
+                ShowContinueError(format("...Supplied Refrigerant Pressure={:.0R}", Pressure) +
+                                  format(" Returned saturated temperature value ={:.2R}", ReturnValue));
                 ShowContinueErrorTimeStamp("");
             }
             ShowRecurringSevereErrorAtEnd(RoutineName + "Saturation pressure is out of range for refrigerant [" +
@@ -6269,7 +6269,7 @@ CurrentModuleObject,
 
         if ((Quality < 0.0) || (Quality > 1.0)) {
             ShowSevereError(RoutineName + ": Refrigerant \"" + Refrigerant + "\", invalid quality, called from " + CalledFrom);
-            ShowContinueError("Saturated refrigerant quality must be between 0 and 1, entered value=[" + format("{:.4R}", Quality) + "].");
+            ShowContinueError(format("Saturated refrigerant quality must be between 0 and 1, entered value=[{:.4R}", Quality) + "].");
             ShowFatalError("Program terminates due to preceding condition.");
         }
 
@@ -6362,7 +6362,7 @@ CurrentModuleObject,
 
         if ((Quality < 0.0) || (Quality > 1.0)) {
             ShowSevereError(RoutineName + "Refrigerant \"" + Refrigerant + "\", invalid quality, called from " + CalledFrom);
-            ShowContinueError("Saturated density quality must be between 0 and 1, entered value=[" + format("{:.4R}", Quality) + "].");
+            ShowContinueError(format("Saturated density quality must be between 0 and 1, entered value=[{:.4R}", Quality) + "].");
             ShowFatalError("Program terminates due to preceding condition.");
         }
 
@@ -6430,8 +6430,8 @@ CurrentModuleObject,
                 ShowContinueError("...Called From:" + CalledFrom + ", supplied data range=[" +
                                   format("{:.2R}", refrig.RhoTemps(refrig.RhofLowTempIndex)) + ',' +
                                   format("{:.2R}", refrig.RhoTemps(refrig.RhofHighTempIndex)) + ']');
-                ShowContinueError("...Supplied Refrigerant Temperature=" + format("{:.2R}", Temperature) +
-                                  " Returned saturated density value =" + format("{:.2R}", ReturnValue));
+                ShowContinueError(format("...Supplied Refrigerant Temperature={:.2R}", Temperature) +
+                                  format(" Returned saturated density value ={:.2R}", ReturnValue));
                 ShowContinueErrorTimeStamp("");
             }
             ShowRecurringSevereErrorAtEnd(RoutineName + "Saturation temperature is out of range for refrigerant [" +
@@ -6509,7 +6509,7 @@ CurrentModuleObject,
 
         if ((Quality < 0.0) || (Quality > 1.0)) {
             ShowSevereError(RoutineName + "Refrigerant \"" + Refrigerant + "\", invalid quality, called from " + CalledFrom);
-            ShowContinueError("Saturated density quality must be between 0 and 1, entered value=[" + format("{:.4R}", Quality) + "].");
+            ShowContinueError(format("Saturated density quality must be between 0 and 1, entered value=[{:.4R}", Quality) + "].");
             ShowFatalError("Program terminates due to preceding condition.");
         }
 
@@ -6726,9 +6726,9 @@ CurrentModuleObject,
                     ShowWarningMessage(RoutineName + "Refrigerant [" + RefrigErrorTracking(RefrigNum).Name +
                                        "] is saturated at the given conditions, saturated enthalpy at given temperature returned. **");
                     ShowContinueError("...Called From:" + CalledFrom);
-                    ShowContinueError("Refrigerant temperature = " + format("{:.2R}", Temperature));
-                    ShowContinueError("Refrigerant pressure = " + format("{:.0R}", Pressure));
-                    ShowContinueError("Returned Enthalpy value = " + format("{:.3R}", ReturnValue));
+                    ShowContinueError(format("Refrigerant temperature = {:.2R}", Temperature));
+                    ShowContinueError(format("Refrigerant pressure = {:.0R}", Pressure));
+                    ShowContinueError(format("Returned Enthalpy value = {:.3R}", ReturnValue));
                     ShowContinueErrorTimeStamp("");
                 }
                 ShowRecurringWarningErrorAtEnd(RoutineName + "Refrigerant [" + RefrigErrorTracking(RefrigNum).Name +
@@ -7033,9 +7033,9 @@ CurrentModuleObject,
                     ShowSevereMessage(RoutineName + "Refrigerant [" + RefrigErrorTracking(RefrigNum).Name +
                                       "] is saturated at the given enthalpy and temperature, saturated enthalpy at given temperature returned. **");
                     ShowContinueError("...Called From:" + CalledFrom);
-                    ShowContinueError("Refrigerant temperature = " + format("{:.2R}", Temperature));
-                    ShowContinueError("Refrigerant Enthalpy = " + format("{:.3R}", Enthalpy));
-                    ShowContinueError("Returned Pressure value = " + format("{:.0R}", ReturnValue));
+                    ShowContinueError(format("Refrigerant temperature = {:.2R}", Temperature));
+                    ShowContinueError(format("Refrigerant Enthalpy = {:.3R}", Enthalpy));
+                    ShowContinueError(format("Returned Pressure value = {:.0R}", ReturnValue));
                     ShowContinueErrorTimeStamp("");
                 }
                 if (CurSatErrCount > 0) {
@@ -7471,9 +7471,9 @@ CurrentModuleObject,
                 ShowWarningMessage(RoutineName + ": Refrigerant [" + RefrigErrorTracking(RefrigNum).Name +
                                    "] is saturated at the given conditions, saturated density at given temperature returned. **");
                 ShowContinueError("...Called From:" + CalledFrom);
-                ShowContinueError("Refrigerant temperature = " + format("{:.2R}", Temperature));
-                ShowContinueError("Refrigerant pressure = " + format("{:.0R}", Pressure));
-                ShowContinueError("Returned Density value = " + format("{:.3R}", saturated_density));
+                ShowContinueError(format("Refrigerant temperature = {:.2R}", Temperature));
+                ShowContinueError(format("Refrigerant pressure = {:.0R}", Pressure));
+                ShowContinueError(format("Returned Density value = {:.3R}", saturated_density));
                 ShowContinueErrorTimeStamp("");
             }
             if (SatErrCount > 0) {
@@ -7628,7 +7628,7 @@ CurrentModuleObject,
                 if (LowTempLimitErr <= GlycolErrorLimitTest) {
                     ShowWarningMessage(RoutineName + "Temperature is out of range (too low) for fluid [" + glycol_data.Name +
                                        "] specific heat supplied values **");
-                    ShowContinueError("..Called From:" + CalledFrom + ",Temperature=[" + format("{:.2R}", Temperature) + "], supplied data range=[" +
+                    ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}", Temperature) + "], supplied data range=[" +
                                       format("{:.2R}", glycol_data.CpLowTempValue) + ',' + format("{:.2R}", glycol_data.CpHighTempValue) + ']');
                     ShowContinueErrorTimeStamp("");
                 }
@@ -7647,7 +7647,7 @@ CurrentModuleObject,
                 HighTempLimitErr = ++GlycolErrorTracking(GlycolIndex).SpecHeatHighErrCount;
                 if (HighTempLimitErr <= GlycolErrorLimitTest) {
                     ShowWarningMessage(RoutineName + "Temperature is out of range (too high) for fluid [" + glycol_data.Name + "] specific heat **");
-                    ShowContinueError("..Called From:" + CalledFrom + ",Temperature=[" + format("{:.2R}", Temperature) + "], supplied data range=[" +
+                    ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}", Temperature) + "], supplied data range=[" +
                                       format("{:.2R}", glycol_data.CpLowTempValue) + ',' + format("{:.2R}", glycol_data.CpHighTempValue) + ']');
                     ShowContinueErrorTimeStamp("");
                 }
@@ -7807,7 +7807,7 @@ CurrentModuleObject,
 
             if ((LowErrorThisTime) && (LowTempLimitErr <= GlycolErrorLimitTest)) {
                 ShowWarningMessage(RoutineName + "Temperature is out of range (too low) for fluid [" + GlycolData(GlycolIndex).Name + "] density **");
-                ShowContinueError("..Called From:" + CalledFrom + ",Temperature=[" + format("{:.2R}", Temperature) + "], supplied data range=[" +
+                ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}", Temperature) + "], supplied data range=[" +
                                   format("{:.2R}", GlycolData(GlycolIndex).RhoLowTempValue) + ',' +
                                   format("{:.2R}", GlycolData(GlycolIndex).RhoHighTempValue) + ']');
                 ShowContinueErrorTimeStamp("");
@@ -7826,7 +7826,7 @@ CurrentModuleObject,
             if ((HighErrorThisTime) && (HighTempLimitErr <= GlycolErrorLimitTest)) {
                 ShowWarningMessage(RoutineName + "Temperature is out of range (too high) for fluid [" + GlycolData(GlycolIndex).Name +
                                    "] density **");
-                ShowContinueError("..Called From:" + CalledFrom + ",Temperature=[" + format("{:.2R}", Temperature) + "], supplied data range=[" +
+                ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}", Temperature) + "], supplied data range=[" +
                                   format("{:.2R}", GlycolData(GlycolIndex).RhoLowTempValue) + ',' +
                                   format("{:.2R}", GlycolData(GlycolIndex).RhoHighTempValue) + ']');
                 ShowContinueErrorTimeStamp("");
@@ -7971,7 +7971,7 @@ CurrentModuleObject,
             if ((LowErrorThisTime) && (LowTempLimitErr <= GlycolErrorLimitTest)) {
                 ShowWarningMessage(RoutineName + "Temperature is out of range (too low) for fluid [" + GlycolData(GlycolIndex).Name +
                                    "] conductivity **");
-                ShowContinueError("..Called From:" + CalledFrom + ",Temperature=[" + format("{:.2R}", Temperature) + "], supplied data range=[" +
+                ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}", Temperature) + "], supplied data range=[" +
                                   format("{:.2R}", GlycolData(GlycolIndex).CondLowTempValue) + ',' +
                                   format("{:.2R}", GlycolData(GlycolIndex).CondHighTempValue) + ']');
                 ShowContinueErrorTimeStamp("");
@@ -7990,7 +7990,7 @@ CurrentModuleObject,
             if ((HighErrorThisTime) && (HighTempLimitErr <= GlycolErrorLimitTest)) {
                 ShowWarningMessage(RoutineName + "Temperature is out of range (too high) for fluid [" + GlycolData(GlycolIndex).Name +
                                    "] conductivity **");
-                ShowContinueError("..Called From:" + CalledFrom + ",Temperature=[" + format("{:.2R}", Temperature) + "], supplied data range=[" +
+                ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}", Temperature) + "], supplied data range=[" +
                                   format("{:.2R}", GlycolData(GlycolIndex).CondLowTempValue) + ',' +
                                   format("{:.2R}", GlycolData(GlycolIndex).CondHighTempValue) + ']');
                 ShowContinueErrorTimeStamp("");
@@ -8135,7 +8135,7 @@ CurrentModuleObject,
             if ((LowErrorThisTime) && (LowTempLimitErr <= GlycolErrorLimitTest)) {
                 ShowWarningMessage(RoutineName + "Temperature is out of range (too low) for fluid [" + GlycolData(GlycolIndex).Name +
                                    "] viscosity **");
-                ShowContinueError("..Called From:" + CalledFrom + ",Temperature=[" + format("{:.2R}", Temperature) + "], supplied data range=[" +
+                ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}", Temperature) + "], supplied data range=[" +
                                   format("{:.2R}", GlycolData(GlycolIndex).ViscLowTempValue) + ',' +
                                   format("{:.2R}", GlycolData(GlycolIndex).ViscHighTempValue) + ']');
                 ShowContinueErrorTimeStamp("");
@@ -8154,7 +8154,7 @@ CurrentModuleObject,
             if ((HighErrorThisTime) && (HighTempLimitErr <= GlycolErrorLimitTest)) {
                 ShowWarningMessage(RoutineName + "Temperature is out of range (too high) for fluid [" + GlycolData(GlycolIndex).Name +
                                    "] viscosity **");
-                ShowContinueError("..Called From:" + CalledFrom + ",Temperature=[" + format("{:.2R}", Temperature) + "], supplied data range=[" +
+                ShowContinueError("..Called From:" + CalledFrom + format(",Temperature=[{:.2R}", Temperature) + "], supplied data range=[" +
                                   format("{:.2R}", GlycolData(GlycolIndex).ViscLowTempValue) + ',' +
                                   format("{:.2R}", GlycolData(GlycolIndex).ViscHighTempValue) + ']');
                 ShowContinueErrorTimeStamp("");
@@ -8663,8 +8663,8 @@ CurrentModuleObject,
             if (TempRangeErrCount <= RefrigerantErrorLimitTest) {
                 ShowWarningError("GetInterpolatedSatProp: Saturation temperature for interpolation is out of range of data supplied: **");
                 ShowContinueErrorTimeStamp(" Called from:" + CalledFrom);
-                ShowContinueError("Refrigerant temperature = " + format("{:.2R}", Temperature));
-                ShowContinueError("Returned saturated property value = " + format("{:.3R}", ReturnValue));
+                ShowContinueError(format("Refrigerant temperature = {:.2R}", Temperature));
+                ShowContinueError(format("Returned saturated property value = {:.3R}", ReturnValue));
             } else {
                 ShowRecurringWarningErrorAtEnd("GetInterpolatedSatProp: Refrigerant temperature for interpolation out of range error",
                                                TempRangeErrIndex,

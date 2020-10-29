@@ -434,7 +434,7 @@ namespace DaylightingDevices {
                 if (Shelf(ShelfNum).ViewFactor + Surface(WinSurf).ViewFactorSky + Surface(WinSurf).ViewFactorGround > 1.0) {
                     ShowWarningError("DaylightingDevice:Shelf = " + Shelf(ShelfNum).Name + ":  Window view factors to sky [" +
                                      format("{:.2R}", Surface(WinSurf).ViewFactorSky) + "],");
-                    ShowContinueError("ground [" + format("{:.2R}", Surface(WinSurf).ViewFactorGround) + "], and outside shelf [" +
+                    ShowContinueError(format("ground [{:.2R}", Surface(WinSurf).ViewFactorGround) + "], and outside shelf [" +
                                       format("{:.2R}", Shelf(ShelfNum).ViewFactor) + "] add up to > 1.0.");
                 }
 
@@ -613,12 +613,12 @@ namespace DaylightingDevices {
                             0.1) { // greater than 10%
                             ShowSevereError(cCurrentModuleObject + " = " + cAlphaArgs(1) +
                                             ":  Dome and diffuser areas are significantly different (>10%).");
-                            ShowContinueError("...Diffuser Area=[" + format("{:.4R}", Surface(SurfNum).Area) + "]; Dome Area=[" +
+                            ShowContinueError(format("...Diffuser Area=[{:.4R}", Surface(SurfNum).Area) + "]; Dome Area=[" +
                                               format("{:.4R}", Surface(TDDPipe(PipeNum).Dome).Area) + "].");
                             ErrorsFound = true;
                         } else {
                             ShowWarningError(cCurrentModuleObject + " = " + cAlphaArgs(1) + ":  Dome and diffuser areas differ by > .1 m2.");
-                            ShowContinueError("...Diffuser Area=[" + format("{:.4R}", Surface(SurfNum).Area) + "]; Dome Area=[" +
+                            ShowContinueError(format("...Diffuser Area=[{:.4R}", Surface(SurfNum).Area) + "]; Dome Area=[" +
                                               format("{:.4R}", Surface(TDDPipe(PipeNum).Dome).Area) + "].");
                         }
                     }
@@ -670,12 +670,12 @@ namespace DaylightingDevices {
                         0.1) { // greater than 10%
                         ShowSevereError(cCurrentModuleObject + " = " + cAlphaArgs(1) +
                                         ":  Pipe and dome/diffuser areas are significantly different (>10%).");
-                        ShowContinueError("...Pipe Area=[" + format("{:.4R}", PipeArea) + "]; Dome/Diffuser Area=[" +
+                        ShowContinueError(format("...Pipe Area=[{:.4R}", PipeArea) + "]; Dome/Diffuser Area=[" +
                                           format("{:.4R}", Surface(TDDPipe(PipeNum).Dome).Area) + "].");
                         ErrorsFound = true;
                     } else {
                         ShowWarningError(cCurrentModuleObject + " = " + cAlphaArgs(1) + ":  Pipe and dome/diffuser areas differ by > .1 m2.");
-                        ShowContinueError("...Pipe Area=[" + format("{:.4R}", PipeArea) + "]; Dome/Diffuser Area=[" +
+                        ShowContinueError(format("...Pipe Area=[{:.4R}", PipeArea) + "]; Dome/Diffuser Area=[" +
                                           format("{:.4R}", Surface(TDDPipe(PipeNum).Dome).Area) + "].");
                     }
                 }

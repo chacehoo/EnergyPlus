@@ -392,7 +392,7 @@ namespace DataEnvironment {
 
         if (LocalOutDryBulbTemp < -100.0) {
             ShowSevereError("OutDryBulbTempAt: outdoor drybulb temperature < -100 C");
-            ShowContinueError("...check heights, this height=[" + format("{:.0R}", Z) + "].");
+            ShowContinueError(format("...check heights, this height=[{:.0R}", Z) + "].");
             ShowFatalError("Program terminates due to preceding condition(s).");
         }
 
@@ -441,7 +441,7 @@ namespace DataEnvironment {
 
         if (LocalOutWetBulbTemp < -100.0) {
             ShowSevereError("OutWetBulbTempAt: outdoor wetbulb temperature < -100 C");
-            ShowContinueError("...check heights, this height=[" + format("{:.0R}", Z) + "].");
+            ShowContinueError(format("...check heights, this height=[{:.0R}", Z) + "].");
             ShowFatalError("Program terminates due to preceding condition(s).");
         }
 
@@ -491,7 +491,7 @@ namespace DataEnvironment {
 
         if (LocalOutDewPointTemp < -100.0) {
             ShowSevereError("OutDewPointTempAt: outdoor dewpoint temperature < -100 C");
-            ShowContinueError("...check heights, this height=[" + format("{:.0R}", Z) + "].");
+            ShowContinueError(format("...check heights, this height=[{:.0R}", Z) + "].");
             ShowFatalError("Program terminates due to preceding condition(s).");
         }
 
@@ -591,7 +591,7 @@ namespace DataEnvironment {
 
 
         ShowSevereError("SetOutBulbTempAt: " + Settings + " Outdoor Temperatures < -100 C");
-        ShowContinueError("...check " + Settings + " Heights - Maximum " + Settings + " Height=[" + format("{:.0R}", max_height) + "].");
+        ShowContinueError("...check " + Settings + " Heights - Maximum " + Settings + format(" Height=[{:.0R}", max_height) + "].");
         if (max_height >= 20000.0) {
             ShowContinueError("...according to your maximum Z height, your building is somewhere in the Stratosphere.");
             ShowContinueError("...look at " + Settings + " Name= " + SettingsName);

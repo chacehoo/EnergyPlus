@@ -641,8 +641,8 @@ namespace EIRPlantLoopHeatPumps {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpCapacity - hardSizedCapacity) / hardSizedCapacity) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowWarningMessage("EIRPlantLoopHeatPump::size(): Potential issue with equipment sizing for " + this->name);
-                                    ShowContinueError("User-Specified Nominal Capacity of " + format("{:.2R}", hardSizedCapacity) + " [W]");
-                                    ShowContinueError("differs from Design Size Nominal Capacity of " + format("{:.2R}", tmpCapacity) +
+                                    ShowContinueError(format("User-Specified Nominal Capacity of {:.2R}", hardSizedCapacity) + " [W]");
+                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R}", tmpCapacity) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");

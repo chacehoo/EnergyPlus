@@ -169,10 +169,10 @@ Real64 ASHRAEMinSATCoolingSizer::size(EnergyPlusData &EP_UNUSED(state), Real64 _
                 this->addErrorMessage(msg);
                 ShowSevereError(msg);
                 msg = "SizingString = " + this->sizingString +
-                      ", DataCapacityUsedForSizing = " + format("{:.1T}", this->dataCapacityUsedForSizing);
+                      format(", DataCapacityUsedForSizing = {:.1T}", this->dataCapacityUsedForSizing);
                 this->addErrorMessage(msg);
                 ShowContinueError(msg);
-                msg = "SizingString = " + this->sizingString + ", DataFlowUsedForSizing = " + format("{:.1T}", this->dataFlowUsedForSizing);
+                msg = "SizingString = " + this->sizingString + format(", DataFlowUsedForSizing = {:.1T}", this->dataFlowUsedForSizing);
                 this->addErrorMessage(msg);
                 ShowContinueError(msg);
             }
@@ -193,14 +193,14 @@ Real64 ASHRAEMinSATCoolingSizer::size(EnergyPlusData &EP_UNUSED(state), Real64 _
                 this->addErrorMessage(msg);
                 ShowSevereError(msg);
                 msg = "SizingString = " + this->sizingString +
-                      ", DataCapacityUsedForSizing = " + format("{:.1T}", this->dataCapacityUsedForSizing);
+                      format(", DataCapacityUsedForSizing = {:.1T}", this->dataCapacityUsedForSizing);
                 this->addErrorMessage(msg);
                 ShowContinueError(msg);
-                msg = "SizingString = " + this->sizingString + ", DataFlowUsedForSizing = " + format("{:.1T}", this->dataFlowUsedForSizing);
+                msg = "SizingString = " + this->sizingString + format(", DataFlowUsedForSizing = {:.1T}", this->dataFlowUsedForSizing);
                 this->addErrorMessage(msg);
                 ShowContinueError(msg);
                 msg = "SizingString = " + this->sizingString +
-                      ", DataZoneUsedForSizing = " + format("{:.0T}", Real64(this->dataZoneUsedForSizing));
+                      format(", DataZoneUsedForSizing = {:.0T}", Real64(this->dataZoneUsedForSizing));
                 ShowContinueError(msg);
             }
         }
@@ -231,10 +231,10 @@ Real64 ASHRAEMaxSATHeatingSizer::size(EnergyPlusData &EP_UNUSED(state), Real64 _
                 this->addErrorMessage(msg);
                 ShowSevereError(msg);
                 msg = "SizingString = " + this->sizingString +
-                      ", DataCapacityUsedForSizing = " + format("{:.1T}", this->dataCapacityUsedForSizing);
+                      format(", DataCapacityUsedForSizing = {:.1T}", this->dataCapacityUsedForSizing);
                 this->addErrorMessage(msg);
                 ShowContinueError(msg);
-                msg = "SizingString = " + this->sizingString + ", DataFlowUsedForSizing = " + format("{:.1T}", this->dataFlowUsedForSizing);
+                msg = "SizingString = " + this->sizingString + format(", DataFlowUsedForSizing = {:.1T}", this->dataFlowUsedForSizing);
                 this->addErrorMessage(msg);
                 ShowContinueError(msg);
             }
@@ -255,14 +255,14 @@ Real64 ASHRAEMaxSATHeatingSizer::size(EnergyPlusData &EP_UNUSED(state), Real64 _
                 this->addErrorMessage(msg);
                 ShowSevereError(msg);
                 msg = "SizingString = " + this->sizingString +
-                      ", DataCapacityUsedForSizing = " + format("{:.1T}", this->dataCapacityUsedForSizing);
+                      format(", DataCapacityUsedForSizing = {:.1T}", this->dataCapacityUsedForSizing);
                 this->addErrorMessage(msg);
                 ShowContinueError(msg);
-                msg = "SizingString = " + this->sizingString + ", DataFlowUsedForSizing = " + format("{:.1T}", this->dataFlowUsedForSizing);
+                msg = "SizingString = " + this->sizingString + format(", DataFlowUsedForSizing = {:.1T}", this->dataFlowUsedForSizing);
                 this->addErrorMessage(msg);
                 ShowContinueError(msg);
                 msg = "SizingString = " + this->sizingString +
-                      ", DataZoneUsedForSizing = " + format("{:.0T}", Real64(this->dataZoneUsedForSizing));
+                      format(", DataZoneUsedForSizing = {:.0T}", Real64(this->dataZoneUsedForSizing));
                 ShowContinueError(msg);
             }
         }

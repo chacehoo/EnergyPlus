@@ -1415,7 +1415,7 @@ namespace WaterToAirHeatPump {
                     if (LoadSidePressure < LowPressCutoff && !FirstHVACIteration) {
                         if (!WarmupFlag) {
                             ShowRecurringWarningErrorAtEnd("WaterToAir Heat pump:cooling [" + state.dataWaterToAirHeatPump->WatertoAirHP(HPNum).Name +
-                                                               "] shut off on low pressure < " + format("{:.0R}", LowPressCutoff),
+                                                               format("] shut off on low pressure < {:.0R}", LowPressCutoff),
                                                            state.dataWaterToAirHeatPump->WatertoAirHP(HPNum).LowPressClgError,
                                                            LoadSidePressure,
                                                            LoadSidePressure,
@@ -1430,7 +1430,7 @@ namespace WaterToAirHeatPump {
                     if (SourceSidePressure > HighPressCutoff && !FirstHVACIteration) {
                         if (!WarmupFlag) {
                             ShowRecurringWarningErrorAtEnd("WaterToAir Heat pump:cooling [" + state.dataWaterToAirHeatPump->WatertoAirHP(HPNum).Name +
-                                                               "] shut off on high pressure > " + format("{:.0R}", HighPressCutoff),
+                                                               format("] shut off on high pressure > {:.0R}", HighPressCutoff),
                                                            state.dataWaterToAirHeatPump->WatertoAirHP(HPNum).HighPressClgError,
                                                            SourceSideInletTemp,
                                                            SourceSideInletTemp,
@@ -1959,7 +1959,7 @@ namespace WaterToAirHeatPump {
                 if (LoadSidePressure > HighPressCutoff && !FirstHVACIteration) {
                     if (!WarmupFlag) {
                         ShowRecurringWarningErrorAtEnd("WaterToAir Heat pump:heating [" + state.dataWaterToAirHeatPump->WatertoAirHP(HPNum).Name +
-                                                           "] shut off on high pressure > " + format("{:.0R}", HighPressCutoff),
+                                                           format("] shut off on high pressure > {:.0R}", HighPressCutoff),
                                                        state.dataWaterToAirHeatPump->WatertoAirHP(HPNum).HighPressHtgError,
                                                        SourceSideInletTemp,
                                                        SourceSideInletTemp,

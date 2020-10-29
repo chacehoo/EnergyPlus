@@ -2233,7 +2233,7 @@ void GeneratorController::simGeneratorGetPowerOutput(EnergyPlusData &state,
     if (electricPowerOutput < 0.0) {
         if (errCountNegElectProd_ == 0) {
             ShowWarningMessage(typeOfName + " named " + name + " is producing negative electric power, check generator inputs.");
-            ShowContinueError("Electric power production rate =" + format("{:.4R}", electricPowerOutput));
+            ShowContinueError(format("Electric power production rate ={:.4R}", electricPowerOutput));
             ShowContinueError("The power will be set to zero, and the simulation continues... ");
         }
         ShowRecurringWarningErrorAtEnd(typeOfName + " named " + name + " is producing negative electric power ",
@@ -3768,15 +3768,15 @@ bool ElectricStorage::determineCurrentForBatteryDischarge(EnergyPlusData &state,
             // Issue #5301 need more diagnostics for this case
             ShowWarningError(
                 "ElectricStorage::determineCurrentForBatteryDischarge, iteration limit exceeded, failed to solve for discharge current.");
-            ShowContinueError("Last timestep charge available, q0 = " + format("{:.5R}", q0));
-            ShowContinueError("New Current, Inew = " + format("{:.5R}", Inew) + " [Amps]");
-            ShowContinueError("Power discharge per module cell, Pw = " + format("{:.5R}", Pw) + " ");
+            ShowContinueError(format("Last timestep charge available, q0 = {:.5R}", q0));
+            ShowContinueError(format("New Current, Inew = {:.5R}", Inew) + " [Amps]");
+            ShowContinueError(format("Power discharge per module cell, Pw = {:.5R}", Pw) + " ");
             ShowContinueError("Charge Conversion Rate, [1/h] change rate from bound charge energy to available charge, parameter k = " +
                               format("{:.5R}", k));
-            ShowContinueError("parameter c = " + format("{:.5R}", c));
-            ShowContinueError("parameter qmax = " + format("{:.5R}", qmax));
-            ShowContinueError("Fully charged open circuit voltage, parameter E0c  = " + format("{:.5R}", E0c));
-            ShowContinueError("parameter InternalR = " + format("{:.5R}", InternalR));
+            ShowContinueError(format("parameter c = {:.5R}", c));
+            ShowContinueError(format("parameter qmax = {:.5R}", qmax));
+            ShowContinueError(format("Fully charged open circuit voltage, parameter E0c  = {:.5R}", E0c));
+            ShowContinueError(format("parameter InternalR = {:.5R}", InternalR));
             if (qmaxf == 0.0) {
                 ShowContinueError("qmaxf was zero, would have divided by zero.");
             }
@@ -4009,7 +4009,7 @@ ElectricTransformer::ElectricTransformer(EnergyPlusData &state, std::string cons
             if (performanceInputMode_ == TransformerPerformanceInput::lossesMethod) {
                 ShowWarningError(routineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\".");
                 ShowContinueError("Specified " + DataIPShortCuts::cAlphaFieldNames(6) + " = " + DataIPShortCuts::cAlphaArgs(6));
-                ShowContinueError("Specified " + DataIPShortCuts::cNumericFieldNames(2) + " = " + format("{:.1R}", ratedCapacity_));
+                ShowContinueError("Specified " + DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.1R}", ratedCapacity_));
                 ShowContinueError("Transformer load and no load losses cannot be calculated with 0.0 rated capacity.");
                 ShowContinueError("Simulation continues but transformer losses will be set to zero.");
             }

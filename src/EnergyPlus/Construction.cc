@@ -235,7 +235,7 @@ namespace Construction {
                             ShowContinueError("High conductivity Material layers are not well supported for internal source constructions, "
                                               "material conductivity = " +
                                               format("{:.3R}", dataMaterial.Material(CurrentLayer).Conductivity) + " [W/m-K]");
-                            ShowContinueError("Material thermal diffusivity = " + format("{:.3R}", Alpha) + " [m2/s]");
+                            ShowContinueError(format("Material thermal diffusivity = {:.3R}", Alpha) + " [m2/s]");
                             ShowContinueError("Material with this thermal diffusivity should have thickness > " +
                                                       format("{:.5R}", ThicknessThreshold) + " [m]");
                             if (dataMaterial.Material(CurrentLayer).Thickness < DataHeatBalance::ThinMaterialLayerThreshold) {
@@ -275,7 +275,7 @@ namespace Construction {
 
                     ShowSevereError("InitConductionTransferFunctions: Material=" + dataMaterial.Material(CurrentLayer).Name +
                                     "R Value below lowest allowed value");
-                    ShowContinueError("Lowest allowed value=[" + format("{:.3R}", RValueLowLimit) + "], Material R Value=[" +
+                    ShowContinueError(format("Lowest allowed value=[{:.3R}", RValueLowLimit) + "], Material R Value=[" +
                                       format("{:.3R}", lr(Layer)) + "].");
                     ErrorsFound = true;
 

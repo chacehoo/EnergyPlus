@@ -715,8 +715,8 @@ namespace PhotovoltaicThermalCollectors {
                         if ((std::abs(DesignVolFlowRateDes - DesignVolFlowRateUser) / DesignVolFlowRateUser) >
                             DataSizing::AutoVsHardSizingThreshold) {
                             ShowMessage("SizeSolarCollector: Potential issue with equipment sizing for " + this->Name);
-                            ShowContinueError("User-Specified Design Flow Rate of " + format("{:.5R}", DesignVolFlowRateUser) + " [W]");
-                            ShowContinueError("differs from Design Size Design Flow Rate of " + format("{:.5R}", DesignVolFlowRateDes) +
+                            ShowContinueError(format("User-Specified Design Flow Rate of {:.5R}", DesignVolFlowRateUser) + " [W]");
+                            ShowContinueError(format("differs from Design Size Design Flow Rate of {:.5R}", DesignVolFlowRateDes) +
                                               " [W]");
                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -779,7 +779,7 @@ namespace PhotovoltaicThermalCollectors {
                                 if ((std::abs(DesignVolFlowRateDes - DesignVolFlowRateUser) / DesignVolFlowRateUser) >
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeSolarCollector: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Design Flow Rate of " + format("{:.5R}", DesignVolFlowRateUser) +
+                                    ShowContinueError(format("User-Specified Design Flow Rate of {:.5R}", DesignVolFlowRateUser) +
                                                       " [W]");
                                     ShowContinueError("differs from Design Size Design Flow Rate of " +
                                                       format("{:.5R}", DesignVolFlowRateDes) + " [W]");

@@ -1988,7 +1988,7 @@ namespace PackagedThermalStorageCoil {
                         if (TESCoil(TESCoilNum).ControlModeErrorIndex == 0) {
                             ShowSevereMessage("InitTESCoil: Invalid control schedule value for operating mode");
                             ShowContinueError("Occurs for Coil:Cooling:DX:SingleSpeed:ThermalStorage name = " + TESCoil(TESCoilNum).Name);
-                            ShowContinueError("Value returned from schedule =" + format("{:.8R}", tmpSchedValue));
+                            ShowContinueError(format("Value returned from schedule ={:.8R}", tmpSchedValue));
                             ShowContinueError("Operating mode will be set to Off, and the simulation continues");
                         }
                         ShowRecurringSevereErrorAtEnd("InitTESCoil: Invalid control schedule value for TES operating mode, set to Off",
@@ -2051,7 +2051,7 @@ namespace PackagedThermalStorageCoil {
                             if (TESCoil(TESCoilNum).ControlModeErrorIndex == 0) {
                                 ShowSevereMessage("InitTESCoil: Invalid control value for operating mode");
                                 ShowContinueError("Occurs for Coil:Cooling:DX:SingleSpeed:ThermalStorage name = " + TESCoil(TESCoilNum).Name);
-                                ShowContinueError("Value returned from EMS =" + format("{:.8R}", TESCoil(TESCoilNum).EMSControlModeValue));
+                                ShowContinueError(format("Value returned from EMS ={:.8R}", TESCoil(TESCoilNum).EMSControlModeValue));
                                 ShowContinueError("Operating mode will be set to Off, and the simulation continues");
                             }
                             ShowRecurringSevereErrorAtEnd("InitTESCoil: Invalid control schedule value for TES operating mode, set to Off",
@@ -4197,8 +4197,8 @@ namespace PackagedThermalStorageCoil {
                                 ++SensPLRIter;
                                 ShowWarningError(SystemType +
                                                  " - Iteration limit exceeded calculating DX unit sensible part-load ratio for unit = " + CoilName);
-                                ShowContinueError("Estimated part-load ratio  = " + format("{:.3R}", (ReqOutput / FullOutput)));
-                                ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", PartLoadFrac));
+                                ShowContinueError(format("Estimated part-load ratio  = {:.3R}", (ReqOutput / FullOutput)));
+                                ShowContinueError(format("Calculated part-load ratio = {:.3R}", PartLoadFrac));
                                 ShowContinueErrorTimeStamp(
                                     "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                             }
@@ -4218,7 +4218,7 @@ namespace PackagedThermalStorageCoil {
                                     SystemType +
                                     " - DX unit sensible part-load ratio calculation failed: part-load ratio limits exceeded, for unit = " +
                                     CoilName);
-                                ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
+                                ShowContinueError(format("Estimated part-load ratio = {:.3R}", PartLoadFrac));
                                 ShowContinueErrorTimeStamp(
                                     "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                             }
@@ -4264,8 +4264,8 @@ namespace PackagedThermalStorageCoil {
                                     ++LatPLRIter;
                                     ShowWarningError(SystemType +
                                                      " - Iteration limit exceeded calculating DX unit latent part-load ratio for unit = " + CoilName);
-                                    ShowContinueError("Estimated part-load ratio   = " + format("{:.3R}", (ReqOutput / FullOutput)));
-                                    ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", PartLoadFrac));
+                                    ShowContinueError(format("Estimated part-load ratio   = {:.3R}", (ReqOutput / FullOutput)));
+                                    ShowContinueError(format("Calculated part-load ratio = {:.3R}", PartLoadFrac));
                                     ShowContinueErrorTimeStamp(
                                         "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                                 }
@@ -4290,7 +4290,7 @@ namespace PackagedThermalStorageCoil {
                                         SystemType +
                                         " - DX unit latent part-load ratio calculation failed: part-load ratio limits exceeded, for unit = " +
                                         CoilName);
-                                    ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
+                                    ShowContinueError(format("Estimated part-load ratio = {:.3R}", PartLoadFrac));
                                     ShowContinueErrorTimeStamp(
                                         "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                                 }

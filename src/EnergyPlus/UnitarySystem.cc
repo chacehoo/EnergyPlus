@@ -416,8 +416,8 @@ namespace UnitarySystems {
                         }
                     } else if (numSpeedInputs < maxSpeeds) {
                         ShowSevereError(cCurrentModuleObject + ": Error getting inputs for system named: " + thisObjectName);
-                        ShowContinueError("Number of speed inputs (" + format("{:.0T}", Real64(numSpeedInputs)) +
-                                          " is less than number of speeds (" + format("{:.0T}", Real64(maxSpeeds)) + ").");
+                        ShowContinueError(format("Number of speed inputs ({:.0T}", Real64(numSpeedInputs)) +
+                                          format(" is less than number of speeds ({:.0T}", Real64(maxSpeeds)) + ").");
                         errorsFound = true;
                     }
                 }
@@ -539,7 +539,7 @@ namespace UnitarySystems {
                                 ShowContinueError("...Fan volumetric flow rate            = " +
                                                   format("{:.5R}", this->m_ActualFanVolFlowRate) + " m3/s.");
                                 ShowContinueError(
-                                    "...Unitary system volumetric flow rate = " + format("{:.5R}", this->m_MaxHeatAirVolFlow) + " m3/s.");
+                                    format("...Unitary system volumetric flow rate = {:.5R}", this->m_MaxHeatAirVolFlow) + " m3/s.");
                             }
                         }
                     }
@@ -6598,7 +6598,7 @@ namespace UnitarySystems {
                     if (FanVolFlowRate < thisSys.m_MaxCoolAirVolFlow && thisSys.m_MaxCoolAirVolFlow != DataSizing::AutoSize &&
                         thisSys.m_CoolCoilExists) {
                         ShowSevereError(cCurrentModuleObject + " = " + thisObjectName);
-                        ShowContinueError("... air flow rate = " + format("{:.7T}", FanVolFlowRate) + " in fan object " + thisSys.m_FanName +
+                        ShowContinueError(format("... air flow rate = {:.7T}", FanVolFlowRate) + " in fan object " + thisSys.m_FanName +
                                           " is less than the maximum HVAC system air flow rate in cooling mode.");
                         ShowContinueError(" The Cooling Supply Air Flow Rate is reset to the fan flow rate and the simulation continues.");
                         thisSys.m_MaxCoolAirVolFlow = FanVolFlowRate;
@@ -6607,7 +6607,7 @@ namespace UnitarySystems {
                     if (FanVolFlowRate < thisSys.m_MaxHeatAirVolFlow && thisSys.m_MaxHeatAirVolFlow != DataSizing::AutoSize &&
                         thisSys.m_HeatCoilExists) {
                         ShowSevereError(cCurrentModuleObject + " = " + thisObjectName);
-                        ShowContinueError("... air flow rate = " + format("{:.7T}", FanVolFlowRate) + " in fan object " + thisSys.m_FanName +
+                        ShowContinueError(format("... air flow rate = {:.7T}", FanVolFlowRate) + " in fan object " + thisSys.m_FanName +
                                           " is less than the maximum HVAC system air flow rate in heating mode.");
                         ShowContinueError(" The Heating Supply Air Flow Rate is reset to the fan flow rate and the simulation continues.");
                         thisSys.m_MaxHeatAirVolFlow = FanVolFlowRate;
@@ -8910,8 +8910,8 @@ namespace UnitarySystems {
                                     if (this->MaxIterIndex == 0) {
                                         ShowWarningMessage("Coil control failed to converge for " + this->UnitType + ':' + this->Name);
                                         ShowContinueError("  Iteration limit exceeded in calculating system sensible part-load ratio.");
-                                        ShowContinueErrorTimeStamp("Sensible load to be met = " + format("{:.2T}", ZoneLoad) +
-                                                                   " (watts), sensible output = " + format("{:.2T}", TempSensOutput) +
+                                        ShowContinueErrorTimeStamp(format("Sensible load to be met = {:.2T}", ZoneLoad) +
+                                                                   format(" (watts), sensible output = {:.2T}", TempSensOutput) +
                                                                    " (watts), and the simulation continues.");
                                     }
                                     ShowRecurringWarningErrorAtEnd(this->UnitType + " \"" + this->Name +
@@ -8925,7 +8925,7 @@ namespace UnitarySystems {
                                 if (this->RegulaFalsiFailedIndex == 0) {
                                     ShowWarningMessage("Coil control failed for " + this->UnitType + ':' + this->Name);
                                     ShowContinueError("  sensible part-load ratio determined to be outside the range of 0-1.");
-                                    ShowContinueErrorTimeStamp("Sensible load to be met = " + format("{:.2T}", ZoneLoad) +
+                                    ShowContinueErrorTimeStamp(format("Sensible load to be met = {:.2T}", ZoneLoad) +
                                                                " (watts), and the simulation continues.");
                                 }
                                 ShowRecurringWarningErrorAtEnd(
@@ -8939,7 +8939,7 @@ namespace UnitarySystems {
                             if (this->RegulaFalsiFailedIndex == 0) {
                                 ShowWarningMessage("Coil control failed for " + this->UnitType + ':' + this->Name);
                                 ShowContinueError("  sensible part-load ratio determined to be outside the range of 0-1.");
-                                ShowContinueErrorTimeStamp("Sensible load to be met = " + format("{:.2T}", ZoneLoad) +
+                                ShowContinueErrorTimeStamp(format("Sensible load to be met = {:.2T}", ZoneLoad) +
                                                            " (watts), and the simulation continues.");
                             }
                             ShowRecurringWarningErrorAtEnd(
@@ -9311,8 +9311,8 @@ namespace UnitarySystems {
                     if (this->warnIndex.m_LatMaxIterIndex == 0) {
                         ShowWarningMessage("Coil control failed to converge for " + this->UnitType + ':' + this->Name);
                         ShowContinueError("  Iteration limit exceeded in calculating system Latent part-load ratio.");
-                        ShowContinueErrorTimeStamp("Latent load to be met = " + format("{:.2T}", state.dataUnitarySystems->MoistureLoad) +
-                                                   " (watts), Latent output = " + format("{:.2T}", TempLatOutput) +
+                        ShowContinueErrorTimeStamp(format("Latent load to be met = {:.2T}", state.dataUnitarySystems->MoistureLoad) +
+                                                   format(" (watts), Latent output = {:.2T}", TempLatOutput) +
                                                    " (watts), and the simulation continues.");
                     }
                     ShowRecurringWarningErrorAtEnd(
@@ -9326,7 +9326,7 @@ namespace UnitarySystems {
                 if (this->warnIndex.m_LatRegulaFalsiFailedIndex == 0) {
                     ShowWarningMessage("Coil control failed for " + this->UnitType + ':' + this->Name);
                     ShowContinueError("  Latent part-load ratio determined to be outside the range of 0-1.");
-                    ShowContinueErrorTimeStamp("Latent load to be met = " + format("{:.2T}", state.dataUnitarySystems->MoistureLoad) +
+                    ShowContinueErrorTimeStamp(format("Latent load to be met = {:.2T}", state.dataUnitarySystems->MoistureLoad) +
                                                " (watts), and the simulation continues.");
                 }
                 ShowRecurringWarningErrorAtEnd(this->UnitType + " \"" + this->Name +
@@ -9339,7 +9339,7 @@ namespace UnitarySystems {
             if (this->warnIndex.m_LatRegulaFalsiFailedIndex == 0) {
                 ShowWarningMessage("Coil control failed for " + this->UnitType + ':' + this->Name);
                 ShowContinueError("  Latent part-load ratio determined to be outside the range of 0-1.");
-                ShowContinueErrorTimeStamp("Latent load to be met = " + format("{:.2T}", state.dataUnitarySystems->MoistureLoad) +
+                ShowContinueErrorTimeStamp(format("Latent load to be met = {:.2T}", state.dataUnitarySystems->MoistureLoad) +
                                            " (watts), and the simulation continues.");
             }
             ShowRecurringWarningErrorAtEnd(this->UnitType + " \"" + this->Name +
@@ -11738,7 +11738,7 @@ namespace UnitarySystems {
                                                 " - Iteration limit exceeded calculating DX unit sensible part-load ratio for unit = " + this->Name);
                                             ShowContinueError("Estimated part-load ratio   = " +
                                                               format("{:.3R}", (ReqOutput / FullOutput)));
-                                            ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", PartLoadFrac));
+                                            ShowContinueError(format("Calculated part-load ratio = {:.3R}", PartLoadFrac));
                                             ShowContinueErrorTimeStamp(
                                                 "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                                         }
@@ -11759,7 +11759,7 @@ namespace UnitarySystems {
                                                              " - DX unit sensible part-load ratio calculation unexpectedly failed: part-load ratio "
                                                              "limits exceeded, for unit = " +
                                                              this->Name);
-                                            ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
+                                            ShowContinueError(format("Estimated part-load ratio = {:.3R}", PartLoadFrac));
                                             ShowContinueErrorTimeStamp(
                                                 "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                                         }
@@ -11781,7 +11781,7 @@ namespace UnitarySystems {
                                                          " - DX unit sensible part-load ratio calculation failed: part-load ratio limits "
                                                          "exceeded, for unit = " +
                                                          this->Name);
-                                        ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
+                                        ShowContinueError(format("Estimated part-load ratio = {:.3R}", PartLoadFrac));
                                         ShowContinueErrorTimeStamp(
                                             "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                                     }
@@ -12155,7 +12155,7 @@ namespace UnitarySystems {
                                                     this->Name);
                                                 ShowContinueError("Estimated latent part-load ratio  = " +
                                                                   format("{:.3R}", (ReqOutput / FullOutput)));
-                                                ShowContinueError("Calculated latent part-load ratio = " + format("{:.3R}", PartLoadFrac));
+                                                ShowContinueError(format("Calculated latent part-load ratio = {:.3R}", PartLoadFrac));
                                                 ShowContinueErrorTimeStamp("The calculated latent part-load ratio will be used and the simulation "
                                                                            "continues. Occurrence info:");
                                             }
@@ -12178,7 +12178,7 @@ namespace UnitarySystems {
                                                                  " - DX unit latent part-load ratio calculation failed unexpectedly: part-load ratio "
                                                                  "limits exceeded, for unit = " +
                                                                  this->Name);
-                                                ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
+                                                ShowContinueError(format("Estimated part-load ratio = {:.3R}", PartLoadFrac));
                                                 ShowContinueErrorTimeStamp(
                                                     "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                                             }
@@ -12200,7 +12200,7 @@ namespace UnitarySystems {
                                                              " - DX unit latent part-load ratio calculation failed: part-load ratio limits "
                                                              "exceeded, for unit = " +
                                                              this->Name);
-                                            ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
+                                            ShowContinueError(format("Estimated part-load ratio = {:.3R}", PartLoadFrac));
                                             ShowContinueErrorTimeStamp(
                                                 "The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                                         }
@@ -12416,8 +12416,8 @@ namespace UnitarySystems {
                 if (this->warnIndex.m_SensPLRIter < 1) {
                     ++this->warnIndex.m_SensPLRIter;
                     ShowWarningError(this->UnitType + " - Iteration limit exceeded calculating part-load ratio for unit = " + this->Name);
-                    ShowContinueError("Estimated part-load ratio  = " + format("{:.3R}", (ReqOutput / FullOutput)));
-                    ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", PartLoadFrac));
+                    ShowContinueError(format("Estimated part-load ratio  = {:.3R}", (ReqOutput / FullOutput)));
+                    ShowContinueError(format("Calculated part-load ratio = {:.3R}", PartLoadFrac));
                     ShowContinueErrorTimeStamp("The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                 } else {
                     ShowRecurringWarningErrorAtEnd(
@@ -12435,7 +12435,7 @@ namespace UnitarySystems {
                     ++this->warnIndex.m_SensPLRFail;
                     ShowWarningError(this->UnitType +
                                      " - sensible part-load ratio calculation failed: part-load ratio limits exceeded, for unit = " + this->Name);
-                    ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
+                    ShowContinueError(format("Estimated part-load ratio = {:.3R}", PartLoadFrac));
                     ShowContinueErrorTimeStamp("The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                 } else {
                     ShowRecurringWarningErrorAtEnd(
@@ -12453,8 +12453,8 @@ namespace UnitarySystems {
                 if (this->warnIndex.m_LatPLRIter < 1) {
                     ++this->warnIndex.m_LatPLRIter;
                     ShowWarningError(this->UnitType + " - Iteration limit exceeded calculating latent part-load ratio for unit = " + this->Name);
-                    ShowContinueError("Estimated part-load ratio   = " + format("{:.3R}", (ReqOutput / FullOutput)));
-                    ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", PartLoadFrac));
+                    ShowContinueError(format("Estimated part-load ratio   = {:.3R}", (ReqOutput / FullOutput)));
+                    ShowContinueError(format("Calculated part-load ratio = {:.3R}", PartLoadFrac));
                     ShowContinueErrorTimeStamp("The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                 }
                 ShowRecurringWarningErrorAtEnd(
@@ -12476,7 +12476,7 @@ namespace UnitarySystems {
                     ++this->warnIndex.m_LatPLRFail;
                     ShowWarningError(this->UnitType +
                                      " - latent part-load ratio calculation failed: part-load ratio limits exceeded, for unit = " + this->Name);
-                    ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
+                    ShowContinueError(format("Estimated part-load ratio = {:.3R}", PartLoadFrac));
                     ShowContinueErrorTimeStamp("The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                 }
                 ShowRecurringWarningErrorAtEnd(this->UnitType + " \"" + this->Name +
@@ -13095,8 +13095,8 @@ namespace UnitarySystems {
                         ++this->warnIndex.m_HeatCoilSensPLRIter;
                         ShowWarningError(this->UnitType +
                                          " - Iteration limit exceeded calculating sensible part-load ratio for unit = " + this->Name);
-                        ShowContinueError("Estimated part-load ratio  = " + format("{:.3R}", (ReqOutput / FullOutput)));
-                        ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", PartLoadFrac));
+                        ShowContinueError(format("Estimated part-load ratio  = {:.3R}", (ReqOutput / FullOutput)));
+                        ShowContinueError(format("Calculated part-load ratio = {:.3R}", PartLoadFrac));
                         ShowContinueErrorTimeStamp("The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                     } else {
                         ShowRecurringWarningErrorAtEnd(this->UnitType + " \"" + this->Name +
@@ -13114,7 +13114,7 @@ namespace UnitarySystems {
                         ++this->warnIndex.m_HeatCoilSensPLRFail;
                         ShowWarningError(this->UnitType +
                                          " - sensible part-load ratio calculation failed: part-load ratio limits exceeded, for unit = " + this->Name);
-                        ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
+                        ShowContinueError(format("Estimated part-load ratio = {:.3R}", PartLoadFrac));
                         ShowContinueErrorTimeStamp("The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                     } else {
                         ShowRecurringWarningErrorAtEnd(
@@ -13469,8 +13469,8 @@ namespace UnitarySystems {
                 if (this->warnIndex.m_SuppHeatCoilSensPLRIter < 1) {
                     ++this->warnIndex.m_SuppHeatCoilSensPLRIter;
                     ShowWarningError(this->UnitType + " - Iteration limit exceeded calculating sensible part-load ratio for unit = " + this->Name);
-                    ShowContinueError("Estimated part-load ratio  = " + format("{:.3R}", (ReqOutput / FullOutput)));
-                    ShowContinueError("Calculated part-load ratio = " + format("{:.3R}", PartLoadFrac));
+                    ShowContinueError(format("Estimated part-load ratio  = {:.3R}", (ReqOutput / FullOutput)));
+                    ShowContinueError(format("Calculated part-load ratio = {:.3R}", PartLoadFrac));
                     ShowContinueErrorTimeStamp("The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
                 } else {
                     ShowRecurringWarningErrorAtEnd(
@@ -13488,7 +13488,7 @@ namespace UnitarySystems {
                     ++this->warnIndex.m_SuppHeatCoilSensPLRFail;
                     ShowWarningError(this->UnitType +
                                      " - sensible part-load ratio calculation failed: part-load ratio limits exceeded, for unit = " + this->Name);
-                    ShowContinueError("Estimated part-load ratio = " + format("{:.3R}", PartLoadFrac));
+                    ShowContinueError(format("Estimated part-load ratio = {:.3R}", PartLoadFrac));
                     ShowContinueErrorTimeStamp("The estimated part-load ratio will be used and the simulation continues. Occurrence info:");
                 } else {
                     ShowRecurringWarningErrorAtEnd(

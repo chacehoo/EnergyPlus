@@ -400,10 +400,10 @@ void BaseSizer::selectSizerOutput(bool &errorsFound)
                     this->addErrorMessage(msg);
                     ShowMessage(msg);
                     msg =
-                        "User-Specified " + this->sizingStringScalable + this->sizingString + " = " + format("{:.5R}", this->originalValue);
+                        "User-Specified " + this->sizingStringScalable + this->sizingString + format(" = {:.5R}", this->originalValue);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = "differs from Design Size " + this->sizingString + " = " + format("{:.5R}", this->autoSizedValue);
+                    msg = "differs from Design Size " + this->sizingString + format(" = {:.5R}", this->autoSizedValue);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
                     msg = "This may, or may not, indicate mismatched component sizes.";
@@ -419,7 +419,7 @@ void BaseSizer::selectSizerOutput(bool &errorsFound)
             std::string msg = this->callingRoutine + ' ' + this->compType + ' ' + this->compName + ", Developer Error: Component sizing incomplete.";
             this->addErrorMessage(msg);
             ShowSevereError(msg);
-            msg = "SizingString = " + this->sizingString + ", SizingResult = " + format("{:.1T}", this->originalValue);
+            msg = "SizingString = " + this->sizingString + format(", SizingResult = {:.1T}", this->originalValue);
             this->addErrorMessage(msg);
             ShowContinueError(msg);
             this->errorType = AutoSizingResultType::ErrorType1;
@@ -526,10 +526,10 @@ void BaseSizer::select2StgDXHumCtrlSizerOutput(bool &errorsFound)
                     this->addErrorMessage(msg);
                     ShowMessage(msg);
                     msg =
-                        "User-Specified " + this->sizingStringScalable + this->sizingString + " = " + format("{:.5R}", this->originalValue);
+                        "User-Specified " + this->sizingStringScalable + this->sizingString + format(" = {:.5R}", this->originalValue);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
-                    msg = "differs from Design Size " + this->sizingString + " = " + format("{:.5R}", this->autoSizedValue);
+                    msg = "differs from Design Size " + this->sizingString + format(" = {:.5R}", this->autoSizedValue);
                     this->addErrorMessage(msg);
                     ShowContinueError(msg);
                     msg = "This may, or may not, indicate mismatched component sizes.";
@@ -545,7 +545,7 @@ void BaseSizer::select2StgDXHumCtrlSizerOutput(bool &errorsFound)
             std::string msg = this->callingRoutine + ' ' + this->compType + ' ' + this->compName + ", Developer Error: Component sizing incomplete.";
             this->addErrorMessage(msg);
             ShowSevereError(msg);
-            msg = "SizingString = " + this->sizingString + ", SizingResult = " + format("{:.1T}", this->originalValue);
+            msg = "SizingString = " + this->sizingString + format(", SizingResult = {:.1T}", this->originalValue);
             this->addErrorMessage(msg);
             ShowContinueError(msg);
             this->errorType = AutoSizingResultType::ErrorType1;

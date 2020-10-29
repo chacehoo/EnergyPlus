@@ -332,7 +332,7 @@ namespace PlantComponentTemperatureSources {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpVolFlowRate - DesVolFlowRateUser) / DesVolFlowRateUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizePlantComponentTemperatureSource: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Design Fluid Flow Rate of " + format("{:.5R}", DesVolFlowRateUser) +
+                                    ShowContinueError(format("User-Specified Design Fluid Flow Rate of {:.5R}", DesVolFlowRateUser) +
                                                       " [m3/s]");
                                     ShowContinueError("differs from Design Size Design Fluid Flow Rate of " +
                                                       format("{:.5R}", tmpVolFlowRate) + " [m3/s]");

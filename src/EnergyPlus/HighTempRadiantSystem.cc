@@ -603,9 +603,9 @@ namespace HighTempRadiantSystem {
                 FracOfRadPotentiallyLost = 1.0 - AllFracsSummed;
                 ShowSevereError("Fraction of radiation distributed to surfaces and people sums up to less than 1 for " + cAlphaArgs(1));
                 ShowContinueError("This would result in some of the radiant energy delivered by the high temp radiant heater being lost.");
-                ShowContinueError("The sum of all radiation fractions to surfaces = " + format("{:.5T}", TotalFracToSurfs));
-                ShowContinueError("The radiant fraction to people = " + format("{:.5T}", HighTempRadSys(Item).FracDistribPerson));
-                ShowContinueError("So, all radiant fractions including surfaces and people = " + format("{:.5T}", AllFracsSummed));
+                ShowContinueError(format("The sum of all radiation fractions to surfaces = {:.5T}", TotalFracToSurfs));
+                ShowContinueError(format("The radiant fraction to people = {:.5T}", HighTempRadSys(Item).FracDistribPerson));
+                ShowContinueError(format("So, all radiant fractions including surfaces and people = {:.5T}", AllFracsSummed));
                 ShowContinueError(
                     "This means that the fraction of radiant energy that would be lost from the high temperature radiant heater would be = " +
                     format("{:.5T}", FracOfRadPotentiallyLost));
@@ -1379,16 +1379,16 @@ namespace HighTempRadiantSystem {
                     if (ThisSurfIntensity > MaxRadHeatFlux) { // CR 8074, trap for excessive intensity (throws off surface balance )
                         ShowSevereError("DistributeHTRadGains:  excessive thermal radiation heat flux intensity detected");
                         ShowContinueError("Surface = " + Surface(SurfNum).Name);
-                        ShowContinueError("Surface area = " + format("{:.3R}", Surface(SurfNum).Area) + " [m2]");
+                        ShowContinueError(format("Surface area = {:.3R}", Surface(SurfNum).Area) + " [m2]");
                         ShowContinueError("Occurs in ZoneHVAC:HighTemperatureRadiant = " + HighTempRadSys(RadSysNum).Name);
-                        ShowContinueError("Radiation intensity = " + format("{:.2R}", ThisSurfIntensity) + " [W/m2]");
+                        ShowContinueError(format("Radiation intensity = {:.2R}", ThisSurfIntensity) + " [W/m2]");
                         ShowContinueError("Assign a larger surface area or more surfaces in ZoneHVAC:HighTemperatureRadiant");
                         ShowFatalError("DistributeHTRadGains:  excessive thermal radiation heat flux intensity detected");
                     }
                 } else { // small surface
                     ShowSevereError("DistributeHTRadGains:  surface not large enough to receive thermal radiation heat flux");
                     ShowContinueError("Surface = " + Surface(SurfNum).Name);
-                    ShowContinueError("Surface area = " + format("{:.3R}", Surface(SurfNum).Area) + " [m2]");
+                    ShowContinueError(format("Surface area = {:.3R}", Surface(SurfNum).Area) + " [m2]");
                     ShowContinueError("Occurs in ZoneHVAC:HighTemperatureRadiant = " + HighTempRadSys(RadSysNum).Name);
                     ShowContinueError("Assign a larger surface area or more surfaces in ZoneHVAC:HighTemperatureRadiant");
                     ShowFatalError("DistributeHTRadGains:  surface not large enough to receive thermal radiation heat flux");

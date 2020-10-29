@@ -299,7 +299,7 @@ namespace PondGroundHeatExchanger {
             }
             if (DataIPShortCuts::rNumericArgs(3) > DataIPShortCuts::rNumericArgs(4)) { // error
                 ShowSevereError("For " + DataIPShortCuts::cCurrentModuleObject + ": " + DataIPShortCuts::cAlphaArgs(1));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(3) + " [" + format("{:.2R}", DataIPShortCuts::rNumericArgs(3)) +
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(3) + format(" [{:.2R}", DataIPShortCuts::rNumericArgs(3)) +
                                   "] > " + DataIPShortCuts::cNumericFieldNames(4) + " [" +
                                   format("{:.2R}", DataIPShortCuts::rNumericArgs(4)) + ']');
                 ErrorsFound = true;
@@ -352,7 +352,7 @@ namespace PondGroundHeatExchanger {
 
         if (!DataEnvironment::GroundTemp_DeepObjInput) {
             ShowWarningError("GetPondGroundHeatExchanger:  No \"Site:GroundTemperature:Deep\" were input.");
-            ShowContinueError("Defaults, constant throughout the year of (" + format("{:.1R}", DataEnvironment::GroundTemp_Deep) +
+            ShowContinueError(format("Defaults, constant throughout the year of ({:.1R}", DataEnvironment::GroundTemp_Deep) +
                               ") will be used.");
         }
     }

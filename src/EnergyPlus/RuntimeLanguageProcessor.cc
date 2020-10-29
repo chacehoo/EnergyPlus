@@ -1999,7 +1999,7 @@ namespace RuntimeLanguageProcessor {
                                 // throw Error
                                 ReturnValue.Type = ValueError;
                                 ReturnValue.Error = "EvaluateExpression: Attempted to raise to power with incompatible numbers: " +
-                                                    format("{:.6T}", Operand(1).Number) + " raised to " + format("{:.6T}", Operand(2).Number);
+                                                    format("{:.6T}", Operand(1).Number) + format(" raised to {:.6T}", Operand(2).Number);
                                 if (!DoingSizing && !KickOffSimulation && !EMSManager::FinishProcessingUserInput) {
                                     seriousErrorFound = true;
                                 }
@@ -2060,7 +2060,7 @@ namespace RuntimeLanguageProcessor {
                             // throw error,
                             ReturnValue.Type = ValueError;
                             ReturnValue.Error =
-                                "EvaluateExpression: Natural Log of zero or less! ln of value = " + format("{:.4T}", Operand(1).Number);
+                                format("EvaluateExpression: Natural Log of zero or less! ln of value = {:.4T}", Operand(1).Number);
                             if (!DoingSizing && !KickOffSimulation && !EMSManager::FinishProcessingUserInput) {
                                 seriousErrorFound = true;
                             }
@@ -2244,16 +2244,16 @@ namespace RuntimeLanguageProcessor {
 
                         ShowSevereError("EMS user program found serious problem and is halting simulation");
                         ShowContinueErrorTimeStamp("");
-                        ShowFatalError("EMS user program halted simulation with error code = " + format("{:.2T}", Operand(1).Number));
+                        ShowFatalError(format("EMS user program halted simulation with error code = {:.2T}", Operand(1).Number));
                         ReturnValue = SetErlValueNumber(Operand(1).Number); // returns back the error code
                     } else if (SELECT_CASE_var == FuncSevereWarnEp) {
 
-                        ShowSevereError("EMS user program issued severe warning with error code = " + format("{:.2T}", Operand(1).Number));
+                        ShowSevereError(format("EMS user program issued severe warning with error code = {:.2T}", Operand(1).Number));
                         ShowContinueErrorTimeStamp("");
                         ReturnValue = SetErlValueNumber(Operand(1).Number); // returns back the error code
                     } else if (SELECT_CASE_var == FuncWarnEp) {
 
-                        ShowWarningError("EMS user program issued warning with error code = " + format("{:.2T}", Operand(1).Number));
+                        ShowWarningError(format("EMS user program issued warning with error code = {:.2T}", Operand(1).Number));
                         ShowContinueErrorTimeStamp("");
                         ReturnValue = SetErlValueNumber(Operand(1).Number); // returns back the error code
                     } else if (SELECT_CASE_var == FuncTrendValue) {
@@ -2558,8 +2558,8 @@ namespace RuntimeLanguageProcessor {
         } else {
             ReturnVal.Type = DataRuntimeLanguage::ValueError;
             ReturnVal.Error = DataRuntimeLanguage::PossibleOperators(FunctionCode).Symbol +
-                              " function called with invalid arguments: Hour=" + format("{:.1R}", Operand1) +
-                              ", Timestep=" + format("{:.1R}", Operand2);
+                              format(" function called with invalid arguments: Hour={:.1R}", Operand1) +
+                              format(", Timestep={:.1R}", Operand2);
         }
     }
 
@@ -2578,8 +2578,8 @@ namespace RuntimeLanguageProcessor {
         } else {
             ReturnVal.Type = DataRuntimeLanguage::ValueError;
             ReturnVal.Error = DataRuntimeLanguage::PossibleOperators(FunctionCode).Symbol +
-                              " function called with invalid arguments: Hour=" + format("{:.1R}", Operand1) +
-                              ", Timestep=" + format("{:.1R}", Operand2);
+                              format(" function called with invalid arguments: Hour={:.1R}", Operand1) +
+                              format(", Timestep={:.1R}", Operand2);
         }
     }
 

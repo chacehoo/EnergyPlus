@@ -426,7 +426,7 @@ namespace ChillerReformulatedEIR {
             thisChiller.TempRefCondOut = DataIPShortCuts::rNumericArgs(4);
             if (thisChiller.TempRefEvapOut >= thisChiller.TempRefCondOut) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(3) + " [" + format("{:.2R}", DataIPShortCuts::rNumericArgs(3)) +
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(3) + format(" [{:.2R}", DataIPShortCuts::rNumericArgs(3)) +
                                   "] >= " + DataIPShortCuts::cNumericFieldNames(4) + " [" +
                                   format("{:.2R}", DataIPShortCuts::rNumericArgs(4)) + ']');
                 ShowContinueError("Reference Leaving Chilled Water Temperature must be less than Reference Leaving Condenser Water Temperature ");
@@ -450,7 +450,7 @@ namespace ChillerReformulatedEIR {
 
             if (thisChiller.MinPartLoadRat > thisChiller.MaxPartLoadRat) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(7) + " [" + format("{:.3R}", DataIPShortCuts::rNumericArgs(7)) +
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(7) + format(" [{:.3R}", DataIPShortCuts::rNumericArgs(7)) +
                                   "] > " + DataIPShortCuts::cNumericFieldNames(8) + " [" +
                                   format("{:.3R}", DataIPShortCuts::rNumericArgs(8)) + ']');
                 ShowContinueError("Minimum part load ratio must be less than or equal to the maximum part load ratio ");
@@ -460,7 +460,7 @@ namespace ChillerReformulatedEIR {
             if (thisChiller.MinUnloadRat < thisChiller.MinPartLoadRat ||
                 thisChiller.MinUnloadRat > thisChiller.MaxPartLoadRat) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(10) + " = " + format("{:.3R}", DataIPShortCuts::rNumericArgs(10)));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(10) + format(" = {:.3R}", DataIPShortCuts::rNumericArgs(10)));
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(10) + " must be greater than or equal to the " +
                                   DataIPShortCuts::cNumericFieldNames(7));
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(10) + " must be less than or equal to the " +
@@ -471,7 +471,7 @@ namespace ChillerReformulatedEIR {
             if (thisChiller.OptPartLoadRat < thisChiller.MinPartLoadRat ||
                 thisChiller.OptPartLoadRat > thisChiller.MaxPartLoadRat) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(9) + " = " + format("{:.3R}", DataIPShortCuts::rNumericArgs(9)));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(9) + format(" = {:.3R}", DataIPShortCuts::rNumericArgs(9)));
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(9) + " must be greater than or equal to the " +
                                   DataIPShortCuts::cNumericFieldNames(7));
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(9) + " must be less than or equal to the " +
@@ -484,7 +484,7 @@ namespace ChillerReformulatedEIR {
             if (thisChiller.CompPowerToCondenserFrac < 0.0 ||
                 thisChiller.CompPowerToCondenserFrac > 1.0) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(11) + " = " + format("{:.3R}", DataIPShortCuts::rNumericArgs(11)));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(11) + format(" = {:.3R}", DataIPShortCuts::rNumericArgs(11)));
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(11) + " must be greater than or equal to zero");
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(11) + " must be less than or equal to one");
                 ErrorsFound = true;
@@ -1135,8 +1135,8 @@ namespace ChillerReformulatedEIR {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpNomCap - RefCapUser) / RefCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("Size:ChillerElectricReformulatedEIR: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Reference Capacity of " + format("{:.2R}", RefCapUser) + " [W]");
-                                    ShowContinueError("differs from Design Size Reference Capacity of " + format("{:.2R}", tmpNomCap) +
+                                    ShowContinueError(format("User-Specified Reference Capacity of {:.2R}", RefCapUser) + " [W]");
+                                    ShowContinueError(format("differs from Design Size Reference Capacity of {:.2R}", tmpNomCap) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -1322,7 +1322,7 @@ namespace ChillerReformulatedEIR {
                 if (CurveVal > 1.10 || CurveVal < 0.90) {
                     ShowWarningError("Capacity ratio as a function of temperature curve output is not equal to 1.0");
                     ShowContinueError("(+ or - 10%) at reference conditions for Chiller:Electric:ReformulatedEIR = " + equipName);
-                    ShowContinueError("Curve output at reference conditions = " + format("{:.3T}", CurveVal));
+                    ShowContinueError(format("Curve output at reference conditions = {:.3T}", CurveVal));
                 }
                 CurveManager::GetCurveMinMaxValues(state,this->ChillerCapFTIndex,
                                                    this->ChillerCAPFTXTempMin,
@@ -1336,7 +1336,7 @@ namespace ChillerReformulatedEIR {
                 if (CurveVal > 1.10 || CurveVal < 0.90) {
                     ShowWarningError("Energy input ratio as a function of temperature curve output is not equal to 1.0");
                     ShowContinueError("(+ or - 10%) at reference conditions for Chiller:Electric:ReformulatedEIR = " + equipName);
-                    ShowContinueError("Curve output at reference conditions = " + format("{:.3T}", CurveVal));
+                    ShowContinueError(format("Curve output at reference conditions = {:.3T}", CurveVal));
                 }
                 CurveManager::GetCurveMinMaxValues(state,this->ChillerEIRFTIndex,
                                                    this->ChillerEIRFTXTempMin,
@@ -1355,7 +1355,7 @@ namespace ChillerReformulatedEIR {
                 if (CurveVal > 1.10 || CurveVal < 0.90) {
                     ShowWarningError("Energy input ratio as a function of part-load ratio curve output is not equal to 1.0");
                     ShowContinueError("(+ or - 10%) at reference conditions for Chiller:Electric:ReformulatedEIR = " + equipName);
-                    ShowContinueError("Curve output at reference conditions = " + format("{:.3T}", CurveVal));
+                    ShowContinueError(format("Curve output at reference conditions = {:.3T}", CurveVal));
                 }
 
                 if (this->PartLoadCurveType == PLR::LeavingCondenserWaterTemperature) {
@@ -1375,14 +1375,14 @@ namespace ChillerReformulatedEIR {
                 }
 
                 if (this->ChillerEIRFPLRPLRMin < 0 || this->ChillerEIRFPLRPLRMin >= this->ChillerEIRFPLRPLRMax || this->ChillerEIRFPLRPLRMin > 1) {
-                    ShowSevereError("Invalid minimum value of PLR = " + format("{:.3T}", this->ChillerEIRFPLRPLRMin) +
+                    ShowSevereError(format("Invalid minimum value of PLR = {:.3T}", this->ChillerEIRFPLRPLRMin) +
                                     " in bicubic curve = " + this->EIRFPLRName + " which is used");
                     ShowContinueError("by Chiller:Electric:ReformulatedEIR = " + equipName + '.');
                     ShowContinueError("The minimum value of PLR [y] must be from zero to 1, and less than the maximum value of PLR.");
                     ErrorsFound = true;
                 }
                 if (this->ChillerEIRFPLRPLRMax > 1.1 || this->ChillerEIRFPLRPLRMax <= this->ChillerEIRFPLRPLRMin || this->ChillerEIRFPLRPLRMax < 0) {
-                    ShowSevereError("Invalid maximum value of PLR = " + format("{:.3T}", this->ChillerEIRFPLRPLRMax) +
+                    ShowSevereError(format("Invalid maximum value of PLR = {:.3T}", this->ChillerEIRFPLRPLRMax) +
                                     " in bicubic curve = " + this->EIRFPLRName + " which is used");
                     ShowContinueError("by Chiller:Electric:ReformulatedEIR = " + equipName + '.');
                     ShowContinueError("The maximum value of PLR [y] must be from zero to 1.1, and greater than the minimum value of PLR.");
@@ -2324,7 +2324,7 @@ namespace ChillerReformulatedEIR {
                                  " C) is outside the range of evaporator outlet temperatures (X var) given in Cooling Capacity Function of "
                                  "Temperature biquadratic curve = " +
                                  this->CAPFTName);
-                ShowContinueErrorTimeStamp("The range specified = " + format("{:.2T}", CAPFTXTmin) + " C to " +
+                ShowContinueErrorTimeStamp(format("The range specified = {:.2T}", CAPFTXTmin) + " C to " +
                                            format("{:.2T}", CAPFTXTmax) + " C.");
                 ShowRecurringWarningErrorAtEnd("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name +
                                                    "\": The evap outlet temp range in Cooling Capacity Function of Temp curve error continues.",
@@ -2348,7 +2348,7 @@ namespace ChillerReformulatedEIR {
                                  " C) is outside the range of evaporator outlet temperatures (X var) given in Electric Input to Cooling Output Ratio "
                                  "Function of Temperature biquadratic curve = " +
                                  this->EIRFTName);
-                ShowContinueErrorTimeStamp("The range specified = " + format("{:.2T}", EIRFTXTmin) + " C to " +
+                ShowContinueErrorTimeStamp(format("The range specified = {:.2T}", EIRFTXTmin) + " C to " +
                                            format("{:.2T}", EIRFTXTmax) + " C.");
                 ShowRecurringWarningErrorAtEnd(
                     "CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name +
@@ -2405,7 +2405,7 @@ namespace ChillerReformulatedEIR {
                                  " C) is outside the range of condenser outlet temperatures (Y var) given in Cooling Capacity Function of "
                                  "Temperature biquadratic curve = " +
                                  this->CAPFTName);
-                ShowContinueErrorTimeStamp("The range specified = " + format("{:.2T}", CAPFTYTmin) + " C to " +
+                ShowContinueErrorTimeStamp(format("The range specified = {:.2T}", CAPFTYTmin) + " C to " +
                                            format("{:.2T}", CAPFTYTmax) + " C.");
                 ShowRecurringWarningErrorAtEnd("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name +
                                                    "\": The cond outlet temp range in Cooling Capacity Function of Temp curve error continues.",
@@ -2429,7 +2429,7 @@ namespace ChillerReformulatedEIR {
                                  " C) is outside the range of condenser outlet temperatures (Y var) given in Electric Input to Cooling Output Ratio "
                                  "Function of Temperature biquadratic curve = " +
                                  this->EIRFTName);
-                ShowContinueErrorTimeStamp("The range specified = " + format("{:.2T}", EIRFTYTmin) + " C to " +
+                ShowContinueErrorTimeStamp(format("The range specified = {:.2T}", EIRFTYTmin) + " C to " +
                                            format("{:.2T}", EIRFTYTmax) + " C.");
                 ShowRecurringWarningErrorAtEnd(
                     "CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name +
@@ -2456,7 +2456,7 @@ namespace ChillerReformulatedEIR {
                                      " C) is outside the range of condenser outlet temperatures (X var) given in Electric Input to Cooling Output "
                                      "Ratio Function of Part-load Ratio bicubic curve = " +
                                      this->EIRFPLRName);
-                    ShowContinueErrorTimeStamp("The range specified = " + format("{:.2T}", EIRFPLRTmin) + " C to " +
+                    ShowContinueErrorTimeStamp(format("The range specified = {:.2T}", EIRFPLRTmin) + " C to " +
                                                format("{:.2T}", EIRFPLRTmax) + " C.");
                     ShowRecurringWarningErrorAtEnd(
                         "CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name +
@@ -2483,7 +2483,7 @@ namespace ChillerReformulatedEIR {
                                  ") is outside the range of part-load ratios (Y var) given in Electric Input to Cooling Output Ratio Function of "
                                  "Part-load Ratio bicubic curve = " +
                                  this->EIRFPLRName);
-                ShowContinueErrorTimeStamp("The range specified = " + format("{:.3T}", EIRFPLRPLRmin) + " to " +
+                ShowContinueErrorTimeStamp(format("The range specified = {:.3T}", EIRFPLRPLRmin) + " to " +
                                            format("{:.3T}", EIRFPLRPLRmax) + '.');
                 ShowRecurringWarningErrorAtEnd(
                     "CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name +
@@ -2538,8 +2538,8 @@ namespace ChillerReformulatedEIR {
                 ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name + "\":");
                 ShowContinueError(" Chiller Capacity as a Function of Temperature curve output is negative (" +
                                   format("{:.3R}", this->ChillerCapFT) + ").");
-                ShowContinueError(" Negative value occurs using an Evaporator Leaving Temp of " + format("{:.1R}", EvapOutletTempSetPoint) +
-                                  " and a Condenser Leaving Temp of " + format("{:.1R}", this->CondOutletTemp) + '.');
+                ShowContinueError(format(" Negative value occurs using an Evaporator Leaving Temp of {:.1R}", EvapOutletTempSetPoint) +
+                                  format(" and a Condenser Leaving Temp of {:.1R}", this->CondOutletTemp) + '.');
                 ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
             } else if (DataPlant::PlantLoop(PlantLoopNum).LoopSide(LoopSideNum).FlowLock != 0 && !DataGlobals::WarmupFlag) {
                 ++this->ChillerCapFTError;
@@ -2559,8 +2559,8 @@ namespace ChillerReformulatedEIR {
                 ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name + "\":");
                 ShowContinueError(" Reformulated Chiller EIR as a Function of Temperature curve output is negative (" +
                                   format("{:.3R}", this->ChillerEIRFT) + ").");
-                ShowContinueError(" Negative value occurs using an Evaporator Leaving Temp of " + format("{:.1R}", this->EvapOutletTemp) +
-                                  " and a Condenser Leaving Temp of " + format("{:.1R}", this->CondOutletTemp) + '.');
+                ShowContinueError(format(" Negative value occurs using an Evaporator Leaving Temp of {:.1R}", this->EvapOutletTemp) +
+                                  format(" and a Condenser Leaving Temp of {:.1R}", this->CondOutletTemp) + '.');
                 ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
             } else if (DataPlant::PlantLoop(PlantLoopNum).LoopSide(LoopSideNum).FlowLock != 0 && !DataGlobals::WarmupFlag) {
                 ++this->ChillerEIRFTError;
@@ -2602,8 +2602,8 @@ namespace ChillerReformulatedEIR {
                 ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name + "\":");
                 ShowContinueError(" Chiller EIR as a function of PLR and condenser water temperature curve output is negative (" +
                                   format("{:.3R}", this->ChillerEIRFPLR) + ").");
-                ShowContinueError(" Negative value occurs using a part-load ratio of " + format("{:.3R}", this->ChillerPartLoadRatio) +
-                                  " and a Condenser Leaving Temp of " + format("{:.1R}", this->CondOutletTemp) + " C.");
+                ShowContinueError(format(" Negative value occurs using a part-load ratio of {:.3R}", this->ChillerPartLoadRatio) +
+                                  format(" and a Condenser Leaving Temp of {:.1R}", this->CondOutletTemp) + " C.");
                 ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
             } else if (DataPlant::PlantLoop(PlantLoopNum).LoopSide(LoopSideNum).FlowLock != 0 && !DataGlobals::WarmupFlag) {
                 ++this->ChillerEIRFPLRError;

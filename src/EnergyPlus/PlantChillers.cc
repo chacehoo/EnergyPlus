@@ -1082,8 +1082,8 @@ namespace PlantChillers {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpNomCap - this->NomCap) / this->NomCap) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerElectric: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Nominal Capacity of " + format("{:.2R}", this->NomCap) + " [W]");
-                                    ShowContinueError("differs from Design Size Nominal Capacity of " + format("{:.2R}", tmpNomCap) +
+                                    ShowContinueError(format("User-Specified Nominal Capacity of {:.2R}", this->NomCap) + " [W]");
+                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R}", tmpNomCap) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -1843,9 +1843,9 @@ namespace PlantChillers {
                 if (condInletTemp > 70.0) {
                     ShowSevereError("CalcElectricChillerModel: Condenser loop inlet temperatures over 70.0 C for ElectricChiller=" + this->Name);
                     ShowContinueErrorTimeStamp("");
-                    ShowContinueError("Condenser loop water temperatures are too high at" + format("{:.2R}", condInletTemp));
+                    ShowContinueError(format("Condenser loop water temperatures are too high at{:.2R}", condInletTemp));
                     ShowContinueError("Check input for condenser plant loop, especially cooling tower");
-                    ShowContinueError("Evaporator inlet temperature: " + format("{:.2R}", DataLoopNode::Node(this->EvapInletNodeNum).Temp));
+                    ShowContinueError(format("Evaporator inlet temperature: {:.2R}", DataLoopNode::Node(this->EvapInletNodeNum).Temp));
 
                     ShowFatalError("Program Terminates due to previous error condition");
                 }
@@ -1855,8 +1855,8 @@ namespace PlantChillers {
                     ShowSevereError("CalcElectricChillerModel: Capacity ratio below zero for ElectricChiller=" + this->Name);
                     ShowContinueErrorTimeStamp("");
                     ShowContinueError("Check input for Capacity Ratio Curve");
-                    ShowContinueError("Condenser inlet temperature: " + format("{:.2R}", condInletTemp));
-                    ShowContinueError("Evaporator inlet temperature: " + format("{:.2R}", DataLoopNode::Node(this->EvapInletNodeNum).Temp));
+                    ShowContinueError(format("Condenser inlet temperature: {:.2R}", condInletTemp));
+                    ShowContinueError(format("Evaporator inlet temperature: {:.2R}", DataLoopNode::Node(this->EvapInletNodeNum).Temp));
                     ShowFatalError("Program Terminates due to previous error condition");
                 }
             }
@@ -2980,8 +2980,8 @@ namespace PlantChillers {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpNomCap - this->NomCap) / this->NomCap) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerEngineDriven: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Nominal Capacity of " + format("{:.2R}", this->NomCap) + " [W]");
-                                    ShowContinueError("differs from Design Size Nominal Capacity of " + format("{:.2R}", tmpNomCap) +
+                                    ShowContinueError(format("User-Specified Nominal Capacity of {:.2R}", this->NomCap) + " [W]");
+                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R}", tmpNomCap) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -3815,9 +3815,9 @@ namespace PlantChillers {
                 if (this->CondInletTemp > 70.0) {
                     ShowSevereError("CalcEngineDrivenChillerModel: Condenser loop inlet temperatures > 70.0 C for EngineDrivenChiller=" + this->Name);
                     ShowContinueErrorTimeStamp("");
-                    ShowContinueError("Condenser loop water temperatures are too high at" + format("{:.2R}", this->CondInletTemp));
+                    ShowContinueError(format("Condenser loop water temperatures are too high at{:.2R}", this->CondInletTemp));
                     ShowContinueError("Check input for condenser plant loop, especially cooling tower");
-                    ShowContinueError("Evaporator inlet temperature: " + format("{:.2R}", DataLoopNode::Node(this->EvapInletNodeNum).Temp));
+                    ShowContinueError(format("Evaporator inlet temperature: {:.2R}", DataLoopNode::Node(this->EvapInletNodeNum).Temp));
 
                     ShowFatalError("Program Terminates due to previous error condition");
                 }
@@ -3827,8 +3827,8 @@ namespace PlantChillers {
                     ShowSevereError("CalcEngineDrivenChillerModel: Capacity ratio below zero for EngineDrivenChiller=" + this->Name);
                     ShowContinueErrorTimeStamp("");
                     ShowContinueError("Check input for Capacity Ratio Curve");
-                    ShowContinueError("Condenser inlet temperature: " + format("{:.2R}", this->CondInletTemp));
-                    ShowContinueError("Evaporator inlet temperature: " + format("{:.2R}", DataLoopNode::Node(this->EvapInletNodeNum).Temp));
+                    ShowContinueError(format("Condenser inlet temperature: {:.2R}", this->CondInletTemp));
+                    ShowContinueError(format("Evaporator inlet temperature: {:.2R}", DataLoopNode::Node(this->EvapInletNodeNum).Temp));
                     ShowFatalError("Program Terminates due to previous error condition");
                 }
             }
@@ -4846,8 +4846,8 @@ namespace PlantChillers {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpNomCap - this->NomCap) / this->NomCap) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeGTChiller: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Nominal Capacity of " + format("{:.2R}", this->NomCap) + " [W]");
-                                    ShowContinueError("differs from Design Size Nominal Capacity of " + format("{:.2R}", tmpNomCap) +
+                                    ShowContinueError(format("User-Specified Nominal Capacity of {:.2R}", this->NomCap) + " [W]");
+                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R}", tmpNomCap) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -5024,7 +5024,7 @@ namespace PlantChillers {
                         if ((std::abs(GTEngineCapacityDes - this->GTEngineCapacity) / this->GTEngineCapacity) >
                             DataSizing::AutoVsHardSizingThreshold) {
                             ShowMessage("SizeGTChiller: Potential issue with equipment sizing for " + this->Name);
-                            ShowContinueError("User-Specified Gas Turbine Engine Capacity of " + format("{:.2R}", this->GTEngineCapacity) +
+                            ShowContinueError(format("User-Specified Gas Turbine Engine Capacity of {:.2R}", this->GTEngineCapacity) +
                                               " [W]");
                             ShowContinueError("differs from Design Size Gas Turbine Engine Capacity of " +
                                               format("{:.2R}", GTEngineCapacityDes) + " [W]");
@@ -5722,9 +5722,9 @@ namespace PlantChillers {
                 if (condInletTemp > 70.0) {
                     ShowSevereError("CalcGTChillerModel: Condenser loop inlet temperatures over 70.0 C for GTChiller=" + this->Name);
                     ShowContinueErrorTimeStamp("");
-                    ShowContinueError("Condenser loop water temperatures are too high at" + format("{:.2R}", condInletTemp));
+                    ShowContinueError(format("Condenser loop water temperatures are too high at{:.2R}", condInletTemp));
                     ShowContinueError("Check input for condenser plant loop, especially cooling tower");
-                    ShowContinueError("Evaporator inlet temperature: " + format("{:.2R}", DataLoopNode::Node(this->EvapInletNodeNum).Temp));
+                    ShowContinueError(format("Evaporator inlet temperature: {:.2R}", DataLoopNode::Node(this->EvapInletNodeNum).Temp));
 
                     ShowFatalError("Program Terminates due to previous error condition");
                 }
@@ -5734,8 +5734,8 @@ namespace PlantChillers {
                     ShowSevereError("CalcGTChillerModel: Capacity ratio below zero for GTChiller=" + this->Name);
                     ShowContinueErrorTimeStamp("");
                     ShowContinueError("Check input for Capacity Ratio Curve");
-                    ShowContinueError("Condenser inlet temperature: " + format("{:.2R}", condInletTemp));
-                    ShowContinueError("Evaporator inlet temperature: " + format("{:.2R}", DataLoopNode::Node(this->EvapInletNodeNum).Temp));
+                    ShowContinueError(format("Condenser inlet temperature: {:.2R}", condInletTemp));
+                    ShowContinueError(format("Evaporator inlet temperature: {:.2R}", DataLoopNode::Node(this->EvapInletNodeNum).Temp));
                     ShowFatalError("Program Terminates due to previous error condition");
                 }
             }
@@ -6500,8 +6500,8 @@ namespace PlantChillers {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpNomCap - NomCapUser) / NomCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerConstantCOP: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Nominal Capacity of " + format("{:.2R}", NomCapUser) + " [W]");
-                                    ShowContinueError("differs from Design Size Nominal Capacity of " + format("{:.2R}", tmpNomCap) +
+                                    ShowContinueError(format("User-Specified Nominal Capacity of {:.2R}", NomCapUser) + " [W]");
+                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R}", tmpNomCap) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -7123,9 +7123,9 @@ namespace PlantChillers {
                 if (CondInletTemp > 70.0) {
                     ShowSevereError("CalcConstCOPChillerModel: Condenser loop inlet temperatures over 70.0 C for ConstCOPChiller=" + this->Name);
                     ShowContinueErrorTimeStamp("");
-                    ShowContinueError("Condenser loop water temperatures are too high at" + format("{:.2R}", CondInletTemp));
+                    ShowContinueError(format("Condenser loop water temperatures are too high at{:.2R}", CondInletTemp));
                     ShowContinueError("Check input for condenser plant loop, especially cooling tower");
-                    ShowContinueError("Evaporator inlet temperature: " + format("{:.2R}", DataLoopNode::Node(this->EvapInletNodeNum).Temp));
+                    ShowContinueError(format("Evaporator inlet temperature: {:.2R}", DataLoopNode::Node(this->EvapInletNodeNum).Temp));
 
                     ShowFatalError("Program Terminates due to previous error condition");
                 }

@@ -1323,7 +1323,7 @@ namespace Fans {
             if (MotorSpeed > (Fan(FanNum).MotorMaxSpd + 1.e-5)) {
                 ShowWarningError("Drive ratio for " + Fan(FanNum).FanType + ": " + Fan(FanNum).FanName +
                                  " is too low at design conditions -- check motor speed and drive ratio inputs");
-                ShowContinueError("...Design fan speed [rev/min]: " + format("{:.2R}", Fan(FanNum).FanSpd));
+                ShowContinueError(format("...Design fan speed [rev/min]: {:.2R}", Fan(FanNum).FanSpd));
             }
 
             Fan(FanNum).FanTrq = Fan(FanNum).FanShaftPower / FanSpdRadS; //[N-m]
@@ -1339,7 +1339,7 @@ namespace Fans {
             if (Fan(FanNum).FanTrq > (Fan(FanNum).BeltMaxTorque + 1.e-5)) {
                 ShowWarningError("Belt for " + Fan(FanNum).FanType + ": " + Fan(FanNum).FanName +
                                  " is undersized at design conditions -- check belt inputs");
-                ShowContinueError("...Design belt output torque (without oversizing) [Nm]: " + format("{:.2R}", Fan(FanNum).FanTrq));
+                ShowContinueError(format("...Design belt output torque (without oversizing) [Nm]: {:.2R}", Fan(FanNum).FanTrq));
             }
 
             // Calculate belt max efficiency using correlations and coefficients based on AMCA data
@@ -1381,7 +1381,7 @@ namespace Fans {
             if (Fan(FanNum).BeltInputPower > (Fan(FanNum).MotorMaxOutPwr + 1.e-5)) {
                 ShowWarningError("Motor for " + Fan(FanNum).FanType + ": " + Fan(FanNum).FanName +
                                  " is undersized at design conditions -- check motor inputs");
-                ShowContinueError("...Design motor output power (without oversizing) [W]: " + format("{:.2R}", Fan(FanNum).BeltInputPower));
+                ShowContinueError(format("...Design motor output power (without oversizing) [W]: {:.2R}", Fan(FanNum).BeltInputPower));
             }
 
             // Calculate motor max efficiency using correlations and coefficients based on MotorMaster+ data
@@ -1422,7 +1422,7 @@ namespace Fans {
                     if (Fan(FanNum).MotorInputPower > (Fan(FanNum).VFDMaxOutPwr + 1.e-5)) {
                         ShowWarningError("VFD for " + Fan(FanNum).FanType + ": " + Fan(FanNum).FanName +
                                          " is undersized at design conditions -- check VFD inputs");
-                        ShowContinueError("...Design VFD output power (without oversizing) [W]: " + format("{:.2R}", Fan(FanNum).MotorInputPower));
+                        ShowContinueError(format("...Design VFD output power (without oversizing) [W]: {:.2R}", Fan(FanNum).MotorInputPower));
                     }
 
                     VFDOutPwrRatio = Fan(FanNum).MotorInputPower / Fan(FanNum).VFDMaxOutPwr;       //[-]
@@ -2019,8 +2019,8 @@ namespace Fans {
                         if (Fan(FanNum).OneTimePowerRatioCheck && !WarmupFlag) {
                             ShowSevereError(cFanTypes(Fan(FanNum).FanType_Num) + " = " + Fan(FanNum).FanName + "\"");
                             ShowContinueError("Error in Fan Power Ratio curve. Curve output less than 0.0.");
-                            ShowContinueError("Curve output = " + format("{:.5T}", SpeedRaisedToPower) +
-                                              ", fan speed ratio = " + format("{:.5T}", SpeedRatio));
+                            ShowContinueError(format("Curve output = {:.5T}", SpeedRaisedToPower) +
+                                              format(", fan speed ratio = {:.5T}", SpeedRatio));
                             ShowContinueError("Check curve coefficients to ensure proper power ratio as a function of fan speed ratio.");
                             ShowContinueError("Resetting Fan Power Ratio curve output to 0.0 and the simulation continues.");
                             ShowContinueErrorTimeStamp("Occurrence info:");
@@ -2034,8 +2034,8 @@ namespace Fans {
                             if (Fan(FanNum).OneTimeEffRatioCheck && !WarmupFlag) {
                                 ShowSevereError(cFanTypes(Fan(FanNum).FanType_Num) + " = " + Fan(FanNum).FanName + "\"");
                                 ShowContinueError("Error in Fan Efficiency Ratio curve. Curve output less than 0.01.");
-                                ShowContinueError("Curve output = " + format("{:.5T}", EffRatioAtSpeedRatio) +
-                                                  ", fan speed ratio = " + format("{:.5T}", SpeedRatio));
+                                ShowContinueError(format("Curve output = {:.5T}", EffRatioAtSpeedRatio) +
+                                                  format(", fan speed ratio = {:.5T}", SpeedRatio));
                                 ShowContinueError("Check curve coefficients to ensure proper efficiency ratio as a function of fan speed ratio.");
                                 ShowContinueError("Resetting Fan Efficiency Ratio curve output to 0.01 and the simulation continues.");
                                 ShowContinueErrorTimeStamp("Occurrence info:");

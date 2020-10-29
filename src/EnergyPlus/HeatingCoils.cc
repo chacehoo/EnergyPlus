@@ -1622,8 +1622,8 @@ namespace HeatingCoils {
                             if (DisplayExtraWarnings) {
                                 if ((std::abs(NominalCapacityDes - NominalCapacityUser) / NominalCapacityUser) > AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeHeatingCoil: Potential issue with equipment sizing for " + CompType + ", " + CompName);
-                                    ShowContinueError("User-Specified Nominal Capacity of " + format("{:.2R}", NominalCapacityUser) + " [W]");
-                                    ShowContinueError("differs from Design Size Nominal Capacity of " + format("{:.2R}", NominalCapacityDes) +
+                                    ShowContinueError(format("User-Specified Nominal Capacity of {:.2R}", NominalCapacityUser) + " [W]");
+                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R}", NominalCapacityDes) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -2230,8 +2230,8 @@ namespace HeatingCoils {
                         ++HeatingCoil(CoilNum).PLFErrorCount;
                         ShowWarningError("CalcFuelHeatingCoil: " + cAllCoilTypes(HeatingCoil(CoilNum).HCoilType_Num) + "=\"" +
                                          HeatingCoil(CoilNum).Name + "\", PLF curve values");
-                        ShowContinueError("The PLF curve value = " + format("{:.5T}", PLF) +
-                                          " for part-load ratio = " + format("{:.5T}", PartLoadRat));
+                        ShowContinueError(format("The PLF curve value = {:.5T}", PLF) +
+                                          format(" for part-load ratio = {:.5T}", PartLoadRat));
                         ShowContinueError("PLF curve values must be >= 0.7. PLF has been reset to 0.7 and the simulation continues...");
                         ShowContinueError("Check the IO reference manual for PLF curve guidance [Coil:Heating:Fuel].");
                     } else {
@@ -2249,7 +2249,7 @@ namespace HeatingCoils {
                         ++HeatingCoil(CoilNum).RTFErrorCount;
                         ShowWarningError("CalcFuelHeatingCoil: " + cAllCoilTypes(HeatingCoil(CoilNum).HCoilType_Num) + "=\"" +
                                          HeatingCoil(CoilNum).Name + "\", runtime fraction");
-                        ShowContinueError("The runtime fraction exceeded 1.0. [" + format("{:.4T}", HeatingCoil(CoilNum).RTF) + "].");
+                        ShowContinueError(format("The runtime fraction exceeded 1.0. [{:.4T}", HeatingCoil(CoilNum).RTF) + "].");
                         ShowContinueError("Runtime fraction is set to 1.0 and the simulation continues...");
                         ShowContinueError("Check the IO reference manual for PLF curve guidance [Coil:Heating:Fuel].");
                     } else {
@@ -2526,8 +2526,8 @@ namespace HeatingCoils {
                         ++HeatingCoil(CoilNum).PLFErrorCount;
                         ShowWarningError("CalcFuelHeatingCoil: " + cAllCoilTypes(HeatingCoil(CoilNum).HCoilType_Num) + "=\"" +
                                          HeatingCoil(CoilNum).Name + "\", PLF curve values");
-                        ShowContinueError("The PLF curve value = " + format("{:.5T}", PLF) +
-                                          " for part-load ratio = " + format("{:.5T}", PartLoadRat));
+                        ShowContinueError(format("The PLF curve value = {:.5T}", PLF) +
+                                          format(" for part-load ratio = {:.5T}", PartLoadRat));
                         ShowContinueError("PLF curve values must be >= 0.7. PLF has been reset to 0.7 and the simulation continues...");
                         ShowContinueError("Check the IO reference manual for PLF curve guidance [Coil:Heating:Fuel].");
                     } else {
@@ -2545,7 +2545,7 @@ namespace HeatingCoils {
                         ++HeatingCoil(CoilNum).RTFErrorCount;
                         ShowWarningError("CalcFuelHeatingCoil: " + cAllCoilTypes(HeatingCoil(CoilNum).HCoilType_Num) + "=\"" +
                                          HeatingCoil(CoilNum).Name + "\", runtime fraction");
-                        ShowContinueError("The runtime fraction exceeded 1.0. [" + format("{:.4T}", HeatingCoil(CoilNum).RTF) + "].");
+                        ShowContinueError(format("The runtime fraction exceeded 1.0. [{:.4T}", HeatingCoil(CoilNum).RTF) + "].");
                         ShowContinueError("Runtime fraction is set to 1.0 and the simulation continues...");
                         ShowContinueError("Check the IO reference manual for PLF curve guidance [Coil:Heating:Fuel].");
                     } else {

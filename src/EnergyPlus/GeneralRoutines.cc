@@ -312,8 +312,8 @@ void ControlCompOutput(EnergyPlusData &state, std::string const &CompName,      
             // Check to make sure that the Minimum Flow rate is less than the max.
             if (MinFlow > MaxFlow) {
                 ShowSevereError("ControlCompOutput:" + CompType + ':' + CompName + ", Min Control Flow is > Max Control Flow");
-                ShowContinueError("Acuated Node=" + NodeID(ActuatedNode) + " MinFlow=[" + format("{:.3T}", MinFlow) +
-                                  "], Max Flow=" + format("{:.3T}", MaxFlow));
+                ShowContinueError("Acuated Node=" + NodeID(ActuatedNode) + format(" MinFlow=[{:.3T}", MinFlow) +
+                                  format("], Max Flow={:.3T}", MaxFlow));
                 ShowContinueErrorTimeStamp("");
                 ShowFatalError("Program terminates due to preceding condition.");
             }
@@ -629,12 +629,12 @@ void ControlCompOutput(EnergyPlusData &state, std::string const &CompName,      
         if ((Iter > MaxIter) && (!WarmupFlag)) {
             // if ( CompErrIndex == 0 ) {
             ShowWarningMessage("ControlCompOutput: Maximum iterations exceeded for " + CompType + " = " + CompName);
-            ShowContinueError("... Load met       = " + format("{:.5T}", LoadMet) + " W.");
-            ShowContinueError("... Load requested = " + format("{:.5T}", QZnReq) + " W.");
-            ShowContinueError("... Error          = " + format("{:.8T}", std::abs((LoadMet - QZnReq) * 100.0 / Denom)) + " %.");
-            ShowContinueError("... Tolerance      = " + format("{:.8T}", ControlOffset * 100.0) + " %.");
+            ShowContinueError(format("... Load met       = {:.5T}", LoadMet) + " W.");
+            ShowContinueError(format("... Load requested = {:.5T}", QZnReq) + " W.");
+            ShowContinueError(format("... Error          = {:.8T}", std::abs((LoadMet - QZnReq) * 100.0 / Denom)) + " %.");
+            ShowContinueError(format("... Tolerance      = {:.8T}", ControlOffset * 100.0) + " %.");
             ShowContinueError("... Error          = (Load met - Load requested) / MAXIMUM(Load requested, 100)");
-            ShowContinueError("... Actuated Node Mass Flow Rate =" + format("{:.9R}", Node(ActuatedNode).MassFlowRate) + " kg/s");
+            ShowContinueError(format("... Actuated Node Mass Flow Rate ={:.9R}", Node(ActuatedNode).MassFlowRate) + " kg/s");
             ShowContinueErrorTimeStamp("");
             ShowRecurringWarningErrorAtEnd("ControlCompOutput: Maximum iterations error for " + CompType + " = " + CompName,
                                            CompErrIndex,

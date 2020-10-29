@@ -380,13 +380,13 @@ namespace ElectricBaseboardRadiator {
             if (ElecBaseboard(BaseboardNum).FracRadiant < MinFraction) {
                 ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", " + cNumericFieldNames(5) +
                                  " was lower than the allowable minimum.");
-                ShowContinueError("...reset to minimum value=[" + format("{:.2R}", MinFraction) + "].");
+                ShowContinueError(format("...reset to minimum value=[{:.2R}", MinFraction) + "].");
                 ElecBaseboard(BaseboardNum).FracRadiant = MinFraction;
             }
             if (ElecBaseboard(BaseboardNum).FracRadiant > MaxFraction) {
                 ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", " + cNumericFieldNames(5) +
                                  " was higher than the allowable maximum.");
-                ShowContinueError("...reset to maximum value=[" + format("{:.2R}", MaxFraction) + "].");
+                ShowContinueError(format("...reset to maximum value=[{:.2R}", MaxFraction) + "].");
                 ElecBaseboard(BaseboardNum).FracRadiant = MaxFraction;
             }
 
@@ -405,13 +405,13 @@ namespace ElectricBaseboardRadiator {
             if (ElecBaseboard(BaseboardNum).FracDistribPerson < MinFraction) {
                 ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", " + cNumericFieldNames(6) +
                                  " was lower than the allowable minimum.");
-                ShowContinueError("...reset to minimum value=[" + format("{:.2R}", MinFraction) + "].");
+                ShowContinueError(format("...reset to minimum value=[{:.2R}", MinFraction) + "].");
                 ElecBaseboard(BaseboardNum).FracDistribPerson = MinFraction;
             }
             if (ElecBaseboard(BaseboardNum).FracDistribPerson > MaxFraction) {
                 ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", " + cNumericFieldNames(6) +
                                  " was higher than the allowable maximum.");
-                ShowContinueError("...reset to maximum value=[" + format("{:.2R}", MaxFraction) + "].");
+                ShowContinueError(format("...reset to maximum value=[{:.2R}", MaxFraction) + "].");
                 ElecBaseboard(BaseboardNum).FracDistribPerson = MaxFraction;
             }
 
@@ -467,13 +467,13 @@ namespace ElectricBaseboardRadiator {
                 if (ElecBaseboard(BaseboardNum).FracDistribToSurf(SurfNum) > MaxFraction) {
                     ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", " + cNumericFieldNames(SurfNum + 6) +
                                      "was greater than the allowable maximum.");
-                    ShowContinueError("...reset to maximum value=[" + format("{:.2R}", MaxFraction) + "].");
+                    ShowContinueError(format("...reset to maximum value=[{:.2R}", MaxFraction) + "].");
                     ElecBaseboard(BaseboardNum).TotSurfToDistrib = MaxFraction;
                 }
                 if (ElecBaseboard(BaseboardNum).FracDistribToSurf(SurfNum) < MinFraction) {
                     ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", " + cNumericFieldNames(SurfNum + 6) +
                                      "was less than the allowable minimum.");
-                    ShowContinueError("...reset to maximum value=[" + format("{:.2R}", MinFraction) + "].");
+                    ShowContinueError(format("...reset to maximum value=[{:.2R}", MinFraction) + "].");
                     ElecBaseboard(BaseboardNum).TotSurfToDistrib = MinFraction;
                 }
                 if (ElecBaseboard(BaseboardNum).SurfacePtr(SurfNum) != 0) {
@@ -1081,16 +1081,16 @@ namespace ElectricBaseboardRadiator {
                         if (ThisSurfIntensity > MaxRadHeatFlux) {
                             ShowSevereError("DistributeBBElecRadGains:  excessive thermal radiation heat flux intensity detected");
                             ShowContinueError("Surface = " + Surface(SurfNum).Name);
-                            ShowContinueError("Surface area = " + format("{:.3R}", Surface(SurfNum).Area) + " [m2]");
+                            ShowContinueError(format("Surface area = {:.3R}", Surface(SurfNum).Area) + " [m2]");
                             ShowContinueError("Occurs in " + cCMO_BBRadiator_Electric + " = " + ElecBaseboard(BaseboardNum).EquipName);
-                            ShowContinueError("Radiation intensity = " + format("{:.2R}", ThisSurfIntensity) + " [W/m2]");
+                            ShowContinueError(format("Radiation intensity = {:.2R}", ThisSurfIntensity) + " [W/m2]");
                             ShowContinueError("Assign a larger surface area or more surfaces in " + cCMO_BBRadiator_Electric);
                             ShowFatalError("DistributeBBElecRadGains:  excessive thermal radiation heat flux intensity detected");
                         }
                     } else {
                         ShowSevereError("DistributeBBElecRadGains:  surface not large enough to receive thermal radiation heat flux");
                         ShowContinueError("Surface = " + Surface(SurfNum).Name);
-                        ShowContinueError("Surface area = " + format("{:.3R}", Surface(SurfNum).Area) + " [m2]");
+                        ShowContinueError(format("Surface area = {:.3R}", Surface(SurfNum).Area) + " [m2]");
                         ShowContinueError("Occurs in " + cCMO_BBRadiator_Electric + " = " + ElecBaseboard(BaseboardNum).EquipName);
                         ShowContinueError("Assign a larger surface area or more surfaces in " + cCMO_BBRadiator_Electric);
                         ShowFatalError("DistributeBBElecRadGains:  surface not large enough to receive thermal radiation heat flux");

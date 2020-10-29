@@ -1028,8 +1028,8 @@ namespace HeatPumpWaterToWaterSimple {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpCoolingCap - nomCoolingCapUser) / nomCoolingCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("sizeCoolingWaterToWaterHP: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Nominal Capacity of " + format("{:.2R}", nomCoolingCapUser) + " [W]");
-                                    ShowContinueError("differs from Design Size Nominal Capacity of " + format("{:.2R}", tmpCoolingCap) +
+                                    ShowContinueError(format("User-Specified Nominal Capacity of {:.2R}", nomCoolingCapUser) + " [W]");
+                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R}", tmpCoolingCap) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -1238,8 +1238,8 @@ namespace HeatPumpWaterToWaterSimple {
                     if (DataGlobals::DisplayExtraWarnings) {
                         if ((std::abs(tmpPowerDraw - nomPowerDrawUser) / nomPowerDrawUser) > DataSizing::AutoVsHardSizingThreshold) {
                             ShowMessage("sizeCoolingWaterToWaterHP: Potential issue with equipment sizing for " + this->Name);
-                            ShowContinueError("User-Specified Cooling Power Consumption of " + format("{:.2R}", nomPowerDrawUser) + " [W]");
-                            ShowContinueError("differs from Design Size Cooling Power Consumption of " + format("{:.2R}", tmpPowerDraw) +
+                            ShowContinueError(format("User-Specified Cooling Power Consumption of {:.2R}", nomPowerDrawUser) + " [W]");
+                            ShowContinueError(format("differs from Design Size Cooling Power Consumption of {:.2R}", tmpPowerDraw) +
                                               " [W]");
                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -1365,8 +1365,8 @@ namespace HeatPumpWaterToWaterSimple {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpHeatingCap - nomHeatingCapUser) / nomHeatingCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("sizeHeatingWaterToWaterHP: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Nominal Capacity of " + format("{:.2R}", nomHeatingCapUser) + " [W]");
-                                    ShowContinueError("differs from Design Size Nominal Capacity of " + format("{:.2R}", tmpHeatingCap) +
+                                    ShowContinueError(format("User-Specified Nominal Capacity of {:.2R}", nomHeatingCapUser) + " [W]");
+                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R}", tmpHeatingCap) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -1574,8 +1574,8 @@ namespace HeatPumpWaterToWaterSimple {
                     if (DataGlobals::DisplayExtraWarnings) {
                         if ((std::abs(tmpPowerDraw - nomPowerDrawUser) / nomPowerDrawUser) > DataSizing::AutoVsHardSizingThreshold) {
                             ShowMessage("sizeHeatingWaterToWaterHP: Potential issue with equipment sizing for " + this->Name);
-                            ShowContinueError("User-Specified Heating Power Consumption of " + format("{:.2R}", nomPowerDrawUser) + " [W]");
-                            ShowContinueError("differs from Design Size Heating Power Consumption of " + format("{:.2R}", tmpPowerDraw) +
+                            ShowContinueError(format("User-Specified Heating Power Consumption of {:.2R}", nomPowerDrawUser) + " [W]");
+                            ShowContinueError(format("differs from Design Size Heating Power Consumption of {:.2R}", tmpPowerDraw) +
                                               " [W]");
                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -1719,12 +1719,12 @@ namespace HeatPumpWaterToWaterSimple {
                 if (this->CoolCapNegativeCounter < 1) {
                     ++this->CoolCapNegativeCounter;
                     ShowWarningError(HPEqFitCooling + " \"" + this->Name + "\":");
-                    ShowContinueError(" Cooling capacity curve output is <= 0.0 (" + format("{:.4T}", QLoad) + ").");
-                    ShowContinueError(" Zero or negative value occurs with a load-side inlet temperature of " + format("{:.2T}", LoadSideInletTemp) +
+                    ShowContinueError(format(" Cooling capacity curve output is <= 0.0 ({:.4T}", QLoad) + ").");
+                    ShowContinueError(format(" Zero or negative value occurs with a load-side inlet temperature of {:.2T}", LoadSideInletTemp) +
                                       " C,");
-                    ShowContinueError(" a source-side inlet temperature of " + format("{:.2T}", SourceSideInletTemp) + " C,");
-                    ShowContinueError(" a load-side mass flow rate of " + format("{:.3T}", LoadSideMassFlowRate) + " kg/s,");
-                    ShowContinueError(" and a source-side mass flow rate of " + format("{:.3T}", SourceSideMassFlowRate) + " kg/s.");
+                    ShowContinueError(format(" a source-side inlet temperature of {:.2T}", SourceSideInletTemp) + " C,");
+                    ShowContinueError(format(" a load-side mass flow rate of {:.3T}", LoadSideMassFlowRate) + " kg/s,");
+                    ShowContinueError(format(" and a source-side mass flow rate of {:.3T}", SourceSideMassFlowRate) + " kg/s.");
                     ShowContinueErrorTimeStamp(" The heat pump is turned off for this time step but simulation continues.");
                 } else {
                     ShowRecurringWarningErrorAtEnd(HPEqFitCooling + " \"" + this->Name +
@@ -1738,12 +1738,12 @@ namespace HeatPumpWaterToWaterSimple {
                 if (this->CoolPowerNegativeCounter < 1) {
                     ++this->CoolPowerNegativeCounter;
                     ShowWarningError(HPEqFitCooling + " \"" + this->Name + "\":");
-                    ShowContinueError(" Cooling compressor power curve output is <= 0.0 (" + format("{:.4T}", Power) + ").");
-                    ShowContinueError(" Zero or negative value occurs with a load-side inlet temperature of " + format("{:.2T}", LoadSideInletTemp) +
+                    ShowContinueError(format(" Cooling compressor power curve output is <= 0.0 ({:.4T}", Power) + ").");
+                    ShowContinueError(format(" Zero or negative value occurs with a load-side inlet temperature of {:.2T}", LoadSideInletTemp) +
                                       " C,");
-                    ShowContinueError(" a source-side inlet temperature of " + format("{:.2T}", SourceSideInletTemp) + " C,");
-                    ShowContinueError(" a load-side mass flow rate of " + format("{:.3T}", LoadSideMassFlowRate) + " kg/s,");
-                    ShowContinueError(" and a source-side mass flow rate of " + format("{:.3T}", SourceSideMassFlowRate) + " kg/s.");
+                    ShowContinueError(format(" a source-side inlet temperature of {:.2T}", SourceSideInletTemp) + " C,");
+                    ShowContinueError(format(" a load-side mass flow rate of {:.3T}", LoadSideMassFlowRate) + " kg/s,");
+                    ShowContinueError(format(" and a source-side mass flow rate of {:.3T}", SourceSideMassFlowRate) + " kg/s.");
                     ShowContinueErrorTimeStamp(" The heat pump is turned off for this time step but simulation continues.");
                 } else {
                     ShowRecurringWarningErrorAtEnd(HPEqFitCooling + " \"" + this->Name +
@@ -1898,12 +1898,12 @@ namespace HeatPumpWaterToWaterSimple {
                 if (this->HeatCapNegativeCounter < 1) {
                     ++this->HeatCapNegativeCounter;
                     ShowWarningError(HPEqFitHeating + " \"" + this->Name + "\":");
-                    ShowContinueError(" Heating capacity curve output is <= 0.0 (" + format("{:.4T}", QLoad) + ").");
-                    ShowContinueError(" Zero or negative value occurs with a load-side inlet temperature of " + format("{:.2T}", LoadSideInletTemp) +
+                    ShowContinueError(format(" Heating capacity curve output is <= 0.0 ({:.4T}", QLoad) + ").");
+                    ShowContinueError(format(" Zero or negative value occurs with a load-side inlet temperature of {:.2T}", LoadSideInletTemp) +
                                       " C,");
-                    ShowContinueError(" a source-side inlet temperature of " + format("{:.2T}", SourceSideInletTemp) + " C,");
-                    ShowContinueError(" a load-side mass flow rate of " + format("{:.3T}", LoadSideMassFlowRate) + " kg/s,");
-                    ShowContinueError(" and a source-side mass flow rate of " + format("{:.3T}", SourceSideMassFlowRate) + " kg/s.");
+                    ShowContinueError(format(" a source-side inlet temperature of {:.2T}", SourceSideInletTemp) + " C,");
+                    ShowContinueError(format(" a load-side mass flow rate of {:.3T}", LoadSideMassFlowRate) + " kg/s,");
+                    ShowContinueError(format(" and a source-side mass flow rate of {:.3T}", SourceSideMassFlowRate) + " kg/s.");
                     ShowContinueErrorTimeStamp(" The heat pump is turned off for this time step but simulation continues.");
                 } else {
                     ShowRecurringWarningErrorAtEnd(HPEqFitHeating + " \"" + this->Name +
@@ -1917,12 +1917,12 @@ namespace HeatPumpWaterToWaterSimple {
                 if (this->HeatPowerNegativeCounter < 1) {
                     ++this->HeatPowerNegativeCounter;
                     ShowWarningError(HPEqFitHeating + " \"" + this->Name + "\":");
-                    ShowContinueError(" Heating compressor power curve output is <= 0.0 (" + format("{:.4T}", Power) + ").");
-                    ShowContinueError(" Zero or negative value occurs with a load-side inlet temperature of " + format("{:.2T}", LoadSideInletTemp) +
+                    ShowContinueError(format(" Heating compressor power curve output is <= 0.0 ({:.4T}", Power) + ").");
+                    ShowContinueError(format(" Zero or negative value occurs with a load-side inlet temperature of {:.2T}", LoadSideInletTemp) +
                                       " C,");
-                    ShowContinueError(" a source-side inlet temperature of " + format("{:.2T}", SourceSideInletTemp) + " C,");
-                    ShowContinueError(" a load-side mass flow rate of " + format("{:.3T}", LoadSideMassFlowRate) + " kg/s,");
-                    ShowContinueError(" and a source-side mass flow rate of " + format("{:.3T}", SourceSideMassFlowRate) + " kg/s.");
+                    ShowContinueError(format(" a source-side inlet temperature of {:.2T}", SourceSideInletTemp) + " C,");
+                    ShowContinueError(format(" a load-side mass flow rate of {:.3T}", LoadSideMassFlowRate) + " kg/s,");
+                    ShowContinueError(format(" and a source-side mass flow rate of {:.3T}", SourceSideMassFlowRate) + " kg/s.");
                     ShowContinueErrorTimeStamp(" The heat pump is turned off for this time step but simulation continues.");
                 } else {
                     ShowRecurringWarningErrorAtEnd(HPEqFitHeating + " \"" + this->Name +

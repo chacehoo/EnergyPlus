@@ -2759,7 +2759,7 @@ namespace SizingManager {
                         ZoneSizingInput(ZoneSizIndex).CoolDesTemp = 0.0;
                     } else if (rNumericArgs(1) < 0.0 && ZoneSizingInput(ZoneSizIndex).ZnCoolDgnSAMethod == SupplyAirTemperature) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + cNumericFieldNames(1) + "=[" + format("{:.2R}", rNumericArgs(1)) +
+                        ShowContinueError("... incorrect " + cNumericFieldNames(1) + format("=[{:.2R}", rNumericArgs(1)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else if (rNumericArgs(1) >= 0.0 && ZoneSizingInput(ZoneSizIndex).ZnCoolDgnSAMethod == SupplyAirTemperature) {
@@ -2809,7 +2809,7 @@ namespace SizingManager {
                         ZoneSizingInput(ZoneSizIndex).HeatDesTemp = 0.0;
                     } else if (rNumericArgs(3) < 0.0 && ZoneSizingInput(ZoneSizIndex).ZnHeatDgnSAMethod == SupplyAirTemperature) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + cNumericFieldNames(3) + "=[" + format("{:.2R}", rNumericArgs(3)) +
+                        ShowContinueError("... incorrect " + cNumericFieldNames(3) + format("=[{:.2R}", rNumericArgs(3)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else if (rNumericArgs(3) >= 0.0 && ZoneSizingInput(ZoneSizIndex).ZnHeatDgnSAMethod == SupplyAirTemperature) {
@@ -2839,7 +2839,7 @@ namespace SizingManager {
                     if (lNumericFieldBlanks(5)) {
                         ZoneSizingInput(ZoneSizIndex).CoolDesHumRat = 0.0;
                     } else if (rNumericArgs(5) < 0.0) {
-                        ShowSevereError(cCurrentModuleObject + ": incorrect " + cNumericFieldNames(5) + ": " + format("{:.2R}", rNumericArgs(5)));
+                        ShowSevereError(cCurrentModuleObject + ": incorrect " + cNumericFieldNames(5) + format(": {:.2R}", rNumericArgs(5)));
                         ShowContinueError(".. value should not be negative. Occurs in Sizing Object=" + cAlphaArgs(1));
                         ErrorsFound = true;
                     } else {
@@ -2853,7 +2853,7 @@ namespace SizingManager {
                     if (lNumericFieldBlanks(6)) {
                         ZoneSizingInput(ZoneSizIndex).HeatDesHumRat = 0.0;
                     } else if (rNumericArgs(6) < 0.0) {
-                        ShowSevereError(cCurrentModuleObject + ": incorrect " + cNumericFieldNames(6) + ": " + format("{:.2R}", rNumericArgs(6)));
+                        ShowSevereError(cCurrentModuleObject + ": incorrect " + cNumericFieldNames(6) + format(": {:.2R}", rNumericArgs(6)));
                         ShowContinueError(".. value should not be negative. Occurs in Sizing Object=" + cAlphaArgs(1));
                         ErrorsFound = true;
                     } else {
@@ -2892,7 +2892,7 @@ namespace SizingManager {
                         ZoneSizingInput(ZoneSizIndex).HeatSizingFactor = GlobalHeatSizingFactor;
                     } else if (rNumericArgs(7) < 0.0) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + cNumericFieldNames(7) + "=[" + format("{:.2R}", rNumericArgs(7)) +
+                        ShowContinueError("... incorrect " + cNumericFieldNames(7) + format("=[{:.2R}", rNumericArgs(7)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else {
@@ -2905,7 +2905,7 @@ namespace SizingManager {
                         ZoneSizingInput(ZoneSizIndex).CoolSizingFactor = GlobalCoolSizingFactor;
                     } else if (rNumericArgs(8) < 0.0) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + cNumericFieldNames(8) + "=[" + format("{:.2R}", rNumericArgs(8)) +
+                        ShowContinueError("... incorrect " + cNumericFieldNames(8) + format("=[{:.2R}", rNumericArgs(8)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else {
@@ -2923,7 +2923,7 @@ namespace SizingManager {
                         ZoneSizingInput(ZoneSizIndex).DesCoolAirFlow = 0.0;
                     } else if (rNumericArgs(9) < 0.0) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + cNumericFieldNames(9) + "=[" + format("{:.2R}", rNumericArgs(9)) +
+                        ShowContinueError("... incorrect " + cNumericFieldNames(9) + format("=[{:.2R}", rNumericArgs(9)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else {
@@ -2944,7 +2944,7 @@ namespace SizingManager {
                         }
                     } else if (rNumericArgs(10) < 0.0) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + cNumericFieldNames(108) + "=[" + format("{:.2R}", rNumericArgs(10)) +
+                        ShowContinueError("... incorrect " + cNumericFieldNames(108) + format("=[{:.2R}", rNumericArgs(10)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else {
@@ -2960,7 +2960,7 @@ namespace SizingManager {
                         ZoneSizingInput(ZoneSizIndex).DesCoolMinAirFlow = 0.0;
                     } else if (rNumericArgs(11) < 0.0) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + cNumericFieldNames(11) + "=[" + format("{:.2R}", rNumericArgs(11)) +
+                        ShowContinueError("... incorrect " + cNumericFieldNames(11) + format("=[{:.2R}", rNumericArgs(11)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else {
@@ -2969,7 +2969,7 @@ namespace SizingManager {
                     //  N12,\field Cooling Minimum Air Flow Fraction
                     if (rNumericArgs(12) < 0.0) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + cNumericFieldNames(12) + "=[" + format("{:.2R}", rNumericArgs(12)) +
+                        ShowContinueError("... incorrect " + cNumericFieldNames(12) + format("=[{:.2R}", rNumericArgs(12)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else {
@@ -2988,7 +2988,7 @@ namespace SizingManager {
                         ZoneSizingInput(ZoneSizIndex).DesHeatAirFlow = 0.0;
                     } else if (rNumericArgs(13) < 0.0) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + cNumericFieldNames(13) + "=[" + format("{:.2R}", rNumericArgs(13)) +
+                        ShowContinueError("... incorrect " + cNumericFieldNames(13) + format("=[{:.2R}", rNumericArgs(13)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else {
@@ -3010,7 +3010,7 @@ namespace SizingManager {
                         }
                     } else if (rNumericArgs(14) < 0.0) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + cNumericFieldNames(14) + "=[" + format("{:.2R}", rNumericArgs(14)) +
+                        ShowContinueError("... incorrect " + cNumericFieldNames(14) + format("=[{:.2R}", rNumericArgs(14)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else {
@@ -3033,7 +3033,7 @@ namespace SizingManager {
                         }
                     } else if (rNumericArgs(15) < 0.0) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + cNumericFieldNames(15) + "=[" + format("{:.2R}", rNumericArgs(15)) +
+                        ShowContinueError("... incorrect " + cNumericFieldNames(15) + format("=[{:.2R}", rNumericArgs(15)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else {
@@ -3055,7 +3055,7 @@ namespace SizingManager {
                         }
                     } else if (rNumericArgs(16) < 0.0) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + cNumericFieldNames(16) + "=[" + format("{:.2R}", rNumericArgs(16)) +
+                        ShowContinueError("... incorrect " + cNumericFieldNames(16) + format("=[{:.2R}", rNumericArgs(16)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else {

@@ -1907,9 +1907,9 @@ namespace VentilatedSlab {
                             if ((std::abs(OutAirVolFlowDes - OutAirVolFlowUser) / OutAirVolFlowUser) > AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeVentilatedSlab: Potential issue with equipment sizing for ZoneHVAC:VentilatedSlab = \"" +
                                             state.dataVentilatedSlab->VentSlab(Item).Name + "\".");
-                                ShowContinueError("User-Specified Maximum Outdoor Air Flow Rate of " + format("{:.5R}", OutAirVolFlowUser) +
+                                ShowContinueError(format("User-Specified Maximum Outdoor Air Flow Rate of {:.5R}", OutAirVolFlowUser) +
                                                   " [m3/s]");
-                                ShowContinueError("differs from Design Size Maximum Outdoor Air Flow Rate of " + format("{:.5R}", OutAirVolFlowDes) +
+                                ShowContinueError(format("differs from Design Size Maximum Outdoor Air Flow Rate of {:.5R}", OutAirVolFlowDes) +
                                                   " [m3/s]");
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -1955,7 +1955,7 @@ namespace VentilatedSlab {
                             if ((std::abs(MinOutAirVolFlowDes - MinOutAirVolFlowUser) / MinOutAirVolFlowUser) > AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeVentilatedSlab: Potential issue with equipment sizing for ZoneHVAC:VentilatedSlab = \"" +
                                             state.dataVentilatedSlab->VentSlab(Item).Name + "\".");
-                                ShowContinueError("User-Specified Minimum Outdoor Air Flow Rate of " + format("{:.5R}", MinOutAirVolFlowUser) +
+                                ShowContinueError(format("User-Specified Minimum Outdoor Air Flow Rate of {:.5R}", MinOutAirVolFlowUser) +
                                                   " [m3/s]");
                                 ShowContinueError("differs from Design Size Minimum Outdoor Air Flow Rate of " +
                                                   format("{:.5R}", MinOutAirVolFlowDes) + " [m3/s]");
@@ -2083,7 +2083,7 @@ namespace VentilatedSlab {
                                 if ((std::abs(MaxVolHotWaterFlowDes - MaxVolHotWaterFlowUser) / MaxVolHotWaterFlowUser) > AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeVentilatedSlab: Potential issue with equipment sizing for ZoneHVAC:VentilatedSlab = \"" +
                                                 state.dataVentilatedSlab->VentSlab(Item).Name + "\".");
-                                    ShowContinueError("User-Specified Maximum Hot Water Flow of " + format("{:.5R}", MaxVolHotWaterFlowUser) +
+                                    ShowContinueError(format("User-Specified Maximum Hot Water Flow of {:.5R}", MaxVolHotWaterFlowUser) +
                                                       " [m3/s]");
                                     ShowContinueError("differs from Design Size Maximum Hot Water Flow of " +
                                                       format("{:.5R}", MaxVolHotWaterFlowDes) + " [m3/s]");
@@ -2200,9 +2200,9 @@ namespace VentilatedSlab {
                                 if ((std::abs(MaxVolHotSteamFlowDes - MaxVolHotSteamFlowUser) / MaxVolHotSteamFlowUser) > AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeVentilatedSlab: Potential issue with equipment sizing for ZoneHVAC:VentilatedSlab = \"" +
                                                 state.dataVentilatedSlab->VentSlab(Item).Name + "\".");
-                                    ShowContinueError("User-Specified Maximum Steam Flow of " + format("{:.5R}", MaxVolHotSteamFlowUser) +
+                                    ShowContinueError(format("User-Specified Maximum Steam Flow of {:.5R}", MaxVolHotSteamFlowUser) +
                                                       " [m3/s]");
-                                    ShowContinueError("differs from Design Size Maximum Steam Flow of " + format("{:.5R}", MaxVolHotSteamFlowDes) +
+                                    ShowContinueError(format("differs from Design Size Maximum Steam Flow of {:.5R}", MaxVolHotSteamFlowDes) +
                                                       " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -2328,9 +2328,9 @@ namespace VentilatedSlab {
                             if ((std::abs(MaxVolColdWaterFlowDes - MaxVolColdWaterFlowUser) / MaxVolColdWaterFlowUser) > AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeVentilatedSlab: Potential issue with equipment sizing for ZoneHVAC:VentilatedSlab = \"" +
                                             state.dataVentilatedSlab->VentSlab(Item).Name + "\".");
-                                ShowContinueError("User-Specified Maximum Cold Water Flow of " + format("{:.5R}", MaxVolColdWaterFlowUser) +
+                                ShowContinueError(format("User-Specified Maximum Cold Water Flow of {:.5R}", MaxVolColdWaterFlowUser) +
                                                   " [m3/s]");
-                                ShowContinueError("differs from Design Size Maximum Cold Water Flow of " + format("{:.5R}", MaxVolColdWaterFlowDes) +
+                                ShowContinueError(format("differs from Design Size Maximum Cold Water Flow of {:.5R}", MaxVolColdWaterFlowDes) +
                                                   " [m3/s]");
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -3713,7 +3713,7 @@ namespace VentilatedSlab {
                                         ShowContinueErrorTimeStamp("");
                                     }
                                     if (CondensationErrorCount == 1) {
-                                        ShowContinueError("Note that there is a " + format("{:.4R}", CondDeltaTemp) +
+                                        ShowContinueError(format("Note that there is a {:.4R}", CondDeltaTemp) +
                                                           " C safety built-in to the shut-off criteria");
                                         ShowContinueError("Note also that this affects all surfaces that are part of this system");
                                     }
@@ -3962,7 +3962,7 @@ namespace VentilatedSlab {
                                         ShowContinueErrorTimeStamp("");
                                     }
                                     if (CondensationErrorCount == 1) {
-                                        ShowContinueError("Note that there is a " + format("{:.4R}", CondDeltaTemp) +
+                                        ShowContinueError(format("Note that there is a {:.4R}", CondDeltaTemp) +
                                                           " C safety built-in to the shut-off criteria");
                                         ShowContinueError("Note also that this affects all surfaces that are part of this system");
                                     }
@@ -4042,7 +4042,7 @@ namespace VentilatedSlab {
                                                   format("{:.4R}", Node(ReturnAirNode).Temp));
                                 ShowContinueError("Predicted return air temperature [C] from the slab section energy balances = " +
                                                   format("{:.4R}", AirOutletTempCheck));
-                                ShowContinueError("Total energy rate (power) [W] added to the slab = " + format("{:.4R}", TotalVentSlabRadPower));
+                                ShowContinueError(format("Total energy rate (power) [W] added to the slab = {:.4R}", TotalVentSlabRadPower));
                                 ShowContinueErrorTimeStamp("");
                             }
                             ShowRecurringWarningErrorAtEnd(state.dataVentilatedSlab->cMO_VentilatedSlab + " [" + state.dataVentilatedSlab->VentSlab(Item).Name +

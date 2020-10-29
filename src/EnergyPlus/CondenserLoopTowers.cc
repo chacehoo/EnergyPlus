@@ -2243,7 +2243,7 @@ namespace CondenserLoopTowers {
                         ShowContinueError("Tower Design Range Temperature specified in tower = " + this->Name);
                         ShowContinueError("is inconsistent with Design Loop Delta Temperature specified in Sizing:Plant object = " +
                                           DataSizing::PlantSizData(PltSizCondNum).PlantLoopName + ".");
-                        ShowContinueError("..The Design Range Temperature specified in tower is = " + format("{:.2T}", this->DesRange));
+                        ShowContinueError(format("..The Design Range Temperature specified in tower is = {:.2T}", this->DesRange));
                         ShowContinueError("..The Design Loop Delta Temperature specified in plant sizing data is = " +
                                           format("{:.2T}", DataSizing::PlantSizData(PltSizCondNum).DeltaT));
                     }
@@ -2457,7 +2457,7 @@ namespace CondenserLoopTowers {
                     //  temperature is less than design inlet air wet bulb temperature
                     if (DataSizing::PlantSizData(PltSizCondNum).ExitTemp <= this->DesInletAirWBTemp) {
                         ShowSevereError("Error when autosizing the UA value for cooling tower = " + this->Name +
-                                        ". Design Loop Exit Temperature must be greater than " + format("{:.2T}", this->DesInletAirWBTemp) +
+                                        format(". Design Loop Exit Temperature must be greater than {:.2T}", this->DesInletAirWBTemp) +
                                         " C when autosizing the tower UA.");
                         ShowContinueError("The Design Loop Exit Temperature specified in Sizing:Plant object = " +
                                           DataSizing::PlantSizData(PltSizCondNum).PlantLoopName + " (" +
@@ -2545,9 +2545,9 @@ namespace CondenserLoopTowers {
                     // * If not, hardcoded above to 21C
                     if (DesTowerExitWaterTemp <= this->DesInletAirWBTemp) {
                         ShowSevereError("Error when autosizing the UA value for cooling tower = " + this->Name +
-                                        ". Design Tower Exit Temperature must be greater than " + format("{:.2T}", this->DesInletAirWBTemp) +
+                                        format(". Design Tower Exit Temperature must be greater than {:.2T}", this->DesInletAirWBTemp) +
                                         " C when autosizing the tower UA.");
-                        ShowContinueError("The User-specified Design Loop Exit Temperature=" + format("{:.2T}", DesTowerExitWaterTemp));
+                        ShowContinueError(format("The User-specified Design Loop Exit Temperature={:.2T}", DesTowerExitWaterTemp));
                         ShowContinueError("is less than or equal to the design inlet air wet-bulb temperature of " +
                                           format("{:.2T}", this->DesInletAirWBTemp) + " C.");
 
@@ -2561,7 +2561,7 @@ namespace CondenserLoopTowers {
                             ShowContinueError(
                                 "The Design Loop Exit Temperature is the sum of the design air inlet wet-bulb temperature= " +
                                 format("{:.2T}", this->DesInletAirWBTemp) +
-                                " C plus the cooling tower design approach temperature = " + format("{:.2T}", this->DesApproach) + "C.");
+                                format(" C plus the cooling tower design approach temperature = {:.2T}", this->DesApproach) + "C.");
                         }
                         ShowContinueError(
                             "If using HVACTemplate:Plant:ChilledWaterLoop, then check that input field Condenser Water Design Setpoint must be > " +
@@ -2879,19 +2879,19 @@ namespace CondenserLoopTowers {
                     ShowContinueError("Tower inlet design water temperature assumed to be 35.0 C.");
                     ShowContinueError("Tower inlet design air dry-bulb temperature assumed to be 35.0 C.");
                     ShowContinueError("Tower inlet design air wet-bulb temperature assumed to be 25.6 C.");
-                    ShowContinueError("Tower load assumed to be " + format("{:.3T}", this->HeatRejectCapNomCapSizingRatio) +
-                                      " times free convection capacity of " + format("{:.0T}", this->TowerFreeConvNomCap) + " W.");
+                    ShowContinueError(format("Tower load assumed to be {:.3T}", this->HeatRejectCapNomCapSizingRatio) +
+                                      format(" times free convection capacity of {:.0T}", this->TowerFreeConvNomCap) + " W.");
 
                     Real64 OutWaterTemp; // outlet water temperature during sizing [C]
                     OutWaterTemp = this->calculateSimpleTowerOutletTemp(state, Par(3), Par(4), UA0);
                     Real64 CoolingOutput = Par(5) * Par(3) * (this->WaterTemp - OutWaterTemp); // tower capacity during sizing [W]
-                    ShowContinueError("Tower capacity at lower UA guess (" + format("{:.4T}", UA0) +
-                                      ") = " + format("{:.0T}", CoolingOutput) + " W.");
+                    ShowContinueError(format("Tower capacity at lower UA guess ({:.4T}", UA0) +
+                                      format(") = {:.0T}", CoolingOutput) + " W.");
 
                     OutWaterTemp = this->calculateSimpleTowerOutletTemp(state, Par(3), Par(4), UA1);
                     CoolingOutput = Par(5) * Par(3) * (this->WaterTemp - OutWaterTemp);
-                    ShowContinueError("Tower capacity at upper UA guess (" + format("{:.4T}", UA1) +
-                                      ") = " + format("{:.0T}", CoolingOutput) + " W.");
+                    ShowContinueError(format("Tower capacity at upper UA guess ({:.4T}", UA1) +
+                                      format(") = {:.0T}", CoolingOutput) + " W.");
 
                     if (CoolingOutput < DesTowerLoad) {
                         ShowContinueError("Free convection capacity should be less than tower capacity at upper UA guess.");
@@ -3144,7 +3144,7 @@ namespace CondenserLoopTowers {
                     ShowContinueError("Tower Design Range Temperature specified in tower = " + this->Name);
                     ShowContinueError("is inconsistent with Design Loop Delta Temperature specified in Sizing:Plant object = " +
                                       DataSizing::PlantSizData(PltSizCondNum).PlantLoopName + ".");
-                    ShowContinueError("..The Design Range Temperature specified in tower is = " + format("{:.2T}", this->DesRange));
+                    ShowContinueError(format("..The Design Range Temperature specified in tower is = {:.2T}", this->DesRange));
                     ShowContinueError("..The Design Loop Delta Temperature specified iin plant sizing data is = " +
                                       format("{:.2T}", DataSizing::PlantSizData(PltSizCondNum).DeltaT));
                 }
@@ -3158,7 +3158,7 @@ namespace CondenserLoopTowers {
                     ShowContinueError("is inconsistent with Design Approach Temperature specified in tower = " + this->Name + ".");
                     ShowContinueError("..The Design Approach Temperature from inputs specified is = " +
                                       format("{:.2T}", DesTowerApproachFromPlant));
-                    ShowContinueError("..The Design Approach Temperature specified in tower is = " + format("{:.2T}", this->DesApproach));
+                    ShowContinueError(format("..The Design Approach Temperature specified in tower is = {:.2T}", this->DesApproach));
                 }
             }
         }
@@ -3231,8 +3231,8 @@ namespace CondenserLoopTowers {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpNomTowerCap - NomCapUser) / NomCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeVSMerkelTower: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Nominal Capacity of " + format("{:.2R}", NomCapUser) + " [W]");
-                                    ShowContinueError("differs from Design Size Nominal Capacity of " + format("{:.2R}", tmpNomTowerCap) +
+                                    ShowContinueError(format("User-Specified Nominal Capacity of {:.2R}", NomCapUser) + " [W]");
+                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R}", tmpNomTowerCap) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -3270,7 +3270,7 @@ namespace CondenserLoopTowers {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpTowerFreeConvNomCap - NomCapUser) / NomCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeVSMerkelTower: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Free Convection Nominal Capacity of " + format("{:.2R}", NomCapUser) +
+                                    ShowContinueError(format("User-Specified Free Convection Nominal Capacity of {:.2R}", NomCapUser) +
                                                       " [W]");
                                     ShowContinueError("differs from Design Size Free Convection Nominal Capacity of " +
                                                       format("{:.2R}", tmpTowerFreeConvNomCap) + " [W]");
@@ -3314,9 +3314,9 @@ namespace CondenserLoopTowers {
                                 if ((std::abs(tmpDesignWaterFlowRate - NomDesWaterFlowUser) / NomDesWaterFlowUser) >
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeVSMerkelTower: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Design Water Flow Rate of " + format("{:.2R}", NomDesWaterFlowUser) +
+                                    ShowContinueError(format("User-Specified Design Water Flow Rate of {:.2R}", NomDesWaterFlowUser) +
                                                       " [m3/s]");
-                                    ShowContinueError("differs from Design Water Flow Rate of " + format("{:.2R}", tmpDesignWaterFlowRate) +
+                                    ShowContinueError(format("differs from Design Water Flow Rate of {:.2R}", tmpDesignWaterFlowRate) +
                                                       " [m3/s]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -3360,9 +3360,9 @@ namespace CondenserLoopTowers {
                             if ((std::abs(tmpDesignAirFlowRate - DesignAirFlowRateUser) / DesignAirFlowRateUser) >
                                 DataSizing::AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeVSMerkelTower: Potential issue with equipment sizing for " + this->Name);
-                                ShowContinueError("User-Specified Design Air Flow Rate of " + format("{:.2R}", DesignAirFlowRateUser) +
+                                ShowContinueError(format("User-Specified Design Air Flow Rate of {:.2R}", DesignAirFlowRateUser) +
                                                   " [m3/s]");
-                                ShowContinueError("differs from Design Air Flow Rate of " + format("{:.2R}", tmpDesignAirFlowRate) +
+                                ShowContinueError(format("differs from Design Air Flow Rate of {:.2R}", tmpDesignAirFlowRate) +
                                                   " [m3/s]");
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -3945,8 +3945,8 @@ namespace CondenserLoopTowers {
                         if ((std::abs(tmpHighSpeedFanPower - HighSpeedFanPowerUser) / HighSpeedFanPowerUser) >
                             DataSizing::AutoVsHardSizingThreshold) {
                             ShowMessage("SizeVSMerkelTower: Potential issue with equipment sizing for " + this->Name);
-                            ShowContinueError("User-Specified Design Fan Power of " + format("{:.2R}", HighSpeedFanPowerUser) + " [W]");
-                            ShowContinueError("differs from Design Fan Power of " + format("{:.2R}", tmpHighSpeedFanPower) + " [W]");
+                            ShowContinueError(format("User-Specified Design Fan Power of {:.2R}", HighSpeedFanPowerUser) + " [W]");
+                            ShowContinueError(format("differs from Design Fan Power of {:.2R}", tmpHighSpeedFanPower) + " [W]");
                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                         }
@@ -5045,7 +5045,7 @@ namespace CondenserLoopTowers {
                                          " - Iteration limit exceeded calculating variable speed fan ratio for unit = " + this->Name);
                         ShowContinueError("Estimated air flow ratio  = " +
                                           format("{:.4R}", (std::abs(MyLoad) - MinSpeedFanQdot) / (FullSpeedFanQdot - MinSpeedFanQdot)));
-                        ShowContinueError("Calculated air flow ratio = " + format("{:.4R}", this->airFlowRateRatio));
+                        ShowContinueError(format("Calculated air flow ratio = {:.4R}", this->airFlowRateRatio));
                         ShowContinueErrorTimeStamp("The calculated air flow ratio will be used and the simulation continues. Occurrence info:");
                     }
                     ShowRecurringWarningErrorAtEnd(
@@ -5062,7 +5062,7 @@ namespace CondenserLoopTowers {
                         ++this->VSMerkelAFRErrorFail;
                         ShowWarningError(cCoolingTower_VariableSpeedMerkel +
                                          " - solver failed calculating variable speed fan ratio for unit = " + this->Name);
-                        ShowContinueError("Estimated air flow ratio  = " + format("{:.4R}", this->airFlowRateRatio));
+                        ShowContinueError(format("Estimated air flow ratio  = {:.4R}", this->airFlowRateRatio));
                         ShowContinueErrorTimeStamp("The estimated air flow ratio will be used and the simulation continues. Occurrence info:");
                     }
                     ShowRecurringWarningErrorAtEnd(
@@ -5905,7 +5905,7 @@ namespace CondenserLoopTowers {
                 ShowContinueError(" Condenser Loop Mass Flow Rate is much greater than the towers design mass flow rate.");
                 ShowContinueError(" Condenser Loop Mass Flow Rate = " +
                                   format("{:.6T}", DataLoopNode::Node(this->WaterOutletNodeNum).MassFlowRate));
-                ShowContinueError(" Tower Design Mass Flow Rate   = " + format("{:.6T}", this->DesWaterMassFlowRate));
+                ShowContinueError(format(" Tower Design Mass Flow Rate   = {:.6T}", this->DesWaterMassFlowRate));
                 ShowContinueErrorTimeStamp("");
             } else {
                 ShowRecurringWarningErrorAtEnd(

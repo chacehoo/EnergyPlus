@@ -3842,13 +3842,13 @@ namespace SystemAvailabilityManager {
             if (SchedMax > 7.0) {
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\"");
                 ShowContinueError(cAlphaFieldNames(4) + "=\"" + cAlphaArgs(4) + "\", the maximum schedule value should be 7. However, ");
-                ShowContinueError("the maximum entered value in the schedule is " + format("{:.1T}", SchedMax));
+                ShowContinueError(format("the maximum entered value in the schedule is {:.1T}", SchedMax));
                 ErrorsFound = true;
             }
             if (SchedMin < 0.0) {
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\"");
                 ShowContinueError(cAlphaFieldNames(4) + "=\"" + cAlphaArgs(4) + "the minimum schedule value should be 0. However, ");
-                ShowContinueError("the minimum entered value in the schedule is " + format("{:.1T}", SchedMin));
+                ShowContinueError(format("the minimum entered value in the schedule is {:.1T}", SchedMin));
                 ErrorsFound = true;
             }
             if (SchedMax == 7.0 && !Contaminant.CO2Simulation) {
@@ -3876,7 +3876,7 @@ namespace SystemAvailabilityManager {
                 if (rNumericArgs(1) > 40.0 || rNumericArgs(1) < 0.0) {
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\"");
                     ShowContinueError(cNumericFieldNames(1) + " is beyond the range.");
-                    ShowContinueError("The input value is " + format("{:.0T}", rNumericArgs(1)) + ". The allowed value must be >= 0 and <= 40 m/s");
+                    ShowContinueError(format("The input value is {:.0T}", rNumericArgs(1)) + ". The allowed value must be >= 0 and <= 40 m/s");
                     ErrorsFound = true;
                 }
             }
@@ -3887,7 +3887,7 @@ namespace SystemAvailabilityManager {
                 if (rNumericArgs(2) > 100.0 || rNumericArgs(2) < -100.0) {
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\"");
                     ShowContinueError(cNumericFieldNames(2) + " is beyond the range.");
-                    ShowContinueError("The input value is " + format("{:.0T}", rNumericArgs(2)) +
+                    ShowContinueError(format("The input value is {:.0T}", rNumericArgs(2)) +
                                       ". The allowed value must be between -100 C and +100 C");
                     ErrorsFound = true;
                 }
@@ -3897,7 +3897,7 @@ namespace SystemAvailabilityManager {
                 if (rNumericArgs(3) > 100.0 || rNumericArgs(3) < -100.0) {
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\"");
                     ShowContinueError(cNumericFieldNames(3) + " is beyond the range.");
-                    ShowContinueError("The input value is " + format("{:.0T}", rNumericArgs(3)) +
+                    ShowContinueError(format("The input value is {:.0T}", rNumericArgs(3)) +
                                       ". The allowed value must be between -100 C and +100 C");
                     ErrorsFound = true;
                 }
@@ -3906,8 +3906,8 @@ namespace SystemAvailabilityManager {
             if (rNumericArgs(2) >= rNumericArgs(3)) {
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" The " + cNumericFieldNames(2) +
                                 " must be less than the " + cNumericFieldNames(3));
-                ShowContinueError("The " + cNumericFieldNames(2) + " is " + format("{:.0T}", rNumericArgs(2)) + ". The " + cNumericFieldNames(3) +
-                                  " is " + format("{:.0T}", rNumericArgs(3)) + '.');
+                ShowContinueError("The " + cNumericFieldNames(2) + format(" is {:.0T}", rNumericArgs(2)) + ". The " + cNumericFieldNames(3) +
+                                  format(" is {:.0T}", rNumericArgs(3)) + '.');
                 ErrorsFound = true;
             }
 
@@ -3917,7 +3917,7 @@ namespace SystemAvailabilityManager {
                 if (rNumericArgs(4) > 300000.0 || rNumericArgs(4) < 0.0) {
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\"");
                     ShowContinueError(cNumericFieldNames(4) + " is beyond the range.");
-                    ShowContinueError("The input value is " + format("{:.0T}", rNumericArgs(4)) +
+                    ShowContinueError(format("The input value is {:.0T}", rNumericArgs(4)) +
                                       ". The allowed value must be between 0 and 300000 J/kg");
                     ErrorsFound = true;
                 }
@@ -3927,7 +3927,7 @@ namespace SystemAvailabilityManager {
                 if (rNumericArgs(5) > 300000.0 || rNumericArgs(5) < 0.0) {
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\"");
                     ShowContinueError(cNumericFieldNames(5) + " is beyond the range.");
-                    ShowContinueError("The input value is " + format("{:.0T}", rNumericArgs(5)) +
+                    ShowContinueError(format("The input value is {:.0T}", rNumericArgs(5)) +
                                       ". The allowed value must be between 0 and 300000 J/kg");
                     ErrorsFound = true;
                 }
@@ -3936,8 +3936,8 @@ namespace SystemAvailabilityManager {
             if (rNumericArgs(4) >= rNumericArgs(5)) {
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" The " + cNumericFieldNames(4) +
                                 " must be less than the " + cNumericFieldNames(5));
-                ShowContinueError("The " + cNumericFieldNames(4) + " is " + format("{:.0T}", rNumericArgs(4)) + ". The " + cNumericFieldNames(5) +
-                                  " is " + format("{:.0T}", rNumericArgs(5)) + '.');
+                ShowContinueError("The " + cNumericFieldNames(4) + format(" is {:.0T}", rNumericArgs(4)) + ". The " + cNumericFieldNames(5) +
+                                  format(" is {:.0T}", rNumericArgs(5)) + '.');
                 ErrorsFound = true;
             }
 
@@ -3947,7 +3947,7 @@ namespace SystemAvailabilityManager {
                 if (rNumericArgs(6) > 100.0 || rNumericArgs(6) < -100.0) {
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\"");
                     ShowContinueError(cNumericFieldNames(6) + " is beyond the range.");
-                    ShowContinueError("The input value is " + format("{:.0T}", rNumericArgs(6)) +
+                    ShowContinueError(format("The input value is {:.0T}", rNumericArgs(6)) +
                                       ". The allowed value must be between -100 C and +100 C");
                     ErrorsFound = true;
                 }
@@ -3957,7 +3957,7 @@ namespace SystemAvailabilityManager {
                 if (rNumericArgs(7) > 100.0 || rNumericArgs(7) < -100.0) {
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\"");
                     ShowContinueError(cNumericFieldNames(7) + " is beyond the range.");
-                    ShowContinueError("The input value is " + format("{:.0T}", rNumericArgs(7)) +
+                    ShowContinueError(format("The input value is {:.0T}", rNumericArgs(7)) +
                                       ". The allowed value must be between -100 C and +100 C");
                     ErrorsFound = true;
                 }
@@ -3966,8 +3966,8 @@ namespace SystemAvailabilityManager {
             if (rNumericArgs(6) >= rNumericArgs(7)) {
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" The " + cNumericFieldNames(6) +
                                 " must be less than the " + cNumericFieldNames(7));
-                ShowContinueError("The " + cNumericFieldNames(6) + " is " + format("{:.0T}", rNumericArgs(6)) + ". The " + cNumericFieldNames(7) +
-                                  " is " + format("{:.0T}", rNumericArgs(7)) + '.');
+                ShowContinueError("The " + cNumericFieldNames(6) + format(" is {:.0T}", rNumericArgs(6)) + ". The " + cNumericFieldNames(7) +
+                                  format(" is {:.0T}", rNumericArgs(7)) + '.');
                 ErrorsFound = true;
             }
 
@@ -3982,7 +3982,7 @@ namespace SystemAvailabilityManager {
             if (SchedMin < 0.0) {
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", Schedule value must be >= 0 in " +
                                 cAlphaFieldNames(6) + "=\"" + cAlphaArgs(6) + "\".");
-                ShowContinueError("The minimum schedule value is " + format("{:.1T}", SchedMin));
+                ShowContinueError(format("The minimum schedule value is {:.1T}", SchedMin));
                 ErrorsFound = true;
             }
 
@@ -4007,7 +4007,7 @@ namespace SystemAvailabilityManager {
                         ShowContinueError("The minimum value of " + cAlphaFieldNames(7) +
                                           " must be greater than or equal to 0.0 at the minimum value of wind speed.");
                         ShowContinueError(cAlphaFieldNames(7) + "=\"" + cAlphaArgs(7) + "\".");
-                        ShowContinueError("Curve output at the minimum wind speed = " + format("{:.3T}", CurveVal));
+                        ShowContinueError(format("Curve output at the minimum wind speed = {:.3T}", CurveVal));
                         ErrorsFound = true;
                     }
                     CurveVal = CurveValue(state, state.dataSystemAvailabilityManager->HybridVentSysAvailMgrData(SysAvailNum).OpeningFactorFWS, CurveMax);
@@ -4016,7 +4016,7 @@ namespace SystemAvailabilityManager {
                         ShowContinueError("The maximum value of " + cAlphaFieldNames(7) +
                                           " must be less than or equal to 1.0 at the maximum value of wind speed.");
                         ShowContinueError(cAlphaFieldNames(7) + "=\"" + cAlphaArgs(7) + "\".");
-                        ShowContinueError("Curve output at the maximum wind speed = " + format("{:.3T}", CurveVal));
+                        ShowContinueError(format("Curve output at the maximum wind speed = {:.3T}", CurveVal));
                         ErrorsFound = true;
                     }
                     // Check curve type
@@ -4041,14 +4041,14 @@ namespace SystemAvailabilityManager {
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\"");
                     ShowContinueError(" For " + cAlphaFieldNames(8) + "=\"" + cAlphaArgs(8) + "\",");
                     ShowContinueError("the maximum schedule value should be 1. However, ");
-                    ShowContinueError("the maximum entered value in the schedule is " + format("{:.1T}", SchedMax));
+                    ShowContinueError(format("the maximum entered value in the schedule is {:.1T}", SchedMax));
                     ErrorsFound = true;
                 }
                 if (SchedMin < 0.0) {
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\"");
                     ShowContinueError("For " + cAlphaFieldNames(8) + "=\"" + cAlphaArgs(8) + "\",");
                     ShowContinueError("the minimum schedule value should be 0. However, ");
-                    ShowContinueError("the minimum entered value in the schedule is " + format("{:.1T}", SchedMin));
+                    ShowContinueError(format("the minimum entered value in the schedule is {:.1T}", SchedMin));
                     ErrorsFound = true;
                 }
             }
@@ -4068,14 +4068,14 @@ namespace SystemAvailabilityManager {
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\"");
                     ShowContinueError("For " + cAlphaFieldNames(9) + "=\"" + cAlphaArgs(9) + "\",");
                     ShowContinueError("the maximum schedule value should be 1. However, ");
-                    ShowContinueError("the maximum entered value in the schedule is " + format("{:.1T}", SchedMax));
+                    ShowContinueError(format("the maximum entered value in the schedule is {:.1T}", SchedMax));
                     ErrorsFound = true;
                 }
                 if (SchedMin < 0.0) {
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\"");
                     ShowContinueError("For " + cAlphaFieldNames(9) + "=\"" + cAlphaArgs(9) + "\",");
                     ShowContinueError("the minimum schedule value should be 0. However, ");
-                    ShowContinueError("the minimum entered value in the schedule is " + format("{:.1T}", SchedMin));
+                    ShowContinueError(format("the minimum entered value in the schedule is {:.1T}", SchedMin));
                     ErrorsFound = true;
                 }
             }

@@ -1173,7 +1173,7 @@ namespace WaterCoils {
                 //   be less than 1
                 TubeToFinDiamRatio = state.dataWaterCoils->WaterCoil(CoilNum).TubeOutsideDiam / state.dataWaterCoils->WaterCoil(CoilNum).EffectiveFinDiam;
                 if (TubeToFinDiamRatio > 1.0) {
-                    ShowWarningError("InitWaterCoil: Detailed Flat Fin Coil, TubetoFinDiamRatio > 1.0, [" + format("{:.4R}", TubeToFinDiamRatio) +
+                    ShowWarningError(format("InitWaterCoil: Detailed Flat Fin Coil, TubetoFinDiamRatio > 1.0, [{:.4R}", TubeToFinDiamRatio) +
                                      ']');
                     // reset tube depth spacing and recalc dependent parameters
                     state.dataWaterCoils->WaterCoil(CoilNum).TubeDepthSpacing *= (pow_2(TubeToFinDiamRatio) + 0.1);
@@ -1183,8 +1183,8 @@ namespace WaterCoils {
                     state.dataWaterCoils->WaterCoil(CoilNum).CoilEffectiveInsideDiam =
                         4.0 * state.dataWaterCoils->WaterCoil(CoilNum).MinAirFlowArea * state.dataWaterCoils->WaterCoil(CoilNum).CoilDepth / state.dataWaterCoils->WaterCoil(CoilNum).TotCoilOutsideSurfArea;
                     TubeToFinDiamRatio = state.dataWaterCoils->WaterCoil(CoilNum).TubeOutsideDiam / state.dataWaterCoils->WaterCoil(CoilNum).EffectiveFinDiam;
-                    ShowContinueError("  Resetting tube depth spacing to " + format("{:.4R}", state.dataWaterCoils->WaterCoil(CoilNum).TubeDepthSpacing) + " meters");
-                    ShowContinueError("  Resetting coil depth to " + format("{:.4R}", state.dataWaterCoils->WaterCoil(CoilNum).CoilDepth) + " meters");
+                    ShowContinueError(format("  Resetting tube depth spacing to {:.4R}", state.dataWaterCoils->WaterCoil(CoilNum).TubeDepthSpacing) + " meters");
+                    ShowContinueError(format("  Resetting coil depth to {:.4R}", state.dataWaterCoils->WaterCoil(CoilNum).CoilDepth) + " meters");
                 }
 
                 CalcDryFinEffCoef(state, TubeToFinDiamRatio, CoefSeries);
@@ -1295,8 +1295,8 @@ namespace WaterCoils {
                             ShowContinueError("                                   Wair,out = " +
                                               format("{:.6R}", state.dataWaterCoils->WaterCoil(CoilNum).DesOutletAirHumRat));
                             if (!NoExitCondReset) {
-                                ShowContinueError("The revised design conditions are: Tair,out = " + format("{:.4R}", TOutNew));
-                                ShowContinueError("                                   Wair,out = " + format("{:.6R}", WOutNew));
+                                ShowContinueError(format("The revised design conditions are: Tair,out = {:.4R}", TOutNew));
+                                ShowContinueError(format("                                   Wair,out = {:.6R}", WOutNew));
                                 state.dataWaterCoils->WaterCoil(CoilNum).DesOutletAirHumRat = WOutNew;
                                 state.dataWaterCoils->WaterCoil(CoilNum).DesOutletAirTemp = TOutNew;
                                 // update outlet air conditions used for sizing
@@ -1408,7 +1408,7 @@ namespace WaterCoils {
                                               format("{:.5R}", state.dataWaterCoils->WaterCoil(CoilNum).MaxWaterVolFlowRate));
                             EnthCorrFrac = (DesEnthWaterOut - DesInletAirEnth) / (DesEnthWaterOut - DesSatEnthAtWaterInTemp);
                             state.dataWaterCoils->WaterCoil(CoilNum).MaxWaterVolFlowRate *= (1.0 + 2.0 * EnthCorrFrac);
-                            ShowContinueError("to " + format("{:.5R}", state.dataWaterCoils->WaterCoil(CoilNum).MaxWaterVolFlowRate) + " m3/s");
+                            ShowContinueError(format("to {:.5R}", state.dataWaterCoils->WaterCoil(CoilNum).MaxWaterVolFlowRate) + " m3/s");
                             state.dataWaterCoils->WaterCoil(CoilNum).MaxWaterMassFlowRate = rho * state.dataWaterCoils->WaterCoil(CoilNum).MaxWaterVolFlowRate;
                             DesOutletWaterTemp = state.dataWaterCoils->WaterCoil(CoilNum).DesInletWaterTemp +
                                                  state.dataWaterCoils->WaterCoil(CoilNum).DesTotWaterCoilLoad / (state.dataWaterCoils->WaterCoil(CoilNum).MaxWaterMassFlowRate * Cp);
@@ -1453,7 +1453,7 @@ namespace WaterCoils {
                             TempCorrFrac = (DesOutletWaterTemp - state.dataWaterCoils->WaterCoil(CoilNum).DesInletAirTemp) /
                                            (DesOutletWaterTemp - state.dataWaterCoils->WaterCoil(CoilNum).DesInletWaterTemp);
                             state.dataWaterCoils->WaterCoil(CoilNum).MaxWaterVolFlowRate *= (1.0 + 2.0 * TempCorrFrac);
-                            ShowContinueError("to " + format("{:.5R}", state.dataWaterCoils->WaterCoil(CoilNum).MaxWaterVolFlowRate) + " m3/s");
+                            ShowContinueError(format("to {:.5R}", state.dataWaterCoils->WaterCoil(CoilNum).MaxWaterVolFlowRate) + " m3/s");
                             state.dataWaterCoils->WaterCoil(CoilNum).MaxWaterMassFlowRate = rho * state.dataWaterCoils->WaterCoil(CoilNum).MaxWaterVolFlowRate;
                             DesOutletWaterTemp = state.dataWaterCoils->WaterCoil(CoilNum).DesInletWaterTemp +
                                                  state.dataWaterCoils->WaterCoil(CoilNum).DesTotWaterCoilLoad / (state.dataWaterCoils->WaterCoil(CoilNum).MaxWaterMassFlowRate * Cp);
@@ -1516,7 +1516,7 @@ namespace WaterCoils {
                     state.dataWaterCoils->WaterCoil(CoilNum).UACoilInternalPerUnitArea = state.dataWaterCoils->WaterCoil(CoilNum).UACoilInternal / state.dataWaterCoils->WaterCoil(CoilNum).TotCoilOutsideSurfArea;
                     state.dataWaterCoils->WaterCoil(CoilNum).UAWetExtPerUnitArea = state.dataWaterCoils->WaterCoil(CoilNum).UACoilExternal / state.dataWaterCoils->WaterCoil(CoilNum).TotCoilOutsideSurfArea;
                     state.dataWaterCoils->WaterCoil(CoilNum).UADryExtPerUnitArea = state.dataWaterCoils->WaterCoil(CoilNum).UAWetExtPerUnitArea;
-                    ShowContinueError(" Coil design UA set to " + format("{:.6R}", state.dataWaterCoils->WaterCoil(CoilNum).UACoilTotal) + " [W/C]");
+                    ShowContinueError(format(" Coil design UA set to {:.6R}", state.dataWaterCoils->WaterCoil(CoilNum).UACoilTotal) + " [W/C]");
                 } else if (SolFla == -2) {
                     ShowSevereError("Calculation of cooling coil design UA failed for coil " + state.dataWaterCoils->WaterCoil(CoilNum).Name);
                     ShowContinueError("  Bad starting values for UA");
@@ -1528,7 +1528,7 @@ namespace WaterCoils {
                     state.dataWaterCoils->WaterCoil(CoilNum).UACoilInternalPerUnitArea = state.dataWaterCoils->WaterCoil(CoilNum).UACoilInternal / state.dataWaterCoils->WaterCoil(CoilNum).TotCoilOutsideSurfArea;
                     state.dataWaterCoils->WaterCoil(CoilNum).UAWetExtPerUnitArea = state.dataWaterCoils->WaterCoil(CoilNum).UACoilExternal / state.dataWaterCoils->WaterCoil(CoilNum).TotCoilOutsideSurfArea;
                     state.dataWaterCoils->WaterCoil(CoilNum).UADryExtPerUnitArea = state.dataWaterCoils->WaterCoil(CoilNum).UAWetExtPerUnitArea;
-                    ShowContinueError(" Coil design UA set to " + format("{:.6R}", state.dataWaterCoils->WaterCoil(CoilNum).UACoilTotal) + " [W/C]");
+                    ShowContinueError(format(" Coil design UA set to {:.6R}", state.dataWaterCoils->WaterCoil(CoilNum).UACoilTotal) + " [W/C]");
                 }
 
                 // cooling coil surface area
@@ -2684,10 +2684,10 @@ namespace WaterCoils {
                 state.dataWaterCoils->WaterCoil(CoilNum).UACoil = sizerHWCoilUA.size(state, TempSize, ErrorsFound);
                 if (DesCoilWaterInTempSaved < DesCoilHWInletTempMin) {
                     ShowWarningError("Autosizing of heating coil UA for Coil:Heating:Water \"" + CompName + "\"");
-                    ShowContinueError(" Plant design loop exit temperature = " + format("{:.2T}", PlantSizData(DataPltSizHeatNum).ExitTemp) + " C");
+                    ShowContinueError(format(" Plant design loop exit temperature = {:.2T}", PlantSizData(DataPltSizHeatNum).ExitTemp) + " C");
                     ShowContinueError(" Plant design loop exit temperature is low for design load and leaving air temperature anticipated.");
                     ShowContinueError(
-                        " Heating coil UA-value is sized using coil water inlet temperature = " + format("{:.2T}", DesCoilInletWaterTempUsed) + " C");
+                        format(" Heating coil UA-value is sized using coil water inlet temperature = {:.2T}", DesCoilInletWaterTempUsed) + " C");
                     state.dataWaterCoils->WaterCoil(DataCoilNum).InletWaterTemp = DesCoilWaterInTempSaved; // reset the Design Coil Inlet Water Temperature
                 }
                 // if coil UA did not size due to one of these variables being 0, must set UACoilVariable to avoid crash later on
@@ -3088,9 +3088,9 @@ namespace WaterCoils {
         if (AirMassFlow > (5.0 * state.dataWaterCoils->WaterCoil(CoilNum).MinAirFlowArea / AirDensity) && state.dataWaterCoils->CoilWarningOnceFlag(CoilNum)) {
             ShowWarningError("Coil:Cooling:Water:DetailedGeometry in Coil =" + state.dataWaterCoils->WaterCoil(CoilNum).Name);
             ShowContinueError("Air Flow Rate Velocity has greatly exceeded upper design guidelines of ~2.5 m/s");
-            ShowContinueError("Air MassFlowRate[kg/s]=" + format("{:.6T}", AirMassFlow));
+            ShowContinueError(format("Air MassFlowRate[kg/s]={:.6T}", AirMassFlow));
             AirVelocity = AirMassFlow * AirDensity / state.dataWaterCoils->WaterCoil(CoilNum).MinAirFlowArea;
-            ShowContinueError("Air Face Velocity[m/s]=" + format("{:.6T}", AirVelocity));
+            ShowContinueError(format("Air Face Velocity[m/s]={:.6T}", AirVelocity));
             ShowContinueError("Approximate MassFlowRate limit for Face Area[kg/s]=" +
                               format("{:.6T}", 2.5 * state.dataWaterCoils->WaterCoil(CoilNum).MinAirFlowArea / AirDensity));
             ShowContinueError("Coil:Cooling:Water:DetailedGeometry could be resized/autosized to handle capacity");
@@ -3098,9 +3098,9 @@ namespace WaterCoils {
         } else if (AirMassFlow > (44.7 * state.dataWaterCoils->WaterCoil(CoilNum).MinAirFlowArea / AirDensity)) {
             ShowSevereError("Coil:Cooling:Water:DetailedGeometry in Coil =" + state.dataWaterCoils->WaterCoil(CoilNum).Name);
             ShowContinueError("Air Flow Rate Velocity is > 100MPH (44.7m/s) and simulation cannot continue");
-            ShowContinueError("Air Mass Flow Rate[kg/s]=" + format("{:.6T}", AirMassFlow));
+            ShowContinueError(format("Air Mass Flow Rate[kg/s]={:.6T}", AirMassFlow));
             AirVelocity = AirMassFlow * AirDensity / state.dataWaterCoils->WaterCoil(CoilNum).MinAirFlowArea;
-            ShowContinueError("Air Face Velocity[m/s]=" + format("{:.6T}", AirVelocity));
+            ShowContinueError(format("Air Face Velocity[m/s]={:.6T}", AirVelocity));
             ShowContinueError("Approximate MassFlowRate limit for Face Area[kg/s]=" +
                               format("{:.6T}", 2.5 * state.dataWaterCoils->WaterCoil(CoilNum).MinAirFlowArea / AirDensity));
             ShowFatalError("Coil:Cooling:Water:DetailedGeometry needs to be resized/autosized to handle capacity");
@@ -6225,11 +6225,11 @@ namespace WaterCoils {
         if (SolFla == -1) {
             ShowSevereError("Calculation of drybulb temperature failed in TdbFnHRhPb(H,RH,PB)");
             ShowContinueError("   Iteration limit exceeded");
-            ShowContinueError("   H=[" + format("{:.6R}", H) + "], RH=[" + format("{:.4R}", RH) + "], PB=[" + format("{:.5R}", PB) + "].");
+            ShowContinueError(format("   H=[{:.6R}", H) + format("], RH=[{:.4R}", RH) + format("], PB=[{:.5R}", PB) + "].");
         } else if (SolFla == -2) {
             ShowSevereError("Calculation of drybulb temperature failed in TdbFnHRhPb(H,RH,PB)");
             ShowContinueError("  Bad starting values for Tdb");
-            ShowContinueError("   H=[" + format("{:.6R}", H) + "], RH=[" + format("{:.4R}", RH) + "], PB=[" + format("{:.5R}", PB) + "].");
+            ShowContinueError(format("   H=[{:.6R}", H) + format("], RH=[{:.4R}", RH) + format("], PB=[{:.5R}", PB) + "].");
         }
         if (SolFla < 0) {
             T = 0.0;

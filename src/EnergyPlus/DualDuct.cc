@@ -772,7 +772,7 @@ namespace DualDuct {
                                                          dd_airterminal(DDNum).DesignRecircFlowRate);
                         } else {
                             if (dd_airterminal(DDNum).MaxAirVolFlowRate < dd_airterminal(DDNum).DesignOAFlowRate) {
-                                ShowSevereError("The value " + format("{:.5R}", dd_airterminal(DDNum).MaxAirVolFlowRate) + " in " +
+                                ShowSevereError(format("The value {:.5R}", dd_airterminal(DDNum).MaxAirVolFlowRate) + " in " +
                                                 cNumericFields(1) + "is lower than the outdoor air requirement.");
                                 ShowContinueError("Occurs in " + cCMO_DDVarVolOA + " = " + dd_airterminal(DDNum).Name);
                                 ShowContinueError("The design outdoor air requirement is " +

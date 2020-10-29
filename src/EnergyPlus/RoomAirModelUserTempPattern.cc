@@ -920,8 +920,8 @@ namespace RoomAirModelUserTempPattern {
             if (DisplayExtraWarnings) {
                 ShowWarningError("RoomAirModelUserTempPattern: Problem in non-dimensional height calculation");
                 ShowContinueError("too low surface: " + Surface(thisHBsurf).Name + " in zone: " + Zone(thisZone).Name);
-                ShowContinueError("**** Average floor height of zone is: " + format("{:.3R}", ZoneZorig));
-                ShowContinueError("**** Surface minimum height is: " + format("{:.3R}", SurfMinZ));
+                ShowContinueError(format("**** Average floor height of zone is: {:.3R}", ZoneZorig));
+                ShowContinueError(format("**** Surface minimum height is: {:.3R}", SurfMinZ));
             } else {
                 ++TotalRoomAirPatternTooLow;
             }
@@ -931,8 +931,8 @@ namespace RoomAirModelUserTempPattern {
             if (DisplayExtraWarnings) {
                 ShowWarningError("RoomAirModelUserTempPattern: Problem in non-dimensional height calculation");
                 ShowContinueError(" too high surface: " + Surface(thisHBsurf).Name + " in zone: " + Zone(thisZone).Name);
-                ShowContinueError("**** Average Ceiling height of zone is: " + format("{:.3R}", (ZoneZorig + ZoneCeilHeight)));
-                ShowContinueError("**** Surface Maximum height is: " + format("{:.3R}", SurfMaxZ));
+                ShowContinueError(format("**** Average Ceiling height of zone is: {:.3R}", (ZoneZorig + ZoneCeilHeight)));
+                ShowContinueError(format("**** Surface Maximum height is: {:.3R}", SurfMaxZ));
             } else {
                 ++TotalRoomAirPatternTooHigh;
             }

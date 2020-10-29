@@ -758,8 +758,8 @@ namespace DataPlant {
                                 "below the high setpoint.");
                             ShowContinueError("Occurs in PlantLoop=" + thisPlantLoop.Name);
                             ShowContinueError(
-                                "LoadToHeatingSetPoint=" + format("{:.3R}", LoadToHeatingSetPoint) +
-                                ", LoadToCoolingSetPoint=" + format("{:.3R}", LoadToCoolingSetPoint));
+                                format("LoadToHeatingSetPoint={:.3R}", LoadToHeatingSetPoint) +
+                                format(", LoadToCoolingSetPoint={:.3R}", LoadToCoolingSetPoint));
                             ShowContinueError("Loop Heating Low Setpoint=" +
                                               format("{:.2R}", LoopSetPointTemperatureLo));
                             ShowContinueError("Loop Cooling High Setpoint=" +
@@ -780,8 +780,8 @@ namespace DataPlant {
                                 "Development Team");
                             ShowContinueError("occurs in PlantLoop=" + thisPlantLoop.Name);
                             ShowContinueError(
-                                "LoadToHeatingSetPoint=" + format("{:.3R}", LoadToHeatingSetPoint) +
-                                ", LoadToCoolingSetPoint=" + format("{:.3R}", LoadToCoolingSetPoint));
+                                format("LoadToHeatingSetPoint={:.3R}", LoadToHeatingSetPoint) +
+                                format(", LoadToCoolingSetPoint={:.3R}", LoadToCoolingSetPoint));
                             ShowContinueError("Loop Heating Setpoint=" +
                                               format("{:.2R}", LoopSetPointTemperatureLo));
                             ShowContinueError("Loop Cooling Setpoint=" +
@@ -1674,9 +1674,9 @@ namespace DataPlant {
                     // Call fatal diagnostic error. !The math should work out!
                     ShowSevereError("ResolveParallelFlows: Dev note, failed to redistribute restricted flow");
                     ShowContinueErrorTimeStamp("");
-                    ShowContinueError("Loop side flow = " + format("{:.8R}", ThisLoopSideFlow) + " (kg/s)");
-                    ShowContinueError("Flow Remaining = " + format("{:.8R}", FlowRemaining) + " (kg/s)");
-                    ShowContinueError("Parallel Branch requests  = " + format("{:.8R}", TotParallelBranchFlowReq) +
+                    ShowContinueError(format("Loop side flow = {:.8R}", ThisLoopSideFlow) + " (kg/s)");
+                    ShowContinueError(format("Flow Remaining = {:.8R}", FlowRemaining) + " (kg/s)");
+                    ShowContinueError(format("Parallel Branch requests  = {:.8R}", TotParallelBranchFlowReq) +
                                       " (kg/s)");
                 }
 

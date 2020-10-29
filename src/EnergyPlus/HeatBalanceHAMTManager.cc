@@ -1380,7 +1380,7 @@ namespace HeatBalanceHAMTManager {
             if (tempmax > MaxSurfaceTempLimit) {
                 if (!WarmupFlag) {
                     if (Surface(sid).HighTempErrCount == 0) {
-                        ShowSevereMessage("HAMT: Temperature (high) out of bounds (" + format("{:.2R}", tempmax) +
+                        ShowSevereMessage(format("HAMT: Temperature (high) out of bounds ({:.2R}", tempmax) +
                                           ") for surface=" + Surface(sid).Name);
                         ShowContinueErrorTimeStamp("");
                     }
@@ -1395,7 +1395,7 @@ namespace HeatBalanceHAMTManager {
             }
             if (tempmax > MaxSurfaceTempLimitBeforeFatal) {
                 if (!WarmupFlag) {
-                    ShowSevereError("HAMT: HAMT: Temperature (high) out of bounds ( " + format("{:.2R}", tempmax) +
+                    ShowSevereError(format("HAMT: HAMT: Temperature (high) out of bounds ( {:.2R}", tempmax) +
                                     ") for surface=" + Surface(sid).Name);
                     ShowContinueErrorTimeStamp("");
                     ShowFatalError("Program terminates due to preceding condition.");
@@ -1404,7 +1404,7 @@ namespace HeatBalanceHAMTManager {
             if (tempmin < MinSurfaceTempLimit) {
                 if (!WarmupFlag) {
                     if (Surface(sid).HighTempErrCount == 0) {
-                        ShowSevereMessage("HAMT: Temperature (low) out of bounds (" + format("{:.2R}", tempmin) +
+                        ShowSevereMessage(format("HAMT: Temperature (low) out of bounds ({:.2R}", tempmin) +
                                           ") for surface=" + Surface(sid).Name);
                         ShowContinueErrorTimeStamp("");
                     }
@@ -1419,7 +1419,7 @@ namespace HeatBalanceHAMTManager {
             }
             if (tempmin < MinSurfaceTempLimitBeforeFatal) {
                 if (!WarmupFlag) {
-                    ShowSevereError("HAMT: HAMT: Temperature (low) out of bounds ( " + format("{:.2R}", tempmin) +
+                    ShowSevereError(format("HAMT: HAMT: Temperature (low) out of bounds ( {:.2R}", tempmin) +
                                     ") for surface=" + Surface(sid).Name);
                     ShowContinueErrorTimeStamp("");
                     ShowFatalError("Program terminates due to preceding condition.");

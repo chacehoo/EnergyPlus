@@ -228,21 +228,21 @@ namespace ThermalChimney {
             state.dataThermalChimneys->ThermalChimneySys(Loop).AbsorberWallWidth = rNumericArgs(1);
             if (state.dataThermalChimneys->ThermalChimneySys(Loop).AbsorberWallWidth < 0.0) {
                 ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) +
-                                " must be >= 0, entered value=[" + format("{:.2R}", rNumericArgs(1)) + "].");
+                                format(" must be >= 0, entered value=[{:.2R}", rNumericArgs(1)) + "].");
                 ErrorsFound = true;
             }
 
             state.dataThermalChimneys->ThermalChimneySys(Loop).AirOutletCrossArea = rNumericArgs(2);
             if (state.dataThermalChimneys->ThermalChimneySys(Loop).AirOutletCrossArea < 0.0) {
                 ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + " invalid " + cNumericFieldNames(2) +
-                                " must be >= 0, entered value=[" + format("{:.2R}", rNumericArgs(2)) + "].");
+                                format(" must be >= 0, entered value=[{:.2R}", rNumericArgs(2)) + "].");
                 ErrorsFound = true;
             }
 
             state.dataThermalChimneys->ThermalChimneySys(Loop).DischargeCoeff = rNumericArgs(3);
             if ((state.dataThermalChimneys->ThermalChimneySys(Loop).DischargeCoeff <= 0.0) || (state.dataThermalChimneys->ThermalChimneySys(Loop).DischargeCoeff > 1.0)) {
                 ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + " invalid " + cNumericFieldNames(3) +
-                                " must be > 0 and <=1.0, entered value=[" + format("{:.2R}", rNumericArgs(3)) + "].");
+                                format(" must be > 0 and <=1.0, entered value=[{:.2R}", rNumericArgs(3)) + "].");
                 ErrorsFound = true;
             }
 
@@ -277,20 +277,20 @@ namespace ThermalChimney {
 
                 if (state.dataThermalChimneys->ThermalChimneySys(Loop).DistanceThermChimInlet(TCZoneNum) < 0.0) {
                     ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + " invalid " + cNumericFieldNames(3 * TCZoneNum + 1) +
-                                    " must be >= 0, entered value=[" + format("{:.2R}", rNumericArgs(3 * TCZoneNum + 1)) + "].");
+                                    format(" must be >= 0, entered value=[{:.2R}", rNumericArgs(3 * TCZoneNum + 1)) + "].");
                     ErrorsFound = true;
                 }
 
                 if ((state.dataThermalChimneys->ThermalChimneySys(Loop).RatioThermChimAirFlow(TCZoneNum) <= 0.0) ||
                     (state.dataThermalChimneys->ThermalChimneySys(Loop).RatioThermChimAirFlow(TCZoneNum) > 1.0)) {
                     ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + " invalid " + cNumericFieldNames(3 * TCZoneNum + 2) +
-                                    " must be > 0 and <=1.0, entered value=[" + format("{:.2R}", rNumericArgs(3 * TCZoneNum + 2)) + "].");
+                                    format(" must be > 0 and <=1.0, entered value=[{:.2R}", rNumericArgs(3 * TCZoneNum + 2)) + "].");
                     ErrorsFound = true;
                 }
 
                 if (state.dataThermalChimneys->ThermalChimneySys(Loop).EachAirInletCrossArea(TCZoneNum) < 0.0) {
                     ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + " invalid " + cNumericFieldNames(3 * TCZoneNum + 3) +
-                                    " must be >= 0, entered value=[" + format("{:.2R}", rNumericArgs(3 * TCZoneNum + 3)) + "].");
+                                    format(" must be >= 0, entered value=[{:.2R}", rNumericArgs(3 * TCZoneNum + 3)) + "].");
                     ErrorsFound = true;
                 }
 

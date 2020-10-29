@@ -978,8 +978,8 @@ namespace ChillerExhaustAbsorption {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpNomCap - NomCapUser) / NomCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerHeaterAbsorptionDoubleEffect: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Nominal Capacity of " + format("{:.2R}", NomCapUser) + " [W]");
-                                    ShowContinueError("differs from Design Size Nominal Capacity of " + format("{:.2R}", tmpNomCap) +
+                                    ShowContinueError(format("User-Specified Nominal Capacity of {:.2R}", NomCapUser) + " [W]");
+                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R}", tmpNomCap) +
                                                       " [W]");
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -1602,9 +1602,9 @@ namespace ChillerExhaustAbsorption {
                     ShowWarningError("ChillerHeater:Absorption:DoubleEffect \"" + this->Name + "\"");
                     ShowContinueError(
                         "...Exhaust temperature and flow input from Micro Turbine is not sufficient during cooling to run the chiller ");
-                    ShowContinueError("...Value of Exhaust air inlet temp =" + format("{:.4T}", lExhaustInTemp) + " C.");
-                    ShowContinueError("... and Exhaust air flow rate of " + format("{:.2T}", lExhaustInFlow) + " kg/s.");
-                    ShowContinueError("...Value of minimum absorber leaving temp =" + format("{:.4T}", AbsLeavingTemp) + " C.");
+                    ShowContinueError(format("...Value of Exhaust air inlet temp ={:.4T}", lExhaustInTemp) + " C.");
+                    ShowContinueError(format("... and Exhaust air flow rate of {:.2T}", lExhaustInFlow) + " kg/s.");
+                    ShowContinueError(format("...Value of minimum absorber leaving temp ={:.4T}", AbsLeavingTemp) + " C.");
                     ShowContinueError("...Either increase the Exhaust temperature (min required = 350 C )  or flow or both of Micro Turbine to meet "
                                       "the min available potential criteria.");
                     ShowContinueErrorTimeStamp("... Simulation will continue.");
@@ -1891,9 +1891,9 @@ namespace ChillerExhaustAbsorption {
                     ShowWarningError("ChillerHeater:Absorption:DoubleEffect \"" + this->Name + "\"");
                     ShowContinueError(
                         "...Exhaust temperature and flow input from Micro Turbine is not sufficient to run the chiller during heating .");
-                    ShowContinueError("...Value of Exhaust air inlet temp =" + format("{:.4T}", lExhaustInTemp) + " C.");
-                    ShowContinueError("... and Exhaust air flow rate of " + format("{:.2T}", lExhaustInFlow) + " kg/s.");
-                    ShowContinueError("...Value of minimum absorber leaving temp =" + format("{:.4T}", AbsLeavingTemp) + " C.");
+                    ShowContinueError(format("...Value of Exhaust air inlet temp ={:.4T}", lExhaustInTemp) + " C.");
+                    ShowContinueError(format("... and Exhaust air flow rate of {:.2T}", lExhaustInFlow) + " kg/s.");
+                    ShowContinueError(format("...Value of minimum absorber leaving temp ={:.4T}", AbsLeavingTemp) + " C.");
                     ShowContinueError("...Either increase the Exhaust temperature (min required = 350 C  )  or flow or both of Micro Turbine to meet "
                                       "the min available potential criteria.");
                     ShowContinueErrorTimeStamp("... Simulation will continue.");

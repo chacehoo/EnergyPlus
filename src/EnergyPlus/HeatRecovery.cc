@@ -729,7 +729,7 @@ namespace HeatRecovery {
                 BalDesDehumPerfData(PerfDataNum).NomSupAirVolFlow != DataSizing::AutoSize) {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Nominal air flow rate must be greater than zero.");
-                ShowContinueError("... value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).NomSupAirVolFlow));
+                ShowContinueError(format("... value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).NomSupAirVolFlow));
                 ErrorsFound = true;
             }
 
@@ -740,7 +740,7 @@ namespace HeatRecovery {
                 BalDesDehumPerfData(PerfDataNum).NomProcAirFaceVel > 6.0) {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Nominal air face velocity cannot be less than or equal to zero or greater than 6 m/s.");
-                ShowContinueError("... value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).NomProcAirFaceVel));
+                ShowContinueError(format("... value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).NomProcAirFaceVel));
                 ErrorsFound = true;
             }
             BalDesDehumPerfData(PerfDataNum).NomElecPower = rNumericArgs(3);
@@ -748,7 +748,7 @@ namespace HeatRecovery {
             if (BalDesDehumPerfData(PerfDataNum).NomElecPower < 0.0) {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Nominal electric power cannot be less than zero.");
-                ShowContinueError("... value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).NomElecPower));
+                ShowContinueError(format("... value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).NomElecPower));
                 ErrorsFound = true;
             }
 
@@ -769,22 +769,22 @@ namespace HeatRecovery {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min/max boundary for the regen outlet air temperature equation.");
                 ShowContinueError("... the minimum value of regeneration inlet air humidity ratio must be less than the maximum.");
-                ShowContinueError("... minimum value entered by user = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).T_MinRegenAirInHumRat));
-                ShowContinueError("... maximum value entered by user = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).T_MaxRegenAirInHumRat));
+                ShowContinueError(format("... minimum value entered by user = {:.6R}", BalDesDehumPerfData(PerfDataNum).T_MinRegenAirInHumRat));
+                ShowContinueError(format("... maximum value entered by user = {:.6R}", BalDesDehumPerfData(PerfDataNum).T_MaxRegenAirInHumRat));
                 ErrorsFound = true;
             }
             if (BalDesDehumPerfData(PerfDataNum).T_MinRegenAirInHumRat < 0.0) {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min boundary for the regen outlet air temperature equation.");
                 ShowContinueError("... the minimum value of regeneration inlet air humidity ratio must be greater than or equal to 0.");
-                ShowContinueError("... minimum value entered by user = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).T_MinRegenAirInHumRat));
+                ShowContinueError(format("... minimum value entered by user = {:.6R}", BalDesDehumPerfData(PerfDataNum).T_MinRegenAirInHumRat));
                 ErrorsFound = true;
             }
             if (BalDesDehumPerfData(PerfDataNum).T_MaxRegenAirInHumRat > 1.0) {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in max boundary for the regen outlet air temperature equation.");
                 ShowContinueError("... the maximum value of regeneration inlet air humidity ratio must be less than or equal to 1.");
-                ShowContinueError("... maximum value entered by user = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).T_MaxRegenAirInHumRat));
+                ShowContinueError(format("... maximum value entered by user = {:.6R}", BalDesDehumPerfData(PerfDataNum).T_MaxRegenAirInHumRat));
                 ErrorsFound = true;
             }
 
@@ -794,8 +794,8 @@ namespace HeatRecovery {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min/max boundary for the regen outlet air temperature equation.");
                 ShowContinueError("... the minimum value of regeneration inlet air temperature must be less than the maximum.");
-                ShowContinueError("... minimum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).T_MinRegenAirInTemp));
-                ShowContinueError("... maximum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).T_MaxRegenAirInTemp));
+                ShowContinueError(format("... minimum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).T_MinRegenAirInTemp));
+                ShowContinueError(format("... maximum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).T_MaxRegenAirInTemp));
                 ErrorsFound = true;
             }
 
@@ -805,22 +805,22 @@ namespace HeatRecovery {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min/max boundary for the regen outlet air temperature equation.");
                 ShowContinueError("... the minimum value of process inlet air humidity ratio must be less than the maximum.");
-                ShowContinueError("... minimum value entered by user = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).T_MinProcAirInHumRat));
-                ShowContinueError("... maximum value entered by user = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).T_MaxProcAirInHumRat));
+                ShowContinueError(format("... minimum value entered by user = {:.6R}", BalDesDehumPerfData(PerfDataNum).T_MinProcAirInHumRat));
+                ShowContinueError(format("... maximum value entered by user = {:.6R}", BalDesDehumPerfData(PerfDataNum).T_MaxProcAirInHumRat));
                 ErrorsFound = true;
             }
             if (BalDesDehumPerfData(PerfDataNum).T_MinProcAirInHumRat < 0.0) {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min boundary for the regen outlet air temperature equation.");
                 ShowContinueError("... the minimum value of process inlet air humidity ratio must be greater than or equal to 0.");
-                ShowContinueError("... minimum value entered by user = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).T_MinProcAirInHumRat));
+                ShowContinueError(format("... minimum value entered by user = {:.6R}", BalDesDehumPerfData(PerfDataNum).T_MinProcAirInHumRat));
                 ErrorsFound = true;
             }
             if (BalDesDehumPerfData(PerfDataNum).T_MaxProcAirInHumRat > 1.0) {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in max boundary for the regen outlet air temperature equation.");
                 ShowContinueError("... the maximum value of process inlet air humidity ratio must be less than or equal to 1.");
-                ShowContinueError("... maximum value entered by user = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).T_MaxProcAirInHumRat));
+                ShowContinueError(format("... maximum value entered by user = {:.6R}", BalDesDehumPerfData(PerfDataNum).T_MaxProcAirInHumRat));
                 ErrorsFound = true;
             }
 
@@ -830,8 +830,8 @@ namespace HeatRecovery {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min/max boundary for the regen outlet air temperature equation.");
                 ShowContinueError("... the minimum value of process inlet air temperature must be less than the maximum.");
-                ShowContinueError("... minimum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).T_MinProcAirInTemp));
-                ShowContinueError("... maximum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).T_MaxProcAirInTemp));
+                ShowContinueError(format("... minimum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).T_MinProcAirInTemp));
+                ShowContinueError(format("... maximum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).T_MaxProcAirInTemp));
                 ErrorsFound = true;
             }
 
@@ -841,8 +841,8 @@ namespace HeatRecovery {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min/max boundary for the regen outlet air temperature equation.");
                 ShowContinueError("... the minimum value of regen air velocity must be less than the maximum.");
-                ShowContinueError("... minimum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).T_MinFaceVel));
-                ShowContinueError("... maximum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).T_MaxFaceVel));
+                ShowContinueError(format("... minimum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).T_MinFaceVel));
+                ShowContinueError(format("... maximum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).T_MaxFaceVel));
                 ErrorsFound = true;
             }
 
@@ -852,8 +852,8 @@ namespace HeatRecovery {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min/max boundary for the regen outlet air temperature equation.");
                 ShowContinueError("... the minimum value of regen outlet air temperature must be less than the maximum.");
-                ShowContinueError("... minimum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).MinRegenAirOutTemp));
-                ShowContinueError("... maximum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).MaxRegenAirOutTemp));
+                ShowContinueError(format("... minimum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).MinRegenAirOutTemp));
+                ShowContinueError(format("... maximum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).MaxRegenAirOutTemp));
                 ErrorsFound = true;
             }
 
@@ -863,22 +863,22 @@ namespace HeatRecovery {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min/max boundary for the regen outlet air temperature equation.");
                 ShowContinueError("... the minimum value of regen inlet air relative humidity must be less than the maximum.");
-                ShowContinueError("... minimum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).T_MinRegenAirInRelHum * 100.0));
-                ShowContinueError("... maximum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).T_MaxRegenAirInRelHum * 100.0));
+                ShowContinueError(format("... minimum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).T_MinRegenAirInRelHum * 100.0));
+                ShowContinueError(format("... maximum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).T_MaxRegenAirInRelHum * 100.0));
                 ErrorsFound = true;
             }
             if (BalDesDehumPerfData(PerfDataNum).T_MinRegenAirInRelHum < 0.0) {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min boundary for the regen outlet air temperature equation.");
                 ShowContinueError("... the minimum value of regen inlet air relative humidity must be greater than or equal to 0.");
-                ShowContinueError("... minimum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).T_MinRegenAirInRelHum * 100.0));
+                ShowContinueError(format("... minimum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).T_MinRegenAirInRelHum * 100.0));
                 ErrorsFound = true;
             }
             if (BalDesDehumPerfData(PerfDataNum).T_MaxRegenAirInRelHum > 1.0) {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in max boundary for the regen outlet air temperature equation.");
                 ShowContinueError("... the maximum value of regen inlet air relative humidity must be less than or equal to 100.");
-                ShowContinueError("... maximum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).T_MaxRegenAirInRelHum * 100.0));
+                ShowContinueError(format("... maximum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).T_MaxRegenAirInRelHum * 100.0));
                 ErrorsFound = true;
             }
 
@@ -888,22 +888,22 @@ namespace HeatRecovery {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min/max boundary for the regen outlet air temperature equation.");
                 ShowContinueError("... the minimum value of process inlet air relative humidity must be less than the maximum.");
-                ShowContinueError("... minimum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).T_MinProcAirInRelHum * 100.0));
-                ShowContinueError("... maximum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).T_MaxProcAirInRelHum * 100.0));
+                ShowContinueError(format("... minimum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).T_MinProcAirInRelHum * 100.0));
+                ShowContinueError(format("... maximum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).T_MaxProcAirInRelHum * 100.0));
                 ErrorsFound = true;
             }
             if (BalDesDehumPerfData(PerfDataNum).T_MinProcAirInRelHum < 0.0) {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min boundary for the regen outlet air temperature equation.");
                 ShowContinueError("... the minimum value of process inlet air relative humidity must be greater than or equal to 0.");
-                ShowContinueError("... minimum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).T_MinProcAirInRelHum * 100.0));
+                ShowContinueError(format("... minimum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).T_MinProcAirInRelHum * 100.0));
                 ErrorsFound = true;
             }
             if (BalDesDehumPerfData(PerfDataNum).T_MaxProcAirInRelHum > 1.0) {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in max boundary for the regen outlet air temperature equation.");
                 ShowContinueError("... the maximum value of process inlet air relative humidity must be less than or equal to 100.");
-                ShowContinueError("... maximum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).T_MaxProcAirInRelHum * 100.0));
+                ShowContinueError(format("... maximum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).T_MaxProcAirInRelHum * 100.0));
                 ErrorsFound = true;
             }
 
@@ -924,22 +924,22 @@ namespace HeatRecovery {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min/max boundary for the regen outlet air humidity ratio equation.");
                 ShowContinueError("... the minimum value of regeneration inlet air humidity ratio must be less than the maximum.");
-                ShowContinueError("... minimum value entered by user = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).H_MinRegenAirInHumRat));
-                ShowContinueError("... maximum value entered by user = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).H_MaxRegenAirInHumRat));
+                ShowContinueError(format("... minimum value entered by user = {:.6R}", BalDesDehumPerfData(PerfDataNum).H_MinRegenAirInHumRat));
+                ShowContinueError(format("... maximum value entered by user = {:.6R}", BalDesDehumPerfData(PerfDataNum).H_MaxRegenAirInHumRat));
                 ErrorsFound = true;
             }
             if (BalDesDehumPerfData(PerfDataNum).H_MinRegenAirInHumRat < 0.0) {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min boundary for the regen outlet air humidity ratio equation.");
                 ShowContinueError("... the minimum value of regeneration inlet air humidity ratio must be greater than or equal to 0.");
-                ShowContinueError("... minimum value entered by user = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).H_MinRegenAirInHumRat));
+                ShowContinueError(format("... minimum value entered by user = {:.6R}", BalDesDehumPerfData(PerfDataNum).H_MinRegenAirInHumRat));
                 ErrorsFound = true;
             }
             if (BalDesDehumPerfData(PerfDataNum).H_MaxRegenAirInHumRat > 1.0) {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in max boundary for the regen outlet air humidity ratio equation.");
                 ShowContinueError("... the maximum value of regeneration inlet air humidity ratio must be less than or equal to 1.");
-                ShowContinueError("... maximum value entered by user = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).H_MaxRegenAirInHumRat));
+                ShowContinueError(format("... maximum value entered by user = {:.6R}", BalDesDehumPerfData(PerfDataNum).H_MaxRegenAirInHumRat));
                 ErrorsFound = true;
             }
 
@@ -949,8 +949,8 @@ namespace HeatRecovery {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min/max boundary for the regen outlet air humidity ratio equation.");
                 ShowContinueError("... the minimum value of regeneration inlet air temperature must be less than the maximum.");
-                ShowContinueError("... minimum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).H_MinRegenAirInTemp));
-                ShowContinueError("... maximum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).H_MaxRegenAirInTemp));
+                ShowContinueError(format("... minimum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).H_MinRegenAirInTemp));
+                ShowContinueError(format("... maximum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).H_MaxRegenAirInTemp));
                 ErrorsFound = true;
             }
 
@@ -960,22 +960,22 @@ namespace HeatRecovery {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min/max boundary for the regen outlet air humidity ratio equation.");
                 ShowContinueError("... the minimum value of process inlet air humidity ratio must be less than the maximum.");
-                ShowContinueError("... minimum value entered by user = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).H_MinProcAirInHumRat));
-                ShowContinueError("... maximum value entered by user = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).H_MaxProcAirInHumRat));
+                ShowContinueError(format("... minimum value entered by user = {:.6R}", BalDesDehumPerfData(PerfDataNum).H_MinProcAirInHumRat));
+                ShowContinueError(format("... maximum value entered by user = {:.6R}", BalDesDehumPerfData(PerfDataNum).H_MaxProcAirInHumRat));
                 ErrorsFound = true;
             }
             if (BalDesDehumPerfData(PerfDataNum).H_MinProcAirInHumRat < 0.0) {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min boundary for the regen outlet air humidity ratio equation.");
                 ShowContinueError("... the minimum value of process inlet air humidity ratio must be greater than or equal to 0.");
-                ShowContinueError("... minimum value entered by user = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).H_MinProcAirInHumRat));
+                ShowContinueError(format("... minimum value entered by user = {:.6R}", BalDesDehumPerfData(PerfDataNum).H_MinProcAirInHumRat));
                 ErrorsFound = true;
             }
             if (BalDesDehumPerfData(PerfDataNum).H_MaxProcAirInHumRat > 1.0) {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in max boundary for the regen outlet air humidity ratio equation.");
                 ShowContinueError("... the maximum value of process inlet air humidity ratio must be less than or equal to 1.");
-                ShowContinueError("... maximum value entered by user = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).H_MaxProcAirInHumRat));
+                ShowContinueError(format("... maximum value entered by user = {:.6R}", BalDesDehumPerfData(PerfDataNum).H_MaxProcAirInHumRat));
                 ErrorsFound = true;
             }
 
@@ -985,8 +985,8 @@ namespace HeatRecovery {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min/max boundary for the regen outlet air humidity ratio equation.");
                 ShowContinueError("... the minimum value of process inlet air temperature must be less than the maximum.");
-                ShowContinueError("... minimum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).H_MinProcAirInTemp));
-                ShowContinueError("... maximum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).H_MaxProcAirInTemp));
+                ShowContinueError(format("... minimum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).H_MinProcAirInTemp));
+                ShowContinueError(format("... maximum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).H_MaxProcAirInTemp));
                 ErrorsFound = true;
             }
 
@@ -996,8 +996,8 @@ namespace HeatRecovery {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min/max boundary for the regen outlet air humidity ratio equation.");
                 ShowContinueError("... the minimum value of regen air velocity must be less than the maximum.");
-                ShowContinueError("... minimum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).H_MinFaceVel));
-                ShowContinueError("... maximum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).H_MaxFaceVel));
+                ShowContinueError(format("... minimum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).H_MinFaceVel));
+                ShowContinueError(format("... maximum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).H_MaxFaceVel));
                 ErrorsFound = true;
             }
 
@@ -1007,22 +1007,22 @@ namespace HeatRecovery {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min/max boundary for the regen outlet air humidity ratio equation.");
                 ShowContinueError("... the minimum value of regen outlet air humidity ratio must be less than the maximum.");
-                ShowContinueError("... minimum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).MinRegenAirOutHumRat));
-                ShowContinueError("... maximum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).MaxRegenAirOutHumRat));
+                ShowContinueError(format("... minimum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).MinRegenAirOutHumRat));
+                ShowContinueError(format("... maximum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).MaxRegenAirOutHumRat));
                 ErrorsFound = true;
             }
             if (BalDesDehumPerfData(PerfDataNum).MinRegenAirOutHumRat < 0.0) {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min boundary for the regen outlet air humidity ratio equation.");
                 ShowContinueError("... the minimum value of regen outlet air humidity ratio must be greater than or equal to 0.");
-                ShowContinueError("... minimum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).MinRegenAirOutHumRat));
+                ShowContinueError(format("... minimum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).MinRegenAirOutHumRat));
                 ErrorsFound = true;
             }
             if (BalDesDehumPerfData(PerfDataNum).MaxRegenAirOutHumRat > 1.0) {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in max boundary for the regen outlet air humidity ratio equation.");
                 ShowContinueError("... the maximum value of regen outlet air humidity ratio must be less or equal to 1.");
-                ShowContinueError("... maximum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).MaxRegenAirOutHumRat));
+                ShowContinueError(format("... maximum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).MaxRegenAirOutHumRat));
                 ErrorsFound = true;
             }
 
@@ -1032,22 +1032,22 @@ namespace HeatRecovery {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min/max boundary for the regen outlet air humidity ratio equation.");
                 ShowContinueError("... the minimum value of regen inlet air relative humidity must be less than the maximum.");
-                ShowContinueError("... minimum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).H_MinRegenAirInRelHum * 100.0));
-                ShowContinueError("... maximum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).H_MaxRegenAirInRelHum * 100.0));
+                ShowContinueError(format("... minimum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).H_MinRegenAirInRelHum * 100.0));
+                ShowContinueError(format("... maximum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).H_MaxRegenAirInRelHum * 100.0));
                 ErrorsFound = true;
             }
             if (BalDesDehumPerfData(PerfDataNum).H_MinRegenAirInRelHum < 0.0) {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min boundary for the regen outlet air humidity ratio equation.");
                 ShowContinueError("... the minimum value of regen inlet air relative humidity must be greater than or equal to 0.");
-                ShowContinueError("... minimum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).H_MinRegenAirInRelHum * 100.0));
+                ShowContinueError(format("... minimum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).H_MinRegenAirInRelHum * 100.0));
                 ErrorsFound = true;
             }
             if (BalDesDehumPerfData(PerfDataNum).H_MaxRegenAirInRelHum > 1.0) {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in max boundary for the regen outlet air humidity ratio equation.");
                 ShowContinueError("... the maximum value of regen inlet air relative humidity must be less or equal to 100.");
-                ShowContinueError("... maximum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).H_MaxRegenAirInRelHum * 100.0));
+                ShowContinueError(format("... maximum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).H_MaxRegenAirInRelHum * 100.0));
                 ErrorsFound = true;
             }
 
@@ -1057,22 +1057,22 @@ namespace HeatRecovery {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min/max boundary for the regen outlet air humidity ratio equation.");
                 ShowContinueError("... the minimum value of process inlet air relative humidity must be less than the maximum.");
-                ShowContinueError("... minimum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).H_MinProcAirInRelHum * 100.0));
-                ShowContinueError("... maximum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).H_MaxProcAirInRelHum * 100.0));
+                ShowContinueError(format("... minimum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).H_MinProcAirInRelHum * 100.0));
+                ShowContinueError(format("... maximum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).H_MaxProcAirInRelHum * 100.0));
                 ErrorsFound = true;
             }
             if (BalDesDehumPerfData(PerfDataNum).H_MinProcAirInRelHum < 0.0) {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in min boundary for the regen outlet air humidity ratio equation.");
                 ShowContinueError("... the minimum value of process inlet air relative humidity must be greater than or equal to 0.");
-                ShowContinueError("... minimum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).H_MinProcAirInRelHum * 100.0));
+                ShowContinueError(format("... minimum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).H_MinProcAirInRelHum * 100.0));
                 ErrorsFound = true;
             }
             if (BalDesDehumPerfData(PerfDataNum).H_MaxProcAirInRelHum > 1.0) {
                 ShowSevereError(cCurrentModuleObject + " \"" + BalDesDehumPerfData(PerfDataNum).Name + "\"");
                 ShowContinueError("Error found in max boundary for the regen outlet air humidity ratio equation.");
                 ShowContinueError("... the maximum value of process inlet air relative humidity must be less than or equal to 100.");
-                ShowContinueError("... maximum value entered = " + format("{:.6R}", BalDesDehumPerfData(PerfDataNum).H_MaxProcAirInRelHum * 100.0));
+                ShowContinueError(format("... maximum value entered = {:.6R}", BalDesDehumPerfData(PerfDataNum).H_MaxProcAirInRelHum * 100.0));
                 ErrorsFound = true;
             }
         }
@@ -1371,58 +1371,58 @@ namespace HeatRecovery {
                         FatalError = true;
                         ShowSevereError("In the HeatExchanger:AirToAir:FlatPlate component " + ExchCond(ExIndex).Name);
                         ShowContinueError("  the mass flow ratio is out of bounds");
-                        ShowContinueError("The mass flow ratio is (Min_Mass_Flow_Rate / Max_Mass_Flow_Rate) = " + format("{:.2R}", Z));
+                        ShowContinueError(format("The mass flow ratio is (Min_Mass_Flow_Rate / Max_Mass_Flow_Rate) = {:.2R}", Z));
                         ShowContinueError("The mass flow ratio should be >= 0.0 and <= 1.0");
-                        ShowContinueError("Min_Mass_Flow_Rate = " + format("{:.2R}", RhoAir) + " [air density] * " +
+                        ShowContinueError(format("Min_Mass_Flow_Rate = {:.2R}", RhoAir) + " [air density] * " +
                                           format("{:.1R}", min(ExchCond(ExIndex).NomSupAirVolFlow, ExchCond(ExIndex).NomSecAirVolFlow)) +
                                           " [Min_Vol_Flow_Rate]");
-                        ShowContinueError("Max_Mass_Flow_Rate = " + format("{:.2R}", RhoAir) + " [air density] * " +
+                        ShowContinueError(format("Max_Mass_Flow_Rate = {:.2R}", RhoAir) + " [air density] * " +
                                           format("{:.1R}", max(ExchCond(ExIndex).NomSupAirVolFlow, ExchCond(ExIndex).NomSecAirVolFlow)) +
                                           " [Max_Vol_Flow_Rate]");
                     } else if (ErrStat == 2) {
                         FatalError = true;
                         ShowSevereError("In the HeatExchanger:AirToAir:FlatPlate component " + ExchCond(ExIndex).Name);
                         ShowContinueError("  the calculated nominal effectiveness is out of bounds");
-                        ShowContinueError("The effectiveness is " + format("{:.3R}", Eps0));
-                        ShowContinueError("The effectiveness should be >= 0.0 and <= " + format("{:.3R}", 1.0 / (1.0 + Z)));
+                        ShowContinueError(format("The effectiveness is {:.3R}", Eps0));
+                        ShowContinueError(format("The effectiveness should be >= 0.0 and <= {:.3R}", 1.0 / (1.0 + Z)));
                         ShowContinueError(
                             "Eff = (Nom_Sup_Mass_Flow_Rate/Min_Mass_Flow_Rate)*(T_nom_sup_out-T_nom_sup_in)/(T_nom_sec_in-T_nom_sup_in)");
                         ShowContinueError("The temperatures are user inputs. The mass flow rates are user input volume flow rates");
-                        ShowContinueError("  times the density of air [" + format("{:.2R}", RhoAir) + " kg/m3]");
+                        ShowContinueError(format("  times the density of air [{:.2R}", RhoAir) + " kg/m3]");
                         ShowContinueError("Change these inputs to obtain a physically realizable heat exchanger effectiveness");
                     } else if (ErrStat == 3) {
                         FatalError = true;
                         ShowSevereError("In the HeatExchanger:AirToAir:FlatPlate component " + ExchCond(ExIndex).Name);
                         ShowContinueError("  the calculated nominal effectiveness is out of bounds");
-                        ShowContinueError("The effectiveness is " + format("{:.3R}", Eps0));
-                        ShowContinueError("The effectiveness should be >= 0.0 and <= " + format("{:.3R}", (1.0 - std::exp(-Z)) / Z));
+                        ShowContinueError(format("The effectiveness is {:.3R}", Eps0));
+                        ShowContinueError(format("The effectiveness should be >= 0.0 and <= {:.3R}", (1.0 - std::exp(-Z)) / Z));
                         ShowContinueError(
                             "Eff = (Nom_Sup_Mass_Flow_Rate/Min_Mass_Flow_Rate)*(T_nom_sup_out-T_nom_sup_in)/(T_nom_sec_in-T_nom_sup_in)");
                         ShowContinueError("The temperatures are user inputs. The mass flow rates are user input volume flow rates");
-                        ShowContinueError("  times the density of air [" + format("{:.2R}", RhoAir) + " kg/m3]");
+                        ShowContinueError(format("  times the density of air [{:.2R}", RhoAir) + " kg/m3]");
                         ShowContinueError("Change these inputs to obtain a physically realizable heat exchanger effectiveness");
                     } else if (ErrStat == 4) {
                         FatalError = true;
                         ShowSevereError("In the HeatExchanger:AirToAir:FlatPlate component " + ExchCond(ExIndex).Name);
                         ShowContinueError("  the quantity Eff_nom*(Min_Mass_Flow_Rate / Max_Mass_Flow_Rate) is out of bounds");
-                        ShowContinueError("The value is " + format("{:.3R}", Eps0 * Z));
-                        ShowContinueError("The value should be >= 0.0 and <= " + format("{:.3R}", 1.0 - std::exp(Z * (SMALL - 1.0))));
+                        ShowContinueError(format("The value is {:.3R}", Eps0 * Z));
+                        ShowContinueError(format("The value should be >= 0.0 and <= {:.3R}", 1.0 - std::exp(Z * (SMALL - 1.0))));
                         ShowContinueError(
                             "Eff_nom = (Nom_Sup_Mass_Flow_Rate/Min_Mass_Flow_Rate) * (T_nom_sup_out - T_nom_sup_in)/(T_nom_sec_in - T_nom_sup_in)");
                         ShowContinueError("The temperatures are user inputs. The mass flow rates are user input volume flow rates");
-                        ShowContinueError("  times the density of air [" + format("{:.2R}", RhoAir) + " kg/m3]");
+                        ShowContinueError(format("  times the density of air [{:.2R}", RhoAir) + " kg/m3]");
                         ShowContinueError("Change these inputs to obtain a physically realizable product of effectiveness times min/max mass ratio "
                                           "for this heat exchanger");
                     } else if (ErrStat == 5) {
                         FatalError = true;
                         ShowSevereError("In the HeatExchanger:AirToAir:FlatPlate component " + ExchCond(ExIndex).Name);
                         ShowContinueError("  the calculated nominal effectiveness is out of bounds");
-                        ShowContinueError("The effectiveness is " + format("{:.3R}", Eps0));
+                        ShowContinueError(format("The effectiveness is {:.3R}", Eps0));
                         ShowContinueError("The effectiveness should be >= 0.0 and <= 1.0");
                         ShowContinueError(
                             "Eff = (Nom_Sup_Mass_Flow_Rate/Min_Mass_Flow_Rate)*(T_nom_sup_out-T_nom_sup_in)/(T_nom_sec_in-T_nom_sup_in)");
                         ShowContinueError("The temperatures are user inputs. The mass flow rates are user input volume flow rates");
-                        ShowContinueError("  times the density of air [" + format("{:.2R}", RhoAir) + " kg/m3]");
+                        ShowContinueError(format("  times the density of air [{:.2R}", RhoAir) + " kg/m3]");
                         ShowContinueError("Change these inputs to obtain a physically realizable heat exchanger effectiveness");
                     }
 
@@ -2133,7 +2133,7 @@ namespace HeatRecovery {
                             ShowSevereError(cHXTypes(ExchCond(ExNum).ExchTypeNum) + ": \"" + ExchCond(ExNum).Name +
                                             "\" unbalanced air volume flow ratio through the heat exchanger is greater than 2:1.");
                             ShowContinueErrorTimeStamp(
-                                "...HX Supply air to Exhaust air flow ratio = " + format("{:.5R}", HXSupAirVolFlowRate / HXSecAirVolFlowRate) + '.');
+                                format("...HX Supply air to Exhaust air flow ratio = {:.5R}", HXSupAirVolFlowRate / HXSecAirVolFlowRate) + '.');
                         } else {
                             ShowRecurringWarningErrorAtEnd(
                                 cHXTypes(ExchCond(ExNum).ExchTypeNum) + " \"" + ExchCond(ExNum).Name +
@@ -2155,7 +2155,7 @@ namespace HeatRecovery {
                     if (ExchCond(ExNum).LowFlowErrCount == 1) {
                         ShowWarningError(cHXTypes(ExchCond(ExNum).ExchTypeNum) + " \"" + ExchCond(ExNum).Name + "\"");
                         ShowContinueError("Average air volume flow rate is <50% or >130% of the nominal HX supply air volume flow rate.");
-                        ShowContinueErrorTimeStamp("Air volume flow rate ratio = " + format("{:.3R}", HXAirVolFlowRatio) + '.');
+                        ShowContinueErrorTimeStamp(format("Air volume flow rate ratio = {:.3R}", HXAirVolFlowRatio) + '.');
                     } else {
                         ShowRecurringWarningErrorAtEnd(
                             cHXTypes(ExchCond(ExNum).ExchTypeNum) + " \"" + ExchCond(ExNum).Name +
@@ -2216,7 +2216,7 @@ namespace HeatRecovery {
                                           format("{:.2R}", ExchCond(ExNum).CoolEffectSensible75));
                         ShowContinueError("...Sensible effectiveness reset to zero and the simulation continues.");
                     }
-                    ShowContinueError("...Heat Exchanger Air Volume Flow Ratio = " + format("{:.2R}", HXAirVolFlowRatio));
+                    ShowContinueError(format("...Heat Exchanger Air Volume Flow Ratio = {:.2R}", HXAirVolFlowRatio));
                     ExchCond(ExNum).SensEffectivenessFlag = true;
                 }
             }
@@ -2239,7 +2239,7 @@ namespace HeatRecovery {
                                           format("{:.2R}", ExchCond(ExNum).CoolEffectLatent75));
                         ShowContinueError("...Latent effectiveness reset to zero and the simulation continues.");
                     }
-                    ShowContinueError("...Heat Exchanger Air Volume Flow Ratio = " + format("{:.2R}", HXAirVolFlowRatio));
+                    ShowContinueError(format("...Heat Exchanger Air Volume Flow Ratio = {:.2R}", HXAirVolFlowRatio));
                     ExchCond(ExNum).LatEffectivenessFlag = true;
                 }
             }
@@ -2347,7 +2347,7 @@ namespace HeatRecovery {
                                                       format("{:.2R}", ExchCond(ExNum).CoolEffectSensible75));
                                     ShowContinueError("...Sensible effectiveness reset to zero and the simulation continues.");
                                 }
-                                ShowContinueError("...Heat Exchanger Air Volume Flow Ratio = " + format("{:.2R}", HXAirVolFlowRatio));
+                                ShowContinueError(format("...Heat Exchanger Air Volume Flow Ratio = {:.2R}", HXAirVolFlowRatio));
                                 ExchCond(ExNum).SensEffectivenessFlag = true;
                             }
                         }
@@ -2370,7 +2370,7 @@ namespace HeatRecovery {
                                                       format("{:.2R}", ExchCond(ExNum).CoolEffectLatent75));
                                     ShowContinueError("...Latent effectiveness reset to zero and the simulation continues.");
                                 }
-                                ShowContinueError("...Heat Exchanger Air Volume Flow Ratio = " + format("{:.2R}", HXAirVolFlowRatio));
+                                ShowContinueError(format("...Heat Exchanger Air Volume Flow Ratio = {:.2R}", HXAirVolFlowRatio));
                                 ExchCond(ExNum).LatEffectivenessFlag = true;
                             }
                         }
@@ -3400,7 +3400,7 @@ namespace HeatRecovery {
 
         // check input validity
         if (Z < 0.0 || Z > 1.0) {
-            ShowFatalError("Variable Z (" + format("{:.2R}", Z) + ") out of range [0.0,1.0] in CalculateEpsFromNTUandZ");
+            ShowFatalError(format("Variable Z ({:.2R}", Z) + ") out of range [0.0,1.0] in CalculateEpsFromNTUandZ");
         }
 
         // effectiveness

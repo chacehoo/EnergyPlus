@@ -3116,9 +3116,9 @@ namespace HVACManager {
                         ShowContinueErrorTimeStamp("");
                         ShowContinueError("  Flows [m3/s at standard density]: Supply=" +
                                           format("{:.6R}", thisAirLoopFlow.SupFlow / DataEnvironment::StdRhoAir) +
-                                          "  Return=" + format("{:.6R}", thisAirLoopFlow.SysRetFlow / DataEnvironment::StdRhoAir) +
-                                          "  Outdoor Air=" + format("{:.6R}", thisAirLoopFlow.OAFlow / DataEnvironment::StdRhoAir));
-                        ShowContinueError("  Imbalance=" + format("{:.6R}", unbalancedExhaustDelta / DataEnvironment::StdRhoAir));
+                                          format("  Return={:.6R}", thisAirLoopFlow.SysRetFlow / DataEnvironment::StdRhoAir) +
+                                          format("  Outdoor Air={:.6R}", thisAirLoopFlow.OAFlow / DataEnvironment::StdRhoAir));
+                        ShowContinueError(format("  Imbalance={:.6R}", unbalancedExhaustDelta / DataEnvironment::StdRhoAir));
                         ShowContinueError("  This error will only be reported once per system.");
                         thisAirLoopFlow.FlowError = true;
                     }

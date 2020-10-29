@@ -985,7 +985,7 @@ namespace WaterThermalTanks {
             if (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).OperatingWaterFlowRate <= 0.0) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
                                 DataIPShortCuts::cNumericFieldNames(6) + " must be greater than 0. " + DataIPShortCuts::cNumericFieldNames(6) +
-                                " = " + format("{:.6T}", DataIPShortCuts::rNumericArgs(6)));
+                                format(" = {:.6T}", DataIPShortCuts::rNumericArgs(6)));
                 ErrorsFound = true;
             }
 
@@ -1161,7 +1161,7 @@ namespace WaterThermalTanks {
             if (HPWH.DeadBandTempDiff <= 0.0 || HPWH.DeadBandTempDiff > 20.0) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + "=\"" + HPWH.Name + "\", ");
                 ShowContinueError(hpwhNumericFieldNames[1 + nNumericOffset] +
-                                  " difference must be > 0 and <= 20. Dead band = " + format("{:.1T}", hpwhNumeric[1 + nNumericOffset]));
+                                  format(" difference must be > 0 and <= 20. Dead band = {:.1T}", hpwhNumeric[1 + nNumericOffset]));
                 ErrorsFound = true;
             }
 
@@ -1192,7 +1192,7 @@ namespace WaterThermalTanks {
                 if (HPWH.OperatingWaterFlowRate <= 0.0 && hpwhNumeric[2] != DataGlobalConstants::AutoCalculate()) {
                     ShowSevereError(DataIPShortCuts::cCurrentModuleObject + "=\"" + HPWH.Name + "\", ");
                     ShowContinueError(hpwhNumericFieldNames[2] +
-                                      " must be greater than 0. Condenser water flow rate = " + format("{:.6T}", hpwhNumeric[2]));
+                                      format(" must be greater than 0. Condenser water flow rate = {:.6T}", hpwhNumeric[2]));
                     ErrorsFound = true;
                 }
 
@@ -1211,7 +1211,7 @@ namespace WaterThermalTanks {
 
                 if (HPWH.WrappedCondenserBottomLocation >= HPWH.WrappedCondenserTopLocation) {
                     ShowSevereError(DataIPShortCuts::cCurrentModuleObject + "=\"" + HPWH.Name + "\", ");
-                    ShowContinueError(hpwhNumericFieldNames[3] + " (" + format("{:.6T}", HPWH.WrappedCondenserTopLocation) +
+                    ShowContinueError(hpwhNumericFieldNames[3] + format(" ({:.6T}", HPWH.WrappedCondenserTopLocation) +
                                       ") must be greater than " + hpwhNumericFieldNames[2] + " (" +
                                       format("{:.6T}", HPWH.WrappedCondenserBottomLocation) + ").");
                     ErrorsFound = true;
@@ -1457,7 +1457,7 @@ namespace WaterThermalTanks {
             if (HPWH.MinAirTempForHPOperation < -5) {
                 ShowWarningError(DataIPShortCuts::cCurrentModuleObject + "=\"" + HPWH.Name +
                                  "\": minimum inlet air temperature for heat pump compressor operation must be greater than or equal to -5 C.");
-                ShowContinueError("...Minimum inlet air temperature = " + format("{:.1T}", hpwhNumeric[4 + nNumericOffset]));
+                ShowContinueError(format("...Minimum inlet air temperature = {:.1T}", hpwhNumeric[4 + nNumericOffset]));
             }
 
             // Maximum Inlet Air Temperature for Compressor Operation
@@ -1466,8 +1466,8 @@ namespace WaterThermalTanks {
                 ShowWarningError(DataIPShortCuts::cCurrentModuleObject + "=\"" + HPWH.Name +
                                  "\": maximum inlet air temperature for heat pump compressor operation");
                 ShowContinueError("must be greater than the minimum inlet air temperature for heat pump compressor operation.");
-                ShowContinueError("...Minimum inlet air temperature = " + format("{:.1T}", HPWH.MinAirTempForHPOperation));
-                ShowContinueError("...Maximum inlet air temperature = " + format("{:.1T}", HPWH.MaxAirTempForHPOperation));
+                ShowContinueError(format("...Minimum inlet air temperature = {:.1T}", HPWH.MinAirTempForHPOperation));
+                ShowContinueError(format("...Maximum inlet air temperature = {:.1T}", HPWH.MaxAirTempForHPOperation));
             }
 
             // Compressor Location
@@ -1566,7 +1566,7 @@ namespace WaterThermalTanks {
 
             if (FanVolFlow != DataSizing::AutoSize && !errFlag) {
                 if (FanVolFlow < HPWH.OperatingAirFlowRate) {
-                    ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " - air flow rate = " + format("{:.7T}", FanVolFlow) +
+                    ShowSevereError(DataIPShortCuts::cCurrentModuleObject + format(" - air flow rate = {:.7T}", FanVolFlow) +
                                     " in fan object " + HPWH.FanName + " is less than the  HPWHs evaporator air flow rate.");
                     ShowContinueError(" The fan flow rate must be >= to the HPWHs evaporator volumetric air flow rate.");
                     ShowContinueError(" Occurs in unit = " + HPWH.Name);
@@ -2729,8 +2729,8 @@ namespace WaterThermalTanks {
             if ((!Tank.HeightWasAutoSized) && (Tank.HeaterHeight1 > tankHeightForTesting)) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + DataIPShortCuts::cAlphaArgs(1) +
                                 ": Heater 1 is located higher than overall tank height.");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + " = " + format("{:.4R}", DataIPShortCuts::rNumericArgs(2)));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(7) + " = " + format("{:.4R}", DataIPShortCuts::rNumericArgs(7)));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(2)));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(7) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(7)));
                 ErrorsFound = true;
             }
 
@@ -2759,8 +2759,8 @@ namespace WaterThermalTanks {
             if ((!Tank.HeightWasAutoSized) && (Tank.HeaterHeight2 > tankHeightForTesting)) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + DataIPShortCuts::cAlphaArgs(1) +
                                 ": Heater 2 is located higher than overall tank height.");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + " = " + format("{:.4R}", DataIPShortCuts::rNumericArgs(2)));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(10) + " = " + format("{:.4R}", DataIPShortCuts::rNumericArgs(10)));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(2)));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(10) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(10)));
                 ErrorsFound = true;
             }
 
@@ -2936,8 +2936,8 @@ namespace WaterThermalTanks {
             if ((!Tank.HeightWasAutoSized) && (Tank.UseInletHeight > Tank.Height)) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + DataIPShortCuts::cAlphaArgs(1) +
                                 ": Use inlet is located higher than overall tank height.");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + " = " + format("{:.4R}", DataIPShortCuts::rNumericArgs(2)));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(24) + " = " + format("{:.4R}", DataIPShortCuts::rNumericArgs(24)));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(2)));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(24) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(24)));
                 ErrorsFound = true;
             }
 
@@ -2953,8 +2953,8 @@ namespace WaterThermalTanks {
             if ((!Tank.HeightWasAutoSized) && (Tank.UseOutletHeight > Tank.Height)) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + DataIPShortCuts::cAlphaArgs(1) +
                                 ": Use outlet is located higher than overall tank height.");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + " = " + format("{:.4R}", DataIPShortCuts::rNumericArgs(2)));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(25) + " = " + format("{:.4R}", DataIPShortCuts::rNumericArgs(25)));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(2)));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(25) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(25)));
                 ErrorsFound = true;
             }
 
@@ -2981,8 +2981,8 @@ namespace WaterThermalTanks {
             if ((!Tank.HeightWasAutoSized) && (Tank.SourceInletHeight > Tank.Height)) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + DataIPShortCuts::cAlphaArgs(1) +
                                 ": Source inlet is located higher than overall tank height.");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + " = " + format("{:.4R}", DataIPShortCuts::rNumericArgs(2)));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(27) + " = " + format("{:.4R}", DataIPShortCuts::rNumericArgs(27)));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(2)));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(27) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(27)));
                 ErrorsFound = true;
             }
 
@@ -2995,8 +2995,8 @@ namespace WaterThermalTanks {
             if ((!Tank.HeightWasAutoSized) && (Tank.SourceOutletHeight > Tank.Height)) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + DataIPShortCuts::cAlphaArgs(1) +
                                 ": Source outlet is located higher than overall tank height.");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + " = " + format("{:.4R}", DataIPShortCuts::rNumericArgs(2)));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(28) + " = " + format("{:.4R}", DataIPShortCuts::rNumericArgs(28)));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(2)));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(28) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(28)));
                 ErrorsFound = true;
             }
 
@@ -3629,8 +3629,8 @@ namespace WaterThermalTanks {
             if (Tank.UseInletHeight > Tank.Height) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + DataIPShortCuts::cAlphaArgs(1) +
                                 ": Use inlet is located higher than overall tank height.");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + " = " + format("{:.4R}", DataIPShortCuts::rNumericArgs(2)));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(10) + " = " + format("{:.4R}", DataIPShortCuts::rNumericArgs(10)));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(2)));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(10) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(10)));
                 ErrorsFound = true;
             }
 
@@ -3638,8 +3638,8 @@ namespace WaterThermalTanks {
             if (Tank.UseOutletHeight > Tank.Height) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + DataIPShortCuts::cAlphaArgs(1) +
                                 ": Use outlet is located higher than overall tank height.");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + " = " + format("{:.4R}", DataIPShortCuts::rNumericArgs(2)));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(11) + " = " + format("{:.4R}", DataIPShortCuts::rNumericArgs(11)));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(2)));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(11) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(11)));
                 ErrorsFound = true;
             }
 
@@ -3654,8 +3654,8 @@ namespace WaterThermalTanks {
             if (Tank.SourceInletHeight > Tank.Height) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + DataIPShortCuts::cAlphaArgs(1) +
                                 ": Source inlet is located higher than overall tank height.");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + " = " + format("{:.4R}", DataIPShortCuts::rNumericArgs(2)));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(14) + " = " + format("{:.4R}", DataIPShortCuts::rNumericArgs(14)));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(2)));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(14) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(14)));
                 ErrorsFound = true;
             }
 
@@ -3666,8 +3666,8 @@ namespace WaterThermalTanks {
             if (Tank.SourceOutletHeight > Tank.Height) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + DataIPShortCuts::cAlphaArgs(1) +
                                 ": Source outlet is located higher than overall tank height.");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + " = " + format("{:.4R}", DataIPShortCuts::rNumericArgs(2)));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(15) + " = " + format("{:.4R}", DataIPShortCuts::rNumericArgs(15)));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(2)));
+                ShowContinueError(DataIPShortCuts::cNumericFieldNames(15) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(15)));
                 ErrorsFound = true;
             }
 
@@ -5477,12 +5477,12 @@ namespace WaterThermalTanks {
                         if (TankChangeRateScale < 60.0) { // nominal change over in less than one minute
                             ShowSevereError("InitWaterThermalTank: Detected problem for stratified tank model.  Model cannot be applied.");
                             ShowContinueError("Occurs for stratified tank name = " + this->Name);
-                            ShowContinueError("Tank volume = " + format("{:.4R}", this->Volume) + " [m3]");
-                            ShowContinueError("Tank use side volume flow rate = " + format("{:.4R}", this->UseDesignVolFlowRate) +
+                            ShowContinueError(format("Tank volume = {:.4R}", this->Volume) + " [m3]");
+                            ShowContinueError(format("Tank use side volume flow rate = {:.4R}", this->UseDesignVolFlowRate) +
                                               " [m3/s]");
-                            ShowContinueError("Tank source side volume flow rate = " + format("{:.4R}", this->SourceDesignVolFlowRate) +
+                            ShowContinueError(format("Tank source side volume flow rate = {:.4R}", this->SourceDesignVolFlowRate) +
                                               " [m3/s]");
-                            ShowContinueError("Nominal tank change over rate = " + format("{:.2R}", TankChangeRateScale) + " [s]");
+                            ShowContinueError(format("Nominal tank change over rate = {:.2R}", TankChangeRateScale) + " [s]");
                             ShowContinueError(
                                 "Change over rate is too fast, increase tank volume, decrease connection flow rates or use mixed tank model");
 
@@ -6044,7 +6044,7 @@ namespace WaterThermalTanks {
                     state.dataWaterThermalTanks->HPWaterHeater(HPNum).HPWHAirVolFlowRate(state.dataWaterThermalTanks->HPWaterHeater(HPNum).NumofSpeed)) { // but this is the not the scaled mas flow
                     // if ( FanVolFlow  < HPWaterHeater( HPNum ).HPWHAirVolFlowRate( HPWaterHeater( HPNum ).NumofSpeed ) ) {
 
-                    ShowWarningError("InitWaterThermalTank: -air flow rate = " + format("{:.7T}", FanVolFlow) +
+                    ShowWarningError(format("InitWaterThermalTank: -air flow rate = {:.7T}", FanVolFlow) +
                                      " in fan object "
                                      " is less than the MSHP system air flow rate"
                                      " when waterheating is required(" +
@@ -7865,7 +7865,7 @@ namespace WaterThermalTanks {
                     ShowWarningError(DesupHtr.Type + " \"" + DesupHtr.Name +
                                      "\":  Water heater tank set point temperature is greater than or equal to the cut-in temperature of the "
                                      "desuperheater. Desuperheater will be disabled.");
-                    ShowContinueErrorTimeStamp(" ...Desuperheater cut-in temperature = " + format("{:.2R}", MinTemp));
+                    ShowContinueErrorTimeStamp(format(" ...Desuperheater cut-in temperature = {:.2R}", MinTemp));
                 } else {
                     ShowRecurringWarningErrorAtEnd(DesupHtr.Type + " \"" + DesupHtr.Name +
                                                        "\":  Water heater tank set point temperature is greater than or equal to the cut-in "
@@ -8028,7 +8028,7 @@ namespace WaterThermalTanks {
                                             ShowWarningError(DesupHtr.Type + " \"" + DesupHtr.Name + "\"");
                                             ShowContinueError(
                                                 "Iteration limit exceeded calculating desuperheater unit part-load ratio, maximum iterations = " +
-                                                IterNum + ". Part-load ratio returned = " + format("{:.3R}", partLoadRatio));
+                                                IterNum + format(". Part-load ratio returned = {:.3R}", partLoadRatio));
                                             ShowContinueErrorTimeStamp("This error occurred in heating mode.");
                                         } else {
                                             ShowRecurringWarningErrorAtEnd(DesupHtr.Type + " \"" + DesupHtr.Name +
@@ -8145,7 +8145,7 @@ namespace WaterThermalTanks {
                                                 ShowWarningError(DesupHtr.Type + " \"" + DesupHtr.Name + "\"");
                                                 ShowContinueError(
                                                     "Iteration limit exceeded calculating desuperheater unit part-load ratio, maximum iterations = " +
-                                                    IterNum + ". Part-load ratio returned = " + format("{:.3R}", partLoadRatio));
+                                                    IterNum + format(". Part-load ratio returned = {:.3R}", partLoadRatio));
                                                 ShowContinueErrorTimeStamp("This error occurred in float mode.");
                                             } else {
                                                 ShowRecurringWarningErrorAtEnd(DesupHtr.Type + " \"" + DesupHtr.Name +
@@ -8857,7 +8857,7 @@ namespace WaterThermalTanks {
                                 ShowWarningError(HeatPump.Type + " \"" + HeatPump.Name + "\"");
                                 ShowContinueError(
                                     "Iteration limit exceeded calculating heat pump water heater compressor part-load ratio, maximum iterations = " +
-                                    IterNum + ". Part-load ratio returned = " + format("{:.3R}", state.dataWaterThermalTanks->hpPartLoadRatio));
+                                    IterNum + format(". Part-load ratio returned = {:.3R}", state.dataWaterThermalTanks->hpPartLoadRatio));
                                 ShowContinueErrorTimeStamp("This error occurred in float mode.");
                             } else {
                                 ShowRecurringWarningErrorAtEnd(
@@ -9048,7 +9048,7 @@ namespace WaterThermalTanks {
                                     ShowWarningError(HeatPump.Type + " \"" + HeatPump.Name + "\"");
                                     ShowContinueError("Iteration limit exceeded calculating heat pump water heater speed"
                                                       " speed ratio ratio, maximum iterations = " +
-                                                      IterNum + ". speed ratio returned = " + format("{:.3R}", SpeedRatio));
+                                                      IterNum + format(". speed ratio returned = {:.3R}", SpeedRatio));
                                     ShowContinueErrorTimeStamp("This error occurred in heating mode.");
                                 } else {
                                     ShowRecurringWarningErrorAtEnd(

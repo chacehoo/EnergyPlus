@@ -714,8 +714,8 @@ namespace HVACVariableRefrigerantFlow {
                         ShowSevereMessage(cVRFTypes(VRF_HeatPump) + " \"" + VRF(VRFCond).Name + "\":");
                         ShowContinueError(" Cooling Capacity Modifier curve (function of temperature) output is negative (" +
                                           format("{:.3T}", TotCoolCapTempModFac) + ").");
-                        ShowContinueError(" Negative value occurs using an outdoor air temperature of " + format("{:.1T}", CondInletTemp) +
-                                          " C and an average indoor air wet-bulb temperature of " + format("{:.1T}", InletAirWetBulbC) + " C.");
+                        ShowContinueError(format(" Negative value occurs using an outdoor air temperature of {:.1T}", CondInletTemp) +
+                                          format(" C and an average indoor air wet-bulb temperature of {:.1T}", InletAirWetBulbC) + " C.");
                         ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                     }
                     ShowRecurringWarningErrorAtEnd(
@@ -735,8 +735,8 @@ namespace HVACVariableRefrigerantFlow {
                         ShowSevereMessage(cVRFTypes(VRF_HeatPump) + " \"" + VRF(VRFCond).Name + "\":");
                         ShowContinueError(" Cooling Energy Input Ratio Modifier curve (function of temperature) output is negative (" +
                                           format("{:.3T}", TotCoolEIRTempModFac) + ").");
-                        ShowContinueError(" Negative value occurs using an outdoor air temperature of " + format("{:.1T}", CondInletTemp) +
-                                          " C and an average indoor air wet-bulb temperature of " + format("{:.1T}", InletAirWetBulbC) + " C.");
+                        ShowContinueError(format(" Negative value occurs using an outdoor air temperature of {:.1T}", CondInletTemp) +
+                                          format(" C and an average indoor air wet-bulb temperature of {:.1T}", InletAirWetBulbC) + " C.");
                         ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                     }
                     ShowRecurringWarningErrorAtEnd(
@@ -765,8 +765,8 @@ namespace HVACVariableRefrigerantFlow {
                         ShowSevereMessage(cVRFTypes(VRF_HeatPump) + " \"" + VRF(VRFCond).Name + "\":");
                         ShowContinueError(" Cooling Capacity Modifier curve (function of temperature) output is negative (" +
                                           format("{:.3T}", TotCoolCapTempModFac) + ").");
-                        ShowContinueError(" Negative value occurs using an outdoor air temperature of " + format("{:.1T}", CondInletTemp) +
-                                          " C and an average indoor air wet-bulb temperature of " + format("{:.1T}", InletAirWetBulbC) + " C.");
+                        ShowContinueError(format(" Negative value occurs using an outdoor air temperature of {:.1T}", CondInletTemp) +
+                                          format(" C and an average indoor air wet-bulb temperature of {:.1T}", InletAirWetBulbC) + " C.");
                         ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                     }
                     ShowRecurringWarningErrorAtEnd(
@@ -785,8 +785,8 @@ namespace HVACVariableRefrigerantFlow {
                         ShowSevereMessage(cVRFTypes(VRF_HeatPump) + " \"" + VRF(VRFCond).Name + "\":");
                         ShowContinueError(" Cooling Energy Input Ratio Modifier curve (function of temperature) output is negative (" +
                                           format("{:.3T}", TotCoolEIRTempModFac) + ").");
-                        ShowContinueError(" Negative value occurs using an outdoor air temperature of " + format("{:.1T}", CondInletTemp) +
-                                          " C and an average indoor air wet-bulb temperature of " + format("{:.1T}", InletAirWetBulbC) + " C.");
+                        ShowContinueError(format(" Negative value occurs using an outdoor air temperature of {:.1T}", CondInletTemp) +
+                                          format(" C and an average indoor air wet-bulb temperature of {:.1T}", InletAirWetBulbC) + " C.");
                         ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                     }
                     ShowRecurringWarningErrorAtEnd(
@@ -864,8 +864,8 @@ namespace HVACVariableRefrigerantFlow {
                                           format("{:.3T}", TotHeatCapTempModFac) + ").");
                         auto const SELECT_CASE_var(VRF(VRFCond).HeatingPerformanceOATType);
                         if (SELECT_CASE_var == DataHVACGlobals::DryBulbIndicator) {
-                            ShowContinueError(" Negative value occurs using an outdoor air temperature of " + format("{:.1T}", CondInletTemp) +
-                                              " C and an average indoor air dry-bulb temperature of " + format("{:.1T}", InletAirDryBulbC) + " C.");
+                            ShowContinueError(format(" Negative value occurs using an outdoor air temperature of {:.1T}", CondInletTemp) +
+                                              format(" C and an average indoor air dry-bulb temperature of {:.1T}", InletAirDryBulbC) + " C.");
                         } else if (SELECT_CASE_var == DataHVACGlobals::WetBulbIndicator) {
                             ShowContinueError(" Negative value occurs using an outdoor air wet-bulb temperature of " +
                                               format("{:.1T}", OutdoorWetBulb) + " C and an average indoor air wet-bulb temperature of " +
@@ -1808,7 +1808,7 @@ namespace HVACVariableRefrigerantFlow {
                     if (MinCurveVal < 0.7) {
                         ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + VRF(VRFNum).Name + "\", invalid");
                         ShowContinueError("..." + cAlphaFieldNames(12) + "=\"" + cAlphaArgs(12) + "\" has out of range values.");
-                        ShowContinueError("...Curve minimum must be >= 0.7, curve min at PLR = " + format("{:.2T}", MinCurvePLR) + " is " +
+                        ShowContinueError(format("...Curve minimum must be >= 0.7, curve min at PLR = {:.2T}", MinCurvePLR) + " is " +
                                           format("{:.3T}", MinCurveVal));
                         ShowContinueError("...Setting curve minimum to 0.7 and simulation continues.");
                         SetCurveOutputMinMaxValues(state, VRF(VRFNum).CoolPLFFPLR, ErrorsFound, 0.7, _);
@@ -1817,7 +1817,7 @@ namespace HVACVariableRefrigerantFlow {
                     if (MaxCurveVal > 1.0) {
                         ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + VRF(VRFNum).Name + "\", invalid");
                         ShowContinueError("..." + cAlphaFieldNames(12) + " = " + cAlphaArgs(12) + " has out of range value.");
-                        ShowContinueError("...Curve maximum must be <= 1.0, curve max at PLR = " + format("{:.2T}", MaxCurvePLR) + " is " +
+                        ShowContinueError(format("...Curve maximum must be <= 1.0, curve max at PLR = {:.2T}", MaxCurvePLR) + " is " +
                                           format("{:.3T}", MaxCurveVal));
                         ShowContinueError("...Setting curve maximum to 1.0 and simulation continues.");
                         SetCurveOutputMinMaxValues(state, VRF(VRFNum).CoolPLFFPLR, ErrorsFound, _, 1.0);
@@ -1835,8 +1835,8 @@ namespace HVACVariableRefrigerantFlow {
             VRF(VRFNum).MaxOATHeating = rNumericArgs(9);
             if (VRF(VRFNum).MinOATHeating >= VRF(VRFNum).MaxOATHeating) {
                 ShowSevereError(cCurrentModuleObject + ", \"" + VRF(VRFNum).Name + "\"");
-                ShowContinueError("... " + cNumericFieldNames(8) + " (" + format("{:.3T}", VRF(VRFNum).MinOATHeating) +
-                                  ") must be less than maximum (" + format("{:.3T}", VRF(VRFNum).MaxOATHeating) + ").");
+                ShowContinueError("... " + cNumericFieldNames(8) + format(" ({:.3T}", VRF(VRFNum).MinOATHeating) +
+                                  format(") must be less than maximum ({:.3T}", VRF(VRFNum).MaxOATHeating) + ").");
                 ErrorsFound = true;
             }
 
@@ -2000,7 +2000,7 @@ namespace HVACVariableRefrigerantFlow {
                     if (MinCurveVal < 0.7) {
                         ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + VRF(VRFNum).Name + "\", invalid");
                         ShowContinueError("..." + cAlphaFieldNames(23) + "=\"" + cAlphaArgs(23) + "\" has out of range values.");
-                        ShowContinueError("...Curve minimum must be >= 0.7, curve min at PLR = " + format("{:.2T}", MinCurvePLR) + " is " +
+                        ShowContinueError(format("...Curve minimum must be >= 0.7, curve min at PLR = {:.2T}", MinCurvePLR) + " is " +
                                           format("{:.3T}", MinCurveVal));
                         ShowContinueError("...Setting curve minimum to 0.7 and simulation continues.");
                         SetCurveOutputMinMaxValues(state, VRF(VRFNum).HeatPLFFPLR, ErrorsFound, 0.7, _);
@@ -2009,7 +2009,7 @@ namespace HVACVariableRefrigerantFlow {
                     if (MaxCurveVal > 1.0) {
                         ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + VRF(VRFNum).Name + "\", invalid");
                         ShowContinueError("..." + cAlphaFieldNames(23) + " = " + cAlphaArgs(23) + " has out of range value.");
-                        ShowContinueError("...Curve maximum must be <= 1.0, curve max at PLR = " + format("{:.2T}", MaxCurvePLR) + " is " +
+                        ShowContinueError(format("...Curve maximum must be <= 1.0, curve max at PLR = {:.2T}", MaxCurvePLR) + " is " +
                                           format("{:.3T}", MaxCurveVal));
                         ShowContinueError("...Setting curve maximum to 1.0 and simulation continues.");
                         SetCurveOutputMinMaxValues(state, VRF(VRFNum).HeatPLFFPLR, ErrorsFound, _, 1.0);
@@ -2026,14 +2026,14 @@ namespace HVACVariableRefrigerantFlow {
                 if (minEIRfLowPLRXInput > VRF(VRFNum).MinPLR) {
                     ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + VRF(VRFNum).Name + "\", invalid");
                     ShowContinueError("..." + cAlphaFieldNames(9) + " = " + cAlphaArgs(9) + " has out of range value.");
-                    ShowContinueError("...Curve minimum value of X = " + format("{:.3T}", minEIRfLowPLRXInput) +
-                                      " must be <= Minimum Heat Pump Part-Load Ratio = " + format("{:.3T}", VRF(VRFNum).MinPLR) + ".");
+                    ShowContinueError(format("...Curve minimum value of X = {:.3T}", minEIRfLowPLRXInput) +
+                                      format(" must be <= Minimum Heat Pump Part-Load Ratio = {:.3T}", VRF(VRFNum).MinPLR) + ".");
                     ErrorsFound = true;
                 }
                 if (maxEIRfLowPLRXInput < 1.0) {
                     ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + VRF(VRFNum).Name + "\", suspicious");
                     ShowContinueError("..." + cAlphaFieldNames(9) + " = " + cAlphaArgs(9) + " has unexpected value.");
-                    ShowContinueError("...Curve maximum value of X = " + format("{:.3T}", maxEIRfLowPLRXInput) +
+                    ShowContinueError(format("...Curve maximum value of X = {:.3T}", maxEIRfLowPLRXInput) +
                                       " should be 1 and will result in lower energy use than expected.");
                 }
                 minEIRfLowPLRXInput = 0.0;
@@ -2044,14 +2044,14 @@ namespace HVACVariableRefrigerantFlow {
                 if (minEIRfLowPLRXInput > VRF(VRFNum).MinPLR) {
                     ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + VRF(VRFNum).Name + "\", invalid");
                     ShowContinueError("..." + cAlphaFieldNames(20) + " = " + cAlphaArgs(20) + " has out of range value.");
-                    ShowContinueError("...Curve minimum value of X = " + format("{:.3T}", minEIRfLowPLRXInput) +
-                                      " must be <= Minimum Heat Pump Part-Load Ratio = " + format("{:.3T}", VRF(VRFNum).MinPLR) + ".");
+                    ShowContinueError(format("...Curve minimum value of X = {:.3T}", minEIRfLowPLRXInput) +
+                                      format(" must be <= Minimum Heat Pump Part-Load Ratio = {:.3T}", VRF(VRFNum).MinPLR) + ".");
                     ErrorsFound = true;
                 }
                 if (maxEIRfLowPLRXInput < 1.0) {
                     ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + VRF(VRFNum).Name + "\", suspicious");
                     ShowContinueError("..." + cAlphaFieldNames(20) + " = " + cAlphaArgs(20) + " has unexpected value.");
-                    ShowContinueError("...Curve maximum value of X = " + format("{:.3T}", maxEIRfLowPLRXInput) +
+                    ShowContinueError(format("...Curve maximum value of X = {:.3T}", maxEIRfLowPLRXInput) +
                                       " should be 1 and will result in lower energy use than expected.");
                 }
             }
@@ -2353,13 +2353,13 @@ namespace HVACVariableRefrigerantFlow {
                     if (VRF(VRFNum).MinOATHeatRecovery < VRF(VRFNum).MinOATCooling || VRF(VRFNum).MinOATHeatRecovery < VRF(VRFNum).MinOATHeating) {
                         ShowWarningError(cCurrentModuleObject + " = \"" + VRF(VRFNum).Name + "\", " + cNumericFieldNames(29) +
                                          " is less than the minimum temperature in heat pump mode.");
-                        ShowContinueError("..." + cNumericFieldNames(29) + " = " + format("{:.2T}", VRF(VRFNum).MinOATHeatRecovery) + " C");
-                        ShowContinueError("...Minimum Outdoor Temperature in Cooling Mode = " + format("{:.2T}", VRF(VRFNum).MinOATCooling) + " C");
-                        ShowContinueError("...Minimum Outdoor Temperature in Heating Mode = " + format("{:.2T}", VRF(VRFNum).MinOATHeating) + " C");
+                        ShowContinueError("..." + cNumericFieldNames(29) + format(" = {:.2T}", VRF(VRFNum).MinOATHeatRecovery) + " C");
+                        ShowContinueError(format("...Minimum Outdoor Temperature in Cooling Mode = {:.2T}", VRF(VRFNum).MinOATCooling) + " C");
+                        ShowContinueError(format("...Minimum Outdoor Temperature in Heating Mode = {:.2T}", VRF(VRFNum).MinOATHeating) + " C");
                         ShowContinueError("...Minimum Outdoor Temperature in Heat Recovery Mode reset to greater of cooling or heating minimum "
                                           "temperature and simulation continues.");
                         VRF(VRFNum).MinOATHeatRecovery = max(VRF(VRFNum).MinOATCooling, VRF(VRFNum).MinOATHeating);
-                        ShowContinueError("... adjusted " + cNumericFieldNames(29) + " = " + format("{:.2T}", VRF(VRFNum).MinOATHeatRecovery) + " C");
+                        ShowContinueError("... adjusted " + cNumericFieldNames(29) + format(" = {:.2T}", VRF(VRFNum).MinOATHeatRecovery) + " C");
                     }
                 }
                 if (lNumericFieldBlanks(30)) {
@@ -2369,13 +2369,13 @@ namespace HVACVariableRefrigerantFlow {
                     if (VRF(VRFNum).MaxOATHeatRecovery > VRF(VRFNum).MaxOATCooling || VRF(VRFNum).MaxOATHeatRecovery > VRF(VRFNum).MaxOATHeating) {
                         ShowWarningError(cCurrentModuleObject + " = \"" + VRF(VRFNum).Name + "\", " + cNumericFieldNames(30) +
                                          " is greater than the maximum temperature in heat pump mode.");
-                        ShowContinueError("..." + cNumericFieldNames(30) + " = " + format("{:.2T}", VRF(VRFNum).MaxOATHeatRecovery) + " C");
-                        ShowContinueError("...Maximum Outdoor Temperature in Cooling Mode = " + format("{:.2T}", VRF(VRFNum).MaxOATCooling) + " C");
-                        ShowContinueError("...Maximum Outdoor Temperature in Heating Mode = " + format("{:.2T}", VRF(VRFNum).MaxOATHeating) + " C");
+                        ShowContinueError("..." + cNumericFieldNames(30) + format(" = {:.2T}", VRF(VRFNum).MaxOATHeatRecovery) + " C");
+                        ShowContinueError(format("...Maximum Outdoor Temperature in Cooling Mode = {:.2T}", VRF(VRFNum).MaxOATCooling) + " C");
+                        ShowContinueError(format("...Maximum Outdoor Temperature in Heating Mode = {:.2T}", VRF(VRFNum).MaxOATHeating) + " C");
                         ShowContinueError("...Maximum Outdoor Temperature in Heat Recovery Mode reset to lesser of cooling or heating minimum "
                                           "temperature and simulation continues.");
                         VRF(VRFNum).MaxOATHeatRecovery = min(VRF(VRFNum).MaxOATCooling, VRF(VRFNum).MaxOATHeating);
-                        ShowContinueError("... adjusted " + cNumericFieldNames(30) + " = " + format("{:.2T}", VRF(VRFNum).MaxOATHeatRecovery) + " C");
+                        ShowContinueError("... adjusted " + cNumericFieldNames(30) + format(" = {:.2T}", VRF(VRFNum).MaxOATHeatRecovery) + " C");
                     }
                 }
 
@@ -2514,14 +2514,14 @@ namespace HVACVariableRefrigerantFlow {
             VRF(VRFNum).MaxOATHeating = rNumericArgs(6);
             if (VRF(VRFNum).MinOATCooling >= VRF(VRFNum).MaxOATCooling) {
                 ShowSevereError(cCurrentModuleObject + ", \"" + VRF(VRFNum).Name + "\"");
-                ShowContinueError("... " + cNumericFieldNames(3) + " (" + format("{:.3T}", VRF(VRFNum).MinOATCooling) +
-                                  ") must be less than maximum (" + format("{:.3T}", VRF(VRFNum).MaxOATCooling) + ").");
+                ShowContinueError("... " + cNumericFieldNames(3) + format(" ({:.3T}", VRF(VRFNum).MinOATCooling) +
+                                  format(") must be less than maximum ({:.3T}", VRF(VRFNum).MaxOATCooling) + ").");
                 ErrorsFound = true;
             }
             if (VRF(VRFNum).MinOATHeating >= VRF(VRFNum).MaxOATHeating) {
                 ShowSevereError(cCurrentModuleObject + ", \"" + VRF(VRFNum).Name + "\"");
-                ShowContinueError("... " + cNumericFieldNames(5) + " (" + format("{:.3T}", VRF(VRFNum).MinOATHeating) +
-                                  ") must be less than maximum (" + format("{:.3T}", VRF(VRFNum).MaxOATHeating) + ").");
+                ShowContinueError("... " + cNumericFieldNames(5) + format(" ({:.3T}", VRF(VRFNum).MinOATHeating) +
+                                  format(") must be less than maximum ({:.3T}", VRF(VRFNum).MaxOATHeating) + ").");
                 ErrorsFound = true;
             }
 
@@ -2548,14 +2548,14 @@ namespace HVACVariableRefrigerantFlow {
             VRF(VRFNum).IUCondTempHigh = rNumericArgs(14);
             if (VRF(VRFNum).IUEvapTempLow >= VRF(VRFNum).IUEvapTempHigh) {
                 ShowSevereError(cCurrentModuleObject + ", \"" + VRF(VRFNum).Name + "\"");
-                ShowContinueError("... " + cNumericFieldNames(11) + " (" + format("{:.3T}", VRF(VRFNum).IUEvapTempLow) +
-                                  ") must be less than maximum (" + format("{:.3T}", VRF(VRFNum).IUEvapTempHigh) + ").");
+                ShowContinueError("... " + cNumericFieldNames(11) + format(" ({:.3T}", VRF(VRFNum).IUEvapTempLow) +
+                                  format(") must be less than maximum ({:.3T}", VRF(VRFNum).IUEvapTempHigh) + ").");
                 ErrorsFound = true;
             }
             if (VRF(VRFNum).IUCondTempLow >= VRF(VRFNum).IUCondTempHigh) {
                 ShowSevereError(cCurrentModuleObject + ", \"" + VRF(VRFNum).Name + "\"");
-                ShowContinueError("... " + cNumericFieldNames(13) + " (" + format("{:.3T}", VRF(VRFNum).IUCondTempLow) +
-                                  ") must be less than maximum (" + format("{:.3T}", VRF(VRFNum).IUCondTempHigh) + ").");
+                ShowContinueError("... " + cNumericFieldNames(13) + format(" ({:.3T}", VRF(VRFNum).IUCondTempLow) +
+                                  format(") must be less than maximum ({:.3T}", VRF(VRFNum).IUCondTempHigh) + ").");
                 ErrorsFound = true;
             }
 
@@ -2879,43 +2879,43 @@ namespace HVACVariableRefrigerantFlow {
             VRF(VRFNum).MaxOATHeatRecovery = rNumericArgs(8);
             if (VRF(VRFNum).MinOATCooling >= VRF(VRFNum).MaxOATCooling) {
                 ShowSevereError(cCurrentModuleObject + ", \"" + VRF(VRFNum).Name + "\"");
-                ShowContinueError("... " + cNumericFieldNames(3) + " (" + format("{:.3T}", VRF(VRFNum).MinOATCooling) +
-                                  ") must be less than maximum (" + format("{:.3T}", VRF(VRFNum).MaxOATCooling) + ").");
+                ShowContinueError("... " + cNumericFieldNames(3) + format(" ({:.3T}", VRF(VRFNum).MinOATCooling) +
+                                  format(") must be less than maximum ({:.3T}", VRF(VRFNum).MaxOATCooling) + ").");
                 ErrorsFound = true;
             }
             if (VRF(VRFNum).MinOATHeating >= VRF(VRFNum).MaxOATHeating) {
                 ShowSevereError(cCurrentModuleObject + ", \"" + VRF(VRFNum).Name + "\"");
-                ShowContinueError("... " + cNumericFieldNames(5) + " (" + format("{:.3T}", VRF(VRFNum).MinOATHeating) +
-                                  ") must be less than maximum (" + format("{:.3T}", VRF(VRFNum).MaxOATHeating) + ").");
+                ShowContinueError("... " + cNumericFieldNames(5) + format(" ({:.3T}", VRF(VRFNum).MinOATHeating) +
+                                  format(") must be less than maximum ({:.3T}", VRF(VRFNum).MaxOATHeating) + ").");
                 ErrorsFound = true;
             }
             if (VRF(VRFNum).MinOATHeatRecovery >= VRF(VRFNum).MaxOATHeatRecovery) {
                 ShowSevereError(cCurrentModuleObject + ", \"" + VRF(VRFNum).Name + "\"");
-                ShowContinueError("... " + cNumericFieldNames(7) + " (" + format("{:.3T}", VRF(VRFNum).MinOATHeating) +
-                                  ") must be less than maximum (" + format("{:.3T}", VRF(VRFNum).MaxOATHeating) + ").");
+                ShowContinueError("... " + cNumericFieldNames(7) + format(" ({:.3T}", VRF(VRFNum).MinOATHeating) +
+                                  format(") must be less than maximum ({:.3T}", VRF(VRFNum).MaxOATHeating) + ").");
                 ErrorsFound = true;
             }
             if (VRF(VRFNum).MinOATHeatRecovery < VRF(VRFNum).MinOATCooling && VRF(VRFNum).MinOATHeatRecovery < VRF(VRFNum).MinOATHeating) {
                 ShowWarningError(cCurrentModuleObject + " = \"" + VRF(VRFNum).Name + "\", " + cNumericFieldNames(7) +
                                  " is less than the minimum temperature in heat pump mode.");
-                ShowContinueError("..." + cNumericFieldNames(7) + " = " + format("{:.2T}", VRF(VRFNum).MinOATHeatRecovery) + " C");
-                ShowContinueError("...Minimum Outdoor Temperature in Cooling Mode = " + format("{:.2T}", VRF(VRFNum).MinOATCooling) + " C");
-                ShowContinueError("...Minimum Outdoor Temperature in Heating Mode = " + format("{:.2T}", VRF(VRFNum).MinOATHeating) + " C");
+                ShowContinueError("..." + cNumericFieldNames(7) + format(" = {:.2T}", VRF(VRFNum).MinOATHeatRecovery) + " C");
+                ShowContinueError(format("...Minimum Outdoor Temperature in Cooling Mode = {:.2T}", VRF(VRFNum).MinOATCooling) + " C");
+                ShowContinueError(format("...Minimum Outdoor Temperature in Heating Mode = {:.2T}", VRF(VRFNum).MinOATHeating) + " C");
                 ShowContinueError("...Minimum Outdoor Temperature in Heat Recovery Mode reset to lesser of cooling or heating minimum temperature "
                                   "and simulation continues.");
                 VRF(VRFNum).MinOATHeatRecovery = min(VRF(VRFNum).MinOATCooling, VRF(VRFNum).MinOATHeating);
-                ShowContinueError("... adjusted " + cNumericFieldNames(7) + " = " + format("{:.2T}", VRF(VRFNum).MinOATHeatRecovery) + " C");
+                ShowContinueError("... adjusted " + cNumericFieldNames(7) + format(" = {:.2T}", VRF(VRFNum).MinOATHeatRecovery) + " C");
             }
             if (VRF(VRFNum).MaxOATHeatRecovery > VRF(VRFNum).MaxOATCooling && VRF(VRFNum).MaxOATHeatRecovery > VRF(VRFNum).MaxOATHeating) {
                 ShowWarningError(cCurrentModuleObject + " = \"" + VRF(VRFNum).Name + "\", " + cNumericFieldNames(8) +
                                  " is greater than the maximum temperature in heat pump mode.");
-                ShowContinueError("..." + cNumericFieldNames(8) + " = " + format("{:.2T}", VRF(VRFNum).MaxOATHeatRecovery) + " C");
-                ShowContinueError("...Maximum Outdoor Temperature in Cooling Mode = " + format("{:.2T}", VRF(VRFNum).MaxOATCooling) + " C");
-                ShowContinueError("...Maximum Outdoor Temperature in Heating Mode = " + format("{:.2T}", VRF(VRFNum).MaxOATHeating) + " C");
+                ShowContinueError("..." + cNumericFieldNames(8) + format(" = {:.2T}", VRF(VRFNum).MaxOATHeatRecovery) + " C");
+                ShowContinueError(format("...Maximum Outdoor Temperature in Cooling Mode = {:.2T}", VRF(VRFNum).MaxOATCooling) + " C");
+                ShowContinueError(format("...Maximum Outdoor Temperature in Heating Mode = {:.2T}", VRF(VRFNum).MaxOATHeating) + " C");
                 ShowContinueError("...Maximum Outdoor Temperature in Heat Recovery Mode reset to greater of cooling or heating maximum temperature "
                                   "and simulation continues.");
                 VRF(VRFNum).MaxOATHeatRecovery = max(VRF(VRFNum).MaxOATCooling, VRF(VRFNum).MaxOATHeating);
-                ShowContinueError("... adjusted " + cNumericFieldNames(8) + " = " + format("{:.2T}", VRF(VRFNum).MaxOATHeatRecovery) + " C");
+                ShowContinueError("... adjusted " + cNumericFieldNames(8) + format(" = {:.2T}", VRF(VRFNum).MaxOATHeatRecovery) + " C");
             }
 
             // IU Control Type
@@ -2938,14 +2938,14 @@ namespace HVACVariableRefrigerantFlow {
             VRF(VRFNum).IUCondTempHigh = rNumericArgs(14);
             if (VRF(VRFNum).IUEvapTempLow >= VRF(VRFNum).IUEvapTempHigh) {
                 ShowSevereError(cCurrentModuleObject + ", \"" + VRF(VRFNum).Name + "\"");
-                ShowContinueError("... " + cNumericFieldNames(11) + " (" + format("{:.3T}", VRF(VRFNum).IUEvapTempLow) +
-                                  ") must be less than maximum (" + format("{:.3T}", VRF(VRFNum).IUEvapTempHigh) + ").");
+                ShowContinueError("... " + cNumericFieldNames(11) + format(" ({:.3T}", VRF(VRFNum).IUEvapTempLow) +
+                                  format(") must be less than maximum ({:.3T}", VRF(VRFNum).IUEvapTempHigh) + ").");
                 ErrorsFound = true;
             }
             if (VRF(VRFNum).IUCondTempLow >= VRF(VRFNum).IUCondTempHigh) {
                 ShowSevereError(cCurrentModuleObject + ", \"" + VRF(VRFNum).Name + "\"");
-                ShowContinueError("... " + cNumericFieldNames(13) + " (" + format("{:.3T}", VRF(VRFNum).IUCondTempLow) +
-                                  ") must be less than maximum (" + format("{:.3T}", VRF(VRFNum).IUCondTempHigh) + ").");
+                ShowContinueError("... " + cNumericFieldNames(13) + format(" ({:.3T}", VRF(VRFNum).IUCondTempLow) +
+                                  format(") must be less than maximum ({:.3T}", VRF(VRFNum).IUCondTempHigh) + ").");
                 ErrorsFound = true;
             }
 
@@ -6338,7 +6338,7 @@ namespace HVACVariableRefrigerantFlow {
                                 ShowContinueError("...InitVRF: VRF Heat Pump Min/Max Operating Temperature in Cooling Mode Limits have been exceeded "
                                                   "and VRF system is disabled.");
                                 if (VRF(VRFCond).CondenserType == DataHVACGlobals::WaterCooled) {
-                                    ShowContinueError("... Outdoor Unit Inlet Water Temperature           = " + format("{:.3T}", OutsideDryBulbTemp));
+                                    ShowContinueError(format("... Outdoor Unit Inlet Water Temperature           = {:.3T}", OutsideDryBulbTemp));
                                 } else {
                                     ShowContinueError("... Outdoor Unit Inlet Air Temperature                 = " +
                                                       format("{:.3T}", OutsideDryBulbTemp));
@@ -6410,9 +6410,9 @@ namespace HVACVariableRefrigerantFlow {
                                 ShowContinueError("...InitVRF: VRF Heat Pump Min/Max Operating Temperature in Heating Mode Limits have been exceeded "
                                                   "and VRF system is disabled.");
                                 if (VRF(VRFCond).CondenserType == DataHVACGlobals::WaterCooled) {
-                                    ShowContinueError("... Outdoor Unit Inlet Water Temperature           = " + format("{:.3T}", OutsideDryBulbTemp));
+                                    ShowContinueError(format("... Outdoor Unit Inlet Water Temperature           = {:.3T}", OutsideDryBulbTemp));
                                 } else {
-                                    ShowContinueError("... Outdoor Unit Inlet Air Temperature             = " + format("{:.3T}", OutsideDryBulbTemp));
+                                    ShowContinueError(format("... Outdoor Unit Inlet Air Temperature             = {:.3T}", OutsideDryBulbTemp));
                                 }
                                 ShowContinueError("... Heating Minimum Outdoor Unit Inlet Temperature = " +
                                                   format("{:.3T}", VRF(VRFCond).MinOATHeating));
@@ -6764,7 +6764,7 @@ namespace HVACVariableRefrigerantFlow {
                         ShowWarningMessage(cVRFTypes(VRF(VRFCond).VRFSystemTypeNum) + " \"" + VRF(VRFCond).Name + "\".");
                         ShowContinueError("...InitVRF: VRF Heat Pump Min/Max Outdoor Temperature in Heat Recovery Mode Limits have been exceeded and "
                                           "VRF heat recovery is disabled.");
-                        ShowContinueError("... Outdoor Dry-Bulb Temperature                       = " + format("{:.3T}", OutsideDryBulbTemp));
+                        ShowContinueError(format("... Outdoor Dry-Bulb Temperature                       = {:.3T}", OutsideDryBulbTemp));
                         ShowContinueError("... Heat Recovery Minimum Outdoor Dry-Bulb Temperature = " +
                                           format("{:.3T}", VRF(VRFCond).MinOATHeatRecovery));
                         ShowContinueError("... Heat Recovery Maximum Outdoor Dry-Bulb Temperature = " +
@@ -6820,7 +6820,7 @@ namespace HVACVariableRefrigerantFlow {
             } else {
                 if (VRF(VRFCond).HPOperatingModeErrorIndex == 0) {
                     ShowWarningMessage(cVRFTypes(VRF(VRFCond).VRFSystemTypeNum) + " \"" + VRF(VRFCond).Name + "\".");
-                    ShowContinueError("...InitVRF: Illegal HP operating mode = " + format("{:.0T}", VRF(VRFCond).EMSValueForHPOperatingMode));
+                    ShowContinueError(format("...InitVRF: Illegal HP operating mode = {:.0T}", VRF(VRFCond).EMSValueForHPOperatingMode));
                     ShowContinueError("...InitVRF: VRF HP operating mode will not be controlled by EMS.");
                 }
                 ShowRecurringWarningErrorAtEnd(cVRFTypes(VRF(VRFCond).VRFSystemTypeNum) + " \"" + VRF(VRFCond).Name +
@@ -7785,7 +7785,7 @@ namespace HVACVariableRefrigerantFlow {
                             if ((std::abs(CoolingCapacityDes - CoolingCapacityUser) / CoolingCapacityUser) > AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeVRF: Potential issue with equipment sizing for " + cVRFTypes(VRF(VRFCond).VRFSystemTypeNum) + ' ' +
                                             VRFTU(VRFCond).Name);
-                                ShowContinueError("User-Specified Rated Total Cooling Capacity (gross) of " + format("{:.2R}", CoolingCapacityUser) +
+                                ShowContinueError(format("User-Specified Rated Total Cooling Capacity (gross) of {:.2R}", CoolingCapacityUser) +
                                                   " [W]");
                                 ShowContinueError("differs from Design Size Rated Total Cooling Capacity (gross) of " +
                                                   format("{:.2R}", CoolingCapacityDes) + " [W]");
@@ -7829,7 +7829,7 @@ namespace HVACVariableRefrigerantFlow {
                             if ((std::abs(HeatingCapacityDes - HeatingCapacityUser) / HeatingCapacityUser) > AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeVRF: Potential issue with equipment sizing for " + cVRFTypes(VRF(VRFCond).VRFSystemTypeNum) + ' ' +
                                             VRFTU(VRFCond).Name);
-                                ShowContinueError("User-Specified Rated Total Heating Capacity of " + format("{:.2R}", HeatingCapacityUser) +
+                                ShowContinueError(format("User-Specified Rated Total Heating Capacity of {:.2R}", HeatingCapacityUser) +
                                                   " [W]");
                                 ShowContinueError("differs from Design Size Rated Total Heating Capacity of " +
                                                   format("{:.2R}", HeatingCapacityDes) + " [W]");
@@ -7958,7 +7958,7 @@ namespace HVACVariableRefrigerantFlow {
                         if ((std::abs(CoolingCapacityDes - CoolingCapacityUser) / CoolingCapacityUser) > AutoVsHardSizingThreshold) {
                             ShowMessage("SizeVRF: Potential issue with equipment sizing for " + cVRFTypes(VRF(VRFCond).VRFSystemTypeNum) + ' ' +
                                         VRFTU(VRFCond).Name);
-                            ShowContinueError("User-Specified Rated Total Cooling Capacity (gross) of " + format("{:.2R}", CoolingCapacityUser) +
+                            ShowContinueError(format("User-Specified Rated Total Cooling Capacity (gross) of {:.2R}", CoolingCapacityUser) +
                                               " [W]");
                             ShowContinueError("differs from Design Size Rated Total Cooling Capacity (gross) of " +
                                               format("{:.2R}", CoolingCapacityDes) + " [W]");
@@ -7969,8 +7969,8 @@ namespace HVACVariableRefrigerantFlow {
                         if ((std::abs(HeatingCapacityDes - HeatingCapacityUser) / HeatingCapacityUser) > AutoVsHardSizingThreshold) {
                             ShowMessage("SizeVRF: Potential issue with equipment sizing for " + cVRFTypes(VRF(VRFCond).VRFSystemTypeNum) + ' ' +
                                         VRFTU(VRFCond).Name);
-                            ShowContinueError("User-Specified Rated Total Heating Capacity of " + format("{:.2R}", HeatingCapacityUser) + " [W]");
-                            ShowContinueError("differs from Design Size Rated Total Heating Capacity of " + format("{:.2R}", HeatingCapacityDes) +
+                            ShowContinueError(format("User-Specified Rated Total Heating Capacity of {:.2R}", HeatingCapacityUser) + " [W]");
+                            ShowContinueError(format("differs from Design Size Rated Total Heating Capacity of {:.2R}", HeatingCapacityDes) +
                                               " [W]");
                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -8009,7 +8009,7 @@ namespace HVACVariableRefrigerantFlow {
                             if ((std::abs(DefrostCapacityDes - DefrostCapacityUser) / DefrostCapacityUser) > AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeVRF: Potential issue with equipment sizing for " + cVRFTypes(VRF(VRFCond).VRFSystemTypeNum) + ' ' +
                                             VRFTU(VRFCond).Name);
-                                ShowContinueError("User-Specified Resistive Defrost Heater Capacity of " + format("{:.2R}", DefrostCapacityUser) +
+                                ShowContinueError(format("User-Specified Resistive Defrost Heater Capacity of {:.2R}", DefrostCapacityUser) +
                                                   " [W]");
                                 ShowContinueError("differs from Design Size Resistive Defrost Heater Capacity of " +
                                                   format("{:.2R}", DefrostCapacityDes) + " [W]");
@@ -8510,7 +8510,7 @@ namespace HVACVariableRefrigerantFlow {
                             ShowWarningMessage(DataHVACGlobals::cVRFTUTypes(this->VRFTUType_Num) + " \"" + this->Name + "\"");
                             ShowContinueError(
                                 format(" Iteration limit exceeded calculating terminal unit part-load ratio, maximum iterations = {}", MaxIte));
-                            ShowContinueErrorTimeStamp(" Part-load ratio returned = " + format("{:.3R}", PartLoadRatio));
+                            ShowContinueErrorTimeStamp(format(" Part-load ratio returned = {:.3R}", PartLoadRatio));
 
                             if (VRF(VRFCond).VRFAlgorithmTypeNum == AlgorithmTypeFluidTCtrl) {
                                 // Algorithm Type: VRF model based on physics, applicable for Fluid Temperature Control
@@ -8521,8 +8521,8 @@ namespace HVACVariableRefrigerantFlow {
                                 this->CalcVRF(state, VRFTUNum, FirstHVACIteration, PartLoadRatio, TempOutput, OnOffAirFlowRatio, SuppHeatCoilLoad);
                             }
 
-                            ShowContinueError(" Load requested = " + format("{:.5T}", QZnReq) +
-                                              ", Load delivered = " + format("{:.5T}", TempOutput));
+                            ShowContinueError(format(" Load requested = {:.5T}", QZnReq) +
+                                              format(", Load delivered = {:.5T}", TempOutput));
                             ShowRecurringWarningErrorAtEnd(DataHVACGlobals::cVRFTUTypes(this->VRFTUType_Num) + " \"" + this->Name +
                                                                "\" -- Terminal unit Iteration limit exceeded error continues...",
                                                            this->IterLimitExceeded);
@@ -11700,12 +11700,12 @@ namespace HVACVariableRefrigerantFlow {
                             ShowWarningMessage(DataHVACGlobals::cVRFTUTypes(this->VRFTUType_Num) + " \"" + this->Name + "\"");
                             ShowContinueError(
                                 format(" Iteration limit exceeded calculating terminal unit part-load ratio, maximum iterations = {}", MaxIte));
-                            ShowContinueErrorTimeStamp(" Part-load ratio returned = " + format("{:.3R}", PartLoadRatio));
+                            ShowContinueErrorTimeStamp(format(" Part-load ratio returned = {:.3R}", PartLoadRatio));
 
                             this->CalcVRF_FluidTCtrl(
                                 state, VRFTUNum, FirstHVACIteration, TempMinPLR, TempOutput, OnOffAirFlowRatio, SuppHeatCoilLoad);
 
-                            ShowContinueError(" Load requested = " + format("{:.5T}", QZnReq) + ", Load delivered = " + format("{:.5T}", TempOutput));
+                            ShowContinueError(format(" Load requested = {:.5T}", QZnReq) + format(", Load delivered = {:.5T}", TempOutput));
                             ShowRecurringWarningErrorAtEnd(DataHVACGlobals::cVRFTUTypes(this->VRFTUType_Num) + " \"" + this->Name +
                                                                "\" -- Terminal unit Iteration limit exceeded error continues...",
                                                            this->IterLimitExceeded);
@@ -12312,9 +12312,9 @@ namespace HVACVariableRefrigerantFlow {
 
             if (m_air <= 0) {
                 TeTc = this->CondensingTemp;
-                ShowSevereMessage(" Unreasonable outdoor unit airflow rate (" + format("{:.3T}", m_air) + " ) for \"" + this->Name + "\":");
+                ShowSevereMessage(format(" Unreasonable outdoor unit airflow rate ({:.3T}", m_air) + " ) for \"" + this->Name + "\":");
                 ShowContinueError(" This cannot be used to calculate outdoor unit refrigerant temperature.");
-                ShowContinueError(" Default condensing temperature is used: " + format("{:.3T}", TeTc));
+                ShowContinueError(format(" Default condensing temperature is used: {:.3T}", TeTc));
             }
 
             BF = this->RateBFOUCond; // 0.219;
@@ -12330,9 +12330,9 @@ namespace HVACVariableRefrigerantFlow {
 
             if (m_air <= 0) {
                 TeTc = this->EvaporatingTemp;
-                ShowSevereMessage(" Unreasonable outdoor unit airflow rate (" + format("{:.3T}", m_air) + " ) for \"" + this->Name + "\":");
+                ShowSevereMessage(format(" Unreasonable outdoor unit airflow rate ({:.3T}", m_air) + " ) for \"" + this->Name + "\":");
                 ShowContinueError(" This cannot be used to calculate outdoor unit refrigerant temperature.");
-                ShowContinueError(" Default condensing temperature is used: " + format("{:.3T}", TeTc));
+                ShowContinueError(format(" Default condensing temperature is used: {:.3T}", TeTc));
             }
 
             BF = this->RateBFOUEvap; // 0.45581;
@@ -12396,7 +12396,7 @@ namespace HVACVariableRefrigerantFlow {
         if (OperationMode == FlagCondMode) {
             // IU Cooling: OperationMode 0
             if (m_air <= 0) {
-                ShowSevereMessage(" Unreasonable outdoor unit airflow rate (" + format("{:.3T}", m_air) + " ) for \"" + this->Name + "\":");
+                ShowSevereMessage(format(" Unreasonable outdoor unit airflow rate ({:.3T}", m_air) + " ) for \"" + this->Name + "\":");
                 ShowContinueError(" This cannot be used to calculate outdoor unit capacity.");
             }
 
@@ -12409,7 +12409,7 @@ namespace HVACVariableRefrigerantFlow {
         } else if (OperationMode == FlagEvapMode) {
             // IU Heating: OperationMode 1
             if (m_air <= 0) {
-                ShowSevereMessage(" Unreasonable outdoor unit airflow rate (" + format("{:.3T}", m_air) + " ) for \"" + this->Name + "\":");
+                ShowSevereMessage(format(" Unreasonable outdoor unit airflow rate ({:.3T}", m_air) + " ) for \"" + this->Name + "\":");
                 ShowContinueError(" This cannot be used to calculate outdoor unit capacity.");
             }
 
@@ -12559,7 +12559,7 @@ namespace HVACVariableRefrigerantFlow {
         if (OperationMode == FlagCondMode) {
             // Cooling: OperationMode 0
             if (m_air <= 0) {
-                ShowSevereMessage(" Unreasonable outdoor unit airflow rate (" + format("{:.3T}", m_air) + " ) for \"" + this->Name + "\":");
+                ShowSevereMessage(format(" Unreasonable outdoor unit airflow rate ({:.3T}", m_air) + " ) for \"" + this->Name + "\":");
                 ShowContinueError(" This cannot be used to calculate outdoor unit subcooling.");
             }
 
@@ -12577,7 +12577,7 @@ namespace HVACVariableRefrigerantFlow {
         } else if (OperationMode == FlagEvapMode) {
             // Heating: OperationMode 1
             if (m_air <= 0) {
-                ShowSevereMessage(" Unreasonable outdoor unit airflow rate (" + format("{:.3T}", m_air) + " ) for \"" + this->Name + "\":");
+                ShowSevereMessage(format(" Unreasonable outdoor unit airflow rate ({:.3T}", m_air) + " ) for \"" + this->Name + "\":");
                 ShowContinueError(" This cannot be used to calculate outdoor unit super heating.");
             }
 

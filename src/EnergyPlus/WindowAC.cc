@@ -381,7 +381,7 @@ namespace WindowAC {
                     FanVolFlow = HVACFan::fanObjs[state.dataWindowAC->WindAC(WindACNum).FanIndex]->designAirVolFlowRate;
                     if (FanVolFlow != AutoSize) {
                         if (FanVolFlow < state.dataWindowAC->WindAC(WindACNum).MaxAirVolFlow) {
-                            ShowWarningError("Air flow rate = " + format("{:.7T}", FanVolFlow) + " in fan object " +
+                            ShowWarningError(format("Air flow rate = {:.7T}", FanVolFlow) + " in fan object " +
                                              state.dataWindowAC->WindAC(WindACNum).FanName + " is less than the maximum supply air flow rate (" +
                                              format("{:.7T}", state.dataWindowAC->WindAC(WindACNum).MaxAirVolFlow) + ") in the " +
                                              CurrentModuleObject + " object.");
@@ -417,7 +417,7 @@ namespace WindowAC {
                                 GetFanVolFlow(state.dataWindowAC->WindAC(WindACNum).FanIndex, FanVolFlow);
                                 if (FanVolFlow != AutoSize) {
                                     if (FanVolFlow < state.dataWindowAC->WindAC(WindACNum).MaxAirVolFlow) {
-                                        ShowWarningError("Air flow rate = " + format("{:.7T}", FanVolFlow) + " in fan object " +
+                                        ShowWarningError(format("Air flow rate = {:.7T}", FanVolFlow) + " in fan object " +
                                                          state.dataWindowAC->WindAC(WindACNum).FanName +
                                                          " is less than the maximum supply air flow rate (" +
                                                          format("{:.7T}", state.dataWindowAC->WindAC(WindACNum).MaxAirVolFlow) + ") in the " +

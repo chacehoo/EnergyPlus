@@ -102,17 +102,17 @@ Real64 CoolingWaterDesAirOutletTempSizer::size(EnergyPlusData &state, Real64 _or
                                   "\", Cooling Coil has leaving air temperature < entering water temperature.";
                 this->addErrorMessage(msg);
                 ShowWarningError(msg);
-                msg = "    Tair,out  =  " + format("{:.3R}", this->autoSizedValue);
+                msg = format("    Tair,out  =  {:.3R}", this->autoSizedValue);
                 this->addErrorMessage(msg);
                 ShowContinueError(msg);
-                msg = "    Twater,in = " + format("{:.3R}", this->dataDesInletWaterTemp);
+                msg = format("    Twater,in = {:.3R}", this->dataDesInletWaterTemp);
                 this->addErrorMessage(msg);
                 ShowContinueError(msg);
                 this->autoSizedValue = this->dataDesInletWaterTemp + 0.5;
                 msg = "....coil leaving air temperature will be reset to:";
                 this->addErrorMessage(msg);
                 ShowContinueError(msg);
-                msg = "    Tair,out = " + format("{:.3R}", this->autoSizedValue);
+                msg = format("    Tair,out = {:.3R}", this->autoSizedValue);
                 this->addErrorMessage(msg);
                 ShowContinueError(msg);
             }
@@ -159,14 +159,14 @@ Real64 CoolingWaterDesAirOutletTempSizer::size(EnergyPlusData &state, Real64 _or
                                   "\", Cooling Coil has leaving air temperature < entering water temperature.";
                 this->addErrorMessage(msg);
                 ShowWarningError(msg);
-                msg = "    Tair,out  =  " + format("{:.3R}", this->autoSizedValue);
+                msg = format("    Tair,out  =  {:.3R}", this->autoSizedValue);
                 ShowContinueError(msg);
-                msg = "    Twater,in = " + format("{:.3R}", this->dataDesInletWaterTemp);
+                msg = format("    Twater,in = {:.3R}", this->dataDesInletWaterTemp);
                 ShowContinueError(msg);
                 this->autoSizedValue = this->dataDesInletWaterTemp + 0.5;
                 msg = "....coil leaving air temperature will be reset to:";
                 ShowContinueError(msg);
-                msg = "    Tair,out = " + format("{:.3R}", this->autoSizedValue);
+                msg = format("    Tair,out = {:.3R}", this->autoSizedValue);
                 ShowContinueError(msg);
             }
         }

@@ -1546,16 +1546,16 @@ namespace HVACControllers {
                 ShowSevereError("CalcSimpleController: Root finder failed at " + CreateHVACStepFullString());
                 ShowContinueError(" Controller name=\"" + ControllerName + "\"");
                 ShowContinueError(" Minimum bound must remain invariant during successive iterations.");
-                ShowContinueError(" Minimum root finder point=" + format("{:.{}T}", RootFinders(ControlNum).MinPoint.X, NumSigDigits));
-                ShowContinueError(" Minimum avail actuated=" + format("{:.{}T}", ControllerProps(ControlNum).MinAvailActuated, NumSigDigits));
+                ShowContinueError(format(" Minimum root finder point={:.{}T}", RootFinders(ControlNum).MinPoint.X, NumSigDigits));
+                ShowContinueError(format(" Minimum avail actuated={:.{}T}", ControllerProps(ControlNum).MinAvailActuated, NumSigDigits));
                 ShowFatalError("Preceding error causes program termination.");
             }
             if (RootFinders(ControlNum).MaxPoint.X != ControllerProps(ControlNum).MaxAvailActuated) {
                 ShowSevereError("CalcSimpleController: Root finder failed at " + CreateHVACStepFullString());
                 ShowContinueError(" Controller name=\"" + ControllerName + "\"");
                 ShowContinueError(" Maximum bound must remain invariant during successive iterations.");
-                ShowContinueError(" Maximum root finder point=" + format("{:.{}T}", RootFinders(ControlNum).MaxPoint.X, NumSigDigits));
-                ShowContinueError(" Maximum avail actuated=" + format("{:.{}T}", ControllerProps(ControlNum).MaxAvailActuated, NumSigDigits));
+                ShowContinueError(format(" Maximum root finder point={:.{}T}", RootFinders(ControlNum).MaxPoint.X, NumSigDigits));
+                ShowContinueError(format(" Maximum avail actuated={:.{}T}", ControllerProps(ControlNum).MaxAvailActuated, NumSigDigits));
                 ShowFatalError("Preceding error causes program termination.");
             }
 
@@ -1697,10 +1697,10 @@ namespace HVACControllers {
             } else if (SELECT_CASE_var == iStatusErrorRange) {
                 ShowSevereError("FindRootSimpleController: Root finder failed at " + CreateHVACStepFullString());
                 ShowContinueError(" Controller name=\"" + ControllerName + "\"");
-                ShowContinueError(" Root candidate x=" + format("{:.{}T}", ControllerProps(ControlNum).ActuatedValue, NumSigDigits) +
+                ShowContinueError(format(" Root candidate x={:.{}T}", ControllerProps(ControlNum).ActuatedValue, NumSigDigits) +
                                   " does not lie within the min/max bounds.");
-                ShowContinueError(" Min bound is x=" + format("{:.{}T}", RootFinders(ControlNum).MinPoint.X, NumSigDigits));
-                ShowContinueError(" Max bound is x=" + format("{:.{}T}", RootFinders(ControlNum).MaxPoint.X, NumSigDigits));
+                ShowContinueError(format(" Min bound is x={:.{}T}", RootFinders(ControlNum).MinPoint.X, NumSigDigits));
+                ShowContinueError(format(" Max bound is x={:.{}T}", RootFinders(ControlNum).MaxPoint.X, NumSigDigits));
                 ShowFatalError("Preceding error causes program termination.");
 
                 // Abnormal case: should never happen
@@ -1708,13 +1708,13 @@ namespace HVACControllers {
                 ShowSevereError("FindRootSimpleController: Root finder failed at " + CreateHVACStepFullString());
                 ShowContinueError(" Controller name=" + ControllerProps(ControlNum).ControllerName);
                 ShowContinueError(" Controller action=" + ActionTypes(ControllerProps(ControlNum).Action));
-                ShowContinueError(" Root candidate x=" + format("{:.{}T}", ControllerProps(ControlNum).ActuatedValue, NumSigDigits) +
+                ShowContinueError(format(" Root candidate x={:.{}T}", ControllerProps(ControlNum).ActuatedValue, NumSigDigits) +
                                   " does not lie within the lower/upper brackets.");
                 if (RootFinders(ControlNum).LowerPoint.DefinedFlag) {
-                    ShowContinueError(" Lower bracket is x=" + format("{:.{}T}", RootFinders(ControlNum).LowerPoint.X, NumSigDigits));
+                    ShowContinueError(format(" Lower bracket is x={:.{}T}", RootFinders(ControlNum).LowerPoint.X, NumSigDigits));
                 }
                 if (RootFinders(ControlNum).UpperPoint.DefinedFlag) {
-                    ShowContinueError(" Upper bracket is x=" + format("{:.{}T}", RootFinders(ControlNum).UpperPoint.X, NumSigDigits));
+                    ShowContinueError(format(" Upper bracket is x={:.{}T}", RootFinders(ControlNum).UpperPoint.X, NumSigDigits));
                 }
                 ShowFatalError("Preceding error causes program termination.");
 
@@ -1764,26 +1764,26 @@ namespace HVACControllers {
                     ShowContinueError("  Actuator will be set to maximum action");
                     ShowContinueError("Controller control type=" + ControlVariableTypes(ControllerProps(ControlNum).ControlVar));
                     if (ControllerProps(ControlNum).ControlVar == iTemperature) {
-                        ShowContinueError("Controller temperature setpoint = " + format("{:.2T}", ControllerProps(ControlNum).SetPointValue) +
+                        ShowContinueError(format("Controller temperature setpoint = {:.2T}", ControllerProps(ControlNum).SetPointValue) +
                                           " [C]");
-                        ShowContinueError("Controller sensed temperature = " + format("{:.2T}", ControllerProps(ControlNum).SensedValue) + " [C]");
+                        ShowContinueError(format("Controller sensed temperature = {:.2T}", ControllerProps(ControlNum).SensedValue) + " [C]");
                     } else if (ControllerProps(ControlNum).ControlVar == iHumidityRatio) {
-                        ShowContinueError("Controller humidity ratio setpoint = " + format("{:.2T}", ControllerProps(ControlNum).SetPointValue) +
+                        ShowContinueError(format("Controller humidity ratio setpoint = {:.2T}", ControllerProps(ControlNum).SetPointValue) +
                                           " [kgWater/kgDryAir]");
-                        ShowContinueError("Controller sensed humidity ratio = " + format("{:.2T}", ControllerProps(ControlNum).SensedValue) +
+                        ShowContinueError(format("Controller sensed humidity ratio = {:.2T}", ControllerProps(ControlNum).SensedValue) +
                                           " [kgWater/kgDryAir]");
                     } else if (ControllerProps(ControlNum).ControlVar == iTemperatureAndHumidityRatio) {
-                        ShowContinueError("Controller temperature setpoint = " + format("{:.2T}", ControllerProps(ControlNum).SetPointValue) +
+                        ShowContinueError(format("Controller temperature setpoint = {:.2T}", ControllerProps(ControlNum).SetPointValue) +
                                           " [C]");
-                        ShowContinueError("Controller sensed temperature = " + format("{:.2T}", ControllerProps(ControlNum).SensedValue) + " [C]");
+                        ShowContinueError(format("Controller sensed temperature = {:.2T}", ControllerProps(ControlNum).SensedValue) + " [C]");
                         ShowContinueError("Controller humidity ratio setpoint = " +
                                           format("{:.2T}", Node(ControllerProps(ControlNum).SensedNode).HumRatMax) + " [kgWater/kgDryAir]");
                         ShowContinueError("Controller sensed humidity ratio = " +
                                           format("{:.2T}", Node(ControllerProps(ControlNum).SensedNode).HumRat) + " [kgWater/kgDryAir]");
                     } else if (ControllerProps(ControlNum).ControlVar == iFlow) {
-                        ShowContinueError("Controller mass flow rate setpoint = " + format("{:.2T}", ControllerProps(ControlNum).SetPointValue) +
+                        ShowContinueError(format("Controller mass flow rate setpoint = {:.2T}", ControllerProps(ControlNum).SetPointValue) +
                                           " [kg/s]");
-                        ShowContinueError("Controller sensed mass flow rate = " + format("{:.2T}", ControllerProps(ControlNum).SensedValue) +
+                        ShowContinueError(format("Controller sensed mass flow rate = {:.2T}", ControllerProps(ControlNum).SensedValue) +
                                           " [kg/s]");
                     } else {
                         // bad control variable input checked in input routine

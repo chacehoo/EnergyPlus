@@ -1105,7 +1105,7 @@ namespace RefrigeratedCase {
                 if (RefrigCase(CaseNum).Height <= 0.0 && RefrigCase(CaseNum).AntiSweatControlType == ASHeatBalance) {
                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + RefrigCase(CaseNum).Name + "\", " + cNumericFieldNames(NumNum) +
                                     " must be greater than 0 when " + cAlphaFieldNames(7) + " is Heat Balance Method.");
-                    ShowContinueError("..given " + cNumericFieldNames(NumNum) + " was: " + format("{:.3R}", RefrigCase(CaseNum).Height));
+                    ShowContinueError("..given " + cNumericFieldNames(NumNum) + format(" was: {:.3R}", RefrigCase(CaseNum).Height));
                     ErrorsFound = true;
                 }
 
@@ -4175,9 +4175,9 @@ namespace RefrigeratedCase {
                             Real64 DiffCircRates = (CalcCircRate - Secondary(SecondaryNum).CircRate) / Secondary(SecondaryNum).CircRate;
                             if (std::abs(DiffCircRates) > 0.3) {
                                 ShowWarningError(CurrentModuleObject + "=\"" + Secondary(SecondaryNum).Name + ' ' + cNumericFieldNames(7) +
-                                                 " Produces a circulating rate of " + format("{:.2R}", CalcCircRate) +
-                                                 " ;  A circulating rate of " + format("{:.2R}", Secondary(SecondaryNum).CircRate) +
-                                                 " would need a " + cNumericFieldNames(7) + " of " + format("{:.2R}", CalcTotFlowVol) +
+                                                 format(" Produces a circulating rate of {:.2R}", CalcCircRate) +
+                                                 format(" ;  A circulating rate of {:.2R}", Secondary(SecondaryNum).CircRate) +
+                                                 " would need a " + cNumericFieldNames(7) + format(" of {:.2R}", CalcTotFlowVol) +
                                                  " m3/s");
                             } // warning check on pump flow rate vs circ rate input
                         }     // blank pump flow rate
@@ -4382,7 +4382,7 @@ namespace RefrigeratedCase {
                         if (TBrineOutRated > (Secondary(SecondaryNum).TMinNeeded + 0.5)) {
                             ShowWarningError(
                                 CurrentModuleObject + "=\"" + Secondary(SecondaryNum).Name +
-                                " The design brine temperature to the refrigeration loads: " + format("{:.1R}", TBrineOutRated) + " ;");
+                                format(" The design brine temperature to the refrigeration loads: {:.1R}", TBrineOutRated) + " ;");
                             ShowContinueError(" is greater than the design inlet temperature for at least one of the cases or walkins: " +
                                               format("{:.1R}", Secondary(SecondaryNum).TMinNeeded));
                             ShowContinueError(
@@ -5307,7 +5307,7 @@ namespace RefrigeratedCase {
                     System(RefrigSysNum).IntercoolerEffectiveness = Numbers(4);
                     if (System(RefrigSysNum).IntercoolerEffectiveness < 0.0 || System(RefrigSysNum).IntercoolerEffectiveness > 1.0) {
                         ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + System(RefrigSysNum).Name + "\", The specified value for the");
-                        ShowContinueError(cNumericFieldNames(4) + " = " + format("{:.2R}", System(RefrigSysNum).IntercoolerEffectiveness) +
+                        ShowContinueError(cNumericFieldNames(4) + format(" = {:.2R}", System(RefrigSysNum).IntercoolerEffectiveness) +
                                           " is invalid.  This value must be");
                         ShowContinueError("between 0.0 and 1.0.  The default value of 0.8 will be used.");
                         System(RefrigSysNum).IntercoolerEffectiveness = 0.8;
@@ -5982,7 +5982,7 @@ namespace RefrigeratedCase {
                     TransSystem(TransRefrigSysNum).RefrigerantName, TransSystem(TransRefrigSysNum).PReceiver, RefrigIndex, RoutineNameNoColon);
                 if (TransSystem(TransRefrigSysNum).TReceiver > GasCooler(TransSystem(TransRefrigSysNum).GasCoolerNum(NumGasCoolers)).MinCondTemp) {
                     ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + TransSystem(TransRefrigSysNum).Name +
-                                     ": The receiver temperature (" + format("{:.2R}", TransSystem(TransRefrigSysNum).TReceiver) +
+                                     format(": The receiver temperature ({:.2R}", TransSystem(TransRefrigSysNum).TReceiver) +
                                      "C) is greater than the minimum condensing temperature specified for subcritical operation (" +
                                      format("{:.2R}", GasCooler(TransSystem(TransRefrigSysNum).GasCoolerNum(NumGasCoolers)).MinCondTemp) +
                                      "C).");
@@ -5993,7 +5993,7 @@ namespace RefrigeratedCase {
                 if (NominalTotalCompCapLP > 0.0) {
                     if (TransSystem(TransRefrigSysNum).TReceiver <= TransSystem(TransRefrigSysNum).TEvapDesignLT) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + TransSystem(TransRefrigSysNum).Name +
-                                        ": The receiver temperature (" + format("{:.2R}", TransSystem(TransRefrigSysNum).TReceiver) +
+                                        format(": The receiver temperature ({:.2R}", TransSystem(TransRefrigSysNum).TReceiver) +
                                         "C) is less than the design evaporator temperature for the low temperature loads (" +
                                         format("{:.2R}", TransSystem(TransRefrigSysNum).TEvapDesignLT) + "C).");
                         ShowContinueError("  Ensure that the receiver temperature is sufficiently greater than the design evaporator temperature for "
@@ -6006,7 +6006,7 @@ namespace RefrigeratedCase {
                 if (NominalTotalCompCapHP > 0.0) {
                     if (TransSystem(TransRefrigSysNum).TReceiver <= TransSystem(TransRefrigSysNum).TEvapDesignMT) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + TransSystem(TransRefrigSysNum).Name +
-                                        ": The receiver temperature (" + format("{:.2R}", TransSystem(TransRefrigSysNum).TReceiver) +
+                                        format(": The receiver temperature ({:.2R}", TransSystem(TransRefrigSysNum).TReceiver) +
                                         "C) is less than the design evaporator temperature for the medium temperature loads (" +
                                         format("{:.2R}", TransSystem(TransRefrigSysNum).TEvapDesignMT) + "C).");
                         ShowContinueError("  Ensure that the receiver temperature is sufficiently greater than the design evaporator temperature for "
@@ -6103,9 +6103,9 @@ namespace RefrigeratedCase {
                 if ((NominalTotalCompCap < (0.7 * NominalTotalCoolingCap)) || (NominalCondCap < (1.3 * NominalTotalCoolingCap))) {
                     ShowWarningError(CurrentModuleObject + "=\"" + TransSystem(TransRefrigSysNum).Name +
                                      "\", You may wish to check the system sizing.");
-                    ShowContinueError("Total nominal cooling capacity is " + format("{:.0R}", NominalTotalCoolingCap) +
-                                      "W. Condenser capacity is " + format("{:.0R}", NominalCondCap) +
-                                      "W. Nominal compressor capacity is " + format("{:.0R}", NominalTotalCompCap) + "W.");
+                    ShowContinueError(format("Total nominal cooling capacity is {:.0R}", NominalTotalCoolingCap) +
+                                      format("W. Condenser capacity is {:.0R}", NominalCondCap) +
+                                      format("W. Nominal compressor capacity is {:.0R}", NominalTotalCompCap) + "W.");
                 }
 
             } // Transcritical refrigeration systems
@@ -11257,7 +11257,7 @@ namespace RefrigeratedCase {
             if (NumIter < 2) continue;
             if ((this->RefMassFlowReceiverBypass == 0.0) || (MassFlowStart == 0.0)) {
                 ShowSevereError("Refrigeration:TranscriticalSystem: " + this->Name + " showing zero refrigerant flow through receiver bypass.");
-                ShowContinueError("Receiver Bypass Flow = " + format("{:.6R}", this->RefMassFlowReceiverBypass));
+                ShowContinueError(format("Receiver Bypass Flow = {:.6R}", this->RefMassFlowReceiverBypass));
                 ShowContinueError("Check input file to ensure that refrigeration loads on this system are not zero.");
             } else {
                 ErrorMassFlow = std::abs(MassFlowStart - this->RefMassFlowReceiverBypass) / MassFlowStart;

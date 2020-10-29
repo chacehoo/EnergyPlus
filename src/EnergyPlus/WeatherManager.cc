@@ -3416,8 +3416,8 @@ namespace WeatherManager {
         if (state.dataWeatherManager->DesDayInput(EnvrnNum).PressureEntered) {
             if (std::abs((state.dataWeatherManager->DesDayInput(EnvrnNum).PressBarom - DataEnvironment::StdBaroPress) / DataEnvironment::StdBaroPress) > 0.1) { // 10% off
                 ShowWarningError(
-                    "SetUpDesignDay: Entered DesignDay Barometric Pressure=" + format("{:.0R}", state.dataWeatherManager->DesDayInput(EnvrnNum).PressBarom) +
-                    " differs by more than 10% from Standard Barometric Pressure=" + format("{:.0R}", DataEnvironment::StdBaroPress) + '.');
+                    format("SetUpDesignDay: Entered DesignDay Barometric Pressure={:.0R}", state.dataWeatherManager->DesDayInput(EnvrnNum).PressBarom) +
+                    format(" differs by more than 10% from Standard Barometric Pressure={:.0R}", DataEnvironment::StdBaroPress) + '.');
                 ShowContinueError("...occurs in DesignDay=" + DataEnvironment::EnvironmentName +
                                   ", Standard Pressure (based on elevation) will be used.");
                 state.dataWeatherManager->DesDayInput(EnvrnNum).PressBarom = DataEnvironment::StdBaroPress;
@@ -3489,21 +3489,21 @@ namespace WeatherManager {
 
             // Hum Ind Type, Hum Ind Value at Max Temp, Hum Ind Units
             if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::WetBulb) {
-                StringOut = "Wetbulb," + format("{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{C},";
+                StringOut = format("Wetbulb,{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{C},";
             } else if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::DewPoint) {
-                StringOut = "Dewpoint," + format("{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{C},";
+                StringOut = format("Dewpoint,{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{C},";
             } else if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::Enthalpy) {
-                StringOut = "Enthalpy," + format("{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{J/kgDryAir},";
+                StringOut = format("Enthalpy,{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{J/kgDryAir},";
             } else if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::HumRatio) {
-                StringOut = "HumidityRatio," + format("{:.4R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{kgWater/kgDryAir},";
+                StringOut = format("HumidityRatio,{:.4R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{kgWater/kgDryAir},";
             } else if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::RelHumSch) {
                 StringOut = "Schedule,<schedule values from 0.0 to 100.0>,{percent},";
             } else if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::WBProfDef) {
-                StringOut = "WetBulbProfileDefaultMultipliers," + format("{:.2R}", state.dataWeatherManager->DesDayInput(state.dataWeatherManager->Envrn).HumIndValue) + ",{C},";
+                StringOut = format("WetBulbProfileDefaultMultipliers,{:.2R}", state.dataWeatherManager->DesDayInput(state.dataWeatherManager->Envrn).HumIndValue) + ",{C},";
             } else if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::WBProfDif) {
-                StringOut = "WetBulbProfileDifferenceSchedule," + format("{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{C},";
+                StringOut = format("WetBulbProfileDifferenceSchedule,{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{C},";
             } else if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::WBProfMul) {
-                StringOut = "WetBulbProfileMultiplierSchedule," + format("{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{C},";
+                StringOut = format("WetBulbProfileMultiplierSchedule,{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{C},";
             }
             print(state.files.eio, "{}", StringOut);
             print(state.files.eio, "{:.0R},", state.dataWeatherManager->DesDayInput(EnvrnNum).PressBarom);
@@ -4353,10 +4353,10 @@ namespace WeatherManager {
                                       "] degrees, Longitude difference=[" +
                                       format("{:.2R}", std::abs(DataEnvironment::Longitude - state.dataWeatherManager->WeatherFileLongitude)) + "] degrees.");
                     ShowContinueError(
-                        "..Time Zone difference=[" + format("{:.1R}", std::abs(DataEnvironment::TimeZoneNumber - state.dataWeatherManager->WeatherFileTimeZone)) +
+                        format("..Time Zone difference=[{:.1R}", std::abs(DataEnvironment::TimeZoneNumber - state.dataWeatherManager->WeatherFileTimeZone)) +
                         "] hour(s), Elevation difference=[" +
                         format("{:.2R}", std::abs((DataEnvironment::Elevation - state.dataWeatherManager->WeatherFileElevation) / max(DataEnvironment::Elevation, 1.0) * 100.0)) +
-                        "] percent, [" + format("{:.2R}", std::abs(DataEnvironment::Elevation - state.dataWeatherManager->WeatherFileElevation)) + "] meters.");
+                        format("] percent, [{:.2R}", std::abs(DataEnvironment::Elevation - state.dataWeatherManager->WeatherFileElevation)) + "] meters.");
                 }
             }
 
@@ -4416,17 +4416,17 @@ namespace WeatherManager {
         }
 
         if ((DataEnvironment::Latitude < -90.0) || (DataEnvironment::Latitude > 90.0)) {
-            ShowSevereError("Latitude must be between -90 and 90; Entered=" + format("{:.2R}", DataEnvironment::Latitude));
+            ShowSevereError(format("Latitude must be between -90 and 90; Entered={:.2R}", DataEnvironment::Latitude));
             LocationError = true;
         }
 
         if ((DataEnvironment::Longitude < -180.0) || (DataEnvironment::Longitude > 180.0)) {
-            ShowSevereError("Longitude must be between -180 and 180; Entered=" + format("{:.2R}", DataEnvironment::Longitude));
+            ShowSevereError(format("Longitude must be between -180 and 180; Entered={:.2R}", DataEnvironment::Longitude));
             LocationError = true;
         }
 
         if ((DataEnvironment::TimeZoneNumber < -12.00) || (DataEnvironment::TimeZoneNumber > 14.00)) {
-            ShowSevereError("Time Zone must be between -12 and +14; Entered=" + format("{:.2R}", DataEnvironment::TimeZoneNumber));
+            ShowSevereError(format("Time Zone must be between -12 and +14; Entered={:.2R}", DataEnvironment::TimeZoneNumber));
             LocationError = true;
         }
 
@@ -5960,7 +5960,7 @@ namespace WeatherManager {
                                 ShowContinueError(".." + DataIPShortCuts::cNumericFieldNames(3) + "=[" +
                                                   format("{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).MaxDryBulb) + "] will be overwritten.");
                                 ShowContinueError(".." + DataIPShortCuts::cAlphaFieldNames(3) + "=\"" + DataIPShortCuts::cAlphaArgs(3) + "\".");
-                                ShowContinueError("..with max value=[" + format("{:.2R}", testval) + "].");
+                                ShowContinueError(format("..with max value=[{:.2R}", testval) + "].");
                             }
                             state.dataWeatherManager->DesDayInput(EnvrnNum).MaxDryBulb = testval;
                         }
@@ -6252,8 +6252,8 @@ namespace WeatherManager {
                 if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue > state.dataWeatherManager->DesDayInput(EnvrnNum).MaxDryBulb) {
                     ShowWarningError(DataIPShortCuts::cCurrentModuleObject + "=\"" + state.dataWeatherManager->DesDayInput(EnvrnNum).Title + "\", range check data.");
                     ShowContinueError(
-                        "..Humidity Indicator Temperature at Max Temperature=" + format("{:.1R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) +
-                        " > Max DryBulb=" + format("{:.1R}", state.dataWeatherManager->DesDayInput(EnvrnNum).MaxDryBulb));
+                        format("..Humidity Indicator Temperature at Max Temperature={:.1R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) +
+                        format(" > Max DryBulb={:.1R}", state.dataWeatherManager->DesDayInput(EnvrnNum).MaxDryBulb));
                     ShowContinueError(".." + DataIPShortCuts::cAlphaFieldNames(5) + "=\"" + DataIPShortCuts::cAlphaArgs(5) + "\".");
                     ShowContinueError("..Conditions for day will be set to Relative Humidity = 100%");
                     if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::DewPoint) {

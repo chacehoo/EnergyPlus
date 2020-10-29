@@ -1796,7 +1796,7 @@ namespace RoomAirModelManager {
                     ShowSevereError("GetRoomAirflowNetworkData: Invalid, zone volume fractions do not sum to 1.0");
                     ShowContinueError("Entered in RoomAir:Node:AirflowNetwork with Zone Name = " + Zone(ZoneNum).Name);
                     ShowContinueError("The Fraction of Zone Air Volume values across all the nodes needs to sum to 1.0.");
-                    ShowContinueError("The sum of fractions entered = " + format("{:.3R}", SumFraction));
+                    ShowContinueError(format("The sum of fractions entered = {:.3R}", SumFraction));
                     ErrorsFound = true;
                 }
                 // Check internal gain fraction
@@ -1822,7 +1822,7 @@ namespace RoomAirModelManager {
                             ShowContinueError("Entered in RoomAir:Node:AirflowNetwork with Zone Name = " + Zone(ZoneNum).Name +
                                               ", Intrnal gain name = " + Name);
                             ShowContinueError("The Fraction of internal gain across all the nodes needs to sum to 1.0.");
-                            ShowContinueError("The sum of fractions entered = " + format("{:.3R}", SumFraction));
+                            ShowContinueError(format("The sum of fractions entered = {:.3R}", SumFraction));
                             ErrorsFound = true;
                         }
                     }
@@ -2089,9 +2089,9 @@ namespace RoomAirModelManager {
 
                 if (std::abs((Z2Zone - Z1Zone) - Zone(ZNum).CeilingHeight) > CeilingHeightDiffMax) {
                     ShowWarningError("RoomAirManager: Inconsistent ceiling heights in Zone: " + Zone(ZNum).Name);
-                    ShowContinueError("Lowest height=[" + format("{:.3R}", Z1Zone) + "].");
-                    ShowContinueError("Highest height=[" + format("{:.3R}", Z2Zone) + "].");
-                    ShowContinueError("Ceiling height=[" + format("{:.3R}", Zone(ZNum).CeilingHeight) + "].");
+                    ShowContinueError(format("Lowest height=[{:.3R}", Z1Zone) + "].");
+                    ShowContinueError(format("Highest height=[{:.3R}", Z2Zone) + "].");
+                    ShowContinueError(format("Ceiling height=[{:.3R}", Zone(ZNum).CeilingHeight) + "].");
                 }
             } // Zones
 
