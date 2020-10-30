@@ -1060,10 +1060,8 @@ namespace ChillerAbsorption {
                                 if ((std::abs(tmpEvapVolFlowRate - EvapVolFlowRateUser) / EvapVolFlowRateUser) >
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerAbsorption: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Design Chilled Water Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", EvapVolFlowRateUser));
-                                    ShowContinueError("differs from Design Size Design Chilled Water Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", tmpEvapVolFlowRate));
+                                    ShowContinueError(format("User-Specified Design Chilled Water Flow Rate of {:.5R} [m3/s]", EvapVolFlowRateUser));
+                                    ShowContinueError(format("differs from Design Size Design Chilled Water Flow Rate of {:.5R} [m3/s]", tmpEvapVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1135,10 +1133,8 @@ namespace ChillerAbsorption {
                                 if ((std::abs(tmpCondVolFlowRate - CondVolFlowRateUser) / CondVolFlowRateUser) >
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerAbsorption: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Design Condenser Water Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", CondVolFlowRateUser));
-                                    ShowContinueError("differs from Design Size Design Condenser Water Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", tmpCondVolFlowRate));
+                                    ShowContinueError(format("User-Specified Design Condenser Water Flow Rate of {:.5R} [m3/s]", CondVolFlowRateUser));
+                                    ShowContinueError(format("differs from Design Size Design Condenser Water Flow Rate of {:.5R} [m3/s]", tmpCondVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1209,10 +1205,8 @@ namespace ChillerAbsorption {
                                         if ((std::abs(tmpGeneratorVolFlowRate - GeneratorVolFlowRateUser) / GeneratorVolFlowRateUser) >
                                             DataSizing::AutoVsHardSizingThreshold) {
                                             ShowMessage("SizeChillerAbsorption: Potential issue with equipment sizing for " + this->Name);
-                                            ShowContinueError("User-Specified Design Generator Fluid Flow Rate of " +
-                                                              format("{:.5R} [m3/s]", GeneratorVolFlowRateUser));
-                                            ShowContinueError("differs from Design Size Design Generator Fluid Flow Rate of " +
-                                                              format("{:.5R} [m3/s]", tmpGeneratorVolFlowRate));
+                                            ShowContinueError(format("User-Specified Design Generator Fluid Flow Rate of {:.5R} [m3/s]", GeneratorVolFlowRateUser));
+                                            ShowContinueError(format("differs from Design Size Design Generator Fluid Flow Rate of {:.5R} [m3/s]", tmpGeneratorVolFlowRate));
                                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                         }
@@ -1268,10 +1262,8 @@ namespace ChillerAbsorption {
                                         if ((std::abs(tmpGeneratorVolFlowRate - GeneratorVolFlowRateUser) / GeneratorVolFlowRateUser) >
                                             DataSizing::AutoVsHardSizingThreshold) {
                                             ShowMessage("SizeChillerAbsorption: Potential issue with equipment sizing for " + this->Name);
-                                            ShowContinueError("User-Specified Design Generator Fluid Flow Rate of " +
-                                                              format("{:.5R} [m3/s]", GeneratorVolFlowRateUser));
-                                            ShowContinueError("differs from Design Size Design Generator Fluid Flow Rate of " +
-                                                              format("{:.5R} [m3/s]", tmpGeneratorVolFlowRate));
+                                            ShowContinueError(format("User-Specified Design Generator Fluid Flow Rate of {:.5R} [m3/s]", GeneratorVolFlowRateUser));
+                                            ShowContinueError(format("differs from Design Size Design Generator Fluid Flow Rate of {:.5R} [m3/s]", tmpGeneratorVolFlowRate));
                                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                         }

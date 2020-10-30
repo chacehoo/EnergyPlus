@@ -432,8 +432,7 @@ namespace DaylightingDevices {
                 if (Shelf(ShelfNum).ViewFactor < 0) CalcViewFactorToShelf(ShelfNum);
 
                 if (Shelf(ShelfNum).ViewFactor + Surface(WinSurf).ViewFactorSky + Surface(WinSurf).ViewFactorGround > 1.0) {
-                    ShowWarningError("DaylightingDevice:Shelf = " + Shelf(ShelfNum).Name + ":  Window view factors to sky [" +
-                                     format("{:.2R}],", Surface(WinSurf).ViewFactorSky));
+                    ShowWarningError("DaylightingDevice:Shelf = " + Shelf(ShelfNum).Name + format(":  Window view factors to sky [{:.2R}],", Surface(WinSurf).ViewFactorSky));
                     ShowContinueError(format("ground [{:.2R}], and outside shelf [", Surface(WinSurf).ViewFactorGround) +
                                       format("{:.2R}] add up to > 1.0.", Shelf(ShelfNum).ViewFactor));
                 }
@@ -603,8 +602,7 @@ namespace DaylightingDevices {
                     if (state.dataConstruction->Construct(Surface(SurfNum).Construction).TransDiff <= 1.0e-10) {
                         ShowSevereError(cCurrentModuleObject + " = " + cAlphaArgs(1) + ":  Diffuser " + cAlphaArgs(3) + " construction (" +
                                         state.dataConstruction->Construct(Surface(SurfNum).Construction).Name + ") invalid value.");
-                        ShowContinueError("Diffuse solar transmittance of construction [" +
-                                          format("{:.4R}] too small for calculations.", state.dataConstruction->Construct(Surface(SurfNum).Construction).TransDiff));
+                        ShowContinueError(format("Diffuse solar transmittance of construction [{:.4R}] too small for calculations.", state.dataConstruction->Construct(Surface(SurfNum).Construction).TransDiff));
                         ErrorsFound = true;
                     }
 

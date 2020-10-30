@@ -1707,8 +1707,7 @@ namespace WaterToAirHeatPumpSimple {
                                             state.dataWaterToAirHeatPumpSimple->SimpleWatertoAirHP(HPNum).Name + "\"");
                                 ShowContinueError(format("User-Specified Rated Total Cooling Capacity of {:.2R}", RatedCapCoolTotalUser) +
                                                   " [W]");
-                                ShowContinueError("differs from Design Size Rated Total Cooling Capacity of " +
-                                                  format("{:.2R} [W]", RatedCapCoolTotalDes));
+                                ShowContinueError(format("differs from Design Size Rated Total Cooling Capacity of {:.2R} [W]", RatedCapCoolTotalDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }
@@ -1762,8 +1761,7 @@ namespace WaterToAirHeatPumpSimple {
                                             state.dataWaterToAirHeatPumpSimple->SimpleWatertoAirHP(HPNum).Name + "\"");
                                 ShowContinueError(format("User-Specified Rated Sensible Cooling Capacity of {:.2R}", RatedCapCoolSensUser) +
                                                   " [W]");
-                                ShowContinueError("differs from Design Size Rated Sensible Cooling Capacity of " +
-                                                  format("{:.2R} [W]", RatedCapCoolSensDes));
+                                ShowContinueError(format("differs from Design Size Rated Sensible Cooling Capacity of {:.2R} [W]", RatedCapCoolSensDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }
@@ -1911,8 +1909,7 @@ namespace WaterToAirHeatPumpSimple {
                             ":WATERTOAIRHEATPUMP:EQUATIONFIT \"" + state.dataWaterToAirHeatPumpSimple->SimpleWatertoAirHP(state.dataWaterToAirHeatPumpSimple->SimpleWatertoAirHP(HPNum).CompanionCoolingCoilNum).Name + "\"");
                         ShowContinueError("...heating capacity is disproportionate (> 20% different) to total cooling capacity");
                         ShowContinueError(format("...heating capacity = {:.3T} W", state.dataWaterToAirHeatPumpSimple->SimpleWatertoAirHP(HPNum).RatedCapHeat));
-                        ShowContinueError("...cooling capacity = " +
-                                          format("{:.3T}", state.dataWaterToAirHeatPumpSimple->SimpleWatertoAirHP(state.dataWaterToAirHeatPumpSimple->SimpleWatertoAirHP(HPNum).CompanionCoolingCoilNum).RatedCapCoolTotal) +
+                        ShowContinueError(format("...cooling capacity = {:.3T}", state.dataWaterToAirHeatPumpSimple->SimpleWatertoAirHP(state.dataWaterToAirHeatPumpSimple->SimpleWatertoAirHP(HPNum).CompanionCoolingCoilNum).RatedCapCoolTotal) +
                                           " W");
                     }
                 }

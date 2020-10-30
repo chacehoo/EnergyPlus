@@ -1581,8 +1581,7 @@ namespace HeatBalanceAirManager {
                     if (Ventilation(Loop).MinIndoorTempSchedPtr == 0 && lNumericFieldBlanks(11) && (!lAlphaFieldBlanks(6))) {
                         if (Item1 == 1) {
                             ShowWarningError(RoutineName + cNumericFieldNames(11) +
-                                             ": the value field is blank and schedule field is invalid. The default value will be used (" +
-                                             format("{:.1R}) ", -VentilTempLimit));
+                                             format(": the value field is blank and schedule field is invalid. The default value will be used ({:.1R}) ", -VentilTempLimit));
                             ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
                         }
                     }
@@ -1629,8 +1628,7 @@ namespace HeatBalanceAirManager {
                     if (Ventilation(Loop).MaxIndoorTempSchedPtr == 0 && lNumericFieldBlanks(12) && (!lAlphaFieldBlanks(7))) {
                         if (Item1 == 1) {
                             ShowWarningError(RoutineName + cNumericFieldNames(12) +
-                                             ": the value field is blank and schedule field is invalid. The default value will be used (" +
-                                             format("{:.1R}) ", VentilTempLimit));
+                                             format(": the value field is blank and schedule field is invalid. The default value will be used ({:.1R}) ", VentilTempLimit));
                             ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
                         }
                     }
@@ -1670,8 +1668,7 @@ namespace HeatBalanceAirManager {
                     if (Ventilation(Loop).DeltaTempSchedPtr == 0 && lNumericFieldBlanks(13) && (!lAlphaFieldBlanks(8))) {
                         if (Item1 == 1) {
                             ShowWarningError(RoutineName + cNumericFieldNames(13) +
-                                             ": the value field is blank and schedule field is invalid. The default value will be used (" +
-                                             format("{:.1R}) ", VentilTempLimit));
+                                             format(": the value field is blank and schedule field is invalid. The default value will be used ({:.1R}) ", VentilTempLimit));
                             ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
                         }
                     }
@@ -1723,9 +1720,8 @@ namespace HeatBalanceAirManager {
                         }
                         if (Ventilation(Loop).MinOutdoorTempSchedPtr == 0 && lNumericFieldBlanks(14) && (!lAlphaFieldBlanks(9))) {
                             ShowWarningError(RoutineName +
-                                             "Minimum Outdoor Temperature: the value field is blank and schedule field is invalid. The default value "
-                                             "will be used (" +
-                                             format("{:.1R}) ", -VentilTempLimit));
+                                             "Minimum Outdoor Temperature: the value field is blank and schedule field is invalid. The default value " +
+                                             format("will be used ({:.1R}) ", -VentilTempLimit));
                             ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
                         }
                         // Check Minimum outdoor temperature value and schedule fields
@@ -1768,8 +1764,7 @@ namespace HeatBalanceAirManager {
                         }
                         if (Ventilation(Loop).MaxOutdoorTempSchedPtr == 0 && lNumericFieldBlanks(15) && (!lAlphaFieldBlanks(10))) {
                             ShowWarningError(RoutineName + cNumericFieldNames(15) +
-                                             ": the value field is blank and schedule field is invalid. The default value will be used (" +
-                                             format("{:.1R}) ", VentilTempLimit));
+                                             format(": the value field is blank and schedule field is invalid. The default value will be used ({:.1R}) ", VentilTempLimit));
                             ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
                         }
                         // Check Maximum outdoor temperature value and schedule fields
@@ -2027,14 +2022,12 @@ namespace HeatBalanceAirManager {
             }
             if (Ventilation(VentiCount).MinIndoorTempSchedPtr == 0 && lNumericFieldBlanks(6) && (!lAlphaFieldBlanks(4))) {
                 ShowWarningError(RoutineName + cNumericFieldNames(6) +
-                                 ": the value field is blank and schedule field is invalid. The default value will be used (" +
-                                 format("{:.1R}) ", -VentilTempLimit));
+                                 format(": the value field is blank and schedule field is invalid. The default value will be used ({:.1R}) ", -VentilTempLimit));
                 ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
             }
             // Check Minimum indoor temperature value and schedule fields
             if (!lNumericFieldBlanks(6) && (!cAlphaArgs(4).empty() && Ventilation(VentiCount).MinIndoorTempSchedPtr == 0)) {
-                ShowWarningError(RoutineName + cAlphaFieldNames(4) + " = " + cAlphaArgs(4) + " is invalid. The constant value will be used at " +
-                                 format("{:.1R} degrees C ", rNumericArgs(11)));
+                ShowWarningError(RoutineName + cAlphaFieldNames(4) + " = " + cAlphaArgs(4) + format(" is invalid. The constant value will be used at {:.1R} degrees C ", rNumericArgs(11)));
                 ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
             }
 
@@ -2066,14 +2059,12 @@ namespace HeatBalanceAirManager {
             }
             if (Ventilation(VentiCount).MaxIndoorTempSchedPtr == 0 && lNumericFieldBlanks(7) && (!lAlphaFieldBlanks(5))) {
                 ShowWarningError(RoutineName + cNumericFieldNames(7) +
-                                 ": the value field is blank and schedule field is invalid. The default value will be used (" +
-                                 format("{:.1R}) ", VentilTempLimit));
+                                 format(": the value field is blank and schedule field is invalid. The default value will be used ({:.1R}) ", VentilTempLimit));
                 ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
             }
             // Check Maximum indoor temperature value and schedule fields
             if (!lNumericFieldBlanks(7) && ((!lAlphaFieldBlanks(5)) && Ventilation(VentiCount).MaxIndoorTempSchedPtr == 0)) {
-                ShowWarningError(RoutineName + cAlphaFieldNames(7) + " = " + cAlphaArgs(5) + " is invalid. The constant value will be used at " +
-                                 format("{:.1R} degrees C ", rNumericArgs(7)));
+                ShowWarningError(RoutineName + cAlphaFieldNames(7) + " = " + cAlphaArgs(5) + format(" is invalid. The constant value will be used at {:.1R} degrees C ", rNumericArgs(7)));
                 ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
             }
 
@@ -2098,13 +2089,11 @@ namespace HeatBalanceAirManager {
             }
             if (Ventilation(VentiCount).DeltaTempSchedPtr == 0 && lNumericFieldBlanks(8) && (!lAlphaFieldBlanks(6))) {
                 ShowWarningError(RoutineName + cNumericFieldNames(8) +
-                                 ": the value field is blank and schedule field is invalid. The default value will be used (" +
-                                 format("{:.1R}) ", VentilTempLimit));
+                                 format(": the value field is blank and schedule field is invalid. The default value will be used ({:.1R}) ", VentilTempLimit));
                 ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
             }
             if (!lNumericFieldBlanks(8) && ((!lAlphaFieldBlanks(6)) && Ventilation(VentiCount).DeltaTempSchedPtr == 0)) {
-                ShowWarningError(RoutineName + cAlphaFieldNames(6) + " = " + cAlphaArgs(6) + " is invalid. The constant value will be used at " +
-                                 format("{:.1R} degrees C ", rNumericArgs(8)));
+                ShowWarningError(RoutineName + cAlphaFieldNames(6) + " = " + cAlphaArgs(6) + format(" is invalid. The constant value will be used at {:.1R} degrees C ", rNumericArgs(8)));
                 ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
             }
 
@@ -2137,14 +2126,12 @@ namespace HeatBalanceAirManager {
             if (Ventilation(VentiCount).MinOutdoorTempSchedPtr == 0 && lNumericFieldBlanks(9) && (!lAlphaFieldBlanks(7))) {
                 ShowWarningError(
                     RoutineName +
-                    "Minimum Outdoor Temperature: the value field is blank and schedule field is invalid. The default value will be used (" +
-                    format("{:.1R}) ", -VentilTempLimit));
+                    format("Minimum Outdoor Temperature: the value field is blank and schedule field is invalid. The default value will be used ({:.1R}) ", -VentilTempLimit));
                 ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
             }
             // Check Minimum outdoor temperature value and schedule fields
             if (!lNumericFieldBlanks(9) && ((!lAlphaFieldBlanks(7)) && Ventilation(VentiCount).MinOutdoorTempSchedPtr == 0)) {
-                ShowWarningError(RoutineName + cAlphaFieldNames(7) + " = " + cAlphaArgs(7) + " is invalid. The constant value will be used at " +
-                                 format("{:.1R} degrees C ", rNumericArgs(14)));
+                ShowWarningError(RoutineName + cAlphaFieldNames(7) + " = " + cAlphaArgs(7) + format(" is invalid. The constant value will be used at {:.1R} degrees C ", rNumericArgs(14)));
                 ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
             }
 
@@ -2175,14 +2162,12 @@ namespace HeatBalanceAirManager {
             }
             if (Ventilation(VentiCount).MaxOutdoorTempSchedPtr == 0 && lNumericFieldBlanks(10) && (!lAlphaFieldBlanks(8))) {
                 ShowWarningError(RoutineName + cNumericFieldNames(10) +
-                                 ": the value field is blank and schedule field is invalid. The default value will be used (" +
-                                 format("{:.1R}) ", VentilTempLimit));
+                                 format(": the value field is blank and schedule field is invalid. The default value will be used ({:.1R}) ", VentilTempLimit));
                 ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
             }
             // Check Maximum outdoor temperature value and schedule fields
             if (!lNumericFieldBlanks(10) && ((!lAlphaFieldBlanks(8)) && Ventilation(VentiCount).MaxOutdoorTempSchedPtr == 0)) {
-                ShowWarningError(RoutineName + cAlphaFieldNames(8) + " = " + cAlphaArgs(8) + "is invalid. The constant value will be used at " +
-                                 format("{:.1R} degrees C ", rNumericArgs(10)));
+                ShowWarningError(RoutineName + cAlphaFieldNames(8) + " = " + cAlphaArgs(8) + format("is invalid. The constant value will be used at {:.1R} degrees C ", rNumericArgs(10)));
                 ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
             }
 
@@ -2452,13 +2437,11 @@ namespace HeatBalanceAirManager {
             }
             if (Mixing(Loop).DeltaTempSchedPtr == 0 && lNumericFieldBlanks(5) && (!lAlphaFieldBlanks(6))) {
                 ShowWarningError(RoutineName + cNumericFieldNames(5) +
-                                 ": the value field is blank and schedule field is invalid. The default value will be used (" +
-                                 format("{:.1R}) ", rNumericArgs(5)));
+                                 format(": the value field is blank and schedule field is invalid. The default value will be used ({:.1R}) ", rNumericArgs(5)));
                 ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
             }
             if (!lNumericFieldBlanks(5) && ((!lAlphaFieldBlanks(6)) && Mixing(Loop).DeltaTempSchedPtr == 0)) {
-                ShowWarningError(RoutineName + cAlphaFieldNames(6) + " = " + cAlphaArgs(6) + " is invalid. The constant value will be used at " +
-                                 format("{:.1R} degrees C ", rNumericArgs(5)));
+                ShowWarningError(RoutineName + cAlphaFieldNames(6) + " = " + cAlphaArgs(6) + format(" is invalid. The constant value will be used at {:.1R} degrees C ", rNumericArgs(5)));
                 ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
             }
 
@@ -2899,13 +2882,11 @@ namespace HeatBalanceAirManager {
                 }
                 if (CrossMixing(Loop).DeltaTempSchedPtr == 0 && lNumericFieldBlanks(5) && (!lAlphaFieldBlanks(6))) {
                     ShowWarningError(RoutineName + cNumericFieldNames(5) +
-                        ": the value field is blank and schedule field is invalid. The default value will be used (" +
-                        format("{:.1R}) ", rNumericArgs(5)));
+                        format(": the value field is blank and schedule field is invalid. The default value will be used ({:.1R}) ", rNumericArgs(5)));
                     ShowContinueError("in " + cCurrentModuleObject + " = " + cAlphaArgs(1) + " and the simulation continues...");
                 }
                 if (!lNumericFieldBlanks(5) && ((!lAlphaFieldBlanks(6)) && CrossMixing(Loop).DeltaTempSchedPtr == 0)) {
-                    ShowWarningError(RoutineName + cAlphaFieldNames(6) + " = " + cAlphaArgs(6) + " is invalid. The constant value will be used at " +
-                        format("{:.1R} degrees C ", rNumericArgs(5)));
+                    ShowWarningError(RoutineName + cAlphaFieldNames(6) + " = " + cAlphaArgs(6) + format(" is invalid. The constant value will be used at {:.1R} degrees C ", rNumericArgs(5)));
                     ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
                 }
 

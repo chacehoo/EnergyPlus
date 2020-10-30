@@ -591,13 +591,11 @@ namespace CoolingPanelSimple {
                 ShowSevereError(RoutineName + cCMO_CoolingPanel_Simple + "=\"" + cAlphaArgs(1) +
                                 "\", Summed radiant fractions for people + surface groups < 1.0");
                 ShowContinueError("This would result in some of the radiant energy delivered by the high temp radiant heater being lost.");
-                ShowContinueError("The sum of all radiation fractions to surfaces = " +
-                                  format("{:.5T}", (AllFracsSummed - ThisCP.FracDistribPerson)));
+                ShowContinueError(format("The sum of all radiation fractions to surfaces = {:.5T}", (AllFracsSummed - ThisCP.FracDistribPerson)));
                 ShowContinueError(format("The radiant fraction to people = {:.5T}", ThisCP.FracDistribPerson));
                 ShowContinueError(format("So, all radiant fractions including surfaces and people = {:.5T}", AllFracsSummed));
                 ShowContinueError(
-                    "This means that the fraction of radiant energy that would be lost from the high temperature radiant heater would be = " +
-                    format("{:.5T}", (1.0 - AllFracsSummed)));
+                    format("This means that the fraction of radiant energy that would be lost from the high temperature radiant heater would be = {:.5T}", (1.0 - AllFracsSummed)));
                 ShowContinueError("Please check and correct this so that all radiant energy is accounted for in " + cCMO_CoolingPanel_Simple + " = " +
                                   cAlphaArgs(1));
                 ErrorsFound = true;

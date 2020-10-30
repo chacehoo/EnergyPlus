@@ -1048,10 +1048,8 @@ namespace HVACStandAloneERV {
                                           "Max Volume specified in the supply air fan object.");
                         ShowContinueError("... Associated fan object = " + cFanTypes(SAFanTypeNum) + " \"" +
                                           StandAloneERV(WhichERV).SupplyAirFanName + "\"");
-                        ShowContinueError("... Modified value                   = " +
-                                          format("{:.2R}", StandAloneERV(WhichERV).SupplyAirVolFlow * HighRHOARatio));
-                        ShowContinueError(" ... Supply Fan Max Volume Flow Rate = " +
-                                          format("{:.2R}", StandAloneERV(WhichERV).DesignSAFanVolFlowRate));
+                        ShowContinueError(format("... Modified value                   = {:.2R}", StandAloneERV(WhichERV).SupplyAirVolFlow * HighRHOARatio));
+                        ShowContinueError(format(" ... Supply Fan Max Volume Flow Rate = {:.2R}", StandAloneERV(WhichERV).DesignSAFanVolFlowRate));
                         ShowContinueError("... The ERV supply air fan will limit the air flow through the ERV and the simulation continues.");
                     }
                 }
@@ -1066,10 +1064,8 @@ namespace HVACStandAloneERV {
                                           "Max Volume specified in the exhaust air fan object.");
                         ShowContinueError("... Associated fan object = " + cFanTypes(EAFanTypeNum) + " \"" +
                                           StandAloneERV(WhichERV).ExhaustAirFanName + "\"");
-                        ShowContinueError("... Modified value                    = " +
-                                          format("{:.2R}", StandAloneERV(WhichERV).ExhaustAirVolFlow * HighRHOARatio));
-                        ShowContinueError(" ... Exhaust Fan Max Volume Flow Rate = " +
-                                          format("{:.2R}", StandAloneERV(WhichERV).DesignEAFanVolFlowRate));
+                        ShowContinueError(format("... Modified value                    = {:.2R}", StandAloneERV(WhichERV).ExhaustAirVolFlow * HighRHOARatio));
+                        ShowContinueError(format(" ... Exhaust Fan Max Volume Flow Rate = {:.2R}", StandAloneERV(WhichERV).DesignEAFanVolFlowRate));
                         ShowContinueError("... The ERV exhaust air fan will limit the air flow through the ERV and the simulation continues.");
                     }
                 }

@@ -1557,8 +1557,7 @@ namespace FuelCellElectricGenerator {
                 DataGenerators::FuelSupply(this->FuelSupNum).CompPowerLossFactor * DataGenerators::FuelSupply(this->FuelSupNum).PfuelCompEl;
 
             if (DataGenerators::FuelSupply(this->FuelSupNum).QskinLoss < 0.0) {
-                ShowWarningError("problem in FuelSupply.QskinLoss " +
-                                 format("{:.3R}", DataGenerators::FuelSupply(this->FuelSupNum).QskinLoss));
+                ShowWarningError(format("problem in FuelSupply.QskinLoss {:.3R}", DataGenerators::FuelSupply(this->FuelSupNum).QskinLoss));
                 DataGenerators::FuelSupply(this->FuelSupNum).QskinLoss = 0.0;
             }
 

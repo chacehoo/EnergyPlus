@@ -2204,16 +2204,12 @@ namespace HeatRecovery {
                     ShowWarningError("HeatExchanger:AirToAir:SensibleAndLatent =\"" + ExchCond(ExNum).Name + "\"" +
                                      " sensible effectiveness is less than zero. Check the following inputs.");
                     if (ExchCond(ExNum).SupInTemp < ExchCond(ExNum).SecInTemp) {
-                        ShowContinueError("...Sensible Effectiveness at 100% Heating Air Flow = " +
-                                          format("{:.2R}", ExchCond(ExNum).HeatEffectSensible100));
-                        ShowContinueError("...Sensible Effectiveness at 75% Heating Air Flow = " +
-                                          format("{:.2R}", ExchCond(ExNum).HeatEffectSensible75));
+                        ShowContinueError(format("...Sensible Effectiveness at 100% Heating Air Flow = {:.2R}", ExchCond(ExNum).HeatEffectSensible100));
+                        ShowContinueError(format("...Sensible Effectiveness at 75% Heating Air Flow = {:.2R}", ExchCond(ExNum).HeatEffectSensible75));
                         ShowContinueError("...Sensible effectiveness reset to zero and the simulation continues.");
                     } else {
-                        ShowContinueError("...Sensible Effectiveness at 100% Cooling Air Flow = " +
-                                          format("{:.2R}", ExchCond(ExNum).CoolEffectSensible100));
-                        ShowContinueError("...Sensible Effectiveness at 75% Cooling Air Flow = " +
-                                          format("{:.2R}", ExchCond(ExNum).CoolEffectSensible75));
+                        ShowContinueError(format("...Sensible Effectiveness at 100% Cooling Air Flow = {:.2R}", ExchCond(ExNum).CoolEffectSensible100));
+                        ShowContinueError(format("...Sensible Effectiveness at 75% Cooling Air Flow = {:.2R}", ExchCond(ExNum).CoolEffectSensible75));
                         ShowContinueError("...Sensible effectiveness reset to zero and the simulation continues.");
                     }
                     ShowContinueError(format("...Heat Exchanger Air Volume Flow Ratio = {:.2R}", HXAirVolFlowRatio));
@@ -2227,16 +2223,12 @@ namespace HeatRecovery {
                     ShowWarningError("HeatExchanger:AirToAir:SensibleAndLatent =\"" + ExchCond(ExNum).Name + "\"" +
                                      " latent effectiveness is less than zero. Check the following inputs.");
                     if (ExchCond(ExNum).SupInTemp < ExchCond(ExNum).SecInTemp) {
-                        ShowContinueError("...Latent Effectiveness at 100% Heating Air Flow = " +
-                                          format("{:.2R}", ExchCond(ExNum).HeatEffectLatent100));
-                        ShowContinueError("...Latent Effectiveness at 75% Heating Air Flow = " +
-                                          format("{:.2R}", ExchCond(ExNum).HeatEffectLatent75));
+                        ShowContinueError(format("...Latent Effectiveness at 100% Heating Air Flow = {:.2R}", ExchCond(ExNum).HeatEffectLatent100));
+                        ShowContinueError(format("...Latent Effectiveness at 75% Heating Air Flow = {:.2R}", ExchCond(ExNum).HeatEffectLatent75));
                         ShowContinueError("...Latent effectiveness reset to zero and the simulation continues.");
                     } else {
-                        ShowContinueError("...Latent Effectiveness at 100% Cooling Air Flow = " +
-                                          format("{:.2R}", ExchCond(ExNum).CoolEffectLatent100));
-                        ShowContinueError("...Latent Effectiveness at 75% Cooling Air Flow = " +
-                                          format("{:.2R}", ExchCond(ExNum).CoolEffectLatent75));
+                        ShowContinueError(format("...Latent Effectiveness at 100% Cooling Air Flow = {:.2R}", ExchCond(ExNum).CoolEffectLatent100));
+                        ShowContinueError(format("...Latent Effectiveness at 75% Cooling Air Flow = {:.2R}", ExchCond(ExNum).CoolEffectLatent75));
                         ShowContinueError("...Latent effectiveness reset to zero and the simulation continues.");
                     }
                     ShowContinueError(format("...Heat Exchanger Air Volume Flow Ratio = {:.2R}", HXAirVolFlowRatio));
@@ -2335,16 +2327,12 @@ namespace HeatRecovery {
                                 ShowWarningError("HeatExchanger:AirToAir:SensibleAndLatent =\"" + ExchCond(ExNum).Name + "\"" +
                                                  " sensible effectiveness is less than zero. Check the following inputs.");
                                 if (ExchCond(ExNum).SupInTemp < ExchCond(ExNum).SecInTemp) {
-                                    ShowContinueError("...Sensible Effectiveness at 100% Heating Air Flow = " +
-                                                      format("{:.2R}", ExchCond(ExNum).HeatEffectSensible100));
-                                    ShowContinueError("...Sensible Effectiveness at 75% Heating Air Flow = " +
-                                                      format("{:.2R}", ExchCond(ExNum).HeatEffectSensible75));
+                                    ShowContinueError(format("...Sensible Effectiveness at 100% Heating Air Flow = {:.2R}", ExchCond(ExNum).HeatEffectSensible100));
+                                    ShowContinueError(format("...Sensible Effectiveness at 75% Heating Air Flow = {:.2R}", ExchCond(ExNum).HeatEffectSensible75));
                                     ShowContinueError("...Sensible effectiveness reset to zero and the simulation continues.");
                                 } else {
-                                    ShowContinueError("...Sensible Effectiveness at 100% Cooling Air Flow = " +
-                                                      format("{:.2R}", ExchCond(ExNum).CoolEffectSensible100));
-                                    ShowContinueError("...Sensible Effectiveness at 75% Cooling Air Flow = " +
-                                                      format("{:.2R}", ExchCond(ExNum).CoolEffectSensible75));
+                                    ShowContinueError(format("...Sensible Effectiveness at 100% Cooling Air Flow = {:.2R}", ExchCond(ExNum).CoolEffectSensible100));
+                                    ShowContinueError(format("...Sensible Effectiveness at 75% Cooling Air Flow = {:.2R}", ExchCond(ExNum).CoolEffectSensible75));
                                     ShowContinueError("...Sensible effectiveness reset to zero and the simulation continues.");
                                 }
                                 ShowContinueError(format("...Heat Exchanger Air Volume Flow Ratio = {:.2R}", HXAirVolFlowRatio));
@@ -2358,16 +2346,12 @@ namespace HeatRecovery {
                                 ShowWarningError("HeatExchanger:AirToAir:SensibleAndLatent =\"" + ExchCond(ExNum).Name + "\"" +
                                                  " latent effectiveness is less than zero. Check the following inputs.");
                                 if (ExchCond(ExNum).SupInTemp < ExchCond(ExNum).SecInTemp) {
-                                    ShowContinueError("...Latent Effectiveness at 100% Heating Air Flow = " +
-                                                      format("{:.2R}", ExchCond(ExNum).HeatEffectLatent100));
-                                    ShowContinueError("...Latent Effectiveness at 75% Heating Air Flow = " +
-                                                      format("{:.2R}", ExchCond(ExNum).HeatEffectLatent75));
+                                    ShowContinueError(format("...Latent Effectiveness at 100% Heating Air Flow = {:.2R}", ExchCond(ExNum).HeatEffectLatent100));
+                                    ShowContinueError(format("...Latent Effectiveness at 75% Heating Air Flow = {:.2R}", ExchCond(ExNum).HeatEffectLatent75));
                                     ShowContinueError("...Latent effectiveness reset to zero and the simulation continues.");
                                 } else {
-                                    ShowContinueError("...Latent Effectiveness at 100% Cooling Air Flow = " +
-                                                      format("{:.2R}", ExchCond(ExNum).CoolEffectLatent100));
-                                    ShowContinueError("...Latent Effectiveness at 75% Cooling Air Flow = " +
-                                                      format("{:.2R}", ExchCond(ExNum).CoolEffectLatent75));
+                                    ShowContinueError(format("...Latent Effectiveness at 100% Cooling Air Flow = {:.2R}", ExchCond(ExNum).CoolEffectLatent100));
+                                    ShowContinueError(format("...Latent Effectiveness at 75% Cooling Air Flow = {:.2R}", ExchCond(ExNum).CoolEffectLatent75));
                                     ShowContinueError("...Latent effectiveness reset to zero and the simulation continues.");
                                 }
                                 ShowContinueError(format("...Heat Exchanger Air Volume Flow Ratio = {:.2R}", HXAirVolFlowRatio));

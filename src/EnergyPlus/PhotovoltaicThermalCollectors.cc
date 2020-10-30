@@ -271,8 +271,7 @@ namespace PhotovoltaicThermalCollectors {
                     ShowWarningError("Suspected input problem with " + DataIPShortCuts::cAlphaFieldNames(2) + " = " + DataIPShortCuts::cAlphaArgs(2));
                     ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + " = " + DataIPShortCuts::cAlphaArgs(1));
                     ShowContinueError("Surface used for solar collector faces down");
-                    ShowContinueError("Surface tilt angle (degrees from ground outward normal) = " +
-                                      format("{:.2R}", DataSurfaces::Surface(PVT(Item).SurfNum).Tilt));
+                    ShowContinueError(format("Surface tilt angle (degrees from ground outward normal) = {:.2R}", DataSurfaces::Surface(PVT(Item).SurfNum).Tilt));
                 }
 
             } // check surface
@@ -781,8 +780,7 @@ namespace PhotovoltaicThermalCollectors {
                                     ShowMessage("SizeSolarCollector: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError(format("User-Specified Design Flow Rate of {:.5R}", DesignVolFlowRateUser) +
                                                       " [W]");
-                                    ShowContinueError("differs from Design Size Design Flow Rate of " +
-                                                      format("{:.5R} [W]", DesignVolFlowRateDes));
+                                    ShowContinueError(format("differs from Design Size Design Flow Rate of {:.5R} [W]", DesignVolFlowRateDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }

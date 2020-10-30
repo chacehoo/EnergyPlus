@@ -1744,8 +1744,7 @@ namespace AirflowNetworkBalanceManager {
                                  CurveValue(state, state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).ComfortHighTempCurveNum, Numbers(3))) > 0.1) {
                         ShowSevereError(RoutineName + CurrentModuleObject + " object: The difference of both curve values at boundary point > 0.1");
                         ShowContinueError("Both curve names are = " + cAlphaFields(2) + " and " + cAlphaFields(3));
-                        ShowContinueError("The input value of " + cNumericFields(3) + " = " +
-                                          format("{:.1R}", state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).ComfortBouPoint));
+                        ShowContinueError("The input value of " + cNumericFields(3) + format(" = {:.1R}", state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).ComfortBouPoint));
                         ErrorsFound = true;
                     }
                 }
@@ -8920,8 +8919,7 @@ namespace AirflowNetworkBalanceManager {
                                           "calculated based on the mass flow rate during HVAC operation.");
                         ShowContinueError(
                             format("The mass flow rate during HVAC operation = {:.2R}", state.dataAirLoop->AirLoopAFNInfo(AirLoopNum).LoopSystemOnMassFlowrate) +
-                            " The mass flow rate during no HVAC operation = " +
-                            format("{:.2R}", state.dataAirLoop->AirLoopAFNInfo(AirLoopNum).LoopSystemOffMassFlowrate));
+                            format(" The mass flow rate during no HVAC operation = {:.2R}", state.dataAirLoop->AirLoopAFNInfo(AirLoopNum).LoopSystemOffMassFlowrate));
                         state.dataAirflowNetworkBalanceManager->UpdateAirflowNetworkMyOneTimeFlag = false;
                     }
                 }

@@ -5526,8 +5526,7 @@ namespace Furnaces {
                     //     Check fan versus system supply air flow rates
                     if (Furnace(FurnaceNum).FanVolFlow + 1e-10 < Furnace(FurnaceNum).CoolVolumeFlowRate(NumOfSpeedCooling)) {
                         ShowWarningError(CurrentModuleObject + format(" - air flow rate = {:.7T}", Furnace(FurnaceNum).FanVolFlow) +
-                                         " in fan object is less than the MSHP system air flow rate when cooling is required (" +
-                                         format("{:.7T}).", Furnace(FurnaceNum).CoolVolumeFlowRate(NumOfSpeedCooling)));
+                                         format(" in fan object is less than the MSHP system air flow rate when cooling is required ({:.7T}).", Furnace(FurnaceNum).CoolVolumeFlowRate(NumOfSpeedCooling)));
                         ShowContinueError(
                             " The MSHP system flow rate when cooling is required is reset to the fan flow rate and the simulation continues.");
                         ShowContinueError(" Occurs in " + CurrentModuleObject + " = " + Furnace(FurnaceNum).Name);
@@ -5553,8 +5552,7 @@ namespace Furnaces {
                     if (NumOfSpeedHeating > 0) {
                         if (Furnace(FurnaceNum).FanVolFlow + 1e-10 < Furnace(FurnaceNum).HeatVolumeFlowRate(NumOfSpeedHeating)) {
                             ShowWarningError(CurrentModuleObject + format(" - air flow rate = {:.7T}", Furnace(FurnaceNum).FanVolFlow) +
-                                             " in fan object is less than the MSHP system air flow rate when heating is required (" +
-                                             format("{:.7T}).", Furnace(FurnaceNum).HeatVolumeFlowRate(NumOfSpeedHeating)));
+                                             format(" in fan object is less than the MSHP system air flow rate when heating is required ({:.7T}).", Furnace(FurnaceNum).HeatVolumeFlowRate(NumOfSpeedHeating)));
                             ShowContinueError(
                                 " The MSHP system flow rate when heating is required is reset to the fan flow rate and the simulation continues.");
                             ShowContinueError(" Occurs in " + CurrentModuleObject + " = " + Furnace(FurnaceNum).Name);
@@ -5580,8 +5578,7 @@ namespace Furnaces {
                     }
                     if (Furnace(FurnaceNum).FanVolFlow < Furnace(FurnaceNum).IdleVolumeAirRate && Furnace(FurnaceNum).IdleVolumeAirRate != 0.0) {
                         ShowWarningError(CurrentModuleObject + format(" - air flow rate = {:.7T}", Furnace(FurnaceNum).FanVolFlow) +
-                                         " in fan object is less than the MSHP system air flow rate when no heating or cooling is needed (" +
-                                         format("{:.7T}).", Furnace(FurnaceNum).IdleVolumeAirRate));
+                                         format(" in fan object is less than the MSHP system air flow rate when no heating or cooling is needed ({:.7T}).", Furnace(FurnaceNum).IdleVolumeAirRate));
                         ShowContinueError(" The MSHP system flow rate when no heating or cooling is needed is reset to the fan flow rate and the "
                                           "simulation continues.");
                         ShowContinueError(" Occurs in " + CurrentModuleObject + " = " + Furnace(FurnaceNum).Name);
@@ -7053,8 +7050,7 @@ namespace Furnaces {
                                         ShowWarningMessage("Heating coil control failed for " + cFurnaceTypes(Furnace(FurnaceNum).FurnaceType_Num) +
                                                            ':' + Furnace(FurnaceNum).Name);
                                         ShowContinueError("  DX sensible heating part-load ratio determined to be outside the range of 0-1.");
-                                        ShowContinueErrorTimeStamp("Sensible load to be met by DX heating coil = " +
-                                                                   format("{:.2T} (watts), and the simulation continues.", SystemSensibleLoad));
+                                        ShowContinueErrorTimeStamp(format("Sensible load to be met by DX heating coil = {:.2T} (watts), and the simulation continues.", SystemSensibleLoad));
                                     }
                                     ShowRecurringWarningErrorAtEnd(
                                         cFurnaceTypes(Furnace(FurnaceNum).FurnaceType_Num) + " \"" + Furnace(FurnaceNum).Name +
@@ -7805,8 +7801,7 @@ namespace Furnaces {
                                                                    Furnace(FurnaceNum).Name);
                                                 ShowContinueError("  Iteration limit exceeded in calculating cooling coil latent part-load ratio.");
                                                 ShowContinueError(
-                                                    "  Latent load convergence error (percent) = " +
-                                                    format("{:.2T}", 100.0 * std::abs((SystemMoistureLoad - TempLatentOutput) / SystemMoistureLoad)));
+                                                    format("  Latent load convergence error (percent) = {:.2T}", 100.0 * std::abs((SystemMoistureLoad - TempLatentOutput) / SystemMoistureLoad)));
                                                 ShowContinueErrorTimeStamp(
                                                     format("Moisture load to be met by DX coil = {:.2T}", SystemMoistureLoad) +
                                                     format(" (watts), Latent output of DX coil = {:.2T}", TempLatentOutput) +
@@ -7825,8 +7820,7 @@ namespace Furnaces {
                                     if (Furnace(FurnaceNum).LatentRegulaFalsiFailedIndex2 == 0) {
                                         ShowWarningMessage("Cooling coil control failed for " + cFurnaceTypes(Furnace(FurnaceNum).FurnaceType_Num) +
                                                            ':' + Furnace(FurnaceNum).Name);
-                                        ShowContinueError("  Latent part-load ratio determined to be outside the range of " +
-                                                          format("{:.3T}", TempMinPLR) + format(" to {:.3T}", TempMaxPLR) + '.');
+                                        ShowContinueError(format("  Latent part-load ratio determined to be outside the range of {:.3T}", TempMinPLR) + format(" to {:.3T}", TempMaxPLR) + '.');
                                         ShowContinueErrorTimeStamp(format("A PLR of {:.3T}", TempMinPLR) +
                                                                    " will be used and the simulation continues.");
                                     }
@@ -8310,8 +8304,7 @@ namespace Furnaces {
                             ShowContinueError("  Cooling sensible part-load ratio determined to be outside the range of 0-1.");
                             ShowContinueError(format("  An estimated part-load ratio = {:.2T}", CoolPartLoadRatio) +
                                               " will be used and the simulation continues.");
-                            ShowContinueError("  The estimated part-load ratio provides a cooling sensible capacity = " +
-                                              format("{:.2T}", ZoneSensLoadMet));
+                            ShowContinueError(format("  The estimated part-load ratio provides a cooling sensible capacity = {:.2T}", ZoneSensLoadMet));
                             ShowContinueErrorTimeStamp(format("  Cooling sensible load required = {:.2T}", TotalZoneSensLoad));
                         }
                         ShowRecurringWarningErrorAtEnd(
@@ -8499,8 +8492,7 @@ namespace Furnaces {
                             ShowContinueError("  Heating sensible part-load ratio determined to be outside the range of 0-1.");
                             ShowContinueError(format("  An estimated part-load ratio = {:.2T}", HeatPartLoadRatio) +
                                               " will be used and the simulation continues.");
-                            ShowContinueError("  The estimated part-load ratio provides a heating sensible capacity = " +
-                                              format("{:.2T}", ZoneSensLoadMet));
+                            ShowContinueError(format("  The estimated part-load ratio provides a heating sensible capacity = {:.2T}", ZoneSensLoadMet));
                             ShowContinueErrorTimeStamp(format("  Heating sensible load required = {:.2T}", TotalZoneSensLoad));
                         }
                         ShowRecurringWarningErrorAtEnd(cFurnaceTypes(Furnace(FurnaceNum).FurnaceType_Num) + " \"" + Furnace(FurnaceNum).Name +

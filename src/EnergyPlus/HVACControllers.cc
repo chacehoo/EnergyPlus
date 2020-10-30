@@ -1776,10 +1776,8 @@ namespace HVACControllers {
                         ShowContinueError(format("Controller temperature setpoint = {:.2T}", ControllerProps(ControlNum).SetPointValue) +
                                           " [C]");
                         ShowContinueError(format("Controller sensed temperature = {:.2T} [C]", ControllerProps(ControlNum).SensedValue));
-                        ShowContinueError("Controller humidity ratio setpoint = " +
-                                          format("{:.2T} [kgWater/kgDryAir]", Node(ControllerProps(ControlNum).SensedNode).HumRatMax));
-                        ShowContinueError("Controller sensed humidity ratio = " +
-                                          format("{:.2T} [kgWater/kgDryAir]", Node(ControllerProps(ControlNum).SensedNode).HumRat));
+                        ShowContinueError(format("Controller humidity ratio setpoint = {:.2T} [kgWater/kgDryAir]", Node(ControllerProps(ControlNum).SensedNode).HumRatMax));
+                        ShowContinueError(format("Controller sensed humidity ratio = {:.2T} [kgWater/kgDryAir]", Node(ControllerProps(ControlNum).SensedNode).HumRat));
                     } else if (ControllerProps(ControlNum).ControlVar == iFlow) {
                         ShowContinueError(format("Controller mass flow rate setpoint = {:.2T}", ControllerProps(ControlNum).SetPointValue) +
                                           " [kg/s]");
@@ -1789,11 +1787,9 @@ namespace HVACControllers {
                         // bad control variable input checked in input routine
                     }
                     if (ControllerProps(ControlNum).ActuatorVar == iFlow) {
-                        ShowContinueError("Controller actuator mass flow rate set to " +
-                                          format("{:.2T} [kg/s]", ControllerProps(ControlNum).MaxAvailActuated));
+                        ShowContinueError(format("Controller actuator mass flow rate set to {:.2T} [kg/s]", ControllerProps(ControlNum).MaxAvailActuated));
                         if (ControllerProps(ControlNum).ControlVar == iTemperature) {
-                            ShowContinueError("Controller actuator temperature = " +
-                                              format("{:.2T} [C]", Node(ControllerProps(ControlNum).ActuatedNode).Temp));
+                            ShowContinueError(format("Controller actuator temperature = {:.2T} [C]", Node(ControllerProps(ControlNum).ActuatedNode).Temp));
                             ShowContinueError("  Note: Chilled water coils should be reverse action and the entering chilled");
                             ShowContinueError("        water temperature (controller actuator temperature) should be below the setpoint temperature");
                             ShowContinueError("  Note: Hot water coils should be normal action and the entering hot");

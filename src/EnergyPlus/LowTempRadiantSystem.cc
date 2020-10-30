@@ -1145,8 +1145,7 @@ namespace LowTempRadiantSystem {
                     thisElecSys.MaxElecPower = thisElecSys.ScaledHeatingCapacity;
                     if (thisElecSys.ScaledHeatingCapacity < 0.0 && thisElecSys.ScaledHeatingCapacity != AutoSize) {
                         ShowSevereError(CurrentModuleObject + " = " + thisElecSys.Name);
-                        ShowContinueError("Illegal " + cNumericFields(iHeatDesignCapacityNumericNum) + " = " +
-                                          format("{:.7T}", Numbers(iHeatDesignCapacityNumericNum)));
+                        ShowContinueError("Illegal " + cNumericFields(iHeatDesignCapacityNumericNum) + format(" = {:.7T}", Numbers(iHeatDesignCapacityNumericNum)));
                         ErrorsFound = true;
                     }
                 } else {
@@ -1163,8 +1162,7 @@ namespace LowTempRadiantSystem {
                     if (thisElecSys.ScaledHeatingCapacity <= 0.0) {
                         ShowSevereError(CurrentModuleObject + " = " + thisElecSys.Name);
                         ShowContinueError("Input for " + cAlphaFields(iHeatCAPMAlphaNum) + " = " + Alphas(iHeatCAPMAlphaNum));
-                        ShowContinueError("Illegal " + cNumericFields(iHeatCapacityPerFloorAreaNumericNum) + " = " +
-                                          format("{:.7T}", Numbers(iHeatCapacityPerFloorAreaNumericNum)));
+                        ShowContinueError("Illegal " + cNumericFields(iHeatCapacityPerFloorAreaNumericNum) + format(" = {:.7T}", Numbers(iHeatCapacityPerFloorAreaNumericNum)));
                         ErrorsFound = true;
                     } else if (thisElecSys.ScaledHeatingCapacity == AutoSize) {
                         ShowSevereError(CurrentModuleObject + " = " + thisElecSys.Name);
@@ -1185,8 +1183,7 @@ namespace LowTempRadiantSystem {
                     thisElecSys.MaxElecPower = thisElecSys.ScaledHeatingCapacity;
                     if (thisElecSys.ScaledHeatingCapacity < 0.0) {
                         ShowSevereError(CurrentModuleObject + " = " + thisElecSys.Name);
-                        ShowContinueError("Illegal " + cNumericFields(iHeatFracOfAutosizedCapacityNumericNum) + " = " +
-                                          format("{:.7T}", Numbers(iHeatFracOfAutosizedCapacityNumericNum)));
+                        ShowContinueError("Illegal " + cNumericFields(iHeatFracOfAutosizedCapacityNumericNum) + format(" = {:.7T}", Numbers(iHeatFracOfAutosizedCapacityNumericNum)));
                         ErrorsFound = true;
                     }
                 } else {
@@ -2717,8 +2714,7 @@ namespace LowTempRadiantSystem {
                                                 HydrRadSys(RadSysNum).Name + "\".");
                                     ShowContinueError(format("User-Specified Maximum Hot Water Flow of {:.5R}", WaterVolFlowMaxHeatUser) +
                                                       " [m3/s]");
-                                    ShowContinueError("differs from Design Size Maximum Hot Water Flow of " +
-                                                      format("{:.5R} [m3/s]", WaterVolFlowMaxHeatDes));
+                                    ShowContinueError(format("differs from Design Size Maximum Hot Water Flow of {:.5R} [m3/s]", WaterVolFlowMaxHeatDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -2877,8 +2873,7 @@ namespace LowTempRadiantSystem {
                                                 HydrRadSys(RadSysNum).Name + "\".");
                                     ShowContinueError(format("User-Specified Maximum Cool Water Flow of {:.5R}", WaterVolFlowMaxCoolUser) +
                                                       " [m3/s]");
-                                    ShowContinueError("differs from Design Size Maximum Cool Water Flow of " +
-                                                      format("{:.5R} [m3/s]", WaterVolFlowMaxCoolDes));
+                                    ShowContinueError(format("differs from Design Size Maximum Cool Water Flow of {:.5R} [m3/s]", WaterVolFlowMaxCoolDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -3642,10 +3637,8 @@ namespace LowTempRadiantSystem {
                                 ShowContinueError("Surface [" + Surface(this->SurfacePtr(RadSurfNum2)).Name +
                                                   "] temperature below dew-point temperature--potential for condensation exists");
                                 ShowContinueError("Flow to the radiant system will be shut-off to avoid condensation");
-                                ShowContinueError("Predicted radiant system surface temperature = " +
-                                                  format("{:.2R}", TH(2, 1, this->SurfacePtr(RadSurfNum2))));
-                                ShowContinueError("Zone dew-point temperature + safety delta T= " +
-                                                  format("{:.2R}", DewPointTemp + this->CondDewPtDeltaT));
+                                ShowContinueError(format("Predicted radiant system surface temperature = {:.2R}", TH(2, 1, this->SurfacePtr(RadSurfNum2))));
+                                ShowContinueError(format("Zone dew-point temperature + safety delta T= {:.2R}", DewPointTemp + this->CondDewPtDeltaT));
                                 ShowContinueErrorTimeStamp("");
                                 ShowContinueError(format("Note that a {:.4R}", this->CondDewPtDeltaT) +
                                                   " C safety was chosen in the input for the shut-off criteria");
@@ -3808,10 +3801,8 @@ namespace LowTempRadiantSystem {
                                 ShowContinueError("Surface [" + Surface(this->SurfacePtr(CondSurfNum)).Name +
                                                   "] temperature below dew-point temperature--potential for condensation exists");
                                 ShowContinueError("Flow to the radiant system will be shut-off to avoid condensation");
-                                ShowContinueError("Predicted radiant system surface temperature = " +
-                                                  format("{:.2R}", TH(2, 1, this->SurfacePtr(CondSurfNum))));
-                                ShowContinueError("Zone dew-point temperature + safety delta T= " +
-                                                  format("{:.2R}", DewPointTemp + this->CondDewPtDeltaT));
+                                ShowContinueError(format("Predicted radiant system surface temperature = {:.2R}", TH(2, 1, this->SurfacePtr(CondSurfNum))));
+                                ShowContinueError(format("Zone dew-point temperature + safety delta T= {:.2R}", DewPointTemp + this->CondDewPtDeltaT));
                                 ShowContinueErrorTimeStamp("");
                                 ShowContinueError(format("Note that a {:.4R}", this->CondDewPtDeltaT) +
                                                   " C safety was chosen in the input for the shut-off criteria");
@@ -4741,10 +4732,8 @@ namespace LowTempRadiantSystem {
                                 ShowContinueError("Surface [" + Surface(this->SurfacePtr(RadSurfNum2)).Name +
                                                   "] temperature below dew-point temperature--potential for condensation exists");
                                 ShowContinueError("Flow to the radiant system will be shut-off to avoid condensation");
-                                ShowContinueError("Predicted radiant system surface temperature = " +
-                                                  format("{:.2R}", TH(2, 1, this->SurfacePtr(RadSurfNum2))));
-                                ShowContinueError("Zone dew-point temperature + safety delta T= " +
-                                                  format("{:.2R}", DewPointTemp + this->CondDewPtDeltaT));
+                                ShowContinueError(format("Predicted radiant system surface temperature = {:.2R}", TH(2, 1, this->SurfacePtr(RadSurfNum2))));
+                                ShowContinueError(format("Zone dew-point temperature + safety delta T= {:.2R}", DewPointTemp + this->CondDewPtDeltaT));
                                 ShowContinueErrorTimeStamp("");
                                 ShowContinueError(format("Note that a {:.4R}", this->CondDewPtDeltaT) +
                                                   " C safety was chosen in the input for the shut-off criteria");
@@ -4802,10 +4791,8 @@ namespace LowTempRadiantSystem {
                                     ShowContinueError("Surface [" + Surface(this->SurfacePtr(RadSurfNum2)).Name +
                                                       "] temperature below dew-point temperature--potential for condensation exists");
                                     ShowContinueError("Flow to the radiant system will be shut-off to avoid condensation");
-                                    ShowContinueError("Predicted radiant system surface temperature = " +
-                                                      format("{:.2R}", TH(2, 1, this->SurfacePtr(RadSurfNum2))));
-                                    ShowContinueError("Zone dew-point temperature + safety delta T= " +
-                                                      format("{:.2R}", DewPointTemp + this->CondDewPtDeltaT));
+                                    ShowContinueError(format("Predicted radiant system surface temperature = {:.2R}", TH(2, 1, this->SurfacePtr(RadSurfNum2))));
+                                    ShowContinueError(format("Zone dew-point temperature + safety delta T= {:.2R}", DewPointTemp + this->CondDewPtDeltaT));
                                     ShowContinueErrorTimeStamp("");
                                     ShowContinueError(format("Note that a {:.4R}", this->CondDewPtDeltaT) +
                                                       " C safety was chosen in the input for the shut-off criteria");

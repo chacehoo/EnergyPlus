@@ -760,10 +760,8 @@ namespace DataPlant {
                             ShowContinueError(
                                 format("LoadToHeatingSetPoint={:.3R}", LoadToHeatingSetPoint) +
                                 format(", LoadToCoolingSetPoint={:.3R}", LoadToCoolingSetPoint));
-                            ShowContinueError("Loop Heating Low Setpoint=" +
-                                              format("{:.2R}", LoopSetPointTemperatureLo));
-                            ShowContinueError("Loop Cooling High Setpoint=" +
-                                              format("{:.2R}", LoopSetPointTemperatureHi));
+                            ShowContinueError(format("Loop Heating Low Setpoint={:.2R}", LoopSetPointTemperatureLo));
+                            ShowContinueError(format("Loop Cooling High Setpoint={:.2R}", LoopSetPointTemperatureHi));
 
                             ShowFatalError("Program terminates due to above conditions.");
                         }
@@ -782,10 +780,8 @@ namespace DataPlant {
                             ShowContinueError(
                                 format("LoadToHeatingSetPoint={:.3R}", LoadToHeatingSetPoint) +
                                 format(", LoadToCoolingSetPoint={:.3R}", LoadToCoolingSetPoint));
-                            ShowContinueError("Loop Heating Setpoint=" +
-                                              format("{:.2R}", LoopSetPointTemperatureLo));
-                            ShowContinueError("Loop Cooling Setpoint=" +
-                                              format("{:.2R}", LoopSetPointTemperatureHi));
+                            ShowContinueError(format("Loop Heating Setpoint={:.2R}", LoopSetPointTemperatureLo));
+                            ShowContinueError(format("Loop Cooling Setpoint={:.2R}", LoopSetPointTemperatureHi));
                             ShowFatalError("Program terminates due to above conditions.");
                         }
                     } else {

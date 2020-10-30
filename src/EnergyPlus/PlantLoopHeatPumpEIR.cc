@@ -681,10 +681,8 @@ namespace EIRPlantLoopHeatPumps {
                                 if ((std::abs(tmpLoadVolFlow - hardSizedLoadSideFlow) / hardSizedLoadSideFlow) >
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("EIRPlantLoopHeatPump::size(): Potential issue with equipment sizing for " + this->name);
-                                    ShowContinueError("User-Specified Load Side Volume Flow Rate of " +
-                                                      format("{:.2R} [m3/s]", hardSizedLoadSideFlow));
-                                    ShowContinueError("differs from Design Size Load Side Volume Flow Rate of " +
-                                                      format("{:.2R} [m3/s]", tmpLoadVolFlow));
+                                    ShowContinueError(format("User-Specified Load Side Volume Flow Rate of {:.2R} [m3/s]", hardSizedLoadSideFlow));
+                                    ShowContinueError(format("differs from Design Size Load Side Volume Flow Rate of {:.2R} [m3/s]", tmpLoadVolFlow));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -819,10 +817,8 @@ namespace EIRPlantLoopHeatPumps {
                         if ((std::abs(tmpSourceVolFlow - hardSizedSourceSideFlow) / hardSizedSourceSideFlow) >
                             DataSizing::AutoVsHardSizingThreshold) {
                             ShowMessage("EIRPlantLoopHeatPump::size(): Potential issue with equipment sizing for " + this->name);
-                            ShowContinueError("User-Specified Source Side Volume Flow Rate of " +
-                                              format("{:.2R} [m3/s]", hardSizedSourceSideFlow));
-                            ShowContinueError("differs from Design Size Source Side Volume Flow Rate of " +
-                                              format("{:.2R} [m3/s]", tmpSourceVolFlow));
+                            ShowContinueError(format("User-Specified Source Side Volume Flow Rate of {:.2R} [m3/s]", hardSizedSourceSideFlow));
+                            ShowContinueError(format("differs from Design Size Source Side Volume Flow Rate of {:.2R} [m3/s]", tmpSourceVolFlow));
                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                         }

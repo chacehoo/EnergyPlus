@@ -222,15 +222,13 @@ Real64 CoolingCapacitySizer::size(EnergyPlusData &state, Real64 _originalValue, 
                     ShowWarningMessage(this->callingRoutine + ": Potential issue with equipment sizing for " + this->compType + ' ' + this->compName);
                     ShowContinueError(format("...Rated Total Cooling Capacity = {:.2T} [W]", this->autoSizedValue));
                     if (this->zoneEqSizing(this->curZoneEqNum).CoolingCapacity) {
-                        ShowContinueError("...Capacity passed by parent object to size child component = " +
-                                          format("{:.2T} [W]", this->autoSizedValue));
+                        ShowContinueError(format("...Capacity passed by parent object to size child component = {:.2T} [W]", this->autoSizedValue));
                     } else {
                         if (UtilityRoutines::SameString(this->compType, "COIL:COOLING:WATER") ||
                             UtilityRoutines::SameString(this->compType, "COIL:COOLING:WATER:DETAILEDGEOMETRY") ||
                             UtilityRoutines::SameString(this->compType, "ZONEHVAC:IDEALLOADSAIRSYSTEM")) {
                             if (this->termUnitIU || this->zoneEqFanCoil) {
-                                ShowContinueError("...Capacity passed by parent object to size child component = " +
-                                                  format("{:.2T} [W]", this->autoSizedValue));
+                                ShowContinueError(format("...Capacity passed by parent object to size child component = {:.2T} [W]", this->autoSizedValue));
                             } else {
                                 ShowContinueError(format("...Air flow rate used for sizing = {:.5T} [m3/s]", DesVolFlow));
                                 ShowContinueError(format("...Coil inlet air temperature used for sizing = {:.2T}", CoilInTemp) +
@@ -450,8 +448,7 @@ Real64 CoolingCapacitySizer::size(EnergyPlusData &state, Real64 _originalValue, 
                         this->finalSysSizing(this->curSysNum).CoolingCapMethod == DataSizing::CapacityPerFloorArea ||
                         (this->finalSysSizing(this->curSysNum).CoolingCapMethod == DataSizing::CoolingDesignCapacity &&
                          this->finalSysSizing(this->curSysNum).CoolingTotalCapacity)) {
-                        ShowContinueError("...Capacity passed by parent object to size child component = " +
-                                          format("{:.2T} [W]", this->autoSizedValue));
+                        ShowContinueError(format("...Capacity passed by parent object to size child component = {:.2T} [W]", this->autoSizedValue));
                     } else {
                         ShowContinueError(format("...Air flow rate used for sizing = {:.5T} [m3/s]", DesVolFlow));
                         ShowContinueError(format("...Outdoor air fraction used for sizing = {:.2T}", OutAirFrac));
@@ -496,8 +493,7 @@ Real64 CoolingCapacitySizer::size(EnergyPlusData &state, Real64 _originalValue, 
                         ShowContinueError(format("...DX coil volume flow rate (m3/s ) = {:.6T}", DesVolFlow));
                         ShowContinueError(format("...Requested capacity (W ) = {:.3T}", this->autoSizedValue));
                         ShowContinueError(format("...Requested flow/capacity ratio (m3/s/W ) = {:.3T}", RatedVolFlowPerRatedTotCap));
-                        ShowContinueError("...Minimum flow/capacity ratio (m3/s/W ) = " +
-                                          format("{:.3T}", DataHVACGlobals::MinRatedVolFlowPerRatedTotCap(DataHVACGlobals::DXCT)));
+                        ShowContinueError(format("...Minimum flow/capacity ratio (m3/s/W ) = {:.3T}", DataHVACGlobals::MinRatedVolFlowPerRatedTotCap(DataHVACGlobals::DXCT)));
                     }
 
                     DXFlowPerCapMinRatio = (DesVolFlow / DataHVACGlobals::MinRatedVolFlowPerRatedTotCap(DataHVACGlobals::DXCT)) /
@@ -515,8 +511,7 @@ Real64 CoolingCapacitySizer::size(EnergyPlusData &state, Real64 _originalValue, 
                         ShowContinueError(format("...DX coil volume flow rate ( m3/s ) = {:.6T}", DesVolFlow));
                         ShowContinueError(format("...Requested capacity ( W ) = {:.3T}", this->autoSizedValue));
                         ShowContinueError(format("...Requested flow/capacity ratio ( m3/s/W ) = {:.3T}", RatedVolFlowPerRatedTotCap));
-                        ShowContinueError("...Maximum flow/capacity ratio ( m3/s/W ) = " +
-                                          format("{:.3T}", DataHVACGlobals::MaxRatedVolFlowPerRatedTotCap(DataHVACGlobals::DXCT)));
+                        ShowContinueError(format("...Maximum flow/capacity ratio ( m3/s/W ) = {:.3T}", DataHVACGlobals::MaxRatedVolFlowPerRatedTotCap(DataHVACGlobals::DXCT)));
                     }
 
                     DXFlowPerCapMaxRatio = DesVolFlow / DataHVACGlobals::MaxRatedVolFlowPerRatedTotCap(DataHVACGlobals::DXCT) /

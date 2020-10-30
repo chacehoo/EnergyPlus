@@ -382,8 +382,7 @@ namespace WindowAC {
                     if (FanVolFlow != AutoSize) {
                         if (FanVolFlow < state.dataWindowAC->WindAC(WindACNum).MaxAirVolFlow) {
                             ShowWarningError(format("Air flow rate = {:.7T} in fan object ", FanVolFlow) +
-                                             state.dataWindowAC->WindAC(WindACNum).FanName + " is less than the maximum supply air flow rate (" +
-                                             format("{:.7T}) in the ", state.dataWindowAC->WindAC(WindACNum).MaxAirVolFlow) +
+                                             state.dataWindowAC->WindAC(WindACNum).FanName + format(" is less than the maximum supply air flow rate ({:.7T}) in the ", state.dataWindowAC->WindAC(WindACNum).MaxAirVolFlow) +
                                              CurrentModuleObject + " object.");
                             ShowContinueError(" The fan flow rate must be >= to the " + cNumericFields(1) + " in the " + CurrentModuleObject +
                                               " object.");
@@ -419,8 +418,7 @@ namespace WindowAC {
                                     if (FanVolFlow < state.dataWindowAC->WindAC(WindACNum).MaxAirVolFlow) {
                                         ShowWarningError(format("Air flow rate = {:.7T} in fan object ", FanVolFlow) +
                                                          state.dataWindowAC->WindAC(WindACNum).FanName +
-                                                         " is less than the maximum supply air flow rate (" +
-                                                         format("{:.7T}) in the ", state.dataWindowAC->WindAC(WindACNum).MaxAirVolFlow) +
+                                                         format(" is less than the maximum supply air flow rate ({:.7T}) in the ", state.dataWindowAC->WindAC(WindACNum).MaxAirVolFlow) +
                                                          CurrentModuleObject + " object.");
                                         ShowContinueError(" The fan flow rate must be >= to the " + cNumericFields(1) + " in the " +
                                                           CurrentModuleObject + " object.");

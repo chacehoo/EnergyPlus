@@ -649,8 +649,7 @@ namespace Boilers {
                                     ShowMessage("SizeBoilerHotWater: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError(format("User-Specified Design Water Flow Rate of {:.2R}", VolFlowRateUser) +
                                                       " [m3/s]");
-                                    ShowContinueError("differs from Design Size Design Water Flow Rate of " +
-                                                      format("{:.2R} [m3/s]", tmpBoilerVolFlowRate));
+                                    ShowContinueError(format("differs from Design Size Design Water Flow Rate of {:.2R} [m3/s]", tmpBoilerVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -853,8 +852,7 @@ namespace Boilers {
                     ShowContinueError(format("...Curve input x value (PLR)     = {:.5T}", this->BoilerPLR));
                     if (state.dataCurveManager->PerfCurve(this->EfficiencyCurvePtr).NumDims == 2) {
                         if (this->CurveTempMode == TempMode::ENTERINGBOILERTEMP) {
-                            ShowContinueError("...Curve input y value (Tinlet) = " +
-                                              format("{:.2T}", DataLoopNode::Node(BoilerInletNode).Temp));
+                            ShowContinueError(format("...Curve input y value (Tinlet) = {:.2T}", DataLoopNode::Node(BoilerInletNode).Temp));
                         } else if (this->CurveTempMode == TempMode::LEAVINGBOILERTEMP) {
                             ShowContinueError(format("...Curve input y value (Toutlet) = {:.2T}", this->BoilerOutletTemp));
                         }
@@ -885,8 +883,7 @@ namespace Boilers {
                     ShowContinueError(format("...Curve input x value (PLR)     = {:.5T}", this->BoilerPLR));
                     if (state.dataCurveManager->PerfCurve(this->EfficiencyCurvePtr).NumDims == 2) {
                         if (this->CurveTempMode == TempMode::ENTERINGBOILERTEMP) {
-                            ShowContinueError("...Curve input y value (Tinlet) = " +
-                                              format("{:.2T}", DataLoopNode::Node(BoilerInletNode).Temp));
+                            ShowContinueError(format("...Curve input y value (Tinlet) = {:.2T}", DataLoopNode::Node(BoilerInletNode).Temp));
                         } else if (this->CurveTempMode == TempMode::LEAVINGBOILERTEMP) {
                             ShowContinueError(format("...Curve input y value (Toutlet) = {:.2T}", this->BoilerOutletTemp));
                         }

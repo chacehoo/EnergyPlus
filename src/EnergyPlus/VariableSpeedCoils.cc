@@ -1643,8 +1643,7 @@ namespace VariableSpeedCoils {
 
                 if (state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedTotCap(I) < 1.e-10) {
                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name + "\", invalid value");
-                    ShowContinueError("...too small " + cNumericFields(12 + (I - 1) * 3) + "=[" +
-                                      format("{:.2R}].", state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedTotCap(I)));
+                    ShowContinueError("...too small " + cNumericFields(12 + (I - 1) * 3) + format("=[{:.2R}].", state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedTotCap(I)));
                     ErrorsFound = true;
                 }
 
@@ -1853,9 +1852,8 @@ namespace VariableSpeedCoils {
             if (state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).NumOfSpeeds < 1) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name + "\", invalid");
                 ShowContinueError("..." + cNumericFields(1) +
-                                  " must be >= 1."
-                                  " entered number is " +
-                                  format("{:.0T}", NumArray(1)));
+                                  " must be >= 1." +
+                                  format(" entered number is {:.0T}", NumArray(1)));
                 ErrorsFound = true;
             }
 
@@ -1866,9 +1864,8 @@ namespace VariableSpeedCoils {
             if ((state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).NormSpedLevel > state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).NumOfSpeeds) || (state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).NormSpedLevel <= 0)) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name + "\", invalid");
                 ShowContinueError("..." + cNumericFields(2) +
-                                  " must be valid speed level"
-                                  " entered number is " +
-                                  format("{:.0T}", NumArray(2)));
+                                  " must be valid speed level" +
+                                  format(" entered number is {:.0T}", NumArray(2)));
                 ErrorsFound = true;
             }
 
@@ -4228,8 +4225,7 @@ namespace VariableSpeedCoils {
                                       state.dataVariableSpeedCoils->VarSpeedCoil(state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).CompanionCoolingCoilNum).Name + "\"");
                     ShowContinueError("...heating capacity is disproportionate (> 20% different) to total cooling capacity");
                     ShowContinueError(format("...heating capacity = {:.3T} W", state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).RatedCapHeat));
-                    ShowContinueError("...cooling capacity = " +
-                                      format("{:.3T} W", state.dataVariableSpeedCoils->VarSpeedCoil(state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).CompanionCoolingCoilNum).RatedCapCoolTotal));
+                    ShowContinueError(format("...cooling capacity = {:.3T} W", state.dataVariableSpeedCoils->VarSpeedCoil(state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).CompanionCoolingCoilNum).RatedCapCoolTotal));
                 }
             }
         }
@@ -4747,10 +4743,8 @@ namespace VariableSpeedCoils {
                             ShowMessage("SizeVarSpeedCoil: Potential issue with equipment sizing for " + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).CoolHeatType + ' ' +
                                         CurrentObjSubfix);
                             ShowContinueError("Coil Name =" + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name);
-                            ShowContinueError("User-Specified Evaporative Condenser Pump Rated Power Consumption of " +
-                                              format("{:.2R} [W]", EvapCondPumpElecNomPowerUser));
-                            ShowContinueError("differs from Design Size Evaporative Condenser Pump Rated Power Consumption of " +
-                                              format("{:.2R} [W]", EvapCondPumpElecNomPowerDes));
+                            ShowContinueError(format("User-Specified Evaporative Condenser Pump Rated Power Consumption of {:.2R} [W]", EvapCondPumpElecNomPowerUser));
+                            ShowContinueError(format("differs from Design Size Evaporative Condenser Pump Rated Power Consumption of {:.2R} [W]", EvapCondPumpElecNomPowerDes));
                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                         }
@@ -4793,8 +4787,7 @@ namespace VariableSpeedCoils {
                             ShowContinueError("Coil Name =" + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name);
                             ShowContinueError(format("User-Specified Resistive Defrost Heater Capacity of {:.2R}", DefrostCapacityUser) +
                                               " [W]");
-                            ShowContinueError("differs from Design Size Resistive Defrost Heater Capacity of " +
-                                              format("{:.2R} [W]", DefrostCapacityDes));
+                            ShowContinueError(format("differs from Design Size Resistive Defrost Heater Capacity of {:.2R} [W]", DefrostCapacityDes));
                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                         }

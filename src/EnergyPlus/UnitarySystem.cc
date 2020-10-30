@@ -536,8 +536,7 @@ namespace UnitarySystems {
                                 ShowContinueError("...For fan type and name = " + FanType + " \"" + FanName + "\"");
                                 ShowContinueError("...Fan power ratio function of speed ratio curve has no impact if fan volumetric flow rate is the "
                                                   "same as the unitary system volumetric flow rate.");
-                                ShowContinueError("...Fan volumetric flow rate            = " +
-                                                  format("{:.5R} m3/s.", this->m_ActualFanVolFlowRate));
+                                ShowContinueError(format("...Fan volumetric flow rate            = {:.5R} m3/s.", this->m_ActualFanVolFlowRate));
                                 ShowContinueError(
                                     format("...Unitary system volumetric flow rate = {:.5R} m3/s.", this->m_MaxHeatAirVolFlow));
                             }
@@ -2736,8 +2735,7 @@ namespace UnitarySystems {
                 ShowContinueError(" For SingleZoneVAV control the No Load Supply Air Flow Rate must be less than both the cooling and heating supply "
                                   "air flow rates.");
                 this->m_MaxNoCoolHeatAirVolFlow = min(this->m_MaxCoolAirVolFlow, this->m_MaxHeatAirVolFlow) - 0.01;
-                ShowContinueError(" The SingleZoneVAV control No Load Supply Air Flow Rate is reset to " +
-                                  format("{:.5T} and the simulation continues.", this->m_MaxNoCoolHeatAirVolFlow));
+                ShowContinueError(format(" The SingleZoneVAV control No Load Supply Air Flow Rate is reset to {:.5T} and the simulation continues.", this->m_MaxNoCoolHeatAirVolFlow));
             }
         }
 
@@ -5521,8 +5519,7 @@ namespace UnitarySystems {
                 }
                 if (thisSys.m_ControlType != ControlType::CCMASHRAE && thisSys.DesignMinOutletTemp > 7.5) {
                     ShowWarningError(cCurrentModuleObject + " = " + thisObjectName);
-                    ShowContinueError("Invalid entry for Minimum Supply Air Temperature = " +
-                                      format("{:.4R}", thisSys.DesignMinOutletTemp));
+                    ShowContinueError(format("Invalid entry for Minimum Supply Air Temperature = {:.4R}", thisSys.DesignMinOutletTemp));
                     ShowContinueError("The minimum supply air temperature will be limited to 7.5C and the simulation continues.");
                     thisSys.DesignMinOutletTemp = 7.5;
                 }
@@ -5863,8 +5860,7 @@ namespace UnitarySystems {
                             if (thisSys.m_MaxCoolAirVolFlow <= DataHVACGlobals::SmallAirVolFlow && thisSys.m_CoolCoilExists) {
                                 ShowWarningError(cCurrentModuleObject + " = " + thisObjectName);
                                 ShowContinueError("Input for Cooling Supply Air Flow Rate Method = SupplyAirFlowRate.");
-                                ShowContinueError("Suspicious Cooling Supply Air Flow Rate = " +
-                                                  format("{:.7R} when cooling coil is present.", thisSys.m_MaxCoolAirVolFlow));
+                                ShowContinueError(format("Suspicious Cooling Supply Air Flow Rate = {:.7R} when cooling coil is present.", thisSys.m_MaxCoolAirVolFlow));
                             }
                             if (thisSys.m_MaxCoolAirVolFlow < 0.0) errorsFound = true;
                         }
@@ -5884,8 +5880,7 @@ namespace UnitarySystems {
                             if (thisSys.m_MaxCoolAirVolFlow <= 0.0001 && thisSys.m_CoolCoilExists) {
                                 ShowSevereError(cCurrentModuleObject + " = " + thisObjectName);
                                 ShowContinueError("Input for Cooling Supply Air Flow Rate Method = FlowPerFloorArea.");
-                                ShowContinueError("Suspicious Cooling Supply Air Flow Rate Per Floor Area = " +
-                                                  format("{:.7R}", thisSys.m_MaxCoolAirVolFlow) +
+                                ShowContinueError(format("Suspicious Cooling Supply Air Flow Rate Per Floor Area = {:.7R}", thisSys.m_MaxCoolAirVolFlow) +
                                                   " [m3/s/m2] when cooling coil is present.");
                                 if (thisSys.m_MaxCoolAirVolFlow < 0.0) errorsFound = true;
                             }
@@ -5913,8 +5908,7 @@ namespace UnitarySystems {
                             if (thisSys.m_MaxCoolAirVolFlow <= DataHVACGlobals::SmallAirVolFlow && thisSys.m_CoolCoilExists) {
                                 ShowSevereError(cCurrentModuleObject + " = " + thisObjectName);
                                 ShowContinueError("Input for Cooling Supply Air Flow Rate Method = FractionOfAutosizedCoolingValue.");
-                                ShowContinueError("Suspicious Cooling Fraction of Autosized Cooling Supply Air Flow Rate = " +
-                                                  format("{:.7R}", thisSys.m_MaxCoolAirVolFlow) +
+                                ShowContinueError(format("Suspicious Cooling Fraction of Autosized Cooling Supply Air Flow Rate = {:.7R}", thisSys.m_MaxCoolAirVolFlow) +
                                                   " [m3/s/m3] when cooling coil is present.");
                                 if (thisSys.m_MaxCoolAirVolFlow < 0.0) errorsFound = true;
                             }
@@ -5941,8 +5935,7 @@ namespace UnitarySystems {
                             if (thisSys.m_MaxCoolAirVolFlow <= 0.00001 && thisSys.m_CoolCoilExists) {
                                 ShowSevereError(cCurrentModuleObject + " = " + thisObjectName);
                                 ShowContinueError("Input for Cooling Supply Air Flow Rate Method = FlowPerCoolingCapacity.");
-                                ShowContinueError("Suspicious Cooling Supply Air Flow Rate Per Unit of Capacity = " +
-                                                  format("{:.7R}", thisSys.m_MaxCoolAirVolFlow) +
+                                ShowContinueError(format("Suspicious Cooling Supply Air Flow Rate Per Unit of Capacity = {:.7R}", thisSys.m_MaxCoolAirVolFlow) +
                                                   " [m3/s/W] when cooling coil is present.");
                                 if (thisSys.m_MaxCoolAirVolFlow < 0.0) errorsFound = true;
                             }
@@ -5991,8 +5984,7 @@ namespace UnitarySystems {
                             if (thisSys.m_MaxHeatAirVolFlow <= DataHVACGlobals::SmallAirVolFlow && thisSys.m_HeatCoilExists) {
                                 ShowWarningError(cCurrentModuleObject + " = " + thisObjectName);
                                 ShowContinueError("Input for Heating Supply Air Flow Rate Method = SupplyAirFlowRate.");
-                                ShowContinueError("Suspicious Heating Supply Air Flow Rate = " +
-                                                  format("{:.7R} when heating coil is present.", thisSys.m_MaxHeatAirVolFlow));
+                                ShowContinueError(format("Suspicious Heating Supply Air Flow Rate = {:.7R} when heating coil is present.", thisSys.m_MaxHeatAirVolFlow));
                             }
                             if (thisSys.m_MaxHeatAirVolFlow < 0.0) errorsFound = true;
                         }
@@ -6010,8 +6002,7 @@ namespace UnitarySystems {
                             if (thisSys.m_MaxHeatAirVolFlow <= 0.0001 && thisSys.m_HeatCoilExists) {
                                 ShowSevereError(cCurrentModuleObject + " = " + thisObjectName);
                                 ShowContinueError("Input for Heating Supply Air Flow Rate Method = FlowPerFloorArea.");
-                                ShowContinueError("Suspicious Heating Supply Air Flow Rate Per Floor Area = " +
-                                                  format("{:.7R}", thisSys.m_MaxHeatAirVolFlow) +
+                                ShowContinueError(format("Suspicious Heating Supply Air Flow Rate Per Floor Area = {:.7R}", thisSys.m_MaxHeatAirVolFlow) +
                                                   " [m3/s/m2] when heating coil is present.");
                             }
                             if (thisSys.m_MaxHeatAirVolFlow < 0.0) errorsFound = true;
@@ -6038,8 +6029,7 @@ namespace UnitarySystems {
                             if (thisSys.m_MaxHeatAirVolFlow <= DataHVACGlobals::SmallAirVolFlow && thisSys.m_HeatCoilExists) {
                                 ShowSevereError(cCurrentModuleObject + " = " + thisObjectName);
                                 ShowContinueError("Input for Heating Supply Air Flow Rate Method = FractionOfAutosizedHeatingValue.");
-                                ShowContinueError("Suspicious Heating Fraction of Autosized Heating Supply Air Flow Rate = " +
-                                                  format("{:.7R}", thisSys.m_MaxHeatAirVolFlow) +
+                                ShowContinueError(format("Suspicious Heating Fraction of Autosized Heating Supply Air Flow Rate = {:.7R}", thisSys.m_MaxHeatAirVolFlow) +
                                                   " [m3/s/m3] when heating coil is present.");
                                 if (thisSys.m_MaxHeatAirVolFlow < 0.0) errorsFound = true;
                             }
@@ -6065,8 +6055,7 @@ namespace UnitarySystems {
                             if (thisSys.m_MaxHeatAirVolFlow <= 0.00001 && thisSys.m_HeatCoilExists) {
                                 ShowSevereError(cCurrentModuleObject + " = " + thisObjectName);
                                 ShowContinueError("Input for Heating Supply Air Flow Rate Method = FlowPerHeatingCapacity.");
-                                ShowContinueError("Suspicious Heating Supply Air Flow Rate Per Unit of Capacity = " +
-                                                  format("{:.7R}", thisSys.m_MaxHeatAirVolFlow) +
+                                ShowContinueError(format("Suspicious Heating Supply Air Flow Rate Per Unit of Capacity = {:.7R}", thisSys.m_MaxHeatAirVolFlow) +
                                                   " [m3/s/W] when heating coil is present.");
                                 if (thisSys.m_MaxHeatAirVolFlow < 0.0) errorsFound = true;
                             }
@@ -6114,8 +6103,7 @@ namespace UnitarySystems {
                             if (thisSys.m_MaxNoCoolHeatAirVolFlow < 0.0) {
                                 ShowSevereError(cCurrentModuleObject + " = " + thisObjectName);
                                 ShowContinueError("Input for No Load Supply Air Flow Rate Method = SupplyAirFlowRate");
-                                ShowContinueError("Illegal No Load Supply Air Flow Rate = " +
-                                                  format("{:.7R}", thisSys.m_MaxNoCoolHeatAirVolFlow));
+                                ShowContinueError(format("Illegal No Load Supply Air Flow Rate = {:.7R}", thisSys.m_MaxNoCoolHeatAirVolFlow));
                                 errorsFound = true;
                             }
                         }
@@ -6134,8 +6122,7 @@ namespace UnitarySystems {
                             if (thisSys.m_MaxNoCoolHeatAirVolFlow <= 0.0001) {
                                 ShowSevereError(cCurrentModuleObject + " = " + thisObjectName);
                                 ShowContinueError("Input for No Load Supply Air Flow Rate Method = FlowPerFloorArea.");
-                                ShowContinueError("Suspicious No Load Supply Air Flow Rate Per Floor Area = " +
-                                                  format("{:.7R} [m3/s/m2]", thisSys.m_MaxNoCoolHeatAirVolFlow));
+                                ShowContinueError(format("Suspicious No Load Supply Air Flow Rate Per Floor Area = {:.7R} [m3/s/m2]", thisSys.m_MaxNoCoolHeatAirVolFlow));
                             }
                             if (thisSys.m_MaxNoCoolHeatAirVolFlow < 0.0) errorsFound = true;
                             thisSys.m_MaxNoCoolHeatAirVolFlow *= TotalFloorAreaOnAirLoop;
@@ -6161,8 +6148,7 @@ namespace UnitarySystems {
                             if (thisSys.m_MaxNoCoolHeatAirVolFlow <= DataHVACGlobals::SmallAirVolFlow) {
                                 ShowWarningError(cCurrentModuleObject + " = " + thisObjectName);
                                 ShowContinueError("Input for No Load Supply Air Flow Rate Method = FractionOfAutosizedCoolingValue.");
-                                ShowContinueError("Suspicious No Load Supply Air Flow Rate Per Unit of Capacity During Cooling Operation = " +
-                                                  format("{:.7R} [m3/s/m3].", thisSys.m_MaxNoCoolHeatAirVolFlow));
+                                ShowContinueError(format("Suspicious No Load Supply Air Flow Rate Per Unit of Capacity During Cooling Operation = {:.7R} [m3/s/m3].", thisSys.m_MaxNoCoolHeatAirVolFlow));
                                 if (thisSys.m_MaxNoCoolHeatAirVolFlow < 0.0) errorsFound = true;
                             }
                             thisSys.m_RequestAutoSize = true;
@@ -6188,8 +6174,7 @@ namespace UnitarySystems {
                             if (thisSys.m_MaxNoCoolHeatAirVolFlow <= DataHVACGlobals::SmallAirVolFlow) {
                                 ShowWarningError(cCurrentModuleObject + " = " + thisObjectName);
                                 ShowContinueError("Input for No Load Supply Air Flow Rate Method = FractionOfAutosizedHeatingValue.");
-                                ShowContinueError("Suspicious No Load Supply Air Flow Rate Per Unit of Capacity During Heating Operation = " +
-                                                  format("{:.7R} [m3/s/m3].", thisSys.m_MaxNoCoolHeatAirVolFlow));
+                                ShowContinueError(format("Suspicious No Load Supply Air Flow Rate Per Unit of Capacity During Heating Operation = {:.7R} [m3/s/m3].", thisSys.m_MaxNoCoolHeatAirVolFlow));
                                 if (thisSys.m_MaxNoCoolHeatAirVolFlow < 0.0) errorsFound = true;
                             }
                             thisSys.m_RequestAutoSize = true;
@@ -6215,8 +6200,7 @@ namespace UnitarySystems {
                             if (thisSys.m_MaxNoCoolHeatAirVolFlow <= 0.00001 && thisSys.m_CoolCoilExists) {
                                 ShowSevereError(cCurrentModuleObject + " = " + thisObjectName);
                                 ShowContinueError("Input for No Load Supply Air Flow Rate Method = FlowPerCoolingCapacity.");
-                                ShowContinueError("Suspicious No Load Supply Air Flow Rate Per Unit of Capacity During Cooling Operation = " +
-                                                  format("{:.7R} [m3/s/W].", thisSys.m_MaxNoCoolHeatAirVolFlow));
+                                ShowContinueError(format("Suspicious No Load Supply Air Flow Rate Per Unit of Capacity During Cooling Operation = {:.7R} [m3/s/W].", thisSys.m_MaxNoCoolHeatAirVolFlow));
                                 if (thisSys.m_MaxNoCoolHeatAirVolFlow < 0.0) errorsFound = true;
                             }
                             thisSys.m_RequestAutoSize = true;
@@ -6241,8 +6225,7 @@ namespace UnitarySystems {
                             if (thisSys.m_MaxNoCoolHeatAirVolFlow <= 0.00001 && thisSys.m_HeatCoilExists) {
                                 ShowSevereError(cCurrentModuleObject + " = " + thisObjectName);
                                 ShowContinueError("Input for No Load Supply Air Flow Rate Method = FlowPerHeatingCapacity.");
-                                ShowContinueError("Suspicious No Load Supply Air Flow Rate Per Unit of Capacity During Heating Operation = " +
-                                                  format("{:.7R} [m3/s/W].", thisSys.m_MaxNoCoolHeatAirVolFlow));
+                                ShowContinueError(format("Suspicious No Load Supply Air Flow Rate Per Unit of Capacity During Heating Operation = {:.7R} [m3/s/W].", thisSys.m_MaxNoCoolHeatAirVolFlow));
                                 if (thisSys.m_MaxNoCoolHeatAirVolFlow < 0.0) errorsFound = true;
                             }
                             thisSys.m_RequestAutoSize = true;
@@ -6761,8 +6744,7 @@ namespace UnitarySystems {
                         ShowContinueError("Illegal Heat Recovery Water Outlet Node Name = " + loc_heatRecoveryOutletNodeName);
                         ShowContinueError("... heat recovery nodes must be specified when Design Heat Recovery Water Flow Rate"
                                           " is greater than 0.");
-                        ShowContinueError("... Design Heat Recovery Water Flow Rate = " +
-                                          format("{:.7R}", thisSys.m_DesignHRWaterVolumeFlow));
+                        ShowContinueError(format("... Design Heat Recovery Water Flow Rate = {:.7R}", thisSys.m_DesignHRWaterVolumeFlow));
                         errorsFound = true;
                     }
                 }
@@ -11736,8 +11718,7 @@ namespace UnitarySystems {
                                             ShowWarningError(
                                                 this->UnitType +
                                                 " - Iteration limit exceeded calculating DX unit sensible part-load ratio for unit = " + this->Name);
-                                            ShowContinueError("Estimated part-load ratio   = " +
-                                                              format("{:.3R}", (ReqOutput / FullOutput)));
+                                            ShowContinueError(format("Estimated part-load ratio   = {:.3R}", (ReqOutput / FullOutput)));
                                             ShowContinueError(format("Calculated part-load ratio = {:.3R}", PartLoadFrac));
                                             ShowContinueErrorTimeStamp(
                                                 "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
@@ -12153,8 +12134,7 @@ namespace UnitarySystems {
                                                     this->UnitType +
                                                     " - Iteration limit exceeded calculating DX unit latent part-load ratio for unit = " +
                                                     this->Name);
-                                                ShowContinueError("Estimated latent part-load ratio  = " +
-                                                                  format("{:.3R}", (ReqOutput / FullOutput)));
+                                                ShowContinueError(format("Estimated latent part-load ratio  = {:.3R}", (ReqOutput / FullOutput)));
                                                 ShowContinueError(format("Calculated latent part-load ratio = {:.3R}", PartLoadFrac));
                                                 ShowContinueErrorTimeStamp("The calculated latent part-load ratio will be used and the simulation "
                                                                            "continues. Occurrence info:");

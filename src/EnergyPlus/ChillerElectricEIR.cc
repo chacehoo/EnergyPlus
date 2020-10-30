@@ -486,8 +486,7 @@ namespace ChillerElectricEIR {
             if (thisChiller.MinPartLoadRat > thisChiller.MaxPartLoadRat) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(7) + format(" [{:.3R}", DataIPShortCuts::rNumericArgs(7)) +
-                                  "] > " + DataIPShortCuts::cNumericFieldNames(8) + " [" +
-                                  format("{:.3R}", DataIPShortCuts::rNumericArgs(8)) + ']');
+                                  "] > " + DataIPShortCuts::cNumericFieldNames(8) + format(" [{:.3R}", DataIPShortCuts::rNumericArgs(8)) + ']');
                 ShowContinueError("Minimum part load ratio must be less than or equal to the maximum part load ratio ");
                 ErrorsFound = true;
             }
@@ -1279,10 +1278,8 @@ namespace ChillerElectricEIR {
                                 if ((std::abs(tmpEvapVolFlowRate - EvapVolFlowRateUser) / EvapVolFlowRateUser) >
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerElectricEIR: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Reference Chilled Water Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", EvapVolFlowRateUser));
-                                    ShowContinueError("differs from Design Size Reference Chilled Water Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", tmpEvapVolFlowRate));
+                                    ShowContinueError(format("User-Specified Reference Chilled Water Flow Rate of {:.5R} [m3/s]", EvapVolFlowRateUser));
+                                    ShowContinueError(format("differs from Design Size Reference Chilled Water Flow Rate of {:.5R} [m3/s]", tmpEvapVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1413,10 +1410,8 @@ namespace ChillerElectricEIR {
                                 if ((std::abs(tmpCondVolFlowRate - CondVolFlowRateUser) / CondVolFlowRateUser) >
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerElectricEIR: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Reference Condenser Fluid Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", CondVolFlowRateUser));
-                                    ShowContinueError("differs from Design Size Reference Condenser Fluid Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", tmpCondVolFlowRate));
+                                    ShowContinueError(format("User-Specified Reference Condenser Fluid Flow Rate of {:.5R} [m3/s]", CondVolFlowRateUser));
+                                    ShowContinueError(format("differs from Design Size Reference Condenser Fluid Flow Rate of {:.5R} [m3/s]", tmpCondVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1498,10 +1493,8 @@ namespace ChillerElectricEIR {
                             if ((std::abs(tempHeatRecVolFlowRate - nomHeatRecVolFlowRateUser) / nomHeatRecVolFlowRateUser) >
                                 DataSizing::AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeChillerElectricEIR: Potential issue with equipment sizing for " + this->Name);
-                                ShowContinueError("User-Specified Heat Recovery Water Flow Rate of " +
-                                                  format("{:.5R} [m3/s]", nomHeatRecVolFlowRateUser));
-                                ShowContinueError("differs from Design Size Heat Recovery Water Flow Rate of " +
-                                                  format("{:.5R} [m3/s]", tempHeatRecVolFlowRate));
+                                ShowContinueError(format("User-Specified Heat Recovery Water Flow Rate of {:.5R} [m3/s]", nomHeatRecVolFlowRateUser));
+                                ShowContinueError(format("differs from Design Size Heat Recovery Water Flow Rate of {:.5R} [m3/s]", tempHeatRecVolFlowRate));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }
@@ -1804,8 +1797,7 @@ namespace ChillerElectricEIR {
                 !DataGlobals::WarmupFlag) {
                 ++this->ChillerCapFTError;
                 ShowWarningError("CHILLER:ELECTRIC:EIR \"" + this->Name + "\":");
-                ShowContinueError(" Chiller Capacity as a Function of Temperature curve output is negative (" +
-                                  format("{:.3R}).", this->ChillerCapFT));
+                ShowContinueError(format(" Chiller Capacity as a Function of Temperature curve output is negative ({:.3R}).", this->ChillerCapFT));
                 ShowContinueError(format(" Negative value occurs using an Evaporator Outlet Temp of {:.1R}", EvapOutletTempSetPoint) +
                                   format(" and a Condenser Inlet Temp of {:.1R}", condInletTemp) + '.');
                 ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
@@ -2094,8 +2086,7 @@ namespace ChillerElectricEIR {
                 !DataGlobals::WarmupFlag) {
                 ++this->ChillerEIRFTError;
                 ShowWarningError("CHILLER:ELECTRIC:EIR \"" + this->Name + "\":");
-                ShowContinueError(" Chiller EIR as a Function of Temperature curve output is negative (" +
-                                  format("{:.3R}).", this->ChillerEIRFT));
+                ShowContinueError(format(" Chiller EIR as a Function of Temperature curve output is negative ({:.3R}).", this->ChillerEIRFT));
                 ShowContinueError(format(" Negative value occurs using an Evaporator Outlet Temp of {:.1R}", this->EvapOutletTemp) +
                                   format(" and a Condenser Inlet Temp of {:.1R}", condInletTemp) + '.');
                 ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");

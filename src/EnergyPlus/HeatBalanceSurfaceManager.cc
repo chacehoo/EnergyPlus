@@ -7073,13 +7073,11 @@ namespace HeatBalanceSurfaceManager {
                     ++calcHeatBalInsideSurfErrCount;
                     if (calcHeatBalInsideSurfErrCount < 16) {
                         if (!DataHeatBalance::AnyCondFD) {
-                            ShowWarningError("Inside surface heat balance did not converge with Max Temp Difference [C] =" +
-                                             format("{:.3R}", MaxDelTemp) +
+                            ShowWarningError(format("Inside surface heat balance did not converge with Max Temp Difference [C] ={:.3R}", MaxDelTemp) +
                                              format(" vs Max Allowed Temp Diff [C] ={:.3R}", MaxAllowedDelTemp));
                             ShowContinueErrorTimeStamp("");
                         } else {
-                            ShowWarningError("Inside surface heat balance did not converge with Max Temp Difference [C] =" +
-                                             format("{:.3R}", MaxDelTemp) +
+                            ShowWarningError(format("Inside surface heat balance did not converge with Max Temp Difference [C] ={:.3R}", MaxDelTemp) +
                                              format(" vs Max Allowed Temp Diff [C] ={:.6R}", MaxAllowedDelTempCondFD));
                             ShowContinueErrorTimeStamp("");
                         }

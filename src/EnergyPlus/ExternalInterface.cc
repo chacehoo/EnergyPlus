@@ -2321,8 +2321,7 @@ namespace ExternalInterface {
         // Socket asked to terminate simulation, but simulation continues
         if (noMoreValues && showContinuationWithoutUpdate) {
             if (haveExternalInterfaceBCVTB) {
-                ShowWarningError("ExternalInterface: Continue simulation without updated values from server at t =" +
-                                 format("{:.2T} hours", preSimTim / 3600.0));
+                ShowWarningError(format("ExternalInterface: Continue simulation without updated values from server at t ={:.2T} hours", preSimTim / 3600.0));
             }
             showContinuationWithoutUpdate = false;
         }

@@ -915,8 +915,7 @@ namespace Humidifiers {
                         ShowContinueError(format("User-Specified Rated Gas Use Rate of {:.2R} [W]", NomPower));
                         ShowContinueError(format("User-Specified or Autosized Rated Capacity of {:.2R} [m3/s]", NomCapVol));
                         ShowContinueError(format("Rated Gas Use Rate at the Rated Capacity of {:.2R} [m3/s]", NomCapVol) +
-                                          " must be greater than the ideal, i.e., 100% thermal efficiency gas use rate of " +
-                                          format("{:.2R} [W]", NomPowerDes));
+                                          format(" must be greater than the ideal, i.e., 100% thermal efficiency gas use rate of {:.2R} [W]", NomPowerDes));
                         ShowContinueError("Resize the Rated Gas Use Rate by dividing the ideal gas use rate with expected thermal efficiency. ");
                         // Changing this from a hard-stop condition to just a limiting condition of eta=1.0
                         // ErrorsFound = true;

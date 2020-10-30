@@ -702,8 +702,7 @@ namespace WaterThermalTanks {
             if (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).DeadBandTempDiff <= 0.0 ||
                 state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).DeadBandTempDiff > 20.0) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
-                                DataIPShortCuts::cNumericFieldNames(1) + " must be > 0 and <= 20. " + DataIPShortCuts::cNumericFieldNames(1) + " = " +
-                                format("{:.1T}", DataIPShortCuts::rNumericArgs(1)));
+                                DataIPShortCuts::cNumericFieldNames(1) + " must be > 0 and <= 20. " + DataIPShortCuts::cNumericFieldNames(1) + format(" = {:.1T}", DataIPShortCuts::rNumericArgs(1)));
                 ErrorsFound = true;
             }
 
@@ -738,8 +737,7 @@ namespace WaterThermalTanks {
                                 ShowWarningError(DataIPShortCuts::cCurrentModuleObject + ", \"" + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name +
                                                  "\":");
                                 ShowContinueError("The " + DataIPShortCuts::cAlphaFieldNames(4) + " should be normalized ");
-                                ShowContinueError(" to 1.0 at the rating point. Curve output at the rating point = " +
-                                                  format("{:.3T}", HEffFTemp));
+                                ShowContinueError(format(" to 1.0 at the rating point. Curve output at the rating point = {:.3T}", HEffFTemp));
                                 ShowContinueError(" The simulation continues using the user-specified curve.");
                             }
                         }
@@ -798,8 +796,7 @@ namespace WaterThermalTanks {
                     if (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).HeatReclaimRecoveryEff <= 0.0 ||
                         state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).HeatReclaimRecoveryEff > 0.9) {
                         ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
-                                        DataIPShortCuts::cNumericFieldNames(2) + " must be > 0.0 and <= 0.9, Efficiency = " +
-                                        format("{:.3T}", state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).HeatReclaimRecoveryEff));
+                                        DataIPShortCuts::cNumericFieldNames(2) + format(" must be > 0.0 and <= 0.9, Efficiency = {:.3T}", state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).HeatReclaimRecoveryEff));
                         ErrorsFound = true;
                     }
                 }    // Blank Num(2)
@@ -812,8 +809,7 @@ namespace WaterThermalTanks {
                         state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).HeatReclaimRecoveryEff > 0.3) {
                         ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
                                         DataIPShortCuts::cNumericFieldNames(2) + " must be > 0.0 and <= 0.3, " +
-                                        DataIPShortCuts::cNumericFieldNames(2) + " = " +
-                                        format("{:.3T}", state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).HeatReclaimRecoveryEff));
+                                        DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.3T}", state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).HeatReclaimRecoveryEff));
                         ErrorsFound = true;
                     }
                 } // Blank Num(2)
@@ -992,8 +988,7 @@ namespace WaterThermalTanks {
             state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).PumpElecPower = DataIPShortCuts::rNumericArgs(7);
             if (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).PumpElecPower < 0.0) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
-                                DataIPShortCuts::cNumericFieldNames(7) + " must be >= 0. " + DataIPShortCuts::cNumericFieldNames(7) + " = " +
-                                format("{:.2T}", DataIPShortCuts::rNumericArgs(7)));
+                                DataIPShortCuts::cNumericFieldNames(7) + " must be >= 0. " + DataIPShortCuts::cNumericFieldNames(7) + format(" = {:.2T}", DataIPShortCuts::rNumericArgs(7)));
                 ErrorsFound = true;
             }
 
@@ -1001,8 +996,7 @@ namespace WaterThermalTanks {
                 7.9264e6) {
                 ShowWarningError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
                                  DataIPShortCuts::cNumericFieldNames(7) + " to " + DataIPShortCuts::cNumericFieldNames(6) + " ratio > 7.9264E6. " +
-                                 DataIPShortCuts::cNumericFieldNames(7) + " to " + DataIPShortCuts::cNumericFieldNames(6) + " = " +
-                                 format("{:.3T}", (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).PumpElecPower /
+                                 DataIPShortCuts::cNumericFieldNames(7) + " to " + DataIPShortCuts::cNumericFieldNames(6) + format(" = {:.3T}", (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).PumpElecPower /
                                                          state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).OperatingWaterFlowRate)));
                 ShowContinueError(" Suggest reducing " + DataIPShortCuts::cNumericFieldNames(7) + " or increasing " +
                                   DataIPShortCuts::cNumericFieldNames(6) + '.');
@@ -1013,24 +1007,21 @@ namespace WaterThermalTanks {
             if (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).PumpFracToWater < 0.0 ||
                 state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).PumpFracToWater > 1.0) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
-                                DataIPShortCuts::cNumericFieldNames(8) + " must be >= 0 or <= 1. " + DataIPShortCuts::cNumericFieldNames(8) + " = " +
-                                format("{:.3T}", DataIPShortCuts::rNumericArgs(8)));
+                                DataIPShortCuts::cNumericFieldNames(8) + " must be >= 0 or <= 1. " + DataIPShortCuts::cNumericFieldNames(8) + format(" = {:.3T}", DataIPShortCuts::rNumericArgs(8)));
                 ErrorsFound = true;
             }
 
             state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).OnCycParaLoad = DataIPShortCuts::rNumericArgs(9);
             if (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).OnCycParaLoad < 0.0) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
-                                DataIPShortCuts::cNumericFieldNames(9) + " must be >= 0. " + DataIPShortCuts::cNumericFieldNames(9) + " = " +
-                                format("{:.2T}", DataIPShortCuts::rNumericArgs(9)));
+                                DataIPShortCuts::cNumericFieldNames(9) + " must be >= 0. " + DataIPShortCuts::cNumericFieldNames(9) + format(" = {:.2T}", DataIPShortCuts::rNumericArgs(9)));
                 ErrorsFound = true;
             }
 
             state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).OffCycParaLoad = DataIPShortCuts::rNumericArgs(10);
             if (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).OffCycParaLoad < 0.0) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
-                                DataIPShortCuts::cNumericFieldNames(10) + " must be >= 0. " + DataIPShortCuts::cNumericFieldNames(10) + " = " +
-                                format("{:.2T}", DataIPShortCuts::rNumericArgs(10)));
+                                DataIPShortCuts::cNumericFieldNames(10) + " must be >= 0. " + DataIPShortCuts::cNumericFieldNames(10) + format(" = {:.2T}", DataIPShortCuts::rNumericArgs(10)));
                 ErrorsFound = true;
             }
         }
@@ -1204,16 +1195,14 @@ namespace WaterThermalTanks {
 
                 if (HPWH.WrappedCondenserBottomLocation < 0.0) {
                     ShowSevereError(DataIPShortCuts::cCurrentModuleObject + "=\"" + HPWH.Name + "\", ");
-                    ShowContinueError(hpwhNumericFieldNames[2] + " must be greater than 0. Condenser bottom location = " +
-                                      format("{:.6T}", HPWH.WrappedCondenserBottomLocation));
+                    ShowContinueError(hpwhNumericFieldNames[2] + format(" must be greater than 0. Condenser bottom location = {:.6T}", HPWH.WrappedCondenserBottomLocation));
                     ErrorsFound = true;
                 }
 
                 if (HPWH.WrappedCondenserBottomLocation >= HPWH.WrappedCondenserTopLocation) {
                     ShowSevereError(DataIPShortCuts::cCurrentModuleObject + "=\"" + HPWH.Name + "\", ");
                     ShowContinueError(hpwhNumericFieldNames[3] + format(" ({:.6T}", HPWH.WrappedCondenserTopLocation) +
-                                      ") must be greater than " + hpwhNumericFieldNames[2] + " (" +
-                                      format("{:.6T}).", HPWH.WrappedCondenserBottomLocation));
+                                      ") must be greater than " + hpwhNumericFieldNames[2] + format(" ({:.6T}).", HPWH.WrappedCondenserBottomLocation));
                     ErrorsFound = true;
                 }
 
@@ -1229,8 +1218,7 @@ namespace WaterThermalTanks {
             HPWH.OperatingAirFlowRate = hpwhNumeric[3 + nNumericOffset];
             if (HPWH.OperatingAirFlowRate <= 0.0 && hpwhNumeric[3 + nNumericOffset] != DataGlobalConstants::AutoCalculate()) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + "=\"" + HPWH.Name + "\", ");
-                ShowContinueError(hpwhNumericFieldNames[3 + nNumericOffset] + " must be greater than 0. Evaporator air flow rate = " +
-                                  format("{:.6T}", hpwhNumeric[3 + nNumericOffset]));
+                ShowContinueError(hpwhNumericFieldNames[3 + nNumericOffset] + format(" must be greater than 0. Evaporator air flow rate = {:.6T}", hpwhNumeric[3 + nNumericOffset]));
                 ErrorsFound = true;
             }
 
@@ -1596,9 +1584,8 @@ namespace WaterThermalTanks {
                 if (DXCoils::DXCoil(HPWH.DXCoilNum).HPWHCondPumpElecNomPower / DXCoils::DXCoil(HPWH.DXCoilNum).RatedTotCap2 > 0.1422) {
                     ShowWarningError(
                         DXCoils::DXCoil(HPWH.DXCoilNum).DXCoilType + "= " + DXCoils::DXCoil(HPWH.DXCoilNum).Name +
-                        ": Rated condenser pump power per watt of rated heating capacity has exceeded the recommended maximum of 0.1422 W/W "
-                        "(41.67 watt/MBH). Condenser pump power per watt = " +
-                        format("{:.4T}",
+                        ": Rated condenser pump power per watt of rated heating capacity has exceeded the recommended maximum of 0.1422 W/W " +
+                        format("(41.67 watt/MBH). Condenser pump power per watt = {:.4T}",
                             (DXCoils::DXCoil(HPWH.DXCoilNum).HPWHCondPumpElecNomPower / DXCoils::DXCoil(HPWH.DXCoilNum).RatedTotCap2)));
                 }
             } else if ((HPWH.DXCoilNum > 0) && (bIsVScoil)) {
@@ -1630,8 +1617,7 @@ namespace WaterThermalTanks {
             HPWH.OnCycParaLoad = hpwhNumeric[6 + nNumericOffset];
             if (HPWH.OnCycParaLoad < 0.0) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + "=\"" + HPWH.Name + "\",");
-                ShowContinueError(hpwhNumericFieldNames[6 + nNumericOffset] + " must be >= 0. " + hpwhNumericFieldNames[6 + nNumericOffset] + " = " +
-                                  format("{:.2T}", hpwhNumeric[6 + nNumericOffset]));
+                ShowContinueError(hpwhNumericFieldNames[6 + nNumericOffset] + " must be >= 0. " + hpwhNumericFieldNames[6 + nNumericOffset] + format(" = {:.2T}", hpwhNumeric[6 + nNumericOffset]));
                 ErrorsFound = true;
             }
 
@@ -1639,8 +1625,7 @@ namespace WaterThermalTanks {
             HPWH.OffCycParaLoad = hpwhNumeric[7 + nNumericOffset];
             if (HPWH.OffCycParaLoad < 0.0) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + "=\"" + HPWH.Name + "\",");
-                ShowContinueError(hpwhNumericFieldNames[7 + nNumericOffset] + " must be >= 0. " + hpwhNumericFieldNames[2 + nNumericOffset] + " = " +
-                                  format("{:.2T}", hpwhNumeric[7 + nNumericOffset]));
+                ShowContinueError(hpwhNumericFieldNames[7 + nNumericOffset] + " must be >= 0. " + hpwhNumericFieldNames[2 + nNumericOffset] + format(" = {:.2T}", hpwhNumeric[7 + nNumericOffset]));
                 ErrorsFound = true;
             }
 
@@ -4027,8 +4012,7 @@ namespace WaterThermalTanks {
                         // check that water heater source side effectiveness is greater than 0
                         if (Tank.SourceEffectiveness <= 0.0) {
                             ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + HPWH.Name +
-                                            ":  Invalid source side effectiveness for heat pump water heater = " +
-                                            format("{:.3T}", Tank.SourceEffectiveness));
+                                            format(":  Invalid source side effectiveness for heat pump water heater = {:.3T}", Tank.SourceEffectiveness));
                             ShowContinueError(" water heater source effectiveness will default to 1.0 and simulation continues.");
                             Tank.SourceEffectiveness = 1.0;
                         }
@@ -5683,8 +5667,7 @@ namespace WaterThermalTanks {
                     if (this->ShowSetPointWarning) {
                         ShowSevereError("Water heater = " + this->Name +
                                         ":  Water heater tank set point temperature is greater than the maximum tank temperature limit.");
-                        ShowContinueErrorTimeStamp("Water heater tank set point temperature is reset to Tank Temperature Limit minus 1 C (" +
-                                                   format("{:.2T}) and simulation continues.", this->SetPointTemp));
+                        ShowContinueErrorTimeStamp(format("Water heater tank set point temperature is reset to Tank Temperature Limit minus 1 C ({:.2T}) and simulation continues.", this->SetPointTemp));
                         this->ShowSetPointWarning = false;
                     }
                 }
@@ -5696,8 +5679,7 @@ namespace WaterThermalTanks {
                     if (this->ShowSetPointWarning) {
                         ShowSevereError("Chilled Water Tank = " + this->Name +
                                         ":  Water heater tank set point temperature is lower than the minimum tank temperature limit.");
-                        ShowContinueErrorTimeStamp("Chilled water tank set point temperature is reset to Tank Temperature Limit plus 1 C (" +
-                                                   format("{:.2T}) and simulation continues.", this->SetPointTemp));
+                        ShowContinueErrorTimeStamp(format("Chilled water tank set point temperature is reset to Tank Temperature Limit plus 1 C ({:.2T}) and simulation continues.", this->SetPointTemp));
                         this->ShowSetPointWarning = false;
                     }
                 }
@@ -5754,8 +5736,7 @@ namespace WaterThermalTanks {
                             "Heat Pump Water Heater = " + state.dataWaterThermalTanks->HPWaterHeater(this->HeatPumpNum).Name +
                             ":  Heat Pump water heater set point temperature is equal to or greater than the maximum tank temperature limit.");
                         ShowContinueErrorTimeStamp(
-                            "Heat Pump water heater tank set point temperature is reset to Tank Temperature Limit minus 1 C (" +
-                            format("{:.2T}) and simulation continues.", state.dataWaterThermalTanks->HPWaterHeater(this->HeatPumpNum).SetPointTemp));
+                            format("Heat Pump water heater tank set point temperature is reset to Tank Temperature Limit minus 1 C ({:.2T}) and simulation continues.", state.dataWaterThermalTanks->HPWaterHeater(this->HeatPumpNum).SetPointTemp));
                         state.dataWaterThermalTanks->HPWaterHeater(this->HeatPumpNum).ShowSetPointWarning = false;
                     }
                 }
@@ -6045,10 +6026,8 @@ namespace WaterThermalTanks {
                     // if ( FanVolFlow  < HPWaterHeater( HPNum ).HPWHAirVolFlowRate( HPWaterHeater( HPNum ).NumofSpeed ) ) {
 
                     ShowWarningError(format("InitWaterThermalTank: -air flow rate = {:.7T}", FanVolFlow) +
-                                     " in fan object "
-                                     " is less than the MSHP system air flow rate"
-                                     " when waterheating is required(" +
-                                     format("{:.7T}).", state.dataWaterThermalTanks->HPWaterHeater(HPNum).HPWHAirVolFlowRate(state.dataWaterThermalTanks->HPWaterHeater(HPNum).NumofSpeed)));
+                                     " in fan object  is less than the MSHP system air flow rate" +
+                                     format(" when waterheating is required({:.7T}).", state.dataWaterThermalTanks->HPWaterHeater(HPNum).HPWHAirVolFlowRate(state.dataWaterThermalTanks->HPWaterHeater(HPNum).NumofSpeed)));
                     ShowContinueError(" The MSHP system flow rate when waterheating is required is reset to the"
                                       " fan flow rate and the simulation continues.");
                     ShowContinueError(" Occurs in " + state.dataWaterThermalTanks->HPWaterHeater(HPNum).Name);
@@ -6669,8 +6648,7 @@ namespace WaterThermalTanks {
             if (this->TankTemp < 2) {
                 if (this->FreezingErrorIndex == 0) {
                     ShowWarningError(RoutineName + ": " + this->Type + " = '" + this->Name +
-                                     "':  Temperature of tank < 2C indicates of possibility of freeze. Tank Temperature = " +
-                                     format("{:.2R} C.", this->TankTemp));
+                                     format("':  Temperature of tank < 2C indicates of possibility of freeze. Tank Temperature = {:.2R} C.", this->TankTemp));
                     ShowContinueErrorTimeStamp("");
                 }
                 ShowRecurringWarningErrorAtEnd(this->Type + " = '" + this->Name + "':  Temperature of tank < 2C indicates of possibility of freeze",
@@ -7536,8 +7514,7 @@ namespace WaterThermalTanks {
             if (this->TankTemp < 2) {
                 if (this->FreezingErrorIndex == 0) {
                     ShowWarningError(RoutineName + ": " + this->Type + " = '" + this->Name +
-                                     "':  Temperature of tank < 2C indicates of possibility of freeze. Tank Temperature = " +
-                                     format("{:.2R} C.", this->TankTemp));
+                                     format("':  Temperature of tank < 2C indicates of possibility of freeze. Tank Temperature = {:.2R} C.", this->TankTemp));
                     ShowContinueErrorTimeStamp("");
                 }
                 ShowRecurringWarningErrorAtEnd(this->Type + " = '" + this->Name + "':  Temperature of tank < 2C indicates of possibility of freeze",
@@ -8049,9 +8026,8 @@ namespace WaterThermalTanks {
                                         ++DesupHtr.RegulaFalsiFailedNum1;
                                         if (DesupHtr.RegulaFalsiFailedNum1 == 1) {
                                             ShowWarningError(DesupHtr.Type + " \"" + DesupHtr.Name + "\"");
-                                            ShowContinueError("Desuperheater unit part-load ratio calculation failed: PLR limits of 0 to 1 exceeded. "
-                                                              "Part-load ratio used = " +
-                                                              format("{:.3R}", partLoadRatio));
+                                            ShowContinueError("Desuperheater unit part-load ratio calculation failed: PLR limits of 0 to 1 exceeded. " +
+                                                              format("Part-load ratio used = {:.3R}", partLoadRatio));
                                             ShowContinueError("Please send this information to the EnergyPlus support group.");
                                             ShowContinueErrorTimeStamp("This error occurred in heating mode.");
                                         } else {
@@ -8165,9 +8141,8 @@ namespace WaterThermalTanks {
                                             if (DesupHtr.RegulaFalsiFailedNum2 == 1) {
                                                 ShowWarningError(DesupHtr.Type + " \"" + DesupHtr.Name + "\"");
                                                 ShowContinueError(
-                                                    "Desuperheater unit part-load ratio calculation failed: PLR limits of 0 to 1 exceeded. "
-                                                    "Part-load ratio used = " +
-                                                    format("{:.3R}", partLoadRatio));
+                                                    "Desuperheater unit part-load ratio calculation failed: PLR limits of 0 to 1 exceeded. " +
+                                                    format("Part-load ratio used = {:.3R}", partLoadRatio));
                                                 ShowContinueError("Please send this information to the EnergyPlus support group.");
                                                 ShowContinueErrorTimeStamp("This error occurred in float mode.");
                                             } else {
@@ -8874,9 +8849,8 @@ namespace WaterThermalTanks {
                             ++HeatPump.RegulaFalsiFailedNum2;
                             if (HeatPump.RegulaFalsiFailedNum2 == 1) {
                                 ShowWarningError(HeatPump.Type + " \"" + HeatPump.Name + "\"");
-                                ShowContinueError("Heat pump water heater compressor part-load ratio calculation failed: PLR limits of 0 to 1 "
-                                                  "exceeded. Part-load ratio used = " +
-                                                  format("{:.3R}", state.dataWaterThermalTanks->hpPartLoadRatio));
+                                ShowContinueError("Heat pump water heater compressor part-load ratio calculation failed: PLR limits of 0 to 1 " +
+                                                  format("exceeded. Part-load ratio used = {:.3R}", state.dataWaterThermalTanks->hpPartLoadRatio));
                                 ShowContinueError("Please send this information to the EnergyPlus support group.");
                                 ShowContinueErrorTimeStamp("This error occurred in float mode.");
                             } else {
@@ -9065,9 +9039,8 @@ namespace WaterThermalTanks {
                                 ++HeatPump.RegulaFalsiFailedNum1;
                                 if (HeatPump.RegulaFalsiFailedNum1 == 1) {
                                     ShowWarningError(HeatPump.Type + " \"" + HeatPump.Name + "\"");
-                                    ShowContinueError("Heat pump water heater speed ratio calculation failed: speed ratio limits "
-                                                      "of 0 to 1 exceeded. speed ratio used = " +
-                                                      format("{:.3R}", SpeedRatio));
+                                    ShowContinueError("Heat pump water heater speed ratio calculation failed: speed ratio limits " +
+                                                      format("of 0 to 1 exceeded. speed ratio used = {:.3R}", SpeedRatio));
                                     ShowContinueError("Please send this information to the EnergyPlus support group.");
                                     ShowContinueErrorTimeStamp("This error occurred in heating mode.");
                                 } else {

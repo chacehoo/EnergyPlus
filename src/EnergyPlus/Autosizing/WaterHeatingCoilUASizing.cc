@@ -137,8 +137,7 @@ Real64 WaterHeatingCoilUASizer::size(EnergyPlusData &state, Real64 _originalValu
                             " C";
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
-                        msg = "  Coil outlet air humidity ratio = " +
-                              format("{:.3T} kgWater/kgDryAir", this->finalZoneSizing(this->curZoneEqNum).HeatDesHumRat);
+                        msg = format("  Coil outlet air humidity ratio = {:.3T} kgWater/kgDryAir", this->finalZoneSizing(this->curZoneEqNum).HeatDesHumRat);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                     }
@@ -197,8 +196,7 @@ Real64 WaterHeatingCoilUASizer::size(EnergyPlusData &state, Real64 _originalValu
                             " C";
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
-                        msg = "  Coil outlet air humidity ratio = " +
-                              format("{:.3T} kgWater/kgDryAir", this->finalZoneSizing(this->curZoneEqNum).HeatDesHumRat);
+                        msg = format("  Coil outlet air humidity ratio = {:.3T} kgWater/kgDryAir", this->finalZoneSizing(this->curZoneEqNum).HeatDesHumRat);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                     }
@@ -213,8 +211,7 @@ Real64 WaterHeatingCoilUASizer::size(EnergyPlusData &state, Real64 _originalValu
                         msg = "  Plant Sizing object = " + this->plantSizData(this->dataPltSizHeatNum).PlantLoopName;
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
-                        msg = "  Plant design loop exit temperature = " +
-                              format("{:.3T} C", this->plantSizData(this->dataPltSizHeatNum).ExitTemp);
+                        msg = format("  Plant design loop exit temperature = {:.3T} C", this->plantSizData(this->dataPltSizHeatNum).ExitTemp);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                         msg = format("  Plant design loop delta T          = {:.3T} C", this->dataWaterCoilSizHeatDeltaT);
@@ -356,8 +353,7 @@ Real64 WaterHeatingCoilUASizer::size(EnergyPlusData &state, Real64 _originalValu
                         msg = "  Plant Sizing object = " + this->plantSizData(this->dataPltSizHeatNum).PlantLoopName;
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
-                        msg = "  Plant design loop exit temperature = " +
-                              format("{:.3T} C", this->plantSizData(this->dataPltSizHeatNum).ExitTemp);
+                        msg = format("  Plant design loop exit temperature = {:.3T} C", this->plantSizData(this->dataPltSizHeatNum).ExitTemp);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                         msg = format("  Plant design loop delta T          = {:.3T} C", this->dataWaterCoilSizHeatDeltaT);

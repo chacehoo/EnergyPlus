@@ -462,8 +462,7 @@ namespace StandardRatings {
                     }
                 }
                 if (RefCap <= 0.0) {
-                    ShowContinueError(" Check the chiller autosized or user specified capacity. Autosized or specified chiller capacity = " +
-                                      format("{:.2R}", RefCap));
+                    ShowContinueError(format(" Check the chiller autosized or user specified capacity. Autosized or specified chiller capacity = {:.2R}", RefCap));
                 }
                 if (RefCOP <= 0.0) {
                     ShowContinueError(format(" Check the chiller reference or rated COP specified. Specified COP = {:.2R}", RefCOP));

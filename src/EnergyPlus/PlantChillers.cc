@@ -1136,10 +1136,8 @@ namespace PlantChillers {
                                 if ((std::abs(tmpEvapVolFlowRate - this->EvapVolFlowRate) / this->EvapVolFlowRate) >
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerElectric: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Design Chilled Water Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", this->EvapVolFlowRate));
-                                    ShowContinueError("differs from Design Size Design Chilled Water Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", tmpEvapVolFlowRate));
+                                    ShowContinueError(format("User-Specified Design Chilled Water Flow Rate of {:.5R} [m3/s]", this->EvapVolFlowRate));
+                                    ShowContinueError(format("differs from Design Size Design Chilled Water Flow Rate of {:.5R} [m3/s]", tmpEvapVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1204,10 +1202,8 @@ namespace PlantChillers {
                                 if ((std::abs(tmpCondVolFlowRate - this->CondVolFlowRate) / this->CondVolFlowRate) >
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerElectric: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Design Condenser Water Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", this->CondVolFlowRate));
-                                    ShowContinueError("differs from Design Size Design Condenser Water Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", tmpCondVolFlowRate));
+                                    ShowContinueError(format("User-Specified Design Condenser Water Flow Rate of {:.5R} [m3/s]", this->CondVolFlowRate));
+                                    ShowContinueError(format("differs from Design Size Design Condenser Water Flow Rate of {:.5R} [m3/s]", tmpCondVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1265,10 +1261,8 @@ namespace PlantChillers {
                                 if ((std::abs(tmpHeatRecVolFlowRate - this->DesignHeatRecVolFlowRate) / this->DesignHeatRecVolFlowRate) >
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerElectric: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Design Heat Recovery Fluid Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", this->DesignHeatRecVolFlowRate));
-                                    ShowContinueError("differs from Design Size Design Heat Recovery Fluid Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", tmpHeatRecVolFlowRate));
+                                    ShowContinueError(format("User-Specified Design Heat Recovery Fluid Flow Rate of {:.5R} [m3/s]", this->DesignHeatRecVolFlowRate));
+                                    ShowContinueError(format("differs from Design Size Design Heat Recovery Fluid Flow Rate of {:.5R} [m3/s]", tmpHeatRecVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -3032,10 +3026,8 @@ namespace PlantChillers {
                                 if ((std::abs(tmpEvapVolFlowRate - this->EvapVolFlowRate) / this->EvapVolFlowRate) >
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerEngineDriven: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Design Chilled Water Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", this->EvapVolFlowRate));
-                                    ShowContinueError("differs from Design Size Design Chilled Water Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", tmpEvapVolFlowRate));
+                                    ShowContinueError(format("User-Specified Design Chilled Water Flow Rate of {:.5R} [m3/s]", this->EvapVolFlowRate));
+                                    ShowContinueError(format("differs from Design Size Design Chilled Water Flow Rate of {:.5R} [m3/s]", tmpEvapVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -3100,10 +3092,8 @@ namespace PlantChillers {
                                 if ((std::abs(tmpCondVolFlowRate - this->CondVolFlowRate) / this->CondVolFlowRate) >
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerEngineDriven: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Design Condenser Water Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", this->CondVolFlowRate));
-                                    ShowContinueError("differs from Design Size Design Condenser Water Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", tmpCondVolFlowRate));
+                                    ShowContinueError(format("User-Specified Design Condenser Water Flow Rate of {:.5R} [m3/s]", this->CondVolFlowRate));
+                                    ShowContinueError(format("differs from Design Size Design Condenser Water Flow Rate of {:.5R} [m3/s]", tmpCondVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -3168,10 +3158,8 @@ namespace PlantChillers {
                                 if ((std::abs(tmpHeatRecVolFlowRate - DesignHeatRecVolFlowRateUser) / DesignHeatRecVolFlowRateUser) >
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeEngineDrivenChiller: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Design Heat Recovery Fluid Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", DesignHeatRecVolFlowRateUser));
-                                    ShowContinueError("differs from Design Size Design Heat Recovery Fluid Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", tmpHeatRecVolFlowRate));
+                                    ShowContinueError(format("User-Specified Design Heat Recovery Fluid Flow Rate of {:.5R} [m3/s]", DesignHeatRecVolFlowRateUser));
+                                    ShowContinueError(format("differs from Design Size Design Heat Recovery Fluid Flow Rate of {:.5R} [m3/s]", tmpHeatRecVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -4900,10 +4888,8 @@ namespace PlantChillers {
                                 if ((std::abs(tmpEvapVolFlowRate - this->EvapVolFlowRate) / this->EvapVolFlowRate) >
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeGTChiller: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Design Chilled Water Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", this->EvapVolFlowRate));
-                                    ShowContinueError("differs from Design Size Design Chilled Water Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", tmpEvapVolFlowRate));
+                                    ShowContinueError(format("User-Specified Design Chilled Water Flow Rate of {:.5R} [m3/s]", this->EvapVolFlowRate));
+                                    ShowContinueError(format("differs from Design Size Design Chilled Water Flow Rate of {:.5R} [m3/s]", tmpEvapVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -4969,10 +4955,8 @@ namespace PlantChillers {
                                 if ((std::abs(tmpCondVolFlowRate - this->CondVolFlowRate) / this->CondVolFlowRate) >
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeGTChiller: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Design Condenser Water Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", this->CondVolFlowRate));
-                                    ShowContinueError("differs from Design Size Design Condenser Water Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", tmpCondVolFlowRate));
+                                    ShowContinueError(format("User-Specified Design Condenser Water Flow Rate of {:.5R} [m3/s]", this->CondVolFlowRate));
+                                    ShowContinueError(format("differs from Design Size Design Condenser Water Flow Rate of {:.5R} [m3/s]", tmpCondVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -5026,8 +5010,7 @@ namespace PlantChillers {
                             ShowMessage("SizeGTChiller: Potential issue with equipment sizing for " + this->Name);
                             ShowContinueError(format("User-Specified Gas Turbine Engine Capacity of {:.2R}", this->GTEngineCapacity) +
                                               " [W]");
-                            ShowContinueError("differs from Design Size Gas Turbine Engine Capacity of " +
-                                              format("{:.2R} [W]", GTEngineCapacityDes));
+                            ShowContinueError(format("differs from Design Size Gas Turbine Engine Capacity of {:.2R} [W]", GTEngineCapacityDes));
                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                         }
@@ -5075,10 +5058,8 @@ namespace PlantChillers {
                                 if ((std::abs(tmpHeatRecVolFlowRate - DesignHeatRecVolFlowRateUser) / DesignHeatRecVolFlowRateUser) >
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeGasTurbineChiller: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Design Heat Recovery Fluid Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", DesignHeatRecVolFlowRateUser));
-                                    ShowContinueError("differs from Design Size Design Heat Recovery Fluid Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", tmpHeatRecVolFlowRate));
+                                    ShowContinueError(format("User-Specified Design Heat Recovery Fluid Flow Rate of {:.5R} [m3/s]", DesignHeatRecVolFlowRateUser));
+                                    ShowContinueError(format("differs from Design Size Design Heat Recovery Fluid Flow Rate of {:.5R} [m3/s]", tmpHeatRecVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -6554,10 +6535,8 @@ namespace PlantChillers {
                                 if ((std::abs(tmpEvapVolFlowRate - EvapVolFlowRateUser) / EvapVolFlowRateUser) >
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerConstantCOP: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Design Chilled Water Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", EvapVolFlowRateUser));
-                                    ShowContinueError("differs from Design Size Design Chilled Water Flow Rate of " +
-                                                      format("{:.5R} [m3/s]", tmpEvapVolFlowRate));
+                                    ShowContinueError(format("User-Specified Design Chilled Water Flow Rate of {:.5R} [m3/s]", EvapVolFlowRateUser));
+                                    ShowContinueError(format("differs from Design Size Design Chilled Water Flow Rate of {:.5R} [m3/s]", tmpEvapVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -6617,10 +6596,8 @@ namespace PlantChillers {
                                     if ((std::abs(tmpCondVolFlowRate - CondVolFlowRateUser) / CondVolFlowRateUser) >
                                         DataSizing::AutoVsHardSizingThreshold) {
                                         ShowMessage("SizeChillerConstantCOP: Potential issue with equipment sizing for " + this->Name);
-                                        ShowContinueError("User-Specified Design Condenser Water Flow Rate of " +
-                                                          format("{:.5R} [m3/s]", CondVolFlowRateUser));
-                                        ShowContinueError("differs from Design Size Design Condenser Water Flow Rate of " +
-                                                          format("{:.5R} [m3/s]", tmpCondVolFlowRate));
+                                        ShowContinueError(format("User-Specified Design Condenser Water Flow Rate of {:.5R} [m3/s]", CondVolFlowRateUser));
+                                        ShowContinueError(format("differs from Design Size Design Condenser Water Flow Rate of {:.5R} [m3/s]", tmpCondVolFlowRate));
                                         ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                         ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                     }

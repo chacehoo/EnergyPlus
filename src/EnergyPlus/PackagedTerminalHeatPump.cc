@@ -4182,8 +4182,7 @@ namespace PackagedTerminalHeatPump {
                     //     Check fan versus system supply air flow rates
                     if (PTUnit(PTUnitNum).FanVolFlow + 1e-10 < PTUnit(PTUnitNum).CoolVolumeFlowRate(NumOfSpeedCooling)) {
                         ShowWarningError(CurrentModuleObject + format(" - air flow rate = {:.7T}", PTUnit(PTUnitNum).FanVolFlow) +
-                                         " in fan object is less than the MSHP system air flow rate when cooling is required (" +
-                                         format("{:.7T}).", PTUnit(PTUnitNum).CoolVolumeFlowRate(NumOfSpeedCooling)));
+                                         format(" in fan object is less than the MSHP system air flow rate when cooling is required ({:.7T}).", PTUnit(PTUnitNum).CoolVolumeFlowRate(NumOfSpeedCooling)));
                         ShowContinueError(
                             " The MSHP system flow rate when cooling is required is reset to the fan flow rate and the simulation continues.");
                         ShowContinueError(" Occurs in " + CurrentModuleObject + " = " + PTUnit(PTUnitNum).Name);
@@ -4203,8 +4202,7 @@ namespace PackagedTerminalHeatPump {
                     if (PTUnit(PTUnitNum).NumOfSpeedHeating > 0) {
                         if (PTUnit(PTUnitNum).FanVolFlow + 1e-10 < PTUnit(PTUnitNum).HeatVolumeFlowRate(NumOfSpeedHeating)) {
                             ShowWarningError(CurrentModuleObject + format(" - air flow rate = {:.7T}", PTUnit(PTUnitNum).FanVolFlow) +
-                                             " in fan object is less than the MSHP system air flow rate when heating is required (" +
-                                             format("{:.7T}).", PTUnit(PTUnitNum).HeatVolumeFlowRate(NumOfSpeedHeating)));
+                                             format(" in fan object is less than the MSHP system air flow rate when heating is required ({:.7T}).", PTUnit(PTUnitNum).HeatVolumeFlowRate(NumOfSpeedHeating)));
                             ShowContinueError(
                                 " The MSHP system flow rate when heating is required is reset to the fan flow rate and the simulation continues.");
                             ShowContinueError(" Occurs in " + CurrentModuleObject + " = " + PTUnit(PTUnitNum).Name);
@@ -4223,8 +4221,7 @@ namespace PackagedTerminalHeatPump {
 
                     if (PTUnit(PTUnitNum).FanVolFlow < PTUnit(PTUnitNum).IdleVolumeAirRate && PTUnit(PTUnitNum).IdleVolumeAirRate != 0.0) {
                         ShowWarningError(CurrentModuleObject + format(" - air flow rate = {:.7T}", PTUnit(PTUnitNum).FanVolFlow) +
-                                         " in fan object is less than the MSHP system air flow rate when no heating or cooling is needed (" +
-                                         format("{:.7T}).", PTUnit(PTUnitNum).IdleVolumeAirRate));
+                                         format(" in fan object is less than the MSHP system air flow rate when no heating or cooling is needed ({:.7T}).", PTUnit(PTUnitNum).IdleVolumeAirRate));
                         ShowContinueError(" The MSHP system flow rate when no heating or cooling is needed is reset to the fan flow rate and the "
                                           "simulation continues.");
                         ShowContinueError(" Occurs in " + CurrentModuleObject + " = " + PTUnit(PTUnitNum).Name);
@@ -5283,10 +5280,8 @@ namespace PackagedTerminalHeatPump {
                             if ((std::abs(CoolOutAirVolFlowDes - CoolOutAirVolFlowUser) / CoolOutAirVolFlowUser) > AutoVsHardSizingThreshold) {
                                 ShowMessage("SizePTUnit: Potential issue with equipment sizing for " + PTUnit(PTUnitNum).UnitType + ' ' +
                                             PTUnit(PTUnitNum).Name);
-                                ShowContinueError("User-Specified Outdoor Air Flow Rate During Cooling Operation of " +
-                                                  format("{:.5R} [m3/s]", CoolOutAirVolFlowUser));
-                                ShowContinueError("differs from Design Size Outdoor Air Flow Rate During Cooling Operation of " +
-                                                  format("{:.5R} [m3/s]", CoolOutAirVolFlowDes));
+                                ShowContinueError(format("User-Specified Outdoor Air Flow Rate During Cooling Operation of {:.5R} [m3/s]", CoolOutAirVolFlowUser));
+                                ShowContinueError(format("differs from Design Size Outdoor Air Flow Rate During Cooling Operation of {:.5R} [m3/s]", CoolOutAirVolFlowDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }
@@ -5334,10 +5329,8 @@ namespace PackagedTerminalHeatPump {
                             if ((std::abs(HeatOutAirVolFlowDes - HeatOutAirVolFlowUser) / HeatOutAirVolFlowUser) > AutoVsHardSizingThreshold) {
                                 ShowMessage("SizePTUnit: Potential issue with equipment sizing for " + PTUnit(PTUnitNum).UnitType + ' ' +
                                             PTUnit(PTUnitNum).Name);
-                                ShowContinueError("User-Specified Outdoor Air Flow Rate During Heating Operation of " +
-                                                  format("{:.5R} [m3/s]", HeatOutAirVolFlowUser));
-                                ShowContinueError("differs from Design Size Outdoor Air Flow Rate During Heating Operation of " +
-                                                  format("{:.5R} [m3/s]", HeatOutAirVolFlowDes));
+                                ShowContinueError(format("User-Specified Outdoor Air Flow Rate During Heating Operation of {:.5R} [m3/s]", HeatOutAirVolFlowUser));
+                                ShowContinueError(format("differs from Design Size Outdoor Air Flow Rate During Heating Operation of {:.5R} [m3/s]", HeatOutAirVolFlowDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }
@@ -5386,10 +5379,8 @@ namespace PackagedTerminalHeatPump {
                                 AutoVsHardSizingThreshold) {
                                 ShowMessage("SizePTUnit: Potential issue with equipment sizing for " + PTUnit(PTUnitNum).UnitType + ' ' +
                                             PTUnit(PTUnitNum).Name);
-                                ShowContinueError("User-Specified Outdoor Air Flow Rate When No Cooling or Heating is Needed of " +
-                                                  format("{:.5R} [m3/s]", NoCoolHeatOutAirVolFlowUser));
-                                ShowContinueError("differs from Design Size Outdoor Air Flow Rate When No Cooling or Heating is Needed of " +
-                                                  format("{:.5R} [m3/s]", NoCoolHeatOutAirVolFlowDes));
+                                ShowContinueError(format("User-Specified Outdoor Air Flow Rate When No Cooling or Heating is Needed of {:.5R} [m3/s]", NoCoolHeatOutAirVolFlowUser));
+                                ShowContinueError(format("differs from Design Size Outdoor Air Flow Rate When No Cooling or Heating is Needed of {:.5R} [m3/s]", NoCoolHeatOutAirVolFlowDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }
@@ -5434,10 +5425,8 @@ namespace PackagedTerminalHeatPump {
                             if (std::abs(MaxSATSupHeatDes - MaxSATSupHeatUser) > (4.0 * AutoVsHardSizingDeltaTempThreshold)) {
                                 ShowMessage("SizePTUnit: Potential issue with equipment sizing for " + PTUnit(PTUnitNum).UnitType + ' ' +
                                             PTUnit(PTUnitNum).Name);
-                                ShowContinueError("User-Specified Maximum Supply Air Temperature from Supplemental Heater of " +
-                                                  format("{:.2R} [C]", MaxSATSupHeatUser));
-                                ShowContinueError("differs from Design Size Maximum Supply Air Temperature from Supplemental Heater of " +
-                                                  format("{:.2R} [C]", MaxSATSupHeatDes));
+                                ShowContinueError(format("User-Specified Maximum Supply Air Temperature from Supplemental Heater of {:.2R} [C]", MaxSATSupHeatUser));
+                                ShowContinueError(format("differs from Design Size Maximum Supply Air Temperature from Supplemental Heater of {:.2R} [C]", MaxSATSupHeatDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }
@@ -5504,8 +5493,7 @@ namespace PackagedTerminalHeatPump {
                 ShowContinueError(" For SingleZoneVAV control the No Load Supply Air Flow Rate must be less than both the cooling and heating supply "
                                   "air flow rates.");
                 PTUnit(PTUnitNum).MaxNoCoolHeatAirVolFlow = min(PTUnit(PTUnitNum).MaxCoolAirVolFlow, PTUnit(PTUnitNum).MaxHeatAirVolFlow) - 0.01;
-                ShowContinueError(" The SingleZoneVAV control No Load Supply Air Flow Rate is reset to " +
-                                  format("{:.5R} and the simulation continues.", PTUnit(PTUnitNum).MaxNoCoolHeatAirVolFlow));
+                ShowContinueError(format(" The SingleZoneVAV control No Load Supply Air Flow Rate is reset to {:.5R} and the simulation continues.", PTUnit(PTUnitNum).MaxNoCoolHeatAirVolFlow));
             }
         }
 

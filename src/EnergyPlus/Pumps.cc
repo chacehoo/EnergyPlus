@@ -2127,8 +2127,7 @@ namespace Pumps {
                 } else {
                     if (PlantFinalSizesOkayToReport) {
                         PumpEquip(PumpNum).NomVolFlowRate = 0.0;
-                        ShowWarningError("SizePump: Calculated Pump Nominal Volume Flow Rate=[" +
-                                         format("{:.2R}] is too small. Set to 0.0", PlantSizData(PlantSizNum).DesVolFlowRate));
+                        ShowWarningError(format("SizePump: Calculated Pump Nominal Volume Flow Rate=[{:.2R}] is too small. Set to 0.0", PlantSizData(PlantSizNum).DesVolFlowRate));
                         ShowContinueError("..occurs for Pump=" + PumpEquip(PumpNum).Name);
                     }
                 }

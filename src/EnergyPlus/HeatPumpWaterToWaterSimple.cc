@@ -1074,10 +1074,8 @@ namespace HeatPumpWaterToWaterSimple {
                                 if ((std::abs(tmpLoadSideVolFlowRate - nomLoadSideVolFlowUser) / nomLoadSideVolFlowUser) >
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("sizeCoolingWaterToWaterHP: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Load Side Volume Flow Rate of " +
-                                                      format("{:.2R} [m3/s]", nomLoadSideVolFlowUser));
-                                    ShowContinueError("differs from Design Size Load Side Volume Flow Rate of " +
-                                                      format("{:.2R} [m3/s]", tmpLoadSideVolFlowRate));
+                                    ShowContinueError(format("User-Specified Load Side Volume Flow Rate of {:.2R} [m3/s]", nomLoadSideVolFlowUser));
+                                    ShowContinueError(format("differs from Design Size Load Side Volume Flow Rate of {:.2R} [m3/s]", tmpLoadSideVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1193,10 +1191,8 @@ namespace HeatPumpWaterToWaterSimple {
                         if ((std::abs(tmpSourceSideVolFlowRate - nomSourceSideVolFlowUser) / nomSourceSideVolFlowUser) >
                             DataSizing::AutoVsHardSizingThreshold) {
                             ShowMessage("sizeCoolingWaterToWaterHP: Potential issue with equipment sizing for " + this->Name);
-                            ShowContinueError("User-Specified Source Side Volume Flow Rate of " +
-                                              format("{:.2R} [m3/s]", nomSourceSideVolFlowUser));
-                            ShowContinueError("differs from Design Size Source Side Volume Flow Rate of " +
-                                              format("{:.2R} [m3/s]", tmpSourceSideVolFlowRate));
+                            ShowContinueError(format("User-Specified Source Side Volume Flow Rate of {:.2R} [m3/s]", nomSourceSideVolFlowUser));
+                            ShowContinueError(format("differs from Design Size Source Side Volume Flow Rate of {:.2R} [m3/s]", tmpSourceSideVolFlowRate));
                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                         }
@@ -1411,10 +1407,8 @@ namespace HeatPumpWaterToWaterSimple {
                                 if ((std::abs(tmpLoadSideVolFlowRate - nomLoadSideVolFlowUser) / nomLoadSideVolFlowUser) >
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("sizeHeatingWaterToWaterHP: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError("User-Specified Load Side Volume Flow Rate of " +
-                                                      format("{:.2R} [m3/s]", nomLoadSideVolFlowUser));
-                                    ShowContinueError("differs from Design Size Load Side Volume Flow Rate of " +
-                                                      format("{:.2R} [m3/s]", tmpLoadSideVolFlowRate));
+                                    ShowContinueError(format("User-Specified Load Side Volume Flow Rate of {:.2R} [m3/s]", nomLoadSideVolFlowUser));
+                                    ShowContinueError(format("differs from Design Size Load Side Volume Flow Rate of {:.2R} [m3/s]", tmpLoadSideVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1529,10 +1523,8 @@ namespace HeatPumpWaterToWaterSimple {
                         if ((std::abs(tmpSourceSideVolFlowRate - nomSourceSideVolFlowUser) / nomSourceSideVolFlowUser) >
                             DataSizing::AutoVsHardSizingThreshold) {
                             ShowMessage("sizeHeatingWaterToWaterHP: Potential issue with equipment sizing for " + this->Name);
-                            ShowContinueError("User-Specified Source Side Volume Flow Rate of " +
-                                              format("{:.2R} [m3/s]", nomSourceSideVolFlowUser));
-                            ShowContinueError("differs from Design Size Source Side Volume Flow Rate of " +
-                                              format("{:.2R} [m3/s]", tmpSourceSideVolFlowRate));
+                            ShowContinueError(format("User-Specified Source Side Volume Flow Rate of {:.2R} [m3/s]", nomSourceSideVolFlowUser));
+                            ShowContinueError(format("differs from Design Size Source Side Volume Flow Rate of {:.2R} [m3/s]", tmpSourceSideVolFlowRate));
                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                         }

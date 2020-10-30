@@ -1704,8 +1704,7 @@ namespace HVACDXSystem {
                                                     DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                     " - Iteration limit exceeded calculating DX unit latent part-load ratio for unit = " +
                                                     DXCoolingSystem(DXSystemNum).Name);
-                                                ShowContinueError("Estimated latent part-load ratio   = " +
-                                                                  format("{:.3R}", (ReqOutput / FullOutput)));
+                                                ShowContinueError(format("Estimated latent part-load ratio   = {:.3R}", (ReqOutput / FullOutput)));
                                                 ShowContinueError(format("Calculated latent part-load ratio = {:.3R}", PartLoadFrac));
                                                 ShowContinueErrorTimeStamp("The calculated latent part-load ratio will be used and the simulation "
                                                                            "continues. Occurrence info:");
@@ -2303,8 +2302,7 @@ namespace HVACDXSystem {
                                                     DXCoolingSystem(DXSystemNum).DXCoolingSystemType +
                                                     " - Iteration limit exceeded calculating DX unit sensible part-load ratio for unit = " +
                                                     DXCoolingSystem(DXSystemNum).Name);
-                                                ShowContinueError("Estimated part-load ratio  = " +
-                                                                  format("{:.3R}", (TempSpeedOut / TempSpeedReqst)));
+                                                ShowContinueError(format("Estimated part-load ratio  = {:.3R}", (TempSpeedOut / TempSpeedReqst)));
                                                 ShowContinueError(format("Calculated part-load ratio = {:.3R}", PartLoadFrac));
                                                 ShowContinueErrorTimeStamp(
                                                     "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");

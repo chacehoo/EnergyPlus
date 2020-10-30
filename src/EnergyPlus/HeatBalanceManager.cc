@@ -777,15 +777,13 @@ namespace HeatBalanceManager {
             // Loads Convergence Tolerance Value
             LoadsConvergTol = BuildingNumbers(2);
             if (LoadsConvergTol <= 0.0) {
-                ShowSevereError(RoutineName + CurrentModuleObject + ": " + cNumericFieldNames(2) + " value invalid, [" +
-                                format("{:.3R}", LoadsConvergTol) + ']');
+                ShowSevereError(RoutineName + CurrentModuleObject + ": " + cNumericFieldNames(2) + format(" value invalid, [{:.3R}", LoadsConvergTol) + ']');
                 ErrorsFound = true;
             }
             // Temperature Convergence Tolerance Value
             TempConvergTol = BuildingNumbers(3);
             if (TempConvergTol <= 0.0) {
-                ShowSevereError(RoutineName + CurrentModuleObject + ": " + cNumericFieldNames(2) + " value invalid, [" +
-                                format("{:.3R}", TempConvergTol) + ']');
+                ShowSevereError(RoutineName + CurrentModuleObject + ": " + cNumericFieldNames(2) + format(" value invalid, [{:.3R}", TempConvergTol) + ']');
                 ErrorsFound = true;
             }
             // Solar Distribution
@@ -2506,8 +2504,7 @@ namespace HeatBalanceManager {
                     NominalR(MaterNum) = dataMaterial.Material(MaterNum).Thickness / DenomRGas;
                 } else {
                     ShowSevereError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Illegal value.");
-                    ShowContinueError("Nominal resistance of gap at room temperature calculated at a negative Conductivity=[" +
-                                      format("{:.3R}].", DenomRGas));
+                    ShowContinueError(format("Nominal resistance of gap at room temperature calculated at a negative Conductivity=[{:.3R}].", DenomRGas));
                     ErrorsFound = true;
                 }
             }
@@ -2627,8 +2624,7 @@ namespace HeatBalanceManager {
                     NominalR(MaterNum) = dataMaterial.Material(MaterNum).Thickness / DenomRGas;
                 } else {
                     ShowSevereError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Illegal value.");
-                    ShowContinueError("Nominal resistance of gap at room temperature calculated at a negative Conductivity=[" +
-                                      format("{:.3R}].", DenomRGas));
+                    ShowContinueError(format("Nominal resistance of gap at room temperature calculated at a negative Conductivity=[{:.3R}].", DenomRGas));
                     ErrorsFound = true;
                 }
             }
@@ -4047,8 +4043,7 @@ namespace HeatBalanceManager {
                     if (SpectralData(Loop).WaveLength(LamNum + 1) <= Lam) {
                         ErrorsFound = true;
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + SpecDataNames(1) + "\" invalid set.");
-                        ShowContinueError("... Wavelengths not in increasing order. at wavelength#=" + fmt::to_string(LamNum) + ", value=[" +
-                                          format("{:.4T}", Lam) + format("], next is [{:.4T}", SpectralData(Loop).WaveLength(LamNum + 1)) +
+                        ShowContinueError("... Wavelengths not in increasing order. at wavelength#=" + fmt::to_string(LamNum) + format(", value=[{:.4T}", Lam) + format("], next is [{:.4T}", SpectralData(Loop).WaveLength(LamNum + 1)) +
                                           "].");
                     }
                 }
@@ -4073,10 +4068,8 @@ namespace HeatBalanceManager {
                 if (RhoF < 0.0 || RhoF > 1.02 || RhoB < 0.0 || RhoB > 1.02) {
                     ErrorsFound = true;
                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + SpecDataNames(1) + "\" invalid value.");
-                    ShowContinueError("... A reflectance is < 0.0 or > 1.0; at wavelength#=" + fmt::to_string(LamNum) + ", RhoF value=[" +
-                                      format("{:.4T}].", RhoF));
-                    ShowContinueError("... A reflectance is < 0.0 or > 1.0; at wavelength#=" + fmt::to_string(LamNum) + ", RhoB value=[" +
-                                      format("{:.4T}].", RhoB));
+                    ShowContinueError("... A reflectance is < 0.0 or > 1.0; at wavelength#=" + fmt::to_string(LamNum) + format(", RhoF value=[{:.4T}].", RhoF));
+                    ShowContinueError("... A reflectance is < 0.0 or > 1.0; at wavelength#=" + fmt::to_string(LamNum) + format(", RhoB value=[{:.4T}].", RhoB));
                 }
 
                 if ((Tau + RhoF) > 1.03 || (Tau + RhoB) > 1.03) {

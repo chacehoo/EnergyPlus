@@ -1938,10 +1938,8 @@ namespace ZoneEquipmentManager {
                             } else if (std::abs(DeltaTemp) > SmallTempDiff && SupplyTemp < CalcFinalZoneSizing(I).ZoneTempAtHeatPeak) {
                                 ShowSevereError(
                                     "UpdateZoneSizing: Supply air temperature is less than zone temperature during heating air flow calculations");
-                                ShowContinueError("...calculated design heating volume flow rate = " +
-                                                  format("{:.5R} m3/s", (CalcFinalZoneSizing(I).DesHeatVolFlow)));
-                                ShowContinueError("...calculated design heating mass flow rate   = " +
-                                                  format("{:.5R} kg/s", (CalcFinalZoneSizing(I).DesHeatMassFlow)));
+                                ShowContinueError(format("...calculated design heating volume flow rate = {:.5R} m3/s", (CalcFinalZoneSizing(I).DesHeatVolFlow)));
+                                ShowContinueError(format("...calculated design heating mass flow rate   = {:.5R} kg/s", (CalcFinalZoneSizing(I).DesHeatMassFlow)));
                                 ShowContinueError(format("...thermostat set piont temp   = {:.3R}", CalcFinalZoneSizing(I).HeatTstatTemp) +
                                                   " C");
                                 ShowContinueError(format("...zone temperature            = {:.3R}", CalcFinalZoneSizing(I).ZoneTempAtHeatPeak) +
@@ -4169,18 +4167,15 @@ namespace ZoneEquipmentManager {
                                                      " there is unbalanced air flow. Load due to induced outdoor air is neglected.");
                                     ShowContinueErrorTimeStamp("");
                                     ShowContinueError(
-                                        "  Flows [m3/s]: Inlets: " +
-                                        format("{:.6R}", thisZoneEquip.TotInletAirMassFlowRate / DataEnvironment::StdRhoAir) +
+                                        format("  Flows [m3/s]: Inlets: {:.6R}", thisZoneEquip.TotInletAirMassFlowRate / DataEnvironment::StdRhoAir) +
                                         format("  Unbalanced exhausts: {:.6R}", sysUnbalExhaust / DataEnvironment::StdRhoAir) +
                                         format("  Returns: {:.6R}", totalZoneReturnMassFlow / DataEnvironment::StdRhoAir));
                                     ShowContinueError(
                                         format("  Infiltration: {:.6R}", DataHeatBalFanSys::OAMFL(actualZone) / rhoZone) +
                                         format("  Zone Ventilation: {:.6R}", DataHeatBalFanSys::VAMFL(actualZone) / rhoZone) +
-                                        "  Mixing (incoming): " +
-                                        format("{:.6R}", DataHeatBalFanSys::MixingMassFlowZone(actualZone) / rhoZone));
+                                        format("  Mixing (incoming): {:.6R}", DataHeatBalFanSys::MixingMassFlowZone(actualZone) / rhoZone));
                                     ShowContinueError(format("  Imbalance (excess outflow): {:.6R}", unbalancedVolFlow) +
-                                                      "  Total system OA flow (for all airloops serving this zone): " +
-                                                      format("{:.6R}", thisZoneEquip.TotAvailAirLoopOA / DataEnvironment::StdRhoAir));
+                                                      format("  Total system OA flow (for all airloops serving this zone): {:.6R}", thisZoneEquip.TotAvailAirLoopOA / DataEnvironment::StdRhoAir));
                                     ShowContinueError("  This error will only be reported once per zone.");
                                     thisZoneEquip.FlowError = true;
                                 }

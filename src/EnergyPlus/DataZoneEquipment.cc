@@ -1704,11 +1704,9 @@ namespace DataZoneEquipment {
                                         if (OARequirements(DSOAPtr).CO2MaxMinLimitErrorCount < 2) {
                                             ShowSevereError("CalcDesignSpecificationOutdoorAir DesignSpecification:OutdoorAir = \"" +
                                                             OARequirements(DSOAPtr).Name + "\".");
-                                            ShowContinueError("For System Outdoor Air Method = ProportionalControlBasedonOccupancySchedule, maximum "
-                                                              "target CO2 concentration (" +
-                                                              format("{:.2R}", ZoneMaxCO2) +
-                                                              "), is not greater than minimum target CO2 concentration (" +
-                                                              format("{:.2R}).", ZoneMinCO2));
+                                            ShowContinueError("For System Outdoor Air Method = ProportionalControlBasedonOccupancySchedule, maximum " +
+                                                              format("target CO2 concentration ({:.2R}", ZoneMaxCO2) +
+                                                              format("), is not greater than minimum target CO2 concentration ({:.2R}).", ZoneMinCO2));
                                             ShowContinueError("\"ProportionalControlBasedonOccupancySchedule\" will not be modeled. Default "
                                                               "\"Flow/Person+Flow/Area\" will be modeled. Simulation continues...");
                                             ShowContinueErrorTimeStamp("");
@@ -1724,11 +1722,9 @@ namespace DataZoneEquipment {
                                         if (OARequirements(DSOAPtr).CO2MaxMinLimitErrorCount < 2) {
                                             ShowSevereError("CalcDesignSpecificationOutdoorAir DesignSpecification:OutdoorAir = \"" +
                                                             OARequirements(DSOAPtr).Name + "\".");
-                                            ShowContinueError("For System Outdoor Air Method = ProportionalControlBasedonDesignOccupancy, maximum "
-                                                              "target CO2 concentration (" +
-                                                              format("{:.2R}", ZoneMaxCO2) +
-                                                              "), is not greater than minimum target CO2 concentration (" +
-                                                              format("{:.2R}).", ZoneMinCO2));
+                                            ShowContinueError("For System Outdoor Air Method = ProportionalControlBasedonDesignOccupancy, maximum " +
+                                                              format("target CO2 concentration ({:.2R}", ZoneMaxCO2) +
+                                                              format("), is not greater than minimum target CO2 concentration ({:.2R}).", ZoneMinCO2));
                                             ShowContinueError("\"ProportionalControlBasedonDesignOccupancy\" will not be modeled. Default "
                                                               "\"Flow/Person+Flow/Area\" will be modeled. Simulation continues...");
                                             ShowContinueErrorTimeStamp("");

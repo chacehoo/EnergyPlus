@@ -1645,10 +1645,8 @@ namespace HeatingCoils {
             for (StageNum = 1; StageNum <= HeatingCoil(CoilNum).NumOfStages - 1; ++StageNum) {
                 if (HeatingCoil(CoilNum).MSNominalCapacity(StageNum) > HeatingCoil(CoilNum).MSNominalCapacity(StageNum + 1)) {
                     ShowSevereError("SizeHeatingCoil: " + HeatingCoil(CoilNum).HeatingCoilType + ' ' + HeatingCoil(CoilNum).Name + ", Stage " +
-                                    fmt::to_string(StageNum) + " Nominal Capacity (" +
-                                    format("{:.2R} W) must be less than or equal to Stage ", HeatingCoil(CoilNum).MSNominalCapacity(StageNum)) +
-                                    fmt::to_string(StageNum + 1) + " Nominal Capacity (" +
-                                    format("{:.2R} W).", HeatingCoil(CoilNum).MSNominalCapacity(StageNum + 1)));
+                                    fmt::to_string(StageNum) + format(" Nominal Capacity ({:.2R} W) must be less than or equal to Stage ", HeatingCoil(CoilNum).MSNominalCapacity(StageNum)) +
+                                    fmt::to_string(StageNum + 1) + format(" Nominal Capacity ({:.2R} W).", HeatingCoil(CoilNum).MSNominalCapacity(StageNum + 1)));
                     ShowFatalError("Preceding conditions cause termination.");
                 }
             }

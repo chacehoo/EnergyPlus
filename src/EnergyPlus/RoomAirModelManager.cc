@@ -1186,8 +1186,7 @@ namespace RoomAirModelManager {
                             AirModel(ThisZone).AirModelType = RoomAirModel_Mixing;
                             ShowWarningError("Problem with " + cCurrentModuleObject + " = " + cAlphaArgs(1));
                             ShowWarningError("Roomair model will not be applied for Zone=" + cAlphaArgs(1) + '.');
-                            ShowContinueError("AirflowNetwrok:Multizone:Surface crack object must have an air flow coefficient = 0.5, value was=" +
-                                              format("{:.2R}", AirflowNetwork::MultizoneSurfaceCrackData(TypeNum).FlowExpo));
+                            ShowContinueError(format("AirflowNetwrok:Multizone:Surface crack object must have an air flow coefficient = 0.5, value was={:.2R}", AirflowNetwork::MultizoneSurfaceCrackData(TypeNum).FlowExpo));
                         }
                     }
                 }

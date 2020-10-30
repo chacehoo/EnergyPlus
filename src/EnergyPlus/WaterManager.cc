@@ -331,10 +331,8 @@ namespace WaterManager {
                             ShowSevereError("Invalid " + cNumericFieldNames(5) + " and/or " + cNumericFieldNames(6));
                             ShowContinueError("Entered in " + cCurrentModuleObject + '=' + cAlphaArgs(1));
                             ShowContinueError(cNumericFieldNames(6) + " must be greater than " + cNumericFieldNames(5));
-                            ShowContinueError("Check value for " + cNumericFieldNames(5) + " = " +
-                                              format("{:.5R}", WaterStorage(Item).ValveOnCapacity));
-                            ShowContinueError("which must be lower than " + cNumericFieldNames(6) + " = " +
-                                              format("{:.5R}", WaterStorage(Item).ValveOffCapacity));
+                            ShowContinueError("Check value for " + cNumericFieldNames(5) + format(" = {:.5R}", WaterStorage(Item).ValveOnCapacity));
+                            ShowContinueError("which must be lower than " + cNumericFieldNames(6) + format(" = {:.5R}", WaterStorage(Item).ValveOffCapacity));
                             ErrorsFound = true;
                         }
                     }

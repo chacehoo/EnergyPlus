@@ -232,17 +232,13 @@ namespace Construction {
                             ShowSevereError("InitConductionTransferFunctions: Found Material that is too thin and/or too highly conductive, "
                                             "material name = " +
                                             dataMaterial.Material(CurrentLayer).Name);
-                            ShowContinueError("High conductivity Material layers are not well supported for internal source constructions, "
-                                              "material conductivity = " +
-                                              format("{:.3R} [W/m-K]", dataMaterial.Material(CurrentLayer).Conductivity));
+                            ShowContinueError("High conductivity Material layers are not well supported for internal source constructions, " +
+                                              format("material conductivity = {:.3R} [W/m-K]", dataMaterial.Material(CurrentLayer).Conductivity));
                             ShowContinueError(format("Material thermal diffusivity = {:.3R} [m2/s]", Alpha));
-                            ShowContinueError("Material with this thermal diffusivity should have thickness > " +
-                                                      format("{:.5R} [m]", ThicknessThreshold));
+                            ShowContinueError(format("Material with this thermal diffusivity should have thickness > {:.5R} [m]", ThicknessThreshold));
                             if (dataMaterial.Material(CurrentLayer).Thickness < DataHeatBalance::ThinMaterialLayerThreshold) {
-                                ShowContinueError("Material may be too thin to be modeled well, thickness = " +
-                                                          format("{:.5R} [m]", dataMaterial.Material(CurrentLayer).Thickness));
-                                ShowContinueError("Material with this thermal diffusivity should have thickness > " +
-                                                  format("{:.5R} [m]", DataHeatBalance::ThinMaterialLayerThreshold));
+                                ShowContinueError(format("Material may be too thin to be modeled well, thickness = {:.5R} [m]", dataMaterial.Material(CurrentLayer).Thickness));
+                                ShowContinueError(format("Material with this thermal diffusivity should have thickness > {:.5R} [m]", DataHeatBalance::ThinMaterialLayerThreshold));
                             }
                             dataMaterial.Material(CurrentLayer).WarnedForHighDiffusivity = true;
                         }

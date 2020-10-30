@@ -1998,8 +1998,7 @@ namespace RuntimeLanguageProcessor {
                             if (std::isnan(TestValue)) {
                                 // throw Error
                                 ReturnValue.Type = ValueError;
-                                ReturnValue.Error = "EvaluateExpression: Attempted to raise to power with incompatible numbers: " +
-                                                    format("{:.6T}", Operand(1).Number) + format(" raised to {:.6T}", Operand(2).Number);
+                                ReturnValue.Error = format("EvaluateExpression: Attempted to raise to power with incompatible numbers: {:.6T}", Operand(1).Number) + format(" raised to {:.6T}", Operand(2).Number);
                                 if (!DoingSizing && !KickOffSimulation && !EMSManager::FinishProcessingUserInput) {
                                     seriousErrorFound = true;
                                 }
@@ -2046,8 +2045,7 @@ namespace RuntimeLanguageProcessor {
                             ReturnValue = SetErlValueNumber(0.0);
                         } else {
                             // throw Error
-                            ReturnValue.Error = "EvaluateExpression: Attempted to calculate exponential value of too large a number: " +
-                                                format("{:.4T}", Operand(1).Number);
+                            ReturnValue.Error = format("EvaluateExpression: Attempted to calculate exponential value of too large a number: {:.4T}", Operand(1).Number);
                             ReturnValue.Type = ValueError;
                             if (!DoingSizing && !KickOffSimulation && !EMSManager::FinishProcessingUserInput) {
                                 seriousErrorFound = true;

@@ -738,8 +738,7 @@ namespace FluidProperties {
                 if (FluidTemps(Loop).Temps(TempLoop) <= FluidTemps(Loop).Temps(TempLoop - 1)) {
                     ShowSevereError(RoutineName + CurrentModuleObject + " name=" + FluidTemps(Loop).Name +
                                     ", lists must have data in ascending order");
-                    ShowContinueError("First out of order occurrence at Temperature #(" + fmt::to_string(TempLoop - 1) + ") {" +
-                                      format("{:.3R}) {", FluidTemps(Loop).Temps(TempLoop - 1)) + "} >= Temp(" + fmt::to_string(TempLoop) +
+                    ShowContinueError("First out of order occurrence at Temperature #(" + fmt::to_string(TempLoop - 1) + format(") {{:.3R}) {", FluidTemps(Loop).Temps(TempLoop - 1)) + "} >= Temp(" + fmt::to_string(TempLoop) +
                                       format("{:.3R}", FluidTemps(Loop).Temps(TempLoop)) + '}');
                     ErrorsFound = true;
                     break;
@@ -1481,8 +1480,7 @@ namespace FluidProperties {
                     if (RefrigData(Loop).SHPress(InData) <= RefrigData(Loop).SHPress(InData - 1)) {
                         ShowSevereError(RoutineName + CurrentModuleObject + " Name=" + RefrigData(Loop).Name);
                         ShowContinueError("Pressures must be entered in ascending order for fluid property data");
-                        ShowContinueError("First Occurrence at Pressure(" + fmt::to_string(InData - 1) + ") {" +
-                                          format("{:.3R}} >= Pressure(", RefrigData(Loop).SHPress(InData - 1)) + fmt::to_string(InData) +
+                        ShowContinueError("First Occurrence at Pressure(" + fmt::to_string(InData - 1) + format(") {{:.3R}} >= Pressure(", RefrigData(Loop).SHPress(InData - 1)) + fmt::to_string(InData) +
                                           format(") {{:.3R}", RefrigData(Loop).SHPress(InData)) + '}');
                         ErrorsFound = true;
                         break;
@@ -6066,8 +6064,7 @@ CurrentModuleObject,
             if (RefrigErrorTracking(RefrigNum).SatTempErrCount <= RefrigerantErrorLimitTest) {
                 ShowSevereMessage(RoutineName + "Saturation temperature is out of range for refrigerant [" + RefrigErrorTracking(RefrigNum).Name +
                                   "] supplied data: **");
-                ShowContinueError("...Called From:" + CalledFrom + ", supplied data range=[" +
-                                  format("{:.2R}", refrig.PsTemps(refrig.PsLowTempIndex)) + ',' +
+                ShowContinueError("...Called From:" + CalledFrom + format(", supplied data range=[{:.2R}", refrig.PsTemps(refrig.PsLowTempIndex)) + ',' +
                                   format("{:.2R}", refrig.PsTemps(refrig.PsHighTempIndex)) + ']');
                 ShowContinueError(format("...Supplied Refrigerant Temperature={:.2R}", Temperature) +
                                   format(" Returned saturated pressure value = {:.0R}", ReturnValue));
@@ -6188,8 +6185,7 @@ CurrentModuleObject,
             if (RefrigErrorTracking(RefrigNum).SatPressErrCount <= RefrigerantErrorLimitTest) {
                 ShowSevereMessage(RoutineName + "Saturation pressure is out of range for refrigerant [" + RefrigErrorTracking(RefrigNum).Name +
                                   "] supplied data: **");
-                ShowContinueError("...Called From:" + CalledFrom + ", supplied data range=[" +
-                                  format("{:.0R}", refrig.PsValues(refrig.PsLowPresIndex)) + ',' +
+                ShowContinueError("...Called From:" + CalledFrom + format(", supplied data range=[{:.0R}", refrig.PsValues(refrig.PsLowPresIndex)) + ',' +
                                   format("{:.0R}", refrig.PsValues(refrig.PsHighPresIndex)) + ']');
                 ShowContinueError(format("...Supplied Refrigerant Pressure={:.0R}", Pressure) +
                                   format(" Returned saturated temperature value ={:.2R}", ReturnValue));
@@ -6427,8 +6423,7 @@ CurrentModuleObject,
             if (RefrigErrorTracking(RefrigNum).SatTempDensityErrCount <= RefrigerantErrorLimitTest) {
                 ShowSevereMessage(RoutineName + "Saturation temperature is out of range for refrigerant [" + RefrigErrorTracking(RefrigNum).Name +
                                   "] supplied data: **");
-                ShowContinueError("...Called From:" + CalledFrom + ", supplied data range=[" +
-                                  format("{:.2R}", refrig.RhoTemps(refrig.RhofLowTempIndex)) + ',' +
+                ShowContinueError("...Called From:" + CalledFrom + format(", supplied data range=[{:.2R}", refrig.RhoTemps(refrig.RhofLowTempIndex)) + ',' +
                                   format("{:.2R}", refrig.RhoTemps(refrig.RhofHighTempIndex)) + ']');
                 ShowContinueError(format("...Supplied Refrigerant Temperature={:.2R}", Temperature) +
                                   format(" Returned saturated density value ={:.2R}", ReturnValue));
