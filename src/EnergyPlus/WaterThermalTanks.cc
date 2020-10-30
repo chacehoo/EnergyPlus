@@ -1584,8 +1584,7 @@ namespace WaterThermalTanks {
                 if (DXCoils::DXCoil(HPWH.DXCoilNum).HPWHCondPumpElecNomPower / DXCoils::DXCoil(HPWH.DXCoilNum).RatedTotCap2 > 0.1422) {
                     ShowWarningError(
                         DXCoils::DXCoil(HPWH.DXCoilNum).DXCoilType + "= " + DXCoils::DXCoil(HPWH.DXCoilNum).Name +
-                        ": Rated condenser pump power per watt of rated heating capacity has exceeded the recommended maximum of 0.1422 W/W " +
-                        format("(41.67 watt/MBH). Condenser pump power per watt = {:.4T}",
+                        format(": Rated condenser pump power per watt of rated heating capacity has exceeded the recommended maximum of 0.1422 W/W (41.67 watt/MBH). Condenser pump power per watt = {:.4T}",
                             (DXCoils::DXCoil(HPWH.DXCoilNum).HPWHCondPumpElecNomPower / DXCoils::DXCoil(HPWH.DXCoilNum).RatedTotCap2)));
                 }
             } else if ((HPWH.DXCoilNum > 0) && (bIsVScoil)) {
@@ -6026,8 +6025,7 @@ namespace WaterThermalTanks {
                     // if ( FanVolFlow  < HPWaterHeater( HPNum ).HPWHAirVolFlowRate( HPWaterHeater( HPNum ).NumofSpeed ) ) {
 
                     ShowWarningError(format("InitWaterThermalTank: -air flow rate = {:.7T}", FanVolFlow) +
-                                     " in fan object  is less than the MSHP system air flow rate" +
-                                     format(" when waterheating is required({:.7T}).", state.dataWaterThermalTanks->HPWaterHeater(HPNum).HPWHAirVolFlowRate(state.dataWaterThermalTanks->HPWaterHeater(HPNum).NumofSpeed)));
+                                     format(" in fan object  is less than the MSHP system air flow rate when waterheating is required({:.7T}).", state.dataWaterThermalTanks->HPWaterHeater(HPNum).HPWHAirVolFlowRate(state.dataWaterThermalTanks->HPWaterHeater(HPNum).NumofSpeed)));
                     ShowContinueError(" The MSHP system flow rate when waterheating is required is reset to the"
                                       " fan flow rate and the simulation continues.");
                     ShowContinueError(" Occurs in " + state.dataWaterThermalTanks->HPWaterHeater(HPNum).Name);
@@ -8026,8 +8024,7 @@ namespace WaterThermalTanks {
                                         ++DesupHtr.RegulaFalsiFailedNum1;
                                         if (DesupHtr.RegulaFalsiFailedNum1 == 1) {
                                             ShowWarningError(DesupHtr.Type + " \"" + DesupHtr.Name + "\"");
-                                            ShowContinueError("Desuperheater unit part-load ratio calculation failed: PLR limits of 0 to 1 exceeded. " +
-                                                              format("Part-load ratio used = {:.3R}", partLoadRatio));
+                                            ShowContinueError(format("Desuperheater unit part-load ratio calculation failed: PLR limits of 0 to 1 exceeded. Part-load ratio used = {:.3R}", partLoadRatio));
                                             ShowContinueError("Please send this information to the EnergyPlus support group.");
                                             ShowContinueErrorTimeStamp("This error occurred in heating mode.");
                                         } else {
@@ -8141,8 +8138,7 @@ namespace WaterThermalTanks {
                                             if (DesupHtr.RegulaFalsiFailedNum2 == 1) {
                                                 ShowWarningError(DesupHtr.Type + " \"" + DesupHtr.Name + "\"");
                                                 ShowContinueError(
-                                                    "Desuperheater unit part-load ratio calculation failed: PLR limits of 0 to 1 exceeded. " +
-                                                    format("Part-load ratio used = {:.3R}", partLoadRatio));
+                                                    format("Desuperheater unit part-load ratio calculation failed: PLR limits of 0 to 1 exceeded. Part-load ratio used = {:.3R}", partLoadRatio));
                                                 ShowContinueError("Please send this information to the EnergyPlus support group.");
                                                 ShowContinueErrorTimeStamp("This error occurred in float mode.");
                                             } else {
@@ -8849,8 +8845,7 @@ namespace WaterThermalTanks {
                             ++HeatPump.RegulaFalsiFailedNum2;
                             if (HeatPump.RegulaFalsiFailedNum2 == 1) {
                                 ShowWarningError(HeatPump.Type + " \"" + HeatPump.Name + "\"");
-                                ShowContinueError("Heat pump water heater compressor part-load ratio calculation failed: PLR limits of 0 to 1 " +
-                                                  format("exceeded. Part-load ratio used = {:.3R}", state.dataWaterThermalTanks->hpPartLoadRatio));
+                                ShowContinueError(format("Heat pump water heater compressor part-load ratio calculation failed: PLR limits of 0 to 1 exceeded. Part-load ratio used = {:.3R}", state.dataWaterThermalTanks->hpPartLoadRatio));
                                 ShowContinueError("Please send this information to the EnergyPlus support group.");
                                 ShowContinueErrorTimeStamp("This error occurred in float mode.");
                             } else {
@@ -9039,8 +9034,7 @@ namespace WaterThermalTanks {
                                 ++HeatPump.RegulaFalsiFailedNum1;
                                 if (HeatPump.RegulaFalsiFailedNum1 == 1) {
                                     ShowWarningError(HeatPump.Type + " \"" + HeatPump.Name + "\"");
-                                    ShowContinueError("Heat pump water heater speed ratio calculation failed: speed ratio limits " +
-                                                      format("of 0 to 1 exceeded. speed ratio used = {:.3R}", SpeedRatio));
+                                    ShowContinueError(format("Heat pump water heater speed ratio calculation failed: speed ratio limits of 0 to 1 exceeded. speed ratio used = {:.3R}", SpeedRatio));
                                     ShowContinueError("Please send this information to the EnergyPlus support group.");
                                     ShowContinueErrorTimeStamp("This error occurred in heating mode.");
                                 } else {

@@ -1852,8 +1852,7 @@ namespace VariableSpeedCoils {
             if (state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).NumOfSpeeds < 1) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name + "\", invalid");
                 ShowContinueError("..." + cNumericFields(1) +
-                                  " must be >= 1." +
-                                  format(" entered number is {:.0T}", NumArray(1)));
+                                  format(" must be >= 1. entered number is {:.0T}", NumArray(1)));
                 ErrorsFound = true;
             }
 
@@ -1864,8 +1863,7 @@ namespace VariableSpeedCoils {
             if ((state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).NormSpedLevel > state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).NumOfSpeeds) || (state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).NormSpedLevel <= 0)) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name + "\", invalid");
                 ShowContinueError("..." + cNumericFields(2) +
-                                  " must be valid speed level" +
-                                  format(" entered number is {:.0T}", NumArray(2)));
+                                  format(" must be valid speed level entered number is {:.0T}", NumArray(2)));
                 ErrorsFound = true;
             }
 

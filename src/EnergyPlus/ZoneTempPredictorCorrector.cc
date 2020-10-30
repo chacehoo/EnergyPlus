@@ -1806,14 +1806,12 @@ namespace ZoneTempPredictorCorrector {
                         // check validity of fixed radiative fraction
                         if ((TempControlledZone(TempControlledZoneNum).FixedRadiativeFraction < 0.0) &&
                             (!(TempControlledZone(TempControlledZoneNum).OpTempCntrlModeScheduled))) {
-                            ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + "=[" +
-                                            format("{:.2T}", rNumericArgs(1)) + "\" cannot be negative.");
+                            ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + format("=[{:.2T}", rNumericArgs(1)) + "\" cannot be negative.");
                             ErrorsFound = true;
                         }
                         if ((TempControlledZone(TempControlledZoneNum).FixedRadiativeFraction >= 0.9) &&
                             (!(TempControlledZone(TempControlledZoneNum).OpTempCntrlModeScheduled))) {
-                            ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + "=[" +
-                                            format("{:.2T}", rNumericArgs(1)) + "\" cannot >= .9.");
+                            ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + format("=[{:.2T}", rNumericArgs(1)) + "\" cannot >= .9.");
                             ErrorsFound = true;
                         }
 
@@ -1893,16 +1891,14 @@ namespace ZoneTempPredictorCorrector {
                         if (Item == 1) {
                             if ((TempControlledZone(TempControlledZoneNum).FixedRadiativeFraction < 0.0) &&
                                 (!(TempControlledZone(TempControlledZoneNum).OpTempCntrlModeScheduled))) {
-                                ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + "=[" +
-                                                format("{:.2T}", rNumericArgs(1)) + "\" cannot be negative.");
+                                ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + format("=[{:.2T}", rNumericArgs(1)) + "\" cannot be negative.");
                                 ErrorsFound = true;
                             }
                         }
                         if (Item == 1) {
                             if ((TempControlledZone(TempControlledZoneNum).FixedRadiativeFraction >= 0.9) &&
                                 (!(TempControlledZone(TempControlledZoneNum).OpTempCntrlModeScheduled))) {
-                                ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + "=[" +
-                                                format("{:.2T}", rNumericArgs(1)) + "\" cannot >= .9.");
+                                ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + format("=[{:.2T}", rNumericArgs(1)) + "\" cannot >= .9.");
                                 ErrorsFound = true;
                             }
                         }
@@ -2021,14 +2017,12 @@ namespace ZoneTempPredictorCorrector {
                         // check validity of zone Overcool constant range
                         if ((TempControlledZone(TempControlledZoneNum).ZoneOvercoolConstRange < 0.0) &&
                             (!(TempControlledZone(TempControlledZoneNum).OvercoolCntrlModeScheduled))) {
-                            ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + "=[" +
-                                            format("{:.2T}", rNumericArgs(1)) + "\" cannot be negative.");
+                            ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + format("=[{:.2T}", rNumericArgs(1)) + "\" cannot be negative.");
                             ErrorsFound = true;
                         }
                         if ((TempControlledZone(TempControlledZoneNum).ZoneOvercoolConstRange > 3.0) &&
                             (!(TempControlledZone(TempControlledZoneNum).OvercoolCntrlModeScheduled))) {
-                            ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + "=[" +
-                                            format("{:.2T}", rNumericArgs(1)) + "\" cannot be > 3.0");
+                            ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + format("=[{:.2T}", rNumericArgs(1)) + "\" cannot be > 3.0");
                             ErrorsFound = true;
                         }
 
@@ -2046,8 +2040,7 @@ namespace ZoneTempPredictorCorrector {
                         // check Overcool Control Ratio limits
                         TempControlledZone(TempControlledZoneNum).ZoneOvercoolControlRatio = rNumericArgs(2);
                         if (TempControlledZone(TempControlledZoneNum).ZoneOvercoolControlRatio < 0.0) {
-                            ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(2) + " invalid " + cNumericFieldNames(2) + "=[" +
-                                            format("{:.2T}", rNumericArgs(2)) + "\" cannot be negative.");
+                            ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(2) + " invalid " + cNumericFieldNames(2) + format("=[{:.2T}", rNumericArgs(2)) + "\" cannot be negative.");
                             ErrorsFound = true;
                         }
                     }
@@ -2090,16 +2083,14 @@ namespace ZoneTempPredictorCorrector {
                         if (Item == 1) {
                             if ((TempControlledZone(TempControlledZoneNum).ZoneOvercoolConstRange < 0.0) &&
                                 (!(TempControlledZone(TempControlledZoneNum).OvercoolCntrlModeScheduled))) {
-                                ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + "=[" +
-                                                format("{:.2T}", rNumericArgs(1)) + "\" cannot be negative.");
+                                ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + format("=[{:.2T}", rNumericArgs(1)) + "\" cannot be negative.");
                                 ErrorsFound = true;
                             }
                         }
                         if (Item == 1) {
                             if ((TempControlledZone(TempControlledZoneNum).ZoneOvercoolConstRange > 3.0) &&
                                 (!(TempControlledZone(TempControlledZoneNum).OvercoolCntrlModeScheduled))) {
-                                ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + "=[" +
-                                                format("{:.2T}", rNumericArgs(1)) + "\" cannot > 3.0");
+                                ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(1) + " invalid " + cNumericFieldNames(1) + format("=[{:.2T}", rNumericArgs(1)) + "\" cannot > 3.0");
                                 ErrorsFound = true;
                             }
                         }
@@ -2120,8 +2111,7 @@ namespace ZoneTempPredictorCorrector {
                         // check Overcool Control Ratio limits
                         if (Item == 1) {
                             if (TempControlledZone(TempControlledZoneNum).ZoneOvercoolControlRatio < 0.0) {
-                                ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(2) + " invalid " + cNumericFieldNames(2) + "=[" +
-                                                format("{:.2T}", rNumericArgs(2)) + "\" cannot be negative.");
+                                ShowSevereError(cCurrentModuleObject + '=' + cAlphaArgs(2) + " invalid " + cNumericFieldNames(2) + format("=[{:.2T}", rNumericArgs(2)) + "\" cannot be negative.");
                                 ErrorsFound = true;
                             }
                         }

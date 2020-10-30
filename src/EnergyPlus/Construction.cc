@@ -232,8 +232,7 @@ namespace Construction {
                             ShowSevereError("InitConductionTransferFunctions: Found Material that is too thin and/or too highly conductive, "
                                             "material name = " +
                                             dataMaterial.Material(CurrentLayer).Name);
-                            ShowContinueError("High conductivity Material layers are not well supported for internal source constructions, " +
-                                              format("material conductivity = {:.3R} [W/m-K]", dataMaterial.Material(CurrentLayer).Conductivity));
+                            ShowContinueError(format("High conductivity Material layers are not well supported for internal source constructions, material conductivity = {:.3R} [W/m-K]", dataMaterial.Material(CurrentLayer).Conductivity));
                             ShowContinueError(format("Material thermal diffusivity = {:.3R} [m2/s]", Alpha));
                             ShowContinueError(format("Material with this thermal diffusivity should have thickness > {:.5R} [m]", ThicknessThreshold));
                             if (dataMaterial.Material(CurrentLayer).Thickness < DataHeatBalance::ThinMaterialLayerThreshold) {

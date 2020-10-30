@@ -4348,14 +4348,11 @@ namespace WeatherManager {
                     ShowWarningError("Weather file location will be used rather than entered (IDF) Location object.");
                     ShowContinueError("..Location object=" + state.dataWeatherManager->LocationTitle);
                     ShowContinueError("..Weather File Location=" + DataEnvironment::WeatherFileLocationTitle);
-                    ShowContinueError("..due to location differences, Latitude difference=[" +
-                                      format("{:.2R}", std::abs(DataEnvironment::Latitude - state.dataWeatherManager->WeatherFileLatitude)) +
-                                      "] degrees, Longitude difference=[" +
-                                      format("{:.2R}", std::abs(DataEnvironment::Longitude - state.dataWeatherManager->WeatherFileLongitude)) + "] degrees.");
+                    ShowContinueError(format("..due to location differences, Latitude difference=[{:.2R}", std::abs(DataEnvironment::Latitude - state.dataWeatherManager->WeatherFileLatitude)) +
+                                      format("] degrees, Longitude difference=[{:.2R}", std::abs(DataEnvironment::Longitude - state.dataWeatherManager->WeatherFileLongitude)) + "] degrees.");
                     ShowContinueError(
                         format("..Time Zone difference=[{:.1R}", std::abs(DataEnvironment::TimeZoneNumber - state.dataWeatherManager->WeatherFileTimeZone)) +
-                        "] hour(s), Elevation difference=[" +
-                        format("{:.2R}", std::abs((DataEnvironment::Elevation - state.dataWeatherManager->WeatherFileElevation) / max(DataEnvironment::Elevation, 1.0) * 100.0)) +
+                        format("] hour(s), Elevation difference=[{:.2R}", std::abs((DataEnvironment::Elevation - state.dataWeatherManager->WeatherFileElevation) / max(DataEnvironment::Elevation, 1.0) * 100.0)) +
                         format("] percent, [{:.2R}", std::abs(DataEnvironment::Elevation - state.dataWeatherManager->WeatherFileElevation)) + "] meters.");
                 }
             }
@@ -5957,8 +5954,7 @@ namespace WeatherManager {
                             Real64 testval = maxval(state.dataWeatherManager->DDDBRngModifier(_, _, EnvrnNum));
                             if (MaxDryBulbEntered) {
                                 ShowWarningError(DataIPShortCuts::cCurrentModuleObject + "=\"" + state.dataWeatherManager->DesDayInput(EnvrnNum).Title + "\", data override.");
-                                ShowContinueError(".." + DataIPShortCuts::cNumericFieldNames(3) + "=[" +
-                                                  format("{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).MaxDryBulb) + "] will be overwritten.");
+                                ShowContinueError(".." + DataIPShortCuts::cNumericFieldNames(3) + format("=[{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).MaxDryBulb) + "] will be overwritten.");
                                 ShowContinueError(".." + DataIPShortCuts::cAlphaFieldNames(3) + "=\"" + DataIPShortCuts::cAlphaArgs(3) + "\".");
                                 ShowContinueError(format("..with max value=[{:.2R}", testval) + "].");
                             }

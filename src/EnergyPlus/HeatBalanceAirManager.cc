@@ -1720,8 +1720,7 @@ namespace HeatBalanceAirManager {
                         }
                         if (Ventilation(Loop).MinOutdoorTempSchedPtr == 0 && lNumericFieldBlanks(14) && (!lAlphaFieldBlanks(9))) {
                             ShowWarningError(RoutineName +
-                                             "Minimum Outdoor Temperature: the value field is blank and schedule field is invalid. The default value " +
-                                             format("will be used ({:.1R}) ", -VentilTempLimit));
+                                             format("Minimum Outdoor Temperature: the value field is blank and schedule field is invalid. The default value will be used ({:.1R}) ", -VentilTempLimit));
                             ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
                         }
                         // Check Minimum outdoor temperature value and schedule fields

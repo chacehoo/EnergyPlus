@@ -4094,9 +4094,8 @@ namespace RefrigeratedCase {
                             Real64 TestDelta = (NominalSecondaryCapacity - Secondary(SecondaryNum).CoolingLoadRated) / NominalSecondaryCapacity;
                             if (std::abs(TestDelta) > 0.2) {
                                 ShowWarningError(CurrentModuleObject + "=\"" + Secondary(SecondaryNum).Name +
-                                                 " You may wish to check the system definition. Based upon the design flow rate and range "
-                                                 "temperature difference,  The nominal secondary loop heat exchanger capacity is, " +
-                                                 format("{:.0R} but the specified design capacity is,  ", NominalSecondaryCapacity) +
+                                                 " You may wish to check the system definition. Based upon the design flow rate and range " +
+                                                 format("temperature difference,  The nominal secondary loop heat exchanger capacity is, {:.0R} but the specified design capacity is,  ", NominalSecondaryCapacity) +
                                                  format("{:.0R}", Secondary(SecondaryNum).CoolingLoadRated));
                             }
                         } else if (!lNumericBlanks(1)) {
@@ -4123,8 +4122,7 @@ namespace RefrigeratedCase {
                             Secondary(SecondaryNum).TBrineInRated = TBrineInRated;
                             if (Secondary(SecondaryNum).HeatExchangeEta > 0.99) {
                                 ShowWarningError(CurrentModuleObject + "=\"" + Secondary(SecondaryNum).Name +
-                                                 " You may wish to check the system definition.  The heat exchanger effectiveness is, " +
-                                                 format("{:.2R}", Secondary(SecondaryNum).HeatExchangeEta));
+                                                 format(" You may wish to check the system definition.  The heat exchanger effectiveness is, {:.2R}", Secondary(SecondaryNum).HeatExchangeEta));
                                 Secondary(SecondaryNum).HeatExchangeEta = 0.99;
                             }
                         } else {
@@ -4272,8 +4270,7 @@ namespace RefrigeratedCase {
                             Secondary(SecondaryNum).PumpPowerToHeat = Numbers(NumNum);
                         } else {
                             ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + Secondary(SecondaryNum).Name + "\" " +
-                                             cNumericFieldNames(NumNum) + " must be between 0.5 and 1.0. Default value of : " +
-                                             format("{:.3R} will be used", PumpMotorEfficiency));
+                                             cNumericFieldNames(NumNum) + format(" must be between 0.5 and 1.0. Default value of : {:.3R} will be used", PumpMotorEfficiency));
                         } // range of pump moter heat to fluid
                     }     // blank input for pumppowertoheat
 
@@ -4383,8 +4380,7 @@ namespace RefrigeratedCase {
                             ShowWarningError(
                                 CurrentModuleObject + "=\"" + Secondary(SecondaryNum).Name +
                                 format(" The design brine temperature to the refrigeration loads: {:.1R} ;", TBrineOutRated));
-                            ShowContinueError(" is greater than the design inlet temperature for at least one of the cases or walkins: " +
-                                              format("{:.1R}", Secondary(SecondaryNum).TMinNeeded));
+                            ShowContinueError(format(" is greater than the design inlet temperature for at least one of the cases or walkins: {:.1R}", Secondary(SecondaryNum).TMinNeeded));
                             ShowContinueError(
                                 " Compare your Approach and Evaporating Temperature to the design inlet temperatures needed for the loads.");
                             // ErrorsFound = .TRUE.
@@ -4398,8 +4394,7 @@ namespace RefrigeratedCase {
                             ShowWarningError(CurrentModuleObject + "=\"" + Secondary(SecondaryNum).Name +
                                              "\" You may wish to check the system sizing.  The nominal secondary loop heat exchanger capacity is " +
                                              format("{:.0R}", Secondary(SecondaryNum).CoolingLoadRated) +
-                                             " But the capacity based upon the maximum flow rate is " +
-                                             format("{:.0R}", CapacityAtMaxVolFlow));
+                                             format(" But the capacity based upon the maximum flow rate is {:.0R}", CapacityAtMaxVolFlow));
                         }                            // DeltaCap1 > .3
                     } else {                         // Fluid type phase change                !^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                         if (lNumericBlanks(1)) {     // Chiller/evaporator capacity was not specified
@@ -4429,8 +4424,7 @@ namespace RefrigeratedCase {
                         ShowWarningError(CurrentModuleObject + "=\"" + Secondary(SecondaryNum).Name +
                                          "\" You may wish to check the system sizing. Total nominal refrigerating load is " +
                                          format("{:.0R}", NominalSecondaryRefLoad) +
-                                         " (Including cases, walk-ins, and pump heat).  The nominal secondary loop heat exchanger capacity is " +
-                                         format("{:.0R}", Secondary(SecondaryNum).CoolingLoadRated));
+                                         format(" (Including cases, walk-ins, and pump heat).  The nominal secondary loop heat exchanger capacity is {:.0R}", Secondary(SecondaryNum).CoolingLoadRated));
                     }
                     // compare rated xt xchanger brine flow to the total rated pump flow
                     if (SecondaryFlowVolRated > (1.1 * PumpTotRatedFlowVol)) {
@@ -5983,8 +5977,7 @@ namespace RefrigeratedCase {
                 if (TransSystem(TransRefrigSysNum).TReceiver > GasCooler(TransSystem(TransRefrigSysNum).GasCoolerNum(NumGasCoolers)).MinCondTemp) {
                     ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + TransSystem(TransRefrigSysNum).Name +
                                      format(": The receiver temperature ({:.2R}", TransSystem(TransRefrigSysNum).TReceiver) +
-                                     "C) is greater than the minimum condensing temperature specified for subcritical operation (" +
-                                     format("{:.2R}", GasCooler(TransSystem(TransRefrigSysNum).GasCoolerNum(NumGasCoolers)).MinCondTemp) +
+                                     format("C) is greater than the minimum condensing temperature specified for subcritical operation ({:.2R}", GasCooler(TransSystem(TransRefrigSysNum).GasCoolerNum(NumGasCoolers)).MinCondTemp) +
                                      "C).");
                     ShowContinueError("  The minimum condensing temperature will be set at 5C greater than the receiver temperature.");
                     GasCooler(TransSystem(TransRefrigSysNum).GasCoolerNum(NumGasCoolers)).MinCondTemp =
@@ -5994,8 +5987,7 @@ namespace RefrigeratedCase {
                     if (TransSystem(TransRefrigSysNum).TReceiver <= TransSystem(TransRefrigSysNum).TEvapDesignLT) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + TransSystem(TransRefrigSysNum).Name +
                                         format(": The receiver temperature ({:.2R}", TransSystem(TransRefrigSysNum).TReceiver) +
-                                        "C) is less than the design evaporator temperature for the low temperature loads (" +
-                                        format("{:.2R}C).", TransSystem(TransRefrigSysNum).TEvapDesignLT));
+                                        format("C) is less than the design evaporator temperature for the low temperature loads ({:.2R}C).", TransSystem(TransRefrigSysNum).TEvapDesignLT));
                         ShowContinueError("  Ensure that the receiver temperature is sufficiently greater than the design evaporator temperature for "
                                           "the low temperature loads.");
                         ShowContinueError(
@@ -6007,8 +5999,7 @@ namespace RefrigeratedCase {
                     if (TransSystem(TransRefrigSysNum).TReceiver <= TransSystem(TransRefrigSysNum).TEvapDesignMT) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + TransSystem(TransRefrigSysNum).Name +
                                         format(": The receiver temperature ({:.2R}", TransSystem(TransRefrigSysNum).TReceiver) +
-                                        "C) is less than the design evaporator temperature for the medium temperature loads (" +
-                                        format("{:.2R}C).", TransSystem(TransRefrigSysNum).TEvapDesignMT));
+                                        format("C) is less than the design evaporator temperature for the medium temperature loads ({:.2R}C).", TransSystem(TransRefrigSysNum).TEvapDesignMT));
                         ShowContinueError("  Ensure that the receiver temperature is sufficiently greater than the design evaporator temperature for "
                                           "the medium temperature loads.");
                         ShowContinueError(

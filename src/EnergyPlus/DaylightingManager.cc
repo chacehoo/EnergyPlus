@@ -4968,11 +4968,9 @@ namespace DaylightingManager {
                                                       format(", Zone Minimum Y= {:.2R}", zone.MinimumY) +
                                                       format(", Zone Maximum Y= {:.2R}", zone.MaximumY));
                                     if (IllumMapCalc(MapNum).MapRefPtAbsCoord(2, RefPt) < zone.MinimumY) {
-                                        ShowContinueError("...Y Reference Distance Outside MinimumY= " +
-                                                          format("{:.4R} m.", zone.MinimumY - IllumMapCalc(MapNum).MapRefPtAbsCoord(2, RefPt)));
+                                        ShowContinueError(format("...Y Reference Distance Outside MinimumY= {:.4R} m.", zone.MinimumY - IllumMapCalc(MapNum).MapRefPtAbsCoord(2, RefPt)));
                                     } else {
-                                        ShowContinueError("...Y Reference Distance Outside MaximumY= " +
-                                                          format("{:.4R} m.", IllumMapCalc(MapNum).MapRefPtAbsCoord(2, RefPt) - zone.MaximumY));
+                                        ShowContinueError(format("...Y Reference Distance Outside MaximumY= {:.4R} m.", IllumMapCalc(MapNum).MapRefPtAbsCoord(2, RefPt) - zone.MaximumY));
                                     }
                                 }
                                 if ((IllumMapCalc(MapNum).MapRefPtAbsCoord(3, RefPt) < zone.MinimumZ ||
@@ -4984,11 +4982,9 @@ namespace DaylightingManager {
                                                       format(", Zone Minimum Z= {:.2R}", zone.MinimumZ) +
                                                       format(", Zone Maximum Z= {:.2R}", zone.MaximumZ));
                                     if (IllumMapCalc(MapNum).MapRefPtAbsCoord(3, RefPt) < zone.MinimumZ) {
-                                        ShowContinueError("...Z Reference Distance Outside MinimumZ= " +
-                                                          format("{:.4R} m.", zone.MinimumZ - IllumMapCalc(MapNum).MapRefPtAbsCoord(3, RefPt)));
+                                        ShowContinueError(format("...Z Reference Distance Outside MinimumZ= {:.4R} m.", zone.MinimumZ - IllumMapCalc(MapNum).MapRefPtAbsCoord(3, RefPt)));
                                     } else {
-                                        ShowContinueError("...Z Reference Distance Outside MaximumZ= " +
-                                                          format("{:.4R} m.", IllumMapCalc(MapNum).MapRefPtAbsCoord(3, RefPt) - zone.MaximumZ));
+                                        ShowContinueError(format("...Z Reference Distance Outside MaximumZ= {:.4R} m.", IllumMapCalc(MapNum).MapRefPtAbsCoord(3, RefPt) - zone.MaximumZ));
                                     }
                                 }
                             }
@@ -5373,11 +5369,9 @@ namespace DaylightingManager {
                                           format(", Zone Minimum X= {:.2R}", zone.MinimumX) +
                                           format(", Zone Maximum X= {:.2R}", zone.MaximumX));
                         if (daylCntrl.DaylRefPtAbsCoord(1, refPtNum) < zone.MinimumX) {
-                            ShowContinueError("...X Reference Distance Outside MinimumX= " +
-                                              format("{:.4R} m.", zone.MinimumX - daylCntrl.DaylRefPtAbsCoord(1, refPtNum)));
+                            ShowContinueError(format("...X Reference Distance Outside MinimumX= {:.4R} m.", zone.MinimumX - daylCntrl.DaylRefPtAbsCoord(1, refPtNum)));
                         } else {
-                            ShowContinueError("...X Reference Distance Outside MaximumX= " +
-                                              format("{:.4R} m.", daylCntrl.DaylRefPtAbsCoord(1, refPtNum) - zone.MaximumX));
+                            ShowContinueError(format("...X Reference Distance Outside MaximumX= {:.4R} m.", daylCntrl.DaylRefPtAbsCoord(1, refPtNum) - zone.MaximumX));
                         }
                     }
                     if (daylCntrl.DaylRefPtAbsCoord(2, refPtNum) < zone.MinimumY || daylCntrl.DaylRefPtAbsCoord(2, refPtNum) > zone.MaximumY) {
@@ -5387,11 +5381,9 @@ namespace DaylightingManager {
                                           format(", Zone Minimum Y= {:.2R}", zone.MinimumY) +
                                           format(", Zone Maximum Y= {:.2R}", zone.MaximumY));
                         if (daylCntrl.DaylRefPtAbsCoord(2, refPtNum) < zone.MinimumY) {
-                            ShowContinueError("...Y Reference Distance Outside MinimumY= " +
-                                              format("{:.4R} m.", zone.MinimumY - daylCntrl.DaylRefPtAbsCoord(2, refPtNum)));
+                            ShowContinueError(format("...Y Reference Distance Outside MinimumY= {:.4R} m.", zone.MinimumY - daylCntrl.DaylRefPtAbsCoord(2, refPtNum)));
                         } else {
-                            ShowContinueError("...Y Reference Distance Outside MaximumY= " +
-                                              format("{:.4R} m.", daylCntrl.DaylRefPtAbsCoord(2, refPtNum) - zone.MaximumY));
+                            ShowContinueError(format("...Y Reference Distance Outside MaximumY= {:.4R} m.", daylCntrl.DaylRefPtAbsCoord(2, refPtNum) - zone.MaximumY));
                         }
                     }
                     if (daylCntrl.DaylRefPtAbsCoord(3, refPtNum) < zone.MinimumZ || daylCntrl.DaylRefPtAbsCoord(3, refPtNum) > zone.MaximumZ) {
@@ -5401,11 +5393,9 @@ namespace DaylightingManager {
                                           format(", Zone Minimum Z= {:.2R}", zone.MinimumZ) +
                                           format(", Zone Maximum Z= {:.2R}", zone.MaximumZ));
                         if (daylCntrl.DaylRefPtAbsCoord(3, refPtNum) < zone.MinimumZ) {
-                            ShowContinueError("...Z Reference Distance Outside MinimumZ= " +
-                                              format("{:.4R} m.", zone.MinimumZ - daylCntrl.DaylRefPtAbsCoord(3, refPtNum)));
+                            ShowContinueError(format("...Z Reference Distance Outside MinimumZ= {:.4R} m.", zone.MinimumZ - daylCntrl.DaylRefPtAbsCoord(3, refPtNum)));
                         } else {
-                            ShowContinueError("...Z Reference Distance Outside MaximumZ= " +
-                                              format("{:.4R} m.", daylCntrl.DaylRefPtAbsCoord(3, refPtNum) - zone.MaximumZ));
+                            ShowContinueError(format("...Z Reference Distance Outside MaximumZ= {:.4R} m.", daylCntrl.DaylRefPtAbsCoord(3, refPtNum) - zone.MaximumZ));
                         }
                     }
                 } // refPtNum

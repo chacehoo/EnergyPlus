@@ -1691,8 +1691,7 @@ namespace SurfaceGeometry {
                                                      " does not have the same materials in the reverse order as the construction " +
                                                      state.dataConstruction->Construct(ConstrNumFound).Name + " of adjacent surface " + Surface(Found).Name);
                                     ShowContinueError("or the properties of the reversed layers are not correct due to differing layer front and back side values");
-                                    ShowContinueError("...but Nominal U values are similar, diff=[" +
-                                                      format("{:.4R}", std::abs(NominalU(ConstrNum) - NominalU(ConstrNumFound))) +
+                                    ShowContinueError(format("...but Nominal U values are similar, diff=[{:.4R}", std::abs(NominalU(ConstrNum) - NominalU(ConstrNumFound))) +
                                                       "] ... simulation proceeds.");
                                     if (!izConstDiffMsg) {
                                         ShowContinueError("...if the two zones are expected to have significantly different temperatures, the proper "
@@ -2362,8 +2361,7 @@ namespace SurfaceGeometry {
             if (((std::abs(baseSurface.Azimuth - subSurface.Azimuth) > errorTolerance) && !baseSurfHoriz) ||
                 (std::abs(baseSurface.Tilt - subSurface.Tilt) > errorTolerance)) {
                 surfaceError = true;
-                ShowSevereError("checkSubSurfAzTiltNorm: Outward facing angle of subsurface differs more than " +
-                                format("{:.1R} degrees from base surface.", errorTolerance));
+                ShowSevereError(format("checkSubSurfAzTiltNorm: Outward facing angle of subsurface differs more than {:.1R} degrees from base surface.", errorTolerance));
                 ShowContinueError("Subsurface=\"" + subSurface.Name + "\" Tilt = " + format("{:.1R}", subSurface.Tilt) +
                                   "  Azimuth = " + format("{:.1R}", subSurface.Azimuth));
                 ShowContinueError("Base surface=\"" + baseSurface.Name + "\" Tilt = " + format("{:.1R}", baseSurface.Tilt) +
@@ -2372,13 +2370,11 @@ namespace SurfaceGeometry {
                        (std::abs(baseSurface.Tilt - subSurface.Tilt) > warningTolerance)) {
                 ++checkSubSurfAzTiltNormErrCount;
                 if (checkSubSurfAzTiltNormErrCount == 1 && !DisplayExtraWarnings) {
-                    ShowWarningError("checkSubSurfAzTiltNorm: Some Outward Facing angles of subsurfaces differ more than " +
-                                     format("{:.1R} degrees from base surface.", warningTolerance));
+                    ShowWarningError(format("checkSubSurfAzTiltNorm: Some Outward Facing angles of subsurfaces differ more than {:.1R} degrees from base surface.", warningTolerance));
                     ShowContinueError("...use Output:Diagnostics,DisplayExtraWarnings; to show more details on individual surfaces.");
                 }
                 if (DisplayExtraWarnings) {
-                    ShowWarningError("checkSubSurfAzTiltNorm: Outward facing angle of subsurface differs more than " +
-                                     format("{:.1R} degrees from base surface.", warningTolerance));
+                    ShowWarningError(format("checkSubSurfAzTiltNorm: Outward facing angle of subsurface differs more than {:.1R} degrees from base surface.", warningTolerance));
                     ShowContinueError("Subsurface=\"" + subSurface.Name + "\" Tilt = " + format("{:.1R}", subSurface.Tilt) +
                                       "  Azimuth = " + format("{:.1R}", subSurface.Azimuth));
                     ShowContinueError("Base surface=\"" + baseSurface.Name + "\" Tilt = " + format("{:.1R}", baseSurface.Tilt) +
@@ -4863,8 +4859,7 @@ namespace SurfaceGeometry {
                                                   " -");
                                 ShowContinueError("..( Material=" + dataMaterial.Material(MatGap1).Name +
                                                   " thickness=" + format("{:.3R} +", dataMaterial.Material(MatGap1).Thickness));
-                                ShowContinueError("..Material=" + dataMaterial.Material(MatGap2).Name + " thickness=" +
-                                                  format("{:.3R}", dataMaterial.Material(MatGap2).Thickness) + " )=[" + format("{:.3R}] >.001", MatGapCalc));
+                                ShowContinueError("..Material=" + dataMaterial.Material(MatGap2).Name + format(" thickness={:.3R}", dataMaterial.Material(MatGap2).Thickness) + " )=[" + format("{:.3R}] >.001", MatGapCalc));
                                 ErrorsFound = true;
                             }
                         } else { // Between-glass shade
@@ -4933,8 +4928,7 @@ namespace SurfaceGeometry {
                                                         cAlphaFieldNames(FrameField) + "=\"" + cAlphaArgs(FrameField) + "\"");
                                         ShowContinueError("Divider cannot be specified because the construction has a between-glass shade or blind.");
                                         ShowContinueError("Calculation will proceed without the divider for this window.");
-                                        ShowContinueError("Divider width = [" +
-                                                          format("{:.2R}].", FrameDivider(SurfaceTmp(SurfNum).FrameDivider).DividerWidth));
+                                        ShowContinueError(format("Divider width = [{:.2R}].", FrameDivider(SurfaceTmp(SurfNum).FrameDivider).DividerWidth));
                                         FrameDivider(SurfaceTmp(SurfNum).FrameDivider).DividerWidth = 0.0;
                                     }
                                 } // End of check if window has divider
@@ -6434,8 +6428,7 @@ namespace SurfaceGeometry {
             if (ExtVentedCavity(Item).ProjArea <= 0.0) {
                 ShowSevereError(cCurrentModuleObject + "=\"" + ExtVentedCavity(Item).Name + "\", invalid .");
                 ErrorsFound = true;
-                ShowContinueError("...because gross area of underlying surfaces must be greater than Zero=[" +
-                                  format("{:.2T}].", ExtVentedCavity(Item).ProjArea));
+                ShowContinueError(format("...because gross area of underlying surfaces must be greater than Zero=[{:.2T}].", ExtVentedCavity(Item).ProjArea));
                 continue;
             }
             ExtVentedCavity(Item).ActualArea = ExtVentedCavity(Item).ProjArea * ExtVentedCavity(Item).AreaRatio;
@@ -7660,8 +7653,7 @@ namespace SurfaceGeometry {
                 if (DisplayExtraWarnings) {
                     ShowWarningError(RoutineName + "Distance between two vertices < .01, possibly coincident. for Surface=" +
                                      SurfaceTmp(SurfNum).Name + ", in Zone=" + SurfaceTmp(SurfNum).ZoneName);
-                    ShowContinueError("Vertex [" + fmt::to_string(SurfaceTmp(SurfNum).Sides) + "]=(" +
-                                      format("{:.2R}", SurfaceTmp(SurfNum).Vertex(SurfaceTmp(SurfNum).Sides).x) + ',' +
+                    ShowContinueError("Vertex [" + fmt::to_string(SurfaceTmp(SurfNum).Sides) + format("]=({:.2R}", SurfaceTmp(SurfNum).Vertex(SurfaceTmp(SurfNum).Sides).x) + ',' +
                                       format("{:.2R}", SurfaceTmp(SurfNum).Vertex(SurfaceTmp(SurfNum).Sides).y) + ',' +
                                       format("{:.2R}", SurfaceTmp(SurfNum).Vertex(SurfaceTmp(SurfNum).Sides).z) + ')');
                     ShowContinueError("Vertex [" + fmt::to_string(1) + "]=(" + format("{:.2R}", SurfaceTmp(SurfNum).Vertex(1).x) + ',' +
@@ -11202,8 +11194,7 @@ namespace SurfaceGeometry {
                                 ShowSevereError(RoutineName + "Base Surface=\"" + Surface(Surface(ThisSurf).BaseSurf).Name + "\", ");
                                 ShowContinueError("Window Surface=\"" + Surface(ThisSurf).Name +
                                                   "\" area (with frame) is too large to fit on the surface.");
-                                ShowContinueError("Base surface area (-windows and doors)=[" +
-                                                  format("{:.2T}] m2, frame area=[", Surface(Surface(ThisSurf).BaseSurf).Area) +
+                                ShowContinueError(format("Base surface area (-windows and doors)=[{:.2T}] m2, frame area=[", Surface(Surface(ThisSurf).BaseSurf).Area) +
                                                   format("{:.2T}] m2.", SurfWinFrameArea(ThisSurf)));
                                 ErrorInSurface = true;
                             }
@@ -12772,8 +12763,7 @@ namespace SurfaceGeometry {
         if (negZcount > 0) {
             ShowWarningError("CalcSurfaceCentroid: " + fmt::to_string(negZcount) + " Surfaces have the Z coordinate < 0.");
             ShowContinueError("...in any calculations, Wind Speed will be 0.0 for these surfaces.");
-            ShowContinueError("...in any calculations, Outside temperatures will be the outside temperature + " +
-                              format("{:.3R} for these surfaces.", WeatherFileTempModCoeff));
+            ShowContinueError(format("...in any calculations, Outside temperatures will be the outside temperature + {:.3R} for these surfaces.", WeatherFileTempModCoeff));
             ShowContinueError("...that is, these surfaces will have conditions as though at ground level.");
         }
     }

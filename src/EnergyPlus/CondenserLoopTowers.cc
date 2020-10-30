@@ -2546,8 +2546,7 @@ namespace CondenserLoopTowers {
 
                         if (this->TowerInletCondsAutoSize) {
                             ShowContinueError(
-                                "Because you did not specify the Design Approach Temperature, and you do not have a Sizing:Plant object, " +
-                                format("it was defaulted to {:.2T} C.", DesTowerExitWaterTemp));
+                                format("Because you did not specify the Design Approach Temperature, and you do not have a Sizing:Plant object, it was defaulted to {:.2T} C.", DesTowerExitWaterTemp));
                         } else {
                             // Should never get there...
                             ShowContinueError(
