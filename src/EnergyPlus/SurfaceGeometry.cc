@@ -12723,11 +12723,11 @@ namespace SurfaceGeometry {
 
                     if (!surface.Name.empty()) {
                         ShowWarningError("CalcSurfaceCentroid: caught problem with # of sides, for surface=" + surface.Name);
-                        ShowContinueError("... number of sides must be >= 3, this surface # sides=" + fmt::to_string(surface.Sides));
+                        ShowContinueError(format("... number of sides must be >= 3, this surface # sides={}", surface.Sides));
                     } else {
-                        ShowWarningError("CalcSurfaceCentroid: caught problem with # of sides, for surface=#" + fmt::to_string(ThisSurf));
+                        ShowWarningError(format("CalcSurfaceCentroid: caught problem with # of sides, for surface=#{}", ThisSurf));
                         ShowContinueError("...surface name is blank. Examine surfaces -- this may be a problem with ill-formed interzone surfaces.");
-                        ShowContinueError("... number of sides must be >= 3, this surface # sides=" + fmt::to_string(surface.Sides));
+                        ShowContinueError(format("... number of sides must be >= 3, this surface # sides={}", surface.Sides));
                     }
                     centroid = 0.0;
                 }

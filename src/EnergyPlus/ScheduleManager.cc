@@ -2820,7 +2820,7 @@ namespace ScheduleManager {
         // FUNCTION LOCAL VARIABLE DECLARATIONS:
 
         if (ThisHour > 24) {
-            ShowFatalError("LookUpScheduleValue called with thisHour=" + fmt::to_string(ThisHour));
+            ShowFatalError(format("LookUpScheduleValue called with thisHour={}", ThisHour));
         }
 
         if (ScheduleIndex == -1) {

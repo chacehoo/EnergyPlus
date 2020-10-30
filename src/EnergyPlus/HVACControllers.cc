@@ -1814,7 +1814,7 @@ namespace HVACControllers {
                 // Should never happen
                 ShowSevereError("FindRootSimpleController: Root finder failed at " + CreateHVACStepFullString());
                 ShowContinueError(" Controller name=" + ControllerName);
-                ShowContinueError(" Unrecognized root finder status flag=" + fmt::to_string(RootFinders(ControlNum).StatusFlag));
+                ShowContinueError(format(" Unrecognized root finder status flag={}", RootFinders(ControlNum).StatusFlag));
                 ShowFatalError("Preceding error causes program termination.");
             }
         }

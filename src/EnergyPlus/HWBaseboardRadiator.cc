@@ -258,7 +258,7 @@ namespace HWBaseboardRadiator {
                                       HWBaseboard(BaseboardNum).BranchNum);
                 } else {
                     ShowSevereError("SimBaseboard: Errors in Baseboard=" + HWBaseboard(BaseboardNum).EquipID);
-                    ShowContinueError("Invalid or unimplemented equipment type=" + fmt::to_string(HWBaseboard(BaseboardNum).EquipType));
+                    ShowContinueError(format("Invalid or unimplemented equipment type={}", HWBaseboard(BaseboardNum).EquipType));
                     ShowFatalError("Preceding condition causes termination.");
                 }
             }

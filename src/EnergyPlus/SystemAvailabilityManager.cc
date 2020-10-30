@@ -1830,7 +1830,7 @@ namespace SystemAvailabilityManager {
                 }
 
             } else {
-                ShowSevereError("AvailabilityManager Type not found: " + fmt::to_string(SysAvailType));
+                ShowSevereError(format("AvailabilityManager Type not found: {}", SysAvailType));
                 ShowContinueError("Occurs in Manager=" + SysAvailName);
                 ShowFatalError("Preceding condition causes termination.");
             }

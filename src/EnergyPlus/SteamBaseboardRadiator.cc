@@ -226,7 +226,7 @@ namespace SteamBaseboardRadiator {
                                           state.dataSteamBaseboardRadiator->SteamBaseboard(BaseboardNum).BranchNum);
                     } else {
                         ShowSevereError("SimSteamBaseboard: Errors in Baseboard=" + state.dataSteamBaseboardRadiator->SteamBaseboard(BaseboardNum).EquipID);
-                        ShowContinueError("Invalid or unimplemented equipment type=" + fmt::to_string(state.dataSteamBaseboardRadiator->SteamBaseboard(BaseboardNum).EquipType));
+                        ShowContinueError(format("Invalid or unimplemented equipment type={}", state.dataSteamBaseboardRadiator->SteamBaseboard(BaseboardNum).EquipType));
                         ShowFatalError("Preceding condition causes termination.");
                     }
                 }

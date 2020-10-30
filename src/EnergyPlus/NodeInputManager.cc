@@ -217,7 +217,7 @@ namespace NodeInputManager {
         if (NodeFluidType != NodeType_Air && NodeFluidType != NodeType_Water && NodeFluidType != NodeType_Electric &&
             NodeFluidType != NodeType_Steam && NodeFluidType != NodeType_Unknown) {
             ShowSevereError(RoutineName + NodeObjectType + "=\"" + NodeObjectName + "\", invalid fluid type.");
-            ShowContinueError("..Invalid FluidType=" + fmt::to_string(NodeFluidType));
+            ShowContinueError(format("..Invalid FluidType={}", NodeFluidType));
             ErrorsFound = true;
             ShowFatalError("Preceding issue causes termination.");
         }
@@ -718,7 +718,7 @@ namespace NodeInputManager {
 
         if (NodeFluidType != NodeType_Air && NodeFluidType != NodeType_Water && NodeFluidType != NodeType_Electric &&
             NodeFluidType != NodeType_Steam && NodeFluidType != NodeType_Unknown) {
-            ShowSevereError("AssignNodeNumber: Invalid FluidType=" + fmt::to_string(NodeFluidType));
+            ShowSevereError(format("AssignNodeNumber: Invalid FluidType={}", NodeFluidType));
             ErrorsFound = true;
             ShowFatalError("AssignNodeNumber: Preceding issue causes termination.");
         }

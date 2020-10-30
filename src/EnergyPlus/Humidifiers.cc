@@ -224,7 +224,7 @@ namespace Humidifiers {
                 thisHum.CalcGasSteamHumidifier(state, WaterAddNeeded);
 
             } else {
-                ShowSevereError("SimHumidifier: Invalid Humidifier Type Code=" + fmt::to_string(thisHum.HumType_Code));
+                ShowSevereError(format("SimHumidifier: Invalid Humidifier Type Code={}", thisHum.HumType_Code));
                 ShowContinueError("...Component Name=[" + CompName + "].");
                 ShowFatalError("Preceding Condition causes termination.");
             }

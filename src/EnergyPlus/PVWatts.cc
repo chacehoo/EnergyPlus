@@ -165,7 +165,7 @@ namespace PVWatts {
             m_azimuth = azimuth;
         } else if (m_geometryType == GeometryType::SURFACE) {
             if (surfaceNum == 0 || surfaceNum > DataSurfaces::Surface.size()) {
-                ShowSevereError("PVWatts: SurfaceNum not in Surfaces: " + fmt::to_string(surfaceNum));
+                ShowSevereError(format("PVWatts: SurfaceNum not in Surfaces: {}", surfaceNum));
                 errorsFound = true;
             } else {
                 m_surfaceNum = surfaceNum;

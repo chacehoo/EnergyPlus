@@ -670,8 +670,8 @@ namespace ExternalInterface {
             }
             StopExternalInterfaceIfError();
 
-            DisplayString("Number of outputs in ExternalInterface = " + fmt::to_string(nOutVal));
-            DisplayString("Number of inputs  in ExternalInterface = " + fmt::to_string(nInpVar));
+            DisplayString(format("Number of outputs in ExternalInterface = {}", nOutVal));
+            DisplayString(format("Number of inputs  in ExternalInterface = {}", nInpVar));
 
             InitExternalInterfacefirstCall = false;
 

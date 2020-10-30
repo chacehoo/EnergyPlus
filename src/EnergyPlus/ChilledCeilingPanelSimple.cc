@@ -189,7 +189,7 @@ namespace CoolingPanelSimple {
                     ThisCP.CalcCoolingPanel(state, CoolingPanelNum);
                 } else {
                     ShowSevereError("SimCoolingPanelSimple: Errors in CoolingPanel=" + state.dataChilledCeilingPanelSimple->CoolingPanel(CoolingPanelNum).EquipID);
-                    ShowContinueError("Invalid or unimplemented equipment type=" + fmt::to_string(state.dataChilledCeilingPanelSimple->CoolingPanel(CoolingPanelNum).EquipType));
+                    ShowContinueError(format("Invalid or unimplemented equipment type={}", state.dataChilledCeilingPanelSimple->CoolingPanel(CoolingPanelNum).EquipType));
                     ShowFatalError("Preceding condition causes termination.");
                 }
             }

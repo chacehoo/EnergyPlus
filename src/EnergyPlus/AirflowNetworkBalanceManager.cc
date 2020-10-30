@@ -1252,8 +1252,8 @@ namespace AirflowNetworkBalanceManager {
         CurrentModuleObject = "AirflowNetwork:Distribution:Component:Fan";
         state.dataAirflowNetworkBalanceManager->DisSysNumOfCVFs = inputProcessor->getNumObjectsFound(CurrentModuleObject);
         if (state.dataAirflowNetworkBalanceManager->DisSysNumOfCVFs > 0 && state.dataAirflowNetworkBalanceManager->DisSysNumOfCVFs != inputProcessor->getNumObjectsFound("AirLoopHVAC")) {
-            ShowSevereError("The number of entered AirflowNetwork:Distribution:Component:Fan objects is " + fmt::to_string(state.dataAirflowNetworkBalanceManager->DisSysNumOfCVFs));
-            ShowSevereError("The number of entered AirLoopHVAC objects is " + fmt::to_string(inputProcessor->getNumObjectsFound("AirLoopHVAC")));
+            ShowSevereError(format("The number of entered AirflowNetwork:Distribution:Component:Fan objects is {}", state.dataAirflowNetworkBalanceManager->DisSysNumOfCVFs));
+            ShowSevereError(format("The number of entered AirLoopHVAC objects is {}", inputProcessor->getNumObjectsFound("AirLoopHVAC")));
             ShowContinueError("Both numbers should be equal. Please check your inputs.");
             success = false;
         }
@@ -4682,7 +4682,7 @@ namespace AirflowNetworkBalanceManager {
                                     "The inputs of component name field as a heat exchanger in AIRFLOWNETWORK:DISTRIBUTION:LINKAGE is not correct");
                     ShowContinueError("The entered name of heat exchanger is " + DisSysCompHXData(i).name +
                                       " in AirflowNetwork:Distribution:Component:HeatExchanger objects");
-                    ShowContinueError("The correct appearance number is 2. The entered appearance number is " + fmt::to_string(count));
+                    ShowContinueError(format("The correct appearance number is 2. The entered appearance number is {}", count));
                     ErrorsFound = true;
                 }
                 if ((!DisSysCompHXData(i).CoilParentExists) && count != 1) {
@@ -4690,7 +4690,7 @@ namespace AirflowNetworkBalanceManager {
                                     "The inputs of component name field as a heat exchanger in AIRFLOWNETWORK:DISTRIBUTION:LINKAGE is not correct");
                     ShowContinueError("The entered name of heat exchanger is " + DisSysCompHXData(i).name +
                                       " in AirflowNetwork:Distribution:Component:HeatExchanger objects");
-                    ShowContinueError("The correct appearance number is 1. The entered appearance number is " + fmt::to_string(count));
+                    ShowContinueError(format("The correct appearance number is 1. The entered appearance number is {}", count));
                     ErrorsFound = true;
                 }
             }
@@ -10347,7 +10347,7 @@ namespace AirflowNetworkBalanceManager {
                 ShowSevereError(RoutineName + "The number of " + CurrentModuleObject +
                                 " is not equal to the number of Fan:ZoneExhaust fans defined in ZoneHVAC:EquipmentConnections");
                 ShowContinueError("The number of " + CurrentModuleObject + " is " + fmt::to_string(AirflowNetworkNumOfExhFan));
-                ShowContinueError("The number of Zone exhaust fans defined in ZoneHVAC:EquipmentConnections is " + fmt::to_string(state.dataAirflowNetworkBalanceManager->NumOfExhaustFans));
+                ShowContinueError(format("The number of Zone exhaust fans defined in ZoneHVAC:EquipmentConnections is {}", state.dataAirflowNetworkBalanceManager->NumOfExhaustFans));
                 ErrorsFound = true;
             }
 

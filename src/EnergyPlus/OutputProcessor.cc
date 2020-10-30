@@ -7785,7 +7785,7 @@ Real64 GetInternalVariableValue(int const varType,    // 1=integer, 2=real, 3=me
                               " Number of integer variables = " + fmt::to_string(NumOfIVariable));
         }
         if (keyVarIndex < 1) {
-            ShowFatalError("GetInternalVariableValue: Integer variable passed index <1. Index = " + fmt::to_string(keyVarIndex));
+            ShowFatalError(format("GetInternalVariableValue: Integer variable passed index <1. Index = {}", keyVarIndex));
         }
 
         // must use %Which, %Value is always zero if variable is not a requested report variable
@@ -7797,7 +7797,7 @@ Real64 GetInternalVariableValue(int const varType,    // 1=integer, 2=real, 3=me
                               " Number of real variables = " + fmt::to_string(NumOfRVariable));
         }
         if (keyVarIndex < 1) {
-            ShowFatalError("GetInternalVariableValue: Integer variable passed index <1. Index = " + fmt::to_string(keyVarIndex));
+            ShowFatalError(format("GetInternalVariableValue: Integer variable passed index <1. Index = {}", keyVarIndex));
         }
 
         // must use %Which, %Value is always zero if variable is not a requested report variable

@@ -1285,8 +1285,8 @@ namespace PluginManagement {
         try {
             return PluginManagement::globalVariableValues[handle];  // TODO: This won't be caught as an exception I think
         } catch (...) {
-            EnergyPlus::ShowSevereError("Tried to access plugin global variable value at index " + fmt::to_string(handle));
-            EnergyPlus::ShowContinueError("Available handles range from 0 to " + fmt::to_string(PluginManagement::globalVariableValues.size() - 1));
+            EnergyPlus::ShowSevereError(format("Tried to access plugin global variable value at index {}", handle));
+            EnergyPlus::ShowContinueError(format("Available handles range from 0 to {}", PluginManagement::globalVariableValues.size() - 1));
             EnergyPlus::ShowFatalError("Plugin global variable problem causes program termination");
         }
         return 0.0;
@@ -1308,8 +1308,8 @@ namespace PluginManagement {
         try {
             PluginManagement::globalVariableValues[handle] = value;  // TODO: This won't be caught as an exception I think
         } catch (...) {
-            EnergyPlus::ShowSevereError("Tried to set plugin global variable value at index " + fmt::to_string(handle));
-            EnergyPlus::ShowContinueError("Available handles range from 0 to " + fmt::to_string(PluginManagement::globalVariableValues.size() - 1));
+            EnergyPlus::ShowSevereError(format("Tried to set plugin global variable value at index {}", handle));
+            EnergyPlus::ShowContinueError(format("Available handles range from 0 to {}", PluginManagement::globalVariableValues.size() - 1));
             EnergyPlus::ShowFatalError("Plugin global variable problem causes program termination");
         }
     }

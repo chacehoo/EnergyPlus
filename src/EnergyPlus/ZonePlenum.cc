@@ -193,7 +193,7 @@ namespace ZonePlenum {
 
         } else {
             ShowSevereError("SimAirZonePlenum: Errors in Plenum=" + CompName);
-            ShowContinueError("ZonePlenum: Unhandled plenum type found:" + fmt::to_string(iCompType));
+            ShowContinueError(format("ZonePlenum: Unhandled plenum type found:{}", iCompType));
             ShowFatalError("Preceding conditions cause termination.");
         }
     }

@@ -7411,7 +7411,7 @@ namespace WeatherManager {
                         Line.erase(0, Pos + 1);
                     } else {
                         ShowWarningError("ProcessEPWHeader: Invalid Typical/Extreme Periods Header(WeatherFile)=" + Line.substr(0, Pos));
-                        ShowContinueError("...on processing Typical/Extreme period #" + fmt::to_string(i));
+                        ShowContinueError(format("...on processing Typical/Extreme period #{}", i));
                         state.dataWeatherManager->NumEPWTypExtSets = i - 1;
                         break;
                     }
@@ -7488,7 +7488,7 @@ namespace WeatherManager {
                     } else {
                         ShowWarningError("ProcessEPWHeader: Invalid Typical/Extreme Periods Header(WeatherFile)=" + state.dataWeatherManager->TypicalExtremePeriods(i).Title +
                                          " " + Line.substr(0, Pos));
-                        ShowContinueError("...on processing Typical/Extreme period #" + fmt::to_string(i));
+                        ShowContinueError(format("...on processing Typical/Extreme period #{}", i));
                         state.dataWeatherManager->NumEPWTypExtSets = i - 1;
                         break;
                     }
@@ -7505,7 +7505,7 @@ namespace WeatherManager {
                             }
                         } else {
                             ShowSevereError("ProcessEPWHeader: Invalid Typical/Extreme Periods Start Date Field(WeatherFile)=" + Line.substr(0, Pos));
-                            ShowContinueError("...on processing Typical/Extreme period #" + fmt::to_string(i));
+                            ShowContinueError(format("...on processing Typical/Extreme period #{}", i));
                             ErrorsFound = true;
                         }
                         Line.erase(0, Pos + 1);
@@ -7520,7 +7520,7 @@ namespace WeatherManager {
                             }
                         } else {
                             ShowSevereError("ProcessEPWHeader: Invalid Typical/Extreme Periods End Date Field(WeatherFile)=" + Line.substr(0, Pos));
-                            ShowContinueError("...on processing Typical/Extreme period #" + fmt::to_string(i));
+                            ShowContinueError(format("...on processing Typical/Extreme period #{}", i));
                             ErrorsFound = true;
                         }
                         Line.erase(0, Pos + 1);

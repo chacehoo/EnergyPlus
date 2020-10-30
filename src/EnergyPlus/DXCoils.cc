@@ -1527,7 +1527,7 @@ namespace DXCoils {
             if ((DXCoil(DXCoilNum).NumCapacityStages > MaxCapacityStages) || (DXCoil(DXCoilNum).NumCapacityStages < 1)) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
                 ShowContinueError("...illegal " + cNumericFields(3) + " = " + fmt::to_string(DXCoil(DXCoilNum).NumCapacityStages));
-                ShowContinueError("...Valid range is 1 to " + fmt::to_string(MaxCapacityStages));
+                ShowContinueError(format("...Valid range is 1 to {}", MaxCapacityStages));
                 ErrorsFound = true;
             }
 
@@ -1537,7 +1537,7 @@ namespace DXCoils {
             if ((DXCoil(DXCoilNum).NumDehumidModes > MaxDehumidModes) || (DXCoil(DXCoilNum).NumDehumidModes < 0)) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
                 ShowContinueError("...illegal " + cNumericFields(4) + " = " + fmt::to_string(DXCoil(DXCoilNum).NumDehumidModes));
-                ShowContinueError("...Valid range is 0 to " + fmt::to_string(MaxDehumidModes));
+                ShowContinueError(format("...Valid range is 0 to {}", MaxDehumidModes));
                 ErrorsFound = true;
             }
 

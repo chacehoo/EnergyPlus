@@ -7425,7 +7425,7 @@ namespace ConvectionCoefficients {
                     if (state.dataConvectionCoefficient->CalcGoldsteinNovoselacCeilingDiffuserWindowErrorIDX1 == 0) {
                         ShowSevereMessage(
                             "CalcGoldsteinNovoselacCeilingDiffuserWindow: Convection model not evaluated (bad relative window location)");
-                        ShowContinueError("Value for window location = " + fmt::to_string(WindowLocationType));
+                        ShowContinueError(format("Value for window location = {}", WindowLocationType));
                         ShowContinueError("Occurs for zone named = " + Zone(ZoneNum).Name);
                         ShowContinueError("Convection surface heat transfer coefficient set to 9.999 [W/m2-K] and the simulation continues");
                     }
@@ -7500,7 +7500,7 @@ namespace ConvectionCoefficients {
                 WindowLocationType != InConvWinLoc_NotSet) {
                 if (state.dataConvectionCoefficient->CalcGoldsteinNovoselacCeilingDiffuserWallErrorIDX1 == 0) {
                     ShowSevereMessage("CalcGoldsteinNovoselacCeilingDiffuserWall: Convection model not evaluated (bad relative window location)");
-                    ShowContinueError("Value for window location = " + fmt::to_string(WindowLocationType));
+                    ShowContinueError(format("Value for window location = {}", WindowLocationType));
                     ShowContinueError("Occurs for zone named = " + Zone(ZoneNum).Name);
                     ShowContinueError("Convection surface heat transfer coefficient set to 9.999 [W/m2-K] and the simulation continues");
                 }

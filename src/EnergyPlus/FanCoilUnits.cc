@@ -2439,7 +2439,7 @@ namespace FanCoilUnits {
                                                                ", Final Capacity = " + fmt::to_string(QUnitOut));
                                     ShowContinueErrorTimeStamp("Min water flow used during iterations = " + fmt::to_string(MinWaterFlow) +
                                                                ", Max water flow used during iterations = " + fmt::to_string(MaxWaterFlow));
-                                    ShowContinueErrorTimeStamp("Water flow rate on last iteration = " + fmt::to_string(CWFlow));
+                                    ShowContinueErrorTimeStamp(format("Water flow rate on last iteration = {}", CWFlow));
                                     ShowContinueErrorTimeStamp("..Water flow rate set to last iteration value ");
                                 } else {
                                     ShowRecurringWarningErrorAtEnd("Cold water flow Iteration limit exceeded in fan coil unit " +
@@ -2585,7 +2585,7 @@ namespace FanCoilUnits {
                                                                    ", Final Capacity = " + fmt::to_string(QUnitOut));
                                         ShowContinueErrorTimeStamp("Min water flow used during iterations = " + fmt::to_string(MinWaterFlow) +
                                                                    ", Max water flow used during iterations = " + fmt::to_string(MaxWaterFlow));
-                                        ShowContinueErrorTimeStamp("Water flow rate on last iteration = " + fmt::to_string(HWFlow));
+                                        ShowContinueErrorTimeStamp(format("Water flow rate on last iteration = {}", HWFlow));
                                         ShowContinueErrorTimeStamp("..Water flow rate set to last iteration value ");
                                     } else {
                                         ShowRecurringWarningErrorAtEnd("Hot water flow Iteration limit exceeded in fan coil unit " +
@@ -2818,7 +2818,7 @@ namespace FanCoilUnits {
                                                                ", Final Capacity = " + fmt::to_string(QUnitOut));
                                     ShowContinueErrorTimeStamp("Min part-load used during iterations = " + fmt::to_string(PLRMin) +
                                                                ", Max part-load used during iterations = " + fmt::to_string(PLRMax));
-                                    ShowContinueErrorTimeStamp("Part-load ratio on last iteration = " + fmt::to_string(PLR));
+                                    ShowContinueErrorTimeStamp(format("Part-load ratio on last iteration = {}", PLR));
                                     ShowContinueErrorTimeStamp("..Part-load ratio set to last iteration value ");
                                 } else {
                                     ShowRecurringWarningErrorAtEnd("Part-load ratio cooling iteration limit exceeded in fan coil unit " +
@@ -2830,7 +2830,7 @@ namespace FanCoilUnits {
                                 if (FanCoil(FanCoilNum).LimitErrCountC < 2) {
                                     ShowWarningError("Part-load ratio cooling control failed in fan coil unit " + FanCoil(FanCoilNum).Name);
                                     ShowContinueError("  Bad part-load ratio limits");
-                                    ShowContinueErrorTimeStamp("..Part-load ratio set to " + fmt::to_string(PLRMin));
+                                    ShowContinueErrorTimeStamp(format("..Part-load ratio set to {}", PLRMin));
                                 } else {
                                     ShowRecurringWarningErrorAtEnd("Part-load ratio cooling control failed in fan coil unit " +
                                                                        FanCoil(FanCoilNum).Name,
@@ -2929,7 +2929,7 @@ namespace FanCoilUnits {
                                                                    ", Final Capacity = " + fmt::to_string(QUnitOut));
                                         ShowContinueErrorTimeStamp("Min part-load ratio used during iterations = " + fmt::to_string(PLRMin) +
                                                                    ", Max part-load used during iterations = " + fmt::to_string(PLRMax));
-                                        ShowContinueErrorTimeStamp("Part-load ratio on last iteration = " + fmt::to_string(PLR));
+                                        ShowContinueErrorTimeStamp(format("Part-load ratio on last iteration = {}", PLR));
                                         ShowContinueErrorTimeStamp("..Part-load ratio set to last iteration value ");
                                     } else {
                                         ShowRecurringWarningErrorAtEnd("Part-load ratio heating iteration limit exceeded in fan coil unit " +
@@ -2941,7 +2941,7 @@ namespace FanCoilUnits {
                                     if (FanCoil(FanCoilNum).LimitErrCountH < 2) {
                                         ShowWarningError("Part-load ratio heating control failed in fan coil unit " + FanCoil(FanCoilNum).Name);
                                         ShowContinueError("  Bad hot part-load ratio limits");
-                                        ShowContinueErrorTimeStamp("..Part-load ratio set to " + fmt::to_string(PLRMin));
+                                        ShowContinueErrorTimeStamp(format("..Part-load ratio set to {}", PLRMin));
                                     } else {
                                         ShowRecurringWarningErrorAtEnd("Part-load ratio heating control failed in fan coil unit " +
                                                                            FanCoil(FanCoilNum).Name,
@@ -3259,7 +3259,7 @@ namespace FanCoilUnits {
                             ShowWarningMessage("ZoneHVAC:FourPipeFanCoil=\"" + FanCoil(FanCoilNum).Name +
                                                "\" -- Exceeded max iterations while adjusting cycling fan sensible runtime to meet the zone load "
                                                "within the cooling convergence tolerance.");
-                            ShowContinueErrorTimeStamp("Iterations=" + fmt::to_string(MaxIterCycl));
+                            ShowContinueErrorTimeStamp(format("Iterations={}", MaxIterCycl));
                         }
                         ShowRecurringWarningErrorAtEnd("ZoneHVAC:FourPipeFanCoil=\"" + FanCoil(FanCoilNum).Name +
                                                            "\"  -- Exceeded max iterations error (sensible runtime) continues...",
@@ -3312,7 +3312,7 @@ namespace FanCoilUnits {
                                                "within the heating convergence tolerance.");
                             ShowContinueError(format("...Requested zone load = {:.3T} [W]", QZnReq));
                             ShowContinueError(format("...Fan coil capacity   = {:.3T} [W]", QUnitOut));
-                            ShowContinueErrorTimeStamp("Iterations=" + fmt::to_string(MaxIterCycl));
+                            ShowContinueErrorTimeStamp(format("Iterations={}", MaxIterCycl));
                         }
                         ShowRecurringWarningErrorAtEnd("ZoneHVAC:FourPipeFanCoil=\"" + FanCoil(FanCoilNum).Name +
                                                            "\"  -- Exceeded max iterations error (sensible runtime) continues...",
@@ -4343,7 +4343,7 @@ namespace FanCoilUnits {
                         ShowWarningMessage("ZoneHVAC:FourPipeFanCoil=\"" + FanCoil(FanCoilNum).Name +
                                            "\" -- Exceeded max iterations while adjusting cycling fan sensible runtime to meet the zone load within "
                                            "the cooling convergence tolerance.");
-                        ShowContinueErrorTimeStamp("Iterations=" + fmt::to_string(MaxIterCycl));
+                        ShowContinueErrorTimeStamp(format("Iterations={}", MaxIterCycl));
                     }
                     ShowRecurringWarningErrorAtEnd("ZoneHVAC:FourPipeFanCoil=\"" + FanCoil(FanCoilNum).Name +
                                                        "\"  -- Exceeded max iterations error (sensible runtime) continues...",
@@ -4474,7 +4474,7 @@ namespace FanCoilUnits {
                                 "ZoneHVAC:FourPipeFanCoil=\"" + FanCoil(FanCoilNum).Name +
                                 "\" -- Exceeded max iterations while adjusting cycling fan sensible runtime to meet the zone load within "
                                 "the heating convergence tolerance.");
-                            ShowContinueErrorTimeStamp("Iterations=" + fmt::to_string(MaxIterCycl));
+                            ShowContinueErrorTimeStamp(format("Iterations={}", MaxIterCycl));
                         }
                         ShowRecurringWarningErrorAtEnd("ZoneHVAC:FourPipeFanCoil=\"" + FanCoil(FanCoilNum).Name +
                                                            "\"  -- Exceeded max iterations error (sensible runtime) continues...",

@@ -442,7 +442,7 @@ namespace AirLoopHVACDOAS {
                         if (!(CompNum == 1 || CompNum == state.dataAirLoop->OutsideAirSys(thisDOAS.m_OASystemNum).NumComponents)) {
                             ShowSevereError("The fan placement is either first as blow through or last as draw through in" + CurrentModuleObject +
                                             " = " + state.dataAirLoop->OutsideAirSys(thisDOAS.m_OASystemNum).ComponentName(CompNum));
-                            ShowContinueError("The current position is number " + fmt::to_string(CompNum));
+                            ShowContinueError(format("The current position is number {}", CompNum));
                             errorsFound = true;
                         }
                     } else if (SELECT_CASE_var == "FAN:COMPONENTMODEL") {
@@ -461,7 +461,7 @@ namespace AirLoopHVACDOAS {
                         if (!(CompNum == 1 || CompNum == state.dataAirLoop->OutsideAirSys(thisDOAS.m_OASystemNum).NumComponents)) {
                             ShowSevereError("The fan placement is either first as blow through or last as draw through in" + CurrentModuleObject +
                                             " = " + state.dataAirLoop->OutsideAirSys(thisDOAS.m_OASystemNum).ComponentName(CompNum));
-                            ShowContinueError("The current position is number " + fmt::to_string(CompNum));
+                            ShowContinueError(format("The current position is number {}", CompNum));
                             errorsFound = true;
                         }
                     } else if (SELECT_CASE_var == "COIL:COOLING:WATER") {

@@ -3409,7 +3409,7 @@ namespace HeatRecovery {
                 } else if (SELECT_CASE_var == Cross_Flow_Other) { // CROSS FLOW, Cmax MIXED, Cmin UNMIXED
                     Eps = (1.0 - std::exp(-Z * (1.0 - std::exp(-NTU)))) / Z;
                 } else {
-                    ShowFatalError("HeatRecovery: Illegal flow arrangement in CalculateEpsFromNTUandZ, Value=" + fmt::to_string(FlowArr));
+                    ShowFatalError(format("HeatRecovery: Illegal flow arrangement in CalculateEpsFromNTUandZ, Value={}", FlowArr));
                 }
             }
         }
@@ -3517,7 +3517,7 @@ namespace HeatRecovery {
                 } else if (SELECT_CASE_var == Cross_Flow_Other) { // CROSS FLOW, Cmax MIXED, Cmin UNMIXED
                     NTU = -std::log(1.0 + std::log(1.0 - Eps * Z) / Z);
                 } else {
-                    ShowFatalError("HeatRecovery: Illegal flow arrangement in CalculateNTUfromEpsAndZ, Value=" + fmt::to_string(FlowArr));
+                    ShowFatalError(format("HeatRecovery: Illegal flow arrangement in CalculateNTUfromEpsAndZ, Value={}", FlowArr));
                 }
             }
         }
