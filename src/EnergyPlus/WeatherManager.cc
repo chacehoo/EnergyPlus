@@ -4349,8 +4349,7 @@ namespace WeatherManager {
                     ShowContinueError("..Weather File Location=" + DataEnvironment::WeatherFileLocationTitle);
                     ShowContinueError(format("..due to location differences, Latitude difference=[{:.2R}] degrees, Longitude difference=[{:.2R}", std::abs(DataEnvironment::Latitude - state.dataWeatherManager->WeatherFileLatitude), std::abs(DataEnvironment::Longitude - state.dataWeatherManager->WeatherFileLongitude)) + "] degrees.");
                     ShowContinueError(
-                        format("..Time Zone difference=[{:.1R}] hour(s), Elevation difference=[{:.2R}", std::abs(DataEnvironment::TimeZoneNumber - state.dataWeatherManager->WeatherFileTimeZone), std::abs((DataEnvironment::Elevation - state.dataWeatherManager->WeatherFileElevation) / max(DataEnvironment::Elevation, 1.0) * 100.0)) +
-                        format("] percent, [{:.2R}", std::abs(DataEnvironment::Elevation - state.dataWeatherManager->WeatherFileElevation)) + "] meters.");
+                        format("..Time Zone difference=[{:.1R}] hour(s), Elevation difference=[{:.2R}] percent, [{:.2R}", std::abs(DataEnvironment::TimeZoneNumber - state.dataWeatherManager->WeatherFileTimeZone), std::abs((DataEnvironment::Elevation - state.dataWeatherManager->WeatherFileElevation) / max(DataEnvironment::Elevation, 1.0) * 100.0), std::abs(DataEnvironment::Elevation - state.dataWeatherManager->WeatherFileElevation)) + "] meters.");
                 }
             }
 

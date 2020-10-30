@@ -4167,11 +4167,9 @@ namespace ZoneEquipmentManager {
                                                      " there is unbalanced air flow. Load due to induced outdoor air is neglected.");
                                     ShowContinueErrorTimeStamp("");
                                     ShowContinueError(
-                                        format("  Flows [m3/s]: Inlets: {:.6R}  Unbalanced exhausts: {:.6R}", thisZoneEquip.TotInletAirMassFlowRate / DataEnvironment::StdRhoAir, sysUnbalExhaust / DataEnvironment::StdRhoAir) +
-                                        format("  Returns: {:.6R}", totalZoneReturnMassFlow / DataEnvironment::StdRhoAir));
+                                        format("  Flows [m3/s]: Inlets: {:.6R}  Unbalanced exhausts: {:.6R}  Returns: {:.6R}", thisZoneEquip.TotInletAirMassFlowRate / DataEnvironment::StdRhoAir, sysUnbalExhaust / DataEnvironment::StdRhoAir, totalZoneReturnMassFlow / DataEnvironment::StdRhoAir));
                                     ShowContinueError(
-                                        format("  Infiltration: {:.6R}  Zone Ventilation: {:.6R}", DataHeatBalFanSys::OAMFL(actualZone) / rhoZone, DataHeatBalFanSys::VAMFL(actualZone) / rhoZone) +
-                                        format("  Mixing (incoming): {:.6R}", DataHeatBalFanSys::MixingMassFlowZone(actualZone) / rhoZone));
+                                        format("  Infiltration: {:.6R}  Zone Ventilation: {:.6R}  Mixing (incoming): {:.6R}", DataHeatBalFanSys::OAMFL(actualZone) / rhoZone, DataHeatBalFanSys::VAMFL(actualZone) / rhoZone, DataHeatBalFanSys::MixingMassFlowZone(actualZone) / rhoZone));
                                     ShowContinueError(format("  Imbalance (excess outflow): {:.6R}  Total system OA flow (for all airloops serving this zone): {:.6R}", unbalancedVolFlow, thisZoneEquip.TotAvailAirLoopOA / DataEnvironment::StdRhoAir));
                                     ShowContinueError("  This error will only be reported once per zone.");
                                     thisZoneEquip.FlowError = true;

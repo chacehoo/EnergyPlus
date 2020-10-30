@@ -6178,8 +6178,7 @@ namespace DXCoils {
                         ((RatedVolFlowPerRatedTotCap - MaxRatedVolFlowPerRatedTotCap(DXCT)) > SmallDifferenceTest)) {
                         ShowWarningError("Sizing: " + DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
                                          "\": Rated air volume flow rate per watt of rated total cooling capacity is out of range.");
-                        ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap) +
-                                          format("], Max Rated Vol Flow Per Watt=[{:.3T}", MaxRatedVolFlowPerRatedTotCap(DXCT)) +
+                        ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}], Max Rated Vol Flow Per Watt=[{:.3T}", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap, MaxRatedVolFlowPerRatedTotCap(DXCT)) +
                                           "]. See Input Output Reference Manual for valid range.");
                     }
                 }
@@ -6289,8 +6288,7 @@ namespace DXCoils {
                             ((RatedVolFlowPerRatedTotCap - MaxRatedVolFlowPerRatedTotCap(DXCT)) > SmallDifferenceTest)) {
                             ShowWarningError("Sizing: " + DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
                                              "\": Rated air volume flow rate per watt of rated total cooling capacity is out of range.");
-                            ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap) +
-                                              format("], Max Rated Vol Flow Per Watt=[{:.3T}", MaxRatedVolFlowPerRatedTotCap(DXCT)) +
+                            ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}], Max Rated Vol Flow Per Watt=[{:.3T}", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap, MaxRatedVolFlowPerRatedTotCap(DXCT)) +
                                               "]. See Input Output Reference Manual for valid range.");
                             ShowContinueError("for CoilPerformance:DX:Cooling mode: " + DXCoil(DXCoilNum).CoilPerformanceName(Mode));
                         }
@@ -6338,8 +6336,7 @@ namespace DXCoils {
                         ((RatedVolFlowPerRatedTotCap - MaxRatedVolFlowPerRatedTotCap(DXCT)) > SmallDifferenceTest)) {
                         ShowWarningError("Sizing: " + DXCoil(DXCoilNum).DXCoilType + ' ' + DXCoil(DXCoilNum).Name +
                                          ": Rated air volume flow rate per watt of rated total heating capacity is out of range.");
-                        ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap) +
-                                          format("], Max Rated Vol Flow Per Watt=[{:.3T}", MaxRatedVolFlowPerRatedTotCap(DXCT)) +
+                        ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}], Max Rated Vol Flow Per Watt=[{:.3T}", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap, MaxRatedVolFlowPerRatedTotCap(DXCT)) +
                                           "]. See Input-Output Reference Manual for valid range.");
                     }
                 }
@@ -6417,8 +6414,7 @@ namespace DXCoils {
                     ((RatedVolFlowPerRatedTotCap - MaxRatedVolFlowPerRatedTotCap(DXCT)) > SmallDifferenceTest)) {
                     ShowWarningError("Coil:Cooling:DX:TwoSpeed \"" + DXCoil(DXCoilNum).Name +
                                      "\": At low speed rated air volume flow rate per watt of rated total cooling capacity is out of range.");
-                    ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap) +
-                                      format("], Max Rated Vol Flow Per Watt=[{:.3T}", MaxRatedVolFlowPerRatedTotCap(DXCT)) +
+                    ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}], Max Rated Vol Flow Per Watt=[{:.3T}", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap, MaxRatedVolFlowPerRatedTotCap(DXCT)) +
                                       "]. See Input-Output Reference Manual for valid range.");
                 }
 
@@ -6463,8 +6459,7 @@ namespace DXCoils {
                         ShowWarningError("Sizing: " + DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
                                          "\": Rated air volume flow rate per watt of rated total cooling capacity is out of range at speed " +
                                          fmt::to_string(Mode));
-                        ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap) +
-                                          format("], Max Rated Vol Flow Per Watt=[{:.3T}", MaxRatedVolFlowPerRatedTotCap(DXCT)) +
+                        ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}], Max Rated Vol Flow Per Watt=[{:.3T}", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap, MaxRatedVolFlowPerRatedTotCap(DXCT)) +
                                           "]. See Input Output Reference Manual for valid range.");
                     }
                     DXCoil(DXCoilNum).MSRatedAirMassFlowRate(Mode) =
@@ -6497,8 +6492,7 @@ namespace DXCoils {
                         ShowWarningError("Coil:Heating:DX:MultiSpeed " + DXCoil(DXCoilNum).Name +
                                          ": Rated air volume flow rate per watt of rated total heating capacity is out of range at speed " +
                                          fmt::to_string(Mode));
-                        ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap) +
-                                          format("], Max Rated Vol Flow Per Watt=[{:.3T}", MaxRatedVolFlowPerRatedTotCap(DXCT)) +
+                        ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}], Max Rated Vol Flow Per Watt=[{:.3T}", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap, MaxRatedVolFlowPerRatedTotCap(DXCT)) +
                                           "]. See Input Output Reference Manual for valid range.");
                     }
                 }
@@ -11751,8 +11745,7 @@ namespace DXCoils {
                 ShowContinueError("When AirMassFlow > 0.0 and CycRatio > 0.0 and SpeedNum > 1, then MSHPMassFlowRateLow and MSHPMassFlowRateHigh "
                                   "must also be > 0.0");
                 ShowContinueErrorTimeStamp("");
-                ShowContinueError(format("AirMassFlow={:.3R}", AirMassFlow) + format(",CycRatio={:.3R},SpeedNum={:.0R}", double(SpeedNum)) + format(", MSHPMassFlowRateLow={:.3R}", CycRatio, MSHPMassFlowRateLow) +
-                                  format(", MSHPMassFlowRateHigh={:.3R}", MSHPMassFlowRateHigh));
+                ShowContinueError(format("AirMassFlow={:.3R}", AirMassFlow) + format(",CycRatio={:.3R},SpeedNum={:.0R}", double(SpeedNum)) + format(", MSHPMassFlowRateLow={:.3R}, MSHPMassFlowRateHigh={:.3R}", CycRatio, MSHPMassFlowRateLow, MSHPMassFlowRateHigh));
                 ShowFatalError("Preceding condition(s) causes termination.");
             } else {
                 ShowContinueError("When AirMassFlow > 0.0 and CycRatio > 0.0, then MSHPMassFlowRateHigh must also be > 0.0");
@@ -11810,8 +11803,7 @@ namespace DXCoils {
                                            "\" - Air volume flow rate per watt of rated total cooling capacity is out of range at speed " +
                                            fmt::to_string(SpeedNumLS) + '.');
                         ShowContinueErrorTimeStamp("");
-                        ShowContinueError(format("Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}--{:.3R}] Current value is ", MinOperVolFlowPerRatedTotCap(DXCT), MaxCoolVolFlowPerRatedTotCap(DXCT)) +
-                                          format("{:.3R} m3/s/W", VolFlowperRatedTotCap));
+                        ShowContinueError(format("Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}--{:.3R}] Current value is {:.3R} m3/s/W", MinOperVolFlowPerRatedTotCap(DXCT), MaxCoolVolFlowPerRatedTotCap(DXCT), VolFlowperRatedTotCap));
                         ShowContinueError("Possible causes include inconsistent air flow rates in system components or");
                         ShowContinueError("inconsistent supply air fan operation modes in coil and unitary system objects.");
                     }
@@ -11835,8 +11827,7 @@ namespace DXCoils {
                                            "\" - Air volume flow rate per watt of rated total cooling capacity is out of range at speed " +
                                            fmt::to_string(SpeedNumHS) + '.');
                         ShowContinueErrorTimeStamp("");
-                        ShowContinueError(format("Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}--{:.3R}] Current value is ", MinOperVolFlowPerRatedTotCap(DXCT), MaxCoolVolFlowPerRatedTotCap(DXCT)) +
-                                          format("{:.3R} m3/s/W", VolFlowperRatedTotCap));
+                        ShowContinueError(format("Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}--{:.3R}] Current value is {:.3R} m3/s/W", MinOperVolFlowPerRatedTotCap(DXCT), MaxCoolVolFlowPerRatedTotCap(DXCT), VolFlowperRatedTotCap));
                         ShowContinueError("Possible causes include inconsistent air flow rates in system components or");
                         ShowContinueError("inconsistent supply air fan operation modes in coil and unitary system objects.");
                     }
@@ -12128,8 +12119,7 @@ namespace DXCoils {
                                            "\" - Air volume flow rate per watt of rated total cooling capacity is out of range at speed " +
                                            fmt::to_string(SpeedNum) + '.');
                         ShowContinueErrorTimeStamp("");
-                        ShowContinueError(format("Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}--{:.3R}] Current value is ", MinOperVolFlowPerRatedTotCap(DXCT), MaxCoolVolFlowPerRatedTotCap(DXCT)) +
-                                          format("{:.3R} m3/s/W", VolFlowperRatedTotCap));
+                        ShowContinueError(format("Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}--{:.3R}] Current value is {:.3R} m3/s/W", MinOperVolFlowPerRatedTotCap(DXCT), MaxCoolVolFlowPerRatedTotCap(DXCT), VolFlowperRatedTotCap));
                         ShowContinueError("Possible causes include inconsistent air flow rates in system components or");
                         ShowContinueError("inconsistent supply air fan operation modes in coil and unitary system objects.");
                     }
@@ -12530,8 +12520,7 @@ namespace DXCoils {
                 ShowContinueError("When AirMassFlow > 0.0 and CycRatio > 0.0 and SpeedNum > 1, then MSHPMassFlowRateLow and MSHPMassFlowRateHigh "
                                   "must also be > 0.0");
                 ShowContinueErrorTimeStamp("");
-                ShowContinueError(format("AirMassFlow={:.3R}", AirMassFlow) + format(",CycRatio={:.3R},SpeedNum={:.0R}", double(SpeedNum)) + format(", MSHPMassFlowRateLow={:.3R}", CycRatio, MSHPMassFlowRateLow) +
-                                  format(", MSHPMassFlowRateHigh={:.3R}", MSHPMassFlowRateHigh));
+                ShowContinueError(format("AirMassFlow={:.3R}", AirMassFlow) + format(",CycRatio={:.3R},SpeedNum={:.0R}", double(SpeedNum)) + format(", MSHPMassFlowRateLow={:.3R}, MSHPMassFlowRateHigh={:.3R}", CycRatio, MSHPMassFlowRateLow, MSHPMassFlowRateHigh));
                 ShowFatalError("Preceding condition(s) causes termination.");
             } else {
                 ShowContinueError("When AirMassFlow > 0.0 and CycRatio > 0.0, then MSHPMassFlowRateHigh must also be > 0.0");
@@ -12614,8 +12603,7 @@ namespace DXCoils {
                                            "\" - Air volume flow rate per watt of rated total heating capacity is out of range at speed " +
                                            fmt::to_string(SpeedNumLS) + '.');
                         ShowContinueErrorTimeStamp("");
-                        ShowContinueError(format("Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}--{:.3R}] Current value is ", MinOperVolFlowPerRatedTotCap(DXCT), MaxHeatVolFlowPerRatedTotCap(DXCT)) +
-                                          format("{:.3R} m3/s/W", VolFlowperRatedTotCap));
+                        ShowContinueError(format("Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}--{:.3R}] Current value is {:.3R} m3/s/W", MinOperVolFlowPerRatedTotCap(DXCT), MaxHeatVolFlowPerRatedTotCap(DXCT), VolFlowperRatedTotCap));
                         ShowContinueError("Possible causes include inconsistent air flow rates in system components or");
                         ShowContinueError("inconsistent supply air fan operation modes in coil and unitary system objects.");
                     }
@@ -12639,8 +12627,7 @@ namespace DXCoils {
                                            "\" - Air volume flow rate per watt of rated total heating capacity is out of range at speed " +
                                            fmt::to_string(SpeedNumHS) + '.');
                         ShowContinueErrorTimeStamp("");
-                        ShowContinueError(format("Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}--{:.3R}] Current value is ", MinOperVolFlowPerRatedTotCap(DXCT), MaxHeatVolFlowPerRatedTotCap(DXCT)) +
-                                          format("{:.3R} m3/s/W", VolFlowperRatedTotCap));
+                        ShowContinueError(format("Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}--{:.3R}] Current value is {:.3R} m3/s/W", MinOperVolFlowPerRatedTotCap(DXCT), MaxHeatVolFlowPerRatedTotCap(DXCT), VolFlowperRatedTotCap));
                         ShowContinueError("Possible causes include inconsistent air flow rates in system components or");
                         ShowContinueError("inconsistent supply air fan operation modes in coil and unitary system objects.");
                     }
@@ -12871,8 +12858,7 @@ namespace DXCoils {
                         ShowWarningMessage(DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
                                            "\" - Air volume flow rate per watt of rated total heating capacity is out of range at speed 1.");
                         ShowContinueErrorTimeStamp("");
-                        ShowContinueError(format("Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}--{:.3R}] Current value is ", MinOperVolFlowPerRatedTotCap(DXCT), MaxHeatVolFlowPerRatedTotCap(DXCT)) +
-                                          format("{:.3R} m3/s/W", VolFlowperRatedTotCap));
+                        ShowContinueError(format("Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}--{:.3R}] Current value is {:.3R} m3/s/W", MinOperVolFlowPerRatedTotCap(DXCT), MaxHeatVolFlowPerRatedTotCap(DXCT), VolFlowperRatedTotCap));
                         ShowContinueError("Possible causes include inconsistent air flow rates in system components or");
                         ShowContinueError("inconsistent supply air fan operation modes in coil and unitary system objects.");
                     }
