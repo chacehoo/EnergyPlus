@@ -364,10 +364,11 @@ namespace WindTurbine {
             if (state.dataWindTurbine->WindTurbineSys(WindTurbineNum).CutOutSpeed == 0.0) {
                 if (lNumericBlanks(8)) {
                     ShowSevereError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid " + cNumericFields(8) +
-                                    " is required but input is blank.");
+                        " is required but input is blank.");
                 } else if (state.dataWindTurbine->WindTurbineSys(WindTurbineNum).CutOutSpeed <= state.dataWindTurbine->WindTurbineSys(WindTurbineNum).RatedWindSpeed) {
-                    ShowSevereError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid " + cNumericFields(8) + format("=[{:.2R}=[", rNumericArgs(8)) + "] must be greater than " + cNumericFields(6) +
-                                    format("{:.2R}].", rNumericArgs(6)));
+                  ShowSevereError(
+                      format("{}=\"{}\" invalid {}=[{:.2R}] must be greater than {}=[{:.2R}].", 
+                        CurrentModuleObject, cAlphaArgs(1), cNumericFields(8), rNumericArgs(8), cNumericFields(6), rNumericArgs(6)));
                 } else {
                     ShowSevereError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid " + cNumericFields(8) + format("=[{:.2R}] must be greater than zero", rNumericArgs(8)));
                 }
