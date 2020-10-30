@@ -7655,7 +7655,7 @@ namespace SurfaceGeometry {
                 ++TotalCoincidentVertices;
                 if (SurfaceTmp(SurfNum).Sides > 3) {
                     if (DisplayExtraWarnings) {
-                        ShowContinueError("Dropping Vertex [" + fmt::to_string(SurfaceTmp(SurfNum).Sides) + "].");
+                        ShowContinueError(format("Dropping Vertex [{}].", SurfaceTmp(SurfNum).Sides));
                     }
                     --SurfaceTmp(SurfNum).Sides;
                     SurfaceTmp(SurfNum).Vertex.redimension(SurfaceTmp(SurfNum).Sides);
@@ -7686,7 +7686,7 @@ namespace SurfaceGeometry {
                     if (Vrt == SurfaceTmp(SurfNum).Sides) {
                         if (SurfaceTmp(SurfNum).Sides > 3) {
                             if (DisplayExtraWarnings) {
-                                ShowContinueError("Dropping Vertex [" + fmt::to_string(SurfaceTmp(SurfNum).Sides) + "].");
+                                ShowContinueError(format("Dropping Vertex [{}].", SurfaceTmp(SurfNum).Sides));
                             }
                             --SurfaceTmp(SurfNum).Sides;
                             SurfaceTmp(SurfNum).Vertex.redimension(SurfaceTmp(SurfNum).Sides);
@@ -7702,7 +7702,7 @@ namespace SurfaceGeometry {
                     } else {
                         if (SurfaceTmp(SurfNum).Sides > 3) {
                             if (DisplayExtraWarnings) {
-                                ShowContinueError("Dropping Vertex [" + fmt::to_string(Vrt) + "].");
+                                ShowContinueError(format("Dropping Vertex [{}].", Vrt));
                             }
                             for (n = Vrt; n <= SurfaceTmp(SurfNum).Sides - 1; ++n) {
                                 SurfaceTmp(SurfNum).Vertex(n).x = SurfaceTmp(SurfNum).Vertex(n + 1).x;
@@ -12743,7 +12743,7 @@ namespace SurfaceGeometry {
         } // loop through surfaces
 
         if (negZcount > 0) {
-            ShowWarningError("CalcSurfaceCentroid: " + fmt::to_string(negZcount) + " Surfaces have the Z coordinate < 0.");
+            ShowWarningError(format("CalcSurfaceCentroid: {} Surfaces have the Z coordinate < 0.", negZcount));
             ShowContinueError("...in any calculations, Wind Speed will be 0.0 for these surfaces.");
             ShowContinueError(format("...in any calculations, Outside temperatures will be the outside temperature + {:.3R} for these surfaces.", WeatherFileTempModCoeff));
             ShowContinueError("...that is, these surfaces will have conditions as though at ground level.");

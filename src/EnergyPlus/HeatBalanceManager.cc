@@ -549,10 +549,10 @@ namespace HeatBalanceManager {
             TotConstructs - std::count_if(state.dataConstruction->Construct.begin(), state.dataConstruction->Construct.end(), [](Construction::ConstructionProps const &e) { return e.IsUsed; });
         if (Unused > 0) {
             if (!DisplayExtraWarnings) {
-                ShowWarningError("CheckUsedConstructions: There are " + fmt::to_string(Unused) + " nominally unused constructions in input.");
+                ShowWarningError(format("CheckUsedConstructions: There are {} nominally unused constructions in input.", Unused));
                 ShowContinueError("For explicit details on each unused construction, use Output:Diagnostics,DisplayExtraWarnings;");
             } else {
-                ShowWarningError("CheckUsedConstructions: There are " + fmt::to_string(Unused) + " nominally unused constructions in input.");
+                ShowWarningError(format("CheckUsedConstructions: There are {} nominally unused constructions in input.", Unused));
                 ShowContinueError("Each Unused construction is shown.");
                 for (Loop = 1; Loop <= TotConstructs; ++Loop) {
                     if (state.dataConstruction->Construct(Loop).IsUsed) continue;
@@ -6364,7 +6364,7 @@ namespace HeatBalanceManager {
                 if (!succeeded) {
                     ShowSevereError("HeatBalanceManager: SearchWindow5DataFile: Error in Read of glazing system values. For glazing system=" +
                                     fmt::to_string(IGlSys));
-                    ShowContinueError("Line (~" + fmt::to_string(FileLineCount) + ") in error (first 100 characters)=" + NextLine.data.substr(0, 100));
+                    ShowContinueError(format("Line (~{}) in error (first 100 characters)=", FileLineCount) + NextLine.data.substr(0, 100));
                     ErrorsFound = true;
                 }
                 if (WinHeight(IGlSys) == 0.0 || WinWidth(IGlSys) == 0.0) {
@@ -6445,7 +6445,7 @@ namespace HeatBalanceManager {
                                             FrameEmis);
             if (!succeeded) {
                 ShowSevereError("HeatBalanceManager: SearchWindow5DataFile: Error in Read of frame data values.");
-                ShowContinueError("Line (~" + fmt::to_string(FileLineCount + 11) + ") in error (first 100 characters)=" + DataLine(11).substr(0, 100));
+                ShowContinueError(format("Line (~{}) in error (first 100 characters)=", FileLineCount + 11) + DataLine(11).substr(0, 100));
                 ErrorsFound = true;
             }
             if (FrameWidth > 0.0) {
@@ -6516,25 +6516,25 @@ namespace HeatBalanceManager {
                     if (DividerConductance(IGlSys) <= 0.0) {
                         ShowSevereError("HeatBalanceManager: SearchWindow5DataFile: Construction=" + DesiredConstructionName +
                                         " from the Window5 data file cannot be used:");
-                        ShowContinueError("glazing system " + fmt::to_string(IGlSys) + " has Divider Conductance <= 0.0");
+                        ShowContinueError(format("glazing system {} has Divider Conductance <= 0.0", IGlSys));
                         ErrorsFound = true;
                     }
                     if (DivEdgeToCenterGlCondRatio(IGlSys) < 1.0) {
                         ShowSevereError("HeatBalanceManager: SearchWindow5DataFile: Construction=" + DesiredConstructionName +
                                         " from the Window5 data file cannot be used:");
-                        ShowContinueError("glazing system " + fmt::to_string(IGlSys) + " has Divider Edge-Of-Glass Conduction Ratio < 1.0");
+                        ShowContinueError(format("glazing system {} has Divider Edge-Of-Glass Conduction Ratio < 1.0", IGlSys));
                         ErrorsFound = true;
                     }
                     if (DividerSolAbsorp(IGlSys) < 0.0 || DividerSolAbsorp(IGlSys) > 1.0) {
                         ShowSevereError("HeatBalanceManager: SearchWindow5DataFile: Construction=" + DesiredConstructionName +
                                         " from the Window5 data file cannot be used:");
-                        ShowContinueError("glazing system " + fmt::to_string(IGlSys) + " has Divider Solar Absorptance < 0.0 or > 1.0");
+                        ShowContinueError(format("glazing system {} has Divider Solar Absorptance < 0.0 or > 1.0", IGlSys));
                         ErrorsFound = true;
                     }
                     if (DividerEmis(IGlSys) <= 0.0 || DividerEmis(IGlSys) >= 1.0) {
                         ShowSevereError("HeatBalanceManager: SearchWindow5DataFile: Construction=" + DesiredConstructionName +
                                         " from the Window5 data file cannot be used:");
-                        ShowContinueError("glazing system " + fmt::to_string(IGlSys) + " has Divider Emissivity <= 0.0 or >= 1.0");
+                        ShowContinueError(format("glazing system {} has Divider Emissivity <= 0.0 or >= 1.0", IGlSys));
                         ErrorsFound = true;
                     }
                     if (DividerType(IGlSys) != "DIVIDEDLITE" && DividerType(IGlSys) != "SUSPENDED") {

@@ -1158,7 +1158,7 @@ namespace HeatBalanceIntRadExchange {
 
             if (NumNums < 3 * pow_2(N)) {
                 ShowSevereError("GetInputViewFactors: " + cCurrentModuleObject + "=\"" + ZoneName + "\", not enough values.");
-                ShowContinueError("...Number of input values [" + fmt::to_string(NumNums) + "] is less than the required number=[" +
+                ShowContinueError(format("...Number of input values [{}] is less than the required number=[", NumNums) +
                                   fmt::to_string(3 * pow_2(N)) + "].");
                 ErrorsFound = true;
                 NumNums = 0;
@@ -1349,7 +1349,7 @@ namespace HeatBalanceIntRadExchange {
 
             if (NumNums < pow_2(N)) {
                 ShowWarningError("GetInputViewFactors: " + cCurrentModuleObject + "=\"" + EnclosureName + "\", not enough values.");
-                ShowContinueError("...Number of input values [" + fmt::to_string(NumNums) + "] is less than the required number=[" +
+                ShowContinueError(format("...Number of input values [{}] is less than the required number=[", NumNums) +
                                   fmt::to_string(pow_2(N)) + "] Missing surface pairs will have a zero view factor.");
             }
             F = 0.0;

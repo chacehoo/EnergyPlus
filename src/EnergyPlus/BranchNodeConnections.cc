@@ -615,7 +615,7 @@ namespace BranchNodeConnections {
                                     NodeConnections(Loop1).ObjectName);
                     ShowContinueError("Object has multiple connections on both inlet and outlet fluid streams.");
                     for (Loop2 = 1; Loop2 <= MaxFluidStream; ++Loop2) {
-                        if (FluidStreamCounts(Loop2)) ShowContinueError("...occurs in Fluid Stream [" + fmt::to_string(Loop2) + "].");
+                        if (FluidStreamCounts(Loop2)) ShowContinueError(format("...occurs in Fluid Stream [{}].", Loop2));
                     }
                     ++ErrorCounter;
                     ErrorsFound = true;

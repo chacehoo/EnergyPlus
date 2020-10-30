@@ -423,7 +423,7 @@ namespace ElectricBaseboardRadiator {
             if ((ElecBaseboard(BaseboardNum).TotSurfToDistrib < MinDistribSurfaces) && (ElecBaseboard(BaseboardNum).FracRadiant > MinFraction)) {
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) +
                                 "\", the number of surface/radiant fraction groups entered was less than the allowable minimum.");
-                ShowContinueError("...the minimum that must be entered=[" + fmt::to_string(MinDistribSurfaces) + "].");
+                ShowContinueError(format("...the minimum that must be entered=[{}].", MinDistribSurfaces));
                 ErrorsFound = true;
                 ElecBaseboard(BaseboardNum).TotSurfToDistrib = 0; // error
             }

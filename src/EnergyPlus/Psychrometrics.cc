@@ -713,7 +713,7 @@ namespace Psychrometrics {
         if (iter > itmax) {
             if (!WarmupFlag) {
                 if (iPsyErrIndex(iPsyTwbFnTdbWPb3) == 0) {
-                    ShowWarningMessage("WetBulb not converged after " + fmt::to_string(iter) + " iterations(PsyTwbFnTdbWPb)");
+                    ShowWarningMessage(format("WetBulb not converged after {} iterations(PsyTwbFnTdbWPb)", iter));
                     if (!CalledFrom.empty()) {
                         ShowContinueErrorTimeStamp(" Routine=" + CalledFrom + ',');
                     } else {

@@ -882,7 +882,7 @@ namespace ScheduleManager {
             // check to see if numfield=0
             if (NumFields == 0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\", Insufficient data entered for a full schedule day.");
-                ShowContinueError("...Number of interval fields = = [" + fmt::to_string(NumFields) + "].");
+                ShowContinueError(format("...Number of interval fields = = [{}].", NumFields));
                 ErrorsFound = true;
             }
 
@@ -1004,7 +1004,7 @@ namespace ScheduleManager {
             // check to see if there are any fields
             if (Numbers(1) <= 0.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + "\", Insufficient data entered for a full schedule day.");
-                ShowContinueError("...Minutes per Item field = [" + fmt::to_string(Numbers(1)) + "].");
+                ShowContinueError(format("...Minutes per Item field = [{}].", Numbers(1)));
                 ErrorsFound = true;
                 continue;
             }

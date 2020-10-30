@@ -322,7 +322,7 @@ namespace MixerComponent {
                 ShowSevereError(CurrentModuleObject + " = " + MixerCond(MixerNum).MixerName +
                                 " specifies an inlet node name the same as the outlet node.");
                 ShowContinueError(".." + cAlphaFields(2) + " = " + NodeID(NodeNum));
-                ShowContinueError("..Inlet Node #" + fmt::to_string(InNodeNum1) + " is duplicate.");
+                ShowContinueError(format("..Inlet Node #{} is duplicate.", InNodeNum1));
                 ErrorsFound = true;
             }
             for (InNodeNum1 = 1; InNodeNum1 <= MixerCond(MixerNum).NumInletNodes; ++InNodeNum1) {
@@ -331,7 +331,7 @@ namespace MixerComponent {
                     ShowSevereError(CurrentModuleObject + " = " + MixerCond(MixerNum).MixerName +
                                     " specifies duplicate inlet nodes in its inlet node list.");
                     ShowContinueError("..Inlet Node #" + fmt::to_string(InNodeNum1) + " Name=" + NodeID(InNodeNum1));
-                    ShowContinueError("..Inlet Node #" + fmt::to_string(InNodeNum2) + " is duplicate.");
+                    ShowContinueError(format("..Inlet Node #{} is duplicate.", InNodeNum2));
                     ErrorsFound = true;
                 }
             }

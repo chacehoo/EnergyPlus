@@ -500,7 +500,7 @@ namespace SteamBaseboardRadiator {
             if ((state.dataSteamBaseboardRadiator->SteamBaseboard(BaseboardNum).TotSurfToDistrib < MinDistribSurfaces) && (state.dataSteamBaseboardRadiator->SteamBaseboard(BaseboardNum).FracRadiant > MinFraction)) {
                 ShowSevereError(RoutineName + state.dataSteamBaseboardRadiator->cCMO_BBRadiator_Steam + "=\"" + cAlphaArgs(1) +
                                 "\", the number of surface/radiant fraction groups entered was less than the allowable minimum.");
-                ShowContinueError("...the minimum that must be entered=[" + fmt::to_string(MinDistribSurfaces) + "].");
+                ShowContinueError(format("...the minimum that must be entered=[{}].", MinDistribSurfaces));
                 ErrorsFound = true;
                 state.dataSteamBaseboardRadiator->SteamBaseboard(BaseboardNum).TotSurfToDistrib = 0;
             }

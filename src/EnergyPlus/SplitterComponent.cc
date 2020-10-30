@@ -256,7 +256,7 @@ namespace SplitterComponent {
                 ShowSevereError(CurrentModuleObject + " = " + state.dataSplitterComponent->SplitterCond(SplitterNum).SplitterName +
                                 " specifies an outlet node name the same as the inlet node.");
                 ShowContinueError(".." + cAlphaFields(2) + '=' + NodeID(NodeNum));
-                ShowContinueError("..Outlet Node #" + fmt::to_string(OutNodeNum1) + " is duplicate.");
+                ShowContinueError(format("..Outlet Node #{} is duplicate.", OutNodeNum1));
                 ErrorsFound = true;
             }
             for (OutNodeNum1 = 1; OutNodeNum1 <= state.dataSplitterComponent->SplitterCond(SplitterNum).NumOutletNodes; ++OutNodeNum1) {
@@ -265,7 +265,7 @@ namespace SplitterComponent {
                     ShowSevereError(CurrentModuleObject + " = " + state.dataSplitterComponent->SplitterCond(SplitterNum).SplitterName +
                                     " specifies duplicate outlet nodes in its outlet node list.");
                     ShowContinueError("..Outlet Node #" + fmt::to_string(OutNodeNum1) + " Name=" + NodeID(OutNodeNum1));
-                    ShowContinueError("..Outlet Node #" + fmt::to_string(OutNodeNum2) + " is duplicate.");
+                    ShowContinueError(format("..Outlet Node #{} is duplicate.", OutNodeNum2));
                     ErrorsFound = true;
                 }
             }

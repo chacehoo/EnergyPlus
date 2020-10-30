@@ -3415,7 +3415,7 @@ namespace WindowManager {
                     }
 
                 } else {
-                    ShowFatalError("SolveForWindowTemperatures: Invalid number of Glass Layers=" + fmt::to_string(state.dataWindowManager->ngllayer) + ", up to 4 allowed.");
+                    ShowFatalError(format("SolveForWindowTemperatures: Invalid number of Glass Layers={}, up to 4 allowed.", state.dataWindowManager->ngllayer));
                 }
             }
 

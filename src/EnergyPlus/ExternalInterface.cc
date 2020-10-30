@@ -645,8 +645,8 @@ namespace ExternalInterface {
 
             if (nOutVal + nInpVar > maxVar) {
                 ShowSevereError("ExternalInterface: Too many variables to be exchanged.");
-                ShowContinueError("Attempted to exchange " + fmt::to_string(nOutVal) + " outputs");
-                ShowContinueError("plus " + fmt::to_string(nOutVal) + " inputs.");
+                ShowContinueError(format("Attempted to exchange {} outputs", nOutVal));
+                ShowContinueError(format("plus {} inputs.", nOutVal));
                 ShowContinueError("Maximum allowed is sum is " + fmt::to_string(maxVar) + '.');
                 ShowContinueError("To fix, increase maxVar in ExternalInterface.cc");
                 ErrorsFound = true;
@@ -793,7 +793,7 @@ namespace ExternalInterface {
                         if (FMU(i).Instance(j).fmistatus != fmiOK) {
                             ShowSevereError("ExternalInterface/GetSetVariablesAndDoStepFMUImport: Error when trying to get outputs");
                             ShowContinueError("in instance \"" + FMU(i).Instance(j).Name + "\" of FMU \"" + FMU(i).Name + "\"");
-                            ShowContinueError("Error Code = \"" + fmt::to_string(FMU(i).Instance(j).fmistatus) + "\"");
+                            ShowContinueError(format("Error Code = \"{}\"", FMU(i).Instance(j).fmistatus));
                             ErrorsFound = true;
                             StopExternalInterfaceIfError();
                         }
@@ -824,7 +824,7 @@ namespace ExternalInterface {
                         if (FMU(i).Instance(j).fmistatus != fmiOK) {
                             ShowSevereError("ExternalInterface/GetSetVariablesAndDoStepFMUImport: Error when trying to get outputs");
                             ShowContinueError("in instance \"" + FMU(i).Instance(j).Name + "\" of FMU \"" + FMU(i).Name + "\"");
-                            ShowContinueError("Error Code = \"" + fmt::to_string(FMU(i).Instance(j).fmistatus) + "\"");
+                            ShowContinueError(format("Error Code = \"{}\"", FMU(i).Instance(j).fmistatus));
                             ErrorsFound = true;
                             StopExternalInterfaceIfError();
                         }
@@ -855,7 +855,7 @@ namespace ExternalInterface {
                         if (FMU(i).Instance(j).fmistatus != fmiOK) {
                             ShowSevereError("ExternalInterface/GetSetVariablesAndDoStepFMUImport: Error when trying to get outputs");
                             ShowContinueError("in instance \"" + FMU(i).Instance(j).Name + "\" of FMU \"" + FMU(i).Name + "\"");
-                            ShowContinueError("Error Code = \"" + fmt::to_string(FMU(i).Instance(j).fmistatus) + "\"");
+                            ShowContinueError(format("Error Code = \"{}\"", FMU(i).Instance(j).fmistatus));
                             ErrorsFound = true;
                             StopExternalInterfaceIfError();
                         }
@@ -918,7 +918,7 @@ namespace ExternalInterface {
                     if (FMU(i).Instance(j).fmistatus != fmiOK) {
                         ShowSevereError("ExternalInterface/GetSetVariablesAndDoStepFMUImport: Error when trying to set inputs");
                         ShowContinueError("in instance \"" + FMU(i).Instance(j).Name + "\" of FMU \"" + FMU(i).Name + "\"");
-                        ShowContinueError("Error Code = \"" + fmt::to_string(FMU(i).Instance(j).fmistatus) + "\"");
+                        ShowContinueError(format("Error Code = \"{}\"", FMU(i).Instance(j).fmistatus));
                         ErrorsFound = true;
                         StopExternalInterfaceIfError();
                     }
@@ -931,7 +931,7 @@ namespace ExternalInterface {
                     ShowSevereError("ExternalInterface/GetSetVariablesAndDoStepFMUImport: Error when trying to");
                     ShowContinueError("do the coSimulation with instance \"" + FMU(i).Instance(j).Name + "\"");
                     ShowContinueError("of FMU \"" + FMU(i).Name + "\"");
-                    ShowContinueError("Error Code = \"" + fmt::to_string(FMU(i).Instance(j).fmistatus) + "\"");
+                    ShowContinueError(format("Error Code = \"{}\"", FMU(i).Instance(j).fmistatus));
                     ErrorsFound = true;
                     StopExternalInterfaceIfError();
                 }
@@ -993,7 +993,7 @@ namespace ExternalInterface {
                 if (FMU(i).Instance(j).fmistatus != fmiOK) {
                     ShowSevereError("ExternalInterface/CalcExternalInterfaceFMUImport: Error when trying to initialize");
                     ShowContinueError("instance \"" + FMU(i).Instance(j).Name + "\" of FMU \"" + FMU(i).Name + "\"");
-                    ShowContinueError("Error Code = \"" + fmt::to_string(FMU(i).Instance(j).fmistatus) + "\"");
+                    ShowContinueError(format("Error Code = \"{}\"", FMU(i).Instance(j).fmistatus));
                     ErrorsFound = true;
                     StopExternalInterfaceIfError();
                 }
@@ -1027,7 +1027,7 @@ namespace ExternalInterface {
                 if (FMU(i).Instance(j).fmistatus != fmiOK) {
                     ShowSevereError("ExternalInterface/CalcExternalInterfaceFMUImport: Error when trying to initialize");
                     ShowContinueError("instance \"" + FMU(i).Instance(j).Name + "\" of FMU \"" + FMU(i).Name + "\"");
-                    ShowContinueError("Error Code = \"" + fmt::to_string(FMU(i).Instance(j).fmistatus) + "\"");
+                    ShowContinueError(format("Error Code = \"{}\"", FMU(i).Instance(j).fmistatus));
                     ErrorsFound = true;
                     StopExternalInterfaceIfError();
                 }
@@ -1495,7 +1495,7 @@ namespace ExternalInterface {
                                          fmt::to_string(FMU(i).Instance(j).NumInputVariablesInIDF) + ')');
                         ShowContinueError("of instance \"" + FMU(i).Instance(j).Name + "\" of FMU \"" + FMU(i).Name +
                                           "\" is less than the number of input variables");
-                        ShowContinueError("in the modelDescription file (" + fmt::to_string(FMU(i).Instance(j).NumInputVariablesInFMU) + ").");
+                        ShowContinueError(format("in the modelDescription file ({}).", FMU(i).Instance(j).NumInputVariablesInFMU));
                         ShowContinueError("Check the input file and the modelDescription file again.");
                     }
                     // check whether the number of input variables in fmu is less than in the idf
@@ -1504,7 +1504,7 @@ namespace ExternalInterface {
                                          fmt::to_string(FMU(i).Instance(j).NumInputVariablesInIDF) + ')');
                         ShowContinueError("of instance \"" + FMU(i).Instance(j).Name + "\" of FMU \"" + FMU(i).Name +
                                           "\" is bigger than the number of input variables");
-                        ShowContinueError("in the modelDescription file (" + fmt::to_string(FMU(i).Instance(j).NumInputVariablesInFMU) + ").");
+                        ShowContinueError(format("in the modelDescription file ({}).", FMU(i).Instance(j).NumInputVariablesInFMU));
                         ShowContinueError("Check the input file and the modelDescription file again.");
                     }
                 }
@@ -1825,7 +1825,7 @@ namespace ExternalInterface {
                                          fmt::to_string(FMU(i).Instance(j).NumOutputVariablesInIDF) + ')');
                         ShowContinueError("of instance \"" + FMU(i).Instance(j).Name + "\" of FMU \"" + FMU(i).Name +
                                           "\" is less than the number of output variables");
-                        ShowContinueError("in the modelDescription file (" + fmt::to_string(FMU(i).Instance(j).NumOutputVariablesInFMU) + ").");
+                        ShowContinueError(format("in the modelDescription file ({}).", FMU(i).Instance(j).NumOutputVariablesInFMU));
                         ShowContinueError("Check the input file and the modelDescription file again.");
                     }
                     // check whether the number of output variables in fmu is less than in the idf
@@ -1834,7 +1834,7 @@ namespace ExternalInterface {
                                          fmt::to_string(FMU(i).Instance(j).NumOutputVariablesInIDF) + ')');
                         ShowContinueError("of instance \"" + FMU(i).Instance(j).Name + "\" of FMU \"" + FMU(i).Name +
                                           "\" is bigger than the number of output variables");
-                        ShowContinueError("in the modelDescription file (" + fmt::to_string(FMU(i).Instance(j).NumOutputVariablesInFMU) + ").");
+                        ShowContinueError(format("in the modelDescription file ({}).", FMU(i).Instance(j).NumOutputVariablesInFMU));
                         ShowContinueError("Check the input file and the modelDescription file again.");
                     }
 
@@ -2174,7 +2174,7 @@ namespace ExternalInterface {
                             ShowSevereError("ExternalInterface/CalcExternalInterfaceFMUImport: ");
                             ShowContinueError("Error when trying to set inputs in instance");
                             ShowContinueError("\"" + FMU(i).Instance(j).Name + "\" of FMU \"" + FMU(i).Name + "\"");
-                            ShowContinueError("Error Code = \"" + fmt::to_string(FMU(i).Instance(j).fmistatus) + "\"");
+                            ShowContinueError(format("Error Code = \"{}\"", FMU(i).Instance(j).fmistatus));
                             ErrorsFound = true;
                             StopExternalInterfaceIfError();
                         }
@@ -2397,7 +2397,7 @@ namespace ExternalInterface {
                         ExternalInterfaceSetErlVariable(varInd(i), dblValRea(i));
                     } else {
                         ShowContinueError("ExternalInterface: Error in finding the type of the input variable for EnergyPlus");
-                        ShowContinueError("variable index: " + fmt::to_string(i) + ". Variable will not be updated.");
+                        ShowContinueError(format("variable index: {}. Variable will not be updated.", i));
                     }
                 }
             }

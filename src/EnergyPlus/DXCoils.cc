@@ -8719,7 +8719,7 @@ namespace DXCoils {
                                 ShowContinueError(format(" Negative value occurs using a condenser inlet air temperature of {:.1T}.", CondInletTemp));
                             }
                             if (Mode > 1) {
-                                ShowContinueError(" Negative output results from stage " + fmt::to_string(Mode) + " compressor operation.");
+                                ShowContinueError(format(" Negative output results from stage {} compressor operation.", Mode));
                             }
                             ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                         }
@@ -8742,7 +8742,7 @@ namespace DXCoils {
                             ShowContinueError(format(" Negative value occurs using an air flow fraction of {:.3T}.", AirMassFlowRatio));
                             ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                             if (Mode > 1) {
-                                ShowContinueError(" Negative output results from stage " + fmt::to_string(Mode) + " compressor operation.");
+                                ShowContinueError(format(" Negative output results from stage {} compressor operation.", Mode));
                             }
                         }
                         ShowRecurringWarningErrorAtEnd(
@@ -9083,7 +9083,7 @@ namespace DXCoils {
                                               '.');
                         }
                         if (Mode > 1) {
-                            ShowContinueError(" Negative output results from stage " + fmt::to_string(Mode) + " compressor operation.");
+                            ShowContinueError(format(" Negative output results from stage {} compressor operation.", Mode));
                         }
                         ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                     }
@@ -9106,7 +9106,7 @@ namespace DXCoils {
                         ShowContinueError(format(" Negative value occurs using an air flow fraction of {:.3T}.", AirMassFlowRatio));
                         ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                         if (Mode > 1) {
-                            ShowContinueError(" Negative output results from stage " + fmt::to_string(Mode) + " compressor operation.");
+                            ShowContinueError(format(" Negative output results from stage {} compressor operation.", Mode));
                         }
                     }
                     ShowRecurringWarningErrorAtEnd(
@@ -9632,7 +9632,7 @@ namespace DXCoils {
                     ShowContinueError(format(" Total Cooling Capacity Modifier curve (function of temperature) output is negative ({:.3T}).", TotCapTempModFac));
                     ShowContinueError(format(" Negative value occurs using a condenser inlet temperature of {:.1T} and an inlet air wet-bulb temperature of {:.1T}.", CondInletTemp, InletAirWetBulbC));
                     if (Mode > 1) {
-                        ShowContinueError(" Negative output results from stage " + fmt::to_string(Mode) + " compressor operation.");
+                        ShowContinueError(format(" Negative output results from stage {} compressor operation.", Mode));
                     }
                     ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                 }
@@ -9657,7 +9657,7 @@ namespace DXCoils {
                     ShowContinueError(format(" Negative value occurs using an air flow fraction of {:.3T}.", AirMassFlowRatio));
                     ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                     if (Mode > 1) {
-                        ShowContinueError(" Negative output results from stage " + fmt::to_string(Mode) + " compressor operation.");
+                        ShowContinueError(format(" Negative output results from stage {} compressor operation.", Mode));
                     }
                 }
                 ShowRecurringWarningErrorAtEnd(

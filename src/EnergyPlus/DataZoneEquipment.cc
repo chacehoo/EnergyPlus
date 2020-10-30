@@ -607,7 +607,7 @@ namespace DataZoneEquipment {
                                           fmt::to_string(thisZoneEquipList.CoolingPriority(ZoneEquipTypeNum)) + "].");
                         ShowContinueError("equipment sequence must be > 0 and <= number of equipments in the list.");
                         if (thisZoneEquipList.CoolingPriority(ZoneEquipTypeNum) > 0)
-                            ShowContinueError("only " + fmt::to_string(thisZoneEquipList.NumOfEquipTypes) + " in the list.");
+                            ShowContinueError(format("only {} in the list.", thisZoneEquipList.NumOfEquipTypes));
                         GetZoneEquipmentDataErrorsFound = true;
                     }
 
@@ -619,7 +619,7 @@ namespace DataZoneEquipment {
                                           fmt::to_string(thisZoneEquipList.HeatingPriority(ZoneEquipTypeNum)) + "].");
                         ShowContinueError("equipment sequence must be > 0 and <= number of equipments in the list.");
                         if (thisZoneEquipList.HeatingPriority(ZoneEquipTypeNum) > 0)
-                            ShowContinueError("only " + fmt::to_string(thisZoneEquipList.NumOfEquipTypes) + " in the list.");
+                            ShowContinueError(format("only {} in the list.", thisZoneEquipList.NumOfEquipTypes));
                         GetZoneEquipmentDataErrorsFound = true;
                     }
 

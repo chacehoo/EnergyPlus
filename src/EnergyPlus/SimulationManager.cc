@@ -2817,9 +2817,9 @@ namespace SimulationManager {
             ShowMessage("No node connection errors were found.");
         } else {
             if (NumNodeConnectionErrors > 1) {
-                ShowMessage("There were " + fmt::to_string(NumNodeConnectionErrors) + " node connection errors noted.");
+                ShowMessage(format("There were {} node connection errors noted.", NumNodeConnectionErrors));
             } else {
-                ShowMessage("There was " + fmt::to_string(NumNodeConnectionErrors) + " node connection error noted.");
+                ShowMessage(format("There was {} node connection error noted.", NumNodeConnectionErrors));
             }
         }
 

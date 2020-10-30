@@ -2331,7 +2331,7 @@ namespace SolarShading {
                     ShowSevereError("Cosine of incident angle of beam solar on surface out of range...too high");
                     ShowContinueError("This is a diagnostic error that should not be encountered under normal circumstances");
                     ShowContinueError("Occurs on surface: " + Surface(SurfNum).Name);
-                    ShowContinueError("Current value = " + fmt::to_string(CosIncAngBeamOnSurface) + " ... should be within [-1, +1]");
+                    ShowContinueError(format("Current value = {} ... should be within [-1, +1]", CosIncAngBeamOnSurface));
                     ShowFatalError("Anisotropic solar calculation causes fatal error");
                 }
                 CosIncAngBeamOnSurface = 1.0;
@@ -2340,7 +2340,7 @@ namespace SolarShading {
                     ShowSevereError("Cosine of incident angle of beam solar on surface out of range...too low");
                     ShowContinueError("This is a diagnostic error that should not be encountered under normal circumstances");
                     ShowContinueError("Occurs on surface: " + Surface(SurfNum).Name);
-                    ShowContinueError("Current value = " + fmt::to_string(CosIncAngBeamOnSurface) + " ... should be within [-1, +1]");
+                    ShowContinueError(format("Current value = {} ... should be within [-1, +1]", CosIncAngBeamOnSurface));
                     ShowFatalError("Anisotropic solar calculation causes fatal error");
                 }
                 CosIncAngBeamOnSurface = -1.0;
@@ -11019,7 +11019,7 @@ namespace SolarShading {
                 TotalWarningErrors += Count - 1;
                 ShowWarningError("Base surface does not surround subsurface (CHKSBS), Overlap Status=" +
                                  state.dataSolarShading->cOverLapStatus(state.dataSolarShading->TrackBaseSubSurround(Loop1).MiscIndex));
-                ShowContinueError("  The base surround errors occurred " + fmt::to_string(Count) + " times.");
+                ShowContinueError(format("  The base surround errors occurred {} times.", Count));
                 for (Loop2 = 1; Loop2 <= state.dataSolarShading->NumBaseSubSurround; ++Loop2) {
                     if (state.dataSolarShading->TrackBaseSubSurround(Loop1).SurfIndex1 == state.dataSolarShading->TrackBaseSubSurround(Loop2).SurfIndex1 &&
                         state.dataSolarShading->TrackBaseSubSurround(Loop1).MiscIndex == state.dataSolarShading->TrackBaseSubSurround(Loop2).MiscIndex) {
@@ -11032,7 +11032,7 @@ namespace SolarShading {
             }
             if (TotCount > 0) {
                 ShowMessage("");
-                ShowContinueError("  The base surround errors occurred " + fmt::to_string(TotCount) + " times (total).");
+                ShowContinueError(format("  The base surround errors occurred {} times (total).", TotCount));
                 ShowMessage("");
             }
 
@@ -11040,7 +11040,7 @@ namespace SolarShading {
             SurfErrorReported = false;
             TotCount = 0;
             if (state.dataSolarShading->NumTooManyVertices > 0) {
-                ShowMessage("Too many vertices [>=" + fmt::to_string(state.dataSolarShading->MaxHCV) + "] in shadow overlap errors occurring...");
+                ShowMessage(format("Too many vertices [>={}] in shadow overlap errors occurring...", state.dataSolarShading->MaxHCV));
                 ShowMessage("These occur throughout the year and may occur several times for the same surfaces. You may be able to reduce them by "
                             "adding Output:Diagnostics,DoNotMirrorDetachedShading;");
             }
@@ -11056,10 +11056,10 @@ namespace SolarShading {
                 TotCount += Count;
                 TotalWarningErrors += Count - 1;
                 ShowMessage("");
-                ShowWarningError("Too many vertices [>=" + fmt::to_string(state.dataSolarShading->MaxHCV) + "] in a shadow overlap");
+                ShowWarningError(format("Too many vertices [>={}] in a shadow overlap", state.dataSolarShading->MaxHCV));
                 ShowContinueError("Overlapping figure=" + Surface(state.dataSolarShading->TrackTooManyVertices(Loop1).SurfIndex1).Name + ", Surface Class=[" +
                                   cSurfaceClass(Surface(state.dataSolarShading->TrackTooManyVertices(Loop1).SurfIndex1).Class) + ']');
-                ShowContinueError("  This error occurred " + fmt::to_string(Count) + " times.");
+                ShowContinueError(format("  This error occurred {} times.", Count));
                 for (Loop2 = 1; Loop2 <= state.dataSolarShading->NumTooManyVertices; ++Loop2) {
                     if (state.dataSolarShading->TrackTooManyVertices(Loop1).SurfIndex1 == state.dataSolarShading->TrackTooManyVertices(Loop2).SurfIndex1) {
                         if (SurfErrorReported2(state.dataSolarShading->TrackTooManyVertices(Loop2).SurfIndex2)) continue;
@@ -11072,14 +11072,14 @@ namespace SolarShading {
             }
             if (TotCount > 0) {
                 ShowMessage("");
-                ShowContinueError("  The too many vertices errors occurred " + fmt::to_string(TotCount) + " times (total).");
+                ShowContinueError(format("  The too many vertices errors occurred {} times (total).", TotCount));
                 ShowMessage("");
             }
 
             SurfErrorReported = false;
             TotCount = 0;
             if (state.dataSolarShading->NumTooManyFigures > 0) {
-                ShowMessage("Too many figures [>=" + fmt::to_string(state.dataSolarShading->MaxHCS) + "] in shadow overlap errors occurring...");
+                ShowMessage(format("Too many figures [>={}] in shadow overlap errors occurring...", state.dataSolarShading->MaxHCS));
                 ShowMessage("These occur throughout the year and may occur several times for the same surfaces. You may be able to reduce them by "
                             "adding OutputDiagnostics,DoNotMirrorDetachedShading;");
             }
@@ -11095,10 +11095,10 @@ namespace SolarShading {
                 TotCount += Count;
                 TotalWarningErrors += Count - 1;
                 ShowMessage("");
-                ShowWarningError("Too many figures [>=" + fmt::to_string(state.dataSolarShading->MaxHCS) + "] in a shadow overlap");
+                ShowWarningError(format("Too many figures [>={}] in a shadow overlap", state.dataSolarShading->MaxHCS));
                 ShowContinueError("Overlapping figure=" + Surface(state.dataSolarShading->TrackTooManyFigures(Loop1).SurfIndex1).Name + ", Surface Class=[" +
                                   cSurfaceClass(Surface(state.dataSolarShading->TrackTooManyFigures(Loop1).SurfIndex1).Class) + ']');
-                ShowContinueError("  This error occurred " + fmt::to_string(Count) + " times.");
+                ShowContinueError(format("  This error occurred {} times.", Count));
                 for (Loop2 = 1; Loop2 <= state.dataSolarShading->NumTooManyFigures; ++Loop2) {
                     if (state.dataSolarShading->TrackTooManyFigures(Loop1).SurfIndex1 == state.dataSolarShading->TrackTooManyFigures(Loop2).SurfIndex1) {
                         if (SurfErrorReported2(state.dataSolarShading->TrackTooManyFigures(Loop2).SurfIndex2)) continue;
@@ -11111,7 +11111,7 @@ namespace SolarShading {
             }
             if (TotCount > 0) {
                 ShowMessage("");
-                ShowContinueError("  The too many figures errors occurred " + fmt::to_string(TotCount) + " times (total).");
+                ShowContinueError(format("  The too many figures errors occurred {} times (total).", TotCount));
                 ShowMessage("");
             }
             SurfErrorReported.deallocate();

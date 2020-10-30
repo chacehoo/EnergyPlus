@@ -8773,8 +8773,8 @@ CurrentModuleObject,
         }
 
         if (NumUnusedRefrig > 0 || NumUnusedGlycol > 0) {
-            if (NumUnusedRefrig > 0) ShowMessage("There are " + fmt::to_string(NumUnusedRefrig) + " unused refrigerants in input.");
-            if (NumUnusedGlycol > 0) ShowMessage("There are " + fmt::to_string(NumUnusedGlycol) + " unused glycols in input.");
+            if (NumUnusedRefrig > 0) ShowMessage(format("There are {} unused refrigerants in input.", NumUnusedRefrig));
+            if (NumUnusedGlycol > 0) ShowMessage(format("There are {} unused glycols in input.", NumUnusedGlycol));
             ShowMessage("Use Output:Diagnostics,DisplayUnusedObjects; to see them.");
         }
     }
