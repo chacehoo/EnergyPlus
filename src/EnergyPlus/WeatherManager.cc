@@ -4441,12 +4441,10 @@ namespace WeatherManager {
                 Real64 const DiffCalc = std::abs(DataEnvironment::TimeZoneNumber - StdTimeMerid);
                 if (DiffCalc > 1.0 && DiffCalc < 24.0) {
                     if (DiffCalc < 3.0) {
-                        ShowWarningError("Standard Time Meridian and Time Zone differ by more than 1, Difference=\"" +
-                                         format("{:.1R}", DiffCalc) + "\"");
+                        ShowWarningError(format("Standard Time Meridian and Time Zone differ by more than 1, Difference=\"{:.1R}", DiffCalc) + "\"");
                         ShowContinueError("Solar Positions may be incorrect");
                     } else {
-                        ShowSevereError("Standard Time Meridian and Time Zone differ by more than 2, Difference=\"" +
-                                        format("{:.1R}", DiffCalc) + "\"");
+                        ShowSevereError(format("Standard Time Meridian and Time Zone differ by more than 2, Difference=\"{:.1R}", DiffCalc) + "\"");
                         ShowContinueError("Solar Positions will be incorrect");
                         //          LocationError=.TRUE.
                     }

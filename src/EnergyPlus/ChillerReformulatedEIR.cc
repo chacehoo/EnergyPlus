@@ -2311,8 +2311,7 @@ namespace ChillerReformulatedEIR {
         if (this->EvapOutletTemp < CAPFTXTmin || this->EvapOutletTemp > CAPFTXTmax) {
             ++this->CAPFTXIter;
             if (this->CAPFTXIter == 1) {
-                ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name + "\": The evaporator outlet temperature (" +
-                                 format("{:.2T}", this->EvapOutletTemp) +
+                ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name + format("\": The evaporator outlet temperature ({:.2T}", this->EvapOutletTemp) +
                                  " C) is outside the range of evaporator outlet temperatures (X var) given in Cooling Capacity Function of "
                                  "Temperature biquadratic curve = " +
                                  this->CAPFTName);
@@ -2335,8 +2334,7 @@ namespace ChillerReformulatedEIR {
         if (this->EvapOutletTemp < EIRFTXTmin || this->EvapOutletTemp > EIRFTXTmax) {
             ++this->EIRFTXIter;
             if (this->EIRFTXIter == 1) {
-                ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name + "\": The evaporator outlet temperature (" +
-                                 format("{:.2T}", this->EvapOutletTemp) +
+                ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name + format("\": The evaporator outlet temperature ({:.2T}", this->EvapOutletTemp) +
                                  " C) is outside the range of evaporator outlet temperatures (X var) given in Electric Input to Cooling Output Ratio "
                                  "Function of Temperature biquadratic curve = " +
                                  this->EIRFTName);
@@ -2392,8 +2390,7 @@ namespace ChillerReformulatedEIR {
         if (this->CondOutletTemp < CAPFTYTmin || this->CondOutletTemp > CAPFTYTmax) {
             ++this->CAPFTYIter;
             if (this->CAPFTYIter == 1) {
-                ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name + "\": The condenser outlet temperature (" +
-                                 format("{:.2T}", this->CondOutletTemp) +
+                ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name + format("\": The condenser outlet temperature ({:.2T}", this->CondOutletTemp) +
                                  " C) is outside the range of condenser outlet temperatures (Y var) given in Cooling Capacity Function of "
                                  "Temperature biquadratic curve = " +
                                  this->CAPFTName);
@@ -2416,8 +2413,7 @@ namespace ChillerReformulatedEIR {
         if (this->CondOutletTemp < EIRFTYTmin || this->CondOutletTemp > EIRFTYTmax) {
             ++this->EIRFTYIter;
             if (this->EIRFTYIter == 1) {
-                ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name + "\": The condenser outlet temperature (" +
-                                 format("{:.2T}", this->CondOutletTemp) +
+                ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name + format("\": The condenser outlet temperature ({:.2T}", this->CondOutletTemp) +
                                  " C) is outside the range of condenser outlet temperatures (Y var) given in Electric Input to Cooling Output Ratio "
                                  "Function of Temperature biquadratic curve = " +
                                  this->EIRFTName);
@@ -2443,8 +2439,7 @@ namespace ChillerReformulatedEIR {
             if (this->CondOutletTemp < EIRFPLRTmin || this->CondOutletTemp > EIRFPLRTmax) {
                 ++this->EIRFPLRTIter;
                 if (this->EIRFPLRTIter == 1) {
-                    ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name + "\": The condenser outlet temperature (" +
-                                     format("{:.2T}", this->CondOutletTemp) +
+                    ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name + format("\": The condenser outlet temperature ({:.2T}", this->CondOutletTemp) +
                                      " C) is outside the range of condenser outlet temperatures (X var) given in Electric Input to Cooling Output "
                                      "Ratio Function of Part-load Ratio bicubic curve = " +
                                      this->EIRFPLRName);
@@ -2470,8 +2465,7 @@ namespace ChillerReformulatedEIR {
         if (this->ChillerPartLoadRatio < EIRFPLRPLRmin || this->ChillerPartLoadRatio > EIRFPLRPLRmax) {
             ++this->EIRFPLRPLRIter;
             if (this->EIRFPLRPLRIter == 1) {
-                ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name + "\": The part-load ratio (" +
-                                 format("{:.3T}", this->ChillerPartLoadRatio) +
+                ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name + format("\": The part-load ratio ({:.3T}", this->ChillerPartLoadRatio) +
                                  ") is outside the range of part-load ratios (Y var) given in Electric Input to Cooling Output Ratio Function of "
                                  "Part-load Ratio bicubic curve = " +
                                  this->EIRFPLRName);

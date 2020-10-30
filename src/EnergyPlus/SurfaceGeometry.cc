@@ -4314,8 +4314,7 @@ namespace SurfaceGeometry {
             if ((SurfaceTmp(SurfNum).Class != SurfaceClass_Window && SurfaceTmp(SurfNum).Class != SurfaceClass_GlassDoor &&
                  SurfaceTmp(SurfNum).Class != SurfaceClass_Door) &&
                 rNumericArgs(2) > 1.0) {
-                ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", invalid " + cNumericFieldNames(2) + "=[" +
-                                 format("{:.1T}].", rNumericArgs(2)));
+                ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", invalid " + cNumericFieldNames(2) + format("=[{:.1T}].", rNumericArgs(2)));
                 ShowContinueError("...because " + cAlphaFieldNames(2) + '=' + cAlphaArgs(2) + " multiplier will be set to 1.0.");
                 SurfaceTmp(SurfNum).Multiplier = 1.0;
             }
@@ -4638,8 +4637,7 @@ namespace SurfaceGeometry {
                 if ((SurfaceTmp(SurfNum).Class != SurfaceClass_Window && SurfaceTmp(SurfNum).Class != SurfaceClass_GlassDoor &&
                      SurfaceTmp(SurfNum).Class != SurfaceClass_Door) &&
                     rNumericArgs(1) > 1.0) {
-                    ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", invalid " + cNumericFieldNames(1) + "=[" +
-                                     format("{:.1T}].", rNumericArgs(1)));
+                    ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", invalid " + cNumericFieldNames(1) + format("=[{:.1T}].", rNumericArgs(1)));
                     ShowContinueError("...because " + cAlphaFieldNames(1) + '=' + cAlphaArgs(1) + " multiplier will be set to 1.0.");
                     SurfaceTmp(SurfNum).Multiplier = 1.0;
                 }
@@ -5602,8 +5600,7 @@ namespace SurfaceGeometry {
                     }
 
                     if (Length * Depth <= 0.0) {
-                        ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", illegal surface area=[" +
-                                        format("{:.2R}]. Surface will NOT be entered.", Length * Depth));
+                        ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + format("\", illegal surface area=[{:.2R}]. Surface will NOT be entered.", Length * Depth));
                         continue;
                     }
 
@@ -5672,8 +5669,7 @@ namespace SurfaceGeometry {
 
                     MakeFin = true;
                     if (Length * Depth <= 0.0) {
-                        ShowWarningError(cCurrentModuleObject + "=Left Fin of \"" + cAlphaArgs(1) + "\", illegal surface area=[" +
-                                         format("{:.2R}]. Surface will NOT be entered.", Length * Depth));
+                        ShowWarningError(cCurrentModuleObject + "=Left Fin of \"" + cAlphaArgs(1) + format("\", illegal surface area=[{:.2R}]. Surface will NOT be entered.", Length * Depth));
                         MakeFin = false;
                     }
 
@@ -5760,8 +5756,7 @@ namespace SurfaceGeometry {
 
                     MakeFin = true;
                     if (Length * Depth <= 0.0) {
-                        ShowWarningError(cCurrentModuleObject + "=Right Fin of \"" + cAlphaArgs(1) + "\", illegal surface area=[" +
-                                         format("{:.2R}]. Surface will NOT be entered.", Length * Depth));
+                        ShowWarningError(cCurrentModuleObject + "=Right Fin of \"" + cAlphaArgs(1) + format("\", illegal surface area=[{:.2R}]. Surface will NOT be entered.", Length * Depth));
                         MakeFin = false;
                     }
 
@@ -6412,8 +6407,7 @@ namespace SurfaceGeometry {
             if (ExtVentedCavity(Item).PlenGapThick <= 0.0) {
                 ShowSevereError(cCurrentModuleObject + "=\"" + ExtVentedCavity(Item).Name + "\", invalid .");
                 ErrorsFound = true;
-                ShowContinueError("...because field \"" + cNumericFieldNames(5) + "\" must be greater than Zero=[" +
-                                  format("{:.2T}].", rNumericArgs(5)));
+                ShowContinueError("...because field \"" + cNumericFieldNames(5) + format("\" must be greater than Zero=[{:.2T}].", rNumericArgs(5)));
                 continue;
             }
             ExtVentedCavity(Item).AreaRatio = rNumericArgs(6);
@@ -10076,8 +10070,7 @@ namespace SurfaceGeometry {
                                         ShowSevereError(cCurrentModuleObject + ", " + cAlphaFieldNames(2) + "=\"" + cAlphaArgs(2) +
                                                         "\", invalid material.");
                                         ShowContinueError("\"Outside\", invalid material for movable insulation.");
-                                        ShowContinueError("Material=\"" + dataMaterial.Material(MaterNum).Name + "\",Resistance=[" +
-                                                          format("{:.3R}", dataMaterial.Material(MaterNum).Resistance) +
+                                        ShowContinueError("Material=\"" + dataMaterial.Material(MaterNum).Name + format("\",Resistance=[{:.3R}", dataMaterial.Material(MaterNum).Resistance) +
                                                           "], must be > 0 for use in Movable Insulation.");
                                         ErrorsFound = true;
                                     } else if (dataMaterial.Material(MaterNum).Conductivity > 0.0) {
@@ -10089,8 +10082,7 @@ namespace SurfaceGeometry {
                                         ShowSevereError(cCurrentModuleObject + ", " + cAlphaFieldNames(2) + "=\"" + cAlphaArgs(2) +
                                                         "\", invalid material.");
                                         ShowContinueError("\"Outside\", invalid material for movable insulation.");
-                                        ShowContinueError("Material=\"" + dataMaterial.Material(MaterNum).Name + "\",Conductivity=[" +
-                                                          format("{:.3R}", dataMaterial.Material(MaterNum).Conductivity) +
+                                        ShowContinueError("Material=\"" + dataMaterial.Material(MaterNum).Name + format("\",Conductivity=[{:.3R}", dataMaterial.Material(MaterNum).Conductivity) +
                                                           "], must be > 0 for use in Movable Insulation.");
                                         ErrorsFound = true;
                                     }
@@ -10111,8 +10103,7 @@ namespace SurfaceGeometry {
                                         ShowSevereError(cCurrentModuleObject + ", " + cAlphaFieldNames(2) + "=\"" + cAlphaArgs(2) +
                                                         "\", invalid material.");
                                         ShowContinueError("\"Inside\", invalid material for movable insulation.");
-                                        ShowContinueError("Material=\"" + dataMaterial.Material(MaterNum).Name + "\",Resistance=[" +
-                                                          format("{:.3R}", dataMaterial.Material(MaterNum).Resistance) +
+                                        ShowContinueError("Material=\"" + dataMaterial.Material(MaterNum).Name + format("\",Resistance=[{:.3R}", dataMaterial.Material(MaterNum).Resistance) +
                                                           "], must be > 0 for use in Movable Insulation.");
                                         ErrorsFound = true;
                                     } else if (dataMaterial.Material(MaterNum).Conductivity > 0.0) {

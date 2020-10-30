@@ -828,8 +828,7 @@ namespace InternalHeatGains {
                                         if (Item1 == 1) {
                                             ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(9) +
                                                              ", maximum is > 1.0");
-                                            ShowContinueError("Schedule=\"" + AlphaName(9) + "\"; Entered min/max range=[" +
-                                                              format("{:.1R}", SchMin) + ',' + format("{:.1R}] Work Efficiency.", SchMax));
+                                            ShowContinueError("Schedule=\"" + AlphaName(9) + format("\"; Entered min/max range=[{:.1R}", SchMin) + ',' + format("{:.1R}] Work Efficiency.", SchMax));
                                         }
                                     }
                                 }
@@ -861,8 +860,7 @@ namespace InternalHeatGains {
                                                     if (Item1 == 1) {
                                                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " +
                                                                         cAlphaFieldNames(12) + ", minimum is < 0.0");
-                                                        ShowContinueError("Schedule=\"" + AlphaName(12) + "\". Minimum is [" +
-                                                                          format("{:.1R}]. Values must be >= 0.0.", SchMin));
+                                                        ShowContinueError("Schedule=\"" + AlphaName(12) + format("\". Minimum is [{:.1R}]. Values must be >= 0.0.", SchMin));
                                                         ErrorsFound = true;
                                                     }
                                                 }
@@ -870,8 +868,7 @@ namespace InternalHeatGains {
                                                     if (Item1 == 1) {
                                                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " +
                                                                         cAlphaFieldNames(12) + ", maximum is < 0.0");
-                                                        ShowContinueError("Schedule=\"" + AlphaName(12) + "\". Maximum is [" +
-                                                                          format("{:.1R}]. Values must be >= 0.0.", SchMax));
+                                                        ShowContinueError("Schedule=\"" + AlphaName(12) + format("\". Maximum is [{:.1R}]. Values must be >= 0.0.", SchMax));
                                                         ErrorsFound = true;
                                                     }
                                                 }
@@ -880,8 +877,7 @@ namespace InternalHeatGains {
                                                 if (Item1 == 1) {
                                                     ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " +
                                                                      cAlphaFieldNames(12) + ", maximum is > 2.0");
-                                                    ShowContinueError("Schedule=\"" + AlphaName(12) + "\"; Entered min/max range=[" +
-                                                                      format("{:.1R}", SchMin) + ',' + format("{:.1R}] Clothing.", SchMax));
+                                                    ShowContinueError("Schedule=\"" + AlphaName(12) + format("\"; Entered min/max range=[{:.1R}", SchMin) + ',' + format("{:.1R}] Clothing.", SchMax));
                                                 }
                                             }
                                         }

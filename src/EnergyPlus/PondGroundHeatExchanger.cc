@@ -827,8 +827,7 @@ namespace PondGroundHeatExchanger {
         if (PondTemperature < 0.0) {
             ++this->ConsecutiveFrozen;
             if (this->FrozenErrIndex == 0) {
-                ShowWarningMessage("GroundHeatExchanger:Pond=\"" + this->Name + "\", is frozen; Pond model not valid. Calculated Pond Temperature=[" +
-                                   format("{:.2R}] C", PondTemperature));
+                ShowWarningMessage("GroundHeatExchanger:Pond=\"" + this->Name + format("\", is frozen; Pond model not valid. Calculated Pond Temperature=[{:.2R}] C", PondTemperature));
                 ShowContinueErrorTimeStamp("");
             }
             ShowRecurringWarningErrorAtEnd("GroundHeatExchanger:Pond=\"" + this->Name + "\", is frozen",

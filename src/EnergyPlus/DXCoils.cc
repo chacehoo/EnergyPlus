@@ -8659,8 +8659,7 @@ namespace DXCoils {
                 ((VolFlowperRatedTotCap < MinOperVolFlowPerRatedTotCap(DXCT)) || (VolFlowperRatedTotCap > MaxCoolVolFlowPerRatedTotCap(DXCT)))) {
                 if (DXCoil(DXCoilNum).ErrIndex1 == 0) {
                     ShowWarningMessage(RoutineName + DXCoil(DXCoilNum).DXCoilType + "=\"" + DXCoil(DXCoilNum).Name +
-                                       "\" - Air volume flow rate per watt of rated total cooling capacity is out of range at " +
-                                       format("{:.3R} m3/s/W.", VolFlowperRatedTotCap));
+                                       format("\" - Air volume flow rate per watt of rated total cooling capacity is out of range at {:.3R} m3/s/W.", VolFlowperRatedTotCap));
                     ShowContinueErrorTimeStamp("");
                     ShowContinueError(format("Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}", MinOperVolFlowPerRatedTotCap(DXCT)) +
                                       format("--{:.3R}", MaxCoolVolFlowPerRatedTotCap(DXCT)) + ']');
@@ -8679,8 +8678,7 @@ namespace DXCoils {
                         (VolFlowperRatedTotCap > MaxHeatVolFlowPerRatedTotCap(DXCT)))) {
                 if (DXCoil(DXCoilNum).ErrIndex1 == 0) {
                     ShowWarningMessage(RoutineName + DXCoil(DXCoilNum).DXCoilType + "=\"" + DXCoil(DXCoilNum).Name +
-                                       "\" - Air volume flow rate per watt of rated total water heating capacity is out of range at " +
-                                       format("{:.2R} m3/s/W.", VolFlowperRatedTotCap));
+                                       format("\" - Air volume flow rate per watt of rated total water heating capacity is out of range at {:.2R} m3/s/W.", VolFlowperRatedTotCap));
                     ShowContinueErrorTimeStamp("");
                     ShowContinueError(format("Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}", MinOperVolFlowPerRatedTotCap(DXCT)) +
                                       format("--{:.3R}", MaxHeatVolFlowPerRatedTotCap(DXCT)) + ']');
@@ -8718,8 +8716,7 @@ namespace DXCoils {
                     if (DXCoil(DXCoilNum).LowAmbErrIndex == 0) {
                         DXCoil(DXCoilNum).LowAmbBuffer1 =
                             DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
-                            "\" - Air-cooled condenser inlet dry-bulb temperature below 0 C. Outdoor dry-bulb temperature = " +
-                            format("{:.2R}", OutdoorDryBulb);
+                            format("\" - Air-cooled condenser inlet dry-bulb temperature below 0 C. Outdoor dry-bulb temperature = {:.2R}", OutdoorDryBulb);
                         DXCoil(DXCoilNum).LowAmbBuffer2 =
                             " ... Occurrence info = " + EnvironmentName + ", " + CurMnDy + ' ' + CreateSysTimeIntervalString();
                     }
@@ -8731,8 +8728,7 @@ namespace DXCoils {
                     if (DXCoil(DXCoilNum).LowAmbErrIndex == 0) {
                         DXCoil(DXCoilNum).LowAmbBuffer1 =
                             DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
-                            "\" - Evap-cooled condenser inlet wet-bulb temperature below 10 C. Outdoor wet-bulb temperature = " +
-                            format("{:.2R}", OutdoorWetBulb);
+                            format("\" - Evap-cooled condenser inlet wet-bulb temperature below 10 C. Outdoor wet-bulb temperature = {:.2R}", OutdoorWetBulb);
                         DXCoil(DXCoilNum).LowAmbBuffer2 =
                             " ... Occurrence info = " + EnvironmentName + ", " + CurMnDy + ' ' + CreateSysTimeIntervalString();
                     }
@@ -9604,8 +9600,7 @@ namespace DXCoils {
                 ((VolFlowperRatedTotCap < MinOperVolFlowPerRatedTotCap(DXCT)) || (VolFlowperRatedTotCap > MaxCoolVolFlowPerRatedTotCap(DXCT)))) {
                 if (DXCoil(DXCoilNum).ErrIndex1 == 0) {
                     ShowWarningMessage(DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
-                                       "\" - Air volume flow rate per watt of rated total cooling capacity is out of range at " +
-                                       format("{:.3R} m3/s/W.", VolFlowperRatedTotCap));
+                                       format("\" - Air volume flow rate per watt of rated total cooling capacity is out of range at {:.3R} m3/s/W.", VolFlowperRatedTotCap));
                     ShowContinueErrorTimeStamp("");
                     ShowContinueError(format("...Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}--", MinOperVolFlowPerRatedTotCap(DXCT)) +
                                       format("{:.3R}", MaxCoolVolFlowPerRatedTotCap(DXCT)) + ']');
@@ -9653,8 +9648,7 @@ namespace DXCoils {
                 DXCoil(DXCoilNum).LowTempLast = OutdoorDryBulb;
                 if (DXCoil(DXCoilNum).LowAmbErrIndex == 0) {
                     DXCoil(DXCoilNum).LowAmbBuffer1 = DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
-                                                      "\" - Condenser inlet temperature below " +
-                                                      format("{:.2R}", DXCoil(DXCoilNum).MinOATCompressor) +
+                                                      format("\" - Condenser inlet temperature below {:.2R}", DXCoil(DXCoilNum).MinOATCompressor) +
                                                       format(" C. Condenser inlet temperature = {:.2R}", OutdoorDryBulb);
                     DXCoil(DXCoilNum).LowAmbBuffer2 =
                         " ... Occurrence info = " + EnvironmentName + ", " + CurMnDy + ' ' + CreateSysTimeIntervalString();
@@ -9667,8 +9661,7 @@ namespace DXCoils {
                 DXCoil(DXCoilNum).HighTempLast = OutdoorDryBulb;
                 if (DXCoil(DXCoilNum).HighAmbErrIndex == 0) {
                     DXCoil(DXCoilNum).HighAmbBuffer1 =
-                        DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name + "\" - Condenser inlet temperature above " +
-                        format("{:.2R}", DXCoil(DXCoilNum).MaxOATCompressor) + format(" C. Condenser temperature = {:.2R}", OutdoorDryBulb);
+                        DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name + format("\" - Condenser inlet temperature above {:.2R}", DXCoil(DXCoilNum).MaxOATCompressor) + format(" C. Condenser temperature = {:.2R}", OutdoorDryBulb);
                     DXCoil(DXCoilNum).HighAmbBuffer2 =
                         " ... Occurrence info = " + EnvironmentName + ", " + CurMnDy + ' ' + CreateSysTimeIntervalString();
                 }
@@ -10132,8 +10125,7 @@ namespace DXCoils {
             if ((VolFlowperRatedTotCap < MinOperVolFlowPerRatedTotCap(DXCT)) || (VolFlowperRatedTotCap > MaxHeatVolFlowPerRatedTotCap(DXCT))) {
                 if (DXCoil(DXCoilNum).ErrIndex1 == 0) {
                     ShowWarningMessage(DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
-                                       "\" - Air volume flow rate per watt of rated total heating capacity is out of range at " +
-                                       format("{:.3R} m3/s/W.", VolFlowperRatedTotCap));
+                                       format("\" - Air volume flow rate per watt of rated total heating capacity is out of range at {:.3R} m3/s/W.", VolFlowperRatedTotCap));
                     ShowContinueErrorTimeStamp("");
                     ShowContinueError(format("Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}", MinOperVolFlowPerRatedTotCap(DXCT)) +
                                       format("--{:.3R}", MaxHeatVolFlowPerRatedTotCap(DXCT)) + ']');

@@ -4094,8 +4094,7 @@ namespace RefrigeratedCase {
                             Real64 TestDelta = (NominalSecondaryCapacity - Secondary(SecondaryNum).CoolingLoadRated) / NominalSecondaryCapacity;
                             if (std::abs(TestDelta) > 0.2) {
                                 ShowWarningError(CurrentModuleObject + "=\"" + Secondary(SecondaryNum).Name +
-                                                 " You may wish to check the system definition. Based upon the design flow rate and range " +
-                                                 format("temperature difference,  The nominal secondary loop heat exchanger capacity is, {:.0R} but the specified design capacity is,  ", NominalSecondaryCapacity) +
+                                                 format(" You may wish to check the system definition. Based upon the design flow rate and range temperature difference,  The nominal secondary loop heat exchanger capacity is, {:.0R} but the specified design capacity is,  ", NominalSecondaryCapacity) +
                                                  format("{:.0R}", Secondary(SecondaryNum).CoolingLoadRated));
                             }
                         } else if (!lNumericBlanks(1)) {
@@ -4392,8 +4391,7 @@ namespace RefrigeratedCase {
                             std::abs((Secondary(SecondaryNum).CoolingLoadRated - CapacityAtMaxVolFlow) / Secondary(SecondaryNum).CoolingLoadRated);
                         if (DeltaCap1 > (0.3)) { // diff between chiller rating and capacity at max flow > 30%
                             ShowWarningError(CurrentModuleObject + "=\"" + Secondary(SecondaryNum).Name +
-                                             "\" You may wish to check the system sizing.  The nominal secondary loop heat exchanger capacity is " +
-                                             format("{:.0R}", Secondary(SecondaryNum).CoolingLoadRated) +
+                                             format("\" You may wish to check the system sizing.  The nominal secondary loop heat exchanger capacity is {:.0R}", Secondary(SecondaryNum).CoolingLoadRated) +
                                              format(" But the capacity based upon the maximum flow rate is {:.0R}", CapacityAtMaxVolFlow));
                         }                            // DeltaCap1 > .3
                     } else {                         // Fluid type phase change                !^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -4422,15 +4420,13 @@ namespace RefrigeratedCase {
                         std::abs((Secondary(SecondaryNum).CoolingLoadRated - NominalSecondaryRefLoad) / Secondary(SecondaryNum).CoolingLoadRated);
                     if (DeltaCap2 > (0.3)) { // diff between chiller rating and sum of nominal loads > 30%
                         ShowWarningError(CurrentModuleObject + "=\"" + Secondary(SecondaryNum).Name +
-                                         "\" You may wish to check the system sizing. Total nominal refrigerating load is " +
-                                         format("{:.0R}", NominalSecondaryRefLoad) +
+                                         format("\" You may wish to check the system sizing. Total nominal refrigerating load is {:.0R}", NominalSecondaryRefLoad) +
                                          format(" (Including cases, walk-ins, and pump heat).  The nominal secondary loop heat exchanger capacity is {:.0R}", Secondary(SecondaryNum).CoolingLoadRated));
                     }
                     // compare rated xt xchanger brine flow to the total rated pump flow
                     if (SecondaryFlowVolRated > (1.1 * PumpTotRatedFlowVol)) {
                         ShowWarningError(CurrentModuleObject + "=\"" + Secondary(SecondaryNum).Name +
-                                         "\" You may wish to check the pump sizing. Total nominal brine flow is " +
-                                         format("{:.0R} m3/s, but the total nominal pump flow rate is:  ", SecondaryFlowVolRated) +
+                                         format("\" You may wish to check the pump sizing. Total nominal brine flow is {:.0R} m3/s, but the total nominal pump flow rate is:  ", SecondaryFlowVolRated) +
                                          format("{:.0R} m3/s. ", PumpTotRatedFlowVol));
                     }
 
@@ -5416,16 +5412,14 @@ namespace RefrigeratedCase {
                 if (System(RefrigSysNum).NumStages == 1) { // Single-stage system
                     if ((NominalTotalCompCap < (0.7 * NominalTotalCoolingCap)) || (NominalCondCap < (1.3 * NominalTotalCoolingCap))) {
                         ShowWarningError(CurrentModuleObject + "=\"" + System(RefrigSysNum).Name +
-                                         "\", You may wish to check the system sizing. Total nominal cooling capacity is " +
-                                         format("{:.0R}W. Condenser capacity is ", NominalTotalCoolingCap) +
+                                         format("\", You may wish to check the system sizing. Total nominal cooling capacity is {:.0R}W. Condenser capacity is ", NominalTotalCoolingCap) +
                                          format("{:.0R}W. Nominal compressor capacity is ", NominalCondCap) +
                                          format("{:.0R}W.", NominalTotalCompCap));
                     }
                 } else if (System(RefrigSysNum).NumStages == 2) { // Two-stage system
                     if ((NominalTotalHiStageCompCap < (0.7 * NominalTotalCoolingCap)) || (NominalCondCap < (1.3 * NominalTotalCoolingCap))) {
                         ShowWarningError(CurrentModuleObject + "=\"" + System(RefrigSysNum).Name +
-                                         "\", You may wish to check the system sizing. Total nominal cooling capacity is " +
-                                         format("{:.0R}W. Condenser capacity is ", NominalTotalCoolingCap) +
+                                         format("\", You may wish to check the system sizing. Total nominal cooling capacity is {:.0R}W. Condenser capacity is ", NominalTotalCoolingCap) +
                                          format("{:.0R}W. Nominal compressor capacity is ", NominalCondCap) +
                                          format("{:.0R}W.", NominalTotalCompCap));
                     }

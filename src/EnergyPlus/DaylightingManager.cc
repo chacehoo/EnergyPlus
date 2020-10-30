@@ -5229,12 +5229,10 @@ namespace DaylightingManager {
             Real64 sumFracs = sum(zone_daylight.FracZoneDaylit);
             if ( (1.0 - sumFracs) > FractionTolerance) {
                 ShowWarningError("GetDaylightingControls: Fraction of Zone controlled by the Daylighting reference points is < 1.0.");
-                ShowContinueError("..discovered in \"" + cCurrentModuleObject + "\" for Zone=\"" + cAlphaArgs(2) + "\", only " +
-                        format("{:.3R} of the zone is controlled.", sum(zone_daylight.FracZoneDaylit)));
+                ShowContinueError("..discovered in \"" + cCurrentModuleObject + "\" for Zone=\"" + cAlphaArgs(2) + format("\", only {:.3R} of the zone is controlled.", sum(zone_daylight.FracZoneDaylit)));
             } else if ((sumFracs - 1.0) > FractionTolerance) {
                 ShowSevereError("GetDaylightingControls: Fraction of Zone controlled by the Daylighting reference points is > 1.0.");
-                ShowContinueError("..discovered in \"" + cCurrentModuleObject + "\" for Zone=\"" + cAlphaArgs(2) + "\", trying to control " +
-                        format("{:.3R} of the zone.", sum(zone_daylight.FracZoneDaylit)));
+                ShowContinueError("..discovered in \"" + cCurrentModuleObject + "\" for Zone=\"" + cAlphaArgs(2) + format("\", trying to control {:.3R} of the zone.", sum(zone_daylight.FracZoneDaylit)));
                 ErrorsFound = true;
             }
 
