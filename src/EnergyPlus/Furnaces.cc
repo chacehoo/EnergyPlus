@@ -7813,7 +7813,7 @@ namespace Furnaces {
                                     if (Furnace(FurnaceNum).LatentRegulaFalsiFailedIndex2 == 0) {
                                         ShowWarningMessage("Cooling coil control failed for " + cFurnaceTypes(Furnace(FurnaceNum).FurnaceType_Num) +
                                                            ':' + Furnace(FurnaceNum).Name);
-                                        ShowContinueError(format("  Latent part-load ratio determined to be outside the range of {:.3T}", TempMinPLR) + format(" to {:.3T}.", TempMaxPLR));
+                                        ShowContinueError(format("  Latent part-load ratio determined to be outside the range of {:.3T} to {:.3T}.", TempMinPLR, TempMaxPLR));
                                         ShowContinueErrorTimeStamp(format("A PLR of {:.3T}", TempMinPLR) +
                                                                    " will be used and the simulation continues.");
                                     }

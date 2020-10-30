@@ -1883,8 +1883,7 @@ CurrentModuleObjects(CO_OAEqList), ComponentListName);
                     ShowContinueError("Air mass balance is required by other outdoor air units: Fan:ZoneExhaust, ZoneMixing, ZoneCrossMixing, or "
                                       "other air flow control inputs.");
                     ShowContinueErrorTimeStamp(
-                        format("The outdoor mass flow rate = {:.3R}", OutAirUnit(OAUnitNum).OutAirMassFlow) +
-                        format(" and the exhaust mass flow rate = {:.3R}.", OutAirUnit(OAUnitNum).ExtAirMassFlow));
+                        format("The outdoor mass flow rate = {:.3R} and the exhaust mass flow rate = {:.3R}.", OutAirUnit(OAUnitNum).OutAirMassFlow, OutAirUnit(OAUnitNum).ExtAirMassFlow));
                     OutAirUnit(OAUnitNum).FlowError = true;
                 }
             }

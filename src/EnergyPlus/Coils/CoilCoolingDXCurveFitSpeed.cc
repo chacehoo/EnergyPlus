@@ -576,7 +576,7 @@ Real64 CoilCoolingDXCurveFitSpeed::CalcBypassFactor(Real64 tdb, Real64 w, Real64
     if (slopeAtConds <= 0.0) {
         // TODO: old dx coil protects against slopeAtConds < 0, but no = 0 - not sure why, 'cause that'll cause divide by zero
         ShowSevereError(RoutineName + object_name + " \"" + name + "\" -- coil bypass factor calculation invalid input conditions.");
-        ShowContinueError(format("deltaT = {:.3R}", deltaT) + format(" and deltaHumRat = {:.3R}", deltaHumRat));
+        ShowContinueError(format("deltaT = {:.3R} and deltaHumRat = {:.3R}", deltaT, deltaHumRat));
         ShowFatalError("Errors found in calculating coil bypass factors");
     }
 

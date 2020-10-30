@@ -6209,11 +6209,11 @@ namespace WaterCoils {
         if (SolFla == -1) {
             ShowSevereError("Calculation of drybulb temperature failed in TdbFnHRhPb(H,RH,PB)");
             ShowContinueError("   Iteration limit exceeded");
-            ShowContinueError(format("   H=[{:.6R}", H) + format("], RH=[{:.4R}", RH) + format("], PB=[{:.5R}].", PB));
+            ShowContinueError(format("   H=[{:.6R}], RH=[{:.4R}], PB=[{:.5R}].", H, RH, PB));
         } else if (SolFla == -2) {
             ShowSevereError("Calculation of drybulb temperature failed in TdbFnHRhPb(H,RH,PB)");
             ShowContinueError("  Bad starting values for Tdb");
-            ShowContinueError(format("   H=[{:.6R}", H) + format("], RH=[{:.4R}", RH) + format("], PB=[{:.5R}].", PB));
+            ShowContinueError(format("   H=[{:.6R}], RH=[{:.4R}], PB=[{:.5R}].", H, RH, PB));
         }
         if (SolFla < 0) {
             T = 0.0;

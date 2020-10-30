@@ -6051,8 +6051,7 @@ namespace DXCoils {
                 ((RatedVolFlowPerRatedTotCap - MaxHeatVolFlowPerRatedTotCap(DXCT)) > SmallDifferenceTest)) {
                 ShowWarningError(DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
                                  "\": Rated air volume flow rate per watt of rated total water heating capacity is out of range");
-                ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}], Max Rated Vol Flow Per Watt=[", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap) +
-                                  format("{:.3T}]. See Input-Output Reference Manual for valid range.", MaxHeatVolFlowPerRatedTotCap(DXCT)));
+                ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}], Max Rated Vol Flow Per Watt=[{:.3T}]. See Input-Output Reference Manual for valid range.", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap, MaxHeatVolFlowPerRatedTotCap(DXCT)));
             }
             HPInletAirHumRat =
                 PsyWFnTdbTwbPb(DXCoil(DXCoilNum).RatedInletDBTemp, DXCoil(DXCoilNum).RatedInletWBTemp, StdPressureSeaLevel, RoutineName);
@@ -11745,12 +11744,12 @@ namespace DXCoils {
                 ShowContinueError("When AirMassFlow > 0.0 and CycRatio > 0.0 and SpeedNum > 1, then MSHPMassFlowRateLow and MSHPMassFlowRateHigh "
                                   "must also be > 0.0");
                 ShowContinueErrorTimeStamp("");
-                ShowContinueError(format("AirMassFlow={:.3R}", AirMassFlow) + format(",CycRatio={:.3R},SpeedNum={:.0R}", double(SpeedNum)) + format(", MSHPMassFlowRateLow={:.3R}, MSHPMassFlowRateHigh={:.3R}", CycRatio, MSHPMassFlowRateLow, MSHPMassFlowRateHigh));
+                ShowContinueError(format("AirMassFlow={:.3R},CycRatio={:.3R},SpeedNum={:.0R}, MSHPMassFlowRateLow={:.3R}, MSHPMassFlowRateHigh={:.3R}", AirMassFlow, double(SpeedNum), CycRatio, MSHPMassFlowRateLow, MSHPMassFlowRateHigh));
                 ShowFatalError("Preceding condition(s) causes termination.");
             } else {
                 ShowContinueError("When AirMassFlow > 0.0 and CycRatio > 0.0, then MSHPMassFlowRateHigh must also be > 0.0");
                 ShowContinueErrorTimeStamp("");
-                ShowContinueError(format("AirMassFlow={:.3R}", AirMassFlow) + format(",CycRatio={:.3R}, MSHPMassFlowRateHigh={:.3R}", CycRatio, MSHPMassFlowRateHigh));
+                ShowContinueError(format("AirMassFlow={:.3R},CycRatio={:.3R}, MSHPMassFlowRateHigh={:.3R}", AirMassFlow, CycRatio, MSHPMassFlowRateHigh));
                 ShowFatalError("Preceding condition(s) causes termination.");
             }
         } else if (CycRatio > 1.0 || SpeedRatio > 1.0) {
@@ -11758,7 +11757,7 @@ namespace DXCoils {
                             " Developer error - inconsistent speed ratios.");
             ShowContinueError("CycRatio and SpeedRatio must be between 0.0 and 1.0");
             ShowContinueErrorTimeStamp("");
-            ShowContinueError(format("CycRatio={:.1R}", CycRatio) + format(", SpeedRatio = {:.1R}", SpeedRatio));
+            ShowContinueError(format("CycRatio={:.1R}, SpeedRatio = {:.1R}", CycRatio, SpeedRatio));
             ShowFatalError("Preceding condition(s) causes termination.");
         }
 
@@ -12520,12 +12519,12 @@ namespace DXCoils {
                 ShowContinueError("When AirMassFlow > 0.0 and CycRatio > 0.0 and SpeedNum > 1, then MSHPMassFlowRateLow and MSHPMassFlowRateHigh "
                                   "must also be > 0.0");
                 ShowContinueErrorTimeStamp("");
-                ShowContinueError(format("AirMassFlow={:.3R}", AirMassFlow) + format(",CycRatio={:.3R},SpeedNum={:.0R}", double(SpeedNum)) + format(", MSHPMassFlowRateLow={:.3R}, MSHPMassFlowRateHigh={:.3R}", CycRatio, MSHPMassFlowRateLow, MSHPMassFlowRateHigh));
+                ShowContinueError(format("AirMassFlow={:.3R},CycRatio={:.3R},SpeedNum={:.0R}, MSHPMassFlowRateLow={:.3R}, MSHPMassFlowRateHigh={:.3R}", AirMassFlow, double(SpeedNum), CycRatio, MSHPMassFlowRateLow, MSHPMassFlowRateHigh));
                 ShowFatalError("Preceding condition(s) causes termination.");
             } else {
                 ShowContinueError("When AirMassFlow > 0.0 and CycRatio > 0.0, then MSHPMassFlowRateHigh must also be > 0.0");
                 ShowContinueErrorTimeStamp("");
-                ShowContinueError(format("AirMassFlow={:.3R}", AirMassFlow) + format(",CycRatio={:.3R}, MSHPMassFlowRateHigh={:.3R}", CycRatio, MSHPMassFlowRateHigh));
+                ShowContinueError(format("AirMassFlow={:.3R},CycRatio={:.3R}, MSHPMassFlowRateHigh={:.3R}", AirMassFlow, CycRatio, MSHPMassFlowRateHigh));
                 ShowFatalError("Preceding condition(s) causes termination.");
             }
         } else if (CycRatio > 1.0 || SpeedRatio > 1.0) {
@@ -12533,7 +12532,7 @@ namespace DXCoils {
                             " Developer error - inconsistent speed ratios.");
             ShowContinueError("CycRatio and SpeedRatio must be between 0.0 and 1.0");
             ShowContinueErrorTimeStamp("");
-            ShowContinueError(format("CycRatio={:.1R}", CycRatio) + format(", SpeedRatio = {:.1R}", SpeedRatio));
+            ShowContinueError(format("CycRatio={:.1R}, SpeedRatio = {:.1R}", CycRatio, SpeedRatio));
             ShowFatalError("Preceding condition(s) causes termination.");
         }
 
@@ -12742,7 +12741,7 @@ namespace DXCoils {
 
                 if (PLF < 0.7) {
                     if (DXCoil(DXCoilNum).PLRErrIndex == 0) {
-                        ShowWarningMessage("The PLF curve value at high speed for DX multispeed heating coil " + DXCoil(DXCoilNum).Name + format(" ={:.2R}", PLF) + format(" for part-load ratio ={:.2R}", PLRHeating));
+                        ShowWarningMessage("The PLF curve value at high speed for DX multispeed heating coil " + DXCoil(DXCoilNum).Name + format(" ={:.2R} for part-load ratio ={:.2R}", PLF, PLRHeating));
                         ShowContinueError("PLF curve values must be >= 0.7. PLF has been reset to 0.7 and simulation is continuing.");
                         ShowContinueError("Check the IO reference manual for PLF curve guidance [Coil:Heating:DX:MultiSpeed].");
                         ShowContinueErrorTimeStamp("");

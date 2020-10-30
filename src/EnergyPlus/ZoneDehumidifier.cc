@@ -869,7 +869,7 @@ namespace ZoneDehumidifier {
                     if (state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).PLFPLRErrorCount < 1) {
                         ++state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).PLFPLRErrorCount;
                         ShowWarningError(state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).UnitType + " \"" + state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).Name + "\":");
-                        ShowContinueError(format("The part load fraction was less than the part load ratio calculated for this time step [PLR={:.4T}", PLR) + format(", PLF={:.4T}].", PLF));
+                        ShowContinueError(format("The part load fraction was less than the part load ratio calculated for this time step [PLR={:.4T}, PLF={:.4T}].", PLR, PLF));
                         ShowContinueError("Runtime fraction reset to 1 and the simulation will continue.");
                         ShowContinueErrorTimeStamp("");
                     } else {

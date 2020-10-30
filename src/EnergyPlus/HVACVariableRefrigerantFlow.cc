@@ -1788,7 +1788,7 @@ namespace HVACVariableRefrigerantFlow {
                     if (MinCurveVal < 0.7) {
                         ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + VRF(VRFNum).Name + "\", invalid");
                         ShowContinueError("..." + cAlphaFieldNames(12) + "=\"" + cAlphaArgs(12) + "\" has out of range values.");
-                        ShowContinueError(format("...Curve minimum must be >= 0.7, curve min at PLR = {:.2T}", MinCurvePLR) + format(" is {:.3T}", MinCurveVal));
+                        ShowContinueError(format("...Curve minimum must be >= 0.7, curve min at PLR = {:.2T} is {:.3T}", MinCurvePLR, MinCurveVal));
                         ShowContinueError("...Setting curve minimum to 0.7 and simulation continues.");
                         SetCurveOutputMinMaxValues(state, VRF(VRFNum).CoolPLFFPLR, ErrorsFound, 0.7, _);
                     }
@@ -1796,7 +1796,7 @@ namespace HVACVariableRefrigerantFlow {
                     if (MaxCurveVal > 1.0) {
                         ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + VRF(VRFNum).Name + "\", invalid");
                         ShowContinueError("..." + cAlphaFieldNames(12) + " = " + cAlphaArgs(12) + " has out of range value.");
-                        ShowContinueError(format("...Curve maximum must be <= 1.0, curve max at PLR = {:.2T}", MaxCurvePLR) + format(" is {:.3T}", MaxCurveVal));
+                        ShowContinueError(format("...Curve maximum must be <= 1.0, curve max at PLR = {:.2T} is {:.3T}", MaxCurvePLR, MaxCurveVal));
                         ShowContinueError("...Setting curve maximum to 1.0 and simulation continues.");
                         SetCurveOutputMinMaxValues(state, VRF(VRFNum).CoolPLFFPLR, ErrorsFound, _, 1.0);
                     }
@@ -1977,7 +1977,7 @@ namespace HVACVariableRefrigerantFlow {
                     if (MinCurveVal < 0.7) {
                         ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + VRF(VRFNum).Name + "\", invalid");
                         ShowContinueError("..." + cAlphaFieldNames(23) + "=\"" + cAlphaArgs(23) + "\" has out of range values.");
-                        ShowContinueError(format("...Curve minimum must be >= 0.7, curve min at PLR = {:.2T}", MinCurvePLR) + format(" is {:.3T}", MinCurveVal));
+                        ShowContinueError(format("...Curve minimum must be >= 0.7, curve min at PLR = {:.2T} is {:.3T}", MinCurvePLR, MinCurveVal));
                         ShowContinueError("...Setting curve minimum to 0.7 and simulation continues.");
                         SetCurveOutputMinMaxValues(state, VRF(VRFNum).HeatPLFFPLR, ErrorsFound, 0.7, _);
                     }
@@ -1985,7 +1985,7 @@ namespace HVACVariableRefrigerantFlow {
                     if (MaxCurveVal > 1.0) {
                         ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + VRF(VRFNum).Name + "\", invalid");
                         ShowContinueError("..." + cAlphaFieldNames(23) + " = " + cAlphaArgs(23) + " has out of range value.");
-                        ShowContinueError(format("...Curve maximum must be <= 1.0, curve max at PLR = {:.2T}", MaxCurvePLR) + format(" is {:.3T}", MaxCurveVal));
+                        ShowContinueError(format("...Curve maximum must be <= 1.0, curve max at PLR = {:.2T} is {:.3T}", MaxCurvePLR, MaxCurveVal));
                         ShowContinueError("...Setting curve maximum to 1.0 and simulation continues.");
                         SetCurveOutputMinMaxValues(state, VRF(VRFNum).HeatPLFFPLR, ErrorsFound, _, 1.0);
                     }
@@ -11622,7 +11622,7 @@ namespace HVACVariableRefrigerantFlow {
                             this->CalcVRF_FluidTCtrl(
                                 state, VRFTUNum, FirstHVACIteration, TempMinPLR, TempOutput, OnOffAirFlowRatio, SuppHeatCoilLoad);
 
-                            ShowContinueError(format(" Load requested = {:.5T}", QZnReq) + format(", Load delivered = {:.5T}", TempOutput));
+                            ShowContinueError(format(" Load requested = {:.5T}, Load delivered = {:.5T}", QZnReq, TempOutput));
                             ShowRecurringWarningErrorAtEnd(DataHVACGlobals::cVRFTUTypes(this->VRFTUType_Num) + " \"" + this->Name +
                                                                "\" -- Terminal unit Iteration limit exceeded error continues...",
                                                            this->IterLimitExceeded);

@@ -6078,8 +6078,7 @@ namespace RefrigeratedCase {
                 if ((NominalTotalCompCap < (0.7 * NominalTotalCoolingCap)) || (NominalCondCap < (1.3 * NominalTotalCoolingCap))) {
                     ShowWarningError(CurrentModuleObject + "=\"" + TransSystem(TransRefrigSysNum).Name +
                                      "\", You may wish to check the system sizing.");
-                    ShowContinueError(format("Total nominal cooling capacity is {:.0R}W. Condenser capacity is {:.0R}", NominalTotalCoolingCap, NominalCondCap) +
-                                      format("W. Nominal compressor capacity is {:.0R}W.", NominalTotalCompCap));
+                    ShowContinueError(format("Total nominal cooling capacity is {:.0R}W. Condenser capacity is {:.0R}W. Nominal compressor capacity is {:.0R}W.", NominalTotalCoolingCap, NominalCondCap, NominalTotalCompCap));
                 }
 
             } // Transcritical refrigeration systems

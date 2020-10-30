@@ -2260,8 +2260,7 @@ namespace ScheduleManager {
             if (CheckScheduleValueMinMax(SchNum, ">=", ScheduleType(NumPointer).Minimum, "<=", ScheduleType(NumPointer).Maximum)) continue;
             ShowSevereError(RoutineName + "Schedule=\"" + Schedule(SchNum).Name + "\" has values outside its Schedule Type (" +
                             ScheduleType(NumPointer).Name + ") range");
-            ShowContinueError(format("  Minimum should be >={:.3R}", ScheduleType(NumPointer).Minimum) +
-                              format(" and Maximum should be <={:.3R}", ScheduleType(NumPointer).Maximum));
+            ShowContinueError(format("  Minimum should be >={:.3R} and Maximum should be <={:.3R}", ScheduleType(NumPointer).Minimum, ScheduleType(NumPointer).Maximum));
             ErrorsFound = true;
         }
 

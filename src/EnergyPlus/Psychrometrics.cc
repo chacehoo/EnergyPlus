@@ -382,7 +382,7 @@ namespace Psychrometrics {
 
         if (rhoair < 0.0) {
             ShowSevereError(format("PsyRhoAirFnPbTdbW: RhoAir (Density of Air) is calculated <= 0 [{:.5R}].", rhoair));
-            ShowContinueError(format("pb =[{:.2R}", pb) + format("], tdb=[{:.2R}", tdb) + format("], w=[{:.7R}].", dw));
+            ShowContinueError(format("pb =[{:.2R}], tdb=[{:.2R}], w=[{:.7R}].", pb, tdb, dw));
             if (!CalledFrom.empty()) {
                 ShowContinueErrorTimeStamp(" Routine=" + CalledFrom + ',');
             } else {

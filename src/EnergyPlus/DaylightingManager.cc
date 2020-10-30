@@ -1974,8 +1974,7 @@ namespace DaylightingManager {
                     ShowWarningError("CalcDaylightCoeffRefPoints: For Zone=\"" + Zone(ZoneNum).Name + "\" External Window=\"" + Surface(IWin).Name +
                                      "\"in Zone=\"" + Zone(Surface(IWin).Zone).Name +
                                      "\" reference point is less than 0.15m (6\") from window plane ");
-                    ShowContinueError(format("Distance=[{:.1R}", ALF) + format(" m] to ref point=[{:.1R},", RREF(1)) +
-                                      format("{:.1R},", RREF(2)) + format("{:.1R}", RREF(3)) +
+                    ShowContinueError(format("Distance=[{:.1R} m] to ref point=[{:.1R},{:.1R},{:.1R}", ALF, RREF(1), RREF(2), RREF(3)) +
                                       "], Inaccuracy in Daylighting Calcs may result.");
                     RefErrIndex(iRefPoint, IWin) = 1;
                 }
@@ -1985,8 +1984,7 @@ namespace DaylightingManager {
                 if (MapErrIndex(iRefPoint, IWin) == 0) { // only show error message once
                     ShowWarningError("CalcDaylightCoeffMapPoints: For Zone=\"" + Zone(ZoneNum).Name + "\" External Window=\"" + Surface(IWin).Name +
                                      "\"in Zone=\"" + Zone(Surface(IWin).Zone).Name + "\" map point is less than 0.15m (6\") from window plane ");
-                    ShowContinueError(format("Distance=[{:.1R}", ALF) + format(" m] map point=[{:.1R},", RREF(1)) +
-                                      format("{:.1R},", RREF(2)) + format("{:.1R}], Inaccuracy in Map Calcs may result.", RREF(3)));
+                    ShowContinueError(format("Distance=[{:.1R} m] map point=[{:.1R},{:.1R},{:.1R}], Inaccuracy in Map Calcs may result.", ALF, RREF(1), RREF(2), RREF(3)));
                     MapErrIndex(iRefPoint, IWin) = 1;
                 }
             }
@@ -10024,8 +10022,7 @@ namespace DaylightingManager {
                 // Write Y scale prefix and illuminance values
                 RefPt = 1;
                 for (Y = 1; Y <= IllumMap(MapNum).Ynum; ++Y) {
-                    mapLine = format("({:.2R};", IllumMapCalc(MapNum).MapRefPtAbsCoord(1, RefPt)) +
-                              format("{:.2R})=", IllumMapCalc(MapNum).MapRefPtAbsCoord(2, RefPt));
+                    mapLine = format("({:.2R};{:.2R})=", IllumMapCalc(MapNum).MapRefPtAbsCoord(1, RefPt), IllumMapCalc(MapNum).MapRefPtAbsCoord(2, RefPt));
                     for (R = RefPt; R <= RefPt + IllumMap(MapNum).Xnum - 1; ++R) {
                         IllumOut = nint(IllumMapCalc(MapNum).DaylIllumAtMapPtHr(R));
                         if (IllumMapCalc(MapNum).MapRefPtInBounds(R)) {

@@ -4041,7 +4041,7 @@ namespace HeatBalanceManager {
                     if (SpectralData(Loop).WaveLength(LamNum + 1) <= Lam) {
                         ErrorsFound = true;
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + SpecDataNames(1) + "\" invalid set.");
-                        ShowContinueError("... Wavelengths not in increasing order. at wavelength#=" + fmt::to_string(LamNum) + format(", value=[{:.4T}", Lam) + format("], next is [{:.4T}", SpectralData(Loop).WaveLength(LamNum + 1)) +
+                        ShowContinueError("... Wavelengths not in increasing order. at wavelength#=" + fmt::to_string(LamNum) + format(", value=[{:.4T}], next is [{:.4T}", Lam, SpectralData(Loop).WaveLength(LamNum + 1)) +
                                           "].");
                     }
                 }
