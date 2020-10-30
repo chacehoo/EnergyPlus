@@ -792,16 +792,14 @@ namespace HeatPumpWaterToWaterCOOLING {
 
             if (SourceSidePressure < this->LowPressCutoff) {
                 ShowSevereError(ModuleCompName + "=\"" + this->Name + "\" Cooling Source Side Pressure Less than the Design Minimum");
-                ShowContinueError(format("Cooling Source Side Pressure={:.2T}", SourceSidePressure) +
-                                  format(" and user specified Design Minimum Pressure={:.2T}", this->LowPressCutoff));
+                ShowContinueError(format("Cooling Source Side Pressure={:.2T} and user specified Design Minimum Pressure={:.2T}", SourceSidePressure, this->LowPressCutoff));
                 ShowContinueErrorTimeStamp("");
                 ShowFatalError("Preceding Conditions cause termination.");
             }
 
             if (LoadSidePressure > this->HighPressCutoff) {
                 ShowSevereError(ModuleCompName + "=\"" + this->Name + "\" Cooling Load Side Pressure greater than the Design Maximum");
-                ShowContinueError(format("Cooling Load Side Pressure={:.2T}", LoadSidePressure) +
-                                  format(" and user specified Design Maximum Pressure={:.2T}", this->HighPressCutoff));
+                ShowContinueError(format("Cooling Load Side Pressure={:.2T} and user specified Design Maximum Pressure={:.2T}", LoadSidePressure, this->HighPressCutoff));
                 ShowContinueErrorTimeStamp("");
                 ShowFatalError("Preceding Conditions cause termination.");
             }
@@ -812,16 +810,14 @@ namespace HeatPumpWaterToWaterCOOLING {
 
             if (SuctionPr < this->LowPressCutoff) {
                 ShowSevereError(ModuleCompName + "=\"" + this->Name + "\" Cooling Suction Pressure Less than the Design Minimum");
-                ShowContinueError(format("Cooling Suction Pressure={:.2T}", SuctionPr) +
-                                  format(" and user specified Design Minimum Pressure={:.2T}", this->LowPressCutoff));
+                ShowContinueError(format("Cooling Suction Pressure={:.2T} and user specified Design Minimum Pressure={:.2T}", SuctionPr, this->LowPressCutoff));
                 ShowContinueErrorTimeStamp("");
                 ShowFatalError("Preceding Conditions cause termination.");
             }
 
             if (DischargePr > this->HighPressCutoff) {
                 ShowSevereError(ModuleCompName + "=\"" + this->Name + "\" Cooling Discharge Pressure greater than the Design Maximum");
-                ShowContinueError(format("Cooling Discharge Pressure={:.2T}", DischargePr) +
-                                  format(" and user specified Design Maximum Pressure={:.2T}", this->HighPressCutoff));
+                ShowContinueError(format("Cooling Discharge Pressure={:.2T} and user specified Design Maximum Pressure={:.2T}", DischargePr, this->HighPressCutoff));
                 ShowContinueErrorTimeStamp("");
                 ShowFatalError("Preceding Conditions cause termination.");
             }

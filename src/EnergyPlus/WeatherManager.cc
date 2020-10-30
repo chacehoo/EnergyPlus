@@ -3416,8 +3416,7 @@ namespace WeatherManager {
         if (state.dataWeatherManager->DesDayInput(EnvrnNum).PressureEntered) {
             if (std::abs((state.dataWeatherManager->DesDayInput(EnvrnNum).PressBarom - DataEnvironment::StdBaroPress) / DataEnvironment::StdBaroPress) > 0.1) { // 10% off
                 ShowWarningError(
-                    format("SetUpDesignDay: Entered DesignDay Barometric Pressure={:.0R}", state.dataWeatherManager->DesDayInput(EnvrnNum).PressBarom) +
-                    format(" differs by more than 10% from Standard Barometric Pressure={:.0R}", DataEnvironment::StdBaroPress) + '.');
+                    format("SetUpDesignDay: Entered DesignDay Barometric Pressure={:.0R} differs by more than 10% from Standard Barometric Pressure={:.0R}", state.dataWeatherManager->DesDayInput(EnvrnNum).PressBarom, DataEnvironment::StdBaroPress) + '.');
                 ShowContinueError("...occurs in DesignDay=" + DataEnvironment::EnvironmentName +
                                   ", Standard Pressure (based on elevation) will be used.");
                 state.dataWeatherManager->DesDayInput(EnvrnNum).PressBarom = DataEnvironment::StdBaroPress;
@@ -4348,11 +4347,9 @@ namespace WeatherManager {
                     ShowWarningError("Weather file location will be used rather than entered (IDF) Location object.");
                     ShowContinueError("..Location object=" + state.dataWeatherManager->LocationTitle);
                     ShowContinueError("..Weather File Location=" + DataEnvironment::WeatherFileLocationTitle);
-                    ShowContinueError(format("..due to location differences, Latitude difference=[{:.2R}", std::abs(DataEnvironment::Latitude - state.dataWeatherManager->WeatherFileLatitude)) +
-                                      format("] degrees, Longitude difference=[{:.2R}", std::abs(DataEnvironment::Longitude - state.dataWeatherManager->WeatherFileLongitude)) + "] degrees.");
+                    ShowContinueError(format("..due to location differences, Latitude difference=[{:.2R}] degrees, Longitude difference=[{:.2R}", std::abs(DataEnvironment::Latitude - state.dataWeatherManager->WeatherFileLatitude), std::abs(DataEnvironment::Longitude - state.dataWeatherManager->WeatherFileLongitude)) + "] degrees.");
                     ShowContinueError(
-                        format("..Time Zone difference=[{:.1R}", std::abs(DataEnvironment::TimeZoneNumber - state.dataWeatherManager->WeatherFileTimeZone)) +
-                        format("] hour(s), Elevation difference=[{:.2R}", std::abs((DataEnvironment::Elevation - state.dataWeatherManager->WeatherFileElevation) / max(DataEnvironment::Elevation, 1.0) * 100.0)) +
+                        format("..Time Zone difference=[{:.1R}] hour(s), Elevation difference=[{:.2R}", std::abs(DataEnvironment::TimeZoneNumber - state.dataWeatherManager->WeatherFileTimeZone), std::abs((DataEnvironment::Elevation - state.dataWeatherManager->WeatherFileElevation) / max(DataEnvironment::Elevation, 1.0) * 100.0)) +
                         format("] percent, [{:.2R}", std::abs(DataEnvironment::Elevation - state.dataWeatherManager->WeatherFileElevation)) + "] meters.");
                 }
             }
@@ -6246,8 +6243,7 @@ namespace WeatherManager {
                 if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue > state.dataWeatherManager->DesDayInput(EnvrnNum).MaxDryBulb) {
                     ShowWarningError(DataIPShortCuts::cCurrentModuleObject + "=\"" + state.dataWeatherManager->DesDayInput(EnvrnNum).Title + "\", range check data.");
                     ShowContinueError(
-                        format("..Humidity Indicator Temperature at Max Temperature={:.1R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) +
-                        format(" > Max DryBulb={:.1R}", state.dataWeatherManager->DesDayInput(EnvrnNum).MaxDryBulb));
+                        format("..Humidity Indicator Temperature at Max Temperature={:.1R} > Max DryBulb={:.1R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue, state.dataWeatherManager->DesDayInput(EnvrnNum).MaxDryBulb));
                     ShowContinueError(".." + DataIPShortCuts::cAlphaFieldNames(5) + "=\"" + DataIPShortCuts::cAlphaArgs(5) + "\".");
                     ShowContinueError("..Conditions for day will be set to Relative Humidity = 100%");
                     if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::DewPoint) {

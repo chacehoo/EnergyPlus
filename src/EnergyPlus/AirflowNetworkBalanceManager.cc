@@ -385,8 +385,7 @@ namespace AirflowNetworkBalanceManager {
                 if (fields.find("reference_barometric_pressure") != fields.end()) { // not required field, has default value
                     pressure = fields.at("reference_barometric_pressure");
                     if (std::abs((pressure - StdBaroPress) / StdBaroPress) > 0.1) { // 10% off
-                        ShowWarningError(RoutineName + ": " + CurrentModuleObject + format(": Pressure = {:.0R}", pressure) +
-                                         format(" differs by more than 10% from Standard Barometric Pressure = {:.0R}", StdBaroPress) + '.');
+                        ShowWarningError(RoutineName + ": " + CurrentModuleObject + format(": Pressure = {:.0R} differs by more than 10% from Standard Barometric Pressure = {:.0R}", pressure, StdBaroPress) + '.');
                         ShowContinueError("...occurs in " + CurrentModuleObject + " = " + thisObjectName);
                     }
                     if (pressure <= 31000.0) {
@@ -5940,8 +5939,7 @@ namespace AirflowNetworkBalanceManager {
                         ++ErrCountLowPre;
                         ShowWarningError("The calculated pressure with minimum exhaust fan rate is lower than the pressure setpoint. The pressure "
                                          "control is unable to perform.");
-                        ShowContinueErrorTimeStamp(format("Calculated pressure = {:.2R}", ZonePressure1) +
-                                                   format("[Pa], Pressure setpoint ={:.2R}", PressureSet));
+                        ShowContinueErrorTimeStamp(format("Calculated pressure = {:.2R}[Pa], Pressure setpoint ={:.2R}", ZonePressure1, PressureSet));
                     } else {
                         ++ErrCountLowPre;
                         ShowRecurringWarningErrorAtEnd(AirflowNetworkNodeData(PressureControllerData(1).AFNNodeNum).Name +
@@ -5962,8 +5960,7 @@ namespace AirflowNetworkBalanceManager {
                             ++ErrCountHighPre;
                             ShowWarningError("The calculated pressure with maximum exhaust fan rate is higher than the pressure setpoint. The "
                                              "pressure control is unable to perform.");
-                            ShowContinueErrorTimeStamp(format("Calculated pressure = {:.2R}", ZonePressure2) +
-                                                       format("[Pa], Pressure setpoint = {:.2R}", PressureSet));
+                            ShowContinueErrorTimeStamp(format("Calculated pressure = {:.2R}[Pa], Pressure setpoint = {:.2R}", ZonePressure2, PressureSet));
                         } else {
                             ++ErrCountHighPre;
                             ShowRecurringWarningErrorAtEnd(
@@ -6019,8 +6016,7 @@ namespace AirflowNetworkBalanceManager {
                         ++ErrCountLowPre;
                         ShowWarningError("The calculated pressure with minimum relief air rate is lower than the pressure setpoint. The pressure "
                                          "control is unable to perform.");
-                        ShowContinueErrorTimeStamp(format("Calculated pressure = {:.2R}", ZonePressure1) +
-                                                   format("[Pa], Pressure setpoint ={:.2R}", PressureSet));
+                        ShowContinueErrorTimeStamp(format("Calculated pressure = {:.2R}[Pa], Pressure setpoint ={:.2R}", ZonePressure1, PressureSet));
                     } else {
                         ++ErrCountLowPre;
                         ShowRecurringWarningErrorAtEnd(AirflowNetworkNodeData(PressureControllerData(1).AFNNodeNum).Name +
@@ -6042,8 +6038,7 @@ namespace AirflowNetworkBalanceManager {
                             ++ErrCountHighPre;
                             ShowWarningError("The calculated pressure with maximum relief air rate is higher than the pressure setpoint. The "
                                              "pressure control is unable to perform.");
-                            ShowContinueErrorTimeStamp(format("Calculated pressure = {:.2R}", ZonePressure2) +
-                                                       format("[Pa], Pressure setpoint = {:.2R}", PressureSet));
+                            ShowContinueErrorTimeStamp(format("Calculated pressure = {:.2R}[Pa], Pressure setpoint = {:.2R}", ZonePressure2, PressureSet));
                         } else {
                             ++ErrCountHighPre;
                             ShowRecurringWarningErrorAtEnd(
@@ -8918,8 +8913,7 @@ namespace AirflowNetworkBalanceManager {
                         ShowContinueError("The added zone loads using the AirflowNetwork model may not be accurate because the zone loads are "
                                           "calculated based on the mass flow rate during HVAC operation.");
                         ShowContinueError(
-                            format("The mass flow rate during HVAC operation = {:.2R}", state.dataAirLoop->AirLoopAFNInfo(AirLoopNum).LoopSystemOnMassFlowrate) +
-                            format(" The mass flow rate during no HVAC operation = {:.2R}", state.dataAirLoop->AirLoopAFNInfo(AirLoopNum).LoopSystemOffMassFlowrate));
+                            format("The mass flow rate during HVAC operation = {:.2R} The mass flow rate during no HVAC operation = {:.2R}", state.dataAirLoop->AirLoopAFNInfo(AirLoopNum).LoopSystemOnMassFlowrate, state.dataAirLoop->AirLoopAFNInfo(AirLoopNum).LoopSystemOffMassFlowrate));
                         state.dataAirflowNetworkBalanceManager->UpdateAirflowNetworkMyOneTimeFlag = false;
                     }
                 }
@@ -8950,8 +8944,7 @@ namespace AirflowNetworkBalanceManager {
                             ShowWarningError("The mass flow rate difference is found between System Node = '" +
                                              NodeID(AirflowNetworkNodeData(Node3).EPlusNodeNum) + "' and AFN Link = '" +
                                              AirflowNetworkLinkageData(i).Name + "'.");
-                            ShowContinueError(format("The system node max mass flow rate = {:.3R}", NodeMass) +
-                                              format(" kg/s. The AFN node mass flow rate = {:.3R} kg.s.", AFNMass));
+                            ShowContinueError(format("The system node max mass flow rate = {:.3R} kg/s. The AFN node mass flow rate = {:.3R} kg.s.", NodeMass, AFNMass));
                             WriteFlag = true;
                         }
                     }

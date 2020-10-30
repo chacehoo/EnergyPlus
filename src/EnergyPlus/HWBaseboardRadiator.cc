@@ -1160,8 +1160,7 @@ namespace HWBaseboardRadiator {
                     if (AirOutletTempStd >= WaterInletTempStd) {
                         ShowSevereError("SizeHWBaseboard: ZoneHVAC:Baseboard:RadiantConvective:Water=\"" + HWBaseboard(BaseboardNum).EquipID + "\".");
                         ShowContinueError("...Air Outlet temperature must be below the Water Inlet temperature");
-                        ShowContinueError(format("...Air Outlet Temperature=[{:.2R}], Water Inlet Temperature=[", AirOutletTempStd) +
-                                          format("{:.2R}].", WaterInletTempStd));
+                        ShowContinueError(format("...Air Outlet Temperature=[{:.2R}], Water Inlet Temperature=[{:.2R}].", AirOutletTempStd, WaterInletTempStd));
                         AirOutletTempStd = WaterInletTempStd - 0.01;
                         ShowContinueError(format("...Air Outlet Temperature set to [{:.2R}].", AirOutletTempStd));
                     }
@@ -1169,8 +1168,7 @@ namespace HWBaseboardRadiator {
                     if (AirInletTempStd >= WaterOutletTempStd) {
                         ShowSevereError("SizeHWBaseboard: ZoneHVAC:Baseboard:RadiantConvective:Water=\"" + HWBaseboard(BaseboardNum).EquipID + "\".");
                         ShowContinueError("...Water Outlet temperature must be below the Air Inlet temperature");
-                        ShowContinueError(format("...Air Inlet Temperature=[{:.2R}], Water Outlet Temperature=[", AirInletTempStd) +
-                                          format("{:.2R}].", WaterOutletTempStd));
+                        ShowContinueError(format("...Air Inlet Temperature=[{:.2R}], Water Outlet Temperature=[{:.2R}].", AirInletTempStd, WaterOutletTempStd));
                         WaterOutletTempStd = AirInletTempStd + 0.01;
                         ShowContinueError(format("...Water Outlet Temperature set to [{:.2R}].", WaterOutletTempStd));
                     }
@@ -1216,8 +1214,7 @@ namespace HWBaseboardRadiator {
                 if (AirOutletTempStd >= WaterInletTempStd) {
                     ShowSevereError("SizeHWBaseboard: ZoneHVAC:Baseboard:RadiantConvective:Water=\"" + HWBaseboard(BaseboardNum).EquipID + "\".");
                     ShowContinueError("...Air Outlet temperature must be below the Water Inlet temperature");
-                    ShowContinueError(format("...Air Outlet Temperature=[{:.2R}], Water Inlet Temperature=[", AirOutletTempStd) +
-                                      format("{:.2R}].", WaterInletTempStd));
+                    ShowContinueError(format("...Air Outlet Temperature=[{:.2R}], Water Inlet Temperature=[{:.2R}].", AirOutletTempStd, WaterInletTempStd));
                     AirOutletTempStd = WaterInletTempStd - 0.01;
                     ShowContinueError(format("...Air Outlet Temperature set to [{:.2R}].", AirOutletTempStd));
                 }
@@ -1225,8 +1222,7 @@ namespace HWBaseboardRadiator {
                 if (AirInletTempStd >= WaterOutletTempStd) {
                     ShowSevereError("SizeHWBaseboard: ZoneHVAC:Baseboard:RadiantConvective:Water=\"" + HWBaseboard(BaseboardNum).EquipID + "\".");
                     ShowContinueError("...Water Outlet temperature must be below the Air Inlet temperature");
-                    ShowContinueError(format("...Air Inlet Temperature=[{:.2R}], Water Outlet Temperature=[", AirInletTempStd) +
-                                      format("{:.2R}].", WaterOutletTempStd));
+                    ShowContinueError(format("...Air Inlet Temperature=[{:.2R}], Water Outlet Temperature=[{:.2R}].", AirInletTempStd, WaterOutletTempStd));
                     WaterOutletTempStd = AirInletTempStd + 0.01;
                     ShowContinueError(format("...Water Outlet Temperature set to [{:.2R}].", WaterOutletTempStd));
                 }

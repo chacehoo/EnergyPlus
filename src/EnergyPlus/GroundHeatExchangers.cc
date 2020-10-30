@@ -2048,8 +2048,7 @@ namespace GroundHeatExchangers {
             ShowContinueError("For GroundHeatExchanger: " + name + "GLHE delta Temp > 100C.");
             ShowContinueError("This can be encountered in cases where the GLHE mass flow rate is either significantly");
             ShowContinueError(" lower than the design value, or cases where the mass flow rate rapidly changes.");
-            ShowContinueError(format("GLHE Current Flow Rate={:.3T}", massFlowRate) +
-                              format("; GLHE Design Flow Rate={:.3T}", designMassFlow));
+            ShowContinueError(format("GLHE Current Flow Rate={:.3T}; GLHE Design Flow Rate={:.3T}", massFlowRate, designMassFlow));
             ++this->numErrorCalls;
         }
     }

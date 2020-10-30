@@ -2019,8 +2019,7 @@ namespace Fans {
                         if (Fan(FanNum).OneTimePowerRatioCheck && !WarmupFlag) {
                             ShowSevereError(cFanTypes(Fan(FanNum).FanType_Num) + " = " + Fan(FanNum).FanName + "\"");
                             ShowContinueError("Error in Fan Power Ratio curve. Curve output less than 0.0.");
-                            ShowContinueError(format("Curve output = {:.5T}", SpeedRaisedToPower) +
-                                              format(", fan speed ratio = {:.5T}", SpeedRatio));
+                            ShowContinueError(format("Curve output = {:.5T}, fan speed ratio = {:.5T}", SpeedRaisedToPower, SpeedRatio));
                             ShowContinueError("Check curve coefficients to ensure proper power ratio as a function of fan speed ratio.");
                             ShowContinueError("Resetting Fan Power Ratio curve output to 0.0 and the simulation continues.");
                             ShowContinueErrorTimeStamp("Occurrence info:");
@@ -2034,8 +2033,7 @@ namespace Fans {
                             if (Fan(FanNum).OneTimeEffRatioCheck && !WarmupFlag) {
                                 ShowSevereError(cFanTypes(Fan(FanNum).FanType_Num) + " = " + Fan(FanNum).FanName + "\"");
                                 ShowContinueError("Error in Fan Efficiency Ratio curve. Curve output less than 0.01.");
-                                ShowContinueError(format("Curve output = {:.5T}", EffRatioAtSpeedRatio) +
-                                                  format(", fan speed ratio = {:.5T}", SpeedRatio));
+                                ShowContinueError(format("Curve output = {:.5T}, fan speed ratio = {:.5T}", EffRatioAtSpeedRatio, SpeedRatio));
                                 ShowContinueError("Check curve coefficients to ensure proper efficiency ratio as a function of fan speed ratio.");
                                 ShowContinueError("Resetting Fan Efficiency Ratio curve output to 0.01 and the simulation continues.");
                                 ShowContinueErrorTimeStamp("Occurrence info:");

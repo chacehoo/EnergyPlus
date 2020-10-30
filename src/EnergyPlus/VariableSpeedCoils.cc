@@ -4445,8 +4445,7 @@ namespace VariableSpeedCoils {
                     ShowWarningError("SizeDXCoil: " + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).VarSpeedCoilType + ' ' + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name + ", Speed " +
                                      fmt::to_string(Mode) + " Rated Air Flow Rate must be less than or equal to Speed " + fmt::to_string(Mode + 1) +
                                      " Rated Air Flow Rate.");
-                    ShowContinueError(format("Instead, {:.2R} > ", state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode)) +
-                                      format("{:.2R}", state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode + 1)));
+                    ShowContinueError(format("Instead, {:.2R} > {:.2R}", state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode), state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode + 1)));
                     ShowFatalError("Preceding conditions cause termination.");
                 }
             }
@@ -4530,8 +4529,7 @@ namespace VariableSpeedCoils {
                 ShowWarningError("SizeDXCoil: " + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).VarSpeedCoilType + ' ' + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name + ", Speed " +
                                  fmt::to_string(Mode) + " Rated Air Flow Rate must be less than or equal to Speed " + fmt::to_string(Mode + 1) +
                                  " Rated Air Flow Rate.");
-                ShowContinueError(format("Instead, {:.2R} > ", state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode)) +
-                                  format("{:.2R}", state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode + 1)));
+                ShowContinueError(format("Instead, {:.2R} > {:.2R}", state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode), state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode + 1)));
                 ShowFatalError("Preceding conditions cause termination.");
             }
         }
@@ -4542,8 +4540,7 @@ namespace VariableSpeedCoils {
                 ShowWarningError("SizeDXCoil: " + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).VarSpeedCoilType + ' ' + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name + ", Speed " +
                                  fmt::to_string(Mode) + " Rated Total Cooling Capacity must be less than or equal to Speed " +
                                  fmt::to_string(Mode + 1) + " Rated Total Cooling Capacity.");
-                ShowContinueError(format("Instead, {:.2R} > ", state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedTotCap(Mode)) +
-                                  format("{:.2R}", state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedTotCap(Mode + 1)));
+                ShowContinueError(format("Instead, {:.2R} > {:.2R}", state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedTotCap(Mode), state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MSRatedTotCap(Mode + 1)));
                 ShowFatalError("Preceding conditions cause termination.");
             }
         }

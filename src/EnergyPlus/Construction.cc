@@ -270,8 +270,7 @@ namespace Construction {
 
                     ShowSevereError("InitConductionTransferFunctions: Material=" + dataMaterial.Material(CurrentLayer).Name +
                                     "R Value below lowest allowed value");
-                    ShowContinueError(format("Lowest allowed value=[{:.3R}], Material R Value=[", RValueLowLimit) +
-                                      format("{:.3R}].", lr(Layer)));
+                    ShowContinueError(format("Lowest allowed value=[{:.3R}], Material R Value=[{:.3R}].", RValueLowLimit, lr(Layer)));
                     ErrorsFound = true;
 
                 } else { // A valid user defined R-value is available.

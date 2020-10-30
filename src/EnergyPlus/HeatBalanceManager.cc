@@ -3445,14 +3445,12 @@ namespace HeatBalanceManager {
                 if (Blind(Loop).SlatAngle < MinSlatAngGeom) {
                     ErrorsFound = true;
                     ShowSevereError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Illegal value combination.");
-                    ShowContinueError(cNumericFieldNames(4) + format("=[{:.1R}", Blind(Loop).SlatAngle) +
-                                      format("], is less than smallest allowed by slat dimensions and spacing, [{:.1R}", MinSlatAngGeom) +
+                    ShowContinueError(cNumericFieldNames(4) + format("=[{:.1R}], is less than smallest allowed by slat dimensions and spacing, [{:.1R}", Blind(Loop).SlatAngle, MinSlatAngGeom) +
                                       "] deg.");
                 } else if (Blind(Loop).SlatAngle > MaxSlatAngGeom) {
                     ErrorsFound = true;
                     ShowSevereError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Illegal value combination.");
-                    ShowContinueError(cNumericFieldNames(4) + format("=[{:.1R}", Blind(Loop).SlatAngle) +
-                                      format("], is greater than largest allowed by slat dimensions and spacing, [{:.1R}", MinSlatAngGeom) +
+                    ShowContinueError(cNumericFieldNames(4) + format("=[{:.1R}], is greater than largest allowed by slat dimensions and spacing, [{:.1R}", Blind(Loop).SlatAngle, MinSlatAngGeom) +
                                       "] deg.");
                 }
             }
@@ -4076,8 +4074,7 @@ namespace HeatBalanceManager {
                     ErrorsFound = true;
                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + SpecDataNames(1) + "\" invalid value.");
                     ShowContinueError("... Transmittance + reflectance) > 1.0 for an entry; at wavelength#=" + fmt::to_string(LamNum) +
-                                      format(", value(Tau+RhoF)=[{:.4T}], value(Tau+RhoB)=[", (Tau + RhoF)) +
-                                      format("{:.4T}].", (Tau + RhoB)));
+                                      format(", value(Tau+RhoF)=[{:.4T}], value(Tau+RhoB)=[{:.4T}].", (Tau + RhoF), (Tau + RhoB)));
                 }
             }
         }
@@ -5728,17 +5725,13 @@ namespace HeatBalanceManager {
                             ShowContinueError("...Environment(SizingPeriod)=\"" + EnvironmentName + "\"");
                         }
 
-                        ShowContinueError(format("..Max Temp Comparison = {:.2R}", WarmupConvergenceValues(ZoneNum).TestMaxTempValue) +
-                                          format(" vs Temperature Convergence Tolerance={:.2R} - ", TempConvergTol) +
+                        ShowContinueError(format("..Max Temp Comparison = {:.2R} vs Temperature Convergence Tolerance={:.2R} - ", WarmupConvergenceValues(ZoneNum).TestMaxTempValue, TempConvergTol) +
                                           PassFail(WarmupConvergenceValues(ZoneNum).PassFlag(1)) + " Convergence");
-                        ShowContinueError(format("..Min Temp Comparison = {:.2R}", WarmupConvergenceValues(ZoneNum).TestMinTempValue) +
-                                          format(" vs Temperature Convergence Tolerance={:.2R} - ", TempConvergTol) +
+                        ShowContinueError(format("..Min Temp Comparison = {:.2R} vs Temperature Convergence Tolerance={:.2R} - ", WarmupConvergenceValues(ZoneNum).TestMinTempValue, TempConvergTol) +
                                           PassFail(WarmupConvergenceValues(ZoneNum).PassFlag(2)) + " Convergence");
-                        ShowContinueError(format("..Max Heat Load Comparison = {:.4R}", WarmupConvergenceValues(ZoneNum).TestMaxHeatLoadValue) +
-                                          format(" vs Loads Convergence Tolerance={:.2R} - ", LoadsConvergTol) +
+                        ShowContinueError(format("..Max Heat Load Comparison = {:.4R} vs Loads Convergence Tolerance={:.2R} - ", WarmupConvergenceValues(ZoneNum).TestMaxHeatLoadValue, LoadsConvergTol) +
                                           PassFail(WarmupConvergenceValues(ZoneNum).PassFlag(3)) + " Convergence");
-                        ShowContinueError(format("..Max Cool Load Comparison = {:.4R}", WarmupConvergenceValues(ZoneNum).TestMaxCoolLoadValue) +
-                                          format(" vs Loads Convergence Tolerance={:.2R} - ", LoadsConvergTol) +
+                        ShowContinueError(format("..Max Cool Load Comparison = {:.4R} vs Loads Convergence Tolerance={:.2R} - ", WarmupConvergenceValues(ZoneNum).TestMaxCoolLoadValue, LoadsConvergTol) +
                                           PassFail(WarmupConvergenceValues(ZoneNum).PassFlag(4)) + " Convergence");
                     }
                 }

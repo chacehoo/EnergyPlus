@@ -578,8 +578,7 @@ namespace ICEngineElectricGenerator {
                 if (this->ErrExhaustTempIndex == 0) {
                     ShowWarningMessage("CalcICEngineGeneratorModel: " + this->TypeOf + "=\"" + this->Name +
                                        "\" low Exhaust Temperature from Curve Value");
-                    ShowContinueError(format("...curve generated temperature=[{:.3R} C], PLR=[", exhaustTemp) +
-                                      format("{:.3R}].", PLR));
+                    ShowContinueError(format("...curve generated temperature=[{:.3R} C], PLR=[{:.3R}].", exhaustTemp, PLR));
                     ShowContinueError("...simulation will continue with exhaust heat reclaim set to 0.");
                 }
                 ShowRecurringWarningErrorAtEnd("CalcICEngineGeneratorModel: " + this->TypeOf + "=\"" + this->Name +

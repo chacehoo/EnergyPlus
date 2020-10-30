@@ -2550,8 +2550,7 @@ namespace CondenserLoopTowers {
                         } else {
                             // Should never get there...
                             ShowContinueError(
-                                format("The Design Loop Exit Temperature is the sum of the design air inlet wet-bulb temperature= {:.2T}", this->DesInletAirWBTemp) +
-                                format(" C plus the cooling tower design approach temperature = {:.2T}C.", this->DesApproach));
+                                format("The Design Loop Exit Temperature is the sum of the design air inlet wet-bulb temperature= {:.2T} C plus the cooling tower design approach temperature = {:.2T}C.", this->DesInletAirWBTemp, this->DesApproach));
                         }
                         ShowContinueError(
                             format("If using HVACTemplate:Plant:ChilledWaterLoop, then check that input field Condenser Water Design Setpoint must be > {:.2T} C if autosizing the cooling tower.", this->DesInletAirWBTemp));
@@ -2868,19 +2867,16 @@ namespace CondenserLoopTowers {
                     ShowContinueError("Tower inlet design water temperature assumed to be 35.0 C.");
                     ShowContinueError("Tower inlet design air dry-bulb temperature assumed to be 35.0 C.");
                     ShowContinueError("Tower inlet design air wet-bulb temperature assumed to be 25.6 C.");
-                    ShowContinueError(format("Tower load assumed to be {:.3T}", this->HeatRejectCapNomCapSizingRatio) +
-                                      format(" times free convection capacity of {:.0T} W.", this->TowerFreeConvNomCap));
+                    ShowContinueError(format("Tower load assumed to be {:.3T} times free convection capacity of {:.0T} W.", this->HeatRejectCapNomCapSizingRatio, this->TowerFreeConvNomCap));
 
                     Real64 OutWaterTemp; // outlet water temperature during sizing [C]
                     OutWaterTemp = this->calculateSimpleTowerOutletTemp(state, Par(3), Par(4), UA0);
                     Real64 CoolingOutput = Par(5) * Par(3) * (this->WaterTemp - OutWaterTemp); // tower capacity during sizing [W]
-                    ShowContinueError(format("Tower capacity at lower UA guess ({:.4T}", UA0) +
-                                      format(") = {:.0T} W.", CoolingOutput));
+                    ShowContinueError(format("Tower capacity at lower UA guess ({:.4T}) = {:.0T} W.", UA0, CoolingOutput));
 
                     OutWaterTemp = this->calculateSimpleTowerOutletTemp(state, Par(3), Par(4), UA1);
                     CoolingOutput = Par(5) * Par(3) * (this->WaterTemp - OutWaterTemp);
-                    ShowContinueError(format("Tower capacity at upper UA guess ({:.4T}", UA1) +
-                                      format(") = {:.0T} W.", CoolingOutput));
+                    ShowContinueError(format("Tower capacity at upper UA guess ({:.4T}) = {:.0T} W.", UA1, CoolingOutput));
 
                     if (CoolingOutput < DesTowerLoad) {
                         ShowContinueError("Free convection capacity should be less than tower capacity at upper UA guess.");

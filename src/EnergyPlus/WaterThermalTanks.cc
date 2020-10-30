@@ -6024,8 +6024,7 @@ namespace WaterThermalTanks {
                     state.dataWaterThermalTanks->HPWaterHeater(HPNum).HPWHAirVolFlowRate(state.dataWaterThermalTanks->HPWaterHeater(HPNum).NumofSpeed)) { // but this is the not the scaled mas flow
                     // if ( FanVolFlow  < HPWaterHeater( HPNum ).HPWHAirVolFlowRate( HPWaterHeater( HPNum ).NumofSpeed ) ) {
 
-                    ShowWarningError(format("InitWaterThermalTank: -air flow rate = {:.7T}", FanVolFlow) +
-                                     format(" in fan object  is less than the MSHP system air flow rate when waterheating is required({:.7T}).", state.dataWaterThermalTanks->HPWaterHeater(HPNum).HPWHAirVolFlowRate(state.dataWaterThermalTanks->HPWaterHeater(HPNum).NumofSpeed)));
+                    ShowWarningError(format("InitWaterThermalTank: -air flow rate = {:.7T} in fan object  is less than the MSHP system air flow rate when waterheating is required({:.7T}).", FanVolFlow, state.dataWaterThermalTanks->HPWaterHeater(HPNum).HPWHAirVolFlowRate(state.dataWaterThermalTanks->HPWaterHeater(HPNum).NumofSpeed)));
                     ShowContinueError(" The MSHP system flow rate when waterheating is required is reset to the"
                                       " fan flow rate and the simulation continues.");
                     ShowContinueError(" Occurs in " + state.dataWaterThermalTanks->HPWaterHeater(HPNum).Name);

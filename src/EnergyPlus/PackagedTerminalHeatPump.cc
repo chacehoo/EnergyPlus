@@ -4181,8 +4181,7 @@ namespace PackagedTerminalHeatPump {
                 if (PTUnit(PTUnitNum).FanVolFlow != AutoSize) {
                     //     Check fan versus system supply air flow rates
                     if (PTUnit(PTUnitNum).FanVolFlow + 1e-10 < PTUnit(PTUnitNum).CoolVolumeFlowRate(NumOfSpeedCooling)) {
-                        ShowWarningError(CurrentModuleObject + format(" - air flow rate = {:.7T}", PTUnit(PTUnitNum).FanVolFlow) +
-                                         format(" in fan object is less than the MSHP system air flow rate when cooling is required ({:.7T}).", PTUnit(PTUnitNum).CoolVolumeFlowRate(NumOfSpeedCooling)));
+                        ShowWarningError(CurrentModuleObject + format(" - air flow rate = {:.7T} in fan object is less than the MSHP system air flow rate when cooling is required ({:.7T}).", PTUnit(PTUnitNum).FanVolFlow, PTUnit(PTUnitNum).CoolVolumeFlowRate(NumOfSpeedCooling)));
                         ShowContinueError(
                             " The MSHP system flow rate when cooling is required is reset to the fan flow rate and the simulation continues.");
                         ShowContinueError(" Occurs in " + CurrentModuleObject + " = " + PTUnit(PTUnitNum).Name);
@@ -4201,8 +4200,7 @@ namespace PackagedTerminalHeatPump {
 
                     if (PTUnit(PTUnitNum).NumOfSpeedHeating > 0) {
                         if (PTUnit(PTUnitNum).FanVolFlow + 1e-10 < PTUnit(PTUnitNum).HeatVolumeFlowRate(NumOfSpeedHeating)) {
-                            ShowWarningError(CurrentModuleObject + format(" - air flow rate = {:.7T}", PTUnit(PTUnitNum).FanVolFlow) +
-                                             format(" in fan object is less than the MSHP system air flow rate when heating is required ({:.7T}).", PTUnit(PTUnitNum).HeatVolumeFlowRate(NumOfSpeedHeating)));
+                            ShowWarningError(CurrentModuleObject + format(" - air flow rate = {:.7T} in fan object is less than the MSHP system air flow rate when heating is required ({:.7T}).", PTUnit(PTUnitNum).FanVolFlow, PTUnit(PTUnitNum).HeatVolumeFlowRate(NumOfSpeedHeating)));
                             ShowContinueError(
                                 " The MSHP system flow rate when heating is required is reset to the fan flow rate and the simulation continues.");
                             ShowContinueError(" Occurs in " + CurrentModuleObject + " = " + PTUnit(PTUnitNum).Name);
@@ -4220,8 +4218,7 @@ namespace PackagedTerminalHeatPump {
                     }
 
                     if (PTUnit(PTUnitNum).FanVolFlow < PTUnit(PTUnitNum).IdleVolumeAirRate && PTUnit(PTUnitNum).IdleVolumeAirRate != 0.0) {
-                        ShowWarningError(CurrentModuleObject + format(" - air flow rate = {:.7T}", PTUnit(PTUnitNum).FanVolFlow) +
-                                         format(" in fan object is less than the MSHP system air flow rate when no heating or cooling is needed ({:.7T}).", PTUnit(PTUnitNum).IdleVolumeAirRate));
+                        ShowWarningError(CurrentModuleObject + format(" - air flow rate = {:.7T} in fan object is less than the MSHP system air flow rate when no heating or cooling is needed ({:.7T}).", PTUnit(PTUnitNum).FanVolFlow, PTUnit(PTUnitNum).IdleVolumeAirRate));
                         ShowContinueError(" The MSHP system flow rate when no heating or cooling is needed is reset to the fan flow rate and the "
                                           "simulation continues.");
                         ShowContinueError(" Occurs in " + CurrentModuleObject + " = " + PTUnit(PTUnitNum).Name);

@@ -415,8 +415,7 @@ namespace RootFinder {
             if (XMax == 0.0) {
                 XMinReset = XMax;
             } else {
-                ShowFatalError(format("InitializeRootFinder: Invalid min/max bounds XMin={:.6T}", XMin) +
-                               format(" must be smaller than XMax={:.6T}", XMax));
+                ShowFatalError(format("InitializeRootFinder: Invalid min/max bounds XMin={:.6T} must be smaller than XMax={:.6T}", XMin, XMax));
             }
         }
 
@@ -1551,8 +1550,7 @@ namespace RootFinder {
                             // Should never happen if CheckLowerUpperBracket() is called before
                             ShowSevereError("UpdateBracket: Current iterate is smaller than the lower bracket.");
                             ShowContinueError(format("UpdateBracket: X={:.15T}", X) + format(", Y={:.15T}", Y));
-                            ShowContinueError(format("UpdateBracket: XLower={:.15T}", RootFinderData.LowerPoint.X) +
-                                              format(", YLower={:.15T}", RootFinderData.LowerPoint.Y));
+                            ShowContinueError(format("UpdateBracket: XLower={:.15T}, YLower={:.15T}", RootFinderData.LowerPoint.X, RootFinderData.LowerPoint.Y));
                             ShowFatalError("UpdateBracket: Preceding error causes program termination.");
                         }
                     }
@@ -1577,8 +1575,7 @@ namespace RootFinder {
                             // Should never happen if CheckLowerUpperBracket() is called before
                             ShowSevereError("UpdateBracket: Current iterate is greater than the upper bracket.");
                             ShowContinueError(format("UpdateBracket: X={:.15T}", X) + format(", Y={:.15T}", Y));
-                            ShowContinueError(format("UpdateBracket: XUpper={:.15T}", RootFinderData.UpperPoint.X) +
-                                              format(", YUpper={:.15T}", RootFinderData.UpperPoint.Y));
+                            ShowContinueError(format("UpdateBracket: XUpper={:.15T}, YUpper={:.15T}", RootFinderData.UpperPoint.X, RootFinderData.UpperPoint.Y));
                             ShowFatalError("UpdateBracket: Preceding error causes program termination.");
                         }
                     }
@@ -1606,8 +1603,7 @@ namespace RootFinder {
                             // Should never happen if CheckLowerUpperBracket() is called before
                             ShowSevereError("UpdateBracket: Current iterate is smaller than the lower bracket.");
                             ShowContinueError(format("UpdateBracket: X={:.15T}", X) + format(", Y={:.15T}", Y));
-                            ShowContinueError(format("UpdateBracket: XLower={:.15T}", RootFinderData.LowerPoint.X) +
-                                              format(", YLower={:.15T}", RootFinderData.LowerPoint.Y));
+                            ShowContinueError(format("UpdateBracket: XLower={:.15T}, YLower={:.15T}", RootFinderData.LowerPoint.X, RootFinderData.LowerPoint.Y));
                             ShowFatalError("UpdateBracket: Preceding error causes program termination.");
                         }
                     }
@@ -1632,8 +1628,7 @@ namespace RootFinder {
                             // Should never happen if CheckLowerUpperBracket() is called before
                             ShowSevereError("UpdateBracket: Current iterate is greater than the upper bracket.");
                             ShowContinueError(format("UpdateBracket: X={:.15T}", X) + format(", Y={:.15T}", Y));
-                            ShowContinueError(format("UpdateBracket: XUpper={:.15T}", RootFinderData.UpperPoint.X) +
-                                              format(", YUpper={:.15T}", RootFinderData.UpperPoint.Y));
+                            ShowContinueError(format("UpdateBracket: XUpper={:.15T}, YUpper={:.15T}", RootFinderData.UpperPoint.X, RootFinderData.UpperPoint.Y));
                             ShowFatalError("UpdateBracket: Preceding error causes program termination.");
                         }
                     }

@@ -312,8 +312,7 @@ void ControlCompOutput(EnergyPlusData &state, std::string const &CompName,      
             // Check to make sure that the Minimum Flow rate is less than the max.
             if (MinFlow > MaxFlow) {
                 ShowSevereError("ControlCompOutput:" + CompType + ':' + CompName + ", Min Control Flow is > Max Control Flow");
-                ShowContinueError("Acuated Node=" + NodeID(ActuatedNode) + format(" MinFlow=[{:.3T}", MinFlow) +
-                                  format("], Max Flow={:.3T}", MaxFlow));
+                ShowContinueError("Acuated Node=" + NodeID(ActuatedNode) + format(" MinFlow=[{:.3T}], Max Flow={:.3T}", MinFlow, MaxFlow));
                 ShowContinueErrorTimeStamp("");
                 ShowFatalError("Program terminates due to preceding condition.");
             }

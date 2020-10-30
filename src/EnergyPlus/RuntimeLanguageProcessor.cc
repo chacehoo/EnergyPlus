@@ -2556,8 +2556,7 @@ namespace RuntimeLanguageProcessor {
         } else {
             ReturnVal.Type = DataRuntimeLanguage::ValueError;
             ReturnVal.Error = DataRuntimeLanguage::PossibleOperators(FunctionCode).Symbol +
-                              format(" function called with invalid arguments: Hour={:.1R}", Operand1) +
-                              format(", Timestep={:.1R}", Operand2);
+                              format(" function called with invalid arguments: Hour={:.1R}, Timestep={:.1R}", Operand1, Operand2);
         }
     }
 
@@ -2576,8 +2575,7 @@ namespace RuntimeLanguageProcessor {
         } else {
             ReturnVal.Type = DataRuntimeLanguage::ValueError;
             ReturnVal.Error = DataRuntimeLanguage::PossibleOperators(FunctionCode).Symbol +
-                              format(" function called with invalid arguments: Hour={:.1R}", Operand1) +
-                              format(", Timestep={:.1R}", Operand2);
+                              format(" function called with invalid arguments: Hour={:.1R}, Timestep={:.1R}", Operand1, Operand2);
         }
     }
 

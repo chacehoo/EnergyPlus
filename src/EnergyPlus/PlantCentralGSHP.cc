@@ -1908,8 +1908,7 @@ namespace PlantCentralGSHP {
                         ++this->ChillerHeater(ChillerHeaterNum).ChillerCapFTError;
                         ShowWarningError("ChillerHeaterPerformance:Electric:EIR \"" + this->ChillerHeater(ChillerHeaterNum).Name + "\":");
                         ShowContinueError(format(" ChillerHeater Capacity as a Function of Temperature curve output is negative ({:.3R}).", ChillerCapFT));
-                        ShowContinueError(format(" Negative value occurs using an Evaporator Outlet Temp of {:.1R} and a Condenser Inlet Temp of ", EvapOutletTempSetPoint) +
-                                          format("{:.1R}", CondInletTemp) + '.');
+                        ShowContinueError(format(" Negative value occurs using an Evaporator Outlet Temp of {:.1R} and a Condenser Inlet Temp of {:.1R}", EvapOutletTempSetPoint, CondInletTemp) + '.');
                         ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                     } else if (!DataGlobals::WarmupFlag) {
                         ++this->ChillerHeater(ChillerHeaterNum).ChillerCapFTError;
@@ -2401,8 +2400,7 @@ namespace PlantCentralGSHP {
                             ++this->ChillerHeater(ChillerHeaterNum).ChillerCapFTError;
                             ShowWarningError("ChillerHeaterPerformance:Electric:EIR \"" + this->ChillerHeater(ChillerHeaterNum).Name + "\":");
                             ShowContinueError(format(" ChillerHeater Capacity as a Function of Temperature curve output is negative ({:.3R}).", ChillerCapFT));
-                            ShowContinueError(format(" Negative value occurs using an Evaporator Outlet Temp of {:.1R} and a Condenser Inlet Temp of ", EvapOutletTempSetPoint) +
-                                              format("{:.1R}", CondInletTemp) + '.');
+                            ShowContinueError(format(" Negative value occurs using an Evaporator Outlet Temp of {:.1R} and a Condenser Inlet Temp of {:.1R}", EvapOutletTempSetPoint, CondInletTemp) + '.');
                             ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                         } else if (!DataGlobals::WarmupFlag) {
                             ++this->ChillerHeater(ChillerHeaterNum).ChillerCapFTError;

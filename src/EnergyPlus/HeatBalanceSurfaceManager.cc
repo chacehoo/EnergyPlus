@@ -7073,12 +7073,10 @@ namespace HeatBalanceSurfaceManager {
                     ++calcHeatBalInsideSurfErrCount;
                     if (calcHeatBalInsideSurfErrCount < 16) {
                         if (!DataHeatBalance::AnyCondFD) {
-                            ShowWarningError(format("Inside surface heat balance did not converge with Max Temp Difference [C] ={:.3R}", MaxDelTemp) +
-                                             format(" vs Max Allowed Temp Diff [C] ={:.3R}", MaxAllowedDelTemp));
+                            ShowWarningError(format("Inside surface heat balance did not converge with Max Temp Difference [C] ={:.3R} vs Max Allowed Temp Diff [C] ={:.3R}", MaxDelTemp, MaxAllowedDelTemp));
                             ShowContinueErrorTimeStamp("");
                         } else {
-                            ShowWarningError(format("Inside surface heat balance did not converge with Max Temp Difference [C] ={:.3R}", MaxDelTemp) +
-                                             format(" vs Max Allowed Temp Diff [C] ={:.6R}", MaxAllowedDelTempCondFD));
+                            ShowWarningError(format("Inside surface heat balance did not converge with Max Temp Difference [C] ={:.3R} vs Max Allowed Temp Diff [C] ={:.6R}", MaxDelTemp, MaxAllowedDelTempCondFD));
                             ShowContinueErrorTimeStamp("");
                         }
                     } else {
@@ -7769,8 +7767,7 @@ namespace HeatBalanceSurfaceManager {
                     ++calcHeatBalInsideSurfErrCount;
                     if (calcHeatBalInsideSurfErrCount < 16) {
                         ShowWarningError(
-                            format("Inside surface heat balance did not converge with Max Temp Difference [C] ={:.3R}", MaxDelTemp) +
-                            format(" vs Max Allowed Temp Diff [C] ={:.6R}", MaxAllowedDelTempCondFD));
+                            format("Inside surface heat balance did not converge with Max Temp Difference [C] ={:.3R} vs Max Allowed Temp Diff [C] ={:.6R}", MaxDelTemp, MaxAllowedDelTempCondFD));
                         ShowContinueErrorTimeStamp("");
                     } else {
                         ShowRecurringWarningErrorAtEnd("Inside surface heat balance convergence problem continues",

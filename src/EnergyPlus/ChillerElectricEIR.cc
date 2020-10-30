@@ -1798,8 +1798,7 @@ namespace ChillerElectricEIR {
                 ++this->ChillerCapFTError;
                 ShowWarningError("CHILLER:ELECTRIC:EIR \"" + this->Name + "\":");
                 ShowContinueError(format(" Chiller Capacity as a Function of Temperature curve output is negative ({:.3R}).", this->ChillerCapFT));
-                ShowContinueError(format(" Negative value occurs using an Evaporator Outlet Temp of {:.1R}", EvapOutletTempSetPoint) +
-                                  format(" and a Condenser Inlet Temp of {:.1R}", condInletTemp) + '.');
+                ShowContinueError(format(" Negative value occurs using an Evaporator Outlet Temp of {:.1R} and a Condenser Inlet Temp of {:.1R}", EvapOutletTempSetPoint, condInletTemp) + '.');
                 ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
             } else if (DataPlant::PlantLoop(this->CWLoopNum).LoopSide(this->CWLoopSideNum).FlowLock != 0 && !DataGlobals::WarmupFlag) {
                 ++this->ChillerCapFTError;
@@ -2087,8 +2086,7 @@ namespace ChillerElectricEIR {
                 ++this->ChillerEIRFTError;
                 ShowWarningError("CHILLER:ELECTRIC:EIR \"" + this->Name + "\":");
                 ShowContinueError(format(" Chiller EIR as a Function of Temperature curve output is negative ({:.3R}).", this->ChillerEIRFT));
-                ShowContinueError(format(" Negative value occurs using an Evaporator Outlet Temp of {:.1R}", this->EvapOutletTemp) +
-                                  format(" and a Condenser Inlet Temp of {:.1R}", condInletTemp) + '.');
+                ShowContinueError(format(" Negative value occurs using an Evaporator Outlet Temp of {:.1R} and a Condenser Inlet Temp of {:.1R}", this->EvapOutletTemp, condInletTemp) + '.');
                 ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
             } else if (DataPlant::PlantLoop(this->CWLoopNum).LoopSide(this->CWLoopSideNum).FlowLock != 0 && !DataGlobals::WarmupFlag) {
                 ++this->ChillerEIRFTError;

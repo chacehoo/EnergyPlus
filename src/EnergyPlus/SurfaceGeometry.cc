@@ -10297,10 +10297,8 @@ namespace SurfaceGeometry {
                     for (auto edge : listOfedgeNotUsedTwice) {
                         ShowContinueError("  The surface    \"" + Surface(edge.surfNum).Name +
                                           "\" has an edge that is either not an edge on another surface or is an edge on three or more surfaces: ");
-                        ShowContinueError("    Vertex start { " + format("{:.4R}", edge.start.x) + ", " + format("{:.4R}, ", edge.start.y) +
-                                          format("{:.4R}}", edge.start.z));
-                        ShowContinueError("    Vertex end   { " + format("{:.4R}", edge.end.x) + ", " + format("{:.4R}, ", edge.end.y) +
-                                          format("{:.4R}}", edge.end.z));
+                        ShowContinueError("    Vertex start { " + format("{:.4R}", edge.start.x) + ", " + format("{:.4R}, {:.4R}}", edge.start.y, edge.start.z));
+                        ShowContinueError("    Vertex end   { " + format("{:.4R}", edge.end.x) + ", " + format("{:.4R}, {:.4R}}", edge.end.y, edge.end.z));
                     }
                 }
             }
@@ -11185,8 +11183,7 @@ namespace SurfaceGeometry {
                                 ShowSevereError(RoutineName + "Base Surface=\"" + Surface(Surface(ThisSurf).BaseSurf).Name + "\", ");
                                 ShowContinueError("Window Surface=\"" + Surface(ThisSurf).Name +
                                                   "\" area (with frame) is too large to fit on the surface.");
-                                ShowContinueError(format("Base surface area (-windows and doors)=[{:.2T}] m2, frame area=[", Surface(Surface(ThisSurf).BaseSurf).Area) +
-                                                  format("{:.2T}] m2.", SurfWinFrameArea(ThisSurf)));
+                                ShowContinueError(format("Base surface area (-windows and doors)=[{:.2T}] m2, frame area=[{:.2T}] m2.", Surface(Surface(ThisSurf).BaseSurf).Area, SurfWinFrameArea(ThisSurf)));
                                 ErrorInSurface = true;
                             }
                             Surface(Surface(ThisSurf).BaseSurf).Area -= SurfWinFrameArea(ThisSurf);
@@ -11200,8 +11197,7 @@ namespace SurfaceGeometry {
                             SurfWinDividerArea(ThisSurf) = DivArea * Surface(ThisSurf).Multiplier;
                             if ((Surface(ThisSurf).Area - SurfWinDividerArea(ThisSurf)) <= 0.0) {
                                 ShowSevereError(RoutineName + "Divider area exceeds glazed opening for window " + Surface(ThisSurf).Name);
-                                ShowContinueError("Window surface area=[" + format("{:.2T}] m2, divider area=[", Surface(ThisSurf).Area) +
-                                                  format("{:.2T}] m2.", SurfWinDividerArea(ThisSurf)));
+                                ShowContinueError("Window surface area=[" + format("{:.2T}] m2, divider area=[{:.2T}] m2.", Surface(ThisSurf).Area, SurfWinDividerArea(ThisSurf)));
                                 ErrorInSurface = true;
                             }
                             Surface(ThisSurf).Area -= SurfWinDividerArea(ThisSurf); // Glazed area

@@ -505,14 +505,12 @@ namespace PVWatts {
                     if (Fskydiff >= 0 && Fskydiff <= 1)
                         irr_st.iskydiff *= Fskydiff;
                     else
-                        ShowWarningError(format("PVWatts: sky diffuse reduction factor invalid: fskydiff={:.7R}", Fskydiff) +
-                                         format(", stilt={:.7R}", irr_st.stilt));
+                        ShowWarningError(format("PVWatts: sky diffuse reduction factor invalid: fskydiff={:.7R}, stilt={:.7R}", Fskydiff, irr_st.stilt));
 
                     if (Fgnddiff >= 0 && Fgnddiff <= 1)
                         irr_st.ignddiff *= Fgnddiff;
                     else
-                        ShowWarningError(format("PVWatts: gnd diffuse reduction factor invalid: fgnddiff={:.7R}", Fgnddiff) +
-                                         format(", stilt={:.7R}", irr_st.stilt));
+                        ShowWarningError(format("PVWatts: gnd diffuse reduction factor invalid: fgnddiff={:.7R}, stilt={:.7R}", Fgnddiff, irr_st.stilt));
                 }
             }
 

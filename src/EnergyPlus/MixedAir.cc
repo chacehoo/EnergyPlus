@@ -2847,8 +2847,7 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
             }
             if ((thisOAController.MaxOA - thisOAController.MinOA) < -SmallAirVolFlow) {
                 ShowSevereError("For Controller:OutdoorAir: " + thisOAController.Name);
-                ShowContinueError(format("  maximum outdoor air flow rate ({:.4R}", thisOAController.MaxOA) +
-                                  format(") < minimum outdoor air flow rate ({:.4R}", thisOAController.MinOA) + ')');
+                ShowContinueError(format("  maximum outdoor air flow rate ({:.4R}) < minimum outdoor air flow rate ({:.4R}", thisOAController.MaxOA, thisOAController.MinOA) + ')');
                 ShowContinueError("  To set the minimum outside air flow rate use the \"Design (minimum) outdoor air flow rate\" field in the "
                                   "Sizing:System object");
                 ErrorsFound = true;
@@ -2859,8 +2858,7 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
                 if ((thisOAController.MinOA - DesSupplyVolFlowRate) > 0.0001) {
                     ShowWarningError("InitOAController: Minimum Outdoor Air Flow Rate for Controller:OutdoorAir=" + thisOAController.Name +
                                      " is greater than Design Supply Air Flow Rate for AirLoopHVAC=" + PrimaryAirSystem(AirLoopNum).Name + ".");
-                    ShowContinueError(format("...Minimum Outdoor Air Flow Rate={:.6R}", thisOAController.MinOA) +
-                                      format(" will be reset to loop Design Supply Air Flow Rate={:.6R}", DesSupplyVolFlowRate));
+                    ShowContinueError(format("...Minimum Outdoor Air Flow Rate={:.6R} will be reset to loop Design Supply Air Flow Rate={:.6R}", thisOAController.MinOA, DesSupplyVolFlowRate));
                     thisOAController.MinOA = DesSupplyVolFlowRate;
                 } else if ((thisOAController.MinOA - DesSupplyVolFlowRate) > 0.0) {
                     // If difference is tiny, reset silently
@@ -2869,8 +2867,7 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
                 if ((thisOAController.MaxOA - DesSupplyVolFlowRate) > 0.0001) {
                     ShowWarningError("InitOAController: Maximum Outdoor Air Flow Rate for Controller:OutdoorAir=" + thisOAController.Name +
                                      " is greater than Design Supply Air Flow Rate for AirLoopHVAC=" + PrimaryAirSystem(AirLoopNum).Name + ".");
-                    ShowContinueError(format("...Maximum Outdoor Air Flow Rate={:.6R}", thisOAController.MaxOA) +
-                                      format(" will be reset to loop Design Supply Air Flow Rate={:.6R}", DesSupplyVolFlowRate));
+                    ShowContinueError(format("...Maximum Outdoor Air Flow Rate={:.6R} will be reset to loop Design Supply Air Flow Rate={:.6R}", thisOAController.MaxOA, DesSupplyVolFlowRate));
                     thisOAController.MaxOA = DesSupplyVolFlowRate;
                 } else if ((thisOAController.MaxOA - DesSupplyVolFlowRate) > 0.0) {
                     // If difference is tiny, reset silently
@@ -3689,8 +3686,7 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
                                      this->Name + ", Min OA fraction is used.");
                     ShowContinueError("This may be overriding desired ventilation controls. Check inputs for Minimum Outdoor Air Flow Rate, Minimum "
                                       "Outdoor Air Schedule Name and Controller:MechanicalVentilation");
-                    ShowContinueErrorTimeStamp(format("Minimum OA fraction = {:.4R}", OutAirMinFrac) +
-                                               format(", Mech Vent OA fraction = {:.4R}", MechVentOutsideAirMinFrac));
+                    ShowContinueErrorTimeStamp(format("Minimum OA fraction = {:.4R}, Mech Vent OA fraction = {:.4R}", OutAirMinFrac, MechVentOutsideAirMinFrac));
                 } else {
                     ShowRecurringWarningErrorAtEnd("Controller:OutdoorAir=\"" + this->Name +
                                                        "\": Min OA fraction > Mechanical ventilation OA fraction, continues...",
@@ -4148,8 +4144,7 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
                                             ++this->OAMaxMinLimitErrorCount;
                                             if (this->OAMaxMinLimitErrorCount < 2) {
                                                 ShowSevereError(RoutineName + CurrentModuleObject + " = \"" + this->Name + "\".");
-                                                ShowContinueError(format("For System Outdoor Air Method = ProportionalControlBasedOnDesignOARate, maximum zone outdoor air rate ({:.4R}", ZoneOAMax) +
-                                                                  format("), is not greater than minimum zone outdoor air rate ({:.4R}).", ZoneOAMin));
+                                                ShowContinueError(format("For System Outdoor Air Method = ProportionalControlBasedOnDesignOARate, maximum zone outdoor air rate ({:.4R}), is not greater than minimum zone outdoor air rate ({:.4R}).", ZoneOAMax, ZoneOAMin));
                                                 ShowContinueError(" The minimum zone outdoor air rate is set to the maximum zone outdoor air rate. "
                                                                   "Simulation continues...");
                                                 ShowContinueErrorTimeStamp("");
@@ -4190,8 +4185,7 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
                                                 if (this->SystemOAMethod == SOAM_ProportionalControlSchOcc) {
                                                     if (this->CO2MaxMinLimitErrorCount < 2) {
                                                         ShowSevereError(RoutineName + CurrentModuleObject + " = \"" + this->Name + "\".");
-                                                        ShowContinueError(format("For System Outdoor Air Method = ProportionalControlBasedonOccupancySchedule, maximum target CO2 concentration ({:.2R}", ZoneMaxCO2) +
-                                                                          format("), is not greater than minimum target CO2 concentration ({:.2R}).", ZoneMinCO2));
+                                                        ShowContinueError(format("For System Outdoor Air Method = ProportionalControlBasedonOccupancySchedule, maximum target CO2 concentration ({:.2R}), is not greater than minimum target CO2 concentration ({:.2R}).", ZoneMaxCO2, ZoneMinCO2));
                                                         ShowContinueError("\"ProportionalControlBasedonOccupancySchedule\" will not be modeled. "
                                                                           "Default \"VentilationRateProcedure\" will be modeled. Simulation "
                                                                           "continues...");
@@ -4208,8 +4202,7 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
                                                 if (this->SystemOAMethod == SOAM_ProportionalControlDesOcc) {
                                                     if (this->CO2MaxMinLimitErrorCount < 2) {
                                                         ShowSevereError(RoutineName + CurrentModuleObject + " = \"" + this->Name + "\".");
-                                                        ShowContinueError(format("For System Outdoor Air Method = ProportionalControlBasedonDesignOccupancy, maximum target CO2 concentration ({:.2R}", ZoneMaxCO2) +
-                                                                          format("), is not greater than minimum target CO2 concentration ({:.2R}).", ZoneMinCO2));
+                                                        ShowContinueError(format("For System Outdoor Air Method = ProportionalControlBasedonDesignOccupancy, maximum target CO2 concentration ({:.2R}), is not greater than minimum target CO2 concentration ({:.2R}).", ZoneMaxCO2, ZoneMinCO2));
                                                         ShowContinueError("\"ProportionalControlBasedonDesignOccupancy\" will not be modeled. "
                                                                           "Default \"VentilationRateProcedure\" will be modeled. Simulation "
                                                                           "continues...");
@@ -4226,8 +4219,7 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
                                                 if (this->SystemOAMethod == SOAM_ProportionalControlDesOARate) {
                                                     if (this->CO2MaxMinLimitErrorCount < 2) {
                                                         ShowSevereError(RoutineName + CurrentModuleObject + " = \"" + this->Name + "\".");
-                                                        ShowContinueError(format("For System Outdoor Air Method = ProportionalControlBasedOnDesignOARate, maximum target CO2 concentration ({:.2R}", ZoneMaxCO2) +
-                                                                          format("), is not greater than minimum target CO2 concentration ({:.2R}).", ZoneMinCO2));
+                                                        ShowContinueError(format("For System Outdoor Air Method = ProportionalControlBasedOnDesignOARate, maximum target CO2 concentration ({:.2R}), is not greater than minimum target CO2 concentration ({:.2R}).", ZoneMaxCO2, ZoneMinCO2));
                                                         ShowContinueError("\"ProportionalControlBasedOnDesignOARate\" will not be modeled. Default "
                                                                           "\"VentilationRateProcedure\" will be modeled. Simulation continues...");
                                                         ShowContinueErrorTimeStamp("");

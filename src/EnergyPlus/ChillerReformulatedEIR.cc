@@ -2315,8 +2315,7 @@ namespace ChillerReformulatedEIR {
                                  " C) is outside the range of evaporator outlet temperatures (X var) given in Cooling Capacity Function of "
                                  "Temperature biquadratic curve = " +
                                  this->CAPFTName);
-                ShowContinueErrorTimeStamp(format("The range specified = {:.2T} C to ", CAPFTXTmin) +
-                                           format("{:.2T} C.", CAPFTXTmax));
+                ShowContinueErrorTimeStamp(format("The range specified = {:.2T} C to {:.2T} C.", CAPFTXTmin, CAPFTXTmax));
                 ShowRecurringWarningErrorAtEnd("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name +
                                                    "\": The evap outlet temp range in Cooling Capacity Function of Temp curve error continues.",
                                                this->CAPFTXIterIndex,
@@ -2338,8 +2337,7 @@ namespace ChillerReformulatedEIR {
                                  " C) is outside the range of evaporator outlet temperatures (X var) given in Electric Input to Cooling Output Ratio "
                                  "Function of Temperature biquadratic curve = " +
                                  this->EIRFTName);
-                ShowContinueErrorTimeStamp(format("The range specified = {:.2T} C to ", EIRFTXTmin) +
-                                           format("{:.2T} C.", EIRFTXTmax));
+                ShowContinueErrorTimeStamp(format("The range specified = {:.2T} C to {:.2T} C.", EIRFTXTmin, EIRFTXTmax));
                 ShowRecurringWarningErrorAtEnd(
                     "CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name +
                         "\": The evap outlet temp range in Electric Input to Cooling Output Ratio Function of Temp curve error continues.",
@@ -2394,8 +2392,7 @@ namespace ChillerReformulatedEIR {
                                  " C) is outside the range of condenser outlet temperatures (Y var) given in Cooling Capacity Function of "
                                  "Temperature biquadratic curve = " +
                                  this->CAPFTName);
-                ShowContinueErrorTimeStamp(format("The range specified = {:.2T} C to ", CAPFTYTmin) +
-                                           format("{:.2T} C.", CAPFTYTmax));
+                ShowContinueErrorTimeStamp(format("The range specified = {:.2T} C to {:.2T} C.", CAPFTYTmin, CAPFTYTmax));
                 ShowRecurringWarningErrorAtEnd("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name +
                                                    "\": The cond outlet temp range in Cooling Capacity Function of Temp curve error continues.",
                                                this->CAPFTYIterIndex,
@@ -2417,8 +2414,7 @@ namespace ChillerReformulatedEIR {
                                  " C) is outside the range of condenser outlet temperatures (Y var) given in Electric Input to Cooling Output Ratio "
                                  "Function of Temperature biquadratic curve = " +
                                  this->EIRFTName);
-                ShowContinueErrorTimeStamp(format("The range specified = {:.2T} C to ", EIRFTYTmin) +
-                                           format("{:.2T} C.", EIRFTYTmax));
+                ShowContinueErrorTimeStamp(format("The range specified = {:.2T} C to {:.2T} C.", EIRFTYTmin, EIRFTYTmax));
                 ShowRecurringWarningErrorAtEnd(
                     "CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name +
                         "\": The cond outlet temp range in Electric Input to Cooling Output Ratio as a Function of Temp curve error continues.",
@@ -2443,8 +2439,7 @@ namespace ChillerReformulatedEIR {
                                      " C) is outside the range of condenser outlet temperatures (X var) given in Electric Input to Cooling Output "
                                      "Ratio Function of Part-load Ratio bicubic curve = " +
                                      this->EIRFPLRName);
-                    ShowContinueErrorTimeStamp(format("The range specified = {:.2T} C to ", EIRFPLRTmin) +
-                                               format("{:.2T} C.", EIRFPLRTmax));
+                    ShowContinueErrorTimeStamp(format("The range specified = {:.2T} C to {:.2T} C.", EIRFPLRTmin, EIRFPLRTmax));
                     ShowRecurringWarningErrorAtEnd(
                         "CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name +
                             "\": The cond outlet temp range in Electric Input to Cooling Output Ratio Function of PLR curve error continues.",
@@ -2469,8 +2464,7 @@ namespace ChillerReformulatedEIR {
                                  ") is outside the range of part-load ratios (Y var) given in Electric Input to Cooling Output Ratio Function of "
                                  "Part-load Ratio bicubic curve = " +
                                  this->EIRFPLRName);
-                ShowContinueErrorTimeStamp(format("The range specified = {:.3T} to ", EIRFPLRPLRmin) +
-                                           format("{:.3T}", EIRFPLRPLRmax) + '.');
+                ShowContinueErrorTimeStamp(format("The range specified = {:.3T} to {:.3T}", EIRFPLRPLRmin, EIRFPLRPLRmax) + '.');
                 ShowRecurringWarningErrorAtEnd(
                     "CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name +
                         "\": The part-load ratio range in Electric Input to Cooling Output Ratio Function of PLRatio curve error continues.",
@@ -2523,8 +2517,7 @@ namespace ChillerReformulatedEIR {
                 ++this->ChillerCapFTError;
                 ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name + "\":");
                 ShowContinueError(format(" Chiller Capacity as a Function of Temperature curve output is negative ({:.3R}).", this->ChillerCapFT));
-                ShowContinueError(format(" Negative value occurs using an Evaporator Leaving Temp of {:.1R}", EvapOutletTempSetPoint) +
-                                  format(" and a Condenser Leaving Temp of {:.1R}", this->CondOutletTemp) + '.');
+                ShowContinueError(format(" Negative value occurs using an Evaporator Leaving Temp of {:.1R} and a Condenser Leaving Temp of {:.1R}", EvapOutletTempSetPoint, this->CondOutletTemp) + '.');
                 ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
             } else if (DataPlant::PlantLoop(PlantLoopNum).LoopSide(LoopSideNum).FlowLock != 0 && !DataGlobals::WarmupFlag) {
                 ++this->ChillerCapFTError;
@@ -2543,8 +2536,7 @@ namespace ChillerReformulatedEIR {
                 ++this->ChillerEIRFTError;
                 ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name + "\":");
                 ShowContinueError(format(" Reformulated Chiller EIR as a Function of Temperature curve output is negative ({:.3R}).", this->ChillerEIRFT));
-                ShowContinueError(format(" Negative value occurs using an Evaporator Leaving Temp of {:.1R}", this->EvapOutletTemp) +
-                                  format(" and a Condenser Leaving Temp of {:.1R}", this->CondOutletTemp) + '.');
+                ShowContinueError(format(" Negative value occurs using an Evaporator Leaving Temp of {:.1R} and a Condenser Leaving Temp of {:.1R}", this->EvapOutletTemp, this->CondOutletTemp) + '.');
                 ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
             } else if (DataPlant::PlantLoop(PlantLoopNum).LoopSide(LoopSideNum).FlowLock != 0 && !DataGlobals::WarmupFlag) {
                 ++this->ChillerEIRFTError;
@@ -2585,8 +2577,7 @@ namespace ChillerReformulatedEIR {
                 ++this->ChillerEIRFPLRError;
                 ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name + "\":");
                 ShowContinueError(format(" Chiller EIR as a function of PLR and condenser water temperature curve output is negative ({:.3R}).", this->ChillerEIRFPLR));
-                ShowContinueError(format(" Negative value occurs using a part-load ratio of {:.3R}", this->ChillerPartLoadRatio) +
-                                  format(" and a Condenser Leaving Temp of {:.1R} C.", this->CondOutletTemp));
+                ShowContinueError(format(" Negative value occurs using a part-load ratio of {:.3R} and a Condenser Leaving Temp of {:.1R} C.", this->ChillerPartLoadRatio, this->CondOutletTemp));
                 ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
             } else if (DataPlant::PlantLoop(PlantLoopNum).LoopSide(LoopSideNum).FlowLock != 0 && !DataGlobals::WarmupFlag) {
                 ++this->ChillerEIRFPLRError;

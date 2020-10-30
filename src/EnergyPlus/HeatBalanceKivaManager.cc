@@ -969,8 +969,7 @@ namespace HeatBalanceKivaManager {
                     }
 
                     if (fnd.deepGroundDepth > initDeepGroundDepth) {
-                        ShowWarningError("Foundation:Kiva=\"" + foundationInputs[surface.OSCPtr].name + format("\", the autocalculated deep ground depth ({:.3T} m) is shallower than foundation construction elements (", initDeepGroundDepth) +
-                                         format("{:.3T} m)", fnd.deepGroundDepth - 1.0));
+                        ShowWarningError("Foundation:Kiva=\"" + foundationInputs[surface.OSCPtr].name + format("\", the autocalculated deep ground depth ({:.3T} m) is shallower than foundation construction elements ({:.3T} m)", initDeepGroundDepth, fnd.deepGroundDepth - 1.0));
                         ShowContinueError(format("The deep ground depth will be set one meter below the lowest element ({:.3T} m)", fnd.deepGroundDepth));
                     }
 

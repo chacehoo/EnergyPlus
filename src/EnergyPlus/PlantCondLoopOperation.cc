@@ -926,8 +926,7 @@ CurrentModuleObject, PlantOpSchemeName);
                                                      PlantLoop(LoopNum).OpScheme(SchemeNum).Name + "\".");
                                     ShowContinueError("Range # " + fmt::to_string(InnerListNum) +
                                                       format(" Lower limit = {:.1R} lies within the Range # ", InnerListNumLowerLimit) +
-                                                      fmt::to_string(ListNum) + format(" ({:.1R} to ", OuterListNumLowerLimit) +
-                                                      format("{:.1R}).", OuterListNumUpperLimit));
+                                                      fmt::to_string(ListNum) + format(" ({:.1R} to {:.1R}).", OuterListNumLowerLimit, OuterListNumUpperLimit));
                                     ShowContinueError("Check that input for load range limit values do not overlap, and the simulation continues...");
                                 }
                                 // Check if inner list has an upper limit that is between an outer's lower and upper limit
@@ -937,8 +936,7 @@ CurrentModuleObject, PlantOpSchemeName);
                                                      PlantLoop(LoopNum).OpScheme(SchemeNum).Name + "\".");
                                     ShowContinueError("Range # " + fmt::to_string(InnerListNum) +
                                                       format(" Upper limit = {:.1R} lies within Range # ", InnerListNumUpperLimit) +
-                                                      fmt::to_string(ListNum) + format(" ({:.1R} to ", OuterListNumLowerLimit) +
-                                                      format("{:.1R}).", OuterListNumUpperLimit));
+                                                      fmt::to_string(ListNum) + format(" ({:.1R} to {:.1R}).", OuterListNumLowerLimit, OuterListNumUpperLimit));
                                     ShowContinueError("Check that input for load range limit values do not overlap, and the simulation continues...");
                                 }
                             }

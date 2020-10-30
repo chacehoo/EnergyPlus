@@ -1373,11 +1373,9 @@ namespace HeatRecovery {
                         ShowContinueError("  the mass flow ratio is out of bounds");
                         ShowContinueError(format("The mass flow ratio is (Min_Mass_Flow_Rate / Max_Mass_Flow_Rate) = {:.2R}", Z));
                         ShowContinueError("The mass flow ratio should be >= 0.0 and <= 1.0");
-                        ShowContinueError(format("Min_Mass_Flow_Rate = {:.2R} [air density] * ", RhoAir) +
-                                          format("{:.1R}", min(ExchCond(ExIndex).NomSupAirVolFlow, ExchCond(ExIndex).NomSecAirVolFlow)) +
+                        ShowContinueError(format("Min_Mass_Flow_Rate = {:.2R} [air density] * {:.1R}", RhoAir, min(ExchCond(ExIndex).NomSupAirVolFlow, ExchCond(ExIndex).NomSecAirVolFlow)) +
                                           " [Min_Vol_Flow_Rate]");
-                        ShowContinueError(format("Max_Mass_Flow_Rate = {:.2R} [air density] * ", RhoAir) +
-                                          format("{:.1R}", max(ExchCond(ExIndex).NomSupAirVolFlow, ExchCond(ExIndex).NomSecAirVolFlow)) +
+                        ShowContinueError(format("Max_Mass_Flow_Rate = {:.2R} [air density] * {:.1R}", RhoAir, max(ExchCond(ExIndex).NomSupAirVolFlow, ExchCond(ExIndex).NomSecAirVolFlow)) +
                                           " [Max_Vol_Flow_Rate]");
                     } else if (ErrStat == 2) {
                         FatalError = true;

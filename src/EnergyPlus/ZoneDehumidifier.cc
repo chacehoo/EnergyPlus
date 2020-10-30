@@ -776,8 +776,7 @@ namespace ZoneDehumidifier {
                     ++state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).WaterRemovalCurveErrorCount;
                     ShowWarningError(state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).UnitType + " \"" + state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).Name + "\":");
                     ShowContinueError(format(" Water Removal Rate Curve output is <= 0.0 ({:.5T}).", WaterRemovalRateFactor));
-                    ShowContinueError(format(" Negative value occurs using an inlet air dry-bulb temperature of {:.2T}", InletAirTemp) +
-                                      format(" and an inlet air relative humidity of {:.1T}", InletAirRH) + '.');
+                    ShowContinueError(format(" Negative value occurs using an inlet air dry-bulb temperature of {:.2T} and an inlet air relative humidity of {:.1T}", InletAirTemp, InletAirRH) + '.');
                     ShowContinueErrorTimeStamp(" Dehumidifier turned off for this time step but simulation continues.");
                 } else {
                     ShowRecurringWarningErrorAtEnd(state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).UnitType + " \"" + state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).Name +
@@ -810,8 +809,7 @@ namespace ZoneDehumidifier {
                     ++state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).EnergyFactorCurveErrorCount;
                     ShowWarningError(state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).UnitType + " \"" + state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).Name + "\":");
                     ShowContinueError(format(" Energy Factor Curve output is <= 0.0 ({:.5T}).", EnergyFactorAdjFactor));
-                    ShowContinueError(format(" Negative value occurs using an inlet air dry-bulb temperature of {:.2T}", InletAirTemp) +
-                                      format(" and an inlet air relative humidity of {:.1T}", InletAirRH) + '.');
+                    ShowContinueError(format(" Negative value occurs using an inlet air dry-bulb temperature of {:.2T} and an inlet air relative humidity of {:.1T}", InletAirTemp, InletAirRH) + '.');
                     ShowContinueErrorTimeStamp(" Dehumidifier turned off for this time step but simulation continues.");
                 } else {
                     ShowRecurringWarningErrorAtEnd(state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).UnitType + " \"" + state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).Name +
@@ -837,8 +835,7 @@ namespace ZoneDehumidifier {
                     if (state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).LowPLFErrorCount < 1) {
                         ++state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).LowPLFErrorCount;
                         ShowWarningError(state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).UnitType + " \"" + state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).Name + "\":");
-                        ShowContinueError(format(" The Part Load Fraction Correlation Curve output is ({:.2T}", PLF) +
-                                          format(") at a part-load ratio ={:.3T}", PLR));
+                        ShowContinueError(format(" The Part Load Fraction Correlation Curve output is ({:.2T}) at a part-load ratio ={:.3T}", PLF, PLR));
                         ShowContinueErrorTimeStamp(" PLF curve values must be >= 0.7.  PLF has been reset to 0.7 and simulation is continuing.");
                     } else {
                         ShowRecurringWarningErrorAtEnd(state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).UnitType + " \"" + state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).Name +
@@ -854,8 +851,7 @@ namespace ZoneDehumidifier {
                     if (state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).HighPLFErrorCount < 1) {
                         ++state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).HighPLFErrorCount;
                         ShowWarningError(state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).UnitType + " \"" + state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).Name + "\":");
-                        ShowContinueError(format(" The Part Load Fraction Correlation Curve output is ({:.2T}", PLF) +
-                                          format(") at a part-load ratio ={:.3T}", PLR));
+                        ShowContinueError(format(" The Part Load Fraction Correlation Curve output is ({:.2T}) at a part-load ratio ={:.3T}", PLF, PLR));
                         ShowContinueErrorTimeStamp(" PLF curve values must be < 1.0.  PLF has been reset to 1.0 and simulation is continuing.");
                     } else {
                         ShowRecurringWarningErrorAtEnd(state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).UnitType + " \"" + state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).Name +

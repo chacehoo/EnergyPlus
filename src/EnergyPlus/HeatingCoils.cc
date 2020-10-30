@@ -2228,8 +2228,7 @@ namespace HeatingCoils {
                         ++HeatingCoil(CoilNum).PLFErrorCount;
                         ShowWarningError("CalcFuelHeatingCoil: " + cAllCoilTypes(HeatingCoil(CoilNum).HCoilType_Num) + "=\"" +
                                          HeatingCoil(CoilNum).Name + "\", PLF curve values");
-                        ShowContinueError(format("The PLF curve value = {:.5T}", PLF) +
-                                          format(" for part-load ratio = {:.5T}", PartLoadRat));
+                        ShowContinueError(format("The PLF curve value = {:.5T} for part-load ratio = {:.5T}", PLF, PartLoadRat));
                         ShowContinueError("PLF curve values must be >= 0.7. PLF has been reset to 0.7 and the simulation continues...");
                         ShowContinueError("Check the IO reference manual for PLF curve guidance [Coil:Heating:Fuel].");
                     } else {
@@ -2524,8 +2523,7 @@ namespace HeatingCoils {
                         ++HeatingCoil(CoilNum).PLFErrorCount;
                         ShowWarningError("CalcFuelHeatingCoil: " + cAllCoilTypes(HeatingCoil(CoilNum).HCoilType_Num) + "=\"" +
                                          HeatingCoil(CoilNum).Name + "\", PLF curve values");
-                        ShowContinueError(format("The PLF curve value = {:.5T}", PLF) +
-                                          format(" for part-load ratio = {:.5T}", PartLoadRat));
+                        ShowContinueError(format("The PLF curve value = {:.5T} for part-load ratio = {:.5T}", PLF, PartLoadRat));
                         ShowContinueError("PLF curve values must be >= 0.7. PLF has been reset to 0.7 and the simulation continues...");
                         ShowContinueError("Check the IO reference manual for PLF curve guidance [Coil:Heating:Fuel].");
                     } else {

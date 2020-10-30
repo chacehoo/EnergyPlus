@@ -416,8 +416,7 @@ namespace UnitarySystems {
                         }
                     } else if (numSpeedInputs < maxSpeeds) {
                         ShowSevereError(cCurrentModuleObject + ": Error getting inputs for system named: " + thisObjectName);
-                        ShowContinueError(format("Number of speed inputs ({:.0T}", Real64(numSpeedInputs)) +
-                                          format(" is less than number of speeds ({:.0T}).", Real64(maxSpeeds)));
+                        ShowContinueError(format("Number of speed inputs ({:.0T} is less than number of speeds ({:.0T}).", Real64(numSpeedInputs), Real64(maxSpeeds)));
                         errorsFound = true;
                     }
                 }
@@ -8892,8 +8891,7 @@ namespace UnitarySystems {
                                     if (this->MaxIterIndex == 0) {
                                         ShowWarningMessage("Coil control failed to converge for " + this->UnitType + ':' + this->Name);
                                         ShowContinueError("  Iteration limit exceeded in calculating system sensible part-load ratio.");
-                                        ShowContinueErrorTimeStamp(format("Sensible load to be met = {:.2T}", ZoneLoad) +
-                                                                   format(" (watts), sensible output = {:.2T}", TempSensOutput) +
+                                        ShowContinueErrorTimeStamp(format("Sensible load to be met = {:.2T} (watts), sensible output = {:.2T}", ZoneLoad, TempSensOutput) +
                                                                    " (watts), and the simulation continues.");
                                     }
                                     ShowRecurringWarningErrorAtEnd(this->UnitType + " \"" + this->Name +
@@ -9293,8 +9291,7 @@ namespace UnitarySystems {
                     if (this->warnIndex.m_LatMaxIterIndex == 0) {
                         ShowWarningMessage("Coil control failed to converge for " + this->UnitType + ':' + this->Name);
                         ShowContinueError("  Iteration limit exceeded in calculating system Latent part-load ratio.");
-                        ShowContinueErrorTimeStamp(format("Latent load to be met = {:.2T}", state.dataUnitarySystems->MoistureLoad) +
-                                                   format(" (watts), Latent output = {:.2T}", TempLatOutput) +
+                        ShowContinueErrorTimeStamp(format("Latent load to be met = {:.2T} (watts), Latent output = {:.2T}", state.dataUnitarySystems->MoistureLoad, TempLatOutput) +
                                                    " (watts), and the simulation continues.");
                     }
                     ShowRecurringWarningErrorAtEnd(

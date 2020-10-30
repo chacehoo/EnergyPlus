@@ -3576,8 +3576,7 @@ namespace WindowManager {
                 // report out temperatures
                 for (i = 1; i <= state.dataWindowManager->nglfacep; ++i) {
                     ShowContinueError("Glazing face index = " + fmt::to_string(i) +
-                                      format(" ; new temperature ={:.4R}", state.dataWindowManager->thetas(i) - DataGlobalConstants::KelvinConv()) +
-                                      format("C  ; previous temperature = {:.4R}", state.dataWindowManager->thetasPrev(i) - DataGlobalConstants::KelvinConv()) + 'C');
+                                      format(" ; new temperature ={:.4R}C  ; previous temperature = {:.4R}", state.dataWindowManager->thetas(i) - DataGlobalConstants::KelvinConv(), state.dataWindowManager->thetasPrev(i) - DataGlobalConstants::KelvinConv()) + 'C');
                 }
             }
 

@@ -227,8 +227,7 @@ namespace EarthTube {
             EarthTubeSys(Loop).MinTemperature = rNumericArgs(2);
             if ((EarthTubeSys(Loop).MinTemperature < -EarthTubeTempLimit) || (EarthTubeSys(Loop).MinTemperature > EarthTubeTempLimit)) {
                 ShowSevereError(cCurrentModuleObject + ": " + cAlphaFieldNames(1) + '=' + cAlphaArgs(1) +
-                                format(" must have a minimum temperature between -{:.0R}C and ", EarthTubeTempLimit) +
-                                format("{:.0R}", EarthTubeTempLimit) + 'C');
+                                format(" must have a minimum temperature between -{:.0R}C and {:.0R}", EarthTubeTempLimit, EarthTubeTempLimit) + 'C');
                 ShowContinueError(format("Entered value={:.0R}", EarthTubeSys(Loop).MinTemperature));
                 ErrorsFound = true;
             }
@@ -236,8 +235,7 @@ namespace EarthTube {
             EarthTubeSys(Loop).MaxTemperature = rNumericArgs(3);
             if ((EarthTubeSys(Loop).MaxTemperature < -EarthTubeTempLimit) || (EarthTubeSys(Loop).MaxTemperature > EarthTubeTempLimit)) {
                 ShowSevereError(cCurrentModuleObject + ": " + cAlphaFieldNames(1) + '=' + cAlphaArgs(1) +
-                                format(" must have a maximum temperature between -{:.0R}C and ", EarthTubeTempLimit) +
-                                format("{:.0R}", EarthTubeTempLimit) + 'C');
+                                format(" must have a maximum temperature between -{:.0R}C and {:.0R}", EarthTubeTempLimit, EarthTubeTempLimit) + 'C');
                 ShowContinueError(format("Entered value={:.0R}", EarthTubeSys(Loop).MaxTemperature));
                 ErrorsFound = true;
             }
@@ -313,8 +311,7 @@ namespace EarthTube {
             if (EarthTubeSys(Loop).z <= (EarthTubeSys(Loop).r1 + EarthTubeSys(Loop).r2 + EarthTubeSys(Loop).r3)) {
                 ShowSevereError(cCurrentModuleObject + ": " + cAlphaFieldNames(1) + '=' + cAlphaArgs(1) + ", " + cNumericFieldNames(11) +
                                 " must be greater than 3*" + cNumericFieldNames(7) + " + " + cNumericFieldNames(8) +
-                                format(" entered value={:.2R}", EarthTubeSys(Loop).z) +
-                                format(" ref sum={:.2R}", EarthTubeSys(Loop).r1 + EarthTubeSys(Loop).r2 + EarthTubeSys(Loop).r3));
+                                format(" entered value={:.2R} ref sum={:.2R}", EarthTubeSys(Loop).z, EarthTubeSys(Loop).r1 + EarthTubeSys(Loop).r2 + EarthTubeSys(Loop).r3));
                 ErrorsFound = true;
             }
 

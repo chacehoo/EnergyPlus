@@ -4094,8 +4094,7 @@ namespace RefrigeratedCase {
                             Real64 TestDelta = (NominalSecondaryCapacity - Secondary(SecondaryNum).CoolingLoadRated) / NominalSecondaryCapacity;
                             if (std::abs(TestDelta) > 0.2) {
                                 ShowWarningError(CurrentModuleObject + "=\"" + Secondary(SecondaryNum).Name +
-                                                 format(" You may wish to check the system definition. Based upon the design flow rate and range temperature difference,  The nominal secondary loop heat exchanger capacity is, {:.0R} but the specified design capacity is,  ", NominalSecondaryCapacity) +
-                                                 format("{:.0R}", Secondary(SecondaryNum).CoolingLoadRated));
+                                                 format(" You may wish to check the system definition. Based upon the design flow rate and range temperature difference,  The nominal secondary loop heat exchanger capacity is, {:.0R} but the specified design capacity is,  {:.0R}", NominalSecondaryCapacity, Secondary(SecondaryNum).CoolingLoadRated));
                             }
                         } else if (!lNumericBlanks(1)) {
                             Secondary(SecondaryNum).CoolingLoadRated = Numbers(1);
@@ -4172,8 +4171,7 @@ namespace RefrigeratedCase {
                             Real64 DiffCircRates = (CalcCircRate - Secondary(SecondaryNum).CircRate) / Secondary(SecondaryNum).CircRate;
                             if (std::abs(DiffCircRates) > 0.3) {
                                 ShowWarningError(CurrentModuleObject + "=\"" + Secondary(SecondaryNum).Name + ' ' + cNumericFieldNames(7) +
-                                                 format(" Produces a circulating rate of {:.2R}", CalcCircRate) +
-                                                 format(" ;  A circulating rate of {:.2R}", Secondary(SecondaryNum).CircRate) +
+                                                 format(" Produces a circulating rate of {:.2R} ;  A circulating rate of {:.2R}", CalcCircRate, Secondary(SecondaryNum).CircRate) +
                                                  " would need a " + cNumericFieldNames(7) + format(" of {:.2R}", CalcTotFlowVol) +
                                                  " m3/s");
                             } // warning check on pump flow rate vs circ rate input
@@ -4391,8 +4389,7 @@ namespace RefrigeratedCase {
                             std::abs((Secondary(SecondaryNum).CoolingLoadRated - CapacityAtMaxVolFlow) / Secondary(SecondaryNum).CoolingLoadRated);
                         if (DeltaCap1 > (0.3)) { // diff between chiller rating and capacity at max flow > 30%
                             ShowWarningError(CurrentModuleObject + "=\"" + Secondary(SecondaryNum).Name +
-                                             format("\" You may wish to check the system sizing.  The nominal secondary loop heat exchanger capacity is {:.0R}", Secondary(SecondaryNum).CoolingLoadRated) +
-                                             format(" But the capacity based upon the maximum flow rate is {:.0R}", CapacityAtMaxVolFlow));
+                                             format("\" You may wish to check the system sizing.  The nominal secondary loop heat exchanger capacity is {:.0R} But the capacity based upon the maximum flow rate is {:.0R}", Secondary(SecondaryNum).CoolingLoadRated, CapacityAtMaxVolFlow));
                         }                            // DeltaCap1 > .3
                     } else {                         // Fluid type phase change                !^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                         if (lNumericBlanks(1)) {     // Chiller/evaporator capacity was not specified
@@ -4420,14 +4417,12 @@ namespace RefrigeratedCase {
                         std::abs((Secondary(SecondaryNum).CoolingLoadRated - NominalSecondaryRefLoad) / Secondary(SecondaryNum).CoolingLoadRated);
                     if (DeltaCap2 > (0.3)) { // diff between chiller rating and sum of nominal loads > 30%
                         ShowWarningError(CurrentModuleObject + "=\"" + Secondary(SecondaryNum).Name +
-                                         format("\" You may wish to check the system sizing. Total nominal refrigerating load is {:.0R}", NominalSecondaryRefLoad) +
-                                         format(" (Including cases, walk-ins, and pump heat).  The nominal secondary loop heat exchanger capacity is {:.0R}", Secondary(SecondaryNum).CoolingLoadRated));
+                                         format("\" You may wish to check the system sizing. Total nominal refrigerating load is {:.0R} (Including cases, walk-ins, and pump heat).  The nominal secondary loop heat exchanger capacity is {:.0R}", NominalSecondaryRefLoad, Secondary(SecondaryNum).CoolingLoadRated));
                     }
                     // compare rated xt xchanger brine flow to the total rated pump flow
                     if (SecondaryFlowVolRated > (1.1 * PumpTotRatedFlowVol)) {
                         ShowWarningError(CurrentModuleObject + "=\"" + Secondary(SecondaryNum).Name +
-                                         format("\" You may wish to check the pump sizing. Total nominal brine flow is {:.0R} m3/s, but the total nominal pump flow rate is:  ", SecondaryFlowVolRated) +
-                                         format("{:.0R} m3/s. ", PumpTotRatedFlowVol));
+                                         format("\" You may wish to check the pump sizing. Total nominal brine flow is {:.0R} m3/s, but the total nominal pump flow rate is:  {:.0R} m3/s. ", SecondaryFlowVolRated, PumpTotRatedFlowVol));
                     }
 
                 } // Secondary Loops
@@ -5412,15 +5407,13 @@ namespace RefrigeratedCase {
                 if (System(RefrigSysNum).NumStages == 1) { // Single-stage system
                     if ((NominalTotalCompCap < (0.7 * NominalTotalCoolingCap)) || (NominalCondCap < (1.3 * NominalTotalCoolingCap))) {
                         ShowWarningError(CurrentModuleObject + "=\"" + System(RefrigSysNum).Name +
-                                         format("\", You may wish to check the system sizing. Total nominal cooling capacity is {:.0R}W. Condenser capacity is ", NominalTotalCoolingCap) +
-                                         format("{:.0R}W. Nominal compressor capacity is ", NominalCondCap) +
+                                         format("\", You may wish to check the system sizing. Total nominal cooling capacity is {:.0R}W. Condenser capacity is {:.0R}W. Nominal compressor capacity is ", NominalTotalCoolingCap, NominalCondCap) +
                                          format("{:.0R}W.", NominalTotalCompCap));
                     }
                 } else if (System(RefrigSysNum).NumStages == 2) { // Two-stage system
                     if ((NominalTotalHiStageCompCap < (0.7 * NominalTotalCoolingCap)) || (NominalCondCap < (1.3 * NominalTotalCoolingCap))) {
                         ShowWarningError(CurrentModuleObject + "=\"" + System(RefrigSysNum).Name +
-                                         format("\", You may wish to check the system sizing. Total nominal cooling capacity is {:.0R}W. Condenser capacity is ", NominalTotalCoolingCap) +
-                                         format("{:.0R}W. Nominal compressor capacity is ", NominalCondCap) +
+                                         format("\", You may wish to check the system sizing. Total nominal cooling capacity is {:.0R}W. Condenser capacity is {:.0R}W. Nominal compressor capacity is ", NominalTotalCoolingCap, NominalCondCap) +
                                          format("{:.0R}W.", NominalTotalCompCap));
                     }
                 } // NumStages
@@ -5970,8 +5963,7 @@ namespace RefrigeratedCase {
                     TransSystem(TransRefrigSysNum).RefrigerantName, TransSystem(TransRefrigSysNum).PReceiver, RefrigIndex, RoutineNameNoColon);
                 if (TransSystem(TransRefrigSysNum).TReceiver > GasCooler(TransSystem(TransRefrigSysNum).GasCoolerNum(NumGasCoolers)).MinCondTemp) {
                     ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + TransSystem(TransRefrigSysNum).Name +
-                                     format(": The receiver temperature ({:.2R}", TransSystem(TransRefrigSysNum).TReceiver) +
-                                     format("C) is greater than the minimum condensing temperature specified for subcritical operation ({:.2R}", GasCooler(TransSystem(TransRefrigSysNum).GasCoolerNum(NumGasCoolers)).MinCondTemp) +
+                                     format(": The receiver temperature ({:.2R}C) is greater than the minimum condensing temperature specified for subcritical operation ({:.2R}", TransSystem(TransRefrigSysNum).TReceiver, GasCooler(TransSystem(TransRefrigSysNum).GasCoolerNum(NumGasCoolers)).MinCondTemp) +
                                      "C).");
                     ShowContinueError("  The minimum condensing temperature will be set at 5C greater than the receiver temperature.");
                     GasCooler(TransSystem(TransRefrigSysNum).GasCoolerNum(NumGasCoolers)).MinCondTemp =
@@ -5980,8 +5972,7 @@ namespace RefrigeratedCase {
                 if (NominalTotalCompCapLP > 0.0) {
                     if (TransSystem(TransRefrigSysNum).TReceiver <= TransSystem(TransRefrigSysNum).TEvapDesignLT) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + TransSystem(TransRefrigSysNum).Name +
-                                        format(": The receiver temperature ({:.2R}", TransSystem(TransRefrigSysNum).TReceiver) +
-                                        format("C) is less than the design evaporator temperature for the low temperature loads ({:.2R}C).", TransSystem(TransRefrigSysNum).TEvapDesignLT));
+                                        format(": The receiver temperature ({:.2R}C) is less than the design evaporator temperature for the low temperature loads ({:.2R}C).", TransSystem(TransRefrigSysNum).TReceiver, TransSystem(TransRefrigSysNum).TEvapDesignLT));
                         ShowContinueError("  Ensure that the receiver temperature is sufficiently greater than the design evaporator temperature for "
                                           "the low temperature loads.");
                         ShowContinueError(
@@ -5992,8 +5983,7 @@ namespace RefrigeratedCase {
                 if (NominalTotalCompCapHP > 0.0) {
                     if (TransSystem(TransRefrigSysNum).TReceiver <= TransSystem(TransRefrigSysNum).TEvapDesignMT) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + TransSystem(TransRefrigSysNum).Name +
-                                        format(": The receiver temperature ({:.2R}", TransSystem(TransRefrigSysNum).TReceiver) +
-                                        format("C) is less than the design evaporator temperature for the medium temperature loads ({:.2R}C).", TransSystem(TransRefrigSysNum).TEvapDesignMT));
+                                        format(": The receiver temperature ({:.2R}C) is less than the design evaporator temperature for the medium temperature loads ({:.2R}C).", TransSystem(TransRefrigSysNum).TReceiver, TransSystem(TransRefrigSysNum).TEvapDesignMT));
                         ShowContinueError("  Ensure that the receiver temperature is sufficiently greater than the design evaporator temperature for "
                                           "the medium temperature loads.");
                         ShowContinueError(
@@ -6088,8 +6078,7 @@ namespace RefrigeratedCase {
                 if ((NominalTotalCompCap < (0.7 * NominalTotalCoolingCap)) || (NominalCondCap < (1.3 * NominalTotalCoolingCap))) {
                     ShowWarningError(CurrentModuleObject + "=\"" + TransSystem(TransRefrigSysNum).Name +
                                      "\", You may wish to check the system sizing.");
-                    ShowContinueError(format("Total nominal cooling capacity is {:.0R}", NominalTotalCoolingCap) +
-                                      format("W. Condenser capacity is {:.0R}", NominalCondCap) +
+                    ShowContinueError(format("Total nominal cooling capacity is {:.0R}W. Condenser capacity is {:.0R}", NominalTotalCoolingCap, NominalCondCap) +
                                       format("W. Nominal compressor capacity is {:.0R}W.", NominalTotalCompCap));
                 }
 

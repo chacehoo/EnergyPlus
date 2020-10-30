@@ -480,8 +480,7 @@ namespace SZVAVModel {
                     if (SZVAVModel.MaxIterIndex == 0) {
                         ShowWarningMessage(MessagePrefix + "Coil control failed to converge for " + SZVAVModel.UnitType + ':' + SZVAVModel.Name);
                         ShowContinueError("  Iteration limit exceeded in calculating system sensible part-load ratio.");
-                        ShowContinueErrorTimeStamp(format("Sensible load to be met = {:.2T}", ZoneLoad) +
-                                                   format(" (watts), sensible output = {:.2T}", TempSensOutput) +
+                        ShowContinueErrorTimeStamp(format("Sensible load to be met = {:.2T} (watts), sensible output = {:.2T}", ZoneLoad, TempSensOutput) +
                                                    " (watts), and the simulation continues.");
                     }
                     ShowRecurringWarningErrorAtEnd(
@@ -908,8 +907,7 @@ namespace SZVAVModel {
                     if (SZVAVModel.MaxIterIndex == 0) {
                         ShowWarningMessage(MessagePrefix + "Coil control failed to converge for " + SZVAVModel.UnitType + ':' + SZVAVModel.Name);
                         ShowContinueError("  Iteration limit exceeded in calculating system sensible part-load ratio.");
-                        ShowContinueErrorTimeStamp(format("Sensible load to be met = {:.2T}", ZoneLoad) +
-                                                   format(" (watts), sensible output = {:.2T}", TempSensOutput) +
+                        ShowContinueErrorTimeStamp(format("Sensible load to be met = {:.2T} (watts), sensible output = {:.2T}", ZoneLoad, TempSensOutput) +
                                                    " (watts), and the simulation continues.");
                     }
                     ShowRecurringWarningErrorAtEnd(
@@ -1328,8 +1326,7 @@ namespace SZVAVModel {
                     if (SZVAVModel.MaxIterIndex == 0) {
                         ShowWarningMessage(MessagePrefix + "Coil control failed to converge for " + SZVAVModel.UnitType + ':' + SZVAVModel.Name);
                         ShowContinueError("  Iteration limit exceeded in calculating system sensible part-load ratio.");
-                        ShowContinueErrorTimeStamp(format("Sensible load to be met = {:.2T}", ZoneLoad) +
-                                                   format(" (watts), sensible output = {:.2T}", TempSensOutput) +
+                        ShowContinueErrorTimeStamp(format("Sensible load to be met = {:.2T} (watts), sensible output = {:.2T}", ZoneLoad, TempSensOutput) +
                                                    " (watts), and the simulation continues.");
                     }
                     ShowRecurringWarningErrorAtEnd(

@@ -1710,8 +1710,7 @@ namespace ThermalComfort {
 
             if (std::abs(AllAngleFacSummed - 1.0) > AngleFacLimit) {
                 ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid - Sum[AngleFactors]");
-                ShowContinueError(format("...Sum of Angle Factors [{:.3R}", AllAngleFacSummed) +
-                                  format("] exceed expected sum [1.0] by more than limit [{:.3R}].", AngleFacLimit));
+                ShowContinueError(format("...Sum of Angle Factors [{:.3R}] exceed expected sum [1.0] by more than limit [{:.3R}].", AllAngleFacSummed, AngleFacLimit));
                 ErrorsFound = true;
             }
         }

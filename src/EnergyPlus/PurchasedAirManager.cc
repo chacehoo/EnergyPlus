@@ -1295,8 +1295,7 @@ namespace PurchasedAirManager {
                 if (PurchAir(PurchAirNum).CoolErrIndex == 0) {
                     ShowSevereError("InitPurchasedAir: For " + PurchAir(PurchAirNum).cObjectName + " = " + PurchAir(PurchAirNum).Name +
                                     " serving Zone " + Zone(ActualZoneNum).Name);
-                    ShowContinueError(format("..the minimum supply air temperature for cooling [{:.2R}", PurchAir(PurchAirNum).MinCoolSuppAirTemp) +
-                                      format("] is greater than the zone cooling mean air temperature (MAT) setpoint [{:.2R}].", ZoneThermostatSetPointHi(ActualZoneNum)));
+                    ShowContinueError(format("..the minimum supply air temperature for cooling [{:.2R}] is greater than the zone cooling mean air temperature (MAT) setpoint [{:.2R}].", PurchAir(PurchAirNum).MinCoolSuppAirTemp, ZoneThermostatSetPointHi(ActualZoneNum)));
                     ShowContinueError("..For operative and comfort thermostat controls, the MAT setpoint is computed.");
                     ShowContinueError("..This error may indicate that the mean radiant temperature or another comfort factor is too warm.");
                     ShowContinueError("Unit availability is nominally ON and Cooling availability is nominally ON.");
@@ -1335,8 +1334,7 @@ namespace PurchasedAirManager {
                 if (PurchAir(PurchAirNum).HeatErrIndex == 0) {
                     ShowSevereMessage("InitPurchasedAir: For " + PurchAir(PurchAirNum).cObjectName + " = " + PurchAir(PurchAirNum).Name +
                                       " serving Zone " + Zone(ActualZoneNum).Name);
-                    ShowContinueError(format("..the maximum supply air temperature for heating [{:.2R}", PurchAir(PurchAirNum).MaxHeatSuppAirTemp) +
-                                      format("] is less than the zone mean air temperature heating setpoint [{:.2R}].", ZoneThermostatSetPointLo(ActualZoneNum)));
+                    ShowContinueError(format("..the maximum supply air temperature for heating [{:.2R}] is less than the zone mean air temperature heating setpoint [{:.2R}].", PurchAir(PurchAirNum).MaxHeatSuppAirTemp, ZoneThermostatSetPointLo(ActualZoneNum)));
                     ShowContinueError("..For operative and comfort thermostat controls, the MAT setpoint is computed.");
                     ShowContinueError("..This error may indicate that the mean radiant temperature or another comfort factor is too cold.");
                     ShowContinueError("Unit availability is nominally ON and Heating availability is nominally ON.");
@@ -2660,8 +2658,7 @@ namespace PurchasedAirManager {
                     if (PurchAir(PurchAirNum).SaturationOutputError < 1) {
                         ++PurchAir(PurchAirNum).SaturationOutputError;
                         ShowWarningError(PurchAir(PurchAirNum).cObjectName + " \"" + PurchAir(PurchAirNum).Name +
-                                         format("\" Supply humidity ratio = {:.5T} exceeds saturation limit ", SupplyHumRatOrig) +
-                                         format("{:.5T} [kgWater/kgDryAir]", SupplyHumRatSat));
+                                         format("\" Supply humidity ratio = {:.5T} exceeds saturation limit {:.5T} [kgWater/kgDryAir]", SupplyHumRatOrig, SupplyHumRatSat));
                         ShowContinueError(" Simulation continuing . . . ");
                         ShowContinueErrorTimeStamp("");
                     } else {

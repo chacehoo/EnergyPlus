@@ -3226,10 +3226,8 @@ namespace SingleDuct {
                                      "reheat maximum");
                     ShowContinueError("Air Terminal Unit name = " + this->SysName);
                     ShowContinueError(
-                        format("Maximum terminal flow during reheat = {:.6R}", this->MaxAirVolFlowRateDuringReheat) +
-                        format(" [m3/s] or flow fraction = {:.4R}", (this->MaxAirVolFlowRateDuringReheat / this->MaxAirVolFlowRate)));
-                    ShowContinueError(format("Minimum terminal flow = {:.6R}", (this->ZoneMinAirFracDes * this->MaxAirVolFlowRate)) +
-                                      format(" [m3/s] or flow fraction = {:.4R}", this->ZoneMinAirFracDes));
+                        format("Maximum terminal flow during reheat = {:.6R} [m3/s] or flow fraction = {:.4R}", this->MaxAirVolFlowRateDuringReheat, (this->MaxAirVolFlowRateDuringReheat / this->MaxAirVolFlowRate)));
+                    ShowContinueError(format("Minimum terminal flow = {:.6R} [m3/s] or flow fraction = {:.4R}", (this->ZoneMinAirFracDes * this->MaxAirVolFlowRate), this->ZoneMinAirFracDes));
                     ShowContinueError("The reheat maximum flow limit will be replaced by the minimum limit, and the simulation continues");
                 }
                 this->MaxAirVolFlowRateDuringReheat = (this->ZoneMinAirFracDes * this->MaxAirVolFlowRate);
@@ -5889,8 +5887,7 @@ namespace SingleDuct {
             Node(SysATMixer(SysNum).SecInNode).MassFlowRate = SecAirMassFlowRate;
             if (std::abs(PriMassFlowRate + SecAirMassFlowRate - MixedAirMassFlowRate) > SmallMassFlow) {
                 ShowSevereError("CalcATMixer: Invalid mass flow rates in AirTerminal:SingleDuct:Mixer=" + SysATMixer(SysNum).Name);
-                ShowContinueErrorTimeStamp(format("Primary mass flow rate={:.6R}", PriMassFlowRate) +
-                                           format("Secondary mass flow rate={:.6R}", SecAirMassFlowRate) +
+                ShowContinueErrorTimeStamp(format("Primary mass flow rate={:.6R}Secondary mass flow rate={:.6R}", PriMassFlowRate, SecAirMassFlowRate) +
                                            format("Mixed mass flow rate={:.6R}", MixedAirMassFlowRate));
                 ShowFatalError("Simulation terminates.");
             }
