@@ -777,13 +777,13 @@ namespace HeatBalanceManager {
             // Loads Convergence Tolerance Value
             LoadsConvergTol = BuildingNumbers(2);
             if (LoadsConvergTol <= 0.0) {
-                ShowSevereError(RoutineName + CurrentModuleObject + ": " + cNumericFieldNames(2) + format(" value invalid, [{:.3R}", LoadsConvergTol) + ']');
+                ShowSevereError(RoutineName + CurrentModuleObject + ": " + cNumericFieldNames(2) + format(" value invalid, [{:.3R}]", LoadsConvergTol));
                 ErrorsFound = true;
             }
             // Temperature Convergence Tolerance Value
             TempConvergTol = BuildingNumbers(3);
             if (TempConvergTol <= 0.0) {
-                ShowSevereError(RoutineName + CurrentModuleObject + ": " + cNumericFieldNames(2) + format(" value invalid, [{:.3R}", TempConvergTol) + ']');
+                ShowSevereError(RoutineName + CurrentModuleObject + ": " + cNumericFieldNames(2) + format(" value invalid, [{:.3R}]", TempConvergTol));
                 ErrorsFound = true;
             }
             // Solar Distribution
@@ -7240,19 +7240,19 @@ namespace HeatBalanceManager {
 
             if (Ffactor <= 0.0) {
                 ShowSevereError(CurrentModuleObject + "=\"" + ConstructAlphas(1) + "\" has " + cNumericFieldNames(1) + " <= 0.0, must be > 0.0.");
-                ShowContinueError(format("Entered value=[{:.2R}", Ffactor) + ']');
+                ShowContinueError(format("Entered value=[{:.2R}]", Ffactor));
                 ErrorsFound = true;
             }
 
             if (Area <= 0.0) {
                 ShowSevereError(CurrentModuleObject + "=\"" + ConstructAlphas(1) + "\" has " + cNumericFieldNames(2) + " <= 0.0, must be > 0.0.");
-                ShowContinueError(format("Entered value=[{:.2R}", Area) + ']');
+                ShowContinueError(format("Entered value=[{:.2R}]", Area));
                 ErrorsFound = true;
             }
 
             if (PerimeterExposed < 0.0) {
                 ShowSevereError(CurrentModuleObject + "=\"" + ConstructAlphas(1) + "\" has " + cNumericFieldNames(3) + " <= 0.0, must be > 0.0.");
-                ShowContinueError(format("Entered value=[{:.2R}", PerimeterExposed) + ']');
+                ShowContinueError(format("Entered value=[{:.2R}]", PerimeterExposed));
                 ErrorsFound = true;
             }
 
@@ -7325,13 +7325,13 @@ namespace HeatBalanceManager {
 
             if (Cfactor <= 0.0) {
                 ShowSevereError(CurrentModuleObject + ' ' + ConstructAlphas(1) + " has " + cNumericFieldNames(1) + " <= 0.0, must be > 0.0.");
-                ShowContinueError(format("Entered value=[{:.2R}", Cfactor) + ']');
+                ShowContinueError(format("Entered value=[{:.2R}]", Cfactor));
                 ErrorsFound = true;
             }
 
             if (Height <= 0.0) {
                 ShowSevereError(CurrentModuleObject + ' ' + ConstructAlphas(1) + " has " + cNumericFieldNames(2) + " <= 0.0, must be > 0.0.");
-                ShowContinueError(format("Entered value=[{:.2R}", Height) + ']');
+                ShowContinueError(format("Entered value=[{:.2R}]", Height));
                 ErrorsFound = true;
             }
 

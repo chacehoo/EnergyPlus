@@ -385,7 +385,7 @@ namespace AirflowNetworkBalanceManager {
                 if (fields.find("reference_barometric_pressure") != fields.end()) { // not required field, has default value
                     pressure = fields.at("reference_barometric_pressure");
                     if (std::abs((pressure - StdBaroPress) / StdBaroPress) > 0.1) { // 10% off
-                        ShowWarningError(RoutineName + ": " + CurrentModuleObject + format(": Pressure = {:.0R} differs by more than 10% from Standard Barometric Pressure = {:.0R}", pressure, StdBaroPress) + '.');
+                        ShowWarningError(RoutineName + ": " + CurrentModuleObject + format(": Pressure = {:.0R} differs by more than 10% from Standard Barometric Pressure = {:.0R}.", pressure, StdBaroPress));
                         ShowContinueError("...occurs in " + CurrentModuleObject + " = " + thisObjectName);
                     }
                     if (pressure <= 31000.0) {

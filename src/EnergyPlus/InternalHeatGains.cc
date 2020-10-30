@@ -654,7 +654,7 @@ namespace InternalHeatGains {
                                 ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(5) + " values");
                                 ShowContinueError("fall outside typical range [70,1000] W/person for Thermal Comfort Reporting.");
                                 ShowContinueError("Odd comfort values may result; Schedule=\"" + AlphaName(5) + "\".");
-                                ShowContinueError(format("Entered min/max range=[{:.1R}", SchMin) + ',' + format("{:.1R}", SchMax) +
+                                ShowContinueError(format("Entered min/max range=[{:.1R},", SchMin) + format("{:.1R}", SchMax) +
                                                   "] W/person.");
                             }
                         }
@@ -828,7 +828,7 @@ namespace InternalHeatGains {
                                         if (Item1 == 1) {
                                             ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(9) +
                                                              ", maximum is > 1.0");
-                                            ShowContinueError("Schedule=\"" + AlphaName(9) + format("\"; Entered min/max range=[{:.1R}", SchMin) + ',' + format("{:.1R}] Work Efficiency.", SchMax));
+                                            ShowContinueError("Schedule=\"" + AlphaName(9) + format("\"; Entered min/max range=[{:.1R},", SchMin) + format("{:.1R}] Work Efficiency.", SchMax));
                                         }
                                     }
                                 }
@@ -877,7 +877,7 @@ namespace InternalHeatGains {
                                                 if (Item1 == 1) {
                                                     ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " +
                                                                      cAlphaFieldNames(12) + ", maximum is > 2.0");
-                                                    ShowContinueError("Schedule=\"" + AlphaName(12) + format("\"; Entered min/max range=[{:.1R}", SchMin) + ',' + format("{:.1R}] Clothing.", SchMax));
+                                                    ShowContinueError("Schedule=\"" + AlphaName(12) + format("\"; Entered min/max range=[{:.1R},", SchMin) + format("{:.1R}] Clothing.", SchMax));
                                                 }
                                             }
                                         }

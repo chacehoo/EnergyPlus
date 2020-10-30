@@ -1648,7 +1648,7 @@ namespace ConvectionCoefficients {
             if (CheckScheduleValueMinMax(UserIntConvectionCoeffs(Loop).ScheduleIndex, ">=", LowHConvLimit, "<=", HighHConvLimit)) continue;
             ShowSevereError(RoutineName + "Surface=\"" + UserIntConvectionCoeffs(Loop).SurfaceName + "\", out-of-range convection coefficient:");
             ShowContinueError("Out-of-range value found in schedule=" + UserIntConvectionCoeffs(Loop).ScheduleName);
-            ShowContinueError(format("User supplied convection coefficients must be in range [>={:.9R}, <={:.1R}", LowHConvLimit, HighHConvLimit) + ']');
+            ShowContinueError(format("User supplied convection coefficients must be in range [>={:.9R}, <={:.1R}]", LowHConvLimit, HighHConvLimit));
             ShowContinueError("Limits are set (or default) in HeatBalanceAlgorithm object.");
             ErrorsFound = true;
         }
@@ -1659,7 +1659,7 @@ namespace ConvectionCoefficients {
             if (CheckScheduleValueMinMax(UserExtConvectionCoeffs(Loop).ScheduleIndex, ">=", LowHConvLimit, "<=", HighHConvLimit)) continue;
             ShowSevereError(RoutineName + "Surface=\"" + UserExtConvectionCoeffs(Loop).SurfaceName + "\", out-of-range convection coefficient:");
             ShowContinueError("Out-of-range value found in schedule=" + UserExtConvectionCoeffs(Loop).ScheduleName);
-            ShowContinueError(format("User supplied convection coefficients must be in range [>={:.9R}, <={:.1R}", LowHConvLimit, HighHConvLimit) + ']');
+            ShowContinueError(format("User supplied convection coefficients must be in range [>={:.9R}, <={:.1R}]", LowHConvLimit, HighHConvLimit));
             ShowContinueError("Limits are set (or default) in HeatBalanceAlgorithm object.");
             ErrorsFound = true;
         }

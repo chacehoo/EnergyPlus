@@ -488,7 +488,7 @@ namespace EnergyPlus {
                             ShowSevereError("PipingSystems::" + RoutineName +
                                             ": A pipe was outside of the domain extents after performing corrections for basement or burial depth.");
                             ShowContinueError("Pipe segment name:" + thisSegment->Name);
-                            ShowContinueError(format("Corrected pipe location: ( x,y )=( {:.2T}", thisSegment->PipeLocation.X) + ',' +
+                            ShowContinueError(format("Corrected pipe location: ( x,y )=( {:.2T},", thisSegment->PipeLocation.X) +
                                               format("{:.2T}", thisSegment->PipeLocation.Y) + " )");
                         }
                     } // segment loop

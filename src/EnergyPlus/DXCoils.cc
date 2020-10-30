@@ -8031,9 +8031,9 @@ namespace DXCoils {
                     ShowWarningMessage(Coil.DXCoilType + " \"" + Coil.Name + "\":");
                     ShowContinueError(format(" HPWH Heating Capacity Modifier curve (function of temperature) output is negative ({:.3T}).", HeatCapFTemp));
                     if (state.dataCurveManager->PerfCurve(Coil.HCapFTemp).NumDims == 2) {
-                        ShowContinueError(format(" Negative value occurs using an inlet air temperature of {:.1T} and an inlet water temperature of {:.1T}", InletAirTemp, InletWaterTemp) + '.');
+                        ShowContinueError(format(" Negative value occurs using an inlet air temperature of {:.1T} and an inlet water temperature of {:.1T}.", InletAirTemp, InletWaterTemp));
                     } else {
-                        ShowContinueError(format(" Negative value occurs using an inlet air temperature of {:.1T}", InletAirTemp) + '.');
+                        ShowContinueError(format(" Negative value occurs using an inlet air temperature of {:.1T}.", InletAirTemp));
                     }
                     ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                 }
@@ -8064,9 +8064,9 @@ namespace DXCoils {
                     ShowWarningMessage(Coil.DXCoilType + " \"" + Coil.Name + "\":");
                     ShowContinueError(format(" HPWH Heating COP Modifier curve (function of temperature) output is negative ({:.3T}).", HeatCOPFTemp));
                     if (state.dataCurveManager->PerfCurve(Coil.HCOPFTemp).NumDims == 2) {
-                        ShowContinueError(format(" Negative value occurs using an inlet air temperature of {:.1T} and an inlet water temperature of {:.1T}", InletAirTemp, InletWaterTemp) + '.');
+                        ShowContinueError(format(" Negative value occurs using an inlet air temperature of {:.1T} and an inlet water temperature of {:.1T}.", InletAirTemp, InletWaterTemp));
                     } else {
-                        ShowContinueError(format(" Negative value occurs using an inlet air temperature of {:.1T}", InletAirTemp) + '.');
+                        ShowContinueError(format(" Negative value occurs using an inlet air temperature of {:.1T}.", InletAirTemp));
                     }
                     ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                 }
@@ -8093,7 +8093,7 @@ namespace DXCoils {
                 if (Coil.HCapFAirFlowErrorIndex == 0) {
                     ShowWarningMessage(Coil.DXCoilType + " \"" + Coil.Name + "\":");
                     ShowContinueError(format(" HPWH Heating Capacity Modifier curve (function of air flow fraction) output is negative ({:.3T}).", HeatCapFAirFlow));
-                    ShowContinueError(format(" Negative value occurs using an air flow fraction of {:.3T}", AirFlowRateRatio) + '.');
+                    ShowContinueError(format(" Negative value occurs using an air flow fraction of {:.3T}.", AirFlowRateRatio));
                     ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                 }
                 ShowRecurringWarningErrorAtEnd(
@@ -8116,7 +8116,7 @@ namespace DXCoils {
                 if (Coil.HCOPFAirFlowErrorIndex == 0) {
                     ShowWarningMessage(Coil.DXCoilType + " \"" + Coil.Name + "\":");
                     ShowContinueError(format(" HPWH Heating COP Modifier curve (function of air flow fraction) output is negative ({:.3T}).", HeatCOPFAirFlow));
-                    ShowContinueError(format(" Negative value occurs using an air flow fraction of {:.3T}", AirFlowRateRatio) + '.');
+                    ShowContinueError(format(" Negative value occurs using an air flow fraction of {:.3T}.", AirFlowRateRatio));
                     ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                 }
                 ShowRecurringWarningErrorAtEnd(
@@ -8139,7 +8139,7 @@ namespace DXCoils {
                 if (Coil.HCapFWaterFlowErrorIndex == 0) {
                     ShowWarningMessage(Coil.DXCoilType + " \"" + Coil.Name + "\":");
                     ShowContinueError(format(" HPWH Heating Capacity Modifier curve (function of water flow fraction) output is negative ({:.3T}).", HeatCapFWaterFlow));
-                    ShowContinueError(format(" Negative value occurs using a water flow fraction of {:.3T}", WaterFlowRateRatio) + '.');
+                    ShowContinueError(format(" Negative value occurs using a water flow fraction of {:.3T}.", WaterFlowRateRatio));
                     ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                 }
                 ShowRecurringWarningErrorAtEnd(
@@ -8162,7 +8162,7 @@ namespace DXCoils {
                 if (Coil.HCOPFWaterFlowErrorIndex == 0) {
                     ShowWarningMessage(Coil.DXCoilType + " \"" + Coil.Name + "\":");
                     ShowContinueError(format(" HPWH Heating COP Modifier curve (function of water flow fraction) output is negative ({:.3T}).", HeatCOPFWaterFlow));
-                    ShowContinueError(format(" Negative value occurs using a water flow fraction of {:.3T}", WaterFlowRateRatio) + '.');
+                    ShowContinueError(format(" Negative value occurs using a water flow fraction of {:.3T}.", WaterFlowRateRatio));
                     ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                 }
                 ShowRecurringWarningErrorAtEnd(
@@ -8620,7 +8620,7 @@ namespace DXCoils {
                     ShowWarningMessage(RoutineName + DXCoil(DXCoilNum).DXCoilType + "=\"" + DXCoil(DXCoilNum).Name +
                                        format("\" - Air volume flow rate per watt of rated total cooling capacity is out of range at {:.3R} m3/s/W.", VolFlowperRatedTotCap));
                     ShowContinueErrorTimeStamp("");
-                    ShowContinueError(format("Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}--{:.3R}", MinOperVolFlowPerRatedTotCap(DXCT), MaxCoolVolFlowPerRatedTotCap(DXCT)) + ']');
+                    ShowContinueError(format("Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}--{:.3R}]", MinOperVolFlowPerRatedTotCap(DXCT), MaxCoolVolFlowPerRatedTotCap(DXCT)));
                     ShowContinueError("Possible causes include inconsistent air flow rates in system components,");
                     ShowContinueError("or variable air volume [VAV] system using incorrect coil type.");
                 }
@@ -8638,7 +8638,7 @@ namespace DXCoils {
                     ShowWarningMessage(RoutineName + DXCoil(DXCoilNum).DXCoilType + "=\"" + DXCoil(DXCoilNum).Name +
                                        format("\" - Air volume flow rate per watt of rated total water heating capacity is out of range at {:.2R} m3/s/W.", VolFlowperRatedTotCap));
                     ShowContinueErrorTimeStamp("");
-                    ShowContinueError(format("Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}--{:.3R}", MinOperVolFlowPerRatedTotCap(DXCT), MaxHeatVolFlowPerRatedTotCap(DXCT)) + ']');
+                    ShowContinueError(format("Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}--{:.3R}]", MinOperVolFlowPerRatedTotCap(DXCT), MaxHeatVolFlowPerRatedTotCap(DXCT)));
                     ShowContinueError("Possible causes may be that the parent object is calling for an actual supply air flow rate that is much "
                                       "higher or lower than the DX coil rated supply air flow rate.");
                 }
@@ -8715,9 +8715,9 @@ namespace DXCoils {
                             ShowWarningMessage(RoutineName + DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name + "\":");
                             ShowContinueError(format(" Total Cooling Capacity Modifier curve (function of temperature) output is negative ({:.3T}).", TotCapTempModFac));
                             if (state.dataCurveManager->PerfCurve(DXCoil(DXCoilNum).CCapFTemp(Mode)).NumDims == 2) {
-                                ShowContinueError(format(" Negative value occurs using a condenser inlet air temperature of {:.1T} and an inlet air wet-bulb temperature of {:.1T}", CondInletTemp, InletAirWetBulbC) + '.');
+                                ShowContinueError(format(" Negative value occurs using a condenser inlet air temperature of {:.1T} and an inlet air wet-bulb temperature of {:.1T}.", CondInletTemp, InletAirWetBulbC));
                             } else {
-                                ShowContinueError(format(" Negative value occurs using a condenser inlet air temperature of {:.1T}", CondInletTemp) + '.');
+                                ShowContinueError(format(" Negative value occurs using a condenser inlet air temperature of {:.1T}.", CondInletTemp));
                             }
                             if (Mode > 1) {
                                 ShowContinueError(" Negative output results from stage " + fmt::to_string(Mode) + " compressor operation.");
@@ -8740,7 +8740,7 @@ namespace DXCoils {
                         if (DXCoil(DXCoilNum).CCapFFlowErrorIndex == 0) {
                             ShowWarningMessage(RoutineName + DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name + "\":");
                             ShowContinueError(format(" Total Cooling Capacity Modifier curve (function of flow fraction) output is negative ({:.3T}).", TotCapFlowModFac));
-                            ShowContinueError(format(" Negative value occurs using an air flow fraction of {:.3T}", AirMassFlowRatio) + '.');
+                            ShowContinueError(format(" Negative value occurs using an air flow fraction of {:.3T}.", AirMassFlowRatio));
                             ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                             if (Mode > 1) {
                                 ShowContinueError(" Negative output results from stage " + fmt::to_string(Mode) + " compressor operation.");
@@ -9078,7 +9078,7 @@ namespace DXCoils {
                         ShowWarningMessage(RoutineName + DXCoil(DXCoilNum).DXCoilType + "=\"" + DXCoil(DXCoilNum).Name + "\":");
                         ShowContinueError(format(" Energy Input Ratio Modifier curve (function of temperature) output is negative ({:.3T}).", EIRTempModFac));
                         if (state.dataCurveManager->PerfCurve(DXCoil(DXCoilNum).EIRFTemp(Mode)).NumDims == 2) {
-                            ShowContinueError(format(" Negative value occurs using a condenser inlet air temperature of {:.1T} and an inlet air wet-bulb temperature of {:.1T}", CondInletTemp, InletAirWetBulbC) + '.');
+                            ShowContinueError(format(" Negative value occurs using a condenser inlet air temperature of {:.1T} and an inlet air wet-bulb temperature of {:.1T}.", CondInletTemp, InletAirWetBulbC));
                         } else {
                             ShowContinueError(format(" Negative value occurs using a condenser inlet air temperature of {:.1T}", CondInletTemp) +
                                               '.');
@@ -9104,7 +9104,7 @@ namespace DXCoils {
                     if (DXCoil(DXCoilNum).EIRFFlowErrorIndex == 0) {
                         ShowWarningMessage(RoutineName + DXCoil(DXCoilNum).DXCoilType + "=\"" + DXCoil(DXCoilNum).Name + "\":");
                         ShowContinueError(format(" Energy Input Ratio Modifier curve (function of flow fraction) output is negative ({:.3T}).", EIRFlowModFac));
-                        ShowContinueError(format(" Negative value occurs using an air flow fraction of {:.3T}", AirMassFlowRatio) + '.');
+                        ShowContinueError(format(" Negative value occurs using an air flow fraction of {:.3T}.", AirMassFlowRatio));
                         ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                         if (Mode > 1) {
                             ShowContinueError(" Negative output results from stage " + fmt::to_string(Mode) + " compressor operation.");
@@ -9555,7 +9555,7 @@ namespace DXCoils {
                     ShowWarningMessage(DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
                                        format("\" - Air volume flow rate per watt of rated total cooling capacity is out of range at {:.3R} m3/s/W.", VolFlowperRatedTotCap));
                     ShowContinueErrorTimeStamp("");
-                    ShowContinueError(format("...Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}--{:.3R}", MinOperVolFlowPerRatedTotCap(DXCT), MaxCoolVolFlowPerRatedTotCap(DXCT)) + ']');
+                    ShowContinueError(format("...Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}--{:.3R}]", MinOperVolFlowPerRatedTotCap(DXCT), MaxCoolVolFlowPerRatedTotCap(DXCT)));
                     ShowContinueError("...Possible causes include inconsistent air flow rates in system components,");
                     ShowContinueError("...or mixing manual inputs with autosize inputs. Also check the following values and calculations.");
                     ShowContinueError("...Volume Flow Rate per Rated Total Capacity = Volume Flow Rate / Rated Total Capacity");
@@ -9631,7 +9631,7 @@ namespace DXCoils {
                 if (DXCoil(DXCoilNum).CCapFTempErrorIndex == 0) {
                     ShowWarningMessage(DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name + "\":");
                     ShowContinueError(format(" Total Cooling Capacity Modifier curve (function of temperature) output is negative ({:.3T}).", TotCapTempModFac));
-                    ShowContinueError(format(" Negative value occurs using a condenser inlet temperature of {:.1T} and an inlet air wet-bulb temperature of {:.1T}", CondInletTemp, InletAirWetBulbC) + '.');
+                    ShowContinueError(format(" Negative value occurs using a condenser inlet temperature of {:.1T} and an inlet air wet-bulb temperature of {:.1T}.", CondInletTemp, InletAirWetBulbC));
                     if (Mode > 1) {
                         ShowContinueError(" Negative output results from stage " + fmt::to_string(Mode) + " compressor operation.");
                     }
@@ -9655,7 +9655,7 @@ namespace DXCoils {
                 if (DXCoil(DXCoilNum).CCapFFlowErrorIndex == 0) {
                     ShowWarningMessage(DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name + "\":");
                     ShowContinueError(format(" Total Cooling Capacity Modifier curve (function of flow fraction) output is negative ({:.3T}).", TotCapFlowModFac));
-                    ShowContinueError(format(" Negative value occurs using an air flow fraction of {:.3T}", AirMassFlowRatio) + '.');
+                    ShowContinueError(format(" Negative value occurs using an air flow fraction of {:.3T}.", AirMassFlowRatio));
                     ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                     if (Mode > 1) {
                         ShowContinueError(" Negative output results from stage " + fmt::to_string(Mode) + " compressor operation.");
@@ -10076,7 +10076,7 @@ namespace DXCoils {
                     ShowWarningMessage(DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
                                        format("\" - Air volume flow rate per watt of rated total heating capacity is out of range at {:.3R} m3/s/W.", VolFlowperRatedTotCap));
                     ShowContinueErrorTimeStamp("");
-                    ShowContinueError(format("Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}--{:.3R}", MinOperVolFlowPerRatedTotCap(DXCT), MaxHeatVolFlowPerRatedTotCap(DXCT)) + ']');
+                    ShowContinueError(format("Expected range for VolumeFlowPerRatedTotalCapacity=[{:.3R}--{:.3R}]", MinOperVolFlowPerRatedTotCap(DXCT), MaxHeatVolFlowPerRatedTotCap(DXCT)));
                     ShowContinueError("Possible causes include inconsistent air flow rates in system components or");
                     ShowContinueError("inconsistent supply air fan operation modes in coil and unitary system objects.");
                 }

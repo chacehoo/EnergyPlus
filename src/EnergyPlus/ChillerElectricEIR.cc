@@ -486,7 +486,7 @@ namespace ChillerElectricEIR {
             if (thisChiller.MinPartLoadRat > thisChiller.MaxPartLoadRat) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(7) + format(" [{:.3R}", DataIPShortCuts::rNumericArgs(7)) +
-                                  "] > " + DataIPShortCuts::cNumericFieldNames(8) + format(" [{:.3R}", DataIPShortCuts::rNumericArgs(8)) + ']');
+                                  "] > " + DataIPShortCuts::cNumericFieldNames(8) + format(" [{:.3R}]", DataIPShortCuts::rNumericArgs(8)));
                 ShowContinueError("Minimum part load ratio must be less than or equal to the maximum part load ratio ");
                 ErrorsFound = true;
             }
@@ -1798,7 +1798,7 @@ namespace ChillerElectricEIR {
                 ++this->ChillerCapFTError;
                 ShowWarningError("CHILLER:ELECTRIC:EIR \"" + this->Name + "\":");
                 ShowContinueError(format(" Chiller Capacity as a Function of Temperature curve output is negative ({:.3R}).", this->ChillerCapFT));
-                ShowContinueError(format(" Negative value occurs using an Evaporator Outlet Temp of {:.1R} and a Condenser Inlet Temp of {:.1R}", EvapOutletTempSetPoint, condInletTemp) + '.');
+                ShowContinueError(format(" Negative value occurs using an Evaporator Outlet Temp of {:.1R} and a Condenser Inlet Temp of {:.1R}.", EvapOutletTempSetPoint, condInletTemp));
                 ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
             } else if (DataPlant::PlantLoop(this->CWLoopNum).LoopSide(this->CWLoopSideNum).FlowLock != 0 && !DataGlobals::WarmupFlag) {
                 ++this->ChillerCapFTError;
@@ -2086,7 +2086,7 @@ namespace ChillerElectricEIR {
                 ++this->ChillerEIRFTError;
                 ShowWarningError("CHILLER:ELECTRIC:EIR \"" + this->Name + "\":");
                 ShowContinueError(format(" Chiller EIR as a Function of Temperature curve output is negative ({:.3R}).", this->ChillerEIRFT));
-                ShowContinueError(format(" Negative value occurs using an Evaporator Outlet Temp of {:.1R} and a Condenser Inlet Temp of {:.1R}", this->EvapOutletTemp, condInletTemp) + '.');
+                ShowContinueError(format(" Negative value occurs using an Evaporator Outlet Temp of {:.1R} and a Condenser Inlet Temp of {:.1R}.", this->EvapOutletTemp, condInletTemp));
                 ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
             } else if (DataPlant::PlantLoop(this->CWLoopNum).LoopSide(this->CWLoopSideNum).FlowLock != 0 && !DataGlobals::WarmupFlag) {
                 ++this->ChillerEIRFTError;
@@ -2107,7 +2107,7 @@ namespace ChillerElectricEIR {
                 ShowWarningError("CHILLER:ELECTRIC:EIR \"" + this->Name + "\":");
                 ShowContinueError(format(" Chiller EIR as a function of PLR curve output is negative ({:.3R}", this->ChillerEIRFPLR) +
                                   ").");
-                ShowContinueError(format(" Negative value occurs using a part-load ratio of {:.3R}", PartLoadRat) + '.');
+                ShowContinueError(format(" Negative value occurs using a part-load ratio of {:.3R}.", PartLoadRat));
                 ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
             } else if (DataPlant::PlantLoop(this->CWLoopNum).LoopSide(this->CWLoopSideNum).FlowLock != 0 && !DataGlobals::WarmupFlag) {
                 ++this->ChillerEIRFPLRError;

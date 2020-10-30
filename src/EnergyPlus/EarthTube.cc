@@ -227,7 +227,7 @@ namespace EarthTube {
             EarthTubeSys(Loop).MinTemperature = rNumericArgs(2);
             if ((EarthTubeSys(Loop).MinTemperature < -EarthTubeTempLimit) || (EarthTubeSys(Loop).MinTemperature > EarthTubeTempLimit)) {
                 ShowSevereError(cCurrentModuleObject + ": " + cAlphaFieldNames(1) + '=' + cAlphaArgs(1) +
-                                format(" must have a minimum temperature between -{:.0R}C and {:.0R}", EarthTubeTempLimit, EarthTubeTempLimit) + 'C');
+                                format(" must have a minimum temperature between -{:.0R}C and {:.0R}C", EarthTubeTempLimit, EarthTubeTempLimit));
                 ShowContinueError(format("Entered value={:.0R}", EarthTubeSys(Loop).MinTemperature));
                 ErrorsFound = true;
             }
@@ -235,7 +235,7 @@ namespace EarthTube {
             EarthTubeSys(Loop).MaxTemperature = rNumericArgs(3);
             if ((EarthTubeSys(Loop).MaxTemperature < -EarthTubeTempLimit) || (EarthTubeSys(Loop).MaxTemperature > EarthTubeTempLimit)) {
                 ShowSevereError(cCurrentModuleObject + ": " + cAlphaFieldNames(1) + '=' + cAlphaArgs(1) +
-                                format(" must have a maximum temperature between -{:.0R}C and {:.0R}", EarthTubeTempLimit, EarthTubeTempLimit) + 'C');
+                                format(" must have a maximum temperature between -{:.0R}C and {:.0R}C", EarthTubeTempLimit, EarthTubeTempLimit));
                 ShowContinueError(format("Entered value={:.0R}", EarthTubeSys(Loop).MaxTemperature));
                 ErrorsFound = true;
             }

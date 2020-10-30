@@ -2131,7 +2131,7 @@ namespace HeatRecovery {
                             ShowSevereError(cHXTypes(ExchCond(ExNum).ExchTypeNum) + ": \"" + ExchCond(ExNum).Name +
                                             "\" unbalanced air volume flow ratio through the heat exchanger is greater than 2:1.");
                             ShowContinueErrorTimeStamp(
-                                format("...HX Supply air to Exhaust air flow ratio = {:.5R}", HXSupAirVolFlowRate / HXSecAirVolFlowRate) + '.');
+                                format("...HX Supply air to Exhaust air flow ratio = {:.5R}.", HXSupAirVolFlowRate / HXSecAirVolFlowRate));
                         } else {
                             ShowRecurringWarningErrorAtEnd(
                                 cHXTypes(ExchCond(ExNum).ExchTypeNum) + " \"" + ExchCond(ExNum).Name +
@@ -2153,7 +2153,7 @@ namespace HeatRecovery {
                     if (ExchCond(ExNum).LowFlowErrCount == 1) {
                         ShowWarningError(cHXTypes(ExchCond(ExNum).ExchTypeNum) + " \"" + ExchCond(ExNum).Name + "\"");
                         ShowContinueError("Average air volume flow rate is <50% or >130% of the nominal HX supply air volume flow rate.");
-                        ShowContinueErrorTimeStamp(format("Air volume flow rate ratio = {:.3R}", HXAirVolFlowRatio) + '.');
+                        ShowContinueErrorTimeStamp(format("Air volume flow rate ratio = {:.3R}.", HXAirVolFlowRatio));
                     } else {
                         ShowRecurringWarningErrorAtEnd(
                             cHXTypes(ExchCond(ExNum).ExchTypeNum) + " \"" + ExchCond(ExNum).Name +

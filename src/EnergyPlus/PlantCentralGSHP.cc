@@ -1908,7 +1908,7 @@ namespace PlantCentralGSHP {
                         ++this->ChillerHeater(ChillerHeaterNum).ChillerCapFTError;
                         ShowWarningError("ChillerHeaterPerformance:Electric:EIR \"" + this->ChillerHeater(ChillerHeaterNum).Name + "\":");
                         ShowContinueError(format(" ChillerHeater Capacity as a Function of Temperature curve output is negative ({:.3R}).", ChillerCapFT));
-                        ShowContinueError(format(" Negative value occurs using an Evaporator Outlet Temp of {:.1R} and a Condenser Inlet Temp of {:.1R}", EvapOutletTempSetPoint, CondInletTemp) + '.');
+                        ShowContinueError(format(" Negative value occurs using an Evaporator Outlet Temp of {:.1R} and a Condenser Inlet Temp of {:.1R}.", EvapOutletTempSetPoint, CondInletTemp));
                         ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                     } else if (!DataGlobals::WarmupFlag) {
                         ++this->ChillerHeater(ChillerHeaterNum).ChillerCapFTError;
@@ -2265,7 +2265,7 @@ namespace PlantCentralGSHP {
                     if (this->ChillerHeater(ChillerHeaterNum).ChillerEIRRefTempErrorIndex == 0) {
                         ShowSevereMessage("CalcChillerHeaterModel: ChillerHeaterPerformance:Electric:EIR=\"" +
                                           this->ChillerHeater(ChillerHeaterNum).Name + "\", DeltaTemp < 0");
-                        ShowContinueError(format(" Reference Simultaneous Cooling-Heating Mode Leaving Condenser Water Temperature [{:.1R}", CondOutletTemp) + ']');
+                        ShowContinueError(format(" Reference Simultaneous Cooling-Heating Mode Leaving Condenser Water Temperature [{:.1R}]", CondOutletTemp));
                         ShowContinueError(format("is below condenser inlet temperature of [{:.1R}].", CondInletTemp));
                         ShowContinueErrorTimeStamp("");
                         ShowContinueError(" Reset reference temperature to one greater than the inlet temperature ");
@@ -2400,7 +2400,7 @@ namespace PlantCentralGSHP {
                             ++this->ChillerHeater(ChillerHeaterNum).ChillerCapFTError;
                             ShowWarningError("ChillerHeaterPerformance:Electric:EIR \"" + this->ChillerHeater(ChillerHeaterNum).Name + "\":");
                             ShowContinueError(format(" ChillerHeater Capacity as a Function of Temperature curve output is negative ({:.3R}).", ChillerCapFT));
-                            ShowContinueError(format(" Negative value occurs using an Evaporator Outlet Temp of {:.1R} and a Condenser Inlet Temp of {:.1R}", EvapOutletTempSetPoint, CondInletTemp) + '.');
+                            ShowContinueError(format(" Negative value occurs using an Evaporator Outlet Temp of {:.1R} and a Condenser Inlet Temp of {:.1R}.", EvapOutletTempSetPoint, CondInletTemp));
                             ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
                         } else if (!DataGlobals::WarmupFlag) {
                             ++this->ChillerHeater(ChillerHeaterNum).ChillerCapFTError;

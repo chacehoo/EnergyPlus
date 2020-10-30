@@ -465,7 +465,7 @@ namespace FanCoilUnits {
             if (FanCoil(FanCoilNum).LowSpeedRatio > FanCoil(FanCoilNum).MedSpeedRatio) {
                 ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + FanCoil(FanCoilNum).Name + "\",");
                 ShowContinueError("... " + cNumericFields(2) + " is greater than the medium speed supply air flow ratio.");
-                ShowContinueError(format("... Fan Coil Unit low speed supply air flow ratio = {:.5T}", FanCoil(FanCoilNum).LowSpeedRatio) + ' ');
+                ShowContinueError(format("... Fan Coil Unit low speed supply air flow ratio = {:.5T} ", FanCoil(FanCoilNum).LowSpeedRatio));
                 ShowContinueError(format("... Fan Coit Unit medium speed supply air flow ratio = {:.5T}", FanCoil(FanCoilNum).MedSpeedRatio) +
                                   ' ');
                 ShowContinueError("... Fan Coil Unit low speed supply air flow ratio and medium speed supply air flow ratio set to default values");

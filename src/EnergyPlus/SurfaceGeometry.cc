@@ -7647,11 +7647,11 @@ namespace SurfaceGeometry {
                 if (DisplayExtraWarnings) {
                     ShowWarningError(RoutineName + "Distance between two vertices < .01, possibly coincident. for Surface=" +
                                      SurfaceTmp(SurfNum).Name + ", in Zone=" + SurfaceTmp(SurfNum).ZoneName);
-                    ShowContinueError("Vertex [" + fmt::to_string(SurfaceTmp(SurfNum).Sides) + format("]=({:.2R}", SurfaceTmp(SurfNum).Vertex(SurfaceTmp(SurfNum).Sides).x) + ',' +
-                                      format("{:.2R}", SurfaceTmp(SurfNum).Vertex(SurfaceTmp(SurfNum).Sides).y) + ',' +
-                                      format("{:.2R}", SurfaceTmp(SurfNum).Vertex(SurfaceTmp(SurfNum).Sides).z) + ')');
-                    ShowContinueError("Vertex [" + fmt::to_string(1) + "]=(" + format("{:.2R}", SurfaceTmp(SurfNum).Vertex(1).x) + ',' +
-                                      format("{:.2R}", SurfaceTmp(SurfNum).Vertex(1).y) + ',' + format("{:.2R}", SurfaceTmp(SurfNum).Vertex(1).z) +
+                    ShowContinueError("Vertex [" + fmt::to_string(SurfaceTmp(SurfNum).Sides) + format("]=({:.2R},", SurfaceTmp(SurfNum).Vertex(SurfaceTmp(SurfNum).Sides).x) +
+                                      format("{:.2R},", SurfaceTmp(SurfNum).Vertex(SurfaceTmp(SurfNum).Sides).y) +
+                                      format("{:.2R})", SurfaceTmp(SurfNum).Vertex(SurfaceTmp(SurfNum).Sides).z));
+                    ShowContinueError("Vertex [" + fmt::to_string(1) + "]=(" + format("{:.2R},", SurfaceTmp(SurfNum).Vertex(1).x) +
+                                      format("{:.2R},", SurfaceTmp(SurfNum).Vertex(1).y) + format("{:.2R}", SurfaceTmp(SurfNum).Vertex(1).z) +
                                       ')');
                 }
                 ++TotalCoincidentVertices;
@@ -7680,12 +7680,12 @@ namespace SurfaceGeometry {
                     if (DisplayExtraWarnings) {
                         ShowWarningError(RoutineName + "Distance between two vertices < .01, possibly coincident. for Surface=" +
                                          SurfaceTmp(SurfNum).Name + ", in Zone=" + SurfaceTmp(SurfNum).ZoneName);
-                        ShowContinueError("Vertex [" + fmt::to_string(Vrt) + "]=(" + format("{:.2R}", SurfaceTmp(SurfNum).Vertex(Vrt).x) + ',' +
-                                          format("{:.2R}", SurfaceTmp(SurfNum).Vertex(Vrt).y) + ',' +
-                                          format("{:.2R}", SurfaceTmp(SurfNum).Vertex(Vrt).z) + ')');
+                        ShowContinueError("Vertex [" + fmt::to_string(Vrt) + "]=(" + format("{:.2R},", SurfaceTmp(SurfNum).Vertex(Vrt).x) +
+                                          format("{:.2R},", SurfaceTmp(SurfNum).Vertex(Vrt).y) +
+                                          format("{:.2R})", SurfaceTmp(SurfNum).Vertex(Vrt).z));
                         ShowContinueError("Vertex [" + fmt::to_string(Vrt - 1) + "]=(" + format("{:.2R}", SurfaceTmp(SurfNum).Vertex(Vrt - 1).x) +
-                                          ',' + format("{:.2R}", SurfaceTmp(SurfNum).Vertex(Vrt - 1).y) + ',' +
-                                          format("{:.2R}", SurfaceTmp(SurfNum).Vertex(Vrt - 1).z) + ')');
+                                          ',' + format("{:.2R},", SurfaceTmp(SurfNum).Vertex(Vrt - 1).y) +
+                                          format("{:.2R})", SurfaceTmp(SurfNum).Vertex(Vrt - 1).z));
                     }
                     ++TotalCoincidentVertices;
                     if (Vrt == SurfaceTmp(SurfNum).Sides) {
@@ -13333,12 +13333,12 @@ namespace SurfaceGeometry {
                         if (Np2 > NSides) Np2 -= NSides;
                         ShowContinueError("...vertex " + fmt::to_string(n) + " to vertex " + fmt::to_string(Np1) + " to vertex " +
                                           fmt::to_string(Np2));
-                        ShowContinueError("...vertex " + fmt::to_string(n) + "=[" + format("{:.2R}", X(n)) + ',' + format("{:.2R}", Y(n)) + ',' +
-                                          format("{:.2R}", Z(n)) + ']');
-                        ShowContinueError("...vertex " + fmt::to_string(Np1) + "=[" + format("{:.2R}", X(n + 1)) + ',' +
-                                          format("{:.2R}", Y(n + 1)) + ',' + format("{:.2R}", Z(n + 1)) + ']');
-                        ShowContinueError("...vertex " + fmt::to_string(Np2) + "=[" + format("{:.2R}", X(n + 2)) + ',' +
-                                          format("{:.2R}", Y(n + 2)) + ',' + format("{:.2R}", Z(n + 2)) + ']');
+                        ShowContinueError("...vertex " + fmt::to_string(n) + "=[" + format("{:.2R},", X(n)) + format("{:.2R},", Y(n)) +
+                                          format("{:.2R}]", Z(n)));
+                        ShowContinueError("...vertex " + fmt::to_string(Np1) + "=[" + format("{:.2R},", X(n + 1)) +
+                                          format("{:.2R},", Y(n + 1)) + format("{:.2R}]", Z(n + 1)));
+                        ShowContinueError("...vertex " + fmt::to_string(Np2) + "=[" + format("{:.2R},", X(n + 2)) +
+                                          format("{:.2R},", Y(n + 2)) + format("{:.2R}]", Z(n + 2)));
                         //          CALL ShowContinueError('...theta angle=['//TRIM(format("{:.6R}", Theta))//']')
                         //          CALL ShowContinueError('...last theta angle=['//TRIM(format("{:.6R}", LastTheta))//']')
                     }

@@ -1026,14 +1026,14 @@ namespace HVACManager {
                             ShowContinueError("Check values should be zero. Most Recent values listed first.");
                             HistoryTrace = "";
                             for (StackDepth = 1; StackDepth <= ConvergLogStackDepth; ++StackDepth) {
-                                HistoryTrace += format("{:.6R}", AirLoopConvergence(AirSysNum).HVACFlowDemandToSupplyTolValue(StackDepth)) + ',';
+                                HistoryTrace += format("{:.6R},", AirLoopConvergence(AirSysNum).HVACFlowDemandToSupplyTolValue(StackDepth));
                             }
 
                             ShowContinueError("Demand-to-Supply interface mass flow rate check value iteration history trace: " + HistoryTrace);
                             HistoryTrace = "";
                             for (StackDepth = 1; StackDepth <= ConvergLogStackDepth; ++StackDepth) {
                                 HistoryTrace +=
-                                    format("{:.6R}", AirLoopConvergence(AirSysNum).HVACFlowSupplyDeck1ToDemandTolValue(StackDepth)) + ',';
+                                    format("{:.6R},", AirLoopConvergence(AirSysNum).HVACFlowSupplyDeck1ToDemandTolValue(StackDepth));
                             }
                             ShowContinueError("Supply-to-demand interface deck 1 mass flow rate check value iteration history trace: " +
                                               HistoryTrace);
@@ -1042,7 +1042,7 @@ namespace HVACManager {
                                 HistoryTrace = "";
                                 for (StackDepth = 1; StackDepth <= ConvergLogStackDepth; ++StackDepth) {
                                     HistoryTrace +=
-                                        format("{:.6R}", AirLoopConvergence(AirSysNum).HVACFlowSupplyDeck2ToDemandTolValue(StackDepth)) + ',';
+                                        format("{:.6R},", AirLoopConvergence(AirSysNum).HVACFlowSupplyDeck2ToDemandTolValue(StackDepth));
                                 }
                                 ShowContinueError("Supply-to-demand interface deck 2 mass flow rate check value iteration history trace: " +
                                                   HistoryTrace);
@@ -1056,12 +1056,12 @@ namespace HVACManager {
                             ShowContinueError("Check values should be zero. Most Recent values listed first.");
                             HistoryTrace = "";
                             for (StackDepth = 1; StackDepth <= ConvergLogStackDepth; ++StackDepth) {
-                                HistoryTrace += format("{:.6R}", AirLoopConvergence(AirSysNum).HVACHumDemandToSupplyTolValue(StackDepth)) + ',';
+                                HistoryTrace += format("{:.6R},", AirLoopConvergence(AirSysNum).HVACHumDemandToSupplyTolValue(StackDepth));
                             }
                             ShowContinueError("Demand-to-Supply interface humidity ratio check value iteration history trace: " + HistoryTrace);
                             HistoryTrace = "";
                             for (StackDepth = 1; StackDepth <= ConvergLogStackDepth; ++StackDepth) {
-                                HistoryTrace += format("{:.6R}", AirLoopConvergence(AirSysNum).HVACHumSupplyDeck1ToDemandTolValue(StackDepth)) + ',';
+                                HistoryTrace += format("{:.6R},", AirLoopConvergence(AirSysNum).HVACHumSupplyDeck1ToDemandTolValue(StackDepth));
                             }
                             ShowContinueError("Supply-to-demand interface deck 1 humidity ratio check value iteration history trace: " +
                                               HistoryTrace);
@@ -1070,7 +1070,7 @@ namespace HVACManager {
                                 HistoryTrace = "";
                                 for (StackDepth = 1; StackDepth <= ConvergLogStackDepth; ++StackDepth) {
                                     HistoryTrace +=
-                                        format("{:.6R}", AirLoopConvergence(AirSysNum).HVACHumSupplyDeck2ToDemandTolValue(StackDepth)) + ',';
+                                        format("{:.6R},", AirLoopConvergence(AirSysNum).HVACHumSupplyDeck2ToDemandTolValue(StackDepth));
                                 }
                                 ShowContinueError("Supply-to-demand interface deck 2 humidity ratio check value iteration history trace: " +
                                                   HistoryTrace);
@@ -1083,13 +1083,13 @@ namespace HVACManager {
                             ShowContinueError("Check values should be zero. Most Recent values listed first.");
                             HistoryTrace = "";
                             for (StackDepth = 1; StackDepth <= ConvergLogStackDepth; ++StackDepth) {
-                                HistoryTrace += format("{:.6R}", AirLoopConvergence(AirSysNum).HVACTempDemandToSupplyTolValue(StackDepth)) + ',';
+                                HistoryTrace += format("{:.6R},", AirLoopConvergence(AirSysNum).HVACTempDemandToSupplyTolValue(StackDepth));
                             }
                             ShowContinueError("Demand-to-Supply interface temperature check value iteration history trace: " + HistoryTrace);
                             HistoryTrace = "";
                             for (StackDepth = 1; StackDepth <= ConvergLogStackDepth; ++StackDepth) {
                                 HistoryTrace +=
-                                    format("{:.6R}", AirLoopConvergence(AirSysNum).HVACTempSupplyDeck1ToDemandTolValue(StackDepth)) + ',';
+                                    format("{:.6R},", AirLoopConvergence(AirSysNum).HVACTempSupplyDeck1ToDemandTolValue(StackDepth));
                             }
                             ShowContinueError("Supply-to-demand interface deck 1 temperature check value iteration history trace: " + HistoryTrace);
 
@@ -1097,7 +1097,7 @@ namespace HVACManager {
                                 HistoryTrace = "";
                                 for (StackDepth = 1; StackDepth <= ConvergLogStackDepth; ++StackDepth) {
                                     HistoryTrace +=
-                                        format("{:.6R}", AirLoopConvergence(AirSysNum).HVACTempSupplyDeck1ToDemandTolValue(StackDepth)) + ',';
+                                        format("{:.6R},", AirLoopConvergence(AirSysNum).HVACTempSupplyDeck1ToDemandTolValue(StackDepth));
                                 }
                                 ShowContinueError("Supply-to-demand interface deck 2 temperature check value iteration history trace: " +
                                                   HistoryTrace);
@@ -1109,13 +1109,13 @@ namespace HVACManager {
                             ShowContinueError("Check values should be zero. Most Recent values listed first.");
                             HistoryTrace = "";
                             for (StackDepth = 1; StackDepth <= ConvergLogStackDepth; ++StackDepth) {
-                                HistoryTrace += format("{:.6R}", AirLoopConvergence(AirSysNum).HVACEnergyDemandToSupplyTolValue(StackDepth)) + ',';
+                                HistoryTrace += format("{:.6R},", AirLoopConvergence(AirSysNum).HVACEnergyDemandToSupplyTolValue(StackDepth));
                             }
                             ShowContinueError("Demand-to-Supply interface energy check value iteration history trace: " + HistoryTrace);
                             HistoryTrace = "";
                             for (StackDepth = 1; StackDepth <= ConvergLogStackDepth; ++StackDepth) {
                                 HistoryTrace +=
-                                    format("{:.6R}", AirLoopConvergence(AirSysNum).HVACEnergySupplyDeck1ToDemandTolValue(StackDepth)) + ',';
+                                    format("{:.6R},", AirLoopConvergence(AirSysNum).HVACEnergySupplyDeck1ToDemandTolValue(StackDepth));
                             }
                             ShowContinueError("Supply-to-demand interface deck 1 energy check value iteration history trace: " + HistoryTrace);
 
@@ -1123,7 +1123,7 @@ namespace HVACManager {
                                 HistoryTrace = "";
                                 for (StackDepth = 1; StackDepth <= ConvergLogStackDepth; ++StackDepth) {
                                     HistoryTrace +=
-                                        format("{:.6R}", AirLoopConvergence(AirSysNum).HVACEnergySupplyDeck2ToDemandTolValue(StackDepth)) + ',';
+                                        format("{:.6R},", AirLoopConvergence(AirSysNum).HVACEnergySupplyDeck2ToDemandTolValue(StackDepth));
                                 }
                                 ShowContinueError("Supply-to-demand interface deck 2 energy check value iteration history trace: " + HistoryTrace);
                             }
@@ -1199,7 +1199,7 @@ namespace HVACManager {
                                 HistoryTrace = "";
                                 for (StackDepth = 1; StackDepth <= ConvergLogStackDepth; ++StackDepth) {
                                     HistoryTrace +=
-                                        format("{:.6R}", ZoneInletConvergence(ZoneNum).InletNode(NodeIndex).HumidityRatio(StackDepth)) + ',';
+                                        format("{:.6R},", ZoneInletConvergence(ZoneNum).InletNode(NodeIndex).HumidityRatio(StackDepth));
                                 }
                                 ShowContinueError(
                                     "Node named " + NodeID(ZoneInletConvergence(ZoneNum).InletNode(NodeIndex).NodeNum) +
@@ -1269,7 +1269,7 @@ namespace HVACManager {
                                 HistoryTrace = "";
                                 for (StackDepth = 1; StackDepth <= ConvergLogStackDepth; ++StackDepth) {
                                     HistoryTrace +=
-                                        format("{:.6R}", ZoneInletConvergence(ZoneNum).InletNode(NodeIndex).MassFlowRate(StackDepth)) + ',';
+                                        format("{:.6R},", ZoneInletConvergence(ZoneNum).InletNode(NodeIndex).MassFlowRate(StackDepth));
                                 }
                                 ShowContinueError("Node named " + NodeID(ZoneInletConvergence(ZoneNum).InletNode(NodeIndex).NodeNum) +
                                                   " mass flow rate [kg/s] iteration history trace (most recent first): " + HistoryTrace);
@@ -1338,7 +1338,7 @@ namespace HVACManager {
                                 HistoryTrace = "";
                                 for (StackDepth = 1; StackDepth <= ConvergLogStackDepth; ++StackDepth) {
                                     HistoryTrace +=
-                                        format("{:.6R}", ZoneInletConvergence(ZoneNum).InletNode(NodeIndex).Temperature(StackDepth)) + ',';
+                                        format("{:.6R},", ZoneInletConvergence(ZoneNum).InletNode(NodeIndex).Temperature(StackDepth));
                                 }
                                 ShowContinueError("Node named " + NodeID(ZoneInletConvergence(ZoneNum).InletNode(NodeIndex).NodeNum) +
                                                   " temperature [C] iteration history trace (most recent first): " + HistoryTrace);
@@ -1355,12 +1355,12 @@ namespace HVACManager {
                             ShowContinueError("Check values should be zero. Most Recent values listed first.");
                             HistoryTrace = "";
                             for (StackDepth = 1; StackDepth <= ConvergLogStackDepth; ++StackDepth) {
-                                HistoryTrace += format("{:.6R}", PlantConvergence(LoopNum).PlantFlowDemandToSupplyTolValue(StackDepth)) + ',';
+                                HistoryTrace += format("{:.6R},", PlantConvergence(LoopNum).PlantFlowDemandToSupplyTolValue(StackDepth));
                             }
                             ShowContinueError("Demand-to-Supply interface mass flow rate check value iteration history trace: " + HistoryTrace);
                             HistoryTrace = "";
                             for (StackDepth = 1; StackDepth <= ConvergLogStackDepth; ++StackDepth) {
-                                HistoryTrace += format("{:.6R}", PlantConvergence(LoopNum).PlantFlowSupplyToDemandTolValue(StackDepth)) + ',';
+                                HistoryTrace += format("{:.6R},", PlantConvergence(LoopNum).PlantFlowSupplyToDemandTolValue(StackDepth));
                             }
                             ShowContinueError("Supply-to-Demand interface mass flow rate check value iteration history trace: " + HistoryTrace);
 
@@ -1520,12 +1520,12 @@ namespace HVACManager {
                             ShowContinueError("Check values should be zero. Most Recent values listed first.");
                             HistoryTrace = "";
                             for (StackDepth = 1; StackDepth <= ConvergLogStackDepth; ++StackDepth) {
-                                HistoryTrace += format("{:.6R}", PlantConvergence(LoopNum).PlantTempDemandToSupplyTolValue(StackDepth)) + ',';
+                                HistoryTrace += format("{:.6R},", PlantConvergence(LoopNum).PlantTempDemandToSupplyTolValue(StackDepth));
                             }
                             ShowContinueError("Demand-to-Supply interface temperature check value iteration history trace: " + HistoryTrace);
                             HistoryTrace = "";
                             for (StackDepth = 1; StackDepth <= ConvergLogStackDepth; ++StackDepth) {
-                                HistoryTrace += format("{:.6R}", PlantConvergence(LoopNum).PlantTempSupplyToDemandTolValue(StackDepth)) + ',';
+                                HistoryTrace += format("{:.6R},", PlantConvergence(LoopNum).PlantTempSupplyToDemandTolValue(StackDepth));
                             }
                             ShowContinueError("Supply-to-Demand interface temperature check value iteration history trace: " + HistoryTrace);
 

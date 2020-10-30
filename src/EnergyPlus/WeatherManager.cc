@@ -3416,7 +3416,7 @@ namespace WeatherManager {
         if (state.dataWeatherManager->DesDayInput(EnvrnNum).PressureEntered) {
             if (std::abs((state.dataWeatherManager->DesDayInput(EnvrnNum).PressBarom - DataEnvironment::StdBaroPress) / DataEnvironment::StdBaroPress) > 0.1) { // 10% off
                 ShowWarningError(
-                    format("SetUpDesignDay: Entered DesignDay Barometric Pressure={:.0R} differs by more than 10% from Standard Barometric Pressure={:.0R}", state.dataWeatherManager->DesDayInput(EnvrnNum).PressBarom, DataEnvironment::StdBaroPress) + '.');
+                    format("SetUpDesignDay: Entered DesignDay Barometric Pressure={:.0R} differs by more than 10% from Standard Barometric Pressure={:.0R}.", state.dataWeatherManager->DesDayInput(EnvrnNum).PressBarom, DataEnvironment::StdBaroPress));
                 ShowContinueError("...occurs in DesignDay=" + DataEnvironment::EnvironmentName +
                                   ", Standard Pressure (based on elevation) will be used.");
                 state.dataWeatherManager->DesDayInput(EnvrnNum).PressBarom = DataEnvironment::StdBaroPress;
