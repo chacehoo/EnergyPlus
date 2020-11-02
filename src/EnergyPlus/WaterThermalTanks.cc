@@ -702,7 +702,7 @@ namespace WaterThermalTanks {
             if (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).DeadBandTempDiff <= 0.0 ||
                 state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).DeadBandTempDiff > 20.0) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
-                                DataIPShortCuts::cNumericFieldNames(1) + " must be > 0 and <= 20. " + format("{} = {:.1T}", DataIPShortCuts::cNumericFieldNames(1), DataIPShortCuts::rNumericArgs(1)));
+                                DataIPShortCuts::cNumericFieldNames(1) + format(" must be > 0 and <= 20. {} = {:.1T}", DataIPShortCuts::cNumericFieldNames(1), DataIPShortCuts::rNumericArgs(1)));
                 ErrorsFound = true;
             }
 
@@ -988,7 +988,7 @@ namespace WaterThermalTanks {
             state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).PumpElecPower = DataIPShortCuts::rNumericArgs(7);
             if (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).PumpElecPower < 0.0) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
-                                DataIPShortCuts::cNumericFieldNames(7) + " must be >= 0. " + format("{} = {:.2T}", DataIPShortCuts::cNumericFieldNames(7), DataIPShortCuts::rNumericArgs(7)));
+                                DataIPShortCuts::cNumericFieldNames(7) + format(" must be >= 0. {} = {:.2T}", DataIPShortCuts::cNumericFieldNames(7), DataIPShortCuts::rNumericArgs(7)));
                 ErrorsFound = true;
             }
 
@@ -996,7 +996,7 @@ namespace WaterThermalTanks {
                 7.9264e6) {
                 ShowWarningError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
                                  DataIPShortCuts::cNumericFieldNames(7) + " to " + DataIPShortCuts::cNumericFieldNames(6) + " ratio > 7.9264E6. " +
-                                 DataIPShortCuts::cNumericFieldNames(7) + " to " + format("{} = {:.3T}", DataIPShortCuts::cNumericFieldNames(6), (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).PumpElecPower /
+                                 DataIPShortCuts::cNumericFieldNames(7) + format(" to {} = {:.3T}", DataIPShortCuts::cNumericFieldNames(6), (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).PumpElecPower /
                                                          state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).OperatingWaterFlowRate)));
                 ShowContinueError(" Suggest reducing " + DataIPShortCuts::cNumericFieldNames(7) + " or increasing " +
                                   DataIPShortCuts::cNumericFieldNames(6) + '.');
@@ -1007,21 +1007,21 @@ namespace WaterThermalTanks {
             if (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).PumpFracToWater < 0.0 ||
                 state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).PumpFracToWater > 1.0) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
-                                DataIPShortCuts::cNumericFieldNames(8) + " must be >= 0 or <= 1. " + format("{} = {:.3T}", DataIPShortCuts::cNumericFieldNames(8), DataIPShortCuts::rNumericArgs(8)));
+                                DataIPShortCuts::cNumericFieldNames(8) + format(" must be >= 0 or <= 1. {} = {:.3T}", DataIPShortCuts::cNumericFieldNames(8), DataIPShortCuts::rNumericArgs(8)));
                 ErrorsFound = true;
             }
 
             state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).OnCycParaLoad = DataIPShortCuts::rNumericArgs(9);
             if (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).OnCycParaLoad < 0.0) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
-                                DataIPShortCuts::cNumericFieldNames(9) + " must be >= 0. " + format("{} = {:.2T}", DataIPShortCuts::cNumericFieldNames(9), DataIPShortCuts::rNumericArgs(9)));
+                                DataIPShortCuts::cNumericFieldNames(9) + format(" must be >= 0. {} = {:.2T}", DataIPShortCuts::cNumericFieldNames(9), DataIPShortCuts::rNumericArgs(9)));
                 ErrorsFound = true;
             }
 
             state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).OffCycParaLoad = DataIPShortCuts::rNumericArgs(10);
             if (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).OffCycParaLoad < 0.0) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
-                                DataIPShortCuts::cNumericFieldNames(10) + " must be >= 0. " + format("{} = {:.2T}", DataIPShortCuts::cNumericFieldNames(10), DataIPShortCuts::rNumericArgs(10)));
+                                DataIPShortCuts::cNumericFieldNames(10) + format(" must be >= 0. {} = {:.2T}", DataIPShortCuts::cNumericFieldNames(10), DataIPShortCuts::rNumericArgs(10)));
                 ErrorsFound = true;
             }
         }

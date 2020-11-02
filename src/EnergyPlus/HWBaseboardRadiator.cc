@@ -425,7 +425,7 @@ namespace HWBaseboardRadiator {
                     HWBaseboard(BaseboardNum).ScaledHeatingCapacity = rNumericArgs(iHeatDesignCapacityNumericNum);
                     if (HWBaseboard(BaseboardNum).ScaledHeatingCapacity < 0.0 && HWBaseboard(BaseboardNum).ScaledHeatingCapacity != AutoSize) {
                         ShowSevereError(cCurrentModuleObject + " = " + HWBaseboard(BaseboardNum).EquipID);
-                        ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFieldNames(iHeatDesignCapacityNumericNum), rNumericArgs(iHeatDesignCapacityNumericNum)));
+                        ShowContinueError(format("Illegal {} = {:.7T}", cNumericFieldNames(iHeatDesignCapacityNumericNum), rNumericArgs(iHeatDesignCapacityNumericNum)));
                         ErrorsFound = true;
                     }
                 } else {
@@ -441,7 +441,7 @@ namespace HWBaseboardRadiator {
                     if (HWBaseboard(BaseboardNum).ScaledHeatingCapacity <= 0.0) {
                         ShowSevereError(cCurrentModuleObject + " = " + HWBaseboard(BaseboardNum).EquipID);
                         ShowContinueError("Input for " + cAlphaFieldNames(iHeatCAPMAlphaNum) + " = " + cAlphaArgs(iHeatCAPMAlphaNum));
-                        ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFieldNames(iHeatCapacityPerFloorAreaNumericNum), rNumericArgs(iHeatCapacityPerFloorAreaNumericNum)));
+                        ShowContinueError(format("Illegal {} = {:.7T}", cNumericFieldNames(iHeatCapacityPerFloorAreaNumericNum), rNumericArgs(iHeatCapacityPerFloorAreaNumericNum)));
                         ErrorsFound = true;
                     } else if (HWBaseboard(BaseboardNum).ScaledHeatingCapacity == AutoSize) {
                         ShowSevereError(cCurrentModuleObject + " = " + HWBaseboard(BaseboardNum).EquipID);
@@ -461,7 +461,7 @@ namespace HWBaseboardRadiator {
                     HWBaseboard(BaseboardNum).ScaledHeatingCapacity = rNumericArgs(iHeatFracOfAutosizedCapacityNumericNum);
                     if (HWBaseboard(BaseboardNum).ScaledHeatingCapacity < 0.0) {
                         ShowSevereError(cCurrentModuleObject + " = " + HWBaseboard(BaseboardNum).EquipID);
-                        ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFieldNames(iHeatFracOfAutosizedCapacityNumericNum), rNumericArgs(iHeatFracOfAutosizedCapacityNumericNum)));
+                        ShowContinueError(format("Illegal {} = {:.7T}", cNumericFieldNames(iHeatFracOfAutosizedCapacityNumericNum), rNumericArgs(iHeatFracOfAutosizedCapacityNumericNum)));
                         ErrorsFound = true;
                     }
                 } else {

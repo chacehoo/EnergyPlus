@@ -2525,10 +2525,10 @@ CurrentModuleObjects(CMO_SysAvailMgrList), AvailManagerListName);
                         ShowContinueError("... A fixed minimum outside air flow rate and high humidity control have been specified.");
                         ShowContinueError("... The " + cNumericFields(7) +
                                           " is less than the ratio of the outside air controllers minimum to maximum outside air flow rate.");
-                        ShowContinueError("... Controller " + format("{} = {:.4T} m3/s.", cNumericFields(1), OAController(OutAirNum).MinOA));
-                        ShowContinueError("... Controller " + format("{} = {:.4T} m3/s.", cNumericFields(2), OAController(OutAirNum).MaxOA));
+                        ShowContinueError(format("... Controller {} = {:.4T} m3/s.", cNumericFields(1), OAController(OutAirNum).MinOA));
+                        ShowContinueError(format("... Controller {} = {:.4T} m3/s.", cNumericFields(2), OAController(OutAirNum).MaxOA));
                         ShowContinueError(format("... Controller minimum to maximum flow ratio = {:.4T}.", OAFlowRatio));
-                        ShowContinueError("... " + format("{} = {:.4T}.", cNumericFields(7), OAController(OutAirNum).HighRHOAFlowRatio));
+                        ShowContinueError(format("... {} = {:.4T}.", cNumericFields(7), OAController(OutAirNum).HighRHOAFlowRatio));
                     }
                 }
             }

@@ -2763,8 +2763,8 @@ namespace GroundHeatExchangers {
                     if (thisGLHE.trenchDepth - thisGLHE.coilDiameter < 0.0) {
                         // Error: part of the coil is above ground
                         ShowSevereError(DataIPShortCuts::cCurrentModuleObject + "=\"" + thisGLHE.name + "\", invalid value in field.");
-                        ShowContinueError("..." + format("{}=[{:.3R}].", DataIPShortCuts::cNumericFieldNames(13), thisGLHE.trenchDepth));
-                        ShowContinueError("..." + format("{}=[{:.3R}].", DataIPShortCuts::cNumericFieldNames(10), thisGLHE.coilDepth));
+                        ShowContinueError(format("...{}=[{:.3R}].", DataIPShortCuts::cNumericFieldNames(13), thisGLHE.trenchDepth));
+                        ShowContinueError(format("...{}=[{:.3R}].", DataIPShortCuts::cNumericFieldNames(10), thisGLHE.coilDepth));
                         ShowContinueError("...Average coil depth will be <=0.");
                         errorsFound = true;
 
@@ -2786,8 +2786,8 @@ namespace GroundHeatExchangers {
 
                 if (thisGLHE.pipe.thickness >= thisGLHE.pipe.outDia / 2.0) {
                     ShowSevereError(DataIPShortCuts::cCurrentModuleObject + "=\"" + thisGLHE.name + "\", invalid value in field.");
-                    ShowContinueError("..." + format("{}=[{:.3R}].", DataIPShortCuts::cNumericFieldNames(12), thisGLHE.pipe.thickness));
-                    ShowContinueError("..." + format("{}=[{:.3R}].", DataIPShortCuts::cNumericFieldNames(10), thisGLHE.pipe.outDia));
+                    ShowContinueError(format("...{}=[{:.3R}].", DataIPShortCuts::cNumericFieldNames(12), thisGLHE.pipe.thickness));
+                    ShowContinueError(format("...{}=[{:.3R}].", DataIPShortCuts::cNumericFieldNames(10), thisGLHE.pipe.outDia));
                     ShowContinueError("...Radius will be <=0.");
                     errorsFound = true;
                 }

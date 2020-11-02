@@ -1743,7 +1743,7 @@ namespace AirflowNetworkBalanceManager {
                                  CurveValue(state, state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).ComfortHighTempCurveNum, Numbers(3))) > 0.1) {
                         ShowSevereError(RoutineName + CurrentModuleObject + " object: The difference of both curve values at boundary point > 0.1");
                         ShowContinueError("Both curve names are = " + cAlphaFields(2) + " and " + cAlphaFields(3));
-                        ShowContinueError("The input value of " + format("{} = {:.1R}", cNumericFields(3), state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).ComfortBouPoint));
+                        ShowContinueError(format("The input value of {} = {:.1R}", cNumericFields(3), state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).ComfortBouPoint));
                         ErrorsFound = true;
                     }
                 }
@@ -2177,7 +2177,7 @@ namespace AirflowNetworkBalanceManager {
                     }
                     if (MultizoneZoneData(i).UpValueTemp <= MultizoneZoneData(i).LowValueTemp) {
                         ShowWarningError(RoutineName + CurrentModuleObject + " object, " + cNumericFields(3) + " <= " + cNumericFields(2));
-                        ShowContinueError("..Input value for " + format("{} = {:.1R}", cNumericFields(3), MultizoneZoneData(i).UpValueTemp) +
+                        ShowContinueError(format("..Input value for {} = {:.1R}", cNumericFields(3), MultizoneZoneData(i).UpValueTemp) +
                                           ", Value will be reset to 100.0");
                         ShowContinueError("..for " + cAlphaFields(1) + " = \"" + MultizoneZoneData(i).ZoneName);
                         MultizoneZoneData(i).UpValueTemp = 100.0;
@@ -2199,7 +2199,7 @@ namespace AirflowNetworkBalanceManager {
                     }
                     if (MultizoneZoneData(i).UpValueEnth <= MultizoneZoneData(i).LowValueEnth) {
                         ShowWarningError(RoutineName + CurrentModuleObject + " object, " + cNumericFields(5) + " <= " + cNumericFields(4));
-                        ShowContinueError("..Input value for " + format("{}= {:.1R}", cNumericFields(5), MultizoneZoneData(i).UpValueEnth) +
+                        ShowContinueError(format("..Input value for {}= {:.1R}", cNumericFields(5), MultizoneZoneData(i).UpValueEnth) +
                                           ", Value will be reset to 300000.0");
                         ShowContinueError("..for " + cAlphaFields(1) + " = \"" + MultizoneZoneData(i).ZoneName);
                         MultizoneZoneData(i).UpValueEnth = 300000.0;

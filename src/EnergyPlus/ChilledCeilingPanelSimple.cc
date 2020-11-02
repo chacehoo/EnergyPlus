@@ -370,7 +370,7 @@ namespace CoolingPanelSimple {
                     ThisCP.ScaledCoolingCapacity = rNumericArgs(4);
                     if (ThisCP.ScaledCoolingCapacity < 0.0 && ThisCP.ScaledCoolingCapacity != DataSizing::AutoSize) {
                         ShowSevereError(cCMO_CoolingPanel_Simple + " = " + ThisCP.EquipID);
-                        ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFieldNames(4), rNumericArgs(4)));
+                        ShowContinueError(format("Illegal {} = {:.7T}", cNumericFieldNames(4), rNumericArgs(4)));
                         ErrorsFound = true;
                     }
                 } else {
@@ -388,7 +388,7 @@ namespace CoolingPanelSimple {
                     if (ThisCP.CoolingCapMethod <= 0.0) {
                         ShowSevereError(cCMO_CoolingPanel_Simple + " = " + ThisCP.EquipID);
                         ShowContinueError("Input for " + cAlphaFieldNames(5) + " = " + cAlphaArgs(5));
-                        ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFieldNames(5), rNumericArgs(5)));
+                        ShowContinueError(format("Illegal {} = {:.7T}", cNumericFieldNames(5), rNumericArgs(5)));
                         ErrorsFound = true;
                     } else if (ThisCP.ScaledCoolingCapacity == DataSizing::AutoSize) {
                         ShowSevereError(cCMO_CoolingPanel_Simple + " = " + ThisCP.EquipID);
@@ -408,7 +408,7 @@ namespace CoolingPanelSimple {
                     ThisCP.ScaledCoolingCapacity = rNumericArgs(6);
                     if (ThisCP.ScaledCoolingCapacity < 0.0) {
                         ShowSevereError(cCMO_CoolingPanel_Simple + " = " + ThisCP.EquipID);
-                        ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFieldNames(6), rNumericArgs(6)));
+                        ShowContinueError(format("Illegal {} = {:.7T}", cNumericFieldNames(6), rNumericArgs(6)));
                         ErrorsFound = true;
                     }
                 } else {

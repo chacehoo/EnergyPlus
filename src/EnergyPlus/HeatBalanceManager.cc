@@ -777,13 +777,13 @@ namespace HeatBalanceManager {
             // Loads Convergence Tolerance Value
             LoadsConvergTol = BuildingNumbers(2);
             if (LoadsConvergTol <= 0.0) {
-                ShowSevereError(RoutineName + CurrentModuleObject + ": " + format("{} value invalid, [{:.3R}]", cNumericFieldNames(2), LoadsConvergTol));
+                ShowSevereError(RoutineName + CurrentModuleObject + format(": {} value invalid, [{:.3R}]", cNumericFieldNames(2), LoadsConvergTol));
                 ErrorsFound = true;
             }
             // Temperature Convergence Tolerance Value
             TempConvergTol = BuildingNumbers(3);
             if (TempConvergTol <= 0.0) {
-                ShowSevereError(RoutineName + CurrentModuleObject + ": " + format("{} value invalid, [{:.3R}]", cNumericFieldNames(2), TempConvergTol));
+                ShowSevereError(RoutineName + CurrentModuleObject + format(": {} value invalid, [{:.3R}]", cNumericFieldNames(2), TempConvergTol));
                 ErrorsFound = true;
             }
             // Solar Distribution

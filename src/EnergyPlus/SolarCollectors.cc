@@ -417,14 +417,14 @@ namespace SolarCollectors {
                 state.dataSolarCollectors->Parameters(ParametersNum).Area = DataIPShortCuts::rNumericArgs(1);
                 if (DataIPShortCuts::rNumericArgs(1) <= 0.0) {
                     ShowSevereError(CurrentModuleParamObject + " = " + DataIPShortCuts::cAlphaArgs(1));
-                    ShowContinueError("Illegal " + format("{} = {:.2R}", DataIPShortCuts::cNumericFieldNames(1), DataIPShortCuts::rNumericArgs(1)));
+                    ShowContinueError(format("Illegal {} = {:.2R}", DataIPShortCuts::cNumericFieldNames(1), DataIPShortCuts::rNumericArgs(1)));
                     ShowContinueError(" Collector gross area must be always gretaer than zero.");
                     ErrorsFound = true;
                 }
                 state.dataSolarCollectors->Parameters(ParametersNum).Volume = DataIPShortCuts::rNumericArgs(2);
                 if (DataIPShortCuts::rNumericArgs(2) <= 0.0) {
                     ShowSevereError(CurrentModuleParamObject + " = " + DataIPShortCuts::cAlphaArgs(1));
-                    ShowContinueError("Illegal " + format("{} = {:.2R}", DataIPShortCuts::cNumericFieldNames(2), DataIPShortCuts::rNumericArgs(2)));
+                    ShowContinueError(format("Illegal {} = {:.2R}", DataIPShortCuts::cNumericFieldNames(2), DataIPShortCuts::rNumericArgs(2)));
                     ShowContinueError(" Collector water volume must be always gretaer than zero.");
                     ErrorsFound = true;
                 }
@@ -464,7 +464,7 @@ namespace SolarCollectors {
                     state.dataSolarCollectors->Parameters(ParametersNum).EmissOfCover(1) = DataIPShortCuts::rNumericArgs(12);
                 } else {
                     ShowSevereError(CurrentModuleParamObject + " = " + DataIPShortCuts::cAlphaArgs(1));
-                    ShowContinueError("Illegal " + format("{} = {:.2R}", DataIPShortCuts::cNumericFieldNames(8), DataIPShortCuts::rNumericArgs(8)));
+                    ShowContinueError(format("Illegal {} = {:.2R}", DataIPShortCuts::cNumericFieldNames(8), DataIPShortCuts::rNumericArgs(8)));
                     ErrorsFound = true;
                 }
                 // Solar absorptance of the absorber plate

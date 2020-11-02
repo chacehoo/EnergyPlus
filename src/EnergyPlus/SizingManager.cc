@@ -2759,7 +2759,7 @@ namespace SizingManager {
                         ZoneSizingInput(ZoneSizIndex).CoolDesTemp = 0.0;
                     } else if (rNumericArgs(1) < 0.0 && ZoneSizingInput(ZoneSizIndex).ZnCoolDgnSAMethod == SupplyAirTemperature) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + format("{}=[{:.2R}", cNumericFieldNames(1), rNumericArgs(1)) +
+                        ShowContinueError(format("... incorrect {}=[{:.2R}", cNumericFieldNames(1), rNumericArgs(1)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else if (rNumericArgs(1) >= 0.0 && ZoneSizingInput(ZoneSizIndex).ZnCoolDgnSAMethod == SupplyAirTemperature) {
@@ -2809,7 +2809,7 @@ namespace SizingManager {
                         ZoneSizingInput(ZoneSizIndex).HeatDesTemp = 0.0;
                     } else if (rNumericArgs(3) < 0.0 && ZoneSizingInput(ZoneSizIndex).ZnHeatDgnSAMethod == SupplyAirTemperature) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + format("{}=[{:.2R}", cNumericFieldNames(3), rNumericArgs(3)) +
+                        ShowContinueError(format("... incorrect {}=[{:.2R}", cNumericFieldNames(3), rNumericArgs(3)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else if (rNumericArgs(3) >= 0.0 && ZoneSizingInput(ZoneSizIndex).ZnHeatDgnSAMethod == SupplyAirTemperature) {
@@ -2839,7 +2839,7 @@ namespace SizingManager {
                     if (lNumericFieldBlanks(5)) {
                         ZoneSizingInput(ZoneSizIndex).CoolDesHumRat = 0.0;
                     } else if (rNumericArgs(5) < 0.0) {
-                        ShowSevereError(cCurrentModuleObject + ": incorrect " + format("{}: {:.2R}", cNumericFieldNames(5), rNumericArgs(5)));
+                        ShowSevereError(cCurrentModuleObject + format(": incorrect {}: {:.2R}", cNumericFieldNames(5), rNumericArgs(5)));
                         ShowContinueError(".. value should not be negative. Occurs in Sizing Object=" + cAlphaArgs(1));
                         ErrorsFound = true;
                     } else {
@@ -2853,7 +2853,7 @@ namespace SizingManager {
                     if (lNumericFieldBlanks(6)) {
                         ZoneSizingInput(ZoneSizIndex).HeatDesHumRat = 0.0;
                     } else if (rNumericArgs(6) < 0.0) {
-                        ShowSevereError(cCurrentModuleObject + ": incorrect " + format("{}: {:.2R}", cNumericFieldNames(6), rNumericArgs(6)));
+                        ShowSevereError(cCurrentModuleObject + format(": incorrect {}: {:.2R}", cNumericFieldNames(6), rNumericArgs(6)));
                         ShowContinueError(".. value should not be negative. Occurs in Sizing Object=" + cAlphaArgs(1));
                         ErrorsFound = true;
                     } else {
@@ -2892,7 +2892,7 @@ namespace SizingManager {
                         ZoneSizingInput(ZoneSizIndex).HeatSizingFactor = GlobalHeatSizingFactor;
                     } else if (rNumericArgs(7) < 0.0) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + format("{}=[{:.2R}", cNumericFieldNames(7), rNumericArgs(7)) +
+                        ShowContinueError(format("... incorrect {}=[{:.2R}", cNumericFieldNames(7), rNumericArgs(7)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else {
@@ -2905,7 +2905,7 @@ namespace SizingManager {
                         ZoneSizingInput(ZoneSizIndex).CoolSizingFactor = GlobalCoolSizingFactor;
                     } else if (rNumericArgs(8) < 0.0) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + format("{}=[{:.2R}", cNumericFieldNames(8), rNumericArgs(8)) +
+                        ShowContinueError(format("... incorrect {}=[{:.2R}", cNumericFieldNames(8), rNumericArgs(8)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else {
@@ -2923,7 +2923,7 @@ namespace SizingManager {
                         ZoneSizingInput(ZoneSizIndex).DesCoolAirFlow = 0.0;
                     } else if (rNumericArgs(9) < 0.0) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + format("{}=[{:.2R}", cNumericFieldNames(9), rNumericArgs(9)) +
+                        ShowContinueError(format("... incorrect {}=[{:.2R}", cNumericFieldNames(9), rNumericArgs(9)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else {
@@ -2944,7 +2944,7 @@ namespace SizingManager {
                         }
                     } else if (rNumericArgs(10) < 0.0) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + format("{}=[{:.2R}", cNumericFieldNames(108), rNumericArgs(10)) +
+                        ShowContinueError(format("... incorrect {}=[{:.2R}", cNumericFieldNames(108), rNumericArgs(10)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else {
@@ -2960,7 +2960,7 @@ namespace SizingManager {
                         ZoneSizingInput(ZoneSizIndex).DesCoolMinAirFlow = 0.0;
                     } else if (rNumericArgs(11) < 0.0) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + format("{}=[{:.2R}", cNumericFieldNames(11), rNumericArgs(11)) +
+                        ShowContinueError(format("... incorrect {}=[{:.2R}", cNumericFieldNames(11), rNumericArgs(11)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else {
@@ -2969,7 +2969,7 @@ namespace SizingManager {
                     //  N12,\field Cooling Minimum Air Flow Fraction
                     if (rNumericArgs(12) < 0.0) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + format("{}=[{:.2R}", cNumericFieldNames(12), rNumericArgs(12)) +
+                        ShowContinueError(format("... incorrect {}=[{:.2R}", cNumericFieldNames(12), rNumericArgs(12)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else {
@@ -2988,7 +2988,7 @@ namespace SizingManager {
                         ZoneSizingInput(ZoneSizIndex).DesHeatAirFlow = 0.0;
                     } else if (rNumericArgs(13) < 0.0) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + format("{}=[{:.2R}", cNumericFieldNames(13), rNumericArgs(13)) +
+                        ShowContinueError(format("... incorrect {}=[{:.2R}", cNumericFieldNames(13), rNumericArgs(13)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else {
@@ -3010,7 +3010,7 @@ namespace SizingManager {
                         }
                     } else if (rNumericArgs(14) < 0.0) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + format("{}=[{:.2R}", cNumericFieldNames(14), rNumericArgs(14)) +
+                        ShowContinueError(format("... incorrect {}=[{:.2R}", cNumericFieldNames(14), rNumericArgs(14)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else {
@@ -3033,7 +3033,7 @@ namespace SizingManager {
                         }
                     } else if (rNumericArgs(15) < 0.0) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + format("{}=[{:.2R}", cNumericFieldNames(15), rNumericArgs(15)) +
+                        ShowContinueError(format("... incorrect {}=[{:.2R}", cNumericFieldNames(15), rNumericArgs(15)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else {
@@ -3055,7 +3055,7 @@ namespace SizingManager {
                         }
                     } else if (rNumericArgs(16) < 0.0) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid data.");
-                        ShowContinueError("... incorrect " + format("{}=[{:.2R}", cNumericFieldNames(16), rNumericArgs(16)) +
+                        ShowContinueError(format("... incorrect {}=[{:.2R}", cNumericFieldNames(16), rNumericArgs(16)) +
                                           "],  value should not be negative.");
                         ErrorsFound = true;
                     } else {
@@ -3447,7 +3447,7 @@ namespace SizingManager {
                 SysSizInput(SysSizIndex).DesOutAirVolFlow = AutoSize;
             } else if (rNumericArgs(iDesignOAVolFlowNumericNum) < 0.0 && rNumericArgs(iDesignOAVolFlowNumericNum) != AutoSize) {
                 ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(iNameAlphaNum) + "\", invalid data.");
-                ShowContinueError("... incorrect " + format("{}=[{:.2R}],  value should not be negative.", cNumericFieldNames(iDesignOAVolFlowNumericNum), rNumericArgs(iDesignOAVolFlowNumericNum)));
+                ShowContinueError(format("... incorrect {}=[{:.2R}],  value should not be negative.", cNumericFieldNames(iDesignOAVolFlowNumericNum), rNumericArgs(iDesignOAVolFlowNumericNum)));
                 ErrorsFound = true;
             } else {
                 SysSizInput(SysSizIndex).DesOutAirVolFlow = rNumericArgs(iDesignOAVolFlowNumericNum);
@@ -3466,7 +3466,7 @@ namespace SizingManager {
                 SysSizInput(SysSizIndex).SysAirMinFlowRat = 0.0;
             } else if ((rNumericArgs(iMinSysAirFlowRatioNumericNum) < 0.0) && (rNumericArgs(iMinSysAirFlowRatioNumericNum) != DataSizing::AutoSize)) {
                 ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(iMinSysAirFlowRatioNumericNum) + "\", invalid data.");
-                ShowContinueError("... incorrect " + format("{}=[{:.2R}],  value should not be negative.", cNumericFieldNames(iMinSysAirFlowRatioNumericNum), rNumericArgs(iMinSysAirFlowRatioNumericNum)));
+                ShowContinueError(format("... incorrect {}=[{:.2R}],  value should not be negative.", cNumericFieldNames(iMinSysAirFlowRatioNumericNum), rNumericArgs(iMinSysAirFlowRatioNumericNum)));
                 ErrorsFound = true;
             } else {
                 SysSizInput(SysSizIndex).SysAirMinFlowRat = rNumericArgs(iMinSysAirFlowRatioNumericNum);
@@ -3508,7 +3508,7 @@ namespace SizingManager {
                 SysSizInput(SysSizIndex).DesCoolAirFlow = 0.0;
             } else if (rNumericArgs(iMaxCoolAirVolFlowNumericNum) < 0.0) {
                 ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(iNameAlphaNum) + "\", invalid data.");
-                ShowContinueError("... incorrect " + format("{}=[{:.2R}],  value should not be negative.", cNumericFieldNames(iMaxCoolAirVolFlowNumericNum), rNumericArgs(iMaxCoolAirVolFlowNumericNum)));
+                ShowContinueError(format("... incorrect {}=[{:.2R}],  value should not be negative.", cNumericFieldNames(iMaxCoolAirVolFlowNumericNum), rNumericArgs(iMaxCoolAirVolFlowNumericNum)));
                 ErrorsFound = true;
             } else {
                 SysSizInput(SysSizIndex).DesCoolAirFlow = rNumericArgs(iMaxCoolAirVolFlowNumericNum);
@@ -3532,7 +3532,7 @@ namespace SizingManager {
                 SysSizInput(SysSizIndex).DesHeatAirFlow = 0.0;
             } else if (rNumericArgs(iMaxHeatAirVolFlowNumericNum) < 0.0) {
                 ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(iNameAlphaNum) + "\", invalid data.");
-                ShowContinueError("... incorrect " + format("{}=[{:.2R}],  value should not be negative.", cNumericFieldNames(iMaxHeatAirVolFlowNumericNum), rNumericArgs(iMaxHeatAirVolFlowNumericNum)));
+                ShowContinueError(format("... incorrect {}=[{:.2R}],  value should not be negative.", cNumericFieldNames(iMaxHeatAirVolFlowNumericNum), rNumericArgs(iMaxHeatAirVolFlowNumericNum)));
                 ErrorsFound = true;
             } else {
                 SysSizInput(SysSizIndex).DesHeatAirFlow = rNumericArgs(iMaxHeatAirVolFlowNumericNum);
@@ -3550,7 +3550,7 @@ namespace SizingManager {
                 SysSizInput(SysSizIndex).MaxZoneOAFraction = 0.0;
             } else if (rNumericArgs(iZoneMaxOAFractionNumericNum) < 0.0) {
                 ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(iNameAlphaNum) + "\", invalid data.");
-                ShowContinueError("... incorrect " + format("{}=[{:.2R}],  value should not be negative.", cNumericFieldNames(iZoneMaxOAFractionNumericNum), rNumericArgs(iZoneMaxOAFractionNumericNum)));
+                ShowContinueError(format("... incorrect {}=[{:.2R}],  value should not be negative.", cNumericFieldNames(iZoneMaxOAFractionNumericNum), rNumericArgs(iZoneMaxOAFractionNumericNum)));
                 ErrorsFound = true;
             } else {
                 SysSizInput(SysSizIndex).MaxZoneOAFraction = rNumericArgs(iZoneMaxOAFractionNumericNum);
@@ -3646,7 +3646,7 @@ namespace SizingManager {
                 SysSizInput(SysSizIndex).ScaledCoolingCapacity = rNumericArgs(iCoolDesignCapacityNumericNum);
                 if (SysSizInput(SysSizIndex).ScaledCoolingCapacity < 0.0 && SysSizInput(SysSizIndex).ScaledCoolingCapacity != AutoSize) {
                     ShowSevereError(cCurrentModuleObject + " = " + SysSizInput(SysSizIndex).AirPriLoopName);
-                    ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFieldNames(iCoolDesignCapacityNumericNum), rNumericArgs(iCoolDesignCapacityNumericNum)));
+                    ShowContinueError(format("Illegal {} = {:.7T}", cNumericFieldNames(iCoolDesignCapacityNumericNum), rNumericArgs(iCoolDesignCapacityNumericNum)));
                     ErrorsFound = true;
                 }
             } else if (UtilityRoutines::SameString(cAlphaArgs(iCoolCAPMAlphaNum), "CAPACITYPERFLOORAREA")) {
@@ -3656,7 +3656,7 @@ namespace SizingManager {
                     if (SysSizInput(SysSizIndex).ScaledCoolingCapacity <= 0.0) {
                         ShowSevereError(cCurrentModuleObject + " = " + SysSizInput(SysSizIndex).AirPriLoopName);
                         ShowContinueError("Input for " + cAlphaFieldNames(iCoolCAPMAlphaNum) + " = " + cAlphaArgs(iCoolCAPMAlphaNum));
-                        ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFieldNames(iCoolCapacityPerFloorAreaNumericNum), rNumericArgs(iCoolCapacityPerFloorAreaNumericNum)));
+                        ShowContinueError(format("Illegal {} = {:.7T}", cNumericFieldNames(iCoolCapacityPerFloorAreaNumericNum), rNumericArgs(iCoolCapacityPerFloorAreaNumericNum)));
                         ErrorsFound = true;
                     } else if (SysSizInput(SysSizIndex).ScaledCoolingCapacity == AutoSize) {
                         ShowSevereError(cCurrentModuleObject + " = " + SysSizInput(SysSizIndex).AirPriLoopName);
@@ -3676,7 +3676,7 @@ namespace SizingManager {
                     SysSizInput(SysSizIndex).ScaledCoolingCapacity = rNumericArgs(iCoolFracOfAutosizedCapacityNumericNum);
                     if (SysSizInput(SysSizIndex).ScaledCoolingCapacity < 0.0) {
                         ShowSevereError(cCurrentModuleObject + " = " + SysSizInput(SysSizIndex).AirPriLoopName);
-                        ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFieldNames(iCoolFracOfAutosizedCapacityNumericNum), rNumericArgs(iCoolFracOfAutosizedCapacityNumericNum)));
+                        ShowContinueError(format("Illegal {} = {:.7T}", cNumericFieldNames(iCoolFracOfAutosizedCapacityNumericNum), rNumericArgs(iCoolFracOfAutosizedCapacityNumericNum)));
                         ErrorsFound = true;
                     }
                 } else {
@@ -3702,7 +3702,7 @@ namespace SizingManager {
                 SysSizInput(SysSizIndex).ScaledHeatingCapacity = rNumericArgs(iHeatDesignCapacityNumericNum);
                 if (SysSizInput(SysSizIndex).ScaledHeatingCapacity < 0.0 && SysSizInput(SysSizIndex).ScaledHeatingCapacity != AutoSize) {
                     ShowSevereError(cCurrentModuleObject + " = " + SysSizInput(SysSizIndex).AirPriLoopName);
-                    ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFieldNames(iHeatDesignCapacityNumericNum), rNumericArgs(iHeatDesignCapacityNumericNum)));
+                    ShowContinueError(format("Illegal {} = {:.7T}", cNumericFieldNames(iHeatDesignCapacityNumericNum), rNumericArgs(iHeatDesignCapacityNumericNum)));
                     ErrorsFound = true;
                 }
             } else if (UtilityRoutines::SameString(cAlphaArgs(iHeatCAPMAlphaNum), "CAPACITYPERFLOORAREA")) {
@@ -3712,7 +3712,7 @@ namespace SizingManager {
                     if (SysSizInput(SysSizIndex).ScaledHeatingCapacity <= 0.0) {
                         ShowSevereError(cCurrentModuleObject + " = " + SysSizInput(SysSizIndex).AirPriLoopName);
                         ShowContinueError("Input for " + cAlphaFieldNames(iHeatCAPMAlphaNum) + " = " + cAlphaArgs(iHeatCAPMAlphaNum));
-                        ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFieldNames(iHeatCapacityPerFloorAreaNumericNum), rNumericArgs(iHeatCapacityPerFloorAreaNumericNum)));
+                        ShowContinueError(format("Illegal {} = {:.7T}", cNumericFieldNames(iHeatCapacityPerFloorAreaNumericNum), rNumericArgs(iHeatCapacityPerFloorAreaNumericNum)));
                         ErrorsFound = true;
                     } else if (SysSizInput(SysSizIndex).ScaledHeatingCapacity == AutoSize) {
                         ShowSevereError(cCurrentModuleObject + " = " + SysSizInput(SysSizIndex).AirPriLoopName);
@@ -3732,7 +3732,7 @@ namespace SizingManager {
                     SysSizInput(SysSizIndex).ScaledHeatingCapacity = rNumericArgs(iHeatFracOfAutosizedCapacityNumericNum);
                     if (SysSizInput(SysSizIndex).ScaledHeatingCapacity < 0.0) {
                         ShowSevereError(cCurrentModuleObject + " = " + SysSizInput(SysSizIndex).AirPriLoopName);
-                        ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFieldNames(iHeatFracOfAutosizedCapacityNumericNum), rNumericArgs(iHeatFracOfAutosizedCapacityNumericNum)));
+                        ShowContinueError(format("Illegal {} = {:.7T}", cNumericFieldNames(iHeatFracOfAutosizedCapacityNumericNum), rNumericArgs(iHeatFracOfAutosizedCapacityNumericNum)));
                         ErrorsFound = true;
                     }
                 } else {
@@ -4272,7 +4272,7 @@ namespace SizingManager {
                         if (ZoneHVACSizing(zSIndex).MaxCoolAirVolFlow == AutoSize) ZoneHVACSizing(zSIndex).RequestAutoSize = true;
                         if (ZoneHVACSizing(zSIndex).MaxCoolAirVolFlow <= 0.0 && ZoneHVACSizing(zSIndex).MaxCoolAirVolFlow != AutoSize) {
                             ShowSevereError(CurrentModuleObject + " = " + ZoneHVACSizing(zSIndex).Name);
-                            ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(iMaxCoolAirVolFlowNumericNum), Numbers(iMaxCoolAirVolFlowNumericNum)));
+                            ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(iMaxCoolAirVolFlowNumericNum), Numbers(iMaxCoolAirVolFlowNumericNum)));
                             ErrorsFound = true;
                         }
                     } else {
@@ -4288,7 +4288,7 @@ namespace SizingManager {
                         if (ZoneHVACSizing(zSIndex).MaxCoolAirVolFlow <= 0.0 && ZoneHVACSizing(zSIndex).MaxCoolAirVolFlow != AutoSize) {
                             ShowSevereError(CurrentModuleObject + " = " + ZoneHVACSizing(zSIndex).Name);
                             ShowContinueError("Input for " + cAlphaFields(iCoolSAFMAlphaNum) + " = " + Alphas(iCoolSAFMAlphaNum));
-                            ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(iCoolFlowPerFloorAreaNumericNum), Numbers(iCoolFlowPerFloorAreaNumericNum)));
+                            ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(iCoolFlowPerFloorAreaNumericNum), Numbers(iCoolFlowPerFloorAreaNumericNum)));
                             ErrorsFound = true;
                             // Autosized input is not allowed
                         } else if (ZoneHVACSizing(zSIndex).MaxCoolAirVolFlow == AutoSize) {
@@ -4313,7 +4313,7 @@ namespace SizingManager {
                         if (ZoneHVACSizing(zSIndex).MaxCoolAirVolFlow <= 0.0 && ZoneHVACSizing(zSIndex).MaxCoolAirVolFlow != AutoSize) {
                             ShowSevereError(CurrentModuleObject + " = " + ZoneHVACSizing(zSIndex).Name);
                             ShowContinueError("Input for " + cAlphaFields(iCoolSAFMAlphaNum) + " = " + Alphas(iCoolSAFMAlphaNum));
-                            ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(iCoolFlowPerFracCoolNumericNum), Numbers(iCoolFlowPerFracCoolNumericNum)));
+                            ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(iCoolFlowPerFracCoolNumericNum), Numbers(iCoolFlowPerFracCoolNumericNum)));
                             ErrorsFound = true;
                             // Autosized input is not allowed
                         } else if (ZoneHVACSizing(zSIndex).MaxCoolAirVolFlow == AutoSize) {
@@ -4339,7 +4339,7 @@ namespace SizingManager {
                         if (ZoneHVACSizing(zSIndex).MaxCoolAirVolFlow <= 0.0 && ZoneHVACSizing(zSIndex).MaxCoolAirVolFlow != AutoSize) {
                             ShowSevereError(CurrentModuleObject + " = " + ZoneHVACSizing(zSIndex).Name);
                             ShowContinueError("Input for " + cAlphaFields(iCoolSAFMAlphaNum) + " = " + Alphas(iCoolSAFMAlphaNum));
-                            ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(iCoolFlowPerCoolCapNumericNum), Numbers(iCoolFlowPerCoolCapNumericNum)));
+                            ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(iCoolFlowPerCoolCapNumericNum), Numbers(iCoolFlowPerCoolCapNumericNum)));
                             ErrorsFound = true;
                             // Autosized input is not allowed
                         } else if (ZoneHVACSizing(zSIndex).MaxCoolAirVolFlow == AutoSize) {
@@ -4375,7 +4375,7 @@ namespace SizingManager {
 
                         if (ZoneHVACSizing(zSIndex).MaxHeatAirVolFlow <= 0.0 && ZoneHVACSizing(zSIndex).MaxHeatAirVolFlow != AutoSize) {
                             ShowSevereError(CurrentModuleObject + " = " + ZoneHVACSizing(zSIndex).Name);
-                            ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(iMaxHeatAirVolFlowNumericNum), Numbers(iMaxHeatAirVolFlowNumericNum)));
+                            ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(iMaxHeatAirVolFlowNumericNum), Numbers(iMaxHeatAirVolFlowNumericNum)));
                             ErrorsFound = true;
                         }
                     } else {
@@ -4391,7 +4391,7 @@ namespace SizingManager {
                         if (ZoneHVACSizing(zSIndex).MaxHeatAirVolFlow <= 0.0 && ZoneHVACSizing(zSIndex).MaxHeatAirVolFlow != AutoSize) {
                             ShowSevereError(CurrentModuleObject + " = " + ZoneHVACSizing(zSIndex).Name);
                             ShowContinueError("Input for " + cAlphaFields(iHeatSAFMAlphaNum) + " = " + Alphas(iHeatSAFMAlphaNum));
-                            ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(iHeatFlowPerFloorAreaNumericNum), Numbers(iHeatFlowPerFloorAreaNumericNum)));
+                            ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(iHeatFlowPerFloorAreaNumericNum), Numbers(iHeatFlowPerFloorAreaNumericNum)));
                             ErrorsFound = true;
                             // Autosized input is not allowed
                         } else if (ZoneHVACSizing(zSIndex).MaxHeatAirVolFlow == AutoSize) {
@@ -4416,7 +4416,7 @@ namespace SizingManager {
                         if (ZoneHVACSizing(zSIndex).MaxHeatAirVolFlow <= 0.0 && ZoneHVACSizing(zSIndex).MaxHeatAirVolFlow != AutoSize) {
                             ShowSevereError(CurrentModuleObject + " = " + ZoneHVACSizing(zSIndex).Name);
                             ShowContinueError("Input for " + cAlphaFields(iHeatSAFMAlphaNum) + " = " + Alphas(iHeatSAFMAlphaNum));
-                            ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(iHeatFlowPerFracCoolNumericNum), Numbers(iHeatFlowPerFracCoolNumericNum)));
+                            ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(iHeatFlowPerFracCoolNumericNum), Numbers(iHeatFlowPerFracCoolNumericNum)));
                             ErrorsFound = true;
                             // Autosized input is not allowed
                         } else if (ZoneHVACSizing(zSIndex).MaxHeatAirVolFlow == AutoSize) {
@@ -4441,7 +4441,7 @@ namespace SizingManager {
                         if (ZoneHVACSizing(zSIndex).MaxHeatAirVolFlow <= 0.0 && ZoneHVACSizing(zSIndex).MaxHeatAirVolFlow != AutoSize) {
                             ShowSevereError(CurrentModuleObject + " = " + ZoneHVACSizing(zSIndex).Name);
                             ShowContinueError("Input for " + cAlphaFields(iHeatSAFMAlphaNum) + " = " + Alphas(iHeatSAFMAlphaNum));
-                            ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(iHeatFlowPerHeatCapNumericNum), Numbers(iHeatFlowPerHeatCapNumericNum)));
+                            ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(iHeatFlowPerHeatCapNumericNum), Numbers(iHeatFlowPerHeatCapNumericNum)));
                             ErrorsFound = true;
                             // Autosized input is not allowed
                         } else if (ZoneHVACSizing(zSIndex).MaxHeatAirVolFlow == AutoSize) {
@@ -4476,7 +4476,7 @@ namespace SizingManager {
                         if (ZoneHVACSizing(zSIndex).MaxNoCoolHeatAirVolFlow == AutoSize) ZoneHVACSizing(zSIndex).RequestAutoSize = true;
                         if (ZoneHVACSizing(zSIndex).MaxNoCoolHeatAirVolFlow < 0.0 && ZoneHVACSizing(zSIndex).MaxNoCoolHeatAirVolFlow != AutoSize) {
                             ShowSevereError(CurrentModuleObject + " = " + ZoneHVACSizing(zSIndex).Name);
-                            ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(iMaxNoCoolHeatAirVolFlowNumericNum), Numbers(iMaxNoCoolHeatAirVolFlowNumericNum)));
+                            ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(iMaxNoCoolHeatAirVolFlowNumericNum), Numbers(iMaxNoCoolHeatAirVolFlowNumericNum)));
                             ErrorsFound = true;
                         }
                     } else {
@@ -4492,7 +4492,7 @@ namespace SizingManager {
                         if (ZoneHVACSizing(zSIndex).MaxNoCoolHeatAirVolFlow < 0.0 && ZoneHVACSizing(zSIndex).MaxNoCoolHeatAirVolFlow != AutoSize) {
                             ShowSevereError(CurrentModuleObject + " = " + ZoneHVACSizing(zSIndex).Name);
                             ShowContinueError("Input for " + cAlphaFields(iNoCoolHeatSAFMAlphaNum) + " = " + Alphas(iNoCoolHeatSAFMAlphaNum));
-                            ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(iNoCoolHeatFlowPerFloorAreaNumericNum), Numbers(iNoCoolHeatFlowPerFloorAreaNumericNum)));
+                            ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(iNoCoolHeatFlowPerFloorAreaNumericNum), Numbers(iNoCoolHeatFlowPerFloorAreaNumericNum)));
                             ErrorsFound = true;
                             // Autosized input is not allowed
                         } else if (ZoneHVACSizing(zSIndex).MaxNoCoolHeatAirVolFlow == AutoSize) {
@@ -4518,7 +4518,7 @@ namespace SizingManager {
                         if (ZoneHVACSizing(zSIndex).MaxNoCoolHeatAirVolFlow < 0.0 && ZoneHVACSizing(zSIndex).MaxNoCoolHeatAirVolFlow != AutoSize) {
                             ShowSevereError(CurrentModuleObject + " = " + ZoneHVACSizing(zSIndex).Name);
                             ShowContinueError("Input for " + cAlphaFields(iNoCoolHeatSAFMAlphaNum) + " = " + Alphas(iNoCoolHeatSAFMAlphaNum));
-                            ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(iNoCoolHeatFlowPerFracCoolNumericNum), Numbers(iNoCoolHeatFlowPerFracCoolNumericNum)));
+                            ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(iNoCoolHeatFlowPerFracCoolNumericNum), Numbers(iNoCoolHeatFlowPerFracCoolNumericNum)));
                             ErrorsFound = true;
                             // Autosized input is not allowed
                         } else if (ZoneHVACSizing(zSIndex).MaxNoCoolHeatAirVolFlow == AutoSize) {
@@ -4544,7 +4544,7 @@ namespace SizingManager {
                         if (ZoneHVACSizing(zSIndex).MaxNoCoolHeatAirVolFlow < 0.0 && ZoneHVACSizing(zSIndex).MaxNoCoolHeatAirVolFlow != AutoSize) {
                             ShowSevereError(CurrentModuleObject + " = " + ZoneHVACSizing(zSIndex).Name);
                             ShowContinueError("Input for " + cAlphaFields(iNoCoolHeatSAFMAlphaNum) + " = " + Alphas(iNoCoolHeatSAFMAlphaNum));
-                            ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(iNoCoolHeatFlowPerFracHeatNumericNum), Numbers(iNoCoolHeatFlowPerFracHeatNumericNum)));
+                            ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(iNoCoolHeatFlowPerFracHeatNumericNum), Numbers(iNoCoolHeatFlowPerFracHeatNumericNum)));
                             ErrorsFound = true;
                             // Autosized input is not allowed
                         } else if (ZoneHVACSizing(zSIndex).MaxNoCoolHeatAirVolFlow == AutoSize) {
@@ -4580,7 +4580,7 @@ namespace SizingManager {
                         if (ZoneHVACSizing(zSIndex).ScaledCoolingCapacity == AutoSize) ZoneHVACSizing(zSIndex).RequestAutoSize = true;
                         if (ZoneHVACSizing(zSIndex).ScaledCoolingCapacity < 0.0 && ZoneHVACSizing(zSIndex).ScaledCoolingCapacity != AutoSize) {
                             ShowSevereError(CurrentModuleObject + " = " + ZoneHVACSizing(zSIndex).Name);
-                            ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(iCoolDesignCapacityNumericNum), Numbers(iCoolDesignCapacityNumericNum)));
+                            ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(iCoolDesignCapacityNumericNum), Numbers(iCoolDesignCapacityNumericNum)));
                             ErrorsFound = true;
                         }
                     } else {
@@ -4596,7 +4596,7 @@ namespace SizingManager {
                         if (ZoneHVACSizing(zSIndex).ScaledCoolingCapacity <= 0.0) {
                             ShowSevereError(CurrentModuleObject + " = " + ZoneHVACSizing(zSIndex).Name);
                             ShowContinueError("Input for " + cAlphaFields(iCoolCAPMAlphaNum) + " = " + Alphas(iCoolCAPMAlphaNum));
-                            ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(iCoolCapacityPerFloorAreaNumericNum), Numbers(iCoolCapacityPerFloorAreaNumericNum)));
+                            ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(iCoolCapacityPerFloorAreaNumericNum), Numbers(iCoolCapacityPerFloorAreaNumericNum)));
                             ErrorsFound = true;
                             // Autosized input is not allowed
                         } else if (ZoneHVACSizing(zSIndex).ScaledCoolingCapacity == AutoSize) {
@@ -4618,7 +4618,7 @@ namespace SizingManager {
                         if (ZoneHVACSizing(zSIndex).ScaledCoolingCapacity == AutoSize) ZoneHVACSizing(zSIndex).RequestAutoSize = true;
                         if (ZoneHVACSizing(zSIndex).ScaledCoolingCapacity < 0.0 && ZoneHVACSizing(zSIndex).ScaledCoolingCapacity != AutoSize) {
                             ShowSevereError(CurrentModuleObject + " = " + ZoneHVACSizing(zSIndex).Name);
-                            ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(iCoolFracOfAutosizedCapacityNumericNum), Numbers(iCoolFracOfAutosizedCapacityNumericNum)));
+                            ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(iCoolFracOfAutosizedCapacityNumericNum), Numbers(iCoolFracOfAutosizedCapacityNumericNum)));
                             ErrorsFound = true;
                         }
                     } else {
@@ -4643,7 +4643,7 @@ namespace SizingManager {
                         if (ZoneHVACSizing(zSIndex).ScaledHeatingCapacity == AutoSize) ZoneHVACSizing(zSIndex).RequestAutoSize = true;
                         if (ZoneHVACSizing(zSIndex).ScaledHeatingCapacity < 0.0 && ZoneHVACSizing(zSIndex).ScaledHeatingCapacity != AutoSize) {
                             ShowSevereError(CurrentModuleObject + " = " + ZoneHVACSizing(zSIndex).Name);
-                            ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(iHeatDesignCapacityNumericNum), Numbers(iHeatDesignCapacityNumericNum)));
+                            ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(iHeatDesignCapacityNumericNum), Numbers(iHeatDesignCapacityNumericNum)));
                             ErrorsFound = true;
                         }
                     } else {
@@ -4659,7 +4659,7 @@ namespace SizingManager {
                         if (ZoneHVACSizing(zSIndex).ScaledHeatingCapacity <= 0.0) {
                             ShowSevereError(CurrentModuleObject + " = " + ZoneHVACSizing(zSIndex).Name);
                             ShowContinueError("Input for " + cAlphaFields(iHeatCAPMAlphaNum) + " = " + Alphas(iHeatCAPMAlphaNum));
-                            ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(iHeatCapacityPerFloorAreaNumericNum), Numbers(iHeatCapacityPerFloorAreaNumericNum)));
+                            ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(iHeatCapacityPerFloorAreaNumericNum), Numbers(iHeatCapacityPerFloorAreaNumericNum)));
                             ErrorsFound = true;
                             // Autosized input is not allowed
                         } else if (ZoneHVACSizing(zSIndex).ScaledHeatingCapacity == AutoSize) {
@@ -4681,7 +4681,7 @@ namespace SizingManager {
                         if (ZoneHVACSizing(zSIndex).ScaledHeatingCapacity == AutoSize) ZoneHVACSizing(zSIndex).RequestAutoSize = true;
                         if (ZoneHVACSizing(zSIndex).ScaledHeatingCapacity < 0.0 && ZoneHVACSizing(zSIndex).ScaledCoolingCapacity != AutoSize) {
                             ShowSevereError(CurrentModuleObject + " = " + ZoneHVACSizing(zSIndex).Name);
-                            ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(iHeatFracOfAutosizedCapacityNumericNum), Numbers(iHeatFracOfAutosizedCapacityNumericNum)));
+                            ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(iHeatFracOfAutosizedCapacityNumericNum), Numbers(iHeatFracOfAutosizedCapacityNumericNum)));
                             ErrorsFound = true;
                         }
                     } else {

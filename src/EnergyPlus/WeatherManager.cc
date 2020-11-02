@@ -5948,7 +5948,7 @@ namespace WeatherManager {
                             Real64 testval = maxval(state.dataWeatherManager->DDDBRngModifier(_, _, EnvrnNum));
                             if (MaxDryBulbEntered) {
                                 ShowWarningError(DataIPShortCuts::cCurrentModuleObject + "=\"" + state.dataWeatherManager->DesDayInput(EnvrnNum).Title + "\", data override.");
-                                ShowContinueError(".." + format("{}=[{:.2R}", DataIPShortCuts::cNumericFieldNames(3), state.dataWeatherManager->DesDayInput(EnvrnNum).MaxDryBulb) + "] will be overwritten.");
+                                ShowContinueError(format("..{}=[{:.2R}", DataIPShortCuts::cNumericFieldNames(3), state.dataWeatherManager->DesDayInput(EnvrnNum).MaxDryBulb) + "] will be overwritten.");
                                 ShowContinueError(".." + DataIPShortCuts::cAlphaFieldNames(3) + "=\"" + DataIPShortCuts::cAlphaArgs(3) + "\".");
                                 ShowContinueError(format("..with max value=[{:.2R}", testval) + "].");
                             }

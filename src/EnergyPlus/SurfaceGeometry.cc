@@ -1727,9 +1727,9 @@ namespace SurfaceGeometry {
                                             "InterZone Surface Areas do not match as expected and might not satisfy conservation of energy:");
 
                                         if (MultFound == 1 && MultSurfNum == 1) {
-                                            ShowContinueError("  Area=" + format("{:.1T}", Surface(SurfNum).Area) +
+                                            ShowContinueError(format("  Area={:.1T}", Surface(SurfNum).Area) +
                                                               " in Surface=" + Surface(SurfNum).Name + ", Zone=" + Surface(SurfNum).ZoneName);
-                                            ShowContinueError("  Area=" + format("{:.1T}", Surface(Found).Area) +
+                                            ShowContinueError(format("  Area={:.1T}", Surface(Found).Area) +
                                                               " in Surface=" + Surface(Found).Name + ", Zone=" + Surface(Found).ZoneName);
                                         } else { // Show multiplier info
                                             ShowContinueError(format("  Area={:.1T}, Multipliers={}, Total Area={:.1T} in Surface={} Zone={}",
@@ -1753,9 +1753,9 @@ namespace SurfaceGeometry {
                             // Tilt
                             if (std::abs(std::abs(Surface(Found).Tilt + Surface(SurfNum).Tilt) - 180.0) > 1.0) {
                                 ShowWarningError(RoutineName + "InterZone Surface Tilts do not match as expected.");
-                                ShowContinueError("  Tilt=" + format("{:.1T} in Surface=", Surface(SurfNum).Tilt) + Surface(SurfNum).Name +
+                                ShowContinueError(format("  Tilt={:.1T} in Surface=", Surface(SurfNum).Tilt) + Surface(SurfNum).Name +
                                                   ", Zone=" + Surface(SurfNum).ZoneName);
-                                ShowContinueError("  Tilt=" + format("{:.1T} in Surface=", Surface(Found).Tilt) + Surface(Found).Name +
+                                ShowContinueError(format("  Tilt={:.1T} in Surface=", Surface(Found).Tilt) + Surface(Found).Name +
                                                   ", Zone=" + Surface(Found).ZoneName);
                             }
                             // check surface class match.  interzone surface.
@@ -1790,11 +1790,11 @@ namespace SurfaceGeometry {
                                     if (std::abs(Surface(SurfNum).SinTilt) > 0.5 || DisplayExtraWarnings) {
                                         // if horizontal surfaces, then these are windows/doors/etc in those items.
                                         ShowWarningError(RoutineName + "InterZone Surface Azimuths do not match as expected.");
-                                        ShowContinueError("  Azimuth=" + format("{:.1T}", Surface(SurfNum).Azimuth) +
-                                                          ", Tilt=" + format("{:.1T}", Surface(SurfNum).Tilt) +
+                                        ShowContinueError(format("  Azimuth={:.1T}", Surface(SurfNum).Azimuth) +
+                                                          format(", Tilt={:.1T}", Surface(SurfNum).Tilt) +
                                                           ", in Surface=" + Surface(SurfNum).Name + ", Zone=" + Surface(SurfNum).ZoneName);
-                                        ShowContinueError("  Azimuth=" + format("{:.1T}", Surface(Found).Azimuth) +
-                                                          ", Tilt=" + format("{:.1T}, in Surface=", Surface(Found).Tilt) + Surface(Found).Name +
+                                        ShowContinueError(format("  Azimuth={:.1T}", Surface(Found).Azimuth) +
+                                                          format(", Tilt={:.1T}, in Surface=", Surface(Found).Tilt) + Surface(Found).Name +
                                                           ", Zone=" + Surface(Found).ZoneName);
                                         ShowContinueError("..surface class of first surface=" + cSurfaceClass(Surface(SurfNum).Class));
                                         ShowContinueError("..surface class of second surface=" + cSurfaceClass(Surface(Found).Class));
@@ -2039,8 +2039,8 @@ namespace SurfaceGeometry {
                                     // Warn user of using specified Zone Floor Area
                                     ShowWarningError(RoutineName + "Entered Floor Area entered for Zone=\"" + Zone(ZoneNum).Name +
                                                      "\" significantly different from calculated Floor Area");
-                                    ShowContinueError("Entered Zone Floor Area value=" + format("{:.2R}", Zone(ZoneNum).UserEnteredFloorArea) +
-                                                      ", Calculated Zone Floor Area value=" + format("{:.2R}", Zone(ZoneNum).CalcFloorArea) +
+                                    ShowContinueError(format("Entered Zone Floor Area value={:.2R}", Zone(ZoneNum).UserEnteredFloorArea) +
+                                                      format(", Calculated Zone Floor Area value={:.2R}", Zone(ZoneNum).CalcFloorArea) +
                                                       ", entered Floor Area will be used in calculations.");
                                 }
                             }
@@ -2056,12 +2056,12 @@ namespace SurfaceGeometry {
 
         for (int SurfNum = 1; SurfNum <= MovedSurfs; ++SurfNum) { // TotSurfaces
             if (Surface(SurfNum).Area < 1.e-06) {
-                ShowSevereError(RoutineName + "Zero or negative surface area[" + format("{:.5R}", Surface(SurfNum).Area) +
+                ShowSevereError(RoutineName + format("Zero or negative surface area[{:.5R}", Surface(SurfNum).Area) +
                                 "], Surface=" + Surface(SurfNum).Name);
                 SurfError = true;
             }
             if (Surface(SurfNum).Area >= 1.e-06 && Surface(SurfNum).Area < 0.001) {
-                ShowWarningError(RoutineName + "Very small surface area[" + format("{:.5R}", Surface(SurfNum).Area) +
+                ShowWarningError(RoutineName + format("Very small surface area[{:.5R}", Surface(SurfNum).Area) +
                                  "], Surface=" + Surface(SurfNum).Name);
             }
         }
@@ -2362,10 +2362,10 @@ namespace SurfaceGeometry {
                 (std::abs(baseSurface.Tilt - subSurface.Tilt) > errorTolerance)) {
                 surfaceError = true;
                 ShowSevereError(format("checkSubSurfAzTiltNorm: Outward facing angle of subsurface differs more than {:.1R} degrees from base surface.", errorTolerance));
-                ShowContinueError("Subsurface=\"" + subSurface.Name + "\" Tilt = " + format("{:.1R}", subSurface.Tilt) +
-                                  "  Azimuth = " + format("{:.1R}", subSurface.Azimuth));
-                ShowContinueError("Base surface=\"" + baseSurface.Name + "\" Tilt = " + format("{:.1R}", baseSurface.Tilt) +
-                                  "  Azimuth = " + format("{:.1R}", baseSurface.Azimuth));
+                ShowContinueError("Subsurface=\"" + subSurface.Name + format("\" Tilt = {:.1R}", subSurface.Tilt) +
+                                  format("  Azimuth = {:.1R}", subSurface.Azimuth));
+                ShowContinueError("Base surface=\"" + baseSurface.Name + format("\" Tilt = {:.1R}", baseSurface.Tilt) +
+                                  format("  Azimuth = {:.1R}", baseSurface.Azimuth));
             } else if (((std::abs(baseSurface.Azimuth - subSurface.Azimuth) > warningTolerance) && !baseSurfHoriz) ||
                        (std::abs(baseSurface.Tilt - subSurface.Tilt) > warningTolerance)) {
                 ++checkSubSurfAzTiltNormErrCount;
@@ -2375,10 +2375,10 @@ namespace SurfaceGeometry {
                 }
                 if (DisplayExtraWarnings) {
                     ShowWarningError(format("checkSubSurfAzTiltNorm: Outward facing angle of subsurface differs more than {:.1R} degrees from base surface.", warningTolerance));
-                    ShowContinueError("Subsurface=\"" + subSurface.Name + "\" Tilt = " + format("{:.1R}", subSurface.Tilt) +
-                                      "  Azimuth = " + format("{:.1R}", subSurface.Azimuth));
-                    ShowContinueError("Base surface=\"" + baseSurface.Name + "\" Tilt = " + format("{:.1R}", baseSurface.Tilt) +
-                                      "  Azimuth = " + format("{:.1R}", baseSurface.Azimuth));
+                    ShowContinueError("Subsurface=\"" + subSurface.Name + format("\" Tilt = {:.1R}", subSurface.Tilt) +
+                                      format("  Azimuth = {:.1R}", subSurface.Azimuth));
+                    ShowContinueError("Base surface=\"" + baseSurface.Name + format("\" Tilt = {:.1R}", baseSurface.Tilt) +
+                                      format("  Azimuth = {:.1R}", baseSurface.Azimuth));
                 }
             }
         }
@@ -2939,7 +2939,7 @@ namespace SurfaceGeometry {
 
                 if (SurfaceTmp(SurfNum).Area <= 0.0) {
                     ShowSevereError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name +
-                                    "\", Surface Area <= 0.0; Entered Area=" + format("{:.2T}", SurfaceTmp(SurfNum).Area));
+                                    format("\", Surface Area <= 0.0; Entered Area={:.2T}", SurfaceTmp(SurfNum).Area));
                     ErrorsFound = true;
                 }
 
@@ -3228,7 +3228,7 @@ namespace SurfaceGeometry {
                         if (!GroundTempObjInput) {
                             ShowWarningError("GetHTSurfaceData: Surfaces with interface to Ground found but no \"Ground Temperatures\" were input.");
                             ShowContinueError("Found first in surface=" + cAlphaArgs(1));
-                            ShowContinueError("Defaults, constant throughout the year of (" + format("{:.1R}) will be used.", GroundTemp));
+                            ShowContinueError(format("Defaults, constant throughout the year of ({:.1R}) will be used.", GroundTemp));
                         }
                         NoGroundTempObjWarning = false;
                     }
@@ -3440,7 +3440,7 @@ namespace SurfaceGeometry {
                 GetVertices(state, SurfNum, SurfaceTmp(SurfNum).Sides, rNumericArgs({3, _}));
                 if (SurfaceTmp(SurfNum).Area <= 0.0) {
                     ShowSevereError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name +
-                                    "\", Surface Area <= 0.0; Entered Area=" + format("{:.2T}", SurfaceTmp(SurfNum).Area));
+                                    format("\", Surface Area <= 0.0; Entered Area={:.2T}", SurfaceTmp(SurfNum).Area));
                     ErrorsFound = true;
                 }
 
@@ -3459,7 +3459,7 @@ namespace SurfaceGeometry {
                     if (SurfaceTmp(SurfNum).Class == SurfaceClass_Wall && state.dataConstruction->Construct(SurfaceTmp(SurfNum).Construction).TypeIsCfactorWall) {
                         if (std::abs(SurfaceTmp(SurfNum).Height - state.dataConstruction->Construct(SurfaceTmp(SurfNum).Construction).Height) > 0.05) {
                             ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name +
-                                             "\", underground Wall Height = " + format("{:.2T}", SurfaceTmp(SurfNum).Height));
+                                             format("\", underground Wall Height = {:.2T}", SurfaceTmp(SurfNum).Height));
                             ShowContinueError("..which does not match its construction height.");
                         }
                     }
@@ -3468,12 +3468,12 @@ namespace SurfaceGeometry {
                     if (SurfaceTmp(SurfNum).Class == SurfaceClass_Floor && state.dataConstruction->Construct(SurfaceTmp(SurfNum).Construction).TypeIsFfactorFloor) {
                         if (std::abs(SurfaceTmp(SurfNum).Area - state.dataConstruction->Construct(SurfaceTmp(SurfNum).Construction).Area) > 0.1) {
                             ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name +
-                                             "\", underground Floor Area = " + format("{:.2T}", SurfaceTmp(SurfNum).Area));
+                                             format("\", underground Floor Area = {:.2T}", SurfaceTmp(SurfNum).Area));
                             ShowContinueError("..which does not match its construction area.");
                         }
                         if (SurfaceTmp(SurfNum).Perimeter < state.dataConstruction->Construct(SurfaceTmp(SurfNum).Construction).PerimeterExposed - 0.1) {
                             ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name +
-                                             "\", underground Floor Perimeter = " + format("{:.2T}", SurfaceTmp(SurfNum).Perimeter));
+                                             format("\", underground Floor Perimeter = {:.2T}", SurfaceTmp(SurfNum).Perimeter));
                             ShowContinueError("..which is less than its construction exposed perimeter.");
                         }
                     }
@@ -3736,7 +3736,7 @@ namespace SurfaceGeometry {
                         if (!GroundTempObjInput) {
                             ShowWarningError("GetRectSurfaces: Surfaces with interface to Ground found but no \"Ground Temperatures\" were input.");
                             ShowContinueError("Found first in surface=" + cAlphaArgs(1));
-                            ShowContinueError("Defaults, constant throughout the year of (" + format("{:.1R}) will be used.", GroundTemp));
+                            ShowContinueError(format("Defaults, constant throughout the year of ({:.1R}) will be used.", GroundTemp));
                         }
                         NoGroundTempObjWarning = false;
                     }
@@ -3775,7 +3775,7 @@ namespace SurfaceGeometry {
 
                 if (SurfaceTmp(SurfNum).Area <= 0.0) {
                     ShowSevereError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name +
-                                    "\", Surface Area <= 0.0; Entered Area=" + format("{:.2T}", SurfaceTmp(SurfNum).Area));
+                                    format("\", Surface Area <= 0.0; Entered Area={:.2T}", SurfaceTmp(SurfNum).Area));
                     ErrorsFound = true;
                 }
 
@@ -3783,7 +3783,7 @@ namespace SurfaceGeometry {
                 if (SurfaceTmp(SurfNum).Class == SurfaceClass_Wall && SurfaceTmp(SurfNum).ExtBoundCond == GroundFCfactorMethod) {
                     if (std::abs(SurfaceTmp(SurfNum).Height - state.dataConstruction->Construct(SurfaceTmp(SurfNum).Construction).Height) > 0.05) {
                         ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name +
-                                         "\", underground Wall Height = " + format("{:.2T}", SurfaceTmp(SurfNum).Height));
+                                         format("\", underground Wall Height = {:.2T}", SurfaceTmp(SurfNum).Height));
                         ShowContinueError("..which deos not match its construction height.");
                     }
                 }
@@ -3792,12 +3792,12 @@ namespace SurfaceGeometry {
                 if (SurfaceTmp(SurfNum).Class == SurfaceClass_Floor && SurfaceTmp(SurfNum).ExtBoundCond == GroundFCfactorMethod) {
                     if (std::abs(SurfaceTmp(SurfNum).Area - state.dataConstruction->Construct(SurfaceTmp(SurfNum).Construction).Area) > 0.1) {
                         ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name +
-                                         "\", underground Floor Area = " + format("{:.2T}", SurfaceTmp(SurfNum).Area));
+                                         format("\", underground Floor Area = {:.2T}", SurfaceTmp(SurfNum).Area));
                         ShowContinueError("..which does not match its construction area.");
                     }
                     if (SurfaceTmp(SurfNum).Perimeter < state.dataConstruction->Construct(SurfaceTmp(SurfNum).Construction).PerimeterExposed - 0.1) {
                         ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name +
-                                         "\", underground Floor Perimeter = " + format("{:.2T}", SurfaceTmp(SurfNum).Perimeter));
+                                         format("\", underground Floor Perimeter = {:.2T}", SurfaceTmp(SurfNum).Perimeter));
                         ShowContinueError("..which is less than its construction exposed perimeter.");
                     }
                 }
@@ -4314,7 +4314,7 @@ namespace SurfaceGeometry {
             if ((SurfaceTmp(SurfNum).Class != SurfaceClass_Window && SurfaceTmp(SurfNum).Class != SurfaceClass_GlassDoor &&
                  SurfaceTmp(SurfNum).Class != SurfaceClass_Door) &&
                 rNumericArgs(2) > 1.0) {
-                ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", invalid " + format("{}=[{:.1T}].", cNumericFieldNames(2), rNumericArgs(2)));
+                ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + format("\", invalid {}=[{:.1T}].", cNumericFieldNames(2), rNumericArgs(2)));
                 ShowContinueError("...because " + cAlphaFieldNames(2) + '=' + cAlphaArgs(2) + " multiplier will be set to 1.0.");
                 SurfaceTmp(SurfNum).Multiplier = 1.0;
             }
@@ -4637,7 +4637,7 @@ namespace SurfaceGeometry {
                 if ((SurfaceTmp(SurfNum).Class != SurfaceClass_Window && SurfaceTmp(SurfNum).Class != SurfaceClass_GlassDoor &&
                      SurfaceTmp(SurfNum).Class != SurfaceClass_Door) &&
                     rNumericArgs(1) > 1.0) {
-                    ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", invalid " + format("{}=[{:.1T}].", cNumericFieldNames(1), rNumericArgs(1)));
+                    ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + format("\", invalid {}=[{:.1T}].", cNumericFieldNames(1), rNumericArgs(1)));
                     ShowContinueError("...because " + cAlphaFieldNames(1) + '=' + cAlphaArgs(1) + " multiplier will be set to 1.0.");
                     SurfaceTmp(SurfNum).Multiplier = 1.0;
                 }
@@ -4647,7 +4647,7 @@ namespace SurfaceGeometry {
 
                 if (SurfaceTmp(SurfNum).Area <= 0.0) {
                     ShowSevereError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name +
-                                    "\", Surface Area <= 0.0; Entered Area=" + format("{:.2T}", SurfaceTmp(SurfNum).Area));
+                                    format("\", Surface Area <= 0.0; Entered Area={:.2T}", SurfaceTmp(SurfNum).Area));
                     ErrorsFound = true;
                 }
 
@@ -4853,11 +4853,11 @@ namespace SurfaceGeometry {
                                 ShowSevereError(cRoutineName + ": The gap width(s) for the unshaded window construction " + state.dataConstruction->Construct(ConstrNum).Name);
                                 ShowContinueError("are inconsistent with the gap widths for shaded window construction " + state.dataConstruction->Construct(ConstrNumSh).Name);
                                 ShowContinueError("for window " + SurfaceTmp(SurfNum).Name + ", which has a between-glass blind.");
-                                ShowContinueError("..Material=" + dataMaterial.Material(MatGap).Name + " thickness=" + format("{:.3R}", dataMaterial.Material(MatGap).Thickness) +
+                                ShowContinueError("..Material=" + dataMaterial.Material(MatGap).Name + format(" thickness={:.3R}", dataMaterial.Material(MatGap).Thickness) +
                                                   " -");
                                 ShowContinueError("..( Material=" + dataMaterial.Material(MatGap1).Name +
-                                                  " thickness=" + format("{:.3R} +", dataMaterial.Material(MatGap1).Thickness));
-                                ShowContinueError("..Material=" + dataMaterial.Material(MatGap2).Name + format(" thickness={:.3R}", dataMaterial.Material(MatGap2).Thickness) + " )=[" + format("{:.3R}] >.001", MatGapCalc));
+                                                  format(" thickness={:.3R} +", dataMaterial.Material(MatGap1).Thickness));
+                                ShowContinueError("..Material=" + dataMaterial.Material(MatGap2).Name + format(" thickness={:.3R}", dataMaterial.Material(MatGap2).Thickness) + format(" )=[{:.3R}] >.001", MatGapCalc));
                                 ErrorsFound = true;
                             }
                         } else { // Between-glass shade
@@ -4867,14 +4867,14 @@ namespace SurfaceGeometry {
                                 ShowSevereError(cRoutineName + ": The gap width(s) for the unshaded window construction " + state.dataConstruction->Construct(ConstrNum).Name);
                                 ShowContinueError("are inconsistent with the gap widths for shaded window construction " + state.dataConstruction->Construct(ConstrNumSh).Name);
                                 ShowContinueError("for window " + SurfaceTmp(SurfNum).Name + ", which has a between-glass shade.");
-                                ShowContinueError("..Material=" + dataMaterial.Material(MatGap).Name + " thickness=" + format("{:.3R}", dataMaterial.Material(MatGap).Thickness) +
+                                ShowContinueError("..Material=" + dataMaterial.Material(MatGap).Name + format(" thickness={:.3R}", dataMaterial.Material(MatGap).Thickness) +
                                     " -");
                                 ShowContinueError("...( Material=" + dataMaterial.Material(MatGap1).Name +
-                                    " thickness=" + format("{:.3R} +", dataMaterial.Material(MatGap1).Thickness));
+                                    format(" thickness={:.3R} +", dataMaterial.Material(MatGap1).Thickness));
                                 ShowContinueError("..Material=" + dataMaterial.Material(MatGap2).Name +
-                                    " thickness=" + format("{:.3R} +", dataMaterial.Material(MatGap2).Thickness));
-                                ShowContinueError("..Material=" + dataMaterial.Material(MatSh).Name + " thickness=" + format("{:.3R}", dataMaterial.Material(MatSh).Thickness) +
-                                    " )=[" + format("{:.3R}] >.001", MatGapCalc));
+                                    format(" thickness={:.3R} +", dataMaterial.Material(MatGap2).Thickness));
+                                ShowContinueError("..Material=" + dataMaterial.Material(MatSh).Name + format(" thickness={:.3R}", dataMaterial.Material(MatSh).Thickness) +
+                                    format(" )=[{:.3R}] >.001", MatGapCalc));
                                 ErrorsFound = true;
                             }
                         }
@@ -6407,7 +6407,7 @@ namespace SurfaceGeometry {
             if (ExtVentedCavity(Item).PlenGapThick <= 0.0) {
                 ShowSevereError(cCurrentModuleObject + "=\"" + ExtVentedCavity(Item).Name + "\", invalid .");
                 ErrorsFound = true;
-                ShowContinueError("...because field \"" + format("{}\" must be greater than Zero=[{:.2T}].", cNumericFieldNames(5), rNumericArgs(5)));
+                ShowContinueError(format("...because field \"{}\" must be greater than Zero=[{:.2T}].", cNumericFieldNames(5), rNumericArgs(5)));
                 continue;
             }
             ExtVentedCavity(Item).AreaRatio = rNumericArgs(6);
@@ -7648,7 +7648,7 @@ namespace SurfaceGeometry {
                     ShowWarningError(RoutineName + "Distance between two vertices < .01, possibly coincident. for Surface=" +
                                      SurfaceTmp(SurfNum).Name + ", in Zone=" + SurfaceTmp(SurfNum).ZoneName);
                     ShowContinueError("Vertex [" + fmt::to_string(SurfaceTmp(SurfNum).Sides) + format("]=({:.2R},{:.2R},{:.2R})", SurfaceTmp(SurfNum).Vertex(SurfaceTmp(SurfNum).Sides).x, SurfaceTmp(SurfNum).Vertex(SurfaceTmp(SurfNum).Sides).y, SurfaceTmp(SurfNum).Vertex(SurfaceTmp(SurfNum).Sides).z));
-                    ShowContinueError("Vertex [" + fmt::to_string(1) + "]=(" + format("{:.2R},", SurfaceTmp(SurfNum).Vertex(1).x) +
+                    ShowContinueError("Vertex [" + fmt::to_string(1) + format("]=({:.2R},", SurfaceTmp(SurfNum).Vertex(1).x) +
                                       format("{:.2R},", SurfaceTmp(SurfNum).Vertex(1).y) + format("{:.2R}", SurfaceTmp(SurfNum).Vertex(1).z) +
                                       ')');
                 }
@@ -7678,8 +7678,8 @@ namespace SurfaceGeometry {
                     if (DisplayExtraWarnings) {
                         ShowWarningError(RoutineName + "Distance between two vertices < .01, possibly coincident. for Surface=" +
                                          SurfaceTmp(SurfNum).Name + ", in Zone=" + SurfaceTmp(SurfNum).ZoneName);
-                        ShowContinueError("Vertex [" + fmt::to_string(Vrt) + "]=(" + format("{:.2R},{:.2R},{:.2R})", SurfaceTmp(SurfNum).Vertex(Vrt).x, SurfaceTmp(SurfNum).Vertex(Vrt).y, SurfaceTmp(SurfNum).Vertex(Vrt).z));
-                        ShowContinueError("Vertex [" + fmt::to_string(Vrt - 1) + "]=(" + format("{:.2R}", SurfaceTmp(SurfNum).Vertex(Vrt - 1).x) +
+                        ShowContinueError("Vertex [" + fmt::to_string(Vrt) + format("]=({:.2R},{:.2R},{:.2R})", SurfaceTmp(SurfNum).Vertex(Vrt).x, SurfaceTmp(SurfNum).Vertex(Vrt).y, SurfaceTmp(SurfNum).Vertex(Vrt).z));
+                        ShowContinueError("Vertex [" + fmt::to_string(Vrt - 1) + format("]=({:.2R}", SurfaceTmp(SurfNum).Vertex(Vrt - 1).x) +
                                           ',' + format("{:.2R},{:.2R})", SurfaceTmp(SurfNum).Vertex(Vrt - 1).y, SurfaceTmp(SurfNum).Vertex(Vrt - 1).z));
                     }
                     ++TotalCoincidentVertices;
@@ -8842,7 +8842,7 @@ namespace SurfaceGeometry {
                                       ", day=" + fmt::to_string(StormWindow(StormWinNum).DayOfMonthOn) +
                                       ") and taken off (month=" + fmt::to_string(StormWindow(StormWinNum).MonthOff) +
                                       ", day=" + fmt::to_string(StormWindow(StormWinNum).DayOfMonthOff) + ");");
-                    ShowContinueError("these times may be reversed for your building latitude=" + format("{:.2R} deg.", Latitude));
+                    ShowContinueError(format("these times may be reversed for your building latitude={:.2R} deg.", Latitude));
                 }
             }
         }
@@ -9747,7 +9747,7 @@ namespace SurfaceGeometry {
             if (!lNumericFieldBlanks(11)) {
                 OSC(OSCNum).MaxLimitPresent = true;
                 OSC(OSCNum).MaxTempLimit = rNumericArgs(11);
-                cOSCLimitsString += "," + format("{:.3R}", rNumericArgs(10));
+                cOSCLimitsString += format(",{:.3R}", rNumericArgs(10));
             } else {
                 cOSCLimitsString += ",N/A";
             }
@@ -10292,8 +10292,8 @@ namespace SurfaceGeometry {
                     for (auto edge : listOfedgeNotUsedTwice) {
                         ShowContinueError("  The surface    \"" + Surface(edge.surfNum).Name +
                                           "\" has an edge that is either not an edge on another surface or is an edge on three or more surfaces: ");
-                        ShowContinueError("    Vertex start { " + format("{:.4R}", edge.start.x) + ", " + format("{:.4R}, {:.4R}}", edge.start.y, edge.start.z));
-                        ShowContinueError("    Vertex end   { " + format("{:.4R}", edge.end.x) + ", " + format("{:.4R}, {:.4R}}", edge.end.y, edge.end.z));
+                        ShowContinueError(format("    Vertex start { {:.4R}", edge.start.x) + format(", {:.4R}, {:.4R}}", edge.start.y, edge.start.z));
+                        ShowContinueError(format("    Vertex end   { {:.4R}", edge.end.x) + format(", {:.4R}, {:.4R}}", edge.end.y, edge.end.z));
                     }
                 }
             }
@@ -10317,8 +10317,8 @@ namespace SurfaceGeometry {
                             // Warn user of using specified Zone Volume
                             ShowWarningError("Entered Volume entered for Zone=\"" + Zone(ZoneNum).Name +
                                              "\" significantly different from calculated Volume");
-                            ShowContinueError("Entered Zone Volume value=" + format("{:.2R}", Zone(ZoneNum).Volume) +
-                                              ", Calculated Zone Volume value=" + format("{:.2R}", CalcVolume) +
+                            ShowContinueError(format("Entered Zone Volume value={:.2R}", Zone(ZoneNum).Volume) +
+                                              format(", Calculated Zone Volume value={:.2R}", CalcVolume) +
                                               ", entered volume will be used in calculations.");
                         }
                     }
@@ -10335,7 +10335,7 @@ namespace SurfaceGeometry {
 
             if (Zone(ZoneNum).Volume <= 0.0) {
                 ShowWarningError("Indicated Zone Volume <= 0.0 for Zone=" + Zone(ZoneNum).Name);
-                ShowContinueError("The calculated Zone Volume was=" + format("{:.2R}", Zone(ZoneNum).Volume));
+                ShowContinueError(format("The calculated Zone Volume was={:.2R}", Zone(ZoneNum).Volume));
                 ShowContinueError("The simulation will continue with the Zone Volume set to 10.0 m3. ");
                 ShowContinueError("...use Output:Diagnostics,DisplayExtraWarnings; to show more details on individual zones.");
                 Zone(ZoneNum).Volume = 10.;
@@ -11192,7 +11192,7 @@ namespace SurfaceGeometry {
                             SurfWinDividerArea(ThisSurf) = DivArea * Surface(ThisSurf).Multiplier;
                             if ((Surface(ThisSurf).Area - SurfWinDividerArea(ThisSurf)) <= 0.0) {
                                 ShowSevereError(RoutineName + "Divider area exceeds glazed opening for window " + Surface(ThisSurf).Name);
-                                ShowContinueError("Window surface area=[" + format("{:.2T}] m2, divider area=[{:.2T}] m2.", Surface(ThisSurf).Area, SurfWinDividerArea(ThisSurf)));
+                                ShowContinueError(format("Window surface area=[{:.2T}] m2, divider area=[{:.2T}] m2.", Surface(ThisSurf).Area, SurfWinDividerArea(ThisSurf)));
                                 ErrorInSurface = true;
                             }
                             Surface(ThisSurf).Area -= SurfWinDividerArea(ThisSurf); // Glazed area
@@ -11956,9 +11956,9 @@ namespace SurfaceGeometry {
                 if (DisplayExtraWarnings) {
                     ShowWarningError("SurfaceGeometry: ModifyWindow: Window " + SurfaceTmp(SurfNum).Name +
                                      " uses the Window5 Data File Construction " + state.dataConstruction->Construct(IConst).Name);
-                    ShowContinueError("The height " + format("{:.3R}(m) or width ", H) + format("{:.3R}", W) +
+                    ShowContinueError(format("The height {:.3R}(m) or width ", H) + format("{:.3R}", W) +
                                       " (m) of this window differs by more than 10%");
-                    ShowContinueError("from the corresponding height " + format("{:.3R} (m) or width ", h1) + format("{:.3R}", w1) +
+                    ShowContinueError(format("from the corresponding height {:.3R} (m) or width ", h1) + format("{:.3R}", w1) +
                                       " (m) on the Window5 Data file.");
                     ShowContinueError("This will affect the frame heat transfer calculation if the frame in the Data File entry");
                     ShowContinueError("is not uniform, i.e., has sections with different geometry and/or thermal properties.");
@@ -12201,7 +12201,7 @@ namespace SurfaceGeometry {
             ShowSevereError("SurfaceGeometry: ModifyWindow: Subsurfaces have too much area for base surface=" +
                             SurfaceTmp(SurfaceTmp(SurfNum).BaseSurf).Name);
             ShowContinueError("Subsurface (window) creating error=" + SurfaceTmp(SurfNum).Name);
-            ShowContinueError("This window has been replaced by two windows from the Window5 Data File of total area " + format("{:.2R}", AreaNew) +
+            ShowContinueError(format("This window has been replaced by two windows from the Window5 Data File of total area {:.2R}", AreaNew) +
                               " m2");
             ErrorsFound = true;
         }
@@ -13328,9 +13328,9 @@ namespace SurfaceGeometry {
                         if (Np2 > NSides) Np2 -= NSides;
                         ShowContinueError("...vertex " + fmt::to_string(n) + " to vertex " + fmt::to_string(Np1) + " to vertex " +
                                           fmt::to_string(Np2));
-                        ShowContinueError("...vertex " + fmt::to_string(n) + "=[" + format("{:.2R},{:.2R},{:.2R}]", X(n), Y(n), Z(n)));
-                        ShowContinueError("...vertex " + fmt::to_string(Np1) + "=[" + format("{:.2R},{:.2R},{:.2R}]", X(n + 1), Y(n + 1), Z(n + 1)));
-                        ShowContinueError("...vertex " + fmt::to_string(Np2) + "=[" + format("{:.2R},{:.2R},{:.2R}]", X(n + 2), Y(n + 2), Z(n + 2)));
+                        ShowContinueError("...vertex " + fmt::to_string(n) + format("=[{:.2R},{:.2R},{:.2R}]", X(n), Y(n), Z(n)));
+                        ShowContinueError("...vertex " + fmt::to_string(Np1) + format("=[{:.2R},{:.2R},{:.2R}]", X(n + 1), Y(n + 1), Z(n + 1)));
+                        ShowContinueError("...vertex " + fmt::to_string(Np2) + format("=[{:.2R},{:.2R},{:.2R}]", X(n + 2), Y(n + 2), Z(n + 2)));
                         //          CALL ShowContinueError('...theta angle=['//TRIM(format("{:.6R}", Theta))//']')
                         //          CALL ShowContinueError('...last theta angle=['//TRIM(format("{:.6R}", LastTheta))//']')
                     }

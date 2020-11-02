@@ -1063,7 +1063,7 @@ namespace DXCoils {
             DXCoil(DXCoilNum).RatedCOP(1) = Numbers(3);
             if (DXCoil(DXCoilNum).RatedCOP(1) <= 0.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} must be > 0.0, entered value=[{:.2T}].", cNumericFields(3), Numbers(3)));
+                ShowContinueError(format("...{} must be > 0.0, entered value=[{:.2T}].", cNumericFields(3), Numbers(3)));
                 ErrorsFound = true;
             }
 
@@ -1514,7 +1514,7 @@ namespace DXCoils {
             DXCoil(DXCoilNum).CrankcaseHeaterCapacity = Numbers(1);
             if (DXCoil(DXCoilNum).CrankcaseHeaterCapacity < 0.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} must be >= 0.0, entered value=[{:.2T}].", cNumericFields(1), Numbers(1)));
+                ShowContinueError(format("...{} must be >= 0.0, entered value=[{:.2T}].", cNumericFields(1), Numbers(1)));
                 ErrorsFound = true;
             }
 
@@ -2969,21 +2969,21 @@ namespace DXCoils {
             DXCoil(DXCoilNum).RatedTotCap2 = Numbers(1);
             if (DXCoil(DXCoilNum).RatedTotCap2 <= 0.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} must be > 0.0, entered value=[{:.2T}].", cNumericFields(1), Numbers(1)));
+                ShowContinueError(format("...{} must be > 0.0, entered value=[{:.2T}].", cNumericFields(1), Numbers(1)));
                 ErrorsFound = true;
             }
 
             DXCoil(DXCoilNum).RatedCOP(1) = Numbers(2);
             if (DXCoil(DXCoilNum).RatedCOP(1) <= 0.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} must be > 0.0, entered value=[{:.2T}].", cNumericFields(2), Numbers(2)));
+                ShowContinueError(format("...{} must be > 0.0, entered value=[{:.2T}].", cNumericFields(2), Numbers(2)));
                 ErrorsFound = true;
             }
 
             DXCoil(DXCoilNum).RatedSHR(1) = Numbers(3);
             if (DXCoil(DXCoilNum).RatedSHR(1) <= 0.0 || DXCoil(DXCoilNum).RatedSHR(1) > 1.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} must be > 0 and <= 1.  entered value=[{:.3T}].", cNumericFields(3), Numbers(3)));
+                ShowContinueError(format("...{} must be > 0 and <= 1.  entered value=[{:.3T}].", cNumericFields(3), Numbers(3)));
 
                 ErrorsFound = true;
             }
@@ -2991,21 +2991,21 @@ namespace DXCoils {
             DXCoil(DXCoilNum).RatedInletDBTemp = Numbers(4);
             if (DXCoil(DXCoilNum).RatedInletDBTemp <= 5.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} must be > 5 {C}.  entered value=[{:.1T}].", cNumericFields(4), Numbers(4)));
+                ShowContinueError(format("...{} must be > 5 {C}.  entered value=[{:.1T}].", cNumericFields(4), Numbers(4)));
                 ErrorsFound = true;
             }
 
             DXCoil(DXCoilNum).RatedInletWBTemp = Numbers(5);
             if (DXCoil(DXCoilNum).RatedInletWBTemp <= 5.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} must be > 5 {C}.  entered value=[{:.1T}].", cNumericFields(5), Numbers(5)));
+                ShowContinueError(format("...{} must be > 5 {C}.  entered value=[{:.1T}].", cNumericFields(5), Numbers(5)));
                 ErrorsFound = true;
             }
 
             DXCoil(DXCoilNum).RatedInletWaterTemp = Numbers(6);
             if (DXCoil(DXCoilNum).RatedInletWaterTemp <= 25.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} must be > 25 {C}.  entered value=[{:.1T}].", cNumericFields(6), Numbers(6)));
+                ShowContinueError(format("...{} must be > 25 {C}.  entered value=[{:.1T}].", cNumericFields(6), Numbers(6)));
                 ErrorsFound = true;
             }
 
@@ -3013,7 +3013,7 @@ namespace DXCoils {
             if (DXCoil(DXCoilNum).RatedAirVolFlowRate(1) != DataGlobalConstants::AutoCalculate()) {
                 if (DXCoil(DXCoilNum).RatedAirVolFlowRate(1) <= 0.0) {
                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                    ShowContinueError("..." + format("{} must be > 0.0.  entered value=[{:.3T}].", cNumericFields(7), Numbers(7)));
+                    ShowContinueError(format("...{} must be > 0.0.  entered value=[{:.3T}].", cNumericFields(7), Numbers(7)));
                     ErrorsFound = true;
                 }
             }
@@ -3023,7 +3023,7 @@ namespace DXCoils {
             if (DXCoil(DXCoilNum).RatedHPWHCondWaterFlow != DataGlobalConstants::AutoCalculate()) {
                 if (DXCoil(DXCoilNum).RatedHPWHCondWaterFlow <= 0.0) {
                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                    ShowContinueError("..." + format("{} must be > 0.0  entered value=[{:.3T}].", cNumericFields(8), Numbers(8)));
+                    ShowContinueError(format("...{} must be > 0.0  entered value=[{:.3T}].", cNumericFields(8), Numbers(8)));
                     ErrorsFound = true;
                 }
                 //   check the range of flow rate to be >= 1 gpm/ton and <= 5 gpm/ton
@@ -3070,14 +3070,14 @@ namespace DXCoils {
             DXCoil(DXCoilNum).HPWHCondPumpElecNomPower = Numbers(9);
             if (DXCoil(DXCoilNum).HPWHCondPumpElecNomPower < 0.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} must be >= 0.0  entered value=[{:.3T}].", cNumericFields(9), Numbers(9)));
+                ShowContinueError(format("...{} must be >= 0.0  entered value=[{:.3T}].", cNumericFields(9), Numbers(9)));
                 ErrorsFound = true;
             }
 
             DXCoil(DXCoilNum).HPWHCondPumpFracToWater = Numbers(10);
             if (DXCoil(DXCoilNum).HPWHCondPumpFracToWater <= 0.0 || DXCoil(DXCoilNum).HPWHCondPumpFracToWater > 1.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} must be >= 0 and <= 1.  entered value=[{:.3T}].", cNumericFields(10), Numbers(10)));
+                ShowContinueError(format("...{} must be >= 0 and <= 1.  entered value=[{:.3T}].", cNumericFields(10), Numbers(10)));
                 ErrorsFound = true;
             }
 
@@ -3105,14 +3105,14 @@ namespace DXCoils {
             DXCoil(DXCoilNum).CrankcaseHeaterCapacity = Numbers(11);
             if (DXCoil(DXCoilNum).CrankcaseHeaterCapacity < 0.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} must be >= 0.0  entered value=[{:.1T}].", cNumericFields(11), Numbers(11)));
+                ShowContinueError(format("...{} must be >= 0.0  entered value=[{:.1T}].", cNumericFields(11), Numbers(11)));
                 ErrorsFound = true;
             }
 
             DXCoil(DXCoilNum).MaxOATCrankcaseHeater = Numbers(12);
             if (DXCoil(DXCoilNum).MaxOATCrankcaseHeater < 0.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} must be >= 0 {C}.  entered value=[{:.1T}].", cNumericFields(12), Numbers(12)));
+                ShowContinueError(format("...{} must be >= 0 {C}.  entered value=[{:.1T}].", cNumericFields(12), Numbers(12)));
                 ErrorsFound = true;
             }
 
@@ -3412,21 +3412,21 @@ namespace DXCoils {
             DXCoil(DXCoilNum).RatedTotCap2 = Numbers(1);
             if (DXCoil(DXCoilNum).RatedTotCap2 <= 0.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} must be > 0.0, entered value=[{:.2T}].", cNumericFields(1), Numbers(1)));
+                ShowContinueError(format("...{} must be > 0.0, entered value=[{:.2T}].", cNumericFields(1), Numbers(1)));
                 ErrorsFound = true;
             }
 
             DXCoil(DXCoilNum).RatedCOP(1) = Numbers(2);
             if (DXCoil(DXCoilNum).RatedCOP(1) <= 0.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} must be > 0.0, entered value=[{:.2T}].", cNumericFields(2), Numbers(2)));
+                ShowContinueError(format("...{} must be > 0.0, entered value=[{:.2T}].", cNumericFields(2), Numbers(2)));
                 ErrorsFound = true;
             }
 
             DXCoil(DXCoilNum).RatedSHR(1) = Numbers(3);
             if (DXCoil(DXCoilNum).RatedSHR(1) <= 0.0 || DXCoil(DXCoilNum).RatedSHR(1) > 1.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} must be > 0 and <= 1.  entered value=[{:.3T}].", cNumericFields(3), Numbers(3)));
+                ShowContinueError(format("...{} must be > 0 and <= 1.  entered value=[{:.3T}].", cNumericFields(3), Numbers(3)));
 
                 ErrorsFound = true;
             }
@@ -3434,21 +3434,21 @@ namespace DXCoils {
             DXCoil(DXCoilNum).RatedInletDBTemp = Numbers(4);
             if (DXCoil(DXCoilNum).RatedInletDBTemp <= 5.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} must be > 5 {C}.  entered value=[{:.1T}].", cNumericFields(4), Numbers(4)));
+                ShowContinueError(format("...{} must be > 5 {C}.  entered value=[{:.1T}].", cNumericFields(4), Numbers(4)));
                 ErrorsFound = true;
             }
 
             DXCoil(DXCoilNum).RatedInletWBTemp = Numbers(5);
             if (DXCoil(DXCoilNum).RatedInletWBTemp <= 5.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} must be > 5 {C}.  entered value=[{:.1T}].", cNumericFields(5), Numbers(5)));
+                ShowContinueError(format("...{} must be > 5 {C}.  entered value=[{:.1T}].", cNumericFields(5), Numbers(5)));
                 ErrorsFound = true;
             }
 
             DXCoil(DXCoilNum).RatedInletWaterTemp = Numbers(6);
             if (DXCoil(DXCoilNum).RatedInletWaterTemp <= 25.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} must be > 25 {C}.  entered value=[{:.1T}].", cNumericFields(6), Numbers(6)));
+                ShowContinueError(format("...{} must be > 25 {C}.  entered value=[{:.1T}].", cNumericFields(6), Numbers(6)));
                 ErrorsFound = true;
             }
 
@@ -3456,7 +3456,7 @@ namespace DXCoils {
             if (DXCoil(DXCoilNum).RatedAirVolFlowRate(1) != DataGlobalConstants::AutoCalculate()) {
                 if (DXCoil(DXCoilNum).RatedAirVolFlowRate(1) <= 0.0) {
                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                    ShowContinueError("..." + format("{} must be > 0.0.  entered value=[{:.3T}].", cNumericFields(7), Numbers(7)));
+                    ShowContinueError(format("...{} must be > 0.0.  entered value=[{:.3T}].", cNumericFields(7), Numbers(7)));
                     ErrorsFound = true;
                 }
             }
@@ -3502,14 +3502,14 @@ namespace DXCoils {
             DXCoil(DXCoilNum).CrankcaseHeaterCapacity = Numbers(8);
             if (DXCoil(DXCoilNum).CrankcaseHeaterCapacity < 0.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} must be >= 0.0  entered value=[{:.1T}].", cNumericFields(8), Numbers(8)));
+                ShowContinueError(format("...{} must be >= 0.0  entered value=[{:.1T}].", cNumericFields(8), Numbers(8)));
                 ErrorsFound = true;
             }
 
             DXCoil(DXCoilNum).MaxOATCrankcaseHeater = Numbers(9);
             if (DXCoil(DXCoilNum).MaxOATCrankcaseHeater < 0.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} must be >= 0 {C}.  entered value=[{:.1T}].", cNumericFields(9), Numbers(9)));
+                ShowContinueError(format("...{} must be >= 0 {C}.  entered value=[{:.1T}].", cNumericFields(9), Numbers(9)));
                 ErrorsFound = true;
             }
 
@@ -3876,7 +3876,7 @@ namespace DXCoils {
             DXCoil(DXCoilNum).BasinHeaterPowerFTempDiff = Numbers(4);
             if (Numbers(4) < 0.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} must be >= 0.0, entered value=[{:.3T}].", cNumericFields(4), Numbers(4)));
+                ShowContinueError(format("...{} must be >= 0.0, entered value=[{:.3T}].", cNumericFields(4), Numbers(4)));
                 ErrorsFound = true;
             }
 
@@ -3916,7 +3916,7 @@ namespace DXCoils {
             DXCoil(DXCoilNum).NumOfSpeeds = Numbers(6); // Number of speeds
             if (DXCoil(DXCoilNum).NumOfSpeeds < 2) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} must be >= 2. entered number is {:.0T}", cNumericFields(6), Numbers(6)));
+                ShowContinueError(format("...{} must be >= 2. entered number is {:.0T}", cNumericFields(6), Numbers(6)));
                 ErrorsFound = true;
             }
 
@@ -4285,7 +4285,7 @@ namespace DXCoils {
             DXCoil(DXCoilNum).CrankcaseHeaterCapacity = Numbers(3);
             if (DXCoil(DXCoilNum).CrankcaseHeaterCapacity < 0.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} cannot be < 0.0, entered value=[{:.2T}].", cNumericFields(3), Numbers(3)));
+                ShowContinueError(format("...{} cannot be < 0.0, entered value=[{:.2T}].", cNumericFields(3), Numbers(3)));
                 ErrorsFound = true;
             }
 
@@ -4387,7 +4387,7 @@ namespace DXCoils {
             DXCoil(DXCoilNum).NumOfSpeeds = Numbers(9); // Number of speeds
             if (DXCoil(DXCoilNum).NumOfSpeeds < 2) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError("..." + format("{} must be >= 2. entered number is {:.0T}", cNumericFields(9), Numbers(9)));
+                ShowContinueError(format("...{} must be >= 2. entered number is {:.0T}", cNumericFields(9), Numbers(9)));
                 ErrorsFound = true;
             }
 

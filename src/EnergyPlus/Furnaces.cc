@@ -2686,21 +2686,21 @@ namespace Furnaces {
             Furnace(FurnaceNum).MaxCoolAirVolFlow = Numbers(2);
             if (Furnace(FurnaceNum).MaxCoolAirVolFlow <= 0 && Furnace(FurnaceNum).MaxCoolAirVolFlow != AutoSize) {
                 ShowSevereError(CurrentModuleObject + " = " + Alphas(1));
-                ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(2), Numbers(2)));
+                ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(2), Numbers(2)));
                 ErrorsFound = true;
             }
 
             Furnace(FurnaceNum).MaxHeatAirVolFlow = Numbers(3);
             if (Furnace(FurnaceNum).MaxHeatAirVolFlow <= 0 && Furnace(FurnaceNum).MaxHeatAirVolFlow != AutoSize) {
                 ShowSevereError(CurrentModuleObject + " = " + Alphas(1));
-                ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(3), Numbers(3)));
+                ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(3), Numbers(3)));
                 ErrorsFound = true;
             }
 
             Furnace(FurnaceNum).MaxNoCoolHeatAirVolFlow = Numbers(4);
             if (Furnace(FurnaceNum).MaxNoCoolHeatAirVolFlow < 0 && Furnace(FurnaceNum).MaxNoCoolHeatAirVolFlow != AutoSize) {
                 ShowSevereError(CurrentModuleObject + " = " + Alphas(1));
-                ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(4), Numbers(4)));
+                ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(4), Numbers(4)));
                 ErrorsFound = true;
             }
 
@@ -3559,21 +3559,21 @@ namespace Furnaces {
             Furnace(FurnaceNum).MaxCoolAirVolFlow = Numbers(1);
             if (Furnace(FurnaceNum).MaxCoolAirVolFlow <= 0 && Furnace(FurnaceNum).MaxCoolAirVolFlow != AutoSize) {
                 ShowSevereError(CurrentModuleObject + " = " + Alphas(1));
-                ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(1), Numbers(1)));
+                ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(1), Numbers(1)));
                 ErrorsFound = true;
             }
 
             Furnace(FurnaceNum).MaxHeatAirVolFlow = Numbers(2);
             if (Furnace(FurnaceNum).MaxHeatAirVolFlow <= 0 && Furnace(FurnaceNum).MaxHeatAirVolFlow != AutoSize) {
                 ShowSevereError(CurrentModuleObject + " = " + Alphas(1));
-                ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(2), Numbers(2)));
+                ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(2), Numbers(2)));
                 ErrorsFound = true;
             }
 
             Furnace(FurnaceNum).MaxNoCoolHeatAirVolFlow = Numbers(3);
             if (Furnace(FurnaceNum).MaxNoCoolHeatAirVolFlow < 0 && Furnace(FurnaceNum).MaxNoCoolHeatAirVolFlow != AutoSize) {
                 ShowSevereError(CurrentModuleObject + " = " + Alphas(1));
-                ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(3), Numbers(3)));
+                ShowContinueError(format("Illegal {} = {:.7T}", cNumericFields(3), Numbers(3)));
                 ErrorsFound = true;
             }
 
