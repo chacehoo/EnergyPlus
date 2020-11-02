@@ -442,7 +442,7 @@ namespace Pumps {
                 ShowWarningError(RoutineName + cCurrentModuleObject + "=\"" + PumpEquip(PumpNum).Name + "\", Invalid '" + cNumericFieldNames(10) +
                                  "'");
                 ShowContinueError(format("Entered Value=[{:.5T}] is above the ", PumpEquip(PumpNum).MinVolFlowRate) +
-                                  cNumericFieldNames(1) + format("=[{:.5T}].", PumpEquip(PumpNum).NomVolFlowRate));
+                                  format("{}=[{:.5T}].", cNumericFieldNames(1), PumpEquip(PumpNum).NomVolFlowRate));
                 ShowContinueError("Reseting value of '" + cNumericFieldNames(10) + "' to the value of '" + cNumericFieldNames(1) + "'.");
                 // Set min to roughly max, but not quite, otherwise it can't turn on, ever
                 PumpEquip(PumpNum).MinVolFlowRate = 0.99 * PumpEquip(PumpNum).NomVolFlowRate;

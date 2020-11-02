@@ -777,13 +777,13 @@ namespace HeatBalanceManager {
             // Loads Convergence Tolerance Value
             LoadsConvergTol = BuildingNumbers(2);
             if (LoadsConvergTol <= 0.0) {
-                ShowSevereError(RoutineName + CurrentModuleObject + ": " + cNumericFieldNames(2) + format(" value invalid, [{:.3R}]", LoadsConvergTol));
+                ShowSevereError(RoutineName + CurrentModuleObject + ": " + format("{} value invalid, [{:.3R}]", cNumericFieldNames(2), LoadsConvergTol));
                 ErrorsFound = true;
             }
             // Temperature Convergence Tolerance Value
             TempConvergTol = BuildingNumbers(3);
             if (TempConvergTol <= 0.0) {
-                ShowSevereError(RoutineName + CurrentModuleObject + ": " + cNumericFieldNames(2) + format(" value invalid, [{:.3R}]", TempConvergTol));
+                ShowSevereError(RoutineName + CurrentModuleObject + ": " + format("{} value invalid, [{:.3R}]", cNumericFieldNames(2), TempConvergTol));
                 ErrorsFound = true;
             }
             // Solar Distribution
@@ -3316,8 +3316,8 @@ namespace HeatBalanceManager {
 
             if (Blind(Loop).SlatWidth < Blind(Loop).SlatSeparation) {
                 ShowWarningError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Slat Angles/Widths");
-                ShowContinueError(cNumericFieldNames(1) + format(" [{:.2R}] is less than ", Blind(Loop).SlatWidth) +
-                                  cNumericFieldNames(2) + format(" [{:.2R}].", Blind(Loop).SlatSeparation));
+                ShowContinueError(format("{} [{:.2R}] is less than ", cNumericFieldNames(1), Blind(Loop).SlatWidth) +
+                                  format("{} [{:.2R}].", cNumericFieldNames(2), Blind(Loop).SlatSeparation));
                 ShowContinueError("This will allow direct beam to be transmitted when Slat angle = 0.");
             }
 
@@ -3445,12 +3445,12 @@ namespace HeatBalanceManager {
                 if (Blind(Loop).SlatAngle < MinSlatAngGeom) {
                     ErrorsFound = true;
                     ShowSevereError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Illegal value combination.");
-                    ShowContinueError(cNumericFieldNames(4) + format("=[{:.1R}], is less than smallest allowed by slat dimensions and spacing, [{:.1R}", Blind(Loop).SlatAngle, MinSlatAngGeom) +
+                    ShowContinueError(format("{}=[{:.1R}], is less than smallest allowed by slat dimensions and spacing, [{:.1R}", cNumericFieldNames(4), Blind(Loop).SlatAngle, MinSlatAngGeom) +
                                       "] deg.");
                 } else if (Blind(Loop).SlatAngle > MaxSlatAngGeom) {
                     ErrorsFound = true;
                     ShowSevereError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Illegal value combination.");
-                    ShowContinueError(cNumericFieldNames(4) + format("=[{:.1R}], is greater than largest allowed by slat dimensions and spacing, [{:.1R}", Blind(Loop).SlatAngle, MinSlatAngGeom) +
+                    ShowContinueError(format("{}=[{:.1R}], is greater than largest allowed by slat dimensions and spacing, [{:.1R}", cNumericFieldNames(4), Blind(Loop).SlatAngle, MinSlatAngGeom) +
                                       "] deg.");
                 }
             }
@@ -3590,34 +3590,34 @@ namespace HeatBalanceManager {
             }
             if (dataMaterial.Material(MaterNum).SlatWidth < dataMaterial.Material(MaterNum).SlatSeparation) {
                 ShowWarningError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Slat Seperation/Width");
-                ShowContinueError(cNumericFieldNames(1) + format(" [{:.2R}] is less than ", dataMaterial.Material(MaterNum).SlatWidth) +
-                                  cNumericFieldNames(2) + format(" [{:.2R}].", dataMaterial.Material(MaterNum).SlatSeparation));
+                ShowContinueError(format("{} [{:.2R}] is less than ", cNumericFieldNames(1), dataMaterial.Material(MaterNum).SlatWidth) +
+                                  format("{} [{:.2R}].", cNumericFieldNames(2), dataMaterial.Material(MaterNum).SlatSeparation));
                 ShowContinueError("This will allow direct beam to be transmitted when Slat angle = 0.");
             }
             if (dataMaterial.Material(MaterNum).SlatSeparation < 0.001) {
                 ShowWarningError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Slat Seperation");
-                ShowContinueError(cNumericFieldNames(2) + format(" [{:.2R}", dataMaterial.Material(MaterNum).SlatSeparation) +
+                ShowContinueError(format("{} [{:.2R}", cNumericFieldNames(2), dataMaterial.Material(MaterNum).SlatSeparation) +
                                   "]. Slate spacing must be > 0.0");
                 ShowContinueError("...Setting slate spacing to default value of 0.025 m and simulation continues.");
                 dataMaterial.Material(MaterNum).SlatSeparation = 0.025;
             }
             if (dataMaterial.Material(MaterNum).SlatWidth < 0.001 || dataMaterial.Material(MaterNum).SlatWidth >= 2.0 * dataMaterial.Material(MaterNum).SlatSeparation) {
                 ShowWarningError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Slat Width");
-                ShowContinueError(cNumericFieldNames(1) + format(" [{:.2R}", dataMaterial.Material(MaterNum).SlatWidth) +
+                ShowContinueError(format("{} [{:.2R}", cNumericFieldNames(1), dataMaterial.Material(MaterNum).SlatWidth) +
                                   "]. Slat width range is 0 < Width <= 2*Spacing");
                 ShowContinueError("...Setting slate width equal to slate spacing and simulation continues.");
                 dataMaterial.Material(MaterNum).SlatWidth = dataMaterial.Material(MaterNum).SlatSeparation;
             }
             if (dataMaterial.Material(MaterNum).SlatCrown < 0.0 || dataMaterial.Material(MaterNum).SlatCrown >= 0.5 * dataMaterial.Material(MaterNum).SlatWidth) {
                 ShowWarningError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Slat Crown");
-                ShowContinueError(cNumericFieldNames(3) + format(" [{:.2R}", dataMaterial.Material(MaterNum).SlatCrown) +
+                ShowContinueError(format("{} [{:.2R}", cNumericFieldNames(3), dataMaterial.Material(MaterNum).SlatCrown) +
                                   "]. Slat crwon range is 0 <= crown < 0.5*Width");
                 ShowContinueError("...Setting slate crown to 0.0 and simulation continues.");
                 dataMaterial.Material(MaterNum).SlatCrown = 0.0;
             }
             if (dataMaterial.Material(MaterNum).SlatAngle < -90.0 || dataMaterial.Material(MaterNum).SlatAngle > 90.0) {
                 ShowWarningError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Slat Angle");
-                ShowContinueError(cNumericFieldNames(4) + format(" [{:.2R}", dataMaterial.Material(MaterNum).SlatAngle) +
+                ShowContinueError(format("{} [{:.2R}", cNumericFieldNames(4), dataMaterial.Material(MaterNum).SlatAngle) +
                                   "]. Slat angle range is -90.0 <= Angle < 90.0");
                 ShowContinueError("...Setting slate angle to 0.0 and simulation continues.");
                 dataMaterial.Material(MaterNum).SlatAngle = 0.0;
@@ -3727,8 +3727,8 @@ namespace HeatBalanceManager {
             if (dataMaterial.Material(MaterNum).InitMoisture > dataMaterial.Material(MaterNum).Porosity) {
                 ShowWarningError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Illegal value combination.");
                 ShowContinueError(cNumericFieldNames(15) + " is greater than " + cNumericFieldNames(13) + ". It must be less or equal.");
-                ShowContinueError(cNumericFieldNames(13) + format(" = {:.3T}.", dataMaterial.Material(MaterNum).Porosity));
-                ShowContinueError(cNumericFieldNames(15) + format(" = {:.3T}.", dataMaterial.Material(MaterNum).InitMoisture));
+                ShowContinueError(format("{} = {:.3T}.", cNumericFieldNames(13), dataMaterial.Material(MaterNum).Porosity));
+                ShowContinueError(format("{} = {:.3T}.", cNumericFieldNames(15), dataMaterial.Material(MaterNum).InitMoisture));
                 ShowContinueError(cNumericFieldNames(15) +
                                   format(" is reset to the maximum (saturation) value = {:.3T}.", dataMaterial.Material(MaterNum).Porosity));
                 ShowContinueError("Simulation continues.");
@@ -8142,14 +8142,14 @@ namespace HeatBalanceManager {
                 ErrorsFound = true;
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " + cNumericFieldNames(1) +
                                 " has been found.");
-                ShowContinueError(cNumericFieldNames(1) + format(" must be > 0, entered value = {:.2R}", rNumericArgs(1)));
+                ShowContinueError(format("{} must be > 0, entered value = {:.2R}", cNumericFieldNames(1), rNumericArgs(1)));
             }
 
             if (rNumericArgs(2) <= 0.0) {
                 ErrorsFound = true;
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " + cNumericFieldNames(2) +
                                 " has been found.");
-                ShowContinueError(cNumericFieldNames(2) + format(" must be > 0, entered value = {:.2R}", rNumericArgs(2)));
+                ShowContinueError(format("{} must be > 0, entered value = {:.2R}", cNumericFieldNames(2), rNumericArgs(2)));
             }
         }
 
@@ -8183,7 +8183,7 @@ namespace HeatBalanceManager {
                 ErrorsFound = true;
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " + cNumericFieldNames(1) +
                                 " has been found.");
-                ShowContinueError(cNumericFieldNames(1) + format(" must be >= 0, entered value = {:.2R}", rNumericArgs(1)));
+                ShowContinueError(format("{} must be >= 0, entered value = {:.2R}", cNumericFieldNames(1), rNumericArgs(1)));
             }
         }
 
@@ -8222,7 +8222,7 @@ namespace HeatBalanceManager {
                 ErrorsFound = true;
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " + cNumericFieldNames(1) +
                                 " has been found.");
-                ShowContinueError(cNumericFieldNames(1) + format(" must be > 0, entered {:.2R}", rNumericArgs(1)));
+                ShowContinueError(format("{} must be > 0, entered {:.2R}", cNumericFieldNames(1), rNumericArgs(1)));
             }
 
             dataMaterial.Material(MaterNum).Pressure = rNumericArgs(2);
@@ -8230,7 +8230,7 @@ namespace HeatBalanceManager {
                 ErrorsFound = true;
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " + cNumericFieldNames(2) +
                                 " has been found.");
-                ShowContinueError(cNumericFieldNames(2) + format(" must be > 0, entered {:.2R}", rNumericArgs(2)));
+                ShowContinueError(format("{} must be > 0, entered {:.2R}", cNumericFieldNames(2), rNumericArgs(2)));
             }
 
             if (!lAlphaFieldBlanks(2)) {
@@ -8349,70 +8349,70 @@ namespace HeatBalanceManager {
                 ErrorsFound = true;
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " + cNumericFieldNames(1) +
                                 " has been found.");
-                ShowContinueError(cNumericFieldNames(1) + format(" must be > 0, entered value = {:.2R}", rNumericArgs(1)));
+                ShowContinueError(format("{} must be > 0, entered value = {:.2R}", cNumericFieldNames(1), rNumericArgs(1)));
             }
 
             if (rNumericArgs(2) <= 0.0) {
                 ErrorsFound = true;
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " + cNumericFieldNames(2) +
                                 " has been found.");
-                ShowContinueError(cNumericFieldNames(2) + format(" must be > 0, entered value = {:.2R}", rNumericArgs(2)));
+                ShowContinueError(format("{} must be > 0, entered value = {:.2R}", cNumericFieldNames(2), rNumericArgs(2)));
             }
 
             if ((rNumericArgs(3) < 0.0) || (rNumericArgs(3) > 1.0)) {
                 ErrorsFound = true;
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " + cNumericFieldNames(3) +
                                 " has been found.");
-                ShowContinueError(cNumericFieldNames(3) + format(" value must be >= 0 and <= 1, entered value = {:.2R}", rNumericArgs(3)));
+                ShowContinueError(format("{} value must be >= 0 and <= 1, entered value = {:.2R}", cNumericFieldNames(3), rNumericArgs(3)));
             }
 
             if ((rNumericArgs(4) <= 0.0) || (rNumericArgs(4) > 1.0)) {
                 ErrorsFound = true;
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " + cNumericFieldNames(4) +
                                 " has been found.");
-                ShowContinueError(cNumericFieldNames(4) + format(" value must be >= 0 and <= 1, entered value = {:.2R}", rNumericArgs(4)));
+                ShowContinueError(format("{} value must be >= 0 and <= 1, entered value = {:.2R}", cNumericFieldNames(4), rNumericArgs(4)));
             }
 
             if ((rNumericArgs(5) <= 0.0) || (rNumericArgs(5) > 1.0)) {
                 ErrorsFound = true;
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " + cNumericFieldNames(5) +
                                 " has been found.");
-                ShowContinueError(cNumericFieldNames(5) + format(" value must be >= 0 and <= 1, entered value = {:.2R}", rNumericArgs(5)));
+                ShowContinueError(format("{} value must be >= 0 and <= 1, entered value = {:.2R}", cNumericFieldNames(5), rNumericArgs(5)));
             }
 
             if ((rNumericArgs(6) < 0.0) || (rNumericArgs(6) > 1.0)) {
                 ErrorsFound = true;
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " + cNumericFieldNames(6) +
                                 " has been found.");
-                ShowContinueError(cNumericFieldNames(6) + format(" must be >= 0 or <= 1, entered value = {:.2R}", rNumericArgs(6)));
+                ShowContinueError(format("{} must be >= 0 or <= 1, entered value = {:.2R}", cNumericFieldNames(6), rNumericArgs(6)));
             }
 
             if ((rNumericArgs(7) < 0.0) || (rNumericArgs(7) > 1.0)) {
                 ErrorsFound = true;
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " + cNumericFieldNames(7) +
                                 " has been found.");
-                ShowContinueError(cNumericFieldNames(7) + format(" must be >=0 or <=1, entered {:.2R}", rNumericArgs(7)));
+                ShowContinueError(format("{} must be >=0 or <=1, entered {:.2R}", cNumericFieldNames(7), rNumericArgs(7)));
             }
 
             if ((rNumericArgs(8) < 0.0) || (rNumericArgs(8) > 1.0)) {
                 ErrorsFound = true;
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " + cNumericFieldNames(8) +
                                 " has been found.");
-                ShowContinueError(cNumericFieldNames(8) + format(" must be >=0 or <=1, entered value = {:.2R}", rNumericArgs(8)));
+                ShowContinueError(format("{} must be >=0 or <=1, entered value = {:.2R}", cNumericFieldNames(8), rNumericArgs(8)));
             }
 
             if ((rNumericArgs(9) < 0.0) || (rNumericArgs(9) > 1.0)) {
                 ErrorsFound = true;
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " + cNumericFieldNames(9) +
                                 " has been found.");
-                ShowContinueError(cNumericFieldNames(9) + format(" must be >=0 or <=1, entered value = {:.2R}", rNumericArgs(9)));
+                ShowContinueError(format("{} must be >=0 or <=1, entered value = {:.2R}", cNumericFieldNames(9), rNumericArgs(9)));
             }
 
             if ((rNumericArgs(10) < 0.0) || (rNumericArgs(10) > 1.0)) {
                 ErrorsFound = true;
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " + cNumericFieldNames(10) +
                                 " has been found.");
-                ShowContinueError(cNumericFieldNames(10) + format(" must be >=0 or <=1, entered value = {:.2R}", rNumericArgs(10)));
+                ShowContinueError(format("{} must be >=0 or <=1, entered value = {:.2R}", cNumericFieldNames(10), rNumericArgs(10)));
             }
 
             if (ComplexShade(Loop).LayerType == csVenetianHorizontal || ComplexShade(Loop).LayerType == csVenetianVertical) {
@@ -8420,35 +8420,35 @@ namespace HeatBalanceManager {
                     ErrorsFound = true;
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " +
                                     cNumericFieldNames(11) + " has been found.");
-                    ShowContinueError(cNumericFieldNames(11) + format(" must be >0, entered value = {:.2R}", rNumericArgs(11)));
+                    ShowContinueError(format("{} must be >0, entered value = {:.2R}", cNumericFieldNames(11), rNumericArgs(11)));
                 }
 
                 if (rNumericArgs(12) <= 0.0) {
                     ErrorsFound = true;
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " +
                                     cNumericFieldNames(12) + " has been found.");
-                    ShowContinueError(cNumericFieldNames(12) + format(" must be >0, entered value = {:.2R}", rNumericArgs(12)));
+                    ShowContinueError(format("{} must be >0, entered value = {:.2R}", cNumericFieldNames(12), rNumericArgs(12)));
                 }
 
                 if (rNumericArgs(13) <= 0.0) {
                     ErrorsFound = true;
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " +
                                     cNumericFieldNames(13) + " has been found.");
-                    ShowContinueError(cNumericFieldNames(13) + format(" must be >0, entered value = {:.2R}", rNumericArgs(13)));
+                    ShowContinueError(format("{} must be >0, entered value = {:.2R}", cNumericFieldNames(13), rNumericArgs(13)));
                 }
 
                 if ((rNumericArgs(14) < -90.0) || (rNumericArgs(14) > 90.0)) {
                     ErrorsFound = true;
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " +
                                     cNumericFieldNames(14) + " has been found.");
-                    ShowContinueError(cNumericFieldNames(14) + format(" must be >=-90 and <=90, entered value = {:.2R}", rNumericArgs(14)));
+                    ShowContinueError(format("{} must be >=-90 and <=90, entered value = {:.2R}", cNumericFieldNames(14), rNumericArgs(14)));
                 }
 
                 if (rNumericArgs(15) <= 0.0) {
                     ErrorsFound = true;
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " +
                                     cNumericFieldNames(15) + " has been found.");
-                    ShowContinueError(cNumericFieldNames(15) + format(" must be >0, entered value = {:.2R}", rNumericArgs(15)));
+                    ShowContinueError(format("{} must be >0, entered value = {:.2R}", cNumericFieldNames(15), rNumericArgs(15)));
                 }
 
                 if ((rNumericArgs(16) < 0.0) || ((rNumericArgs(16) > 0.0) && (rNumericArgs(16) < (rNumericArgs(11) / 2)))) {
@@ -8550,7 +8550,7 @@ namespace HeatBalanceManager {
                 ErrorsFound = true;
                 ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " + cNumericFieldNames(1) +
                                 " has been found.");
-                ShowContinueError(cNumericFieldNames(1) + format(" should be >= 0.0 and <= 1.0, entered value = {:.2R}", rNumericArgs(1)));
+                ShowContinueError(format("{} should be >= 0.0 and <= 1.0, entered value = {:.2R}", cNumericFieldNames(1), rNumericArgs(1)));
             }
 
             {
@@ -8613,7 +8613,7 @@ namespace HeatBalanceManager {
                     ErrorsFound = true;
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " +
                                     cNumericFieldNames(2) + " has been found.");
-                    ShowContinueError(cNumericFieldNames(2) + format(" must be > 0, entered value = {:.2R}", rNumericArgs(2)));
+                    ShowContinueError(format("{} must be > 0, entered value = {:.2R}", cNumericFieldNames(2), rNumericArgs(2)));
                 }
 
                 WindowThermalModel(Loop).InitialTemperature = rNumericArgs(3);
@@ -8621,7 +8621,7 @@ namespace HeatBalanceManager {
                     ErrorsFound = true;
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " +
                                     cNumericFieldNames(3) + " has been found.");
-                    ShowContinueError(cNumericFieldNames(3) + format(" must be > 0, entered value = {:.2R}", rNumericArgs(3)));
+                    ShowContinueError(format("{} must be > 0, entered value = {:.2R}", cNumericFieldNames(3), rNumericArgs(3)));
                 }
 
                 WindowThermalModel(Loop).InitialPressure = rNumericArgs(4);
@@ -8629,7 +8629,7 @@ namespace HeatBalanceManager {
                     ErrorsFound = true;
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + ", object. Illegal value for " +
                                     cNumericFieldNames(4) + " has been found.");
-                    ShowContinueError(cNumericFieldNames(4) + format(" must be > 0, entered value = {:.2R}", rNumericArgs(4)));
+                    ShowContinueError(format("{} must be > 0, entered value = {:.2R}", cNumericFieldNames(4), rNumericArgs(4)));
                 }
             }
 

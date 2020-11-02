@@ -454,7 +454,7 @@ namespace HVACUnitaryBypassVAV {
 
             CBVAV(CBVAVNum).MaxCoolAirVolFlow = Numbers(1);
             if (CBVAV(CBVAVNum).MaxCoolAirVolFlow <= 0.0 && CBVAV(CBVAVNum).MaxCoolAirVolFlow != DataSizing::AutoSize) {
-                ShowSevereError(CurrentModuleObject + " illegal " + cNumericFields(1) + format(" = {:.7T}", Numbers(1)));
+                ShowSevereError(CurrentModuleObject + " illegal " + format("{} = {:.7T}", cNumericFields(1), Numbers(1)));
                 ShowContinueError(cNumericFields(1) + " must be greater than zero.");
                 ShowContinueError("Occurs in " + CurrentModuleObject + " = " + CBVAV(CBVAVNum).Name);
                 ErrorsFound = true;
@@ -462,7 +462,7 @@ namespace HVACUnitaryBypassVAV {
 
             CBVAV(CBVAVNum).MaxHeatAirVolFlow = Numbers(2);
             if (CBVAV(CBVAVNum).MaxHeatAirVolFlow <= 0.0 && CBVAV(CBVAVNum).MaxHeatAirVolFlow != DataSizing::AutoSize) {
-                ShowSevereError(CurrentModuleObject + " illegal " + cNumericFields(2) + format(" = {:.7T}", Numbers(2)));
+                ShowSevereError(CurrentModuleObject + " illegal " + format("{} = {:.7T}", cNumericFields(2), Numbers(2)));
                 ShowContinueError(cNumericFields(2) + " must be greater than zero.");
                 ShowContinueError("Occurs in " + CurrentModuleObject + " = " + CBVAV(CBVAVNum).Name);
                 ErrorsFound = true;
@@ -470,7 +470,7 @@ namespace HVACUnitaryBypassVAV {
 
             CBVAV(CBVAVNum).MaxNoCoolHeatAirVolFlow = Numbers(3);
             if (CBVAV(CBVAVNum).MaxNoCoolHeatAirVolFlow < 0.0 && CBVAV(CBVAVNum).MaxNoCoolHeatAirVolFlow != DataSizing::AutoSize) {
-                ShowSevereError(CurrentModuleObject + " illegal " + cNumericFields(3) + format(" = {:.7T}", Numbers(3)));
+                ShowSevereError(CurrentModuleObject + " illegal " + format("{} = {:.7T}", cNumericFields(3), Numbers(3)));
                 ShowContinueError(cNumericFields(3) + " must be greater than or equal to zero.");
                 ShowContinueError("Occurs in " + CurrentModuleObject + " = " + CBVAV(CBVAVNum).Name);
                 ErrorsFound = true;
@@ -478,7 +478,7 @@ namespace HVACUnitaryBypassVAV {
 
             CBVAV(CBVAVNum).CoolOutAirVolFlow = Numbers(4);
             if (CBVAV(CBVAVNum).CoolOutAirVolFlow < 0.0 && CBVAV(CBVAVNum).CoolOutAirVolFlow != DataSizing::AutoSize) {
-                ShowSevereError(CurrentModuleObject + " illegal " + cNumericFields(4) + format(" = {:.7T}", Numbers(4)));
+                ShowSevereError(CurrentModuleObject + " illegal " + format("{} = {:.7T}", cNumericFields(4), Numbers(4)));
                 ShowContinueError(cNumericFields(4) + " must be greater than or equal to zero.");
                 ShowContinueError("Occurs in " + CurrentModuleObject + " = " + CBVAV(CBVAVNum).Name);
                 ErrorsFound = true;
@@ -486,7 +486,7 @@ namespace HVACUnitaryBypassVAV {
 
             CBVAV(CBVAVNum).HeatOutAirVolFlow = Numbers(5);
             if (CBVAV(CBVAVNum).HeatOutAirVolFlow < 0.0 && CBVAV(CBVAVNum).HeatOutAirVolFlow != DataSizing::AutoSize) {
-                ShowSevereError(CurrentModuleObject + " illegal " + cNumericFields(5) + format(" = {:.7T}", Numbers(5)));
+                ShowSevereError(CurrentModuleObject + " illegal " + format("{} = {:.7T}", cNumericFields(5), Numbers(5)));
                 ShowContinueError(cNumericFields(5) + " must be greater than or equal to zero.");
                 ShowContinueError("Occurs in " + CurrentModuleObject + " = " + CBVAV(CBVAVNum).Name);
                 ErrorsFound = true;
@@ -494,7 +494,7 @@ namespace HVACUnitaryBypassVAV {
 
             CBVAV(CBVAVNum).NoCoolHeatOutAirVolFlow = Numbers(6);
             if (CBVAV(CBVAVNum).NoCoolHeatOutAirVolFlow < 0.0 && CBVAV(CBVAVNum).NoCoolHeatOutAirVolFlow != DataSizing::AutoSize) {
-                ShowSevereError(CurrentModuleObject + " illegal " + cNumericFields(6) + format(" = {:.7T}", Numbers(6)));
+                ShowSevereError(CurrentModuleObject + " illegal " + format("{} = {:.7T}", cNumericFields(6), Numbers(6)));
                 ShowContinueError(cNumericFields(6) + " must be greater than or equal to zero.");
                 ShowContinueError("Occurs in " + CurrentModuleObject + " = " + CBVAV(CBVAVNum).Name);
                 ErrorsFound = true;

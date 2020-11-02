@@ -485,8 +485,8 @@ namespace ChillerElectricEIR {
 
             if (thisChiller.MinPartLoadRat > thisChiller.MaxPartLoadRat) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(7) + format(" [{:.3R}", DataIPShortCuts::rNumericArgs(7)) +
-                                  "] > " + DataIPShortCuts::cNumericFieldNames(8) + format(" [{:.3R}]", DataIPShortCuts::rNumericArgs(8)));
+                ShowContinueError(format("{} [{:.3R}", DataIPShortCuts::cNumericFieldNames(7), DataIPShortCuts::rNumericArgs(7)) +
+                                  "] > " + format("{} [{:.3R}]", DataIPShortCuts::cNumericFieldNames(8), DataIPShortCuts::rNumericArgs(8)));
                 ShowContinueError("Minimum part load ratio must be less than or equal to the maximum part load ratio ");
                 ErrorsFound = true;
             }
@@ -494,7 +494,7 @@ namespace ChillerElectricEIR {
             if (thisChiller.MinUnloadRat < thisChiller.MinPartLoadRat ||
                 thisChiller.MinUnloadRat > thisChiller.MaxPartLoadRat) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(10) + format(" = {:.3R}", DataIPShortCuts::rNumericArgs(10)));
+                ShowContinueError(format("{} = {:.3R}", DataIPShortCuts::cNumericFieldNames(10), DataIPShortCuts::rNumericArgs(10)));
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(10) + " must be greater than or equal to the " +
                                   DataIPShortCuts::cNumericFieldNames(7));
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(10) + " must be less than or equal to the " +
@@ -505,7 +505,7 @@ namespace ChillerElectricEIR {
             if (thisChiller.OptPartLoadRat < thisChiller.MinPartLoadRat ||
                 thisChiller.OptPartLoadRat > thisChiller.MaxPartLoadRat) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(9) + format(" = {:.3R}", DataIPShortCuts::rNumericArgs(9)));
+                ShowContinueError(format("{} = {:.3R}", DataIPShortCuts::cNumericFieldNames(9), DataIPShortCuts::rNumericArgs(9)));
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(9) + " must be greater than or equal to the " +
                                   DataIPShortCuts::cNumericFieldNames(7));
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(9) + " must be less than or equal to the " +
@@ -519,7 +519,7 @@ namespace ChillerElectricEIR {
             if (thisChiller.CompPowerToCondenserFrac < 0.0 ||
                 thisChiller.CompPowerToCondenserFrac > 1.0) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(12) + format(" = {:.3R}", DataIPShortCuts::rNumericArgs(12)));
+                ShowContinueError(format("{} = {:.3R}", DataIPShortCuts::cNumericFieldNames(12), DataIPShortCuts::rNumericArgs(12)));
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(12) + " must be greater than or equal to zero");
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(12) + " must be less than or equal to one");
                 ErrorsFound = true;

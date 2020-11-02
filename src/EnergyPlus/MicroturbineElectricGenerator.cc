@@ -203,8 +203,8 @@ namespace MicroturbineElectricGenerator {
 
             if (MTGenerator(GeneratorNum).MinElecPowerOutput >= MTGenerator(GeneratorNum).MaxElecPowerOutput) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + "= " + MTGenerator(GeneratorNum).Name);
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + format(" [{:.2R}] > ", NumArray(2)) +
-                                  DataIPShortCuts::cNumericFieldNames(3) + format(" [{:.2R}]", NumArray(3)));
+                ShowContinueError(format("{} [{:.2R}] > ", DataIPShortCuts::cNumericFieldNames(2), NumArray(2)) +
+                                  format("{} [{:.2R}]", DataIPShortCuts::cNumericFieldNames(3), NumArray(3)));
                 ShowContinueError("Minimum Full Load Electrical Power Output must be less than or equal");
                 ShowContinueError("to Maximum Full Load Electrical Power Output.");
                 ErrorsFound = true;
@@ -215,9 +215,9 @@ namespace MicroturbineElectricGenerator {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + "= " + MTGenerator(GeneratorNum).Name);
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(1) + " must be >= " + DataIPShortCuts::cNumericFieldNames(2));
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(1) + " must be <= " + DataIPShortCuts::cNumericFieldNames(3));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(1) + format(" = {:.2R}", NumArray(1)));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.2R}", NumArray(2)));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(3) + format(" = {:.2R}", NumArray(3)));
+                ShowContinueError(format("{} = {:.2R}", DataIPShortCuts::cNumericFieldNames(1), NumArray(1)));
+                ShowContinueError(format("{} = {:.2R}", DataIPShortCuts::cNumericFieldNames(2), NumArray(2)));
+                ShowContinueError(format("{} = {:.2R}", DataIPShortCuts::cNumericFieldNames(3), NumArray(3)));
                 ErrorsFound = true;
             }
 

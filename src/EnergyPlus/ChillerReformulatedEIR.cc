@@ -426,8 +426,8 @@ namespace ChillerReformulatedEIR {
             thisChiller.TempRefCondOut = DataIPShortCuts::rNumericArgs(4);
             if (thisChiller.TempRefEvapOut >= thisChiller.TempRefCondOut) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(3) + format(" [{:.2R}", DataIPShortCuts::rNumericArgs(3)) +
-                                  "] >= " + DataIPShortCuts::cNumericFieldNames(4) + format(" [{:.2R}]", DataIPShortCuts::rNumericArgs(4)));
+                ShowContinueError(format("{} [{:.2R}", DataIPShortCuts::cNumericFieldNames(3), DataIPShortCuts::rNumericArgs(3)) +
+                                  "] >= " + format("{} [{:.2R}]", DataIPShortCuts::cNumericFieldNames(4), DataIPShortCuts::rNumericArgs(4)));
                 ShowContinueError("Reference Leaving Chilled Water Temperature must be less than Reference Leaving Condenser Water Temperature ");
                 ErrorsFound = true;
             }
@@ -449,8 +449,8 @@ namespace ChillerReformulatedEIR {
 
             if (thisChiller.MinPartLoadRat > thisChiller.MaxPartLoadRat) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(7) + format(" [{:.3R}", DataIPShortCuts::rNumericArgs(7)) +
-                                  "] > " + DataIPShortCuts::cNumericFieldNames(8) + format(" [{:.3R}]", DataIPShortCuts::rNumericArgs(8)));
+                ShowContinueError(format("{} [{:.3R}", DataIPShortCuts::cNumericFieldNames(7), DataIPShortCuts::rNumericArgs(7)) +
+                                  "] > " + format("{} [{:.3R}]", DataIPShortCuts::cNumericFieldNames(8), DataIPShortCuts::rNumericArgs(8)));
                 ShowContinueError("Minimum part load ratio must be less than or equal to the maximum part load ratio ");
                 ErrorsFound = true;
             }
@@ -458,7 +458,7 @@ namespace ChillerReformulatedEIR {
             if (thisChiller.MinUnloadRat < thisChiller.MinPartLoadRat ||
                 thisChiller.MinUnloadRat > thisChiller.MaxPartLoadRat) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(10) + format(" = {:.3R}", DataIPShortCuts::rNumericArgs(10)));
+                ShowContinueError(format("{} = {:.3R}", DataIPShortCuts::cNumericFieldNames(10), DataIPShortCuts::rNumericArgs(10)));
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(10) + " must be greater than or equal to the " +
                                   DataIPShortCuts::cNumericFieldNames(7));
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(10) + " must be less than or equal to the " +
@@ -469,7 +469,7 @@ namespace ChillerReformulatedEIR {
             if (thisChiller.OptPartLoadRat < thisChiller.MinPartLoadRat ||
                 thisChiller.OptPartLoadRat > thisChiller.MaxPartLoadRat) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(9) + format(" = {:.3R}", DataIPShortCuts::rNumericArgs(9)));
+                ShowContinueError(format("{} = {:.3R}", DataIPShortCuts::cNumericFieldNames(9), DataIPShortCuts::rNumericArgs(9)));
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(9) + " must be greater than or equal to the " +
                                   DataIPShortCuts::cNumericFieldNames(7));
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(9) + " must be less than or equal to the " +
@@ -482,7 +482,7 @@ namespace ChillerReformulatedEIR {
             if (thisChiller.CompPowerToCondenserFrac < 0.0 ||
                 thisChiller.CompPowerToCondenserFrac > 1.0) {
                 ShowSevereError(RoutineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\"");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(11) + format(" = {:.3R}", DataIPShortCuts::rNumericArgs(11)));
+                ShowContinueError(format("{} = {:.3R}", DataIPShortCuts::cNumericFieldNames(11), DataIPShortCuts::rNumericArgs(11)));
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(11) + " must be greater than or equal to zero");
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(11) + " must be less than or equal to one");
                 ErrorsFound = true;

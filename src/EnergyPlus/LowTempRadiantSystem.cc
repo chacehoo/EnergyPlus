@@ -597,7 +597,7 @@ namespace LowTempRadiantSystem {
                     thisRadSys.ScaledHeatingCapacity = Numbers(5);
                     if (thisRadSys.ScaledHeatingCapacity < 0.0 && thisRadSys.ScaledHeatingCapacity != AutoSize) {
                         ShowSevereError(CurrentModuleObject + " = " + thisRadSys.Name);
-                        ShowContinueError("Illegal " + cNumericFields(5) + format(" = {:.7T}", Numbers(5)));
+                        ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(5), Numbers(5)));
                         ErrorsFound = true;
                     }
                 } else {
@@ -615,7 +615,7 @@ namespace LowTempRadiantSystem {
                     if (thisRadSys.ScaledHeatingCapacity <= 0.0) {
                         ShowSevereError(CurrentModuleObject + " = " + thisRadSys.Name);
                         ShowContinueError("Input for " + cAlphaFields(8) + " = " + Alphas(8));
-                        ShowContinueError("Illegal " + cNumericFields(6) + format(" = {:.7T}", Numbers(6)));
+                        ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(6), Numbers(6)));
                         ErrorsFound = true;
                     } else if (thisRadSys.ScaledHeatingCapacity == AutoSize) {
                         ShowSevereError(CurrentModuleObject + " = " + thisRadSys.Name);
@@ -635,7 +635,7 @@ namespace LowTempRadiantSystem {
                     thisRadSys.ScaledHeatingCapacity = Numbers(7);
                     if (thisRadSys.ScaledHeatingCapacity < 0.0) {
                         ShowSevereError(CurrentModuleObject + " = " + thisRadSys.Name);
-                        ShowContinueError("Illegal " + cNumericFields(7) + format(" = {:.7T}", Numbers(7)));
+                        ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(7), Numbers(7)));
                         ErrorsFound = true;
                     }
                 } else {
@@ -688,7 +688,7 @@ namespace LowTempRadiantSystem {
                     thisRadSys.ScaledCoolingCapacity = Numbers(10);
                     if (thisRadSys.ScaledCoolingCapacity < 0.0 && thisRadSys.ScaledCoolingCapacity != AutoSize) {
                         ShowSevereError(CurrentModuleObject + " = " + thisRadSys.Name);
-                        ShowContinueError("Illegal " + cNumericFields(10) + format(" = {:.7T}", Numbers(10)));
+                        ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(10), Numbers(10)));
                         ErrorsFound = true;
                     }
                 } else {
@@ -706,7 +706,7 @@ namespace LowTempRadiantSystem {
                     if (thisRadSys.CoolingCapMethod <= 0.0) {
                         ShowSevereError(CurrentModuleObject + " = " + thisRadSys.Name);
                         ShowContinueError("Input for " + cAlphaFields(12) + " = " + Alphas(12));
-                        ShowContinueError("Illegal " + cNumericFields(11) + format(" = {:.7T}", Numbers(11)));
+                        ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(11), Numbers(11)));
                         ErrorsFound = true;
                     } else if (thisRadSys.ScaledCoolingCapacity == AutoSize) {
                         ShowSevereError(CurrentModuleObject + " = " + thisRadSys.Name);
@@ -726,7 +726,7 @@ namespace LowTempRadiantSystem {
                     thisRadSys.ScaledCoolingCapacity = Numbers(12);
                     if (thisRadSys.ScaledCoolingCapacity < 0.0) {
                         ShowSevereError(CurrentModuleObject + " = " + thisRadSys.Name);
-                        ShowContinueError("Illegal " + cNumericFields(12) + format(" = {:.7T}", Numbers(12)));
+                        ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(12), Numbers(12)));
                         ErrorsFound = true;
                     }
                 } else {
@@ -1145,7 +1145,7 @@ namespace LowTempRadiantSystem {
                     thisElecSys.MaxElecPower = thisElecSys.ScaledHeatingCapacity;
                     if (thisElecSys.ScaledHeatingCapacity < 0.0 && thisElecSys.ScaledHeatingCapacity != AutoSize) {
                         ShowSevereError(CurrentModuleObject + " = " + thisElecSys.Name);
-                        ShowContinueError("Illegal " + cNumericFields(iHeatDesignCapacityNumericNum) + format(" = {:.7T}", Numbers(iHeatDesignCapacityNumericNum)));
+                        ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(iHeatDesignCapacityNumericNum), Numbers(iHeatDesignCapacityNumericNum)));
                         ErrorsFound = true;
                     }
                 } else {
@@ -1162,7 +1162,7 @@ namespace LowTempRadiantSystem {
                     if (thisElecSys.ScaledHeatingCapacity <= 0.0) {
                         ShowSevereError(CurrentModuleObject + " = " + thisElecSys.Name);
                         ShowContinueError("Input for " + cAlphaFields(iHeatCAPMAlphaNum) + " = " + Alphas(iHeatCAPMAlphaNum));
-                        ShowContinueError("Illegal " + cNumericFields(iHeatCapacityPerFloorAreaNumericNum) + format(" = {:.7T}", Numbers(iHeatCapacityPerFloorAreaNumericNum)));
+                        ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(iHeatCapacityPerFloorAreaNumericNum), Numbers(iHeatCapacityPerFloorAreaNumericNum)));
                         ErrorsFound = true;
                     } else if (thisElecSys.ScaledHeatingCapacity == AutoSize) {
                         ShowSevereError(CurrentModuleObject + " = " + thisElecSys.Name);
@@ -1183,7 +1183,7 @@ namespace LowTempRadiantSystem {
                     thisElecSys.MaxElecPower = thisElecSys.ScaledHeatingCapacity;
                     if (thisElecSys.ScaledHeatingCapacity < 0.0) {
                         ShowSevereError(CurrentModuleObject + " = " + thisElecSys.Name);
-                        ShowContinueError("Illegal " + cNumericFields(iHeatFracOfAutosizedCapacityNumericNum) + format(" = {:.7T}", Numbers(iHeatFracOfAutosizedCapacityNumericNum)));
+                        ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFields(iHeatFracOfAutosizedCapacityNumericNum), Numbers(iHeatFracOfAutosizedCapacityNumericNum)));
                         ErrorsFound = true;
                     }
                 } else {

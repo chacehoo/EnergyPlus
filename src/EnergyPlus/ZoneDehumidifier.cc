@@ -394,8 +394,8 @@ namespace ZoneDehumidifier {
 
             if (state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumidIndex).MinInletAirTemp >= state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumidIndex).MaxInletAirTemp) {
                 ShowSevereError(cNumericFields(5) + " must be greater than " + cNumericFields(4));
-                ShowContinueError(cNumericFields(5) + format(" specified = {:.1T}", Numbers(5)));
-                ShowContinueError(cNumericFields(4) + format(" specified = {:.1T}", Numbers(4)));
+                ShowContinueError(format("{} specified = {:.1T}", cNumericFields(5), Numbers(5)));
+                ShowContinueError(format("{} specified = {:.1T}", cNumericFields(4), Numbers(4)));
                 ShowContinueError("Occurs in " + CurrentModuleObject + " = " + state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumidIndex).Name);
                 ErrorsFound = true;
             }

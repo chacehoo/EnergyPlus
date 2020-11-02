@@ -4314,7 +4314,7 @@ namespace SurfaceGeometry {
             if ((SurfaceTmp(SurfNum).Class != SurfaceClass_Window && SurfaceTmp(SurfNum).Class != SurfaceClass_GlassDoor &&
                  SurfaceTmp(SurfNum).Class != SurfaceClass_Door) &&
                 rNumericArgs(2) > 1.0) {
-                ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", invalid " + cNumericFieldNames(2) + format("=[{:.1T}].", rNumericArgs(2)));
+                ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", invalid " + format("{}=[{:.1T}].", cNumericFieldNames(2), rNumericArgs(2)));
                 ShowContinueError("...because " + cAlphaFieldNames(2) + '=' + cAlphaArgs(2) + " multiplier will be set to 1.0.");
                 SurfaceTmp(SurfNum).Multiplier = 1.0;
             }
@@ -4637,7 +4637,7 @@ namespace SurfaceGeometry {
                 if ((SurfaceTmp(SurfNum).Class != SurfaceClass_Window && SurfaceTmp(SurfNum).Class != SurfaceClass_GlassDoor &&
                      SurfaceTmp(SurfNum).Class != SurfaceClass_Door) &&
                     rNumericArgs(1) > 1.0) {
-                    ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", invalid " + cNumericFieldNames(1) + format("=[{:.1T}].", rNumericArgs(1)));
+                    ShowWarningError(cCurrentModuleObject + "=\"" + SurfaceTmp(SurfNum).Name + "\", invalid " + format("{}=[{:.1T}].", cNumericFieldNames(1), rNumericArgs(1)));
                     ShowContinueError("...because " + cAlphaFieldNames(1) + '=' + cAlphaArgs(1) + " multiplier will be set to 1.0.");
                     SurfaceTmp(SurfNum).Multiplier = 1.0;
                 }
@@ -6407,7 +6407,7 @@ namespace SurfaceGeometry {
             if (ExtVentedCavity(Item).PlenGapThick <= 0.0) {
                 ShowSevereError(cCurrentModuleObject + "=\"" + ExtVentedCavity(Item).Name + "\", invalid .");
                 ErrorsFound = true;
-                ShowContinueError("...because field \"" + cNumericFieldNames(5) + format("\" must be greater than Zero=[{:.2T}].", rNumericArgs(5)));
+                ShowContinueError("...because field \"" + format("{}\" must be greater than Zero=[{:.2T}].", cNumericFieldNames(5), rNumericArgs(5)));
                 continue;
             }
             ExtVentedCavity(Item).AreaRatio = rNumericArgs(6);

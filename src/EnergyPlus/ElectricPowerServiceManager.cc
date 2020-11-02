@@ -4008,7 +4008,7 @@ ElectricTransformer::ElectricTransformer(EnergyPlusData &state, std::string cons
             if (performanceInputMode_ == TransformerPerformanceInput::lossesMethod) {
                 ShowWarningError(routineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\".");
                 ShowContinueError("Specified " + DataIPShortCuts::cAlphaFieldNames(6) + " = " + DataIPShortCuts::cAlphaArgs(6));
-                ShowContinueError("Specified " + DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.1R}", ratedCapacity_));
+                ShowContinueError("Specified " + format("{} = {:.1R}", DataIPShortCuts::cNumericFieldNames(2), ratedCapacity_));
                 ShowContinueError("Transformer load and no load losses cannot be calculated with 0.0 rated capacity.");
                 ShowContinueError("Simulation continues but transformer losses will be set to zero.");
             }
@@ -4025,7 +4025,7 @@ ElectricTransformer::ElectricTransformer(EnergyPlusData &state, std::string cons
                 maxPUL_ = ratedPUL_;
             } else if (maxPUL_ <= 0 || maxPUL_ > 1) {
                 ShowSevereError(routineName + DataIPShortCuts::cCurrentModuleObject + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\", invalid entry.");
-                ShowContinueError("Invalid " + DataIPShortCuts::cNumericFieldNames(11) + format("=[{:.3R}].", DataIPShortCuts::rNumericArgs(11)));
+                ShowContinueError("Invalid " + format("{}=[{:.3R}].", DataIPShortCuts::cNumericFieldNames(11), DataIPShortCuts::rNumericArgs(11)));
                 ShowContinueError("Entered value must be > 0 and <= 1.");
                 errorsFound = true;
             }

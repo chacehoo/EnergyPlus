@@ -1043,7 +1043,7 @@ namespace HVACStandAloneERV {
                     StandAloneERV(WhichERV).DesignSAFanVolFlowRate != AutoSize) {
                     if (StandAloneERV(WhichERV).SupplyAirVolFlow * HighRHOARatio > StandAloneERV(WhichERV).DesignSAFanVolFlowRate) {
                         ShowWarningError(CurrentModuleObject + " \"" + Alphas(1) + "\"");
-                        ShowContinueError("... A " + cNumericFields(5) + format(" was entered as {:.4R}", HighRHOARatio));
+                        ShowContinueError("... A " + format("{} was entered as {:.4R}", cNumericFields(5), HighRHOARatio));
                         ShowContinueError("... This flow ratio results in a Supply Air Volume Flow Rate through the ERV which is greater than the "
                                           "Max Volume specified in the supply air fan object.");
                         ShowContinueError("... Associated fan object = " + cFanTypes(SAFanTypeNum) + " \"" +
@@ -1059,7 +1059,7 @@ namespace HVACStandAloneERV {
                     StandAloneERV(WhichERV).DesignEAFanVolFlowRate != AutoSize) {
                     if (StandAloneERV(WhichERV).ExhaustAirVolFlow * HighRHOARatio > StandAloneERV(WhichERV).DesignEAFanVolFlowRate) {
                         ShowWarningError("ZoneHVAC:EnergyRecoveryVentilator:Controller \"" + Alphas(1) + "\"");
-                        ShowContinueError("... A " + cNumericFields(5) + format(" was entered as {:.4R}", HighRHOARatio));
+                        ShowContinueError("... A " + format("{} was entered as {:.4R}", cNumericFields(5), HighRHOARatio));
                         ShowContinueError("... This flow ratio results in an Exhaust Air Volume Flow Rate through the ERV which is greater than the "
                                           "Max Volume specified in the exhaust air fan object.");
                         ShowContinueError("... Associated fan object = " + cFanTypes(EAFanTypeNum) + " \"" +

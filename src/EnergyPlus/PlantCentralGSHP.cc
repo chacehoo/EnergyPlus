@@ -1264,7 +1264,7 @@ namespace PlantCentralGSHP {
 
             if (ChillerHeater(ChillerHeaterNum).OpenMotorEff < 0.0 || ChillerHeater(ChillerHeaterNum).OpenMotorEff > 1.0) {
                 ShowSevereError("GetCurveInput: For " + DataIPShortCuts::cCurrentModuleObject + ": " + DataIPShortCuts::cAlphaArgs(1));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(14) + format(" = {:.3R}", DataIPShortCuts::rNumericArgs(14)));
+                ShowContinueError(format("{} = {:.3R}", DataIPShortCuts::cNumericFieldNames(14), DataIPShortCuts::rNumericArgs(14)));
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(14) + " must be greater than or equal to zero");
                 ShowContinueError(DataIPShortCuts::cNumericFieldNames(14) + " must be less than or equal to one");
                 CHErrorsFound = true;

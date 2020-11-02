@@ -231,14 +231,14 @@ namespace MicroCHPElectricGenerator {
                 MicroCHPParamInput(CHPParamNum).RadiativeFraction = NumArray(9); // N9 radiative fraction for skin losses
                 MicroCHPParamInput(CHPParamNum).MCeng = NumArray(10);            // N10 Aggregated Thermal Mass of Generator MC_eng
                 if (MicroCHPParamInput(CHPParamNum).MCeng <= 0.0) {
-                    ShowSevereError("Invalid, " + DataIPShortCuts::cNumericFieldNames(10) + format(" = {:.5R}", NumArray(10)));
+                    ShowSevereError("Invalid, " + format("{} = {:.5R}", DataIPShortCuts::cNumericFieldNames(10), NumArray(10)));
                     ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + AlphArray(1));
                     ShowContinueError("Thermal mass must be greater than zero");
                     ErrorsFound = true;
                 }
                 MicroCHPParamInput(CHPParamNum).MCcw = NumArray(11); // Aggregated Thermal Mass of Heat Recovery MC_cw
                 if (MicroCHPParamInput(CHPParamNum).MCcw <= 0.0) {
-                    ShowSevereError("Invalid, " + DataIPShortCuts::cNumericFieldNames(11) + format(" = {:.5R}", NumArray(11)));
+                    ShowSevereError("Invalid, " + format("{} = {:.5R}", DataIPShortCuts::cNumericFieldNames(11), NumArray(11)));
                     ShowContinueError("Entered in " + DataIPShortCuts::cCurrentModuleObject + '=' + AlphArray(1));
                     ShowContinueError("Thermal mass must be greater than zero");
                     ErrorsFound = true;

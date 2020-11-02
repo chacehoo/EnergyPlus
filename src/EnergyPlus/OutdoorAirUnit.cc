@@ -549,7 +549,7 @@ namespace OutdoorAirUnit {
                 if (NumArray(2) != NumArray(1)) {
                     ShowWarningError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", " + cNumericFields(1) + " and " + cNumericFields(2) +
                                      " are not equal. This may cause unbalanced flow.");
-                    ShowContinueError(cNumericFields(1) + format("={:.3R}=", NumArray(1)) + " and " + cNumericFields(2) +
+                    ShowContinueError(format("{}={:.3R}=", cNumericFields(1), NumArray(1)) + " and " + cNumericFields(2) +
                                       format("{:.3R}", NumArray(2)));
                 }
             }

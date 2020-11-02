@@ -702,7 +702,7 @@ namespace WaterThermalTanks {
             if (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).DeadBandTempDiff <= 0.0 ||
                 state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).DeadBandTempDiff > 20.0) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
-                                DataIPShortCuts::cNumericFieldNames(1) + " must be > 0 and <= 20. " + DataIPShortCuts::cNumericFieldNames(1) + format(" = {:.1T}", DataIPShortCuts::rNumericArgs(1)));
+                                DataIPShortCuts::cNumericFieldNames(1) + " must be > 0 and <= 20. " + format("{} = {:.1T}", DataIPShortCuts::cNumericFieldNames(1), DataIPShortCuts::rNumericArgs(1)));
                 ErrorsFound = true;
             }
 
@@ -796,7 +796,7 @@ namespace WaterThermalTanks {
                     if (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).HeatReclaimRecoveryEff <= 0.0 ||
                         state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).HeatReclaimRecoveryEff > 0.9) {
                         ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
-                                        DataIPShortCuts::cNumericFieldNames(2) + format(" must be > 0.0 and <= 0.9, Efficiency = {:.3T}", state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).HeatReclaimRecoveryEff));
+                                        format("{} must be > 0.0 and <= 0.9, Efficiency = {:.3T}", DataIPShortCuts::cNumericFieldNames(2), state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).HeatReclaimRecoveryEff));
                         ErrorsFound = true;
                     }
                 }    // Blank Num(2)
@@ -809,7 +809,7 @@ namespace WaterThermalTanks {
                         state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).HeatReclaimRecoveryEff > 0.3) {
                         ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
                                         DataIPShortCuts::cNumericFieldNames(2) + " must be > 0.0 and <= 0.3, " +
-                                        DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.3T}", state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).HeatReclaimRecoveryEff));
+                                        format("{} = {:.3T}", DataIPShortCuts::cNumericFieldNames(2), state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).HeatReclaimRecoveryEff));
                         ErrorsFound = true;
                     }
                 } // Blank Num(2)
@@ -988,7 +988,7 @@ namespace WaterThermalTanks {
             state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).PumpElecPower = DataIPShortCuts::rNumericArgs(7);
             if (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).PumpElecPower < 0.0) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
-                                DataIPShortCuts::cNumericFieldNames(7) + " must be >= 0. " + DataIPShortCuts::cNumericFieldNames(7) + format(" = {:.2T}", DataIPShortCuts::rNumericArgs(7)));
+                                DataIPShortCuts::cNumericFieldNames(7) + " must be >= 0. " + format("{} = {:.2T}", DataIPShortCuts::cNumericFieldNames(7), DataIPShortCuts::rNumericArgs(7)));
                 ErrorsFound = true;
             }
 
@@ -996,7 +996,7 @@ namespace WaterThermalTanks {
                 7.9264e6) {
                 ShowWarningError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
                                  DataIPShortCuts::cNumericFieldNames(7) + " to " + DataIPShortCuts::cNumericFieldNames(6) + " ratio > 7.9264E6. " +
-                                 DataIPShortCuts::cNumericFieldNames(7) + " to " + DataIPShortCuts::cNumericFieldNames(6) + format(" = {:.3T}", (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).PumpElecPower /
+                                 DataIPShortCuts::cNumericFieldNames(7) + " to " + format("{} = {:.3T}", DataIPShortCuts::cNumericFieldNames(6), (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).PumpElecPower /
                                                          state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).OperatingWaterFlowRate)));
                 ShowContinueError(" Suggest reducing " + DataIPShortCuts::cNumericFieldNames(7) + " or increasing " +
                                   DataIPShortCuts::cNumericFieldNames(6) + '.');
@@ -1007,21 +1007,21 @@ namespace WaterThermalTanks {
             if (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).PumpFracToWater < 0.0 ||
                 state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).PumpFracToWater > 1.0) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
-                                DataIPShortCuts::cNumericFieldNames(8) + " must be >= 0 or <= 1. " + DataIPShortCuts::cNumericFieldNames(8) + format(" = {:.3T}", DataIPShortCuts::rNumericArgs(8)));
+                                DataIPShortCuts::cNumericFieldNames(8) + " must be >= 0 or <= 1. " + format("{} = {:.3T}", DataIPShortCuts::cNumericFieldNames(8), DataIPShortCuts::rNumericArgs(8)));
                 ErrorsFound = true;
             }
 
             state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).OnCycParaLoad = DataIPShortCuts::rNumericArgs(9);
             if (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).OnCycParaLoad < 0.0) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
-                                DataIPShortCuts::cNumericFieldNames(9) + " must be >= 0. " + DataIPShortCuts::cNumericFieldNames(9) + format(" = {:.2T}", DataIPShortCuts::rNumericArgs(9)));
+                                DataIPShortCuts::cNumericFieldNames(9) + " must be >= 0. " + format("{} = {:.2T}", DataIPShortCuts::cNumericFieldNames(9), DataIPShortCuts::rNumericArgs(9)));
                 ErrorsFound = true;
             }
 
             state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).OffCycParaLoad = DataIPShortCuts::rNumericArgs(10);
             if (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).OffCycParaLoad < 0.0) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
-                                DataIPShortCuts::cNumericFieldNames(10) + " must be >= 0. " + DataIPShortCuts::cNumericFieldNames(10) + format(" = {:.2T}", DataIPShortCuts::rNumericArgs(10)));
+                                DataIPShortCuts::cNumericFieldNames(10) + " must be >= 0. " + format("{} = {:.2T}", DataIPShortCuts::cNumericFieldNames(10), DataIPShortCuts::rNumericArgs(10)));
                 ErrorsFound = true;
             }
         }
@@ -2713,8 +2713,8 @@ namespace WaterThermalTanks {
             if ((!Tank.HeightWasAutoSized) && (Tank.HeaterHeight1 > tankHeightForTesting)) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + DataIPShortCuts::cAlphaArgs(1) +
                                 ": Heater 1 is located higher than overall tank height.");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(2)));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(7) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(7)));
+                ShowContinueError(format("{} = {:.4R}", DataIPShortCuts::cNumericFieldNames(2), DataIPShortCuts::rNumericArgs(2)));
+                ShowContinueError(format("{} = {:.4R}", DataIPShortCuts::cNumericFieldNames(7), DataIPShortCuts::rNumericArgs(7)));
                 ErrorsFound = true;
             }
 
@@ -2743,8 +2743,8 @@ namespace WaterThermalTanks {
             if ((!Tank.HeightWasAutoSized) && (Tank.HeaterHeight2 > tankHeightForTesting)) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + DataIPShortCuts::cAlphaArgs(1) +
                                 ": Heater 2 is located higher than overall tank height.");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(2)));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(10) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(10)));
+                ShowContinueError(format("{} = {:.4R}", DataIPShortCuts::cNumericFieldNames(2), DataIPShortCuts::rNumericArgs(2)));
+                ShowContinueError(format("{} = {:.4R}", DataIPShortCuts::cNumericFieldNames(10), DataIPShortCuts::rNumericArgs(10)));
                 ErrorsFound = true;
             }
 
@@ -2920,8 +2920,8 @@ namespace WaterThermalTanks {
             if ((!Tank.HeightWasAutoSized) && (Tank.UseInletHeight > Tank.Height)) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + DataIPShortCuts::cAlphaArgs(1) +
                                 ": Use inlet is located higher than overall tank height.");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(2)));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(24) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(24)));
+                ShowContinueError(format("{} = {:.4R}", DataIPShortCuts::cNumericFieldNames(2), DataIPShortCuts::rNumericArgs(2)));
+                ShowContinueError(format("{} = {:.4R}", DataIPShortCuts::cNumericFieldNames(24), DataIPShortCuts::rNumericArgs(24)));
                 ErrorsFound = true;
             }
 
@@ -2937,8 +2937,8 @@ namespace WaterThermalTanks {
             if ((!Tank.HeightWasAutoSized) && (Tank.UseOutletHeight > Tank.Height)) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + DataIPShortCuts::cAlphaArgs(1) +
                                 ": Use outlet is located higher than overall tank height.");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(2)));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(25) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(25)));
+                ShowContinueError(format("{} = {:.4R}", DataIPShortCuts::cNumericFieldNames(2), DataIPShortCuts::rNumericArgs(2)));
+                ShowContinueError(format("{} = {:.4R}", DataIPShortCuts::cNumericFieldNames(25), DataIPShortCuts::rNumericArgs(25)));
                 ErrorsFound = true;
             }
 
@@ -2965,8 +2965,8 @@ namespace WaterThermalTanks {
             if ((!Tank.HeightWasAutoSized) && (Tank.SourceInletHeight > Tank.Height)) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + DataIPShortCuts::cAlphaArgs(1) +
                                 ": Source inlet is located higher than overall tank height.");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(2)));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(27) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(27)));
+                ShowContinueError(format("{} = {:.4R}", DataIPShortCuts::cNumericFieldNames(2), DataIPShortCuts::rNumericArgs(2)));
+                ShowContinueError(format("{} = {:.4R}", DataIPShortCuts::cNumericFieldNames(27), DataIPShortCuts::rNumericArgs(27)));
                 ErrorsFound = true;
             }
 
@@ -2979,8 +2979,8 @@ namespace WaterThermalTanks {
             if ((!Tank.HeightWasAutoSized) && (Tank.SourceOutletHeight > Tank.Height)) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + DataIPShortCuts::cAlphaArgs(1) +
                                 ": Source outlet is located higher than overall tank height.");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(2)));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(28) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(28)));
+                ShowContinueError(format("{} = {:.4R}", DataIPShortCuts::cNumericFieldNames(2), DataIPShortCuts::rNumericArgs(2)));
+                ShowContinueError(format("{} = {:.4R}", DataIPShortCuts::cNumericFieldNames(28), DataIPShortCuts::rNumericArgs(28)));
                 ErrorsFound = true;
             }
 
@@ -3613,8 +3613,8 @@ namespace WaterThermalTanks {
             if (Tank.UseInletHeight > Tank.Height) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + DataIPShortCuts::cAlphaArgs(1) +
                                 ": Use inlet is located higher than overall tank height.");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(2)));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(10) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(10)));
+                ShowContinueError(format("{} = {:.4R}", DataIPShortCuts::cNumericFieldNames(2), DataIPShortCuts::rNumericArgs(2)));
+                ShowContinueError(format("{} = {:.4R}", DataIPShortCuts::cNumericFieldNames(10), DataIPShortCuts::rNumericArgs(10)));
                 ErrorsFound = true;
             }
 
@@ -3622,8 +3622,8 @@ namespace WaterThermalTanks {
             if (Tank.UseOutletHeight > Tank.Height) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + DataIPShortCuts::cAlphaArgs(1) +
                                 ": Use outlet is located higher than overall tank height.");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(2)));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(11) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(11)));
+                ShowContinueError(format("{} = {:.4R}", DataIPShortCuts::cNumericFieldNames(2), DataIPShortCuts::rNumericArgs(2)));
+                ShowContinueError(format("{} = {:.4R}", DataIPShortCuts::cNumericFieldNames(11), DataIPShortCuts::rNumericArgs(11)));
                 ErrorsFound = true;
             }
 
@@ -3638,8 +3638,8 @@ namespace WaterThermalTanks {
             if (Tank.SourceInletHeight > Tank.Height) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + DataIPShortCuts::cAlphaArgs(1) +
                                 ": Source inlet is located higher than overall tank height.");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(2)));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(14) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(14)));
+                ShowContinueError(format("{} = {:.4R}", DataIPShortCuts::cNumericFieldNames(2), DataIPShortCuts::rNumericArgs(2)));
+                ShowContinueError(format("{} = {:.4R}", DataIPShortCuts::cNumericFieldNames(14), DataIPShortCuts::rNumericArgs(14)));
                 ErrorsFound = true;
             }
 
@@ -3650,8 +3650,8 @@ namespace WaterThermalTanks {
             if (Tank.SourceOutletHeight > Tank.Height) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + DataIPShortCuts::cAlphaArgs(1) +
                                 ": Source outlet is located higher than overall tank height.");
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(2) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(2)));
-                ShowContinueError(DataIPShortCuts::cNumericFieldNames(15) + format(" = {:.4R}", DataIPShortCuts::rNumericArgs(15)));
+                ShowContinueError(format("{} = {:.4R}", DataIPShortCuts::cNumericFieldNames(2), DataIPShortCuts::rNumericArgs(2)));
+                ShowContinueError(format("{} = {:.4R}", DataIPShortCuts::cNumericFieldNames(15), DataIPShortCuts::rNumericArgs(15)));
                 ErrorsFound = true;
             }
 

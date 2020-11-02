@@ -911,8 +911,8 @@ namespace FanCoilUnits {
                     if (FanCoil(FanCoilNum).DesignMaxOutletTemp < FanCoil(FanCoilNum).DesignMinOutletTemp) {
                         ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + FanCoil(FanCoilNum).Name + "\",");
                         ShowContinueError("... " + cNumericFields(11) + " is greater than " + cNumericFields(12) + ".");
-                        ShowContinueError("... " + cNumericFields(11) + format(" = {:.2T} [C].", FanCoil(FanCoilNum).DesignMinOutletTemp));
-                        ShowContinueError("... " + cNumericFields(12) + format(" = {:.2T} [C].", FanCoil(FanCoilNum).DesignMaxOutletTemp));
+                        ShowContinueError("... " + format("{} = {:.2T} [C].", cNumericFields(11), FanCoil(FanCoilNum).DesignMinOutletTemp));
+                        ShowContinueError("... " + format("{} = {:.2T} [C].", cNumericFields(12), FanCoil(FanCoilNum).DesignMaxOutletTemp));
                         ErrorsFound = true;
                     }
                 }

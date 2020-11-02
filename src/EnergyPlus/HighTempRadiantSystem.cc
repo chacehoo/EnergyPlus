@@ -372,7 +372,7 @@ namespace HighTempRadiantSystem {
                     HighTempRadSys(Item).ScaledHeatingCapacity = rNumericArgs(iHeatDesignCapacityNumericNum);
                     if (HighTempRadSys(Item).ScaledHeatingCapacity < 0.0 && HighTempRadSys(Item).ScaledHeatingCapacity != AutoSize) {
                         ShowSevereError(cCurrentModuleObject + " = " + HighTempRadSys(Item).Name);
-                        ShowContinueError("Illegal " + cNumericFieldNames(iHeatDesignCapacityNumericNum) + format(" = {:.7T}", rNumericArgs(iHeatDesignCapacityNumericNum)));
+                        ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFieldNames(iHeatDesignCapacityNumericNum), rNumericArgs(iHeatDesignCapacityNumericNum)));
                         ErrorsFound = true;
                     }
                 } else {
@@ -388,7 +388,7 @@ namespace HighTempRadiantSystem {
                     if (HighTempRadSys(Item).ScaledHeatingCapacity <= 0.0) {
                         ShowSevereError(cCurrentModuleObject + " = " + HighTempRadSys(Item).Name);
                         ShowContinueError("Input for " + cAlphaFieldNames(iHeatCAPMAlphaNum) + " = " + cAlphaArgs(iHeatCAPMAlphaNum));
-                        ShowContinueError("Illegal " + cNumericFieldNames(iHeatCapacityPerFloorAreaNumericNum) + format(" = {:.7T}", rNumericArgs(iHeatCapacityPerFloorAreaNumericNum)));
+                        ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFieldNames(iHeatCapacityPerFloorAreaNumericNum), rNumericArgs(iHeatCapacityPerFloorAreaNumericNum)));
                         ErrorsFound = true;
                     } else if (HighTempRadSys(Item).ScaledHeatingCapacity == AutoSize) {
                         ShowSevereError(cCurrentModuleObject + " = " + HighTempRadSys(Item).Name);
@@ -408,7 +408,7 @@ namespace HighTempRadiantSystem {
                     HighTempRadSys(Item).ScaledHeatingCapacity = rNumericArgs(iHeatFracOfAutosizedCapacityNumericNum);
                     if (HighTempRadSys(Item).ScaledHeatingCapacity < 0.0) {
                         ShowSevereError(cCurrentModuleObject + " = " + HighTempRadSys(Item).Name);
-                        ShowContinueError("Illegal " + cNumericFieldNames(iHeatFracOfAutosizedCapacityNumericNum) + format(" = {:.7T}", rNumericArgs(iHeatFracOfAutosizedCapacityNumericNum)));
+                        ShowContinueError("Illegal " + format("{} = {:.7T}", cNumericFieldNames(iHeatFracOfAutosizedCapacityNumericNum), rNumericArgs(iHeatFracOfAutosizedCapacityNumericNum)));
                         ErrorsFound = true;
                     }
                 } else {

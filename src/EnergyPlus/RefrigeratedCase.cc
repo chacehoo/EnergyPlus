@@ -1105,7 +1105,7 @@ namespace RefrigeratedCase {
                 if (RefrigCase(CaseNum).Height <= 0.0 && RefrigCase(CaseNum).AntiSweatControlType == ASHeatBalance) {
                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + RefrigCase(CaseNum).Name + "\", " + cNumericFieldNames(NumNum) +
                                     " must be greater than 0 when " + cAlphaFieldNames(7) + " is Heat Balance Method.");
-                    ShowContinueError("..given " + cNumericFieldNames(NumNum) + format(" was: {:.3R}", RefrigCase(CaseNum).Height));
+                    ShowContinueError("..given " + format("{} was: {:.3R}", cNumericFieldNames(NumNum), RefrigCase(CaseNum).Height));
                     ErrorsFound = true;
                 }
 
@@ -4172,7 +4172,7 @@ namespace RefrigeratedCase {
                             if (std::abs(DiffCircRates) > 0.3) {
                                 ShowWarningError(CurrentModuleObject + "=\"" + Secondary(SecondaryNum).Name + ' ' + cNumericFieldNames(7) +
                                                  format(" Produces a circulating rate of {:.2R} ;  A circulating rate of {:.2R}", CalcCircRate, Secondary(SecondaryNum).CircRate) +
-                                                 " would need a " + cNumericFieldNames(7) + format(" of {:.2R}", CalcTotFlowVol) +
+                                                 " would need a " + format("{} of {:.2R}", cNumericFieldNames(7), CalcTotFlowVol) +
                                                  " m3/s");
                             } // warning check on pump flow rate vs circ rate input
                         }     // blank pump flow rate
@@ -4267,7 +4267,7 @@ namespace RefrigeratedCase {
                             Secondary(SecondaryNum).PumpPowerToHeat = Numbers(NumNum);
                         } else {
                             ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + Secondary(SecondaryNum).Name + "\" " +
-                                             cNumericFieldNames(NumNum) + format(" must be between 0.5 and 1.0. Default value of : {:.3R} will be used", PumpMotorEfficiency));
+                                             format("{} must be between 0.5 and 1.0. Default value of : {:.3R} will be used", cNumericFieldNames(NumNum), PumpMotorEfficiency));
                         } // range of pump moter heat to fluid
                     }     // blank input for pumppowertoheat
 
@@ -5292,7 +5292,7 @@ namespace RefrigeratedCase {
                     System(RefrigSysNum).IntercoolerEffectiveness = Numbers(4);
                     if (System(RefrigSysNum).IntercoolerEffectiveness < 0.0 || System(RefrigSysNum).IntercoolerEffectiveness > 1.0) {
                         ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + System(RefrigSysNum).Name + "\", The specified value for the");
-                        ShowContinueError(cNumericFieldNames(4) + format(" = {:.2R}", System(RefrigSysNum).IntercoolerEffectiveness) +
+                        ShowContinueError(format("{} = {:.2R}", cNumericFieldNames(4), System(RefrigSysNum).IntercoolerEffectiveness) +
                                           " is invalid.  This value must be");
                         ShowContinueError("between 0.0 and 1.0.  The default value of 0.8 will be used.");
                         System(RefrigSysNum).IntercoolerEffectiveness = 0.8;

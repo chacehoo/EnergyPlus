@@ -542,7 +542,7 @@ namespace InternalHeatGains {
                                     }
                                 } else {
                                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + People(Loop).Name + "\", invalid " +
-                                                    cNumericFieldNames(2) + format(", value  [<0.0]={:.3R}", IHGNumbers(2)));
+                                                    format("{}, value  [<0.0]={:.3R}", cNumericFieldNames(2), IHGNumbers(2)));
                                     ErrorsFound = true;
                                 }
                             }
@@ -561,7 +561,7 @@ namespace InternalHeatGains {
                                     }
                                 } else {
                                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + People(Loop).Name + "\", invalid " +
-                                                    cNumericFieldNames(3) + format(", value  [<0.0]={:.3R}", IHGNumbers(3)));
+                                                    format("{}, value  [<0.0]={:.3R}", cNumericFieldNames(3), IHGNumbers(3)));
                                     ErrorsFound = true;
                                 }
                             }
@@ -1285,7 +1285,7 @@ namespace InternalHeatGains {
                                     }
                                 } else {
                                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Lights(Loop).Name + "\", invalid " +
-                                                    cNumericFieldNames(2) + format(", value  [<0.0]={:.3R}", IHGNumbers(2)));
+                                                    format("{}, value  [<0.0]={:.3R}", cNumericFieldNames(2), IHGNumbers(2)));
                                     ErrorsFound = true;
                                 }
                             }
@@ -1304,7 +1304,7 @@ namespace InternalHeatGains {
                                     }
                                 } else {
                                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Lights(Loop).Name + "\", invalid " +
-                                                    cNumericFieldNames(3) + format(", value  [<0.0]={:.3R}", IHGNumbers(3)));
+                                                    format("{}, value  [<0.0]={:.3R}", cNumericFieldNames(3), IHGNumbers(3)));
                                     ErrorsFound = true;
                                 }
                             }
@@ -1731,7 +1731,7 @@ namespace InternalHeatGains {
                                     }
                                 } else {
                                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", invalid " +
-                                                    cNumericFieldNames(2) + format(", value  [<0.0]={:.3R}", IHGNumbers(2)));
+                                                    format("{}, value  [<0.0]={:.3R}", cNumericFieldNames(2), IHGNumbers(2)));
                                     ErrorsFound = true;
                                 }
                             }
@@ -1750,7 +1750,7 @@ namespace InternalHeatGains {
                                     }
                                 } else {
                                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", invalid " +
-                                                    cNumericFieldNames(3) + format(", value  [<0.0]={:.3R}", IHGNumbers(3)));
+                                                    format("{}, value  [<0.0]={:.3R}", cNumericFieldNames(3), IHGNumbers(3)));
                                     ErrorsFound = true;
                                 }
                             }
@@ -2132,7 +2132,7 @@ namespace InternalHeatGains {
                                     }
                                 } else {
                                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + ZoneGas(Loop).Name + "\", invalid " +
-                                                    cNumericFieldNames(2) + format(", value  [<0.0]={:.3R}", IHGNumbers(2)));
+                                                    format("{}, value  [<0.0]={:.3R}", cNumericFieldNames(2), IHGNumbers(2)));
                                     ErrorsFound = true;
                                 }
                             }
@@ -2151,7 +2151,7 @@ namespace InternalHeatGains {
                                     }
                                 } else {
                                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + ZoneGas(Loop).Name + "\", invalid " +
-                                                    cNumericFieldNames(3) + format(", value  [<0.0]={:.3R}", IHGNumbers(3)));
+                                                    format("{}, value  [<0.0]={:.3R}", cNumericFieldNames(3), IHGNumbers(3)));
                                     ErrorsFound = true;
                                 }
                             }
@@ -2525,7 +2525,7 @@ namespace InternalHeatGains {
                                     }
                                 } else {
                                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", invalid " +
-                                                    cNumericFieldNames(2) + format(", value  [<0.0]={:.3R}", IHGNumbers(2)));
+                                                    format("{}, value  [<0.0]={:.3R}", cNumericFieldNames(2), IHGNumbers(2)));
                                     ErrorsFound = true;
                                 }
                             }
@@ -2544,7 +2544,7 @@ namespace InternalHeatGains {
                                     }
                                 } else {
                                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", invalid " +
-                                                    cNumericFieldNames(3) + format(", value  [<0.0]={:.3R}", IHGNumbers(3)));
+                                                    format("{}, value  [<0.0]={:.3R}", cNumericFieldNames(3), IHGNumbers(3)));
                                     ErrorsFound = true;
                                 }
                             }
@@ -2919,7 +2919,7 @@ namespace InternalHeatGains {
                                     }
                                 } else {
                                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", invalid " +
-                                                    cNumericFieldNames(2) + format(", value  [<0.0]={:.3R}", IHGNumbers(2)));
+                                                    format("{}, value  [<0.0]={:.3R}", cNumericFieldNames(2), IHGNumbers(2)));
                                     ErrorsFound = true;
                                 }
                             }
@@ -2938,7 +2938,7 @@ namespace InternalHeatGains {
                                     }
                                 } else {
                                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", invalid " +
-                                                    cNumericFieldNames(3) + format(", value  [<0.0]={:.3R}", IHGNumbers(3)));
+                                                    format("{}, value  [<0.0]={:.3R}", cNumericFieldNames(3), IHGNumbers(3)));
                                     ErrorsFound = true;
                                 }
                             }
