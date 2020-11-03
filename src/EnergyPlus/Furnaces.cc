@@ -5523,7 +5523,7 @@ namespace Furnaces {
                 if (Furnace(FurnaceNum).FanVolFlow != AutoSize) {
                     //     Check fan versus system supply air flow rates
                     if (Furnace(FurnaceNum).FanVolFlow + 1e-10 < Furnace(FurnaceNum).CoolVolumeFlowRate(NumOfSpeedCooling)) {
-                        ShowWarningError(CurrentModuleObject + format(" - air flow rate = {:.7T} in fan object is less than the MSHP system air flow rate when cooling is required ({:.7T}).", Furnace(FurnaceNum).FanVolFlow, Furnace(FurnaceNum).CoolVolumeFlowRate(NumOfSpeedCooling)));
+                        ShowWarningError(format("{} - air flow rate = {:.7T} in fan object is less than the MSHP system air flow rate when cooling is required ({:.7T}).", CurrentModuleObject, Furnace(FurnaceNum).FanVolFlow, Furnace(FurnaceNum).CoolVolumeFlowRate(NumOfSpeedCooling)));
                         ShowContinueError(
                             " The MSHP system flow rate when cooling is required is reset to the fan flow rate and the simulation continues.");
                         ShowContinueError(" Occurs in " + CurrentModuleObject + " = " + Furnace(FurnaceNum).Name);
@@ -5548,7 +5548,7 @@ namespace Furnaces {
                     }
                     if (NumOfSpeedHeating > 0) {
                         if (Furnace(FurnaceNum).FanVolFlow + 1e-10 < Furnace(FurnaceNum).HeatVolumeFlowRate(NumOfSpeedHeating)) {
-                            ShowWarningError(CurrentModuleObject + format(" - air flow rate = {:.7T} in fan object is less than the MSHP system air flow rate when heating is required ({:.7T}).", Furnace(FurnaceNum).FanVolFlow, Furnace(FurnaceNum).HeatVolumeFlowRate(NumOfSpeedHeating)));
+                            ShowWarningError(format("{} - air flow rate = {:.7T} in fan object is less than the MSHP system air flow rate when heating is required ({:.7T}).", CurrentModuleObject, Furnace(FurnaceNum).FanVolFlow, Furnace(FurnaceNum).HeatVolumeFlowRate(NumOfSpeedHeating)));
                             ShowContinueError(
                                 " The MSHP system flow rate when heating is required is reset to the fan flow rate and the simulation continues.");
                             ShowContinueError(" Occurs in " + CurrentModuleObject + " = " + Furnace(FurnaceNum).Name);
