@@ -1166,7 +1166,7 @@ namespace ZoneTempPredictorCorrector {
                         ComfortControlledZone(ComfortControlledZoneNum).TdbMaxSetPoint) {
                         ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1));
                         ShowContinueError(".." + cNumericFieldNames(1) + " > " + cNumericFieldNames(2));
-                        ShowContinueError(format("..[{:.0T}].", rNumericArgs(1)) + format("] > [{:.0T}", rNumericArgs(2)));
+                        ShowContinueError(format("..[{:.0T}] > [{:.0T}].", rNumericArgs(1), rNumericArgs(2)));
                         ErrorsFound = true;
                     }
                     // If MaxTemp = MinTemp, no thermal comfort control
@@ -4048,8 +4048,7 @@ namespace ZoneTempPredictorCorrector {
                     ShowSevereError("SingleHeatCoolSetPoint: Effective heating set-point higher than effective cooling set-point - use "
                                     "DualSetPointWithDeadBand if using unmixed air model");
                     ShowContinueErrorTimeStamp("occurs in Zone=" + Zone(ZoneNum).Name);
-                    ShowContinueError(format("LoadToHeatingSetPoint={:.3R}", LoadToHeatingSetPoint) +
-                                      format(", LoadToCoolingSetPoint={:.3R}", LoadToCoolingSetPoint));
+                    ShowContinueError(format("LoadToHeatingSetPoint={:.3R}, LoadToCoolingSetPoint={:.3R}", LoadToHeatingSetPoint, LoadToCoolingSetPoint));
                     ShowContinueError(format("Zone TempDepZnLd={:.2R}", state.dataZoneTempPredictorCorrector->TempDepZnLd(ZoneNum)));
                     ShowContinueError(format("Zone TempIndZnLd={:.2R}", state.dataZoneTempPredictorCorrector->TempIndZnLd(ZoneNum)));
                     ShowContinueError(format("Zone ThermostatSetPoint={:.2R}", TempZoneThermostatSetPoint(ZoneNum)));
@@ -4072,8 +4071,7 @@ namespace ZoneTempPredictorCorrector {
                     ShowSevereError(
                         "SingleHeatCoolSetPoint: Unanticipated combination of heating and cooling loads - report to EnergyPlus Development Team");
                     ShowContinueErrorTimeStamp("occurs in Zone=" + Zone(ZoneNum).Name);
-                    ShowContinueError(format("LoadToHeatingSetPoint={:.3R}", LoadToHeatingSetPoint) +
-                                      format(", LoadToCoolingSetPoint={:.3R}", LoadToCoolingSetPoint));
+                    ShowContinueError(format("LoadToHeatingSetPoint={:.3R}, LoadToCoolingSetPoint={:.3R}", LoadToHeatingSetPoint, LoadToCoolingSetPoint));
                     ShowContinueError(format("Zone TempDepZnLd={:.2R}", state.dataZoneTempPredictorCorrector->TempDepZnLd(ZoneNum)));
                     ShowContinueError(format("Zone TempIndZnLd={:.2R}", state.dataZoneTempPredictorCorrector->TempIndZnLd(ZoneNum)));
                     ShowContinueError(format("Zone ThermostatSetPoint={:.2R}", TempZoneThermostatSetPoint(ZoneNum)));
@@ -4123,8 +4121,7 @@ namespace ZoneTempPredictorCorrector {
                     ShowSevereError("DualSetPointWithDeadBand: Effective heating set-point higher than effective cooling set-point - increase "
                                     "deadband if using unmixed air model");
                     ShowContinueErrorTimeStamp("occurs in Zone=" + Zone(ZoneNum).Name);
-                    ShowContinueError(format("LoadToHeatingSetPoint={:.3R}", LoadToHeatingSetPoint) +
-                                      format(", LoadToCoolingSetPoint={:.3R}", LoadToCoolingSetPoint));
+                    ShowContinueError(format("LoadToHeatingSetPoint={:.3R}, LoadToCoolingSetPoint={:.3R}", LoadToHeatingSetPoint, LoadToCoolingSetPoint));
                     ShowContinueError(format("Zone TempDepZnLd={:.2R}", state.dataZoneTempPredictorCorrector->TempDepZnLd(ZoneNum)));
                     ShowContinueError(format("Zone TempIndZnLd={:.2R}", state.dataZoneTempPredictorCorrector->TempIndZnLd(ZoneNum)));
                     ShowContinueError(format("Zone Heating ThermostatSetPoint={:.2R}", ZoneThermostatSetPointLo(ZoneNum)));
@@ -4151,8 +4148,7 @@ namespace ZoneTempPredictorCorrector {
                     ShowSevereError(
                         "DualSetPointWithDeadBand: Unanticipated combination of heating and cooling loads - report to EnergyPlus Development Team");
                     ShowContinueErrorTimeStamp("occurs in Zone=" + Zone(ZoneNum).Name);
-                    ShowContinueError(format("LoadToHeatingSetPoint={:.3R}", LoadToHeatingSetPoint) +
-                                      format(", LoadToCoolingSetPoint={:.3R}", LoadToCoolingSetPoint));
+                    ShowContinueError(format("LoadToHeatingSetPoint={:.3R}, LoadToCoolingSetPoint={:.3R}", LoadToHeatingSetPoint, LoadToCoolingSetPoint));
                     ShowContinueError(format("Zone Heating Set-point={:.2R}", ZoneThermostatSetPointLo(ZoneNum)));
                     ShowContinueError(format("Zone Cooling Set-point={:.2R}", ZoneThermostatSetPointHi(ZoneNum)));
                     ShowContinueError(format("Zone TempDepZnLd={:.2R}", state.dataZoneTempPredictorCorrector->TempDepZnLd(ZoneNum)));
@@ -4602,8 +4598,7 @@ namespace ZoneTempPredictorCorrector {
                     ShowSevereError(
                         "Humidistat: Unanticipated combination of humidifying and dehumidifying loads - report to EnergyPlus Development Team");
                     ShowContinueErrorTimeStamp("occurs in Zone=" + Zone(ZoneNum).Name);
-                    ShowContinueError(format("LoadToHumidifySetPoint={:.5R}", LoadToHumidifySetPoint) +
-                                      format(", LoadToDehumidifySetPoint={:.5R}", LoadToDehumidifySetPoint));
+                    ShowContinueError(format("LoadToHumidifySetPoint={:.5R}, LoadToDehumidifySetPoint={:.5R}", LoadToHumidifySetPoint, LoadToDehumidifySetPoint));
                     ShowContinueError(format("Zone RH Humidifying Set-point={:.1R}", ZoneRHHumidifyingSetPoint));
                     ShowContinueError(format("Zone RH Dehumidifying Set-point={:.2R}", ZoneRHDehumidifyingSetPoint));
                     ShowFatalError("Program terminates due to above conditions.");

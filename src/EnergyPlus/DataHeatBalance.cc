@@ -1837,7 +1837,7 @@ namespace DataHeatBalance {
                 (Blind(TotBlinds).SlatAngle < Blind(TotBlinds).MinSlatAngle || Blind(TotBlinds).SlatAngle > Blind(TotBlinds).MaxSlatAngle)) {
                 errFlag = true;
                 ShowSevereError("WindowMaterial:Blind=\"" + Blind(inBlindNumber).Name + "\", Illegal value combination.");
-                ShowContinueError(format("Slat Angle=[{:.1R}] is outside of the input min/max range, min=[{:.1R}] deg.", Blind(TotBlinds).MinSlatAngle) + format("], max=[{:.1R}", Blind(TotBlinds).SlatAngle, Blind(TotBlinds).MaxSlatAngle));
+                ShowContinueError(format("Slat Angle=[{:.1R}] is outside of the input min/max range, min=[{:.1R}], max=[{:.1R}] deg.", Blind(TotBlinds).SlatAngle, Blind(TotBlinds).MinSlatAngle, Blind(TotBlinds).MaxSlatAngle));
             }
 
             // Warning if input minimum slat angle is less than that allowed by slat geometry

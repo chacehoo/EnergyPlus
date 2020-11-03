@@ -1998,7 +1998,7 @@ namespace RuntimeLanguageProcessor {
                             if (std::isnan(TestValue)) {
                                 // throw Error
                                 ReturnValue.Type = ValueError;
-                                ReturnValue.Error = format("EvaluateExpression: Attempted to raise to power with incompatible numbers: {:.6T}", Operand(1).Number) + format(" raised to {:.6T}", Operand(2).Number);
+                                ReturnValue.Error = format("EvaluateExpression: Attempted to raise to power with incompatible numbers: {:.6T} raised to {:.6T}", Operand(1).Number, Operand(2).Number);
                                 if (!DoingSizing && !KickOffSimulation && !EMSManager::FinishProcessingUserInput) {
                                     seriousErrorFound = true;
                                 }

@@ -403,8 +403,7 @@ namespace Psychrometrics {
         if (RHValue > 1.01) {
             if (!WarmupFlag) {
                 if (iPsyErrIndex(iPsyRhFnTdbRhovLBnd0C) == 0) {
-                    String = format(" Dry-Bulb= {:.2T}", Tdb) + format(" Rhovapor= {:.3T}", Rhovapor) +
-                             format(" Calculated Relative Humidity [%]= {:.2T}", RHValue * 100.0);
+                    String = format(" Dry-Bulb= {:.2T} Rhovapor= {:.3T} Calculated Relative Humidity [%]= {:.2T}", Tdb, Rhovapor, RHValue * 100.0);
                     ShowWarningMessage("Calculated Relative Humidity out of range (PsyRhFnTdbRhovLBnd0C) ");
                     if (!CalledFrom.empty()) {
                         ShowContinueErrorTimeStamp(" Routine=" + CalledFrom + ',');
@@ -425,8 +424,7 @@ namespace Psychrometrics {
         } else if (RHValue < -0.05) {
             if (!WarmupFlag) {
                 if (iPsyErrIndex(iPsyRhFnTdbRhovLBnd0C) == 0) {
-                    String = format(" Dry-Bulb= {:.2T}", Tdb) + format(" Rhovapor= {:.3T}", Rhovapor) +
-                             format(" Calculated Relative Humidity [%]= {:.2T}", RHValue * 100.0);
+                    String = format(" Dry-Bulb= {:.2T} Rhovapor= {:.3T} Calculated Relative Humidity [%]= {:.2T}", Tdb, Rhovapor, RHValue * 100.0);
                     ShowWarningMessage("Calculated Relative Humidity out of range (PsyRhFnTdbRhovLBnd0C) ");
                     if (!CalledFrom.empty()) {
                         ShowContinueErrorTimeStamp(" Routine=" + CalledFrom + ',');
@@ -633,8 +631,7 @@ namespace Psychrometrics {
             if (W <= -0.0001) {
                 if (!WarmupFlag) {
                     if (iPsyErrIndex(iPsyTwbFnTdbWPb2) == 0) {
-                        String = format(" Dry-Bulb= {:.2T}", TDB) + format(" Humidity Ratio= {:.3T}", W) +
-                                 format(" Pressure= {:.2T}", Patm);
+                        String = format(" Dry-Bulb= {:.2T} Humidity Ratio= {:.3T} Pressure= {:.2T}", TDB, W, Patm);
                         ShowWarningMessage("Entered Humidity Ratio invalid (PsyTwbFnTdbWPb)");
                         if (!CalledFrom.empty()) {
                             ShowContinueErrorTimeStamp(" Routine=" + CalledFrom + ',');
@@ -761,7 +758,7 @@ namespace Psychrometrics {
         if (V <= -0.01) {
             if (!WarmupFlag) {
                 if (iPsyErrIndex(iPsyVFnTdbWPb) == 0) {
-                    String = format(" Dry-Bulb= {:.2T}", TDB) + format(" Humidity Ratio= {:.3T}", w) + format(" Pressure= {:.2T}", PB);
+                    String = format(" Dry-Bulb= {:.2T} Humidity Ratio= {:.3T} Pressure= {:.2T}", TDB, w, PB);
                     ShowWarningMessage("Calculated Specific Volume out of range (PsyVFnTdbWPb)");
                     if (!CalledFrom.empty()) {
                         ShowContinueErrorTimeStamp(" Routine=" + CalledFrom + ',');
@@ -789,7 +786,7 @@ namespace Psychrometrics {
         if (W < -0.0001) {
             if (!WarmupFlag) {
                 if (iPsyErrIndex(iPsyWFnTdbH) == 0) {
-                    String = format(" Dry-Bulb= {:.2T}", TDB) + format(" Enthalpy= {:.3T}", H);
+                    String = format(" Dry-Bulb= {:.2T} Enthalpy= {:.3T}", TDB, H);
                     ShowWarningMessage("Calculated Humidity Ratio invalid (PsyWFnTdbH)");
                     if (!CalledFrom.empty()) {
                         ShowContinueErrorTimeStamp(" Routine=" + CalledFrom + ',');
@@ -943,7 +940,7 @@ namespace Psychrometrics {
         if (TWB > (TDB + 0.01)) {
             if (ReportErrors && !WarmupFlag) {
                 if (iPsyErrIndex(iPsyWFnTdbTwbPb) == 0) {
-                    String = format(" Dry-Bulb= {:.2T}", TDB) + format(" Pressure= {:.2T}", PB);
+                    String = format(" Dry-Bulb= {:.2T} Pressure= {:.2T}", TDB, PB);
                     ShowWarningMessage("Given Wet Bulb Temperature invalid (PsyWFnTdbTwbPb)");
                     if (!CalledFrom.empty()) {
                         ShowContinueErrorTimeStamp(" Routine=" + CalledFrom + ',');
@@ -973,7 +970,7 @@ namespace Psychrometrics {
         if (W < 0.0) {
             if (ReportErrors && !WarmupFlag) {
                 if (iPsyErrIndex(iPsyWFnTdbTwbPb2) == 0) {
-                    String = format(" Dry-Bulb= {:.2T}", TDB) + format(" Wet-Bulb= {:.2T}", TWB) + format(" Pressure= {:.2T}", PB);
+                    String = format(" Dry-Bulb= {:.2T} Wet-Bulb= {:.2T} Pressure= {:.2T}", TDB, TWB, PB);
                     ShowWarningMessage("Calculated Humidity Ratio Invalid (PsyWFnTdbTwbPb)");
                     if (!CalledFrom.empty()) {
                         ShowContinueErrorTimeStamp(" Routine=" + CalledFrom + ',');
@@ -1009,8 +1006,7 @@ namespace Psychrometrics {
                     } else {
                         ShowContinueErrorTimeStamp(" Routine=Unknown,");
                     }
-                    String = format(" Dry-bulb={:.2T}", TDB) + format(" Wet-Bulb (WB)= {:.2T}", TWB) +
-                             format(" Pressure= {:.2T}", PB) + format(" Humidity Ratio={:.3T}", W);
+                    String = format(" Dry-bulb={:.2T} Wet-Bulb (WB)= {:.2T} Pressure= {:.2T} Humidity Ratio={:.3T}", TDB, TWB, PB, W);
                     ShowContinueError(String);
                     String = format(" Calculated Dew Point Temperature (DPT)= {:.2T}; Since DPT > WB, DPT will be set to WB", TDP);
                     ShowContinueError(String);
@@ -1089,7 +1085,7 @@ namespace Psychrometrics {
                     } else {
                         ShowContinueErrorTimeStamp(" Routine=Unknown,");
                     }
-                    String = format(" Enthalpy={:.5T}", HH) + format(" Pressure= {:.2T}", PB);
+                    String = format(" Enthalpy={:.5T} Pressure= {:.2T}", HH, PB);
                     ShowContinueError(String);
                     FlagError = true;
                 }
@@ -1176,7 +1172,7 @@ namespace Psychrometrics {
                     } else {
                         ShowContinueErrorTimeStamp(" Routine=Unknown,");
                     }
-                    String = format(" Enthalpy={:.5T}", HH) + format(" Pressure= {:.2T}", PB);
+                    String = format(" Enthalpy={:.5T} Pressure= {:.2T}", HH, PB);
                     ShowContinueError(format("{} Last T={:.2T}", String, T));
                 }
 #endif
@@ -1197,8 +1193,7 @@ namespace Psychrometrics {
         if (RHValue > 1.01) {
             if (!WarmupFlag) {
                 if (iPsyErrIndex(iPsyRhFnTdbRhov) == 0) {
-                    String = format(" Dry-Bulb= {:.2T}", Tdb) + format(" Rhovapor= {:.3T}", Rhovapor) +
-                             format(" Calculated Relative Humidity [%]= {:.2T}", RHValue * 100.0);
+                    String = format(" Dry-Bulb= {:.2T} Rhovapor= {:.3T} Calculated Relative Humidity [%]= {:.2T}", Tdb, Rhovapor, RHValue * 100.0);
                     ShowWarningMessage("Calculated Relative Humidity out of range (PsyRhFnTdbRhov) ");
                     if (!CalledFrom.empty()) {
                         ShowContinueErrorTimeStamp(" Routine=" + CalledFrom + ',');
@@ -1219,8 +1214,7 @@ namespace Psychrometrics {
         } else if (RHValue < -0.05) {
             if (!WarmupFlag) {
                 if (iPsyErrIndex(iPsyRhFnTdbRhov) == 0) {
-                    String = format(" Dry-Bulb= {:.2T}", Tdb) + format(" Rhovapor= {:.3T}", Rhovapor) +
-                             format(" Calculated Relative Humidity [%]= {:.2T}", RHValue * 100.0);
+                    String = format(" Dry-Bulb= {:.2T} Rhovapor= {:.3T} Calculated Relative Humidity [%]= {:.2T}", Tdb, Rhovapor, RHValue * 100.0);
                     ShowWarningMessage("Calculated Relative Humidity out of range (PsyRhFnTdbRhov) ");
                     if (!CalledFrom.empty()) {
                         ShowContinueErrorTimeStamp(" Routine=" + CalledFrom + ',');
@@ -1252,8 +1246,7 @@ namespace Psychrometrics {
         if (RHValue > 1.01) {
             if (!WarmupFlag) {
                 if (iPsyErrIndex(iPsyRhFnTdbWPb) == 0) {
-                    String = format(" Dry-Bulb= {:.2T}", TDB) + format(" Humidity Ratio= {:.3T}", W) +
-                             format(" Calculated Relative Humidity [%]= {:.2T}", RHValue * 100.0);
+                    String = format(" Dry-Bulb= {:.2T} Humidity Ratio= {:.3T} Calculated Relative Humidity [%]= {:.2T}", TDB, W, RHValue * 100.0);
                     ShowWarningMessage("Calculated Relative Humidity out of range (PsyRhFnTdbWPb) ");
                     if (!CalledFrom.empty()) {
                         ShowContinueErrorTimeStamp(" Routine=" + CalledFrom + ',');
@@ -1274,8 +1267,7 @@ namespace Psychrometrics {
         } else if (RHValue < -0.05) {
             if (!WarmupFlag) {
                 if (iPsyErrIndex(iPsyRhFnTdbWPb) == 0) {
-                    String = format(" Dry-Bulb= {:.2T}", TDB) + format(" Humidity Ratio= {:.3T}", W) +
-                             format(" Calculated Relative Humidity [%]= {:.2T}", RHValue * 100.0);
+                    String = format(" Dry-Bulb= {:.2T} Humidity Ratio= {:.3T} Calculated Relative Humidity [%]= {:.2T}", TDB, W, RHValue * 100.0);
                     ShowWarningMessage("Calculated Relative Humidity out of range (PsyRhFnTdbWPb) ");
                     if (!CalledFrom.empty()) {
                         ShowContinueErrorTimeStamp(" Routine=" + CalledFrom + ',');
@@ -1307,7 +1299,7 @@ namespace Psychrometrics {
     {
         if (!WarmupFlag) {
             if (iPsyErrIndex(iPsyWFnTdpPb) == 0) {
-                String = format(" Dew-Point= {:.2T}", TDP) + format(" Barometric Pressure= {:.2T}", PB);
+                String = format(" Dew-Point= {:.2T} Barometric Pressure= {:.2T}", TDP, PB);
                 ShowWarningMessage("Calculated partial vapor pressure is greater than the barometric pressure, so that calculated humidity ratio is invalid (PsyWFnTdpPb).");
                 if (!CalledFrom.empty()) {
                     ShowContinueErrorTimeStamp(" Routine=" + CalledFrom + ',');
@@ -1335,8 +1327,7 @@ namespace Psychrometrics {
         if (W <= -0.0001) {
             if (!WarmupFlag) {
                 if (iPsyErrIndex(iPsyWFnTdbRhPb) == 0) {
-                    String = format(" Dry-Bulb= {:.2T}", TDB) + format(" Relative Humidity [%]= {:.2T}", RH * 100.0) +
-                             format(" Pressure= {:.2T}", PB);
+                    String = format(" Dry-Bulb= {:.2T} Relative Humidity [%]= {:.2T} Pressure= {:.2T}", TDB, RH * 100.0, PB);
                     ShowWarningMessage("Calculated Humidity Ratio is invalid (PsyWFnTdbRhPb)");
                     if (!CalledFrom.empty()) {
                         ShowContinueErrorTimeStamp(" Routine=" + CalledFrom + ',');

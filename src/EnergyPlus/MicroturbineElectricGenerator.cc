@@ -203,8 +203,7 @@ namespace MicroturbineElectricGenerator {
 
             if (MTGenerator(GeneratorNum).MinElecPowerOutput >= MTGenerator(GeneratorNum).MaxElecPowerOutput) {
                 ShowSevereError(DataIPShortCuts::cCurrentModuleObject + "= " + MTGenerator(GeneratorNum).Name);
-                ShowContinueError(format("{} [{:.2R}] > ", DataIPShortCuts::cNumericFieldNames(2), NumArray(2)) +
-                                  format("{} [{:.2R}]", DataIPShortCuts::cNumericFieldNames(3), NumArray(3)));
+                ShowContinueError(format("{} [{:.2R}] > {} [{:.2R}]", DataIPShortCuts::cNumericFieldNames(2), NumArray(2), DataIPShortCuts::cNumericFieldNames(3), NumArray(3)));
                 ShowContinueError("Minimum Full Load Electrical Power Output must be less than or equal");
                 ShowContinueError("to Maximum Full Load Electrical Power Output.");
                 ErrorsFound = true;

@@ -650,7 +650,7 @@ namespace InternalHeatGains {
                                 ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(5) + " values");
                                 ShowContinueError("fall outside typical range [70,1000] W/person for Thermal Comfort Reporting.");
                                 ShowContinueError("Odd comfort values may result; Schedule=\"" + AlphaName(5) + "\".");
-                                ShowContinueError(format("Entered min/max range=[{:.1R},] W/person.", SchMin) + format("{:.1R}", SchMax));
+                                ShowContinueError(format("Entered min/max range=[{:.1R},] W/person.{:.1R}", SchMin, SchMax));
                             }
                         }
                     }

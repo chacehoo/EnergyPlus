@@ -4171,8 +4171,7 @@ namespace RefrigeratedCase {
                             Real64 DiffCircRates = (CalcCircRate - Secondary(SecondaryNum).CircRate) / Secondary(SecondaryNum).CircRate;
                             if (std::abs(DiffCircRates) > 0.3) {
                                 ShowWarningError(CurrentModuleObject + "=\"" + Secondary(SecondaryNum).Name + ' ' + cNumericFieldNames(7) +
-                                                 format(" Produces a circulating rate of {:.2R} ;  A circulating rate of {:.2R}", CalcCircRate, Secondary(SecondaryNum).CircRate) +
-                                                 format(" would need a {} of {:.2R} m3/s", cNumericFieldNames(7), CalcTotFlowVol));
+                                                 format(" Produces a circulating rate of {:.2R} ;  A circulating rate of {:.2R} would need a {} of {:.2R} m3/s", CalcCircRate, Secondary(SecondaryNum).CircRate, cNumericFieldNames(7), CalcTotFlowVol));
                             } // warning check on pump flow rate vs circ rate input
                         }     // blank pump flow rate
                         SecondaryFlowVolRated = PumpTotRatedFlowVol;
@@ -5405,14 +5404,12 @@ namespace RefrigeratedCase {
                 if (System(RefrigSysNum).NumStages == 1) { // Single-stage system
                     if ((NominalTotalCompCap < (0.7 * NominalTotalCoolingCap)) || (NominalCondCap < (1.3 * NominalTotalCoolingCap))) {
                         ShowWarningError(CurrentModuleObject + "=\"" + System(RefrigSysNum).Name +
-                                         format("\", You may wish to check the system sizing. Total nominal cooling capacity is {:.0R}W. Condenser capacity is {:.0R}W. Nominal compressor capacity is ", NominalTotalCoolingCap, NominalCondCap) +
-                                         format("{:.0R}W.", NominalTotalCompCap));
+                                         format("\", You may wish to check the system sizing. Total nominal cooling capacity is {:.0R}W. Condenser capacity is {:.0R}W. Nominal compressor capacity is {:.0R}W.", NominalTotalCoolingCap, NominalCondCap, NominalTotalCompCap));
                     }
                 } else if (System(RefrigSysNum).NumStages == 2) { // Two-stage system
                     if ((NominalTotalHiStageCompCap < (0.7 * NominalTotalCoolingCap)) || (NominalCondCap < (1.3 * NominalTotalCoolingCap))) {
                         ShowWarningError(CurrentModuleObject + "=\"" + System(RefrigSysNum).Name +
-                                         format("\", You may wish to check the system sizing. Total nominal cooling capacity is {:.0R}W. Condenser capacity is {:.0R}W. Nominal compressor capacity is ", NominalTotalCoolingCap, NominalCondCap) +
-                                         format("{:.0R}W.", NominalTotalCompCap));
+                                         format("\", You may wish to check the system sizing. Total nominal cooling capacity is {:.0R}W. Condenser capacity is {:.0R}W. Nominal compressor capacity is {:.0R}W.", NominalTotalCoolingCap, NominalCondCap, NominalTotalCompCap));
                     }
                 } // NumStages
 

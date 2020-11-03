@@ -299,8 +299,7 @@ namespace PondGroundHeatExchanger {
             }
             if (DataIPShortCuts::rNumericArgs(3) > DataIPShortCuts::rNumericArgs(4)) { // error
                 ShowSevereError("For " + DataIPShortCuts::cCurrentModuleObject + ": " + DataIPShortCuts::cAlphaArgs(1));
-                ShowContinueError(format("{} [{:.2R}", DataIPShortCuts::cNumericFieldNames(3), DataIPShortCuts::rNumericArgs(3)) +
-                                  format("] > {} [{:.2R}]", DataIPShortCuts::cNumericFieldNames(4), DataIPShortCuts::rNumericArgs(4)));
+                ShowContinueError(format("{} [{:.2R}] > {} [{:.2R}]", DataIPShortCuts::cNumericFieldNames(3), DataIPShortCuts::rNumericArgs(3), DataIPShortCuts::cNumericFieldNames(4), DataIPShortCuts::rNumericArgs(4)));
                 ErrorsFound = true;
             }
 

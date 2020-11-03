@@ -9600,7 +9600,7 @@ namespace DXCoils {
                 DXCoil(DXCoilNum).HighTempLast = OutdoorDryBulb;
                 if (DXCoil(DXCoilNum).HighAmbErrIndex == 0) {
                     DXCoil(DXCoilNum).HighAmbBuffer1 =
-                        DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name + format("\" - Condenser inlet temperature above {:.2R}", DXCoil(DXCoilNum).MaxOATCompressor) + format(" C. Condenser temperature = {:.2R}", OutdoorDryBulb);
+                        DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name + format("\" - Condenser inlet temperature above {:.2R} C. Condenser temperature = {:.2R}", DXCoil(DXCoilNum).MaxOATCompressor, OutdoorDryBulb);
                     DXCoil(DXCoilNum).HighAmbBuffer2 =
                         " ... Occurrence info = " + EnvironmentName + ", " + CurMnDy + ' ' + CreateSysTimeIntervalString();
                 }

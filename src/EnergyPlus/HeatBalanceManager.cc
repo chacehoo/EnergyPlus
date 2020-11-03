@@ -3316,8 +3316,7 @@ namespace HeatBalanceManager {
 
             if (Blind(Loop).SlatWidth < Blind(Loop).SlatSeparation) {
                 ShowWarningError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Slat Angles/Widths");
-                ShowContinueError(format("{} [{:.2R}] is less than ", cNumericFieldNames(1), Blind(Loop).SlatWidth) +
-                                  format("{} [{:.2R}].", cNumericFieldNames(2), Blind(Loop).SlatSeparation));
+                ShowContinueError(format("{} [{:.2R}] is less than {} [{:.2R}].", cNumericFieldNames(1), Blind(Loop).SlatWidth, cNumericFieldNames(2), Blind(Loop).SlatSeparation));
                 ShowContinueError("This will allow direct beam to be transmitted when Slat angle = 0.");
             }
 
@@ -3588,8 +3587,7 @@ namespace HeatBalanceManager {
             }
             if (dataMaterial.Material(MaterNum).SlatWidth < dataMaterial.Material(MaterNum).SlatSeparation) {
                 ShowWarningError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Slat Seperation/Width");
-                ShowContinueError(format("{} [{:.2R}] is less than ", cNumericFieldNames(1), dataMaterial.Material(MaterNum).SlatWidth) +
-                                  format("{} [{:.2R}].", cNumericFieldNames(2), dataMaterial.Material(MaterNum).SlatSeparation));
+                ShowContinueError(format("{} [{:.2R}] is less than {} [{:.2R}].", cNumericFieldNames(1), dataMaterial.Material(MaterNum).SlatWidth, cNumericFieldNames(2), dataMaterial.Material(MaterNum).SlatSeparation));
                 ShowContinueError("This will allow direct beam to be transmitted when Slat angle = 0.");
             }
             if (dataMaterial.Material(MaterNum).SlatSeparation < 0.001) {

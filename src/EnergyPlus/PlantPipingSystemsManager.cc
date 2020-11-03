@@ -488,8 +488,7 @@ namespace EnergyPlus {
                             ShowSevereError("PipingSystems::" + RoutineName +
                                             ": A pipe was outside of the domain extents after performing corrections for basement or burial depth.");
                             ShowContinueError("Pipe segment name:" + thisSegment->Name);
-                            ShowContinueError(format("Corrected pipe location: ( x,y )=( {:.2T},", thisSegment->PipeLocation.X) +
-                                              format("{:.2T} )", thisSegment->PipeLocation.Y));
+                            ShowContinueError(format("Corrected pipe location: ( x,y )=( {:.2T},{:.2T} )", thisSegment->PipeLocation.X, thisSegment->PipeLocation.Y));
                         }
                     } // segment loop
                 } // circuit loop
@@ -1670,8 +1669,7 @@ namespace EnergyPlus {
                 // Issue a severe if Inner >= Outer diameter
                 if (thisCircuit.PipeSize.InnerDia >= thisCircuit.PipeSize.OuterDia) {
                     ShowSevereError(RoutineName + ": " + ObjName_HorizTrench + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\" has invalid pipe diameters.");
-                    ShowContinueError(format("Outer diameter [{:.3T}", thisCircuit.PipeSize.OuterDia)
-                            + format("] must be greater than inner diameter [{:.3T}].", thisCircuit.PipeSize.InnerDia));
+                    ShowContinueError(format("Outer diameter [{:.3T}] must be greater than inner diameter [{:.3T}].", thisCircuit.PipeSize.OuterDia, thisCircuit.PipeSize.InnerDia));
                     ErrorsFound = true;
                 }
 
