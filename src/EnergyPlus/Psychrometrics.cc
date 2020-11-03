@@ -1177,7 +1177,7 @@ namespace Psychrometrics {
                         ShowContinueErrorTimeStamp(" Routine=Unknown,");
                     }
                     String = format(" Enthalpy={:.5T}", HH) + format(" Pressure= {:.2T}", PB);
-                    ShowContinueError(String + format(" Last T={:.2T}", T));
+                    ShowContinueError(format("{} Last T={:.2T}", String, T));
                 }
 #endif
             }

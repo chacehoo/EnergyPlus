@@ -5573,7 +5573,7 @@ namespace Furnaces {
                         }
                     }
                     if (Furnace(FurnaceNum).FanVolFlow < Furnace(FurnaceNum).IdleVolumeAirRate && Furnace(FurnaceNum).IdleVolumeAirRate != 0.0) {
-                        ShowWarningError(CurrentModuleObject + format(" - air flow rate = {:.7T} in fan object is less than the MSHP system air flow rate when no heating or cooling is needed ({:.7T}).", Furnace(FurnaceNum).FanVolFlow, Furnace(FurnaceNum).IdleVolumeAirRate));
+                        ShowWarningError(format("{} - air flow rate = {:.7T} in fan object is less than the MSHP system air flow rate when no heating or cooling is needed ({:.7T}).", CurrentModuleObject, Furnace(FurnaceNum).FanVolFlow, Furnace(FurnaceNum).IdleVolumeAirRate));
                         ShowContinueError(" The MSHP system flow rate when no heating or cooling is needed is reset to the fan flow rate and the "
                                           "simulation continues.");
                         ShowContinueError(" Occurs in " + CurrentModuleObject + " = " + Furnace(FurnaceNum).Name);

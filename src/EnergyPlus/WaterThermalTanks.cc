@@ -1195,13 +1195,13 @@ namespace WaterThermalTanks {
 
                 if (HPWH.WrappedCondenserBottomLocation < 0.0) {
                     ShowSevereError(DataIPShortCuts::cCurrentModuleObject + "=\"" + HPWH.Name + "\", ");
-                    ShowContinueError(hpwhNumericFieldNames[2] + format(" must be greater than 0. Condenser bottom location = {:.6T}", HPWH.WrappedCondenserBottomLocation));
+                    ShowContinueError(format("{} must be greater than 0. Condenser bottom location = {:.6T}", hpwhNumericFieldNames[2], HPWH.WrappedCondenserBottomLocation));
                     ErrorsFound = true;
                 }
 
                 if (HPWH.WrappedCondenserBottomLocation >= HPWH.WrappedCondenserTopLocation) {
                     ShowSevereError(DataIPShortCuts::cCurrentModuleObject + "=\"" + HPWH.Name + "\", ");
-                    ShowContinueError(hpwhNumericFieldNames[3] + format(" ({:.6T}) must be greater than ", HPWH.WrappedCondenserTopLocation) + hpwhNumericFieldNames[2] + format(" ({:.6T}).", HPWH.WrappedCondenserBottomLocation));
+                    ShowContinueError(format("{} ({:.6T}) must be greater than ", HPWH.WrappedCondenserTopLocation) + hpwhNumericFieldNames[2] + format(" ({:.6T}).", hpwhNumericFieldNames[3], HPWH.WrappedCondenserBottomLocation));
                     ErrorsFound = true;
                 }
 

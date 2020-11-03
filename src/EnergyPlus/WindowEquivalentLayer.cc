@@ -978,7 +978,7 @@ namespace WindowEquivalentLayer {
 
         if (P < -0.05 || P > 1.05) {
             ShowWarningMessage(RoutineName + "property value should have been between 0 and 1");
-            ShowContinueError(WHAT + format("=:  property value is ={:.4T}", P));
+            ShowContinueError(format("{}=:  property value is ={:.4T}", WHAT, P));
             if (P < 0.0) {
                 ShowContinueError("property value is reset to 0.0");
             } else if (P > 1.0) {

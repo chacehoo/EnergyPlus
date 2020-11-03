@@ -183,13 +183,13 @@ namespace ExteriorEnergyUse {
                     if (SchMin < 0.0) {
                         ShowSevereError(RoutineName + cCurrentModuleObject + ": invalid " + cAlphaFieldNames(2) + " minimum, is < 0.0 for " +
                                         cAlphaFieldNames(1) + '=' + cAlphaArgs(1));
-                        ShowContinueError(cAlphaArgs(2) + format("\". Minimum is [{:.1R}]. Values must be >= 0.0.", SchMin));
+                        ShowContinueError(format("{}\". Minimum is [{:.1R}]. Values must be >= 0.0.", cAlphaArgs(2), SchMin));
                         ErrorsFound = true;
                     }
                     if (SchMax < 0.0) {
                         ShowSevereError(RoutineName + cCurrentModuleObject + ": invalid " + cAlphaFieldNames(2) + " maximum, is < 0.0 for " +
                                         cAlphaFieldNames(1) + '=' + cAlphaArgs(1));
-                        ShowContinueError(cAlphaArgs(2) + format("\". Maximum is [{:.1R}]. Values must be >= 0.0.", SchMax));
+                        ShowContinueError(format("{}\". Maximum is [{:.1R}]. Values must be >= 0.0.", cAlphaArgs(2), SchMax));
                         ErrorsFound = true;
                     }
                 }
@@ -340,13 +340,13 @@ namespace ExteriorEnergyUse {
                     if (SchMin < 0.0) {
                         ShowSevereError(RoutineName + cCurrentModuleObject + ": invalid " + cAlphaFieldNames(3) + " minimum, is < 0.0 for " +
                                         cAlphaFieldNames(1) + '=' + cAlphaArgs(1));
-                        ShowContinueError(cAlphaArgs(3) + format("\". Minimum is [{:.1R}]. Values must be >= 0.0.", SchMin));
+                        ShowContinueError(format("{}\". Minimum is [{:.1R}]. Values must be >= 0.0.", cAlphaArgs(3), SchMin));
                         ErrorsFound = true;
                     }
                     if (SchMax < 0.0) {
                         ShowSevereError(RoutineName + cCurrentModuleObject + ": invalid " + cAlphaFieldNames(3) + " maximum, is < 0.0 for " +
                                         cAlphaFieldNames(1) + '=' + cAlphaArgs(1));
-                        ShowContinueError(cAlphaArgs(3) + format("\". Maximum is [{:.1R}]. Values must be >= 0.0.", SchMax));
+                        ShowContinueError(format("{}\". Maximum is [{:.1R}]. Values must be >= 0.0.", cAlphaArgs(3), SchMax));
                         ErrorsFound = true;
                     }
                 }
@@ -393,13 +393,13 @@ namespace ExteriorEnergyUse {
                     if (SchMin < 0.0) {
                         ShowSevereError(RoutineName + cCurrentModuleObject + ": invalid " + cAlphaFieldNames(3) + " minimum, is < 0.0 for " +
                                         cAlphaFieldNames(1) + '=' + cAlphaArgs(1));
-                        ShowContinueError(cAlphaArgs(3) + format("\". Minimum is [{:.1R}]. Values must be >= 0.0.", SchMin));
+                        ShowContinueError(format("{}\". Minimum is [{:.1R}]. Values must be >= 0.0.", cAlphaArgs(3), SchMin));
                         ErrorsFound = true;
                     }
                     if (SchMax < 0.0) {
                         ShowSevereError(RoutineName + cCurrentModuleObject + ": invalid " + cAlphaFieldNames(3) + " maximum, is < 0.0 for " +
                                         cAlphaFieldNames(1) + '=' + cAlphaArgs(1));
-                        ShowContinueError(cAlphaArgs(3) + format("\". Maximum is [{:.1R}]. Values must be >= 0.0.", SchMax));
+                        ShowContinueError(format("{}\". Maximum is [{:.1R}]. Values must be >= 0.0.", cAlphaArgs(3), SchMax));
                         ErrorsFound = true;
                     }
                 }
