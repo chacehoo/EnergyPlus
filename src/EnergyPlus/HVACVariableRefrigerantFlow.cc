@@ -12531,7 +12531,7 @@ namespace HVACVariableRefrigerantFlow {
 
             if (m_air <= 0) {
                 TeTc = this->CondensingTemp;
-                ShowSevereMessage(format(" Unreasonable outdoor unit airflow rate ({:.3T} ) for \"", m_air) + this->Name + "\":");
+                ShowSevereMessage(format(" Unreasonable outdoor unit airflow rate ({:.3T} ) for \"{}", m_air, this->Name) + "\":");
                 ShowContinueError(" This cannot be used to calculate outdoor unit refrigerant temperature.");
                 ShowContinueError(format(" Default condensing temperature is used: {:.3T}", TeTc));
             }
@@ -12549,7 +12549,7 @@ namespace HVACVariableRefrigerantFlow {
 
             if (m_air <= 0) {
                 TeTc = this->EvaporatingTemp;
-                ShowSevereMessage(format(" Unreasonable outdoor unit airflow rate ({:.3T} ) for \"", m_air) + this->Name + "\":");
+                ShowSevereMessage(format(" Unreasonable outdoor unit airflow rate ({:.3T} ) for \"{}", m_air, this->Name) + "\":");
                 ShowContinueError(" This cannot be used to calculate outdoor unit refrigerant temperature.");
                 ShowContinueError(format(" Default condensing temperature is used: {:.3T}", TeTc));
             }
@@ -12614,7 +12614,7 @@ namespace HVACVariableRefrigerantFlow {
         if (OperationMode == FlagCondMode) {
             // IU Cooling: OperationMode 0
             if (m_air <= 0) {
-                ShowSevereMessage(format(" Unreasonable outdoor unit airflow rate ({:.3T} ) for \"", m_air) + this->Name + "\":");
+                ShowSevereMessage(format(" Unreasonable outdoor unit airflow rate ({:.3T} ) for \"{}", m_air, this->Name) + "\":");
                 ShowContinueError(" This cannot be used to calculate outdoor unit capacity.");
             }
 
@@ -12627,7 +12627,7 @@ namespace HVACVariableRefrigerantFlow {
         } else if (OperationMode == FlagEvapMode) {
             // IU Heating: OperationMode 1
             if (m_air <= 0) {
-                ShowSevereMessage(format(" Unreasonable outdoor unit airflow rate ({:.3T} ) for \"", m_air) + this->Name + "\":");
+                ShowSevereMessage(format(" Unreasonable outdoor unit airflow rate ({:.3T} ) for \"{}", m_air, this->Name) + "\":");
                 ShowContinueError(" This cannot be used to calculate outdoor unit capacity.");
             }
 
@@ -12775,7 +12775,7 @@ namespace HVACVariableRefrigerantFlow {
         if (OperationMode == FlagCondMode) {
             // Cooling: OperationMode 0
             if (m_air <= 0) {
-                ShowSevereMessage(format(" Unreasonable outdoor unit airflow rate ({:.3T} ) for \"", m_air) + this->Name + "\":");
+                ShowSevereMessage(format(" Unreasonable outdoor unit airflow rate ({:.3T} ) for \"{}", m_air, this->Name) + "\":");
                 ShowContinueError(" This cannot be used to calculate outdoor unit subcooling.");
             }
 
@@ -12793,7 +12793,7 @@ namespace HVACVariableRefrigerantFlow {
         } else if (OperationMode == FlagEvapMode) {
             // Heating: OperationMode 1
             if (m_air <= 0) {
-                ShowSevereMessage(format(" Unreasonable outdoor unit airflow rate ({:.3T} ) for \"", m_air) + this->Name + "\":");
+                ShowSevereMessage(format(" Unreasonable outdoor unit airflow rate ({:.3T} ) for \"{}", m_air, this->Name) + "\":");
                 ShowContinueError(" This cannot be used to calculate outdoor unit super heating.");
             }
 

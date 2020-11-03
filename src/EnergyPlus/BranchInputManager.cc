@@ -1743,7 +1743,7 @@ namespace BranchInputManager {
                 Found = UtilityRoutines::FindItemInList(state.dataBranchInputManager->Splitters(Count).OutletBranchNames(Loop), state.dataBranchInputManager->Branch);
                 if (Found == 0) {
                     ShowSevereError("GetSplitterInput: Invalid Branch=" + state.dataBranchInputManager->Splitters(Count).OutletBranchNames(Loop) +
-                                    fmt::format(", referenced as Outlet Branch # {} to ", Loop) + CurrentModuleObject + '=' +
+                                    fmt::format(", referenced as Outlet Branch # {} to {}", Loop, CurrentModuleObject) + '=' +
                                     state.dataBranchInputManager->Splitters(Count).Name);
                     ErrorsFound = true;
                 }

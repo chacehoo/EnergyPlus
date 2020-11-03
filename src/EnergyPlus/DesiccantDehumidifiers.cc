@@ -239,7 +239,7 @@ namespace DesiccantDehumidifiers {
                                ", Number of Units=" + fmt::to_string(NumDesicDehums) + ", Entered Unit name=" + CompName);
             }
             if (CompName != DesicDehum(DesicDehumNum).Name) {
-                ShowFatalError(format("SimDesiccantDehumidifier: Invalid CompIndex passed={}, Unit name=", DesicDehumNum) + CompName +
+                ShowFatalError(format("SimDesiccantDehumidifier: Invalid CompIndex passed={}, Unit name={}", DesicDehumNum, CompName) +
                                ", stored Unit Name for that index=" + DesicDehum(DesicDehumNum).Name);
             }
         }

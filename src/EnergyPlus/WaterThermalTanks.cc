@@ -1553,7 +1553,7 @@ namespace WaterThermalTanks {
 
             if (FanVolFlow != DataSizing::AutoSize && !errFlag) {
                 if (FanVolFlow < HPWH.OperatingAirFlowRate) {
-                    ShowSevereError(DataIPShortCuts::cCurrentModuleObject + format(" - air flow rate = {:.7T} in fan object ", FanVolFlow) + HPWH.FanName + " is less than the  HPWHs evaporator air flow rate.");
+                    ShowSevereError(DataIPShortCuts::cCurrentModuleObject + format(" - air flow rate = {:.7T} in fan object {}", FanVolFlow, HPWH.FanName) + " is less than the  HPWHs evaporator air flow rate.");
                     ShowContinueError(" The fan flow rate must be >= to the HPWHs evaporator volumetric air flow rate.");
                     ShowContinueError(" Occurs in unit = " + HPWH.Name);
                     ErrorsFound = true;

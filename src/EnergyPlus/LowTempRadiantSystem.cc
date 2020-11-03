@@ -4319,7 +4319,7 @@ namespace LowTempRadiantSystem {
             // Error check, just in case
             if (this->WaterRecircRate < 0.0) {
                 ShowWarningError("Flow mismatch in radiant system--result will be an energy imbalance--should not get this error");
-                ShowContinueErrorTimeStamp(format("WaterRecircRate={:.2T}, in Radiant System=", this->WaterRecircRate) + this->Name + ',');
+                ShowContinueErrorTimeStamp(format("WaterRecircRate={:.2T}, in Radiant System={}", this->WaterRecircRate, this->Name) + ',');
                 this->WaterRecircRate = 0.0;
                 this->WaterInjectionRate = this->WaterMassFlowRate;
             }
