@@ -416,7 +416,7 @@ void CoilCoolingDXCurveFitSpeed::CalcSpeedOutput(EnergyPlus::EnergyPlusData &sta
         A0 = -std::log(RatedCBF) * RatedAirMassFlowRate;
     } else {
         // This is bad - results in CBF = 1.0 which results in divide by zero below: hADP = inletState.h - hDelta / (1.0 - CBF)
-        ShowFatalError(RoutineName + format("Rated CBF={:.6R} is <= 0.0 for ", RatedCBF) + object_name + "=" + name);
+        ShowFatalError(format("{}Rated CBF={:.6R} is <= 0.0 for ", RoutineName, RatedCBF) + object_name + "=" + name);
         A0 = 0.0;
     }
     Real64 ADiff = -A0 / AirMassFlow;

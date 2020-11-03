@@ -2267,7 +2267,7 @@ namespace HVACMultiSpeedHeatPump {
             if (MSHeatPump(MSHeatPumpNum).FanVolFlow != AutoSize) {
                 //     Check fan versus system supply air flow rates
                 if (MSHeatPump(MSHeatPumpNum).FanVolFlow < MSHeatPump(MSHeatPumpNum).CoolVolumeFlowRate(NumOfSpeedCooling)) {
-                    ShowWarningError(CurrentModuleObject + format(" - air flow rate = {:.7T} in fan object ", MSHeatPump(MSHeatPumpNum).FanVolFlow) + MSHeatPump(MSHeatPumpNum).FanName +
+                    ShowWarningError(format("{} - air flow rate = {:.7T} in fan object ", CurrentModuleObject, MSHeatPump(MSHeatPumpNum).FanVolFlow) + MSHeatPump(MSHeatPumpNum).FanName +
                                      format(" is less than the MSHP system air flow rate when cooling is required ({:.7T}).", MSHeatPump(MSHeatPumpNum).CoolVolumeFlowRate(NumOfSpeedCooling)));
                     ShowContinueError(
                         " The MSHP system flow rate when cooling is required is reset to the fan flow rate and the simulation continues.");
@@ -2285,7 +2285,7 @@ namespace HVACMultiSpeedHeatPump {
                     }
                 }
                 if (MSHeatPump(MSHeatPumpNum).FanVolFlow < MSHeatPump(MSHeatPumpNum).HeatVolumeFlowRate(NumOfSpeedHeating)) {
-                    ShowWarningError(CurrentModuleObject + format(" - air flow rate = {:.7T} in fan object ", MSHeatPump(MSHeatPumpNum).FanVolFlow) + MSHeatPump(MSHeatPumpNum).FanName +
+                    ShowWarningError(format("{} - air flow rate = {:.7T} in fan object ", CurrentModuleObject, MSHeatPump(MSHeatPumpNum).FanVolFlow) + MSHeatPump(MSHeatPumpNum).FanName +
                                      format(" is less than the MSHP system air flow rate when heating is required ({:.7T}).", MSHeatPump(MSHeatPumpNum).HeatVolumeFlowRate(NumOfSpeedHeating)));
                     ShowContinueError(
                         " The MSHP system flow rate when heating is required is reset to the fan flow rate and the simulation continues.");
@@ -2303,7 +2303,7 @@ namespace HVACMultiSpeedHeatPump {
                 }
                 if (MSHeatPump(MSHeatPumpNum).FanVolFlow < MSHeatPump(MSHeatPumpNum).IdleVolumeAirRate &&
                     MSHeatPump(MSHeatPumpNum).IdleVolumeAirRate != 0.0) {
-                    ShowWarningError(CurrentModuleObject + format(" - air flow rate = {:.7T} in fan object ", MSHeatPump(MSHeatPumpNum).FanVolFlow) + MSHeatPump(MSHeatPumpNum).FanName +
+                    ShowWarningError(format("{} - air flow rate = {:.7T} in fan object ", CurrentModuleObject, MSHeatPump(MSHeatPumpNum).FanVolFlow) + MSHeatPump(MSHeatPumpNum).FanName +
                                      format(" is less than the MSHP system air flow rate when no heating or cooling is needed ({:.7T}).", MSHeatPump(MSHeatPumpNum).IdleVolumeAirRate));
                     ShowContinueError(" The MSHP system flow rate when no heating or cooling is needed is reset to the fan flow rate and the "
                                       "simulation continues.");

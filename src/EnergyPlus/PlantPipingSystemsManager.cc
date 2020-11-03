@@ -2278,7 +2278,7 @@ namespace EnergyPlus {
             //       MODIFIED       na
             //       RE-ENGINEERED  na
 
-            ShowSevereError(RoutineName + ':' + ObjectName + "=\"" + InstanceName + "\", invalid " + FieldName + format("=\"{:.3T}\", Condition: ", FieldEntry) + Condition);
+            ShowSevereError(RoutineName + ':' + ObjectName + "=\"" + InstanceName + "\", invalid " + format("{}=\"{:.3T}\", Condition: ", FieldName, FieldEntry) + Condition);
             ErrorsFound = true;
         }
 

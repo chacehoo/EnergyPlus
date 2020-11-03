@@ -2051,11 +2051,11 @@ namespace SurfaceGeometry {
 
         for (int SurfNum = 1; SurfNum <= MovedSurfs; ++SurfNum) { // TotSurfaces
             if (Surface(SurfNum).Area < 1.e-06) {
-                ShowSevereError(RoutineName + format("Zero or negative surface area[{:.5R}], Surface=", Surface(SurfNum).Area) + Surface(SurfNum).Name);
+                ShowSevereError(format("{}Zero or negative surface area[{:.5R}], Surface=", RoutineName, Surface(SurfNum).Area) + Surface(SurfNum).Name);
                 SurfError = true;
             }
             if (Surface(SurfNum).Area >= 1.e-06 && Surface(SurfNum).Area < 0.001) {
-                ShowWarningError(RoutineName + format("Very small surface area[{:.5R}], Surface=", Surface(SurfNum).Area) + Surface(SurfNum).Name);
+                ShowWarningError(format("{}Very small surface area[{:.5R}], Surface=", RoutineName, Surface(SurfNum).Area) + Surface(SurfNum).Name);
             }
         }
 
@@ -2355,9 +2355,9 @@ namespace SurfaceGeometry {
                 (std::abs(baseSurface.Tilt - subSurface.Tilt) > errorTolerance)) {
                 surfaceError = true;
                 ShowSevereError(format("checkSubSurfAzTiltNorm: Outward facing angle of subsurface differs more than {:.1R} degrees from base surface.", errorTolerance));
-                ShowContinueError("Subsurface=\"" + subSurface.Name + format("\" Tilt = {:.1R}", subSurface.Tilt) +
+                ShowContinueError("Subsurface=\"" + format("{}\" Tilt = {:.1R}", subSurface.Name, subSurface.Tilt) +
                                   format("  Azimuth = {:.1R}", subSurface.Azimuth));
-                ShowContinueError("Base surface=\"" + baseSurface.Name + format("\" Tilt = {:.1R}", baseSurface.Tilt) +
+                ShowContinueError("Base surface=\"" + format("{}\" Tilt = {:.1R}", baseSurface.Name, baseSurface.Tilt) +
                                   format("  Azimuth = {:.1R}", baseSurface.Azimuth));
             } else if (((std::abs(baseSurface.Azimuth - subSurface.Azimuth) > warningTolerance) && !baseSurfHoriz) ||
                        (std::abs(baseSurface.Tilt - subSurface.Tilt) > warningTolerance)) {
@@ -2368,9 +2368,9 @@ namespace SurfaceGeometry {
                 }
                 if (DisplayExtraWarnings) {
                     ShowWarningError(format("checkSubSurfAzTiltNorm: Outward facing angle of subsurface differs more than {:.1R} degrees from base surface.", warningTolerance));
-                    ShowContinueError("Subsurface=\"" + subSurface.Name + format("\" Tilt = {:.1R}", subSurface.Tilt) +
+                    ShowContinueError("Subsurface=\"" + format("{}\" Tilt = {:.1R}", subSurface.Name, subSurface.Tilt) +
                                       format("  Azimuth = {:.1R}", subSurface.Azimuth));
-                    ShowContinueError("Base surface=\"" + baseSurface.Name + format("\" Tilt = {:.1R}", baseSurface.Tilt) +
+                    ShowContinueError("Base surface=\"" + format("{}\" Tilt = {:.1R}", baseSurface.Name, baseSurface.Tilt) +
                                       format("  Azimuth = {:.1R}", baseSurface.Azimuth));
                 }
             }

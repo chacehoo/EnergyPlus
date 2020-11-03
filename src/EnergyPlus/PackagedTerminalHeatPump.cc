@@ -1786,7 +1786,7 @@ namespace PackagedTerminalHeatPump {
             if (FanVolFlow != AutoSize) {
                 if (FanVolFlow <
                     max(PTUnit(PTUnitNum).MaxCoolAirVolFlow, PTUnit(PTUnitNum).MaxHeatAirVolFlow, PTUnit(PTUnitNum).MaxNoCoolHeatAirVolFlow)) {
-                    ShowWarningError(CurrentModuleObject + format(" - air flow rate = {:.7T} in fan object ", FanVolFlow) +
+                    ShowWarningError(format("{} - air flow rate = {:.7T} in fan object ", CurrentModuleObject, FanVolFlow) +
                                      PTUnit(PTUnitNum).FanName + " is less than the maximum PTHP supply air flow rate.");
                     ShowContinueError(" The fan flow rate must be greater than the PTHP maximum supply air flow rate.");
                     ShowContinueError(" Occurs in " + CurrentModuleObject + " = " + PTUnit(PTUnitNum).Name);
