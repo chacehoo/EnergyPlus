@@ -3445,13 +3445,11 @@ namespace HeatBalanceManager {
                 if (Blind(Loop).SlatAngle < MinSlatAngGeom) {
                     ErrorsFound = true;
                     ShowSevereError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Illegal value combination.");
-                    ShowContinueError(format("{}=[{:.1R}], is less than smallest allowed by slat dimensions and spacing, [{:.1R}", cNumericFieldNames(4), Blind(Loop).SlatAngle, MinSlatAngGeom) +
-                                      "] deg.");
+                    ShowContinueError(format("{}=[{:.1R}], is less than smallest allowed by slat dimensions and spacing, [{:.1R}] deg.", cNumericFieldNames(4), Blind(Loop).SlatAngle, MinSlatAngGeom));
                 } else if (Blind(Loop).SlatAngle > MaxSlatAngGeom) {
                     ErrorsFound = true;
                     ShowSevereError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Illegal value combination.");
-                    ShowContinueError(format("{}=[{:.1R}], is greater than largest allowed by slat dimensions and spacing, [{:.1R}", cNumericFieldNames(4), Blind(Loop).SlatAngle, MinSlatAngGeom) +
-                                      "] deg.");
+                    ShowContinueError(format("{}=[{:.1R}], is greater than largest allowed by slat dimensions and spacing, [{:.1R}] deg.", cNumericFieldNames(4), Blind(Loop).SlatAngle, MinSlatAngGeom));
                 }
             }
 
@@ -3596,29 +3594,25 @@ namespace HeatBalanceManager {
             }
             if (dataMaterial.Material(MaterNum).SlatSeparation < 0.001) {
                 ShowWarningError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Slat Seperation");
-                ShowContinueError(format("{} [{:.2R}", cNumericFieldNames(2), dataMaterial.Material(MaterNum).SlatSeparation) +
-                                  "]. Slate spacing must be > 0.0");
+                ShowContinueError(format("{} [{:.2R}]. Slate spacing must be > 0.0", cNumericFieldNames(2), dataMaterial.Material(MaterNum).SlatSeparation));
                 ShowContinueError("...Setting slate spacing to default value of 0.025 m and simulation continues.");
                 dataMaterial.Material(MaterNum).SlatSeparation = 0.025;
             }
             if (dataMaterial.Material(MaterNum).SlatWidth < 0.001 || dataMaterial.Material(MaterNum).SlatWidth >= 2.0 * dataMaterial.Material(MaterNum).SlatSeparation) {
                 ShowWarningError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Slat Width");
-                ShowContinueError(format("{} [{:.2R}", cNumericFieldNames(1), dataMaterial.Material(MaterNum).SlatWidth) +
-                                  "]. Slat width range is 0 < Width <= 2*Spacing");
+                ShowContinueError(format("{} [{:.2R}]. Slat width range is 0 < Width <= 2*Spacing", cNumericFieldNames(1), dataMaterial.Material(MaterNum).SlatWidth));
                 ShowContinueError("...Setting slate width equal to slate spacing and simulation continues.");
                 dataMaterial.Material(MaterNum).SlatWidth = dataMaterial.Material(MaterNum).SlatSeparation;
             }
             if (dataMaterial.Material(MaterNum).SlatCrown < 0.0 || dataMaterial.Material(MaterNum).SlatCrown >= 0.5 * dataMaterial.Material(MaterNum).SlatWidth) {
                 ShowWarningError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Slat Crown");
-                ShowContinueError(format("{} [{:.2R}", cNumericFieldNames(3), dataMaterial.Material(MaterNum).SlatCrown) +
-                                  "]. Slat crwon range is 0 <= crown < 0.5*Width");
+                ShowContinueError(format("{} [{:.2R}]. Slat crwon range is 0 <= crown < 0.5*Width", cNumericFieldNames(3), dataMaterial.Material(MaterNum).SlatCrown));
                 ShowContinueError("...Setting slate crown to 0.0 and simulation continues.");
                 dataMaterial.Material(MaterNum).SlatCrown = 0.0;
             }
             if (dataMaterial.Material(MaterNum).SlatAngle < -90.0 || dataMaterial.Material(MaterNum).SlatAngle > 90.0) {
                 ShowWarningError(CurrentModuleObject + "=\"" + MaterialNames(1) + "\", Slat Angle");
-                ShowContinueError(format("{} [{:.2R}", cNumericFieldNames(4), dataMaterial.Material(MaterNum).SlatAngle) +
-                                  "]. Slat angle range is -90.0 <= Angle < 90.0");
+                ShowContinueError(format("{} [{:.2R}]. Slat angle range is -90.0 <= Angle < 90.0", cNumericFieldNames(4), dataMaterial.Material(MaterNum).SlatAngle));
                 ShowContinueError("...Setting slate angle to 0.0 and simulation continues.");
                 dataMaterial.Material(MaterNum).SlatAngle = 0.0;
             }
@@ -4041,8 +4035,7 @@ namespace HeatBalanceManager {
                     if (SpectralData(Loop).WaveLength(LamNum + 1) <= Lam) {
                         ErrorsFound = true;
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + SpecDataNames(1) + "\" invalid set.");
-                        ShowContinueError("... Wavelengths not in increasing order. at wavelength#=" + fmt::to_string(LamNum) + format(", value=[{:.4T}], next is [{:.4T}", Lam, SpectralData(Loop).WaveLength(LamNum + 1)) +
-                                          "].");
+                        ShowContinueError("... Wavelengths not in increasing order. at wavelength#=" + fmt::to_string(LamNum) + format(", value=[{:.4T}], next is [{:.4T}].", Lam, SpectralData(Loop).WaveLength(LamNum + 1)));
                     }
                 }
 
@@ -4059,8 +4052,7 @@ namespace HeatBalanceManager {
                 if (Tau > 1.01) {
                     ErrorsFound = true;
                     ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + SpecDataNames(1) + "\" invalid value.");
-                    ShowContinueError("... A transmittance is > 1.0; at wavelength#=" + fmt::to_string(LamNum) + format(", value=[{:.4T}", Tau) +
-                                      "].");
+                    ShowContinueError("... A transmittance is > 1.0; at wavelength#=" + fmt::to_string(LamNum) + format(", value=[{:.4T}].", Tau));
                 }
 
                 if (RhoF < 0.0 || RhoF > 1.02 || RhoB < 0.0 || RhoB > 1.02) {

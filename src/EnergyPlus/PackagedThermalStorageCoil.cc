@@ -4197,7 +4197,7 @@ namespace PackagedThermalStorageCoil {
                                 ++SensPLRIter;
                                 ShowWarningError(SystemType +
                                                  " - Iteration limit exceeded calculating DX unit sensible part-load ratio for unit = " + CoilName);
-                                ShowContinueError(format("Estimated part-load ratio  = {:.3R}", (ReqOutput / FullOutput)));
+                                ShowContinueError(format("Estimated part-load ratio  = {:.3R}", ReqOutput / FullOutput));
                                 ShowContinueError(format("Calculated part-load ratio = {:.3R}", PartLoadFrac));
                                 ShowContinueErrorTimeStamp(
                                     "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");
@@ -4264,7 +4264,7 @@ namespace PackagedThermalStorageCoil {
                                     ++LatPLRIter;
                                     ShowWarningError(SystemType +
                                                      " - Iteration limit exceeded calculating DX unit latent part-load ratio for unit = " + CoilName);
-                                    ShowContinueError(format("Estimated part-load ratio   = {:.3R}", (ReqOutput / FullOutput)));
+                                    ShowContinueError(format("Estimated part-load ratio   = {:.3R}", ReqOutput / FullOutput));
                                     ShowContinueError(format("Calculated part-load ratio = {:.3R}", PartLoadFrac));
                                     ShowContinueErrorTimeStamp(
                                         "The calculated part-load ratio will be used and the simulation continues. Occurrence info:");

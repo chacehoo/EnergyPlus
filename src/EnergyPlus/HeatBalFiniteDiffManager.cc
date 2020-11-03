@@ -382,7 +382,7 @@ namespace HeatBalFiniteDiffManager {
                 if (nonInc) {
                     ShowSevereError("GetCondFDInput: " + cCurrentModuleObject + "=\"" + MaterialNames(1) +
                                     "\", non increasing Temperatures. Temperatures must be strictly increasing.");
-                    ShowContinueError("...occurs first at item=[" + fmt::to_string(inegptr) + format("], value=[{:.2R}", MaterialFD(MaterNum).TempEnth(1, inegptr)) + "].");
+                    ShowContinueError("...occurs first at item=[" + fmt::to_string(inegptr) + format("], value=[{:.2R}].", MaterialFD(MaterNum).TempEnth(1, inegptr)));
                     ErrorsFound = true;
                 }
                 nonInc = false;
@@ -395,7 +395,7 @@ namespace HeatBalFiniteDiffManager {
                 }
                 if (nonInc) {
                     ShowSevereError("GetCondFDInput: " + cCurrentModuleObject + "=\"" + MaterialNames(1) + "\", non increasing Enthalpy.");
-                    ShowContinueError("...occurs first at item=[" + fmt::to_string(inegptr) + format("], value=[{:.2R}", MaterialFD(MaterNum).TempEnth(2, inegptr)) + "].");
+                    ShowContinueError("...occurs first at item=[" + fmt::to_string(inegptr) + format("], value=[{:.2R}].", MaterialFD(MaterNum).TempEnth(2, inegptr)));
                     ShowContinueError("...These values may be Cp (Specific Heat) rather than Enthalpy.  Please correct.");
                     ErrorsFound = true;
                 }
@@ -470,7 +470,7 @@ namespace HeatBalFiniteDiffManager {
                 if (nonInc) {
                     ShowSevereError("GetCondFDInput: " + cCurrentModuleObject + "=\"" + MaterialNames(1) +
                                     "\", non increasing Temperatures. Temperatures must be strictly increasing.");
-                    ShowContinueError("...occurs first at item=[" + fmt::to_string(inegptr) + format("], value=[{:.2R}", MaterialFD(MaterNum).TempCond(1, inegptr)) + "].");
+                    ShowContinueError("...occurs first at item=[" + fmt::to_string(inegptr) + format("], value=[{:.2R}].", MaterialFD(MaterNum).TempCond(1, inegptr)));
                     ErrorsFound = true;
                 }
             }
@@ -790,12 +790,12 @@ namespace HeatBalFiniteDiffManager {
                                 "InitialInitHeatBalFiniteDiff: Found Material that is too thin and/or too highly conductive, material name = " +
                                 dataMaterial.Material(CurrentLayer).Name);
                             ShowContinueError(
-                                format("High conductivity Material layers are not well supported by Conduction Finite Difference, material conductivity = {:.3R}", dataMaterial.Material(CurrentLayer).Conductivity) + " [W/m-K]");
-                            ShowContinueError(format("Material thermal diffusivity = {:.3R}", Alpha) + " [m2/s]");
-                            ShowContinueError(format("Material with this thermal diffusivity should have thickness > {:.5R}", ThicknessThreshold) + " [m]");
+                                format("High conductivity Material layers are not well supported by Conduction Finite Difference, material conductivity = {:.3R} [W/m-K]", dataMaterial.Material(CurrentLayer).Conductivity));
+                            ShowContinueError(format("Material thermal diffusivity = {:.3R} [m2/s]", Alpha));
+                            ShowContinueError(format("Material with this thermal diffusivity should have thickness > {:.5R} [m]", ThicknessThreshold));
                             if (dataMaterial.Material(CurrentLayer).Thickness < ThinMaterialLayerThreshold) {
-                                ShowContinueError(format("Material may be too thin to be modeled well, thickness = {:.5R}", dataMaterial.Material(CurrentLayer).Thickness) + " [m]");
-                                ShowContinueError(format("Material with this thermal diffusivity should have thickness > {:.5R}", ThinMaterialLayerThreshold) + " [m]");
+                                ShowContinueError(format("Material may be too thin to be modeled well, thickness = {:.5R} [m]", dataMaterial.Material(CurrentLayer).Thickness));
+                                ShowContinueError(format("Material with this thermal diffusivity should have thickness > {:.5R} [m]", ThinMaterialLayerThreshold));
                             }
                             ShowFatalError("Preceding conditions cause termination.");
                         }
@@ -2247,19 +2247,19 @@ namespace HeatBalFiniteDiffManager {
         if (!WarmupFlag || WarmupSurfTemp > 10 || DisplayExtraWarnings) {
             if (CheckTemperature < MinSurfaceTempLimit) {
                 if (Surface(SurfNum).LowTempErrCount == 0) {
-                    ShowSevereMessage(format("Temperature (low) out of bounds [{:.2R}", CheckTemperature) + "] for zone=\"" +
+                    ShowSevereMessage(format("Temperature (low) out of bounds [{:.2R}] for zone=\"", CheckTemperature) +
                                       Zone(ZoneNum).Name + "\", for surface=\"" + Surface(SurfNum).Name + "\"");
                     ShowContinueErrorTimeStamp("");
                     if (!Zone(ZoneNum).TempOutOfBoundsReported) {
                         ShowContinueError("Zone=\"" + Zone(ZoneNum).Name + "\", Diagnostic Details:");
                         if (Zone(ZoneNum).FloorArea > 0.0) {
-                            ShowContinueError(format("...Internal Heat Gain [{:.3R}", Zone(ZoneNum).InternalHeatGains / Zone(ZoneNum).FloorArea) + "] W/m2");
+                            ShowContinueError(format("...Internal Heat Gain [{:.3R}] W/m2", Zone(ZoneNum).InternalHeatGains / Zone(ZoneNum).FloorArea));
                         } else {
-                            ShowContinueError(format("...Internal Heat Gain (no floor) [{:.3R}", Zone(ZoneNum).InternalHeatGains) + "] W");
+                            ShowContinueError(format("...Internal Heat Gain (no floor) [{:.3R}] W", Zone(ZoneNum).InternalHeatGains));
                         }
                         if (AirflowNetwork::SimulateAirflowNetwork <= AirflowNetwork::AirflowNetworkControlSimple) {
-                            ShowContinueError(format("...Infiltration/Ventilation [{:.3R}", Zone(ZoneNum).NominalInfilVent) + "] m3/s");
-                            ShowContinueError(format("...Mixing/Cross Mixing [{:.3R}", Zone(ZoneNum).NominalMixing) + "] m3/s");
+                            ShowContinueError(format("...Infiltration/Ventilation [{:.3R}] m3/s", Zone(ZoneNum).NominalInfilVent));
+                            ShowContinueError(format("...Mixing/Cross Mixing [{:.3R}] m3/s", Zone(ZoneNum).NominalMixing));
                         } else {
                             ShowContinueError("...Airflow Network Simulation: Nominal Infiltration/Ventilation/Mixing not available.");
                         }
@@ -2290,19 +2290,19 @@ namespace HeatBalFiniteDiffManager {
                 }
             } else {
                 if (Surface(SurfNum).HighTempErrCount == 0) {
-                    ShowSevereMessage(format("Temperature (high) out of bounds ({:.2R}", CheckTemperature) + "] for zone=\"" +
+                    ShowSevereMessage(format("Temperature (high) out of bounds ({:.2R}] for zone=\"", CheckTemperature) +
                                       Zone(ZoneNum).Name + "\", for surface=\"" + Surface(SurfNum).Name + "\"");
                     ShowContinueErrorTimeStamp("");
                     if (!Zone(ZoneNum).TempOutOfBoundsReported) {
                         ShowContinueError("Zone=\"" + Zone(ZoneNum).Name + "\", Diagnostic Details:");
                         if (Zone(ZoneNum).FloorArea > 0.0) {
-                            ShowContinueError(format("...Internal Heat Gain [{:.3R}", Zone(ZoneNum).InternalHeatGains / Zone(ZoneNum).FloorArea) + "] W/m2");
+                            ShowContinueError(format("...Internal Heat Gain [{:.3R}] W/m2", Zone(ZoneNum).InternalHeatGains / Zone(ZoneNum).FloorArea));
                         } else {
-                            ShowContinueError(format("...Internal Heat Gain (no floor) [{:.3R}", Zone(ZoneNum).InternalHeatGains) + "] W");
+                            ShowContinueError(format("...Internal Heat Gain (no floor) [{:.3R}] W", Zone(ZoneNum).InternalHeatGains));
                         }
                         if (AirflowNetwork::SimulateAirflowNetwork <= AirflowNetwork::AirflowNetworkControlSimple) {
-                            ShowContinueError(format("...Infiltration/Ventilation [{:.3R}", Zone(ZoneNum).NominalInfilVent) + "] m3/s");
-                            ShowContinueError(format("...Mixing/Cross Mixing [{:.3R}", Zone(ZoneNum).NominalMixing) + "] m3/s");
+                            ShowContinueError(format("...Infiltration/Ventilation [{:.3R}] m3/s", Zone(ZoneNum).NominalInfilVent));
+                            ShowContinueError(format("...Mixing/Cross Mixing [{:.3R}] m3/s", Zone(ZoneNum).NominalMixing));
                         } else {
                             ShowContinueError("...Airflow Network Simulation: Nominal Infiltration/Ventilation/Mixing not available.");
                         }

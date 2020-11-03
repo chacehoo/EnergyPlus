@@ -1589,8 +1589,7 @@ namespace HeatBalanceAirManager {
                     if (!lNumericFieldBlanks(11) && (!cAlphaArgs(6).empty() && Ventilation(Loop).MinIndoorTempSchedPtr == 0)) {
                         if (Item1 == 1) {
                             ShowWarningError(RoutineName + cAlphaFieldNames(6) + " = " + cAlphaArgs(6) +
-                                             format(" is invalid. The constant value will be used at {:.1R}", rNumericArgs(11)) +
-                                             " degrees C ");
+                                             format(" is invalid. The constant value will be used at {:.1R} degrees C ", rNumericArgs(11)));
                             ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
                         }
                     }
@@ -1636,8 +1635,7 @@ namespace HeatBalanceAirManager {
                     if (!lNumericFieldBlanks(12) && ((!lAlphaFieldBlanks(7)) && Ventilation(Loop).MaxIndoorTempSchedPtr == 0)) {
                         if (Item1 == 1) {
                             ShowWarningError(RoutineName + cAlphaFieldNames(7) + " = " + cAlphaArgs(7) +
-                                             format(" is invalid. The constant value will be used at {:.1R}", rNumericArgs(12)) +
-                                             " degrees C ");
+                                             format(" is invalid. The constant value will be used at {:.1R} degrees C ", rNumericArgs(12)));
                             ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
                         }
                     }
@@ -1683,8 +1681,7 @@ namespace HeatBalanceAirManager {
                     if (!lNumericFieldBlanks(13) && ((!lAlphaFieldBlanks(8)) && Ventilation(Loop).DeltaTempSchedPtr == 0)) {
                         if (Item1 == 1) {
                             ShowWarningError(RoutineName + cAlphaFieldNames(8) + " = " + cAlphaArgs(8) +
-                                             format(" is invalid. The constant value will be used at {:.1R}", rNumericArgs(13)) +
-                                             " degrees C ");
+                                             format(" is invalid. The constant value will be used at {:.1R} degrees C ", rNumericArgs(13)));
                             ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
                         }
                     }
@@ -1726,8 +1723,7 @@ namespace HeatBalanceAirManager {
                         // Check Minimum outdoor temperature value and schedule fields
                         if (!lNumericFieldBlanks(14) && ((!lAlphaFieldBlanks(9)) && Ventilation(Loop).MinOutdoorTempSchedPtr == 0)) {
                             ShowWarningError(RoutineName + cAlphaFieldNames(9) + " = " + cAlphaArgs(9) +
-                                             format(" is invalid. The constant value will be used at {:.1R}", rNumericArgs(14)) +
-                                             " degrees C ");
+                                             format(" is invalid. The constant value will be used at {:.1R} degrees C ", rNumericArgs(14)));
                             ShowContinueError("in the " + cCurrentModuleObject + " object = " + cAlphaArgs(1) + " and the simulation continues...");
                         }
                     }

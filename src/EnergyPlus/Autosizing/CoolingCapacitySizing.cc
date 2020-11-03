@@ -231,18 +231,14 @@ Real64 CoolingCapacitySizer::size(EnergyPlusData &state, Real64 _originalValue, 
                                 ShowContinueError(format("...Capacity passed by parent object to size child component = {:.2T} [W]", this->autoSizedValue));
                             } else {
                                 ShowContinueError(format("...Air flow rate used for sizing = {:.5T} [m3/s]", DesVolFlow));
-                                ShowContinueError(format("...Coil inlet air temperature used for sizing = {:.2T}", CoilInTemp) +
-                                                  " [C]");
-                                ShowContinueError(format("...Coil outlet air temperature used for sizing = {:.2T}", CoilOutTemp) +
-                                                  " [C]");
+                                ShowContinueError(format("...Coil inlet air temperature used for sizing = {:.2T} [C]", CoilInTemp));
+                                ShowContinueError(format("...Coil outlet air temperature used for sizing = {:.2T} [C]", CoilOutTemp));
                             }
                         } else {
                             if (CoilOutTemp > -999.0) {
                                 ShowContinueError(format("...Air flow rate used for sizing = {:.5T} [m3/s]", DesVolFlow));
-                                ShowContinueError(format("...Coil inlet air temperature used for sizing = {:.2T}", CoilInTemp) +
-                                                  " [C]");
-                                ShowContinueError(format("...Coil outlet air temperature used for sizing = {:.2T}", CoilOutTemp) +
-                                                  " [C]");
+                                ShowContinueError(format("...Coil inlet air temperature used for sizing = {:.2T} [C]", CoilInTemp));
+                                ShowContinueError(format("...Coil outlet air temperature used for sizing = {:.2T} [C]", CoilOutTemp));
                             } else {
                                 ShowContinueError("...Capacity used to size child component set to 0 [W]");
                             }

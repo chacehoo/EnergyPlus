@@ -3887,8 +3887,7 @@ namespace SystemAvailabilityManager {
                 if (rNumericArgs(2) > 100.0 || rNumericArgs(2) < -100.0) {
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\"");
                     ShowContinueError(cNumericFieldNames(2) + " is beyond the range.");
-                    ShowContinueError(format("The input value is {:.0T}", rNumericArgs(2)) +
-                                      ". The allowed value must be between -100 C and +100 C");
+                    ShowContinueError(format("The input value is {:.0T}. The allowed value must be between -100 C and +100 C", rNumericArgs(2)));
                     ErrorsFound = true;
                 }
             }
@@ -3897,8 +3896,7 @@ namespace SystemAvailabilityManager {
                 if (rNumericArgs(3) > 100.0 || rNumericArgs(3) < -100.0) {
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\"");
                     ShowContinueError(cNumericFieldNames(3) + " is beyond the range.");
-                    ShowContinueError(format("The input value is {:.0T}", rNumericArgs(3)) +
-                                      ". The allowed value must be between -100 C and +100 C");
+                    ShowContinueError(format("The input value is {:.0T}. The allowed value must be between -100 C and +100 C", rNumericArgs(3)));
                     ErrorsFound = true;
                 }
             }
@@ -3917,8 +3915,7 @@ namespace SystemAvailabilityManager {
                 if (rNumericArgs(4) > 300000.0 || rNumericArgs(4) < 0.0) {
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\"");
                     ShowContinueError(cNumericFieldNames(4) + " is beyond the range.");
-                    ShowContinueError(format("The input value is {:.0T}", rNumericArgs(4)) +
-                                      ". The allowed value must be between 0 and 300000 J/kg");
+                    ShowContinueError(format("The input value is {:.0T}. The allowed value must be between 0 and 300000 J/kg", rNumericArgs(4)));
                     ErrorsFound = true;
                 }
             }
@@ -3927,8 +3924,7 @@ namespace SystemAvailabilityManager {
                 if (rNumericArgs(5) > 300000.0 || rNumericArgs(5) < 0.0) {
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\"");
                     ShowContinueError(cNumericFieldNames(5) + " is beyond the range.");
-                    ShowContinueError(format("The input value is {:.0T}", rNumericArgs(5)) +
-                                      ". The allowed value must be between 0 and 300000 J/kg");
+                    ShowContinueError(format("The input value is {:.0T}. The allowed value must be between 0 and 300000 J/kg", rNumericArgs(5)));
                     ErrorsFound = true;
                 }
             }
@@ -3947,8 +3943,7 @@ namespace SystemAvailabilityManager {
                 if (rNumericArgs(6) > 100.0 || rNumericArgs(6) < -100.0) {
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\"");
                     ShowContinueError(cNumericFieldNames(6) + " is beyond the range.");
-                    ShowContinueError(format("The input value is {:.0T}", rNumericArgs(6)) +
-                                      ". The allowed value must be between -100 C and +100 C");
+                    ShowContinueError(format("The input value is {:.0T}. The allowed value must be between -100 C and +100 C", rNumericArgs(6)));
                     ErrorsFound = true;
                 }
             }
@@ -3957,8 +3952,7 @@ namespace SystemAvailabilityManager {
                 if (rNumericArgs(7) > 100.0 || rNumericArgs(7) < -100.0) {
                     ShowSevereError(RoutineName + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\"");
                     ShowContinueError(cNumericFieldNames(7) + " is beyond the range.");
-                    ShowContinueError(format("The input value is {:.0T}", rNumericArgs(7)) +
-                                      ". The allowed value must be between -100 C and +100 C");
+                    ShowContinueError(format("The input value is {:.0T}. The allowed value must be between -100 C and +100 C", rNumericArgs(7)));
                     ErrorsFound = true;
                 }
             }

@@ -1189,8 +1189,7 @@ namespace DemandManager {
 
                 if (DemandMgr(MgrNum).LowerLimit > DemandMgr(MgrNum).UpperLimit) {
                     ShowSevereError("Invalid input for " + CurrentModuleObject + " = " + AlphArray(1));
-                    ShowContinueError(format("{} [{:.2R} [", cNumericFieldNames(2), NumArray(2)) + "] > " + cNumericFieldNames(3) +
-                                      format("{:.2R}]", NumArray(3)));
+                    ShowContinueError(format("{} [{:.R2}] > {} [{.R2}]", cNumericFieldNames(2), NumArray(2), cNumericFieldNames(3), NumArray(3)));
                     ShowContinueError(cNumericFieldNames(2) + " cannot be greater than " + cNumericFieldNames(3));
                     ErrorsFound = true;
                 }

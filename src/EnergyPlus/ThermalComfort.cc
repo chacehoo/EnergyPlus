@@ -2109,8 +2109,7 @@ namespace ThermalComfort {
                 for (iZone = 1; iZone <= NumOfZones; ++iZone) {
                     if (state.dataThermalComforts->ThermalComfortInASH55(iZone).Enable55Warning) {
                         if (state.dataThermalComforts->ThermalComfortInASH55(iZone).totalTimeNotEither > allowedHours) {
-                            ShowContinueError(format("{:.1R}", state.dataThermalComforts->ThermalComfortInASH55(iZone).totalTimeNotEither) +
-                                              " hours were uncomfortable in zone: " + Zone(iZone).Name);
+                            ShowContinueError(format("{:.1R} hours were uncomfortable in zone: ", state.dataThermalComforts->ThermalComfortInASH55(iZone).totalTimeNotEither) + Zone(iZone).Name);
                         }
                     }
                 }

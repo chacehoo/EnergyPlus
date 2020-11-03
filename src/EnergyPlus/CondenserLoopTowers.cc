@@ -2454,8 +2454,7 @@ namespace CondenserLoopTowers {
                     //  temperature is less than design inlet air wet bulb temperature
                     if (DataSizing::PlantSizData(PltSizCondNum).ExitTemp <= this->DesInletAirWBTemp) {
                         ShowSevereError("Error when autosizing the UA value for cooling tower = " + this->Name +
-                                        format(". Design Loop Exit Temperature must be greater than {:.2T}", this->DesInletAirWBTemp) +
-                                        " C when autosizing the tower UA.");
+                                        format(". Design Loop Exit Temperature must be greater than {:.2T} C when autosizing the tower UA.", this->DesInletAirWBTemp));
                         ShowContinueError("The Design Loop Exit Temperature specified in Sizing:Plant object = " +
                                           DataSizing::PlantSizData(PltSizCondNum).PlantLoopName + format(" ({:.2T} C)", DataSizing::PlantSizData(PltSizCondNum).ExitTemp));
                         ShowContinueError(format("is less than or equal to the design inlet air wet-bulb temperature of {:.2T} C.", this->DesInletAirWBTemp));
@@ -2539,8 +2538,7 @@ namespace CondenserLoopTowers {
                     // * If not, hardcoded above to 21C
                     if (DesTowerExitWaterTemp <= this->DesInletAirWBTemp) {
                         ShowSevereError("Error when autosizing the UA value for cooling tower = " + this->Name +
-                                        format(". Design Tower Exit Temperature must be greater than {:.2T}", this->DesInletAirWBTemp) +
-                                        " C when autosizing the tower UA.");
+                                        format(". Design Tower Exit Temperature must be greater than {:.2T} C when autosizing the tower UA.", this->DesInletAirWBTemp));
                         ShowContinueError(format("The User-specified Design Loop Exit Temperature={:.2T}", DesTowerExitWaterTemp));
                         ShowContinueError(format("is less than or equal to the design inlet air wet-bulb temperature of {:.2T} C.", this->DesInletAirWBTemp));
 
@@ -3215,8 +3213,7 @@ namespace CondenserLoopTowers {
                                 if ((std::abs(tmpNomTowerCap - NomCapUser) / NomCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeVSMerkelTower: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError(format("User-Specified Nominal Capacity of {:.2R} [W]", NomCapUser));
-                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R}", tmpNomTowerCap) +
-                                                      " [W]");
+                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R} [W]", tmpNomTowerCap));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -3253,8 +3250,7 @@ namespace CondenserLoopTowers {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpTowerFreeConvNomCap - NomCapUser) / NomCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeVSMerkelTower: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError(format("User-Specified Free Convection Nominal Capacity of {:.2R}", NomCapUser) +
-                                                      " [W]");
+                                    ShowContinueError(format("User-Specified Free Convection Nominal Capacity of {:.2R} [W]", NomCapUser));
                                     ShowContinueError(format("differs from Design Size Free Convection Nominal Capacity of {:.2R} [W]", tmpTowerFreeConvNomCap));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -3296,10 +3292,8 @@ namespace CondenserLoopTowers {
                                 if ((std::abs(tmpDesignWaterFlowRate - NomDesWaterFlowUser) / NomDesWaterFlowUser) >
                                     DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeVSMerkelTower: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError(format("User-Specified Design Water Flow Rate of {:.2R}", NomDesWaterFlowUser) +
-                                                      " [m3/s]");
-                                    ShowContinueError(format("differs from Design Water Flow Rate of {:.2R}", tmpDesignWaterFlowRate) +
-                                                      " [m3/s]");
+                                    ShowContinueError(format("User-Specified Design Water Flow Rate of {:.2R} [m3/s]", NomDesWaterFlowUser));
+                                    ShowContinueError(format("differs from Design Water Flow Rate of {:.2R} [m3/s]", tmpDesignWaterFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -3342,10 +3336,8 @@ namespace CondenserLoopTowers {
                             if ((std::abs(tmpDesignAirFlowRate - DesignAirFlowRateUser) / DesignAirFlowRateUser) >
                                 DataSizing::AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeVSMerkelTower: Potential issue with equipment sizing for " + this->Name);
-                                ShowContinueError(format("User-Specified Design Air Flow Rate of {:.2R}", DesignAirFlowRateUser) +
-                                                  " [m3/s]");
-                                ShowContinueError(format("differs from Design Air Flow Rate of {:.2R}", tmpDesignAirFlowRate) +
-                                                  " [m3/s]");
+                                ShowContinueError(format("User-Specified Design Air Flow Rate of {:.2R} [m3/s]", DesignAirFlowRateUser));
+                                ShowContinueError(format("differs from Design Air Flow Rate of {:.2R} [m3/s]", tmpDesignAirFlowRate));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }

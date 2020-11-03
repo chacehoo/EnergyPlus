@@ -1201,8 +1201,7 @@ namespace WaterThermalTanks {
 
                 if (HPWH.WrappedCondenserBottomLocation >= HPWH.WrappedCondenserTopLocation) {
                     ShowSevereError(DataIPShortCuts::cCurrentModuleObject + "=\"" + HPWH.Name + "\", ");
-                    ShowContinueError(hpwhNumericFieldNames[3] + format(" ({:.6T}", HPWH.WrappedCondenserTopLocation) +
-                                      ") must be greater than " + hpwhNumericFieldNames[2] + format(" ({:.6T}).", HPWH.WrappedCondenserBottomLocation));
+                    ShowContinueError(hpwhNumericFieldNames[3] + format(" ({:.6T}) must be greater than ", HPWH.WrappedCondenserTopLocation) + hpwhNumericFieldNames[2] + format(" ({:.6T}).", HPWH.WrappedCondenserBottomLocation));
                     ErrorsFound = true;
                 }
 
@@ -1554,8 +1553,7 @@ namespace WaterThermalTanks {
 
             if (FanVolFlow != DataSizing::AutoSize && !errFlag) {
                 if (FanVolFlow < HPWH.OperatingAirFlowRate) {
-                    ShowSevereError(DataIPShortCuts::cCurrentModuleObject + format(" - air flow rate = {:.7T}", FanVolFlow) +
-                                    " in fan object " + HPWH.FanName + " is less than the  HPWHs evaporator air flow rate.");
+                    ShowSevereError(DataIPShortCuts::cCurrentModuleObject + format(" - air flow rate = {:.7T} in fan object ", FanVolFlow) + HPWH.FanName + " is less than the  HPWHs evaporator air flow rate.");
                     ShowContinueError(" The fan flow rate must be >= to the HPWHs evaporator volumetric air flow rate.");
                     ShowContinueError(" Occurs in unit = " + HPWH.Name);
                     ErrorsFound = true;
@@ -5461,10 +5459,8 @@ namespace WaterThermalTanks {
                             ShowSevereError("InitWaterThermalTank: Detected problem for stratified tank model.  Model cannot be applied.");
                             ShowContinueError("Occurs for stratified tank name = " + this->Name);
                             ShowContinueError(format("Tank volume = {:.4R} [m3]", this->Volume));
-                            ShowContinueError(format("Tank use side volume flow rate = {:.4R}", this->UseDesignVolFlowRate) +
-                                              " [m3/s]");
-                            ShowContinueError(format("Tank source side volume flow rate = {:.4R}", this->SourceDesignVolFlowRate) +
-                                              " [m3/s]");
+                            ShowContinueError(format("Tank use side volume flow rate = {:.4R} [m3/s]", this->UseDesignVolFlowRate));
+                            ShowContinueError(format("Tank source side volume flow rate = {:.4R} [m3/s]", this->SourceDesignVolFlowRate));
                             ShowContinueError(format("Nominal tank change over rate = {:.2R} [s]", TankChangeRateScale));
                             ShowContinueError(
                                 "Change over rate is too fast, increase tank volume, decrease connection flow rates or use mixed tank model");

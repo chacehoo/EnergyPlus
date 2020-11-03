@@ -1710,8 +1710,7 @@ namespace HeatBalanceIntRadExchange {
                 if (CheckConvergeTolerance > 0.005) {
                     ShowWarningError("FixViewFactors: View factors not complete. Check for bad surface descriptions or unenclosed zone=\"" +
                                      enclName + "\".");
-                    ShowContinueError(format("Enforced reciprocity has tolerance (ideal is 0)=[{:.6R}", CheckConvergeTolerance) +
-                                      "], Row Sum (ideal is " + fmt::to_string(N) + format(")=[{:.2R}].", RowSum));
+                    ShowContinueError(format("Enforced reciprocity has tolerance (ideal is 0)=[{:.6R}], Row Sum (ideal is {})=[{:.2R}].", CheckConvergeTolerance, N, RowSum));
                     ShowContinueError("If zone is unusual, or tolerance is on the order of 0.001, view factors are probably OK.");
                 }
                 if (std::abs(FixedCheckValue) < std::abs(OriginalCheckValue)) {

@@ -10878,8 +10878,7 @@ namespace OutputReportTabular {
                 if (pdiff > 0.019) {
                     ShowWarningError(
                         "WriteVeriSumTable: InputVerificationsAndResultsSummary: Wall area based on [>=60,<=120] degrees (tilt) as walls");
-                    ShowContinueError(format("differs ~{:.1R}", pdiff * 100.0) +
-                                      "% from user entered Wall class surfaces. Degree calculation based on ASHRAE 90.1 wall definitions.");
+                    ShowContinueError(format("differs ~{:.1R}% from user entered Wall class surfaces. Degree calculation based on ASHRAE 90.1 wall definitions.", pdiff * 100.0));
                     //      CALL ShowContinueError('Calculated based on degrees=['//  &
                     //         TRIM(ADJUSTL(RealToStr((wallAreaN + wallAreaS + wallAreaE + wallAreaW),3)))//  &
                     //         '] m2, Calculated from user entered Wall class surfaces=['//  &

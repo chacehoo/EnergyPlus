@@ -1670,8 +1670,7 @@ namespace DataPlant {
                     ShowContinueErrorTimeStamp("");
                     ShowContinueError(format("Loop side flow = {:.8R} (kg/s)", ThisLoopSideFlow));
                     ShowContinueError(format("Flow Remaining = {:.8R} (kg/s)", FlowRemaining));
-                    ShowContinueError(format("Parallel Branch requests  = {:.8R}", TotParallelBranchFlowReq) +
-                                      " (kg/s)");
+                    ShowContinueError(format("Parallel Branch requests  = {:.8R} (kg/s)", TotParallelBranchFlowReq));
                 }
 
                 // 2)  ! Reset the flow on the Mixer outlet branch

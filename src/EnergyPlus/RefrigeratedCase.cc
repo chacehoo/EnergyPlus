@@ -4172,8 +4172,7 @@ namespace RefrigeratedCase {
                             if (std::abs(DiffCircRates) > 0.3) {
                                 ShowWarningError(CurrentModuleObject + "=\"" + Secondary(SecondaryNum).Name + ' ' + cNumericFieldNames(7) +
                                                  format(" Produces a circulating rate of {:.2R} ;  A circulating rate of {:.2R}", CalcCircRate, Secondary(SecondaryNum).CircRate) +
-                                                 format(" would need a {} of {:.2R}", cNumericFieldNames(7), CalcTotFlowVol) +
-                                                 " m3/s");
+                                                 format(" would need a {} of {:.2R} m3/s", cNumericFieldNames(7), CalcTotFlowVol));
                             } // warning check on pump flow rate vs circ rate input
                         }     // blank pump flow rate
                         SecondaryFlowVolRated = PumpTotRatedFlowVol;
@@ -5292,8 +5291,7 @@ namespace RefrigeratedCase {
                     System(RefrigSysNum).IntercoolerEffectiveness = Numbers(4);
                     if (System(RefrigSysNum).IntercoolerEffectiveness < 0.0 || System(RefrigSysNum).IntercoolerEffectiveness > 1.0) {
                         ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + System(RefrigSysNum).Name + "\", The specified value for the");
-                        ShowContinueError(format("{} = {:.2R}", cNumericFieldNames(4), System(RefrigSysNum).IntercoolerEffectiveness) +
-                                          " is invalid.  This value must be");
+                        ShowContinueError(format("{} = {:.2R} is invalid.  This value must be", cNumericFieldNames(4), System(RefrigSysNum).IntercoolerEffectiveness));
                         ShowContinueError("between 0.0 and 1.0.  The default value of 0.8 will be used.");
                         System(RefrigSysNum).IntercoolerEffectiveness = 0.8;
                     }
@@ -5963,8 +5961,7 @@ namespace RefrigeratedCase {
                     TransSystem(TransRefrigSysNum).RefrigerantName, TransSystem(TransRefrigSysNum).PReceiver, RefrigIndex, RoutineNameNoColon);
                 if (TransSystem(TransRefrigSysNum).TReceiver > GasCooler(TransSystem(TransRefrigSysNum).GasCoolerNum(NumGasCoolers)).MinCondTemp) {
                     ShowWarningError(RoutineName + CurrentModuleObject + "=\"" + TransSystem(TransRefrigSysNum).Name +
-                                     format(": The receiver temperature ({:.2R}C) is greater than the minimum condensing temperature specified for subcritical operation ({:.2R}", TransSystem(TransRefrigSysNum).TReceiver, GasCooler(TransSystem(TransRefrigSysNum).GasCoolerNum(NumGasCoolers)).MinCondTemp) +
-                                     "C).");
+                                     format(": The receiver temperature ({:.2R}C) is greater than the minimum condensing temperature specified for subcritical operation ({:.2R}C).", TransSystem(TransRefrigSysNum).TReceiver, GasCooler(TransSystem(TransRefrigSysNum).GasCoolerNum(NumGasCoolers)).MinCondTemp));
                     ShowContinueError("  The minimum condensing temperature will be set at 5C greater than the receiver temperature.");
                     GasCooler(TransSystem(TransRefrigSysNum).GasCoolerNum(NumGasCoolers)).MinCondTemp =
                         TransSystem(TransRefrigSysNum).TReceiver + 5.0;

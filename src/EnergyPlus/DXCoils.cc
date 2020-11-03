@@ -2991,21 +2991,21 @@ namespace DXCoils {
             DXCoil(DXCoilNum).RatedInletDBTemp = Numbers(4);
             if (DXCoil(DXCoilNum).RatedInletDBTemp <= 5.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError(format("...{} must be > 5 {C}.  entered value=[{:.1T}].", cNumericFields(4), Numbers(4)));
+                ShowContinueError(format("...{} must be > 5 {{C}}.  entered value=[{:.1T}].", cNumericFields(4), Numbers(4)));
                 ErrorsFound = true;
             }
 
             DXCoil(DXCoilNum).RatedInletWBTemp = Numbers(5);
             if (DXCoil(DXCoilNum).RatedInletWBTemp <= 5.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError(format("...{} must be > 5 {C}.  entered value=[{:.1T}].", cNumericFields(5), Numbers(5)));
+                ShowContinueError(format("...{} must be > 5 {{C}}.  entered value=[{:.1T}].", cNumericFields(5), Numbers(5)));
                 ErrorsFound = true;
             }
 
             DXCoil(DXCoilNum).RatedInletWaterTemp = Numbers(6);
             if (DXCoil(DXCoilNum).RatedInletWaterTemp <= 25.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError(format("...{} must be > 25 {C}.  entered value=[{:.1T}].", cNumericFields(6), Numbers(6)));
+                ShowContinueError(format("...{} must be > 25 {{C}}.  entered value=[{:.1T}].", cNumericFields(6), Numbers(6)));
                 ErrorsFound = true;
             }
 
@@ -3112,7 +3112,7 @@ namespace DXCoils {
             DXCoil(DXCoilNum).MaxOATCrankcaseHeater = Numbers(12);
             if (DXCoil(DXCoilNum).MaxOATCrankcaseHeater < 0.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError(format("...{} must be >= 0 {C}.  entered value=[{:.1T}].", cNumericFields(12), Numbers(12)));
+                ShowContinueError(format("...{} must be >= 0 {{C}}.  entered value=[{:.1T}].", cNumericFields(12), Numbers(12)));
                 ErrorsFound = true;
             }
 
@@ -3434,21 +3434,21 @@ namespace DXCoils {
             DXCoil(DXCoilNum).RatedInletDBTemp = Numbers(4);
             if (DXCoil(DXCoilNum).RatedInletDBTemp <= 5.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError(format("...{} must be > 5 {C}.  entered value=[{:.1T}].", cNumericFields(4), Numbers(4)));
+                ShowContinueError(format("...{} must be > 5 {{C}}.  entered value=[{:.1T}].", cNumericFields(4), Numbers(4)));
                 ErrorsFound = true;
             }
 
             DXCoil(DXCoilNum).RatedInletWBTemp = Numbers(5);
             if (DXCoil(DXCoilNum).RatedInletWBTemp <= 5.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError(format("...{} must be > 5 {C}.  entered value=[{:.1T}].", cNumericFields(5), Numbers(5)));
+                ShowContinueError(format("...{} must be > 5 {{C}}.  entered value=[{:.1T}].", cNumericFields(5), Numbers(5)));
                 ErrorsFound = true;
             }
 
             DXCoil(DXCoilNum).RatedInletWaterTemp = Numbers(6);
             if (DXCoil(DXCoilNum).RatedInletWaterTemp <= 25.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError(format("...{} must be > 25 {C}.  entered value=[{:.1T}].", cNumericFields(6), Numbers(6)));
+                ShowContinueError(format("...{} must be > 25 {{C}}.  entered value=[{:.1T}].", cNumericFields(6), Numbers(6)));
                 ErrorsFound = true;
             }
 
@@ -3509,7 +3509,7 @@ namespace DXCoils {
             DXCoil(DXCoilNum).MaxOATCrankcaseHeater = Numbers(9);
             if (DXCoil(DXCoilNum).MaxOATCrankcaseHeater < 0.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + DXCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError(format("...{} must be >= 0 {C}.  entered value=[{:.1T}].", cNumericFields(9), Numbers(9)));
+                ShowContinueError(format("...{} must be >= 0 {{C}}.  entered value=[{:.1T}].", cNumericFields(9), Numbers(9)));
                 ErrorsFound = true;
             }
 
@@ -6177,8 +6177,7 @@ namespace DXCoils {
                         ((RatedVolFlowPerRatedTotCap - MaxRatedVolFlowPerRatedTotCap(DXCT)) > SmallDifferenceTest)) {
                         ShowWarningError("Sizing: " + DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
                                          "\": Rated air volume flow rate per watt of rated total cooling capacity is out of range.");
-                        ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}], Max Rated Vol Flow Per Watt=[{:.3T}", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap, MaxRatedVolFlowPerRatedTotCap(DXCT)) +
-                                          "]. See Input Output Reference Manual for valid range.");
+                        ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}], Max Rated Vol Flow Per Watt=[{:.3T}]. See Input Output Reference Manual for valid range.", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap, MaxRatedVolFlowPerRatedTotCap(DXCT)));
                     }
                 }
 
@@ -6287,8 +6286,7 @@ namespace DXCoils {
                             ((RatedVolFlowPerRatedTotCap - MaxRatedVolFlowPerRatedTotCap(DXCT)) > SmallDifferenceTest)) {
                             ShowWarningError("Sizing: " + DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
                                              "\": Rated air volume flow rate per watt of rated total cooling capacity is out of range.");
-                            ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}], Max Rated Vol Flow Per Watt=[{:.3T}", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap, MaxRatedVolFlowPerRatedTotCap(DXCT)) +
-                                              "]. See Input Output Reference Manual for valid range.");
+                            ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}], Max Rated Vol Flow Per Watt=[{:.3T}]. See Input Output Reference Manual for valid range.", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap, MaxRatedVolFlowPerRatedTotCap(DXCT)));
                             ShowContinueError("for CoilPerformance:DX:Cooling mode: " + DXCoil(DXCoilNum).CoilPerformanceName(Mode));
                         }
                         DXCoil(DXCoilNum).RatedAirMassFlowRate(Mode) =
@@ -6335,8 +6333,7 @@ namespace DXCoils {
                         ((RatedVolFlowPerRatedTotCap - MaxRatedVolFlowPerRatedTotCap(DXCT)) > SmallDifferenceTest)) {
                         ShowWarningError("Sizing: " + DXCoil(DXCoilNum).DXCoilType + ' ' + DXCoil(DXCoilNum).Name +
                                          ": Rated air volume flow rate per watt of rated total heating capacity is out of range.");
-                        ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}], Max Rated Vol Flow Per Watt=[{:.3T}", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap, MaxRatedVolFlowPerRatedTotCap(DXCT)) +
-                                          "]. See Input-Output Reference Manual for valid range.");
+                        ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}], Max Rated Vol Flow Per Watt=[{:.3T}]. See Input-Output Reference Manual for valid range.", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap, MaxRatedVolFlowPerRatedTotCap(DXCT)));
                     }
                 }
 
@@ -6413,8 +6410,7 @@ namespace DXCoils {
                     ((RatedVolFlowPerRatedTotCap - MaxRatedVolFlowPerRatedTotCap(DXCT)) > SmallDifferenceTest)) {
                     ShowWarningError("Coil:Cooling:DX:TwoSpeed \"" + DXCoil(DXCoilNum).Name +
                                      "\": At low speed rated air volume flow rate per watt of rated total cooling capacity is out of range.");
-                    ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}], Max Rated Vol Flow Per Watt=[{:.3T}", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap, MaxRatedVolFlowPerRatedTotCap(DXCT)) +
-                                      "]. See Input-Output Reference Manual for valid range.");
+                    ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}], Max Rated Vol Flow Per Watt=[{:.3T}]. See Input-Output Reference Manual for valid range.", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap, MaxRatedVolFlowPerRatedTotCap(DXCT)));
                 }
 
                 DXCoil(DXCoilNum).RatedAirMassFlowRate2 =
@@ -6458,8 +6454,7 @@ namespace DXCoils {
                         ShowWarningError("Sizing: " + DXCoil(DXCoilNum).DXCoilType + " \"" + DXCoil(DXCoilNum).Name +
                                          "\": Rated air volume flow rate per watt of rated total cooling capacity is out of range at speed " +
                                          fmt::to_string(Mode));
-                        ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}], Max Rated Vol Flow Per Watt=[{:.3T}", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap, MaxRatedVolFlowPerRatedTotCap(DXCT)) +
-                                          "]. See Input Output Reference Manual for valid range.");
+                        ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}], Max Rated Vol Flow Per Watt=[{:.3T}]. See Input Output Reference Manual for valid range.", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap, MaxRatedVolFlowPerRatedTotCap(DXCT)));
                     }
                     DXCoil(DXCoilNum).MSRatedAirMassFlowRate(Mode) =
                         DXCoil(DXCoilNum).MSRatedAirVolFlowRate(Mode) *
@@ -6491,8 +6486,7 @@ namespace DXCoils {
                         ShowWarningError("Coil:Heating:DX:MultiSpeed " + DXCoil(DXCoilNum).Name +
                                          ": Rated air volume flow rate per watt of rated total heating capacity is out of range at speed " +
                                          fmt::to_string(Mode));
-                        ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}], Max Rated Vol Flow Per Watt=[{:.3T}", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap, MaxRatedVolFlowPerRatedTotCap(DXCT)) +
-                                          "]. See Input Output Reference Manual for valid range.");
+                        ShowContinueError(format("Min Rated Vol Flow Per Watt=[{:.3T}], Rated Vol Flow Per Watt=[{:.3T}], Max Rated Vol Flow Per Watt=[{:.3T}]. See Input Output Reference Manual for valid range.", MinRatedVolFlowPerRatedTotCap(DXCT), RatedVolFlowPerRatedTotCap, MaxRatedVolFlowPerRatedTotCap(DXCT)));
                     }
                 }
             }
@@ -7060,8 +7054,7 @@ namespace DXCoils {
                                 if ((std::abs(SecCoilAirFlowDes - SecCoilAirFlowUser) / SecCoilAirFlowUser) > AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeDxCoil: Potential issue with equipment sizing for " + DXCoil(DXCoilNum).DXCoilType + ' ' +
                                                 DXCoil(DXCoilNum).Name);
-                                    ShowContinueError(format("User-Specified Secondary Coil Air Flow Rate of {:.5R}", SecCoilAirFlowUser) +
-                                                      " [m3/s]");
+                                    ShowContinueError(format("User-Specified Secondary Coil Air Flow Rate of {:.5R} [m3/s]", SecCoilAirFlowUser));
                                     ShowContinueError(format("differs from Design Size Secondary Coil Air Flow Rate of {:.5R} [m3/s]", SecCoilAirFlowDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -7665,8 +7658,7 @@ namespace DXCoils {
                                 if ((std::abs(SecCoilAirFlowDes - SecCoilAirFlowUser) / SecCoilAirFlowUser) > AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeDxCoil: Potential issue with equipment sizing for " + DXCoil(DXCoilNum).DXCoilType + ' ' +
                                                 DXCoil(DXCoilNum).Name);
-                                    ShowContinueError(format("User-Specified Secondary Coil Air Flow Rate of {:.5R}", SecCoilAirFlowUser) +
-                                                      " [m3/s]");
+                                    ShowContinueError(format("User-Specified Secondary Coil Air Flow Rate of {:.5R} [m3/s]", SecCoilAirFlowUser));
                                     ShowContinueError(format("differs from Design Size Secondary Coil Air Flow Rate of {:.5R} [m3/s]", SecCoilAirFlowDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -7799,8 +7791,7 @@ namespace DXCoils {
                         if ((std::abs(DefrostCapacityDes - DefrostCapacityUser) / DefrostCapacityUser) > AutoVsHardSizingThreshold) {
                             ShowWarningMessage("SizeDxCoil: Potential issue with equipment sizing for " + DXCoil(DXCoilNum).DXCoilType + ' ' +
                                                DXCoil(DXCoilNum).Name);
-                            ShowContinueError(format("User-Specified Resistive Defrost Heater Capacity of {:.2R}", DefrostCapacityUser) +
-                                              "[W]");
+                            ShowContinueError(format("User-Specified Resistive Defrost Heater Capacity of {:.2R}[W]", DefrostCapacityUser));
                             ShowContinueError(format("differs from Design Size Resistive Defrost Heater Capacity of {:.2R}[W]", DefrostCapacityDes));
                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -8845,15 +8836,13 @@ namespace DXCoils {
                     if (DXCoil(DXCoilNum).DXCoilType_Num == CoilDX_HeatPumpWaterHeaterPumped ||
                         DXCoil(DXCoilNum).DXCoilType_Num == CoilDX_HeatPumpWaterHeaterWrapped) {
                         ShowWarningMessage(RoutineName + DXCoil(DXCoilNum).DXCoilType + "=\"" + DXCoil(DXCoilNum).Name + "\", runtime fraction");
-                        ShowWarningMessage(format("The runtime fraction exceeded 1.0. [{:.4R}", DXCoil(DXCoilNum).CoolingCoilRuntimeFraction) +
-                                           "].");
+                        ShowWarningMessage(format("The runtime fraction exceeded 1.0. [{:.4R}].", DXCoil(DXCoilNum).CoolingCoilRuntimeFraction));
                         ShowContinueError("Runtime fraction reset to 1 and the simulation will continue.");
                         ShowContinueError("Check the IO reference manual for PLF curve guidance [" + DXCoil(DXCoilNum).DXCoilType + "].");
                         ShowContinueErrorTimeStamp("");
                     } else {
                         ShowWarningMessage(RoutineName + DXCoil(DXCoilNum).DXCoilType + "=\"" + DXCoil(DXCoilNum).Name + "\", runtime fraction");
-                        ShowWarningMessage(format("The runtime fraction exceeded 1.0. [{:.4R}", DXCoil(DXCoilNum).CoolingCoilRuntimeFraction) +
-                                           "].");
+                        ShowWarningMessage(format("The runtime fraction exceeded 1.0. [{:.4R}].", DXCoil(DXCoilNum).CoolingCoilRuntimeFraction));
                         ShowContinueError("Runtime fraction reset to 1 and the simulation will continue.");
                         ShowContinueError("Check the IO reference manual for PLF curve guidance [" + DXCoil(DXCoilNum).DXCoilType + "].");
                         ShowContinueErrorTimeStamp("");
@@ -12182,8 +12171,7 @@ namespace DXCoils {
                 PLF = CurveValue(state, DXCoil(DXCoilNum).MSPLFFPLR(SpeedNum), CycRatio);
                 if (FanOpMode == CycFanCycCoil && CycRatio == 1.0 && PLF != 1.0) {
                     if (DXCoil(DXCoilNum).PLFErrIndex == 0) {
-                        ShowWarningMessage("The PLF curve value for DX cooling coil " + DXCoil(DXCoilNum).Name + format(" ={:.2R}", PLF) +
-                                           " for part-load ratio = 1");
+                        ShowWarningMessage("The PLF curve value for DX cooling coil " + DXCoil(DXCoilNum).Name + format(" ={:.2R} for part-load ratio = 1", PLF));
                         ShowContinueError("PLF curve value must be = 1.0 and has been reset to 1.0. Simulation is continuing.");
                         ShowContinueErrorTimeStamp("");
                     }
@@ -12966,8 +12954,7 @@ namespace DXCoils {
                 PLF = CurveValue(state, DXCoil(DXCoilNum).MSPLFFPLR(1), PLRHeating); // Calculate part-load factor
                 if (FanOpMode == CycFanCycCoil && CycRatio == 1.0 && PLF != 1.0) {
                     if (DXCoil(DXCoilNum).PLFErrIndex == 0) {
-                        ShowWarningMessage("The PLF curve value for DX heating coil " + DXCoil(DXCoilNum).Name + format(" ={:.2R}", PLF) +
-                                           " for part-load ratio = 1");
+                        ShowWarningMessage("The PLF curve value for DX heating coil " + DXCoil(DXCoilNum).Name + format(" ={:.2R} for part-load ratio = 1", PLF));
                         ShowContinueError("PLF curve value must be = 1.0 and has been reset to 1.0. Simulation is continuing.");
                         ShowContinueErrorTimeStamp("");
                     }

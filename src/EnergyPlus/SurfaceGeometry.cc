@@ -1691,8 +1691,7 @@ namespace SurfaceGeometry {
                                                      " does not have the same materials in the reverse order as the construction " +
                                                      state.dataConstruction->Construct(ConstrNumFound).Name + " of adjacent surface " + Surface(Found).Name);
                                     ShowContinueError("or the properties of the reversed layers are not correct due to differing layer front and back side values");
-                                    ShowContinueError(format("...but Nominal U values are similar, diff=[{:.4R}", std::abs(NominalU(ConstrNum) - NominalU(ConstrNumFound))) +
-                                                      "] ... simulation proceeds.");
+                                    ShowContinueError(format("...but Nominal U values are similar, diff=[{:.4R}] ... simulation proceeds.", std::abs(NominalU(ConstrNum) - NominalU(ConstrNumFound))));
                                     if (!izConstDiffMsg) {
                                         ShowContinueError("...if the two zones are expected to have significantly different temperatures, the proper "
                                                           "\"reverse\" construction should be created.");
@@ -1727,10 +1726,8 @@ namespace SurfaceGeometry {
                                             "InterZone Surface Areas do not match as expected and might not satisfy conservation of energy:");
 
                                         if (MultFound == 1 && MultSurfNum == 1) {
-                                            ShowContinueError(format("  Area={:.1T}", Surface(SurfNum).Area) +
-                                                              " in Surface=" + Surface(SurfNum).Name + ", Zone=" + Surface(SurfNum).ZoneName);
-                                            ShowContinueError(format("  Area={:.1T}", Surface(Found).Area) +
-                                                              " in Surface=" + Surface(Found).Name + ", Zone=" + Surface(Found).ZoneName);
+                                            ShowContinueError(format("  Area={:.1T} in Surface=", Surface(SurfNum).Area) + Surface(SurfNum).Name + ", Zone=" + Surface(SurfNum).ZoneName);
+                                            ShowContinueError(format("  Area={:.1T} in Surface=", Surface(Found).Area) + Surface(Found).Name + ", Zone=" + Surface(Found).ZoneName);
                                         } else { // Show multiplier info
                                             ShowContinueError(format("  Area={:.1T}, Multipliers={}, Total Area={:.1T} in Surface={} Zone={}",
                                                                      Surface(SurfNum).Area,
@@ -1791,8 +1788,7 @@ namespace SurfaceGeometry {
                                         // if horizontal surfaces, then these are windows/doors/etc in those items.
                                         ShowWarningError(RoutineName + "InterZone Surface Azimuths do not match as expected.");
                                         ShowContinueError(format("  Azimuth={:.1T}", Surface(SurfNum).Azimuth) +
-                                                          format(", Tilt={:.1T}", Surface(SurfNum).Tilt) +
-                                                          ", in Surface=" + Surface(SurfNum).Name + ", Zone=" + Surface(SurfNum).ZoneName);
+                                                          format(", Tilt={:.1T}, in Surface=", Surface(SurfNum).Tilt) + Surface(SurfNum).Name + ", Zone=" + Surface(SurfNum).ZoneName);
                                         ShowContinueError(format("  Azimuth={:.1T}", Surface(Found).Azimuth) +
                                                           format(", Tilt={:.1T}, in Surface=", Surface(Found).Tilt) + Surface(Found).Name +
                                                           ", Zone=" + Surface(Found).ZoneName);
@@ -2040,8 +2036,7 @@ namespace SurfaceGeometry {
                                     ShowWarningError(RoutineName + "Entered Floor Area entered for Zone=\"" + Zone(ZoneNum).Name +
                                                      "\" significantly different from calculated Floor Area");
                                     ShowContinueError(format("Entered Zone Floor Area value={:.2R}", Zone(ZoneNum).UserEnteredFloorArea) +
-                                                      format(", Calculated Zone Floor Area value={:.2R}", Zone(ZoneNum).CalcFloorArea) +
-                                                      ", entered Floor Area will be used in calculations.");
+                                                      format(", Calculated Zone Floor Area value={:.2R}, entered Floor Area will be used in calculations.", Zone(ZoneNum).CalcFloorArea));
                                 }
                             }
                         }
@@ -2056,13 +2051,11 @@ namespace SurfaceGeometry {
 
         for (int SurfNum = 1; SurfNum <= MovedSurfs; ++SurfNum) { // TotSurfaces
             if (Surface(SurfNum).Area < 1.e-06) {
-                ShowSevereError(RoutineName + format("Zero or negative surface area[{:.5R}", Surface(SurfNum).Area) +
-                                "], Surface=" + Surface(SurfNum).Name);
+                ShowSevereError(RoutineName + format("Zero or negative surface area[{:.5R}], Surface=", Surface(SurfNum).Area) + Surface(SurfNum).Name);
                 SurfError = true;
             }
             if (Surface(SurfNum).Area >= 1.e-06 && Surface(SurfNum).Area < 0.001) {
-                ShowWarningError(RoutineName + format("Very small surface area[{:.5R}", Surface(SurfNum).Area) +
-                                 "], Surface=" + Surface(SurfNum).Name);
+                ShowWarningError(RoutineName + format("Very small surface area[{:.5R}], Surface=", Surface(SurfNum).Area) + Surface(SurfNum).Name);
             }
         }
 
@@ -4853,8 +4846,7 @@ namespace SurfaceGeometry {
                                 ShowSevereError(cRoutineName + ": The gap width(s) for the unshaded window construction " + state.dataConstruction->Construct(ConstrNum).Name);
                                 ShowContinueError("are inconsistent with the gap widths for shaded window construction " + state.dataConstruction->Construct(ConstrNumSh).Name);
                                 ShowContinueError("for window " + SurfaceTmp(SurfNum).Name + ", which has a between-glass blind.");
-                                ShowContinueError("..Material=" + dataMaterial.Material(MatGap).Name + format(" thickness={:.3R}", dataMaterial.Material(MatGap).Thickness) +
-                                                  " -");
+                                ShowContinueError("..Material=" + dataMaterial.Material(MatGap).Name + format(" thickness={:.3R} -", dataMaterial.Material(MatGap).Thickness));
                                 ShowContinueError("..( Material=" + dataMaterial.Material(MatGap1).Name +
                                                   format(" thickness={:.3R} +", dataMaterial.Material(MatGap1).Thickness));
                                 ShowContinueError("..Material=" + dataMaterial.Material(MatGap2).Name + format(" thickness={:.3R}", dataMaterial.Material(MatGap2).Thickness) + format(" )=[{:.3R}] >.001", MatGapCalc));
@@ -4867,8 +4859,7 @@ namespace SurfaceGeometry {
                                 ShowSevereError(cRoutineName + ": The gap width(s) for the unshaded window construction " + state.dataConstruction->Construct(ConstrNum).Name);
                                 ShowContinueError("are inconsistent with the gap widths for shaded window construction " + state.dataConstruction->Construct(ConstrNumSh).Name);
                                 ShowContinueError("for window " + SurfaceTmp(SurfNum).Name + ", which has a between-glass shade.");
-                                ShowContinueError("..Material=" + dataMaterial.Material(MatGap).Name + format(" thickness={:.3R}", dataMaterial.Material(MatGap).Thickness) +
-                                    " -");
+                                ShowContinueError("..Material=" + dataMaterial.Material(MatGap).Name + format(" thickness={:.3R} -", dataMaterial.Material(MatGap).Thickness));
                                 ShowContinueError("...( Material=" + dataMaterial.Material(MatGap1).Name +
                                     format(" thickness={:.3R} +", dataMaterial.Material(MatGap1).Thickness));
                                 ShowContinueError("..Material=" + dataMaterial.Material(MatGap2).Name +
@@ -10065,8 +10056,7 @@ namespace SurfaceGeometry {
                                         ShowSevereError(cCurrentModuleObject + ", " + cAlphaFieldNames(2) + "=\"" + cAlphaArgs(2) +
                                                         "\", invalid material.");
                                         ShowContinueError("\"Outside\", invalid material for movable insulation.");
-                                        ShowContinueError("Material=\"" + dataMaterial.Material(MaterNum).Name + format("\",Resistance=[{:.3R}", dataMaterial.Material(MaterNum).Resistance) +
-                                                          "], must be > 0 for use in Movable Insulation.");
+                                        ShowContinueError("Material=\"" + dataMaterial.Material(MaterNum).Name + format("\",Resistance=[{:.3R}], must be > 0 for use in Movable Insulation.", dataMaterial.Material(MaterNum).Resistance));
                                         ErrorsFound = true;
                                     } else if (dataMaterial.Material(MaterNum).Conductivity > 0.0) {
                                         dataMaterial.Material(MaterNum).Resistance = dataMaterial.Material(MaterNum).Thickness / dataMaterial.Material(MaterNum).Conductivity;
@@ -10077,8 +10067,7 @@ namespace SurfaceGeometry {
                                         ShowSevereError(cCurrentModuleObject + ", " + cAlphaFieldNames(2) + "=\"" + cAlphaArgs(2) +
                                                         "\", invalid material.");
                                         ShowContinueError("\"Outside\", invalid material for movable insulation.");
-                                        ShowContinueError("Material=\"" + dataMaterial.Material(MaterNum).Name + format("\",Conductivity=[{:.3R}", dataMaterial.Material(MaterNum).Conductivity) +
-                                                          "], must be > 0 for use in Movable Insulation.");
+                                        ShowContinueError("Material=\"" + dataMaterial.Material(MaterNum).Name + format("\",Conductivity=[{:.3R}], must be > 0 for use in Movable Insulation.", dataMaterial.Material(MaterNum).Conductivity));
                                         ErrorsFound = true;
                                     }
                                 }
@@ -10098,8 +10087,7 @@ namespace SurfaceGeometry {
                                         ShowSevereError(cCurrentModuleObject + ", " + cAlphaFieldNames(2) + "=\"" + cAlphaArgs(2) +
                                                         "\", invalid material.");
                                         ShowContinueError("\"Inside\", invalid material for movable insulation.");
-                                        ShowContinueError("Material=\"" + dataMaterial.Material(MaterNum).Name + format("\",Resistance=[{:.3R}", dataMaterial.Material(MaterNum).Resistance) +
-                                                          "], must be > 0 for use in Movable Insulation.");
+                                        ShowContinueError("Material=\"" + dataMaterial.Material(MaterNum).Name + format("\",Resistance=[{:.3R}], must be > 0 for use in Movable Insulation.", dataMaterial.Material(MaterNum).Resistance));
                                         ErrorsFound = true;
                                     } else if (dataMaterial.Material(MaterNum).Conductivity > 0.0) {
                                         dataMaterial.Material(MaterNum).Resistance = dataMaterial.Material(MaterNum).Thickness / dataMaterial.Material(MaterNum).Conductivity;
@@ -10318,8 +10306,7 @@ namespace SurfaceGeometry {
                             ShowWarningError("Entered Volume entered for Zone=\"" + Zone(ZoneNum).Name +
                                              "\" significantly different from calculated Volume");
                             ShowContinueError(format("Entered Zone Volume value={:.2R}", Zone(ZoneNum).Volume) +
-                                              format(", Calculated Zone Volume value={:.2R}", CalcVolume) +
-                                              ", entered volume will be used in calculations.");
+                                              format(", Calculated Zone Volume value={:.2R}, entered volume will be used in calculations.", CalcVolume));
                         }
                     }
                 }
@@ -11956,10 +11943,8 @@ namespace SurfaceGeometry {
                 if (DisplayExtraWarnings) {
                     ShowWarningError("SurfaceGeometry: ModifyWindow: Window " + SurfaceTmp(SurfNum).Name +
                                      " uses the Window5 Data File Construction " + state.dataConstruction->Construct(IConst).Name);
-                    ShowContinueError(format("The height {:.3R}(m) or width ", H) + format("{:.3R}", W) +
-                                      " (m) of this window differs by more than 10%");
-                    ShowContinueError(format("from the corresponding height {:.3R} (m) or width ", h1) + format("{:.3R}", w1) +
-                                      " (m) on the Window5 Data file.");
+                    ShowContinueError(format("The height {:.3R}(m) or width  (m) of this window differs by more than 10%", H) + format("{:.3R}", W));
+                    ShowContinueError(format("from the corresponding height {:.3R} (m) or width  (m) on the Window5 Data file.", h1) + format("{:.3R}", w1));
                     ShowContinueError("This will affect the frame heat transfer calculation if the frame in the Data File entry");
                     ShowContinueError("is not uniform, i.e., has sections with different geometry and/or thermal properties.");
                 } else {
@@ -12201,8 +12186,7 @@ namespace SurfaceGeometry {
             ShowSevereError("SurfaceGeometry: ModifyWindow: Subsurfaces have too much area for base surface=" +
                             SurfaceTmp(SurfaceTmp(SurfNum).BaseSurf).Name);
             ShowContinueError("Subsurface (window) creating error=" + SurfaceTmp(SurfNum).Name);
-            ShowContinueError(format("This window has been replaced by two windows from the Window5 Data File of total area {:.2R}", AreaNew) +
-                              " m2");
+            ShowContinueError(format("This window has been replaced by two windows from the Window5 Data File of total area {:.2R} m2", AreaNew));
             ErrorsFound = true;
         }
 

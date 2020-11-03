@@ -1383,18 +1383,15 @@ namespace Pumps {
                 TotalEffic = PumpEquip(PumpNum).NomVolFlowRate * PumpEquip(PumpNum).NomPumpHead / PumpEquip(PumpNum).NomPowerUse;
                 PumpEquip(PumpNum).PumpEffic = TotalEffic / PumpEquip(PumpNum).MotorEffic;
                 if (PumpEquip(PumpNum).PumpEffic < 0.50) {
-                    ShowWarningError(format("Check input. Calculated Pump Efficiency={:.2R}", PumpEquip(PumpNum).PumpEffic * 100.0) +
-                                     "% which is less than 50%, for pump=" + PumpEquip(PumpNum).Name);
+                    ShowWarningError(format("Check input. Calculated Pump Efficiency={:.2R}% which is less than 50%, for pump=", PumpEquip(PumpNum).PumpEffic * 100.0) + PumpEquip(PumpNum).Name);
                     ShowContinueError(format("Calculated Pump_Efficiency % =Total_Efficiency % [{:.1R}] / Motor_Efficiency % [{:.1R}]", TotalEffic * 100.0, PumpEquip(PumpNum).MotorEffic * 100.0));
                     ShowContinueError(format("Total_Efficiency % =(Rated_Volume_Flow_Rate [{:.1R}] * Rated_Pump_Head [{:.1R}] / Rated_Power_Use [{:.1R}]) * 100.", PumpEquip(PumpNum).NomVolFlowRate, PumpEquip(PumpNum).NomPumpHead, PumpEquip(PumpNum).NomPowerUse));
                 } else if ((PumpEquip(PumpNum).PumpEffic > 0.95) && (PumpEquip(PumpNum).PumpEffic <= 1.0)) {
-                    ShowWarningError(format("Check input.  Calculated Pump Efficiency={:.2R}", PumpEquip(PumpNum).PumpEffic * 100.0) +
-                                     "% is approaching 100%, for pump=" + PumpEquip(PumpNum).Name);
+                    ShowWarningError(format("Check input.  Calculated Pump Efficiency={:.2R}% is approaching 100%, for pump=", PumpEquip(PumpNum).PumpEffic * 100.0) + PumpEquip(PumpNum).Name);
                     ShowContinueError(format("Calculated Pump_Efficiency % =Total_Efficiency % [{:.1R}] / Motor_Efficiency % [{:.1R}]", TotalEffic * 100.0, PumpEquip(PumpNum).MotorEffic * 100.0));
                     ShowContinueError(format("Total_Efficiency % =(Rated_Volume_Flow_Rate [{:.1R}] * Rated_Pump_Head [{:.1R}] / Rated_Power_Use [{:.1R}]) * 100.", PumpEquip(PumpNum).NomVolFlowRate, PumpEquip(PumpNum).NomPumpHead, PumpEquip(PumpNum).NomPowerUse));
                 } else if (PumpEquip(PumpNum).PumpEffic > 1.0) {
-                    ShowSevereError(format("Check input.  Calculated Pump Efficiency={:.3R}", PumpEquip(PumpNum).PumpEffic * 100.0) +
-                                    "% which is bigger than 100%, for pump=" + PumpEquip(PumpNum).Name);
+                    ShowSevereError(format("Check input.  Calculated Pump Efficiency={:.3R}% which is bigger than 100%, for pump=", PumpEquip(PumpNum).PumpEffic * 100.0) + PumpEquip(PumpNum).Name);
                     ShowContinueError(format("Calculated Pump_Efficiency % =Total_Efficiency % [{:.1R}] / Motor_Efficiency % [{:.1R}]", TotalEffic * 100.0, PumpEquip(PumpNum).MotorEffic * 100.0));
                     ShowContinueError(format("Total_Efficiency % =(Rated_Volume_Flow_Rate [{:.1R}] * Rated_Pump_Head [{:.1R}] / Rated_Power_Use [{:.1R}]) * 100.", PumpEquip(PumpNum).NomVolFlowRate, PumpEquip(PumpNum).NomPumpHead, PumpEquip(PumpNum).NomPowerUse));
                     ShowFatalError("Errors found in Pump input");

@@ -133,8 +133,7 @@ Real64 WaterHeatingCoilUASizer::size(EnergyPlusData &state, Real64 _originalValu
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                         msg =
-                            format("  Coil outlet air temperature    = {:.3T}", this->finalZoneSizing(this->curZoneEqNum).HeatDesTemp) +
-                            " C";
+                            format("  Coil outlet air temperature    = {:.3T} C", this->finalZoneSizing(this->curZoneEqNum).HeatDesTemp);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                         msg = format("  Coil outlet air humidity ratio = {:.3T} kgWater/kgDryAir", this->finalZoneSizing(this->curZoneEqNum).HeatDesHumRat);
@@ -192,8 +191,7 @@ Real64 WaterHeatingCoilUASizer::size(EnergyPlusData &state, Real64 _originalValu
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                         msg =
-                            format("  Coil outlet air temperature    = {:.3T}", this->finalZoneSizing(this->curZoneEqNum).HeatDesTemp) +
-                            " C";
+                            format("  Coil outlet air temperature    = {:.3T} C", this->finalZoneSizing(this->curZoneEqNum).HeatDesTemp);
                         this->addErrorMessage(msg);
                         ShowContinueError(msg);
                         msg = format("  Coil outlet air humidity ratio = {:.3T} kgWater/kgDryAir", this->finalZoneSizing(this->curZoneEqNum).HeatDesHumRat);

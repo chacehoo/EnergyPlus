@@ -7688,8 +7688,7 @@ namespace PackagedTerminalHeatPump {
                         if (ErrCountVar == 0) {
                             ++ErrCountVar;
                             ShowWarningError("Iteration limit exceeded calculating VS WSHP unit speed ratio, for unit=" + PTUnit(PTUnitNum).Name);
-                            ShowContinueErrorTimeStamp(format("Speed ratio returned=[{:.2R}", SpeedRatio) +
-                                                       "], Speed number =" + fmt::to_string(SpeedNum));
+                            ShowContinueErrorTimeStamp(format("Speed ratio returned=[{:.2R}], Speed number =", SpeedRatio) + fmt::to_string(SpeedNum));
                         } else {
                             ++ErrCountVar;
                             ShowRecurringWarningErrorAtEnd(PTUnit(PTUnitNum).Name +

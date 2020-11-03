@@ -1196,8 +1196,7 @@ namespace UnitHeater {
                                 if ((std::abs(MaxVolHotWaterFlowDes - MaxVolHotWaterFlowUser) / MaxVolHotWaterFlowUser) > AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeUnitHeater: Potential issue with equipment sizing for ZoneHVAC:UnitHeater " +
                                                 state.dataUnitHeaters->UnitHeat(UnitHeatNum).Name);
-                                    ShowContinueError(format("User-Specified Maximum Hot Water Flow of {:.5R}", MaxVolHotWaterFlowUser) +
-                                                      " [m3/s]");
+                                    ShowContinueError(format("User-Specified Maximum Hot Water Flow of {:.5R} [m3/s]", MaxVolHotWaterFlowUser));
                                     ShowContinueError(format("differs from Design Size Maximum Hot Water Flow of {:.5R} [m3/s]", MaxVolHotWaterFlowDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -1307,10 +1306,8 @@ namespace UnitHeater {
                                 if ((std::abs(MaxVolHotSteamFlowDes - MaxVolHotSteamFlowUser) / MaxVolHotSteamFlowUser) > AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeUnitHeater: Potential issue with equipment sizing for ZoneHVAC:UnitHeater " +
                                                 state.dataUnitHeaters->UnitHeat(UnitHeatNum).Name);
-                                    ShowContinueError(format("User-Specified Maximum Steam Flow of {:.5R}", MaxVolHotSteamFlowUser) +
-                                                      " [m3/s]");
-                                    ShowContinueError(format("differs from Design Size Maximum Steam Flow of {:.5R}", MaxVolHotSteamFlowDes) +
-                                                      " [m3/s]");
+                                    ShowContinueError(format("User-Specified Maximum Steam Flow of {:.5R} [m3/s]", MaxVolHotSteamFlowUser));
+                                    ShowContinueError(format("differs from Design Size Maximum Steam Flow of {:.5R} [m3/s]", MaxVolHotSteamFlowDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }

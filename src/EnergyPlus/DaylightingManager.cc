@@ -1974,8 +1974,7 @@ namespace DaylightingManager {
                     ShowWarningError("CalcDaylightCoeffRefPoints: For Zone=\"" + Zone(ZoneNum).Name + "\" External Window=\"" + Surface(IWin).Name +
                                      "\"in Zone=\"" + Zone(Surface(IWin).Zone).Name +
                                      "\" reference point is less than 0.15m (6\") from window plane ");
-                    ShowContinueError(format("Distance=[{:.1R} m] to ref point=[{:.1R},{:.1R},{:.1R}", ALF, RREF(1), RREF(2), RREF(3)) +
-                                      "], Inaccuracy in Daylighting Calcs may result.");
+                    ShowContinueError(format("Distance=[{:.1R} m] to ref point=[{:.1R},{:.1R},{:.1R}], Inaccuracy in Daylighting Calcs may result.", ALF, RREF(1), RREF(2), RREF(3)));
                     RefErrIndex(iRefPoint, IWin) = 1;
                 }
             }
@@ -4743,8 +4742,7 @@ namespace DaylightingManager {
                 IllumMap(MapNum).Xmax = rNumericArgs(3);
                 if (rNumericArgs(2) > rNumericArgs(3)) {
                     ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid entry.");
-                    ShowContinueError("..." + cNumericFieldNames(2) + '[' + format("{:.2R}", rNumericArgs(2)) +
-                                      "] must be <= " + cNumericFieldNames(3) + '[' + format("{:.2R}].", rNumericArgs(3)));
+                    ShowContinueError("..." + cNumericFieldNames(2) + '[' + format("{:.2R}] must be <= ", rNumericArgs(2)) + cNumericFieldNames(3) + '[' + format("{:.2R}].", rNumericArgs(3)));
                     ErrorsFound = true;
                 }
                 IllumMap(MapNum).Xnum = rNumericArgs(4);
@@ -4758,8 +4756,7 @@ namespace DaylightingManager {
                 IllumMap(MapNum).Ymax = rNumericArgs(6);
                 if (rNumericArgs(5) > rNumericArgs(6)) {
                     ShowSevereError(cCurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", invalid entry.");
-                    ShowContinueError("..." + cNumericFieldNames(5) + '[' + format("{:.2R}", rNumericArgs(5)) +
-                                      "] must be <= " + cNumericFieldNames(6) + '[' + format("{:.2R}].", rNumericArgs(6)));
+                    ShowContinueError("..." + cNumericFieldNames(5) + '[' + format("{:.2R}] must be <= ", rNumericArgs(5)) + cNumericFieldNames(6) + '[' + format("{:.2R}].", rNumericArgs(6)));
                     ErrorsFound = true;
                 }
                 IllumMap(MapNum).Ynum = rNumericArgs(7);

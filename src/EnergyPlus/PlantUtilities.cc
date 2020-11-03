@@ -658,10 +658,10 @@ namespace PlantUtilities {
                         ShowContinueErrorTimeStamp("");
                         ShowContinueError("PlantLoop name= " + PlantLoop(LoopNum).Name);
                         ShowContinueError("Plant Connector:Mixer name= " + PlantLoop(LoopNum).LoopSide(LoopSideNum).Mixer.Name);
-                        ShowContinueError(format("Mixer outlet mass flow rate= {:.6R} {kg/s}", Node(MixerOutletNode).MassFlowRate));
+                        ShowContinueError(format("Mixer outlet mass flow rate= {:.6R} {{kg/s}}", Node(MixerOutletNode).MassFlowRate));
                         ShowContinueError("Plant Connector:Splitter name= " + PlantLoop(LoopNum).LoopSide(LoopSideNum).Splitter.Name);
-                        ShowContinueError(format("Splitter inlet mass flow rate= {:.6R} {kg/s}", Node(SplitterInletNode).MassFlowRate));
-                        ShowContinueError(format("Difference in two mass flow rates= {:.6R} {kg/s}", AbsDifference));
+                        ShowContinueError(format("Splitter inlet mass flow rate= {:.6R} {{kg/s}}", Node(SplitterInletNode).MassFlowRate));
+                        ShowContinueError(format("Difference in two mass flow rates= {:.6R} {{kg/s}}", AbsDifference));
                     }
                     ShowRecurringSevereErrorAtEnd("Plant Flows (Loop=" + PlantLoop(LoopNum).Name +
                                                       ") splitter inlet flow not match mixer outlet flow",
@@ -676,10 +676,10 @@ namespace PlantUtilities {
                         ShowContinueErrorTimeStamp("");
                         ShowContinueError("PlantLoop name= " + PlantLoop(LoopNum).Name);
                         ShowContinueError("Plant Connector:Mixer name= " + PlantLoop(LoopNum).LoopSide(LoopSideNum).Mixer.Name);
-                        ShowContinueError(format("Mixer outlet mass flow rate= {:.6R} {kg/s}", Node(MixerOutletNode).MassFlowRate));
+                        ShowContinueError(format("Mixer outlet mass flow rate= {:.6R} {{kg/s}}", Node(MixerOutletNode).MassFlowRate));
                         ShowContinueError("Plant Connector:Splitter name= " + PlantLoop(LoopNum).LoopSide(LoopSideNum).Splitter.Name);
-                        ShowContinueError(format("Splitter inlet mass flow rate= {:.6R} {kg/s}", Node(SplitterInletNode).MassFlowRate));
-                        ShowContinueError(format("Difference in two mass flow rates= {:.6R} {kg/s}", AbsDifference));
+                        ShowContinueError(format("Splitter inlet mass flow rate= {:.6R} {{kg/s}}", Node(SplitterInletNode).MassFlowRate));
+                        ShowContinueError(format("Difference in two mass flow rates= {:.6R} {{kg/s}}", AbsDifference));
                         ShowFatalError("CheckPlantMixerSplitterConsistency: Simulation terminated because of problems in plant flow resolver");
                     }
                 }
@@ -704,10 +704,10 @@ namespace PlantUtilities {
                         ShowContinueErrorTimeStamp("");
                         ShowContinueError("PlantLoop name= " + PlantLoop(LoopNum).Name);
                         ShowContinueError("Plant Connector:Mixer name= " + PlantLoop(LoopNum).LoopSide(LoopSideNum).Mixer.Name);
-                        ShowContinueError(format("Sum of Branch outlet mass flow rates= {:.6R} {kg/s}", SumOutletFlow));
+                        ShowContinueError(format("Sum of Branch outlet mass flow rates= {:.6R} {{kg/s}}", SumOutletFlow));
                         ShowContinueError("Plant Connector:Splitter name= " + PlantLoop(LoopNum).LoopSide(LoopSideNum).Splitter.Name);
-                        ShowContinueError(format("Splitter inlet mass flow rate= {:.6R} {kg/s}", Node(SplitterInletNode).MassFlowRate));
-                        ShowContinueError(format("Difference in two mass flow rates= {:.6R} {kg/s}", AbsDifference));
+                        ShowContinueError(format("Splitter inlet mass flow rate= {:.6R} {{kg/s}}", Node(SplitterInletNode).MassFlowRate));
+                        ShowContinueError(format("Difference in two mass flow rates= {:.6R} {{kg/s}}", AbsDifference));
                     }
                     ShowRecurringSevereErrorAtEnd("Plant Flows (Loop=" + PlantLoop(LoopNum).Name +
                                                       ") splitter inlet flow does not match branch outlet flows",
@@ -820,8 +820,7 @@ namespace PlantUtilities {
                 DemandSupply = "Unknown";
             }
             ShowContinueError("PlantLoop Name (" + DemandSupply + "Side)= " + PlantLoop(LoopNum).Name);
-            ShowContinueError(format("PlantLoop Setpoint Temperature={:.1R}", Node(PlantLoop(LoopNum).TempSetPointNodeNum).TempSetPoint) +
-                              " {C}");
+            ShowContinueError(format("PlantLoop Setpoint Temperature={:.1R} {{C}}", Node(PlantLoop(LoopNum).TempSetPointNodeNum).TempSetPoint));
             if (PlantLoop(LoopNum).LoopSide(SupplySide).InletNodeSetPt) {
                 ShowContinueError("PlantLoop Inlet Node (SupplySide) has a Setpoint.");
             } else {
@@ -843,24 +842,21 @@ namespace PlantUtilities {
                 ShowContinueError("PlantLoop Outlet Node (DemandSide) does not have a Setpoint.");
             }
             ShowContinueError("PlantLoop Outlet Node (" + DemandSupply + "Side) \"" + NodeID(PlantLoop(LoopNum).LoopSide(LoopSideNum).NodeNumOut) +
-                              format("\" has temperature={:.1R} {C}", Node(PlantLoop(LoopNum).LoopSide(LoopSideNum).NodeNumOut).Temp));
+                              format("\" has temperature={:.1R} {{C}}", Node(PlantLoop(LoopNum).LoopSide(LoopSideNum).NodeNumOut).Temp));
             ShowContinueError("PlantLoop Inlet Node (" + DemandSupply + "Side) \"" + NodeID(PlantLoop(LoopNum).LoopSide(LoopSideNum).NodeNumIn) +
-                              format("\" has temperature={:.1R} {C}", Node(PlantLoop(LoopNum).LoopSide(LoopSideNum).NodeNumIn).Temp));
-            ShowContinueError(format("PlantLoop Minimum Temperature={:.1R} {C}", PlantLoop(LoopNum).MinTemp));
-            ShowContinueError(format("PlantLoop Maximum Temperature={:.1R} {C}", PlantLoop(LoopNum).MaxTemp));
-            ShowContinueError(format("PlantLoop Flow Request (SupplySide)={:.1R}", PlantLoop(LoopNum).LoopSide(SupplySide).FlowRequest) +
-                              " {kg/s}");
-            ShowContinueError(format("PlantLoop Flow Request (DemandSide)={:.1R}", PlantLoop(LoopNum).LoopSide(DemandSide).FlowRequest) +
-                              " {kg/s}");
+                              format("\" has temperature={:.1R} {{C}}", Node(PlantLoop(LoopNum).LoopSide(LoopSideNum).NodeNumIn).Temp));
+            ShowContinueError(format("PlantLoop Minimum Temperature={:.1R} {{C}}", PlantLoop(LoopNum).MinTemp));
+            ShowContinueError(format("PlantLoop Maximum Temperature={:.1R} {{C}}", PlantLoop(LoopNum).MaxTemp));
+            ShowContinueError(format("PlantLoop Flow Request (SupplySide)={:.1R} {{kg/s}}", PlantLoop(LoopNum).LoopSide(SupplySide).FlowRequest));
+            ShowContinueError(format("PlantLoop Flow Request (DemandSide)={:.1R} {{kg/s}}", PlantLoop(LoopNum).LoopSide(DemandSide).FlowRequest));
             ShowContinueError("PlantLoop Node (" + DemandSupply + "Side) \"" + NodeID(PlantLoop(LoopNum).LoopSide(LoopSideNum).NodeNumOut) +
-                              format("\" has mass flow rate ={:.1R}", Node(PlantLoop(LoopNum).LoopSide(LoopSideNum).NodeNumOut).MassFlowRate) +
-                              " {kg/s}");
-            ShowContinueError(format("PlantLoop PumpHeat (SupplySide)={:.1R} {W}", PlantLoop(LoopNum).LoopSide(SupplySide).TotalPumpHeat));
-            ShowContinueError(format("PlantLoop PumpHeat (DemandSide)={:.1R} {W}", PlantLoop(LoopNum).LoopSide(DemandSide).TotalPumpHeat));
-            ShowContinueError(format("PlantLoop Cooling Demand={:.1R} {W}", PlantLoop(LoopNum).CoolingDemand));
-            ShowContinueError(format("PlantLoop Heating Demand={:.1R} {W}", PlantLoop(LoopNum).HeatingDemand));
-            ShowContinueError(format("PlantLoop Demand not Dispatched={:.1R} {W}", PlantLoop(LoopNum).DemandNotDispatched));
-            ShowContinueError(format("PlantLoop Unmet Demand={:.1R} {W}", PlantLoop(LoopNum).UnmetDemand));
+                              format("\" has mass flow rate ={:.1R} {{kg/s}}", Node(PlantLoop(LoopNum).LoopSide(LoopSideNum).NodeNumOut).MassFlowRate));
+            ShowContinueError(format("PlantLoop PumpHeat (SupplySide)={:.1R} {{W}}", PlantLoop(LoopNum).LoopSide(SupplySide).TotalPumpHeat));
+            ShowContinueError(format("PlantLoop PumpHeat (DemandSide)={:.1R} {{W}}", PlantLoop(LoopNum).LoopSide(DemandSide).TotalPumpHeat));
+            ShowContinueError(format("PlantLoop Cooling Demand={:.1R} {{W}}", PlantLoop(LoopNum).CoolingDemand));
+            ShowContinueError(format("PlantLoop Heating Demand={:.1R} {{W}}", PlantLoop(LoopNum).HeatingDemand));
+            ShowContinueError(format("PlantLoop Demand not Dispatched={:.1R} {{W}}", PlantLoop(LoopNum).DemandNotDispatched));
+            ShowContinueError(format("PlantLoop Unmet Demand={:.1R} {{W}}", PlantLoop(LoopNum).UnmetDemand));
 
             LoopCapacity = 0.0;
             DispatchedCapacity = 0.0;
@@ -879,13 +875,13 @@ namespace PlantUtilities {
                     LoopSupplySideDispatchedCapacity = DispatchedCapacity - LoopDemandSideDispatchedCapacity;
                 }
             }
-            ShowContinueError(format("PlantLoop Capacity={:.1R} {W}", LoopCapacity));
-            ShowContinueError(format("PlantLoop Capacity (SupplySide)={:.1R} {W}", LoopSupplySideCapacity));
-            ShowContinueError(format("PlantLoop Capacity (DemandSide)={:.1R} {W}", LoopDemandSideCapacity));
+            ShowContinueError(format("PlantLoop Capacity={:.1R} {{W}}", LoopCapacity));
+            ShowContinueError(format("PlantLoop Capacity (SupplySide)={:.1R} {{W}}", LoopSupplySideCapacity));
+            ShowContinueError(format("PlantLoop Capacity (DemandSide)={:.1R} {{W}}", LoopDemandSideCapacity));
             ShowContinueError("PlantLoop Operation Scheme=" + PlantLoop(LoopNum).OperationScheme);
-            ShowContinueError(format("PlantLoop Operation Dispatched Load = {:.1R} {W}", DispatchedCapacity));
-            ShowContinueError(format("PlantLoop Operation Dispatched Load (SupplySide)= {:.1R} {W}", LoopSupplySideDispatchedCapacity));
-            ShowContinueError(format("PlantLoop Operation Dispatched Load (DemandSide)= {:.1R} {W}", LoopDemandSideDispatchedCapacity));
+            ShowContinueError(format("PlantLoop Operation Dispatched Load = {:.1R} {{W}}", DispatchedCapacity));
+            ShowContinueError(format("PlantLoop Operation Dispatched Load (SupplySide)= {:.1R} {{W}}", LoopSupplySideDispatchedCapacity));
+            ShowContinueError(format("PlantLoop Operation Dispatched Load (DemandSide)= {:.1R} {{W}}", LoopDemandSideDispatchedCapacity));
             ShowContinueError("Branches on the Loop.");
             ShowBranchesOnLoop(LoopNum);
             ShowContinueError("*************************");

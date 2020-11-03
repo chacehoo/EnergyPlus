@@ -1739,8 +1739,7 @@ namespace PurchasedAirManager {
                                 if ((std::abs(MaxCoolTotCapDes - MaxCoolTotCapUser) / MaxCoolTotCapUser) > AutoVsHardSizingThreshold) {
                                     ShowMessage("SizePurchasedAir: Potential issue with equipment sizing for " + PurchAir(PurchAirNum).cObjectName +
                                                 ' ' + PurchAir(PurchAirNum).Name);
-                                    ShowContinueError(format("User-Specified Maximum Total Cooling Capacity of {:.2R}", MaxCoolTotCapUser) +
-                                                      " [W]");
+                                    ShowContinueError(format("User-Specified Maximum Total Cooling Capacity of {:.2R} [W]", MaxCoolTotCapUser));
                                     ShowContinueError(format("differs from Design Size Maximum Total Cooling Capacity of {:.2R} [W]", MaxCoolTotCapDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -1838,8 +1837,7 @@ namespace PurchasedAirManager {
                             if ((std::abs(MaxHeatSensCapDes - MaxHeatSensCapUser) / MaxHeatSensCapUser) > AutoVsHardSizingThreshold) {
                                 ShowMessage("SizePurchasedAir: Potential issue with equipment sizing for " + PurchAir(PurchAirNum).cObjectName + ' ' +
                                             PurchAir(PurchAirNum).Name);
-                                ShowContinueError(format("...User-Specified Maximum Sensible Heating Capacity of {:.2R}", MaxHeatSensCapUser) +
-                                                  " [W]");
+                                ShowContinueError(format("...User-Specified Maximum Sensible Heating Capacity of {:.2R} [W]", MaxHeatSensCapUser));
                                 ShowContinueError(format("...differs from Design Size Maximum Sensible Heating Capacity of {:.2R} [W]", MaxHeatSensCapDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -1935,8 +1933,7 @@ namespace PurchasedAirManager {
                             if ((std::abs(MaxCoolTotCapDes - MaxCoolTotCapUser) / MaxCoolTotCapUser) > AutoVsHardSizingThreshold) {
                                 ShowMessage("SizePurchasedAir: Potential issue with equipment sizing for " + PurchAir(PurchAirNum).cObjectName + ' ' +
                                             PurchAir(PurchAirNum).Name);
-                                ShowContinueError(format("User-Specified Maximum Total Cooling Capacity of {:.2R}", MaxCoolTotCapUser) +
-                                                  " [W]");
+                                ShowContinueError(format("User-Specified Maximum Total Cooling Capacity of {:.2R} [W]", MaxCoolTotCapUser));
                                 ShowContinueError(format("differs from Design Size Maximum Total Cooling Capacity of {:.2R} [W]", MaxCoolTotCapDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");

@@ -549,7 +549,7 @@ namespace OutdoorAirUnit {
                 if (NumArray(2) != NumArray(1)) {
                     ShowWarningError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\", " + cNumericFields(1) + " and " + cNumericFields(2) +
                                      " are not equal. This may cause unbalanced flow.");
-                    ShowContinueError(format("{}={:.3R}=", cNumericFields(1), NumArray(1)) + " and " + cNumericFields(2) +
+                    ShowContinueError(format("{}={:.3R}= and ", cNumericFields(1), NumArray(1)) + cNumericFields(2) +
                                       format("{:.3R}", NumArray(2)));
                 }
             }
@@ -1544,8 +1544,7 @@ CurrentModuleObjects(CO_OAEqList), ComponentListName);
                                 ShowMessage("SizeOutdoorAirUnit: Potential issue with equipment sizing for ZoneHVAC:OutdoorAirUnit " +
                                             OutAirUnit(OAUnitNum).Name);
                                 ShowContinueError(format("User-Specified Outdoor Air Flow Rate of {:.5R} [m3/s]", OutAirVolFlowUser));
-                                ShowContinueError(format("differs from Design Size Outdoor Air Flow Rate of {:.5R}", OutAirVolFlowDes) +
-                                                  " [m3/s]");
+                                ShowContinueError(format("differs from Design Size Outdoor Air Flow Rate of {:.5R} [m3/s]", OutAirVolFlowDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }
@@ -1588,8 +1587,7 @@ CurrentModuleObjects(CO_OAEqList), ComponentListName);
                                 ShowMessage("SizeOutdoorAirUnit: Potential issue with equipment sizing for ZoneHVAC:OutdoorAirUnit " +
                                             OutAirUnit(OAUnitNum).Name);
                                 ShowContinueError(format("User-Specified Exhaust Air Flow Rate of {:.5R} [m3/s]", ExtAirVolFlowUser));
-                                ShowContinueError(format("differs from Design Size Exhaust Air Flow Rate of {:.5R}", ExtAirVolFlowDes) +
-                                                  " [m3/s]");
+                                ShowContinueError(format("differs from Design Size Exhaust Air Flow Rate of {:.5R} [m3/s]", ExtAirVolFlowDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }

@@ -1373,10 +1373,8 @@ namespace HeatRecovery {
                         ShowContinueError("  the mass flow ratio is out of bounds");
                         ShowContinueError(format("The mass flow ratio is (Min_Mass_Flow_Rate / Max_Mass_Flow_Rate) = {:.2R}", Z));
                         ShowContinueError("The mass flow ratio should be >= 0.0 and <= 1.0");
-                        ShowContinueError(format("Min_Mass_Flow_Rate = {:.2R} [air density] * {:.1R}", RhoAir, min(ExchCond(ExIndex).NomSupAirVolFlow, ExchCond(ExIndex).NomSecAirVolFlow)) +
-                                          " [Min_Vol_Flow_Rate]");
-                        ShowContinueError(format("Max_Mass_Flow_Rate = {:.2R} [air density] * {:.1R}", RhoAir, max(ExchCond(ExIndex).NomSupAirVolFlow, ExchCond(ExIndex).NomSecAirVolFlow)) +
-                                          " [Max_Vol_Flow_Rate]");
+                        ShowContinueError(format("Min_Mass_Flow_Rate = {:.2R} [air density] * {:.1R} [Min_Vol_Flow_Rate]", RhoAir, min(ExchCond(ExIndex).NomSupAirVolFlow, ExchCond(ExIndex).NomSecAirVolFlow)));
+                        ShowContinueError(format("Max_Mass_Flow_Rate = {:.2R} [air density] * {:.1R} [Max_Vol_Flow_Rate]", RhoAir, max(ExchCond(ExIndex).NomSupAirVolFlow, ExchCond(ExIndex).NomSecAirVolFlow)));
                     } else if (ErrStat == 2) {
                         FatalError = true;
                         ShowSevereError("In the HeatExchanger:AirToAir:FlatPlate component " + ExchCond(ExIndex).Name);

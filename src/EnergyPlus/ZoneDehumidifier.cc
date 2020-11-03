@@ -884,8 +884,7 @@ namespace ZoneDehumidifier {
                     if (state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).HighRTFErrorCount < 1) {
                         ++state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).HighRTFErrorCount;
                         ShowWarningError(state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).UnitType + " \"" + state.dataZoneDehumidifier->ZoneDehumid(ZoneDehumNum).Name + "\":");
-                        ShowContinueError(format("The runtime fraction for this zone dehumidifier exceeded 1.0 [{:.4T}", RunTimeFraction) +
-                                          "].");
+                        ShowContinueError(format("The runtime fraction for this zone dehumidifier exceeded 1.0 [{:.4T}].", RunTimeFraction));
                         ShowContinueError("Runtime fraction reset to 1 and the simulation will continue.");
                         ShowContinueErrorTimeStamp("");
                     } else {

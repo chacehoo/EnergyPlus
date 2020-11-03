@@ -1083,8 +1083,7 @@ namespace PlantChillers {
                                 if ((std::abs(tmpNomCap - this->NomCap) / this->NomCap) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerElectric: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError(format("User-Specified Nominal Capacity of {:.2R} [W]", this->NomCap));
-                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R}", tmpNomCap) +
-                                                      " [W]");
+                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R} [W]", tmpNomCap));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -2975,8 +2974,7 @@ namespace PlantChillers {
                                 if ((std::abs(tmpNomCap - this->NomCap) / this->NomCap) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerEngineDriven: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError(format("User-Specified Nominal Capacity of {:.2R} [W]", this->NomCap));
-                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R}", tmpNomCap) +
-                                                      " [W]");
+                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R} [W]", tmpNomCap));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -4835,8 +4833,7 @@ namespace PlantChillers {
                                 if ((std::abs(tmpNomCap - this->NomCap) / this->NomCap) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeGTChiller: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError(format("User-Specified Nominal Capacity of {:.2R} [W]", this->NomCap));
-                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R}", tmpNomCap) +
-                                                      " [W]");
+                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R} [W]", tmpNomCap));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -5008,8 +5005,7 @@ namespace PlantChillers {
                         if ((std::abs(GTEngineCapacityDes - this->GTEngineCapacity) / this->GTEngineCapacity) >
                             DataSizing::AutoVsHardSizingThreshold) {
                             ShowMessage("SizeGTChiller: Potential issue with equipment sizing for " + this->Name);
-                            ShowContinueError(format("User-Specified Gas Turbine Engine Capacity of {:.2R}", this->GTEngineCapacity) +
-                                              " [W]");
+                            ShowContinueError(format("User-Specified Gas Turbine Engine Capacity of {:.2R} [W]", this->GTEngineCapacity));
                             ShowContinueError(format("differs from Design Size Gas Turbine Engine Capacity of {:.2R} [W]", GTEngineCapacityDes));
                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -6482,8 +6478,7 @@ namespace PlantChillers {
                                 if ((std::abs(tmpNomCap - NomCapUser) / NomCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerConstantCOP: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError(format("User-Specified Nominal Capacity of {:.2R} [W]", NomCapUser));
-                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R}", tmpNomCap) +
-                                                      " [W]");
+                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R} [W]", tmpNomCap));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }

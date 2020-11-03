@@ -1314,8 +1314,7 @@ namespace FluidCoolers {
                 if (SolFla == -1) {
                     ShowWarningError("Iteration limit exceeded in calculating fluid cooler UA.");
                     ShowContinueError("Autosizing of fluid cooler UA failed for fluid cooler = " + this->Name);
-                    ShowContinueError(format("The final UA value at low fan speed ={:.2R}", UA) +
-                                      " W/C, and the simulation continues...");
+                    ShowContinueError(format("The final UA value at low fan speed ={:.2R} W/C, and the simulation continues...", UA));
                 } else if (SolFla == -2) {
                     CalcFluidCoolerOutlet(state, int(Par(2)), Par(3), Par(4), UA0, OutWaterTempAtUA0);
                     CalcFluidCoolerOutlet(state, int(Par(2)), Par(3), Par(4), UA1, OutWaterTempAtUA1);

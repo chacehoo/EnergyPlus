@@ -489,7 +489,7 @@ namespace EnergyPlus {
                                             ": A pipe was outside of the domain extents after performing corrections for basement or burial depth.");
                             ShowContinueError("Pipe segment name:" + thisSegment->Name);
                             ShowContinueError(format("Corrected pipe location: ( x,y )=( {:.2T},", thisSegment->PipeLocation.X) +
-                                              format("{:.2T}", thisSegment->PipeLocation.Y) + " )");
+                                              format("{:.2T} )", thisSegment->PipeLocation.Y));
                         }
                     } // segment loop
                 } // circuit loop
@@ -1671,7 +1671,7 @@ namespace EnergyPlus {
                 if (thisCircuit.PipeSize.InnerDia >= thisCircuit.PipeSize.OuterDia) {
                     ShowSevereError(RoutineName + ": " + ObjName_HorizTrench + "=\"" + DataIPShortCuts::cAlphaArgs(1) + "\" has invalid pipe diameters.");
                     ShowContinueError(format("Outer diameter [{:.3T}", thisCircuit.PipeSize.OuterDia)
-                            + format("] must be greater than inner diameter [{:.3T}", thisCircuit.PipeSize.InnerDia) + "].");
+                            + format("] must be greater than inner diameter [{:.3T}].", thisCircuit.PipeSize.InnerDia));
                     ErrorsFound = true;
                 }
 
@@ -2278,7 +2278,7 @@ namespace EnergyPlus {
             //       MODIFIED       na
             //       RE-ENGINEERED  na
 
-            ShowSevereError(RoutineName + ':' + ObjectName + "=\"" + InstanceName + "\", invalid " + FieldName + format("=\"{:.3T}", FieldEntry) + "\", Condition: " + Condition);
+            ShowSevereError(RoutineName + ':' + ObjectName + "=\"" + InstanceName + "\", invalid " + FieldName + format("=\"{:.3T}\", Condition: ", FieldEntry) + Condition);
             ErrorsFound = true;
         }
 

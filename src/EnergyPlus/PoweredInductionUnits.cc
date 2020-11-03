@@ -1102,8 +1102,7 @@ namespace PoweredInductionUnits {
                             if ((std::abs(MaxPriAirVolFlowDes - MaxPriAirVolFlowUser) / MaxPriAirVolFlowUser) > AutoVsHardSizingThreshold) {
                                 ShowMessage("SizePIU: Potential issue with equipment sizing for " + PIU(PIUNum).UnitType + ' ' + PIU(PIUNum).Name);
                                 ShowContinueError(format("User-Specified Primary Air Flow Rate of {:.5R} [m3/s]", MaxPriAirVolFlowUser));
-                                ShowContinueError(format("differs from Design Size Primary Air Flow Rate of {:.5R}", MaxPriAirVolFlowDes) +
-                                                  " [m3/s]");
+                                ShowContinueError(format("differs from Design Size Primary Air Flow Rate of {:.5R} [m3/s]", MaxPriAirVolFlowDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }
@@ -1147,8 +1146,7 @@ namespace PoweredInductionUnits {
                             if ((std::abs(MaxTotAirVolFlowDes - MaxTotAirVolFlowUser) / MaxTotAirVolFlowUser) > AutoVsHardSizingThreshold) {
                                 ShowMessage("SizePIU: Potential issue with equipment sizing for " + PIU(PIUNum).UnitType + ' ' + PIU(PIUNum).Name);
                                 ShowContinueError(format("User-Specified Maximum Air Flow Rate of {:.5R} [m3/s]", MaxTotAirVolFlowUser));
-                                ShowContinueError(format("differs from Design Size Maximum Air Flow Rate of {:.5R}", MaxTotAirVolFlowDes) +
-                                                  " [m3/s]");
+                                ShowContinueError(format("differs from Design Size Maximum Air Flow Rate of {:.5R} [m3/s]", MaxTotAirVolFlowDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }
@@ -1193,8 +1191,7 @@ namespace PoweredInductionUnits {
                         if (DisplayExtraWarnings) {
                             if ((std::abs(MaxSecAirVolFlowDes - MaxSecAirVolFlowUser) / MaxSecAirVolFlowUser) > AutoVsHardSizingThreshold) {
                                 ShowMessage("SizePIU: Potential issue with equipment sizing for " + PIU(PIUNum).UnitType + ' ' + PIU(PIUNum).Name);
-                                ShowContinueError(format("User-Specified Maximum Secondary Air Flow Rate of {:.5R}", MaxSecAirVolFlowUser) +
-                                                  " [m3/s]");
+                                ShowContinueError(format("User-Specified Maximum Secondary Air Flow Rate of {:.5R} [m3/s]", MaxSecAirVolFlowUser));
                                 ShowContinueError(format("differs from Design Size Maximum Secondary Air Flow Rate of {:.5R} [m3/s]", MaxSecAirVolFlowDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -1453,8 +1450,7 @@ namespace PoweredInductionUnits {
                                 if ((std::abs(MaxVolHotSteamFlowDes - MaxVolHotSteamFlowUser) / MaxVolHotSteamFlowUser) > AutoVsHardSizingThreshold) {
                                     ShowMessage("SizePIU: Potential issue with equipment sizing for " + PIU(PIUNum).UnitType + ' ' +
                                                 PIU(PIUNum).Name);
-                                    ShowContinueError(format("User-Specified Maximum Reheat Steam Flow of {:.5R}", MaxVolHotSteamFlowUser) +
-                                                      " [m3/s]");
+                                    ShowContinueError(format("User-Specified Maximum Reheat Steam Flow of {:.5R} [m3/s]", MaxVolHotSteamFlowUser));
                                     ShowContinueError(format("differs from Design Size Maximum Reheat Steam Flow of {:.5R} [m3/s]", MaxVolHotSteamFlowDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");

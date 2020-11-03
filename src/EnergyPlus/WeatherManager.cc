@@ -3488,21 +3488,21 @@ namespace WeatherManager {
 
             // Hum Ind Type, Hum Ind Value at Max Temp, Hum Ind Units
             if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::WetBulb) {
-                StringOut = format("Wetbulb,{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{C},";
+                StringOut = format("Wetbulb,{:.2R},{{C}},", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue);
             } else if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::DewPoint) {
-                StringOut = format("Dewpoint,{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{C},";
+                StringOut = format("Dewpoint,{:.2R},{{C}},", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue);
             } else if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::Enthalpy) {
-                StringOut = format("Enthalpy,{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{J/kgDryAir},";
+                StringOut = format("Enthalpy,{:.2R},{{J/kgDryAir}},", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue);
             } else if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::HumRatio) {
-                StringOut = format("HumidityRatio,{:.4R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{kgWater/kgDryAir},";
+                StringOut = format("HumidityRatio,{:.4R},{{kgWater/kgDryAir}},", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue);
             } else if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::RelHumSch) {
                 StringOut = "Schedule,<schedule values from 0.0 to 100.0>,{percent},";
             } else if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::WBProfDef) {
-                StringOut = format("WetBulbProfileDefaultMultipliers,{:.2R}", state.dataWeatherManager->DesDayInput(state.dataWeatherManager->Envrn).HumIndValue) + ",{C},";
+                StringOut = format("WetBulbProfileDefaultMultipliers,{:.2R},{{C}},", state.dataWeatherManager->DesDayInput(state.dataWeatherManager->Envrn).HumIndValue);
             } else if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::WBProfDif) {
-                StringOut = format("WetBulbProfileDifferenceSchedule,{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{C},";
+                StringOut = format("WetBulbProfileDifferenceSchedule,{:.2R},{{C}},", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue);
             } else if (state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndType == DDHumIndType::WBProfMul) {
-                StringOut = format("WetBulbProfileMultiplierSchedule,{:.2R}", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue) + ",{C},";
+                StringOut = format("WetBulbProfileMultiplierSchedule,{:.2R},{{C}},", state.dataWeatherManager->DesDayInput(EnvrnNum).HumIndValue);
             }
             print(state.files.eio, "{}", StringOut);
             print(state.files.eio, "{:.0R},", state.dataWeatherManager->DesDayInput(EnvrnNum).PressBarom);
@@ -4347,9 +4347,9 @@ namespace WeatherManager {
                     ShowWarningError("Weather file location will be used rather than entered (IDF) Location object.");
                     ShowContinueError("..Location object=" + state.dataWeatherManager->LocationTitle);
                     ShowContinueError("..Weather File Location=" + DataEnvironment::WeatherFileLocationTitle);
-                    ShowContinueError(format("..due to location differences, Latitude difference=[{:.2R}] degrees, Longitude difference=[{:.2R}", std::abs(DataEnvironment::Latitude - state.dataWeatherManager->WeatherFileLatitude), std::abs(DataEnvironment::Longitude - state.dataWeatherManager->WeatherFileLongitude)) + "] degrees.");
+                    ShowContinueError(format("..due to location differences, Latitude difference=[{:.2R}] degrees, Longitude difference=[{:.2R}] degrees.", std::abs(DataEnvironment::Latitude - state.dataWeatherManager->WeatherFileLatitude), std::abs(DataEnvironment::Longitude - state.dataWeatherManager->WeatherFileLongitude)));
                     ShowContinueError(
-                        format("..Time Zone difference=[{:.1R}] hour(s), Elevation difference=[{:.2R}] percent, [{:.2R}", std::abs(DataEnvironment::TimeZoneNumber - state.dataWeatherManager->WeatherFileTimeZone), std::abs((DataEnvironment::Elevation - state.dataWeatherManager->WeatherFileElevation) / max(DataEnvironment::Elevation, 1.0) * 100.0), std::abs(DataEnvironment::Elevation - state.dataWeatherManager->WeatherFileElevation)) + "] meters.");
+                        format("..Time Zone difference=[{:.1R}] hour(s), Elevation difference=[{:.2R}] percent, [{:.2R}] meters.", std::abs(DataEnvironment::TimeZoneNumber - state.dataWeatherManager->WeatherFileTimeZone), std::abs((DataEnvironment::Elevation - state.dataWeatherManager->WeatherFileElevation) / max(DataEnvironment::Elevation, 1.0) * 100.0), std::abs(DataEnvironment::Elevation - state.dataWeatherManager->WeatherFileElevation)));
                 }
             }
 
@@ -4437,10 +4437,10 @@ namespace WeatherManager {
                 Real64 const DiffCalc = std::abs(DataEnvironment::TimeZoneNumber - StdTimeMerid);
                 if (DiffCalc > 1.0 && DiffCalc < 24.0) {
                     if (DiffCalc < 3.0) {
-                        ShowWarningError(format("Standard Time Meridian and Time Zone differ by more than 1, Difference=\"{:.1R}", DiffCalc) + "\"");
+                        ShowWarningError(format("Standard Time Meridian and Time Zone differ by more than 1, Difference=\"{:.1R}\"", DiffCalc));
                         ShowContinueError("Solar Positions may be incorrect");
                     } else {
-                        ShowSevereError(format("Standard Time Meridian and Time Zone differ by more than 2, Difference=\"{:.1R}", DiffCalc) + "\"");
+                        ShowSevereError(format("Standard Time Meridian and Time Zone differ by more than 2, Difference=\"{:.1R}\"", DiffCalc));
                         ShowContinueError("Solar Positions will be incorrect");
                         //          LocationError=.TRUE.
                     }
@@ -5948,9 +5948,9 @@ namespace WeatherManager {
                             Real64 testval = maxval(state.dataWeatherManager->DDDBRngModifier(_, _, EnvrnNum));
                             if (MaxDryBulbEntered) {
                                 ShowWarningError(DataIPShortCuts::cCurrentModuleObject + "=\"" + state.dataWeatherManager->DesDayInput(EnvrnNum).Title + "\", data override.");
-                                ShowContinueError(format("..{}=[{:.2R}", DataIPShortCuts::cNumericFieldNames(3), state.dataWeatherManager->DesDayInput(EnvrnNum).MaxDryBulb) + "] will be overwritten.");
+                                ShowContinueError(format("..{}=[{:.2R}] will be overwritten.", DataIPShortCuts::cNumericFieldNames(3), state.dataWeatherManager->DesDayInput(EnvrnNum).MaxDryBulb));
                                 ShowContinueError(".." + DataIPShortCuts::cAlphaFieldNames(3) + "=\"" + DataIPShortCuts::cAlphaArgs(3) + "\".");
-                                ShowContinueError(format("..with max value=[{:.2R}", testval) + "].");
+                                ShowContinueError(format("..with max value=[{:.2R}].", testval));
                             }
                             state.dataWeatherManager->DesDayInput(EnvrnNum).MaxDryBulb = testval;
                         }

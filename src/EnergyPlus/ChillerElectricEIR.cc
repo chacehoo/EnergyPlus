@@ -1344,8 +1344,7 @@ namespace ChillerElectricEIR {
                                 if ((std::abs(tmpNomCap - RefCapUser) / RefCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerElectricEIR: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError(format("User-Specified Reference Capacity of {:.2R} [W]", RefCapUser));
-                                    ShowContinueError(format("differs from Design Size Reference Capacity of {:.2R}", tmpNomCap) +
-                                                      " [W]");
+                                    ShowContinueError(format("differs from Design Size Reference Capacity of {:.2R} [W]", tmpNomCap));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -2105,8 +2104,7 @@ namespace ChillerElectricEIR {
                 !DataGlobals::WarmupFlag) {
                 ++this->ChillerEIRFPLRError;
                 ShowWarningError("CHILLER:ELECTRIC:EIR \"" + this->Name + "\":");
-                ShowContinueError(format(" Chiller EIR as a function of PLR curve output is negative ({:.3R}", this->ChillerEIRFPLR) +
-                                  ").");
+                ShowContinueError(format(" Chiller EIR as a function of PLR curve output is negative ({:.3R}).", this->ChillerEIRFPLR));
                 ShowContinueError(format(" Negative value occurs using a part-load ratio of {:.3R}.", PartLoadRat));
                 ShowContinueErrorTimeStamp(" Resetting curve output to zero and continuing simulation.");
             } else if (DataPlant::PlantLoop(this->CWLoopNum).LoopSide(this->CWLoopSideNum).FlowLock != 0 && !DataGlobals::WarmupFlag) {

@@ -1623,8 +1623,7 @@ namespace HeatingCoils {
                                 if ((std::abs(NominalCapacityDes - NominalCapacityUser) / NominalCapacityUser) > AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeHeatingCoil: Potential issue with equipment sizing for " + CompType + ", " + CompName);
                                     ShowContinueError(format("User-Specified Nominal Capacity of {:.2R} [W]", NominalCapacityUser));
-                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R}", NominalCapacityDes) +
-                                                      " [W]");
+                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R} [W]", NominalCapacityDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }

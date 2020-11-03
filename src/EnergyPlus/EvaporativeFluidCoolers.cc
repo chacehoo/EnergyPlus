@@ -1417,8 +1417,7 @@ namespace EvaporativeFluidCoolers {
                     // temperature is less than design inlet air wet bulb temperature of 25.6 C
                     if (DataSizing::PlantSizData(PltSizCondNum).ExitTemp <= 25.6) {
                         ShowSevereError("Error when autosizing the UA value for Evaporative Fluid Cooler = " + this->Name + '.');
-                        ShowContinueError(format("Design Loop Exit Temperature ({:.2R}", DataSizing::PlantSizData(PltSizCondNum).ExitTemp) +
-                                          " C) must be greater than 25.6 C when autosizing the Evaporative Fluid Cooler UA.");
+                        ShowContinueError(format("Design Loop Exit Temperature ({:.2R} C) must be greater than 25.6 C when autosizing the Evaporative Fluid Cooler UA.", DataSizing::PlantSizData(PltSizCondNum).ExitTemp));
                         ShowContinueError("The Design Loop Exit Temperature specified in Sizing:Plant object = " +
                                           DataSizing::PlantSizData(PltSizCondNum).PlantLoopName);
                         ShowContinueError("It is recommended that the Design Loop Exit Temperature = 25.6 C plus the Evaporative Fluid Cooler design "

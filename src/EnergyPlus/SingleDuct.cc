@@ -2579,8 +2579,7 @@ namespace SingleDuct {
                                 ShowMessage("SizeHVACSingleDuct: Potential issue with equipment sizing for " + this->SysType + " = \"" +
                                             this->SysName + "\".");
                                 ShowContinueError(format("User-Specified Maximum Air Flow Rate of {:.5R} [m3/s]", MaxAirVolFlowRateUser));
-                                ShowContinueError(format("differs from Design Size Maximum Air Flow Rate of {:.5R}", MaxAirVolFlowRateDes) +
-                                                  " [m3/s]");
+                                ShowContinueError(format("differs from Design Size Maximum Air Flow Rate of {:.5R} [m3/s]", MaxAirVolFlowRateDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }
@@ -2627,8 +2626,7 @@ namespace SingleDuct {
                                 AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeHVACSingleDuct: Potential issue with equipment sizing for " + this->SysType + " = \"" +
                                             this->SysName + "\".");
-                                ShowContinueError(format("User-Specified Maximum Heating Air Flow Rate of {:.5R}", MaxHeatAirVolFlowRateUser) +
-                                                  " [m3/s]");
+                                ShowContinueError(format("User-Specified Maximum Heating Air Flow Rate of {:.5R} [m3/s]", MaxHeatAirVolFlowRateUser));
                                 ShowContinueError(format("differs from Design Size Maximum Heating Air Flow Rate of {:.5R} [m3/s]", MaxHeatAirVolFlowRateDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -2689,8 +2687,7 @@ namespace SingleDuct {
                         ShowMessage("SizeHVACSingleDuct: Potential issue with equipment sizing for " + this->SysType + " = \"" + this->SysName +
                                     "\".");
                         ShowContinueError(format("User-Specified Minimum Cooling Air Flow Fraction of {:.5R} [m3/s]", MinAirFlowFracUser));
-                        ShowContinueError(format("differs from Design Size Minimum Cooling Air Flow Fraction of {:.5R}", MinAirFlowFracDes) +
-                                          " [m3/s]");
+                        ShowContinueError(format("differs from Design Size Minimum Cooling Air Flow Fraction of {:.5R} [m3/s]", MinAirFlowFracDes));
                         ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                         ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                     }
@@ -2749,8 +2746,7 @@ namespace SingleDuct {
                         ShowMessage("SizeHVACSingleDuct: Potential issue with equipment sizing for " + this->SysType + " = \"" + this->SysName +
                                     "\".");
                         ShowContinueError(format("User-Specified Minimum Cooling Air Flow Rate of {:.5R} [m3/s]", FixedMinAirUser));
-                        ShowContinueError(format("differs from Design Size Minimum Cooling Air Flow Rate of {:.5R}", FixedMinAirDes) +
-                                          " [m3/s]");
+                        ShowContinueError(format("differs from Design Size Minimum Cooling Air Flow Rate of {:.5R} [m3/s]", FixedMinAirDes));
                         ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                         ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                     }

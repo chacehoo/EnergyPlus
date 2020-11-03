@@ -1049,8 +1049,7 @@ namespace ChillerIndirectAbsorption {
                                 if ((std::abs(tmpNomCap - NomCapUser) / NomCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerAbsorptionIndirect: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError(format("User-Specified Nominal Capacity of {:.2R} [W]", NomCapUser));
-                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R}", tmpNomCap) +
-                                                      " [W]");
+                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R} [W]", tmpNomCap));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1105,8 +1104,7 @@ namespace ChillerIndirectAbsorption {
                             if ((std::abs(tmpNomPumpPower - NomPumpPowerUser) / NomPumpPowerUser) > DataSizing::AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeChillerAbsorptionIndirect: Potential issue with equipment sizing for " + this->Name);
                                 ShowContinueError(format("User-Specified Nominal Pumping Power of {:.2R} [W]", NomPumpPowerUser));
-                                ShowContinueError(format("differs from Design Size Nominal Pumping Power of {:.2R}", tmpNomPumpPower) +
-                                                  " [W]");
+                                ShowContinueError(format("differs from Design Size Nominal Pumping Power of {:.2R} [W]", tmpNomPumpPower));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }

@@ -1557,8 +1557,7 @@ namespace HVACStandAloneERV {
                         ShowMessage("SizeStandAloneERV: Potential issue with equipment sizing for ZoneHVAC:EnergyRecoveryVentilator " +
                                     cFanTypes(StandAloneERV(StandAloneERVNum).SupplyAirFanType_Num) + ' ' +
                                     StandAloneERV(StandAloneERVNum).SupplyAirFanName);
-                        ShowContinueError(format("User-Specified Supply Fan Maximum Flow Rate of {:.5R}", DesignSAFanVolFlowRateUser) +
-                                          " [m3/s]");
+                        ShowContinueError(format("User-Specified Supply Fan Maximum Flow Rate of {:.5R} [m3/s]", DesignSAFanVolFlowRateUser));
                         ShowContinueError(format("differs from the ERV Supply Air Flow Rate of {:.5R} [m3/s]", DesignSAFanVolFlowRateDes));
                         ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                         ShowContinueError("Verify that the value entered is intended and is consistent with other components.");

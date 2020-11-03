@@ -372,8 +372,7 @@ Real64 HeatingCapacitySizer::size(EnergyPlusData &state, Real64 _originalValue, 
                         ShowContinueError(format("...Coil inlet air temperature used for sizing = {:.2T} [C]", CoilInTemp));
                         ShowContinueError(format("...Coil outlet air temperature used for sizing = {:.2T} [C]", CoilOutTemp));
                     } else {
-                        ShowContinueError(format("...Capacity passed by parent object to size child component = {:.2T}", DesCoilLoad) +
-                                          " [W]");
+                        ShowContinueError(format("...Capacity passed by parent object to size child component = {:.2T} [W]", DesCoilLoad));
                     }
                 }
             }

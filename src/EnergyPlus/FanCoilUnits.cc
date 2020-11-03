@@ -1683,10 +1683,8 @@ namespace FanCoilUnits {
                             if ((std::abs(MaxAirVolFlowDes - MaxAirVolFlowUser) / MaxAirVolFlowUser) > AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeFanCoilUnit: Potential issue with equipment sizing for " + FanCoil(FanCoilNum).UnitType + ' ' +
                                             FanCoil(FanCoilNum).Name);
-                                ShowContinueError(format("User-Specified Supply Air Maximum Flow Rate of {:.5R}", MaxAirVolFlowUser) +
-                                                  " [m3/s]");
-                                ShowContinueError(format("differs from Design Size Supply Air Maximum Flow Rate of {:.5R}", MaxAirVolFlowDes) +
-                                                  " [m3/s]");
+                                ShowContinueError(format("User-Specified Supply Air Maximum Flow Rate of {:.5R} [m3/s]", MaxAirVolFlowUser));
+                                ShowContinueError(format("differs from Design Size Supply Air Maximum Flow Rate of {:.5R} [m3/s]", MaxAirVolFlowDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }
@@ -1751,10 +1749,8 @@ namespace FanCoilUnits {
                             if ((std::abs(OutAirVolFlowDes - OutAirVolFlowUser) / OutAirVolFlowUser) > AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeFanCoilUnit: Potential issue with equipment sizing for " + FanCoil(FanCoilNum).UnitType + ' ' +
                                             FanCoil(FanCoilNum).Name);
-                                ShowContinueError(format("User-Specified Maximum Outdoor Air Flow Rate of {:.5R}", OutAirVolFlowUser) +
-                                                  " [m3/s]");
-                                ShowContinueError(format("differs from Design Size Maximum Outdoor Air Flow Rate of {:.5R}", OutAirVolFlowDes) +
-                                                  " [m3/s]");
+                                ShowContinueError(format("User-Specified Maximum Outdoor Air Flow Rate of {:.5R} [m3/s]", OutAirVolFlowUser));
+                                ShowContinueError(format("differs from Design Size Maximum Outdoor Air Flow Rate of {:.5R} [m3/s]", OutAirVolFlowDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }
@@ -1914,10 +1910,8 @@ namespace FanCoilUnits {
                             if ((std::abs(MaxHotWaterVolFlowDes - MaxHotWaterVolFlowUser) / MaxHotWaterVolFlowUser) > AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeFanCoilUnit: Potential issue with equipment sizing for " + FanCoil(FanCoilNum).UnitType + ' ' +
                                             FanCoil(FanCoilNum).Name);
-                                ShowContinueError(format("User-Specified Maximum Hot Water Flow of {:.5R}", MaxHotWaterVolFlowUser) +
-                                                  " [m3/s]");
-                                ShowContinueError(format("differs from Design Size Maximum Hot Water Flow of {:.5R}", MaxHotWaterVolFlowDes) +
-                                                  " [m3/s]");
+                                ShowContinueError(format("User-Specified Maximum Hot Water Flow of {:.5R} [m3/s]", MaxHotWaterVolFlowUser));
+                                ShowContinueError(format("differs from Design Size Maximum Hot Water Flow of {:.5R} [m3/s]", MaxHotWaterVolFlowDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }
@@ -2085,10 +2079,8 @@ namespace FanCoilUnits {
                             if ((std::abs(MaxColdWaterVolFlowDes - MaxColdWaterVolFlowUser) / MaxColdWaterVolFlowUser) > AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeFanCoilUnit: Potential issue with equipment sizing for " + FanCoil(FanCoilNum).UnitType + ' ' +
                                             FanCoil(FanCoilNum).Name);
-                                ShowContinueError(format("User-Specified Maximum Cold Water Flow of {:.5R}", MaxColdWaterVolFlowUser) +
-                                                  "[m3/s]");
-                                ShowContinueError(format("differs from Design Size Maximum Cold Water Flow of {:.5R}", MaxColdWaterVolFlowDes) +
-                                                  "[m3/s]");
+                                ShowContinueError(format("User-Specified Maximum Cold Water Flow of {:.5R}[m3/s]", MaxColdWaterVolFlowUser));
+                                ShowContinueError(format("differs from Design Size Maximum Cold Water Flow of {:.5R}[m3/s]", MaxColdWaterVolFlowDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }

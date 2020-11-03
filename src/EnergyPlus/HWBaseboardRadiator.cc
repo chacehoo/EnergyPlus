@@ -1119,8 +1119,7 @@ namespace HWBaseboardRadiator {
                                     ShowMessage(
                                         "SizeHWBaseboard: Potential issue with equipment sizing for ZoneHVAC:Baseboard:RadiantConvective:Water=\"" +
                                         HWBaseboard(BaseboardNum).EquipID + "\".");
-                                    ShowContinueError(format("User-Specified Maximum Water Flow Rate of {:.5R}", WaterVolFlowRateMaxUser) +
-                                                      " [m3/s]");
+                                    ShowContinueError(format("User-Specified Maximum Water Flow Rate of {:.5R} [m3/s]", WaterVolFlowRateMaxUser));
                                     ShowContinueError(format("differs from Design Size Maximum Water Flow Rate of {:.5R} [m3/s]", WaterVolFlowRateMaxDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");

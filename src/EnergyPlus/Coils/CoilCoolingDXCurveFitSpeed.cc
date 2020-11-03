@@ -609,8 +609,7 @@ Real64 CoilCoolingDXCurveFitSpeed::CalcBypassFactor(Real64 tdb, Real64 w, Real64
 
     if (iter > maxIter) {
         ShowSevereError(RoutineName + object_name + " \"" + name + "\" -- coil bypass factor calculation did not converge after max iterations.");
-        ShowContinueError(format("The RatedSHR of [{:.3R}", this->grossRatedSHR) +
-                          "], entered by the user or autosized (see *.eio file),");
+        ShowContinueError(format("The RatedSHR of [{:.3R}], entered by the user or autosized (see *.eio file),", this->grossRatedSHR));
         ShowContinueError("may be causing this. The line defined by the coil rated inlet air conditions");
         ShowContinueError("(26.7C drybulb and 19.4C wetbulb) and the RatedSHR (i.e., slope of the line) must intersect");
         ShowContinueError("the saturation curve of the psychrometric chart. If the RatedSHR is too low, then this");

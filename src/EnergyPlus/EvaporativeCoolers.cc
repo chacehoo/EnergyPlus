@@ -1267,8 +1267,7 @@ namespace EvaporativeCoolers {
                             ShowMessage("SizeEvaporativeCooler:Indirect:ResearchSpecial: Potential issue with equipment sizing for " +
                                         EvapCond(EvapCoolNum).EvapCoolerName);
                             ShowContinueError(format("User-Specified Secondary Fan Flow Rate of {:.5R} [m3/s]", IndirectVolFlowRateUser));
-                            ShowContinueError(format("differs from Design Size Secondary Fan Flow Rate of {:.5R}", IndirectVolFlowRateDes) +
-                                              " [m3/s]");
+                            ShowContinueError(format("differs from Design Size Secondary Fan Flow Rate of {:.5R} [m3/s]", IndirectVolFlowRateDes));
                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                         }

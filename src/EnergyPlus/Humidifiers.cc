@@ -880,8 +880,7 @@ namespace Humidifiers {
                                 ShowMessage("SizeHumidifier: Potential issue with equipment sizing for " + HumidifierType(HumType_Code) + " = \"" +
                                             Name + "\".");
                                 ShowContinueError(format("User-Specified Nominal Capacity Volume of {:.2R} [Wm3/s]", NomCapVolUser));
-                                ShowContinueError(format("differs from Design Size Nominal Capacity Volume of {:.2R}", NomCapVolDes) +
-                                                  " [m3/s]");
+                                ShowContinueError(format("differs from Design Size Nominal Capacity Volume of {:.2R} [m3/s]", NomCapVolDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }

@@ -738,8 +738,11 @@ namespace FluidProperties {
                 if (FluidTemps(Loop).Temps(TempLoop) <= FluidTemps(Loop).Temps(TempLoop - 1)) {
                     ShowSevereError(RoutineName + CurrentModuleObject + " name=" + FluidTemps(Loop).Name +
                                     ", lists must have data in ascending order");
-                    ShowContinueError("First out of order occurrence at Temperature #(" + fmt::to_string(TempLoop - 1) + format(") {{:.3R}) {", FluidTemps(Loop).Temps(TempLoop - 1)) + "} >= Temp(" + fmt::to_string(TempLoop) +
-                                      format("{:.3R}}", FluidTemps(Loop).Temps(TempLoop)));
+                    ShowContinueError(format("First out of order occurrence at Temperature #({}) {{{:.R3}}} >= Temp({}) {{{:.R3}}}",
+                                             TempLoop - 1,
+                                             FluidTemps(Loop).Temps(TempLoop - 1),
+                                             TempLoop,
+                                             FluidTemps(Loop).Temps(TempLoop)));
                     ErrorsFound = true;
                     break;
                 }
@@ -1436,8 +1439,7 @@ namespace FluidProperties {
                     ++NumOfPressPts;
                     if (Numbers(1) <= 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + " Name=" + RefrigData(Loop).Name);
-                        ShowContinueError(format("Negative pressures not allowed in fluid property input data, Value =[{:.3R}", Numbers(1)) +
-                                          "].");
+                        ShowContinueError(format("Negative pressures not allowed in fluid property input data, Value =[{:.3R}].", Numbers(1)));
                         ErrorsFound = true;
                     }
                     PressurePtr(NumOfPressPts).Pressure = Numbers(1);
@@ -1480,8 +1482,11 @@ namespace FluidProperties {
                     if (RefrigData(Loop).SHPress(InData) <= RefrigData(Loop).SHPress(InData - 1)) {
                         ShowSevereError(RoutineName + CurrentModuleObject + " Name=" + RefrigData(Loop).Name);
                         ShowContinueError("Pressures must be entered in ascending order for fluid property data");
-                        ShowContinueError("First Occurrence at Pressure(" + fmt::to_string(InData - 1) + format(") {{:.3R}} >= Pressure(", RefrigData(Loop).SHPress(InData - 1)) + fmt::to_string(InData) +
-                                          format(") {{:.3R}}", RefrigData(Loop).SHPress(InData)));
+                        ShowContinueError(format("First Occurrence at Pressure({}) {{{:.R3}}} >= Pressure({}) {{{:.R3}}}",
+                                                 InData - 1,
+                                                 RefrigData(Loop).SHPress(InData - 1),
+                                                 InData,
+                                                 RefrigData(Loop).SHPress(InData)));
                         ErrorsFound = true;
                         break;
                     }
@@ -1522,8 +1527,7 @@ namespace FluidProperties {
                     ++NumOfPressPts;
                     if (Numbers(1) <= 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + " Name=" + RefrigData(Loop).Name);
-                        ShowContinueError(format("Negative pressures not allowed in fluid property input data, Value =[{:.3R}", Numbers(1)) +
-                                          "].");
+                        ShowContinueError(format("Negative pressures not allowed in fluid property input data, Value =[{:.3R}].", Numbers(1)));
                         ErrorsFound = true;
                     }
                     PressurePtr(NumOfPressPts).Pressure = Numbers(1);
@@ -5798,7 +5802,7 @@ CurrentModuleObject,
                     print(state.files.debug, ",{:.3R}\n", RefrigData(RefrigNum).HshValues(Loop, RefrigData(RefrigNum).NumSuperTempPts));
                 }
                 for (Loop = 1; Loop <= RefrigData(RefrigNum).NumSuperPressPts; ++Loop) {
-                    print(state.files.debug, "Superheated Pressure:#{}={:.2R}\n", fmt::to_string(Loop), RefrigData(RefrigNum).SHPress(Loop));
+                    print(state.files.debug, "Superheated Pressure:#{}={:.2R}\n", Loop, RefrigData(RefrigNum).SHPress(Loop));
                     print(state.files.debug, "Density Superheated Gas:");
                     for (Loop1 = 1; Loop1 <= RefrigData(RefrigNum).NumSuperTempPts - 1; ++Loop1) {
                         print(state.files.debug, ",{:.3R}", RefrigData(RefrigNum).RhoshValues(Loop, Loop1));

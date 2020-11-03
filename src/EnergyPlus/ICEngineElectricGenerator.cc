@@ -233,8 +233,7 @@ namespace ICEngineElectricGenerator {
                 if (xValue < ReferenceTemp) {
                     ShowSevereError("GetICEngineGeneratorInput: " + DataIPShortCuts::cAlphaFieldNames(7) + " output has very low value.");
                     ShowContinueError(format("...curve generates [{:.3R} C] at PLR=1.0", xValue));
-                    ShowContinueError(format("...this is less than the Reference Temperature [{:.2R}", ReferenceTemp) +
-                                      " C] and may cause errors.");
+                    ShowContinueError(format("...this is less than the Reference Temperature [{:.2R} C] and may cause errors.", ReferenceTemp));
                 }
             }
 

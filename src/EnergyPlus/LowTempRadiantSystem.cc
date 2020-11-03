@@ -2712,8 +2712,7 @@ namespace LowTempRadiantSystem {
                                     ShowMessage("SizeLowTempRadiantSystem: Potential issue with equipment sizing for "
                                                 "ZoneHVAC:LowTemperatureRadiant:VariableFlow = \"" +
                                                 HydrRadSys(RadSysNum).Name + "\".");
-                                    ShowContinueError(format("User-Specified Maximum Hot Water Flow of {:.5R}", WaterVolFlowMaxHeatUser) +
-                                                      " [m3/s]");
+                                    ShowContinueError(format("User-Specified Maximum Hot Water Flow of {:.5R} [m3/s]", WaterVolFlowMaxHeatUser));
                                     ShowContinueError(format("differs from Design Size Maximum Hot Water Flow of {:.5R} [m3/s]", WaterVolFlowMaxHeatDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -2871,8 +2870,7 @@ namespace LowTempRadiantSystem {
                                     ShowMessage("SizeLowTempRadiantSystem: Potential issue with equipment sizing for "
                                                 "ZoneHVAC:LowTemperatureRadiant:VariableFlow = \"" +
                                                 HydrRadSys(RadSysNum).Name + "\".");
-                                    ShowContinueError(format("User-Specified Maximum Cool Water Flow of {:.5R}", WaterVolFlowMaxCoolUser) +
-                                                      " [m3/s]");
+                                    ShowContinueError(format("User-Specified Maximum Cool Water Flow of {:.5R} [m3/s]", WaterVolFlowMaxCoolUser));
                                     ShowContinueError(format("differs from Design Size Maximum Cool Water Flow of {:.5R} [m3/s]", WaterVolFlowMaxCoolDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -2914,8 +2912,7 @@ namespace LowTempRadiantSystem {
                                                 "ZoneHVAC:LowTemperatureRadiant:VariableFlow = \"" +
                                                 HydrRadSys(RadSysNum).Name + "\".");
                                     ShowContinueError(format("User-Specified Hydronic Tubing Length of {:.5R} [m]", TubeLengthUser));
-                                    ShowContinueError(format("differs from Design Size Hydronic Tubing Length of {:.5R}", TubeLengthDes) +
-                                                      " [m]");
+                                    ShowContinueError(format("differs from Design Size Hydronic Tubing Length of {:.5R} [m]", TubeLengthDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -3066,8 +3063,7 @@ namespace LowTempRadiantSystem {
                                                 "ZoneHVAC:LowTemperatureRadiant:ConstantFlow = \" " +
                                                 CFloRadSys(RadSysNum).Name + "\".");
                                     ShowContinueError(format("User-Specified Maximum Water Flow of {:.5R} [m3/s]", WaterVolFlowMaxUser));
-                                    ShowContinueError(format("differs from Design Size Maximum Water Flow of {:.5R}", WaterVolFlowMaxDes) +
-                                                      " [m3/s]");
+                                    ShowContinueError(format("differs from Design Size Maximum Water Flow of {:.5R} [m3/s]", WaterVolFlowMaxDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -3114,8 +3110,7 @@ namespace LowTempRadiantSystem {
                                                 "ZoneHVAC:LowTemperatureRadiant:ConstantFlow = \" " +
                                                 CFloRadSys(RadSysNum).Name + "\".");
                                     ShowContinueError(format("User-Specified Hydronic Tubing Length of {:.5R} [m]", TubeLengthUser));
-                                    ShowContinueError(format("differs from Design Size Hydronic Tubing Length of {:.5R}", TubeLengthDes) +
-                                                      " [m]");
+                                    ShowContinueError(format("differs from Design Size Hydronic Tubing Length of {:.5R} [m]", TubeLengthDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -3640,8 +3635,7 @@ namespace LowTempRadiantSystem {
                                 ShowContinueError(format("Predicted radiant system surface temperature = {:.2R}", TH(2, 1, this->SurfacePtr(RadSurfNum2))));
                                 ShowContinueError(format("Zone dew-point temperature + safety delta T= {:.2R}", DewPointTemp + this->CondDewPtDeltaT));
                                 ShowContinueErrorTimeStamp("");
-                                ShowContinueError(format("Note that a {:.4R}", this->CondDewPtDeltaT) +
-                                                  " C safety was chosen in the input for the shut-off criteria");
+                                ShowContinueError(format("Note that a {:.4R} C safety was chosen in the input for the shut-off criteria", this->CondDewPtDeltaT));
                                 ShowContinueError("Note also that this affects all surfaces that are part of this radiant system");
                             }
                             ShowRecurringWarningErrorAtEnd(cHydronicSystem + " [" + this->Name + "] condensation shut-off occurrence continues.",
@@ -3804,8 +3798,7 @@ namespace LowTempRadiantSystem {
                                 ShowContinueError(format("Predicted radiant system surface temperature = {:.2R}", TH(2, 1, this->SurfacePtr(CondSurfNum))));
                                 ShowContinueError(format("Zone dew-point temperature + safety delta T= {:.2R}", DewPointTemp + this->CondDewPtDeltaT));
                                 ShowContinueErrorTimeStamp("");
-                                ShowContinueError(format("Note that a {:.4R}", this->CondDewPtDeltaT) +
-                                                  " C safety was chosen in the input for the shut-off criteria");
+                                ShowContinueError(format("Note that a {:.4R} C safety was chosen in the input for the shut-off criteria", this->CondDewPtDeltaT));
                                 ShowContinueError("Note also that this affects all surfaces that are part of this radiant system");
                             }
                             ShowRecurringWarningErrorAtEnd(cHydronicSystem + " [" + this->Name + "] condensation shut-off occurrence continues.",
@@ -4735,8 +4728,7 @@ namespace LowTempRadiantSystem {
                                 ShowContinueError(format("Predicted radiant system surface temperature = {:.2R}", TH(2, 1, this->SurfacePtr(RadSurfNum2))));
                                 ShowContinueError(format("Zone dew-point temperature + safety delta T= {:.2R}", DewPointTemp + this->CondDewPtDeltaT));
                                 ShowContinueErrorTimeStamp("");
-                                ShowContinueError(format("Note that a {:.4R}", this->CondDewPtDeltaT) +
-                                                  " C safety was chosen in the input for the shut-off criteria");
+                                ShowContinueError(format("Note that a {:.4R} C safety was chosen in the input for the shut-off criteria", this->CondDewPtDeltaT));
                                 ShowContinueError("Note also that this affects all surfaces that are part of this radiant system");
                             }
                             ShowRecurringWarningErrorAtEnd(cConstantFlowSystem + " [" + this->Name + "] condensation shut-off occurrence continues.",
@@ -4794,8 +4786,7 @@ namespace LowTempRadiantSystem {
                                     ShowContinueError(format("Predicted radiant system surface temperature = {:.2R}", TH(2, 1, this->SurfacePtr(RadSurfNum2))));
                                     ShowContinueError(format("Zone dew-point temperature + safety delta T= {:.2R}", DewPointTemp + this->CondDewPtDeltaT));
                                     ShowContinueErrorTimeStamp("");
-                                    ShowContinueError(format("Note that a {:.4R}", this->CondDewPtDeltaT) +
-                                                      " C safety was chosen in the input for the shut-off criteria");
+                                    ShowContinueError(format("Note that a {:.4R} C safety was chosen in the input for the shut-off criteria", this->CondDewPtDeltaT));
                                     ShowContinueError("Note also that this affects all surfaces that are part of this radiant system");
                                 }
                                 ShowRecurringWarningErrorAtEnd(cConstantFlowSystem + " [" + this->Name +

@@ -1061,10 +1061,8 @@ namespace CoolingPanelSimple {
                                 ShowMessage(
                                     "SizeCoolingPanel: Potential issue with equipment sizing for ZoneHVAC:CoolingPanel:RadiantConvective:Water = \"" +
                                     ThisCP.EquipID + "\".");
-                                ShowContinueError(format("User-Specified Maximum Cool Water Flow of {:.5R}", WaterVolFlowMaxCoolUser) +
-                                                  " [m3/s]");
-                                ShowContinueError(format("differs from Design Size Maximum Cool Water Flow of {:.5R}", WaterVolFlowMaxCoolDes) +
-                                                  " [m3/s]");
+                                ShowContinueError(format("User-Specified Maximum Cool Water Flow of {:.5R} [m3/s]", WaterVolFlowMaxCoolUser));
+                                ShowContinueError(format("differs from Design Size Maximum Cool Water Flow of {:.5R} [m3/s]", WaterVolFlowMaxCoolDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                             }
@@ -1274,8 +1272,7 @@ namespace CoolingPanelSimple {
                         ShowContinueError(format("Water inlet temperature = {:.2R}", waterInletTemp));
                         ShowContinueError(format("Zone dew-point temperature + safety delta T= {:.2R}", DewPointTemp + this->CondDewPtDeltaT));
                         ShowContinueErrorTimeStamp("");
-                        ShowContinueError(format("Note that a {:.4R}", this->CondDewPtDeltaT) +
-                                          " C safety was chosen in the input for the shut-off criteria");
+                        ShowContinueError(format("Note that a {:.4R} C safety was chosen in the input for the shut-off criteria", this->CondDewPtDeltaT));
                     }
                     ShowRecurringWarningErrorAtEnd(cCMO_CoolingPanel_Simple + " [" + this->EquipID + "] condensation shut-off occurrence continues.",
                                                    this->CondErrIndex,

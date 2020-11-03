@@ -846,8 +846,7 @@ namespace HVACSingleDuctInduc {
                             if ((std::abs(MaxTotAirVolFlowDes - MaxTotAirVolFlowUser) / MaxTotAirVolFlowUser) > AutoVsHardSizingThreshold) {
                                 ShowMessage("SizeHVACSingleDuctInduction: Potential issue with equipment sizing for " + IndUnit(IUNum).UnitType +
                                             " = \"" + IndUnit(IUNum).Name + "\".");
-                                ShowContinueError(format("User-Specified Maximum Total Air Flow Rate of {:.5R}", MaxTotAirVolFlowUser) +
-                                                  " [m3/s]");
+                                ShowContinueError(format("User-Specified Maximum Total Air Flow Rate of {:.5R} [m3/s]", MaxTotAirVolFlowUser));
                                 ShowContinueError(format("differs from Design Size Maximum Total Air Flow Rate of {:.5R} [m3/s]", MaxTotAirVolFlowDes));
                                 ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                 ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -945,8 +944,7 @@ namespace HVACSingleDuctInduc {
                                 if ((std::abs(MaxVolHotWaterFlowDes - MaxVolHotWaterFlowUser) / MaxVolHotWaterFlowUser) > AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeHVACSingleDuctInduction: Potential issue with equipment sizing for " + IndUnit(IUNum).UnitType +
                                                 " = \"" + IndUnit(IUNum).Name + "\".");
-                                    ShowContinueError(format("User-Specified Maximum Hot Water Flow Rate of {:.5R}", MaxVolHotWaterFlowUser) +
-                                                      " [m3/s]");
+                                    ShowContinueError(format("User-Specified Maximum Hot Water Flow Rate of {:.5R} [m3/s]", MaxVolHotWaterFlowUser));
                                     ShowContinueError(format("differs from Design Size Maximum Hot Water Flow Rate of {:.5R} [m3/s]", MaxVolHotWaterFlowDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -1036,8 +1034,7 @@ namespace HVACSingleDuctInduc {
                                     AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeHVACSingleDuctInduction: Potential issue with equipment sizing for " + IndUnit(IUNum).UnitType +
                                                 " = \"" + IndUnit(IUNum).Name + "\".");
-                                    ShowContinueError(format("User-Specified Maximum Cold Water Flow Rate of {:.5R}", MaxVolColdWaterFlowUser) +
-                                                      " [m3/s]");
+                                    ShowContinueError(format("User-Specified Maximum Cold Water Flow Rate of {:.5R} [m3/s]", MaxVolColdWaterFlowUser));
                                     ShowContinueError(format("differs from Design Size Maximum Cold Water Flow Rate of {:.5R} [m3/s]", MaxVolColdWaterFlowDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");

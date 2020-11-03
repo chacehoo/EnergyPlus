@@ -1016,8 +1016,7 @@ namespace SteamBaseboardRadiator {
                                     ShowMessage("SizeSteamBaseboard: Potential issue with equipment sizing for "
                                                 "ZoneHVAC:Baseboard:RadiantConvective:Steam=\"" +
                                                 state.dataSteamBaseboardRadiator->SteamBaseboard(BaseboardNum).EquipID + "\".");
-                                    ShowContinueError(format("User-Specified Maximum Steam Flow Rate of {:.5R}", SteamVolFlowRateMaxUser) +
-                                                      " [m3/s]");
+                                    ShowContinueError(format("User-Specified Maximum Steam Flow Rate of {:.5R} [m3/s]", SteamVolFlowRateMaxUser));
                                     ShowContinueError(format("differs from Design Size Maximum Steam Flow Rate of {:.5R} [m3/s]", SteamVolFlowRateMaxDes));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");

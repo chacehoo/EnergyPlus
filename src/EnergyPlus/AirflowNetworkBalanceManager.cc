@@ -1674,16 +1674,14 @@ namespace AirflowNetworkBalanceManager {
                 state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).MinOpeningTime = Numbers(1);
                 if (state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).MinOpeningTime < 0.0) {
                     ShowWarningError(RoutineName + CurrentModuleObject + " object, " + cNumericFields(1) + " < 0.0");
-                    ShowContinueError(format("..Input value = {:.1R}", state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).MinOpeningTime) +
-                                      ", Value will be reset to 0.0");
+                    ShowContinueError(format("..Input value = {:.1R}, Value will be reset to 0.0", state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).MinOpeningTime));
                     ShowContinueError("..for " + cAlphaFields(1) + " = \"" + state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).Name);
                     state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).MinOpeningTime = 0.0;
                 }
                 state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).MinClosingTime = Numbers(2);
                 if (state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).MinClosingTime < 0.0) {
                     ShowWarningError(RoutineName + CurrentModuleObject + " object, " + cNumericFields(2) + " < 0.0");
-                    ShowContinueError(format("..Input value = {:.1R}", state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).MinClosingTime) +
-                                      ", Value will be reset to 0.0");
+                    ShowContinueError(format("..Input value = {:.1R}, Value will be reset to 0.0", state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).MinClosingTime));
                     ShowContinueError("..for " + cAlphaFields(1) + " = \"" + state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).Name);
                     state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).MinClosingTime = 0.0;
                 }
@@ -1731,8 +1729,7 @@ namespace AirflowNetworkBalanceManager {
                     state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).ComfortBouPoint = Numbers(3);
                     if (state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).ComfortBouPoint < 0.0) {
                         ShowWarningError(RoutineName + CurrentModuleObject + " object, " + cNumericFields(3) + " < 0.0");
-                        ShowContinueError(format("..Input value = {:.1R}", state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).ComfortBouPoint) +
-                                          ", Value will be reset to 10.0 as default");
+                        ShowContinueError(format("..Input value = {:.1R}, Value will be reset to 10.0 as default", state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).ComfortBouPoint));
                         ShowContinueError("..for " + cAlphaFields(1) + " = \"" + state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).Name);
                         state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).ComfortBouPoint = 10.0;
                     }
@@ -1751,8 +1748,7 @@ namespace AirflowNetworkBalanceManager {
                     state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).MaxPPD = Numbers(4);
                     if (state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).MaxPPD < 0.0 || state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).MaxPPD > 100.0) {
                         ShowWarningError(RoutineName + CurrentModuleObject + " object, " + cNumericFields(4) + " beyond 0.0 and 100.0");
-                        ShowContinueError(format("..Input value = {:.1R}", state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).MaxPPD) +
-                                          ", Value will be reset to 10.0 as default");
+                        ShowContinueError(format("..Input value = {:.1R}, Value will be reset to 10.0 as default", state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).MaxPPD));
                         ShowContinueError("..for " + cAlphaFields(1) + " = \"" + state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).Name);
                         state.dataAirflowNetworkBalanceManager->OccupantVentilationControl(i).MaxPPD = 10.0;
                     }
@@ -2177,8 +2173,7 @@ namespace AirflowNetworkBalanceManager {
                     }
                     if (MultizoneZoneData(i).UpValueTemp <= MultizoneZoneData(i).LowValueTemp) {
                         ShowWarningError(RoutineName + CurrentModuleObject + " object, " + cNumericFields(3) + " <= " + cNumericFields(2));
-                        ShowContinueError(format("..Input value for {} = {:.1R}", cNumericFields(3), MultizoneZoneData(i).UpValueTemp) +
-                                          ", Value will be reset to 100.0");
+                        ShowContinueError(format("..Input value for {} = {:.1R}, Value will be reset to 100.0", cNumericFields(3), MultizoneZoneData(i).UpValueTemp));
                         ShowContinueError("..for " + cAlphaFields(1) + " = \"" + MultizoneZoneData(i).ZoneName);
                         MultizoneZoneData(i).UpValueTemp = 100.0;
                     }
@@ -2192,15 +2187,13 @@ namespace AirflowNetworkBalanceManager {
                     }
                     if (MultizoneZoneData(i).LowValueEnth >= 300000.0) {
                         ShowWarningError(RoutineName + CurrentModuleObject + " object, " + cNumericFields(4) + " >= 300000.0");
-                        ShowContinueError(format("..Input value = {:.1R}", MultizoneZoneData(i).LowValueEnth) +
-                                          ", Value will be reset to 0.0.");
+                        ShowContinueError(format("..Input value = {:.1R}, Value will be reset to 0.0.", MultizoneZoneData(i).LowValueEnth));
                         ShowContinueError("..for " + cAlphaFields(1) + " = \"" + MultizoneZoneData(i).ZoneName);
                         MultizoneZoneData(i).LowValueEnth = 0.0;
                     }
                     if (MultizoneZoneData(i).UpValueEnth <= MultizoneZoneData(i).LowValueEnth) {
                         ShowWarningError(RoutineName + CurrentModuleObject + " object, " + cNumericFields(5) + " <= " + cNumericFields(4));
-                        ShowContinueError(format("..Input value for {}= {:.1R}", cNumericFields(5), MultizoneZoneData(i).UpValueEnth) +
-                                          ", Value will be reset to 300000.0");
+                        ShowContinueError(format("..Input value for {}= {:.1R}, Value will be reset to 300000.0", cNumericFields(5), MultizoneZoneData(i).UpValueEnth));
                         ShowContinueError("..for " + cAlphaFields(1) + " = \"" + MultizoneZoneData(i).ZoneName);
                         MultizoneZoneData(i).UpValueEnth = 300000.0;
                     }
@@ -2905,22 +2898,19 @@ namespace AirflowNetworkBalanceManager {
                         }
                         if (MultizoneSurfaceData(i).LowValueTemp < 0.0) {
                             ShowWarningError(RoutineName + CurrentModuleObject + " object, Low Temperature difference value < 0.0d0");
-                            ShowContinueError(format("..Input value={:.1R}", MultizoneSurfaceData(i).LowValueTemp) +
-                                              ", Value will be reset to 0.0.");
+                            ShowContinueError(format("..Input value={:.1R}, Value will be reset to 0.0.", MultizoneSurfaceData(i).LowValueTemp));
                             ShowContinueError("..for Surface = \"" + MultizoneSurfaceData(i).SurfName + "\"");
                             MultizoneSurfaceData(i).LowValueTemp = 0.0;
                         }
                         if (MultizoneSurfaceData(i).LowValueTemp >= 100.0) {
                             ShowWarningError(RoutineName + CurrentModuleObject + " object, Low Temperature difference value >= 100.0d0");
-                            ShowContinueError(format("..Input value = {:.1R}", MultizoneSurfaceData(i).LowValueTemp) +
-                                              ", Value will be reset to 0.0");
+                            ShowContinueError(format("..Input value = {:.1R}, Value will be reset to 0.0", MultizoneSurfaceData(i).LowValueTemp));
                             ShowContinueError("..for Surface = \"" + MultizoneSurfaceData(i).SurfName + "\"");
                             MultizoneZoneData(i).LowValueTemp = 0.0;
                         }
                         if (MultizoneSurfaceData(i).UpValueTemp <= MultizoneSurfaceData(i).LowValueTemp) {
                             ShowWarningError(RoutineName + CurrentModuleObject + " object, Upper Temperature <= Lower Temperature difference value.");
-                            ShowContinueError(format("..Input value = {:.1R}", MultizoneSurfaceData(i).UpValueTemp) +
-                                              ", Value will be reset to 100.0");
+                            ShowContinueError(format("..Input value = {:.1R}, Value will be reset to 100.0", MultizoneSurfaceData(i).UpValueTemp));
                             ShowContinueError("..for Surface = \"" + MultizoneSurfaceData(i).SurfName + "\"");
                             MultizoneSurfaceData(i).UpValueTemp = 100.0;
                         }
@@ -2941,22 +2931,19 @@ namespace AirflowNetworkBalanceManager {
                         }
                         if (MultizoneSurfaceData(i).LowValueEnth < 0.0) {
                             ShowWarningError(RoutineName + CurrentModuleObject + " object, Low Enthalpy difference value < 0.0d0");
-                            ShowContinueError(format("..Input value = {:.1R}", MultizoneSurfaceData(i).LowValueEnth) +
-                                              ", Value will be reset to 0.0");
+                            ShowContinueError(format("..Input value = {:.1R}, Value will be reset to 0.0", MultizoneSurfaceData(i).LowValueEnth));
                             ShowContinueError("..for Surface = \"" + MultizoneSurfaceData(i).SurfName + "\"");
                             MultizoneSurfaceData(i).LowValueEnth = 0.0;
                         }
                         if (MultizoneSurfaceData(i).LowValueEnth >= 300000.0) {
                             ShowWarningError(RoutineName + CurrentModuleObject + " object, Low Enthalpy difference value >= 300000.0");
-                            ShowContinueError(format("..Input value = {:.1R}", MultizoneSurfaceData(i).LowValueEnth) +
-                                              ", Value will be reset to 0.0");
+                            ShowContinueError(format("..Input value = {:.1R}, Value will be reset to 0.0", MultizoneSurfaceData(i).LowValueEnth));
                             ShowContinueError("..for Surface = \"" + MultizoneSurfaceData(i).SurfName + "\"");
                             MultizoneZoneData(i).LowValueEnth = 0.0;
                         }
                         if (MultizoneSurfaceData(i).UpValueEnth <= MultizoneSurfaceData(i).LowValueEnth) {
                             ShowWarningError(RoutineName + CurrentModuleObject + " object, Upper Enthalpy <= Lower Enthalpy difference value.");
-                            ShowContinueError(format("..Input value = {:.1R}", MultizoneSurfaceData(i).UpValueEnth) +
-                                              ", Value will be set to 300000.0");
+                            ShowContinueError(format("..Input value = {:.1R}, Value will be set to 300000.0", MultizoneSurfaceData(i).UpValueEnth));
                             ShowContinueError("..for Surface = \"" + MultizoneSurfaceData(i).SurfName + "\"");
                             MultizoneSurfaceData(i).UpValueEnth = 300000.0;
                         }

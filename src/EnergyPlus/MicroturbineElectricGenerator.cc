@@ -1274,8 +1274,7 @@ namespace MicroturbineElectricGenerator {
                     if (this->AnciPowerFMdotFuelErrorIndex == 0) {
                         ShowWarningMessage("GENERATOR:MICROTURBINE \"" + this->Name + "\"");
                         ShowContinueError(format("... Ancillary Power Modifier (function of fuel input) output is less than zero ({:.4T}).", AnciPowerFMdotFuel));
-                        ShowContinueError(format("... Value occurs using a fuel input mass flow rate of {:.4T}", this->FuelMdot) +
-                                          " kg/s.");
+                        ShowContinueError(format("... Value occurs using a fuel input mass flow rate of {:.4T} kg/s.", this->FuelMdot));
                         ShowContinueErrorTimeStamp("... Resetting curve output to zero and continuing simulation.");
                     }
                     ShowRecurringWarningErrorAtEnd(
@@ -1674,10 +1673,8 @@ namespace MicroturbineElectricGenerator {
                     ShowWarningMessage("GENERATOR:MICROTURBINE \"" + this->Name + "\"");
                     ShowContinueError(
                         "...The model has calculated the exhaust air humidity ratio to be less than the combustion air inlet humidity ratio.");
-                    ShowContinueError(format("...Value of exhaust air humidity ratio          ={:.6T}", this->ExhaustAirHumRat) +
-                                      " kgWater/kgDryAir.");
-                    ShowContinueError(format("...Value of combustion air inlet humidity ratio ={:.6T}", CombustionAirInletW) +
-                                      " kgWater/kgDryAir.");
+                    ShowContinueError(format("...Value of exhaust air humidity ratio          ={:.6T} kgWater/kgDryAir.", this->ExhaustAirHumRat));
+                    ShowContinueError(format("...Value of combustion air inlet humidity ratio ={:.6T} kgWater/kgDryAir.", CombustionAirInletW));
                     ShowContinueErrorTimeStamp("... Simulation will continue.");
                 }
                 ShowRecurringWarningErrorAtEnd(

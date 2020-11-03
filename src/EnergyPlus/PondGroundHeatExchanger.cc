@@ -351,8 +351,7 @@ namespace PondGroundHeatExchanger {
 
         if (!DataEnvironment::GroundTemp_DeepObjInput) {
             ShowWarningError("GetPondGroundHeatExchanger:  No \"Site:GroundTemperature:Deep\" were input.");
-            ShowContinueError(format("Defaults, constant throughout the year of ({:.1R}", DataEnvironment::GroundTemp_Deep) +
-                              ") will be used.");
+            ShowContinueError(format("Defaults, constant throughout the year of ({:.1R}) will be used.", DataEnvironment::GroundTemp_Deep));
         }
     }
 

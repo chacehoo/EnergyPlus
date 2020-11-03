@@ -406,8 +406,7 @@ namespace PlantCentralGSHP {
                                         ShowMessage("SizeChillerHeaterPerformanceElectricEIR: Potential issue with equipment sizing for " +
                                                     this->ChillerHeater(NumChillerHeater).Name);
                                         ShowContinueError(format("User-Specified Reference Capacity of {:.2R} [W]", NomCapUser));
-                                        ShowContinueError(format("differs from Design Size Reference Capacity of {:.2R}", tmpNomCap) +
-                                                          " [W]");
+                                        ShowContinueError(format("differs from Design Size Reference Capacity of {:.2R} [W]", tmpNomCap));
                                         ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                         ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                     }

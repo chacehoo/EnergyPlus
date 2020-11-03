@@ -997,8 +997,7 @@ namespace DesiccantDehumidifiers {
 
                     if (RegenCoilControlNodeNum > 0) {
                         ShowSevereError(DesicDehum(DesicDehumNum).DehumType + " \"" + DesicDehum(DesicDehumNum).Name + "\"");
-                        ShowContinueError(format("{} is specified as {:.3R}", cNumericFields(1), DesicDehum(DesicDehumNum).RegenSetPointTemp) +
-                                          " C in this object.");
+                        ShowContinueError(format("{} is specified as {:.3R} C in this object.", cNumericFields(1), DesicDehum(DesicDehumNum).RegenSetPointTemp));
                         ShowContinueError(" Do not specify a coil temperature setpoint node name in the regeneration air heater object.");
                         ShowContinueError("..." + cAlphaFields(9) + " = " + DesicDehum(DesicDehumNum).RegenCoilType);
                         ShowContinueError("..." + cAlphaFields(10) + " = " + DesicDehum(DesicDehumNum).RegenCoilName);
@@ -1142,8 +1141,7 @@ namespace DesiccantDehumidifiers {
 
                     if (RegenCoilControlNodeNum > 0) {
                         ShowSevereError(DesicDehum(DesicDehumNum).DehumType + " \"" + DesicDehum(DesicDehumNum).Name + "\"");
-                        ShowContinueError(format("{} is specified as {:.3R}", cNumericFields(1), DesicDehum(DesicDehumNum).RegenSetPointTemp) +
-                                          " C in this object.");
+                        ShowContinueError(format("{} is specified as {:.3R} C in this object.", cNumericFields(1), DesicDehum(DesicDehumNum).RegenSetPointTemp));
                         ShowContinueError(" Do not specify a coil temperature setpoint node name in the regeneration air heater object.");
                         ShowContinueError("..." + cAlphaFields(9) + " = " + DesicDehum(DesicDehumNum).RegenCoilType);
                         ShowContinueError("..." + cAlphaFields(10) + " = " + DesicDehum(DesicDehumNum).RegenCoilName);

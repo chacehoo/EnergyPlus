@@ -292,15 +292,13 @@ namespace ZoneContaminantPredictorCorrector {
                     if (SchMin < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", minimum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Minimum is [{:.1R}", SchMin) +
-                                          "]. Values must be >= 0.0.");
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Minimum is [{:.1R}]. Values must be >= 0.0.", SchMin));
                         ErrorsFound = true;
                     }
                     if (SchMax < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", maximum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Maximum is [{:.1R}", SchMax) +
-                                          "]. Values must be >= 0.0.");
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Maximum is [{:.1R}]. Values must be >= 0.0.", SchMax));
                         ErrorsFound = true;
                     }
                 }
@@ -325,15 +323,13 @@ namespace ZoneContaminantPredictorCorrector {
                     if (SchMin < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(4) +
                                         ", minimum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(4) + format("\". Minimum is [{:.1R}", SchMin) +
-                                          "]. Values must be >= 0.0.");
+                        ShowContinueError("Schedule=\"" + AlphaName(4) + format("\". Minimum is [{:.1R}]. Values must be >= 0.0.", SchMin));
                         ErrorsFound = true;
                     }
                     if (SchMax < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(4) +
                                         ", maximum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(4) + format("\". Maximum is [{:.1R}", SchMax) +
-                                          "]. Values must be >= 0.0.");
+                        ShowContinueError("Schedule=\"" + AlphaName(4) + format("\". Maximum is [{:.1R}]. Values must be >= 0.0.", SchMax));
                         ErrorsFound = true;
                     }
                 }
@@ -428,15 +424,13 @@ namespace ZoneContaminantPredictorCorrector {
                     if (SchMin < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", minimum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Minimum is [{:.1R}", SchMin) +
-                                          "]. Values must be >= 0.0.");
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Minimum is [{:.1R}]. Values must be >= 0.0.", SchMin));
                         ErrorsFound = true;
                     }
                     if (SchMax < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", maximum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Maximum is [{:.1R}", SchMax) +
-                                          "]. Values must be >= 0.0.");
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Maximum is [{:.1R}]. Values must be >= 0.0.", SchMax));
                         ErrorsFound = true;
                     }
                 }
@@ -547,15 +541,13 @@ namespace ZoneContaminantPredictorCorrector {
                     if (SchMin < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", minimum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Minimum is [{:.1R}", SchMin) +
-                                          "]. Values must be >= 0.0.");
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Minimum is [{:.1R}]. Values must be >= 0.0.", SchMin));
                         ErrorsFound = true;
                     }
                     if (SchMax < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", maximum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Maximum is [{:.1R}", SchMax) +
-                                          "]. Values must be >= 0.0.");
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Maximum is [{:.1R}]. Values must be >= 0.0.", SchMax));
                         ErrorsFound = true;
                     }
                 }
@@ -655,15 +647,13 @@ namespace ZoneContaminantPredictorCorrector {
                     if (SchMin < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", minimum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Minimum is [{:.1R}", SchMin) +
-                                          "]. Values must be >= 0.0.");
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Minimum is [{:.1R}]. Values must be >= 0.0.", SchMin));
                         ErrorsFound = true;
                     }
                     if (SchMax < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", maximum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Maximum is [{:.1R}", SchMax) +
-                                          "]. Values must be >= 0.0.");
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Maximum is [{:.1R}]. Values must be >= 0.0.", SchMax));
                         ErrorsFound = true;
                     }
                 }
@@ -769,15 +759,13 @@ namespace ZoneContaminantPredictorCorrector {
                     if (SchMin < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", minimum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Minimum is [{:.1R}", SchMin) +
-                                          "]. Values must be >= 0.0.");
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Minimum is [{:.1R}]. Values must be >= 0.0.", SchMin));
                         ErrorsFound = true;
                     }
                     if (SchMax < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", maximum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Maximum is [{:.1R}", SchMax) +
-                                          "]. Values must be >= 0.0.");
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Maximum is [{:.1R}]. Values must be >= 0.0.", SchMax));
                         ErrorsFound = true;
                     }
                 }
@@ -884,15 +872,13 @@ namespace ZoneContaminantPredictorCorrector {
                     if (SchMin < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", minimum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Minimum is [{:.1R}", SchMin) +
-                                          "]. Values must be >= 0.0.");
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Minimum is [{:.1R}]. Values must be >= 0.0.", SchMin));
                         ErrorsFound = true;
                     }
                     if (SchMax < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", maximum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Maximum is [{:.1R}", SchMax) +
-                                          "]. Values must be >= 0.0.");
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Maximum is [{:.1R}]. Values must be >= 0.0.", SchMax));
                         ErrorsFound = true;
                     }
                 }
@@ -984,15 +970,13 @@ namespace ZoneContaminantPredictorCorrector {
                     if (SchMin < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", minimum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Minimum is [{:.1R}", SchMin) +
-                                          "]. Values must be >= 0.0.");
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Minimum is [{:.1R}]. Values must be >= 0.0.", SchMin));
                         ErrorsFound = true;
                     }
                     if (SchMax < 0.0) {
                         ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + AlphaName(1) + "\", " + cAlphaFieldNames(3) +
                                         ", maximum is < 0.0");
-                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Maximum is [{:.1R}", SchMax) +
-                                          "]. Values must be >= 0.0.");
+                        ShowContinueError("Schedule=\"" + AlphaName(3) + format("\". Maximum is [{:.1R}]. Values must be >= 0.0.", SchMax));
                         ErrorsFound = true;
                     }
                 }

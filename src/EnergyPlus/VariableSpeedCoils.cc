@@ -1978,7 +1978,7 @@ namespace VariableSpeedCoils {
             state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MaxOATCrankcaseHeater = NumArray(11);
             if (state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).MaxOATCrankcaseHeater < 0.0) {
                 ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name + "\", invalid");
-                ShowContinueError(format("...{} must be >= 0 {C}.  entered value=[{:.1T}].", cNumericFields(11), NumArray(11)));
+                ShowContinueError(format("...{} must be >= 0 {{C}}.  entered value=[{:.1T}].", cNumericFields(11), NumArray(11)));
                 ErrorsFound = true;
             }
 
@@ -4055,8 +4055,7 @@ namespace VariableSpeedCoils {
                                         CurrentObjSubfix);
                             ShowContinueError("Coil Name =" + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name);
                             ShowContinueError(format("User-Specified Rated Total Cooling Capacity of {:.2R} [W]", RatedCapCoolTotalUser));
-                            ShowContinueError(format("differs from Design Size Rated Total Cooling Capacity of {:.2R}", RatedCapCoolTotalDes) +
-                                              " [W]");
+                            ShowContinueError(format("differs from Design Size Rated Total Cooling Capacity of {:.2R} [W]", RatedCapCoolTotalDes));
                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                         }
@@ -4195,8 +4194,7 @@ namespace VariableSpeedCoils {
                                         CurrentObjSubfix);
                             ShowContinueError("Coil Name =" + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name);
                             ShowContinueError(format("User-Specified Rated Air Flow Rate of {:.5R} [m3/s]", RatedAirVolFlowRateUser));
-                            ShowContinueError(format("differs from Design Size Rated Air Flow Rate of {:.5R}", RatedAirVolFlowRateDes) +
-                                              " [m3/s]");
+                            ShowContinueError(format("differs from Design Size Rated Air Flow Rate of {:.5R} [m3/s]", RatedAirVolFlowRateDes));
                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                         }
@@ -4464,8 +4462,7 @@ namespace VariableSpeedCoils {
                                     CurrentObjSubfix);
                         ShowContinueError("Coil Name =" + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name);
                         ShowContinueError(format("User-Specified Rated Water Flow Rate of {:.5R} [m3/s]", RatedWaterVolFlowRateUser));
-                        ShowContinueError(format("differs from Design Size Rated Water Flow Rate of {:.5R}", RatedWaterVolFlowRateDes) +
-                                          " [m3/s]");
+                        ShowContinueError(format("differs from Design Size Rated Water Flow Rate of {:.5R} [m3/s]", RatedWaterVolFlowRateDes));
                         ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                         ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                     }
@@ -4780,8 +4777,7 @@ namespace VariableSpeedCoils {
                             ShowMessage("SizeVarSpeedCoil: Potential issue with equipment sizing for " + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).CoolHeatType + ' ' +
                                         CurrentObjSubfix);
                             ShowContinueError("Coil Name =" + state.dataVariableSpeedCoils->VarSpeedCoil(DXCoilNum).Name);
-                            ShowContinueError(format("User-Specified Resistive Defrost Heater Capacity of {:.2R}", DefrostCapacityUser) +
-                                              " [W]");
+                            ShowContinueError(format("User-Specified Resistive Defrost Heater Capacity of {:.2R} [W]", DefrostCapacityUser));
                             ShowContinueError(format("differs from Design Size Resistive Defrost Heater Capacity of {:.2R} [W]", DefrostCapacityDes));
                             ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                             ShowContinueError("Verify that the value entered is intended and is consistent with other components.");

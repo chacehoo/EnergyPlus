@@ -1309,37 +1309,31 @@ namespace StandardRatings {
         if (TotCapTempModFacRated < 0.0 || CapTempModFacH2Test < 0.0 || CapTempModFacH3Test < 0.0 || EIRTempModFacRated < 0.0 ||
             EIRTempModFacH2Test < 0.0 || EIRTempModFacH3Test < 0.0) {
             if (TotCapTempModFacRated < 0.0) {
-                ShowSevereError(format(" Invalid Total Heating Capacity Function of Temperature Curve value = {:.2R}", TotCapTempModFacRated) +
-                                ", Curve Type = " + state.dataCurveManager->PerfCurve(CapFTempCurveIndex).ObjectType + ", Curve Name = " + GetCurveName(state, CapFTempCurveIndex));
+                ShowSevereError(format(" Invalid Total Heating Capacity Function of Temperature Curve value = {:.2R}, Curve Type = ", TotCapTempModFacRated) + state.dataCurveManager->PerfCurve(CapFTempCurveIndex).ObjectType + ", Curve Name = " + GetCurveName(state, CapFTempCurveIndex));
                 ShowContinueError(" ...Net heating capacity at high temperature is set to zero. The curve value must be > 0. Check the curve.");
                 NetHeatingCapRated = 0.0;
             }
             if (CapTempModFacH3Test < 0.0) {
-                ShowSevereError(format(" Invalid Total Heating Capacity Function of Temperature Curve value = {:.2R}", CapTempModFacH3Test) +
-                                ", Curve Type = " + state.dataCurveManager->PerfCurve(CapFTempCurveIndex).ObjectType + ", Curve Name = " + GetCurveName(state, CapFTempCurveIndex));
+                ShowSevereError(format(" Invalid Total Heating Capacity Function of Temperature Curve value = {:.2R}, Curve Type = ", CapTempModFacH3Test) + state.dataCurveManager->PerfCurve(CapFTempCurveIndex).ObjectType + ", Curve Name = " + GetCurveName(state, CapFTempCurveIndex));
                 ShowContinueError(" ...Net heating capacity at low temperature is set to zero. The curve value must be > 0. Check the curve.");
                 NetHeatingCapH3Test = 0.0;
             }
             if (CapTempModFacH2Test < 0.0) {
-                ShowSevereError(format(" Invalid Total Heating Capacity Function of Temperature Curve value = {:.2R}", CapTempModFacH2Test) +
-                                ", Curve Type = " + state.dataCurveManager->PerfCurve(CapFTempCurveIndex).ObjectType + ", Curve Name = " + GetCurveName(state, CapFTempCurveIndex));
+                ShowSevereError(format(" Invalid Total Heating Capacity Function of Temperature Curve value = {:.2R}, Curve Type = ", CapTempModFacH2Test) + state.dataCurveManager->PerfCurve(CapFTempCurveIndex).ObjectType + ", Curve Name = " + GetCurveName(state, CapFTempCurveIndex));
                 ShowContinueError(" ...HSPF calculation is incorrect. The curve value must be > 0. Check the curve.");
                 NetHeatingCapH3Test = 0.0;
             }
             // check EIR curve values
             if (EIRTempModFacRated < 0.0) {
-                ShowSevereError(format(" Invalid EIR Function of Temperature Curve value = {:.2R}", EIRTempModFacRated) +
-                                ", Curve Type = " + state.dataCurveManager->PerfCurve(EIRFTempCurveIndex).ObjectType + ", Curve Name = " + GetCurveName(state, EIRFTempCurveIndex));
+                ShowSevereError(format(" Invalid EIR Function of Temperature Curve value = {:.2R}, Curve Type = ", EIRTempModFacRated) + state.dataCurveManager->PerfCurve(EIRFTempCurveIndex).ObjectType + ", Curve Name = " + GetCurveName(state, EIRFTempCurveIndex));
                 ShowContinueError(" ...HSPF calculation is incorrect. The curve value must be > 0. Check the curve.");
             }
             if (EIRTempModFacH2Test < 0.0) {
-                ShowSevereError(format(" Invalid EIR Function of Temperature Curve value = {:.2R}", EIRTempModFacH2Test) +
-                                ", Curve Type = " + state.dataCurveManager->PerfCurve(EIRFTempCurveIndex).ObjectType + ", Curve Name = " + GetCurveName(state, EIRFTempCurveIndex));
+                ShowSevereError(format(" Invalid EIR Function of Temperature Curve value = {:.2R}, Curve Type = ", EIRTempModFacH2Test) + state.dataCurveManager->PerfCurve(EIRFTempCurveIndex).ObjectType + ", Curve Name = " + GetCurveName(state, EIRFTempCurveIndex));
                 ShowContinueError(" ...HSPF calculation is incorrect. The curve value must be > 0. Check the curve.");
             }
             if (EIRTempModFacH3Test < 0.0) {
-                ShowSevereError(format(" Invalid EIR Function of Temperature Curve value = {:.2R}", EIRTempModFacH3Test) +
-                                ", Curve Type = " + state.dataCurveManager->PerfCurve(EIRFTempCurveIndex).ObjectType + ", Curve Name = " + GetCurveName(state, EIRFTempCurveIndex));
+                ShowSevereError(format(" Invalid EIR Function of Temperature Curve value = {:.2R}, Curve Type = ", EIRTempModFacH3Test) + state.dataCurveManager->PerfCurve(EIRFTempCurveIndex).ObjectType + ", Curve Name = " + GetCurveName(state, EIRFTempCurveIndex));
                 ShowContinueError(" ...HSPF calculation is incorrect. The curve value must be > 0. Check the curve.");
             }
             ShowContinueError(" ...HSPF value has been reset to 0.0 and simulation is continuing.");

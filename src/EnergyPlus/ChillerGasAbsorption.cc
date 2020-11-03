@@ -971,8 +971,7 @@ namespace ChillerGasAbsorption {
                                 if ((std::abs(tmpNomCap - NomCapUser) / NomCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeChillerHeaterAbsorptionDirectFired: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError(format("User-Specified Nominal Capacity of {:.2R} [W]", NomCapUser));
-                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R}", tmpNomCap) +
-                                                      " [W]");
+                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R} [W]", tmpNomCap));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }

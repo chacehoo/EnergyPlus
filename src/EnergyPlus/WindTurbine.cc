@@ -379,7 +379,7 @@ namespace WindTurbine {
             if (lNumericBlanks(9) || state.dataWindTurbine->WindTurbineSys(WindTurbineNum).SysEfficiency == 0.0 || state.dataWindTurbine->WindTurbineSys(WindTurbineNum).SysEfficiency > 1.0) {
                 state.dataWindTurbine->WindTurbineSys(WindTurbineNum).SysEfficiency = SysEffDefault;
                 ShowWarningError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + format("\" invalid {}=[{:.2R}].", cNumericFields(9), rNumericArgs(9)));
-                ShowContinueError(format("...The default value of {:.3R} was assumed.", SysEffDefault) + " for " + cNumericFields(9));
+                ShowContinueError(format("...The default value of {:.3R} was assumed. for ", SysEffDefault) + cNumericFields(9));
             }
 
             state.dataWindTurbine->WindTurbineSys(WindTurbineNum).MaxTipSpeedRatio = rNumericArgs(10); // Maximum tip speed ratio
@@ -395,7 +395,7 @@ namespace WindTurbine {
             if (state.dataWindTurbine->WindTurbineSys(WindTurbineNum).SysEfficiency > MaxTSR) {
                 state.dataWindTurbine->WindTurbineSys(WindTurbineNum).SysEfficiency = MaxTSR;
                 ShowWarningError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + format("\" invalid {}=[{:.2R}].", cNumericFields(10), rNumericArgs(10)));
-                ShowContinueError(format("...The default value of {:.1R} was assumed.", MaxTSR) + " for " + cNumericFields(10));
+                ShowContinueError(format("...The default value of {:.1R} was assumed. for ", MaxTSR) + cNumericFields(10));
             }
 
             state.dataWindTurbine->WindTurbineSys(WindTurbineNum).MaxPowerCoeff = rNumericArgs(11); // Maximum power coefficient
@@ -411,7 +411,7 @@ namespace WindTurbine {
             if (state.dataWindTurbine->WindTurbineSys(WindTurbineNum).MaxPowerCoeff > MaxPowerCoeff) {
                 state.dataWindTurbine->WindTurbineSys(WindTurbineNum).MaxPowerCoeff = DefaultPC;
                 ShowWarningError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + format("\" invalid {}=[{:.2R}].", cNumericFields(11), rNumericArgs(11)));
-                ShowContinueError(format("...The default value of {:.2R} will be used.", DefaultPC) + " for " + cNumericFields(11));
+                ShowContinueError(format("...The default value of {:.2R} will be used. for ", DefaultPC) + cNumericFields(11));
             }
 
             state.dataWindTurbine->WindTurbineSys(WindTurbineNum).LocalAnnualAvgWS = rNumericArgs(12); // Local wind speed annually averaged
@@ -434,7 +434,7 @@ namespace WindTurbine {
                     if (lNumericBlanks(13)) {
                         ShowWarningError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + "\" invalid " + cNumericFields(13) +
                                          " is necessary for accurate prediction but input is blank.");
-                        ShowContinueError(format("...The default value of {:.2R} will be used.", DefaultH) + " for " + cNumericFields(13));
+                        ShowContinueError(format("...The default value of {:.2R} will be used. for ", DefaultH) + cNumericFields(13));
                     } else {
                         ShowSevereError(CurrentModuleObject + "=\"" + cAlphaArgs(1) + format("\" invalid {}=[{:.2R}] must be greater than zero.", cNumericFields(13), rNumericArgs(13)));
                         ErrorsFound = true;

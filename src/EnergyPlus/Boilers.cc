@@ -596,8 +596,7 @@ namespace Boilers {
                                 if ((std::abs(tmpNomCap - NomCapUser) / NomCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeBoilerHotWater: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError(format("User-Specified Nominal Capacity of {:.2R} [W]", NomCapUser));
-                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R}", tmpNomCap) +
-                                                      " [W]");
+                                    ShowContinueError(format("differs from Design Size Nominal Capacity of {:.2R} [W]", tmpNomCap));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -647,8 +646,7 @@ namespace Boilers {
                             if (DataGlobals::DisplayExtraWarnings) {
                                 if ((std::abs(tmpBoilerVolFlowRate - VolFlowRateUser) / VolFlowRateUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("SizeBoilerHotWater: Potential issue with equipment sizing for " + this->Name);
-                                    ShowContinueError(format("User-Specified Design Water Flow Rate of {:.2R}", VolFlowRateUser) +
-                                                      " [m3/s]");
+                                    ShowContinueError(format("User-Specified Design Water Flow Rate of {:.2R} [m3/s]", VolFlowRateUser));
                                     ShowContinueError(format("differs from Design Size Design Water Flow Rate of {:.2R} [m3/s]", tmpBoilerVolFlowRate));
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
@@ -858,8 +856,7 @@ namespace Boilers {
                         }
                     }
                     ShowContinueError(format("...Curve output (normalized eff) = {:.5T}", EffCurveOutput));
-                    ShowContinueError(format("...Calculated Boiler efficiency  = {:.5T}", BoilerEff) +
-                                      " (Boiler efficiency = Nominal Thermal Efficiency * Normalized Boiler Efficiency Curve output)");
+                    ShowContinueError(format("...Calculated Boiler efficiency  = {:.5T} (Boiler efficiency = Nominal Thermal Efficiency * Normalized Boiler Efficiency Curve output)", BoilerEff));
                     ShowContinueErrorTimeStamp("...Curve output reset to 0.01 and simulation continues.");
                 } else {
                     ShowRecurringWarningErrorAtEnd("Boiler:HotWater \"" + this->Name +
@@ -889,8 +886,7 @@ namespace Boilers {
                         }
                     }
                     ShowContinueError(format("...Curve output (normalized eff) = {:.5T}", EffCurveOutput));
-                    ShowContinueError(format("...Calculated Boiler efficiency  = {:.5T}", BoilerEff) +
-                                      " (Boiler efficiency = Nominal Thermal Efficiency * Normalized Boiler Efficiency Curve output)");
+                    ShowContinueError(format("...Calculated Boiler efficiency  = {:.5T} (Boiler efficiency = Nominal Thermal Efficiency * Normalized Boiler Efficiency Curve output)", BoilerEff));
                     ShowContinueErrorTimeStamp("...Curve output reset to 1.1 and simulation continues.");
                 } else {
                     ShowRecurringWarningErrorAtEnd("Boiler:HotWater \"" + this->Name +
