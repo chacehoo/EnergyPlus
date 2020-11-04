@@ -127,8 +127,7 @@ namespace BaseboardElectric {
             }
             if (baseboard->Baseboard(BaseboardNum).CheckEquipName) {
                 if (EquipName != baseboard->Baseboard(BaseboardNum).EquipName) {
-                    ShowFatalError(format("SimElectricBaseboard: Invalid CompIndex passed={}, Unit name={}", BaseboardNum, EquipName) +
-                                   ", stored Unit Name for that index=" + baseboard->Baseboard(BaseboardNum).EquipName);
+                    ShowFatalError(format("SimElectricBaseboard: Invalid CompIndex passed={}, Unit name={}, stored Unit Name for that index=", BaseboardNum, EquipName)  + baseboard->Baseboard(BaseboardNum).EquipName);
                 }
                 baseboard->Baseboard(BaseboardNum).CheckEquipName = false;
             }

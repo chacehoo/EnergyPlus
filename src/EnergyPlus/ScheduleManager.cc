@@ -764,12 +764,24 @@ namespace ScheduleManager {
             if (ScheduleType(LoopIndex).Limited) {
                 if (ScheduleType(LoopIndex).Minimum > ScheduleType(LoopIndex).Maximum) {
                     if (ScheduleType(LoopIndex).IsReal) {
-                        ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + format("\", {} [{:.2R} [", cNumericFields(1), ScheduleType(LoopIndex).Minimum) + "] > " + cNumericFields(2) +
-                                        format("{:.2R}].", ScheduleType(LoopIndex).Maximum));
+                        ShowSevereError(format("{}=\"{}\", {} [{:.2R}] > {} [{:.2R}].",
+                                               RoutineName,
+                                               CurrentModuleObject,
+                                               Alphas(1),
+                                               cNumericFields(1),
+                                               ScheduleType(LoopIndex).Minimum,
+                                               cNumericFields(2),
+                                               ScheduleType(LoopIndex).Maximum));
                         ShowContinueError("  Other warning/severes about schedule values may appear.");
                     } else {
-                        ShowSevereError(RoutineName + CurrentModuleObject + "=\"" + Alphas(1) + format("\", {} [{:.0R} [", cNumericFields(1), ScheduleType(LoopIndex).Minimum) + "] > " + cNumericFields(2) +
-                                        format("{:.0R}].", ScheduleType(LoopIndex).Maximum));
+                        ShowSevereError(format("{}=\"{}\", {} [{:.0R}] > {} [{:.0R}].",
+                                               RoutineName,
+                                               CurrentModuleObject,
+                                               Alphas(1),
+                                               cNumericFields(1),
+                                               ScheduleType(LoopIndex).Minimum,
+                                               cNumericFields(2),
+                                               ScheduleType(LoopIndex).Maximum));
                         ShowContinueError("  Other warning/severes about schedule values may appear.");
                     }
                 }

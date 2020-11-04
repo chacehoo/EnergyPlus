@@ -7851,8 +7851,7 @@ namespace HeatBalanceSurfaceManager {
             if (!WarmupFlag || WarmupSurfTemp > 10 || DisplayExtraWarnings) {
                 if (TH12 < MinSurfaceTempLimit) {
                     if (surface.LowTempErrCount == 0) {
-                        ShowSevereMessage(format("Temperature (low) out of bounds [{:.2R}] for zone=\"{}", TH12, zone.Name) +
-                                          "\", for surface=\"" + surface.Name + "\"");
+                        ShowSevereMessage(format("Temperature (low) out of bounds [{:.2R}] for zone=\"{}\", for surface=\"", TH12, zone.Name)  + surface.Name + "\"");
                         ShowContinueErrorTimeStamp("");
                         if (!zone.TempOutOfBoundsReported) {
                             ShowContinueError("Zone=\"" + zone.Name + "\", Diagnostic Details:");
@@ -7892,8 +7891,7 @@ namespace HeatBalanceSurfaceManager {
                     }
                 } else {
                     if (surface.HighTempErrCount == 0) {
-                        ShowSevereMessage(format("Temperature (high) out of bounds ({:.2R}] for zone=\"{}", TH12, zone.Name) +
-                                          "\", for surface=\"" + surface.Name + "\"");
+                        ShowSevereMessage(format("Temperature (high) out of bounds ({:.2R}] for zone=\"{}\", for surface=\"", TH12, zone.Name)  + surface.Name + "\"");
                         ShowContinueErrorTimeStamp("");
                         if (!zone.TempOutOfBoundsReported) {
                             ShowContinueError("Zone=\"" + zone.Name + "\", Diagnostic Details:");
@@ -7946,8 +7944,7 @@ namespace HeatBalanceSurfaceManager {
         if ((TH12 > MaxSurfaceTempLimitBeforeFatal) || (TH12 < MinSurfaceTempLimitBeforeFatal)) {
             if (!WarmupFlag) {
                 if (TH12 < MinSurfaceTempLimitBeforeFatal) {
-                    ShowSevereError(format("Temperature (low) out of bounds [{:.2R}] for zone=\"{}", TH12, zone.Name) +
-                                    "\", for surface=\"" + surface.Name + "\"");
+                    ShowSevereError(format("Temperature (low) out of bounds [{:.2R}] for zone=\"{}\", for surface=\"", TH12, zone.Name)  + surface.Name + "\"");
                     ShowContinueErrorTimeStamp("");
                     if (!zone.TempOutOfBoundsReported) {
                         ShowContinueError("Zone=\"" + zone.Name + "\", Diagnostic Details:");
@@ -7971,8 +7968,7 @@ namespace HeatBalanceSurfaceManager {
                     }
                     ShowFatalError("Program terminates due to preceding condition.");
                 } else {
-                    ShowSevereError(format("Temperature (high) out of bounds [{:.2R}] for zone=\"{}", TH12, zone.Name) +
-                                    "\", for surface=\"" + surface.Name + "\"");
+                    ShowSevereError(format("Temperature (high) out of bounds [{:.2R}] for zone=\"{}\", for surface=\"", TH12, zone.Name)  + surface.Name + "\"");
                     ShowContinueErrorTimeStamp("");
                     if (!zone.TempOutOfBoundsReported) {
                         ShowContinueError("Zone=\"" + zone.Name + "\", Diagnostic Details:");
@@ -7998,8 +7994,7 @@ namespace HeatBalanceSurfaceManager {
                 }
             } else {
                 if (TH12 < -10000. || TH12 > 10000.) {
-                    ShowSevereError(format("CalcHeatBalanceInsideSurf: The temperature of {:.2R} C for zone=\"{}", TH12, zone.Name) +
-                                    "\", for surface=\"" + surface.Name + "\"");
+                    ShowSevereError(format("CalcHeatBalanceInsideSurf: The temperature of {:.2R} C for zone=\"{}\", for surface=\"", TH12, zone.Name)  + surface.Name + "\"");
                     ShowContinueError("..is very far out of bounds during warmup. This may be an indication of a malformed zone.");
                     ShowContinueErrorTimeStamp("");
                     ShowFatalError("Program terminates due to preceding condition.");

@@ -1130,8 +1130,7 @@ namespace ChillerReformulatedEIR {
                                 if ((std::abs(tmpNomCap - RefCapUser) / RefCapUser) > DataSizing::AutoVsHardSizingThreshold) {
                                     ShowMessage("Size:ChillerElectricReformulatedEIR: Potential issue with equipment sizing for " + this->Name);
                                     ShowContinueError(format("User-Specified Reference Capacity of {:.2R} [W]", RefCapUser));
-                                    ShowContinueError(format("differs from Design Size Reference Capacity of {:.2R}", tmpNomCap) +
-                                                      " [W]");
+                                    ShowContinueError(format("differs from Design Size Reference Capacity of {:.2R} [W]", tmpNomCap) );
                                     ShowContinueError("This may, or may not, indicate mismatched component sizes.");
                                     ShowContinueError("Verify that the value entered is intended and is consistent with other components.");
                                 }
@@ -1365,15 +1364,13 @@ namespace ChillerReformulatedEIR {
                 }
 
                 if (this->ChillerEIRFPLRPLRMin < 0 || this->ChillerEIRFPLRPLRMin >= this->ChillerEIRFPLRPLRMax || this->ChillerEIRFPLRPLRMin > 1) {
-                    ShowSevereError(format("Invalid minimum value of PLR = {:.3T}", this->ChillerEIRFPLRPLRMin) +
-                                    " in bicubic curve = " + this->EIRFPLRName + " which is used");
+                    ShowSevereError(format("Invalid minimum value of PLR = {:.3T} in bicubic curve = ", this->ChillerEIRFPLRPLRMin)  + this->EIRFPLRName + " which is used");
                     ShowContinueError("by Chiller:Electric:ReformulatedEIR = " + equipName + '.');
                     ShowContinueError("The minimum value of PLR [y] must be from zero to 1, and less than the maximum value of PLR.");
                     ErrorsFound = true;
                 }
                 if (this->ChillerEIRFPLRPLRMax > 1.1 || this->ChillerEIRFPLRPLRMax <= this->ChillerEIRFPLRPLRMin || this->ChillerEIRFPLRPLRMax < 0) {
-                    ShowSevereError(format("Invalid maximum value of PLR = {:.3T}", this->ChillerEIRFPLRPLRMax) +
-                                    " in bicubic curve = " + this->EIRFPLRName + " which is used");
+                    ShowSevereError(format("Invalid maximum value of PLR = {:.3T} in bicubic curve = ", this->ChillerEIRFPLRPLRMax)  + this->EIRFPLRName + " which is used");
                     ShowContinueError("by Chiller:Electric:ReformulatedEIR = " + equipName + '.');
                     ShowContinueError("The maximum value of PLR [y] must be from zero to 1.1, and greater than the minimum value of PLR.");
                     ErrorsFound = true;
@@ -2309,9 +2306,7 @@ namespace ChillerReformulatedEIR {
         if (this->EvapOutletTemp < CAPFTXTmin || this->EvapOutletTemp > CAPFTXTmax) {
             ++this->CAPFTXIter;
             if (this->CAPFTXIter == 1) {
-                ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + format("{}\": The evaporator outlet temperature ({:.2T}", this->Name, this->EvapOutletTemp) +
-                                 " C) is outside the range of evaporator outlet temperatures (X var) given in Cooling Capacity Function of "
-                                 "Temperature biquadratic curve = " +
+                ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + format("{}\": The evaporator outlet temperature ({:.2T} C) is outside the range of evaporator outlet temperatures (X var) given in Cooling Capacity Function of Temperature biquadratic curve = ", this->Name, this->EvapOutletTemp)  +
                                  this->CAPFTName);
                 ShowContinueErrorTimeStamp(format("The range specified = {:.2T} C to {:.2T} C.", CAPFTXTmin, CAPFTXTmax));
                 ShowRecurringWarningErrorAtEnd("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name +
@@ -2331,9 +2326,7 @@ namespace ChillerReformulatedEIR {
         if (this->EvapOutletTemp < EIRFTXTmin || this->EvapOutletTemp > EIRFTXTmax) {
             ++this->EIRFTXIter;
             if (this->EIRFTXIter == 1) {
-                ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + format("{}\": The evaporator outlet temperature ({:.2T}", this->Name, this->EvapOutletTemp) +
-                                 " C) is outside the range of evaporator outlet temperatures (X var) given in Electric Input to Cooling Output Ratio "
-                                 "Function of Temperature biquadratic curve = " +
+                ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + format("{}\": The evaporator outlet temperature ({:.2T} C) is outside the range of evaporator outlet temperatures (X var) given in Electric Input to Cooling Output Ratio Function of Temperature biquadratic curve = ", this->Name, this->EvapOutletTemp)  +
                                  this->EIRFTName);
                 ShowContinueErrorTimeStamp(format("The range specified = {:.2T} C to {:.2T} C.", EIRFTXTmin, EIRFTXTmax));
                 ShowRecurringWarningErrorAtEnd(
@@ -2386,9 +2379,7 @@ namespace ChillerReformulatedEIR {
         if (this->CondOutletTemp < CAPFTYTmin || this->CondOutletTemp > CAPFTYTmax) {
             ++this->CAPFTYIter;
             if (this->CAPFTYIter == 1) {
-                ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + format("{}\": The condenser outlet temperature ({:.2T}", this->Name, this->CondOutletTemp) +
-                                 " C) is outside the range of condenser outlet temperatures (Y var) given in Cooling Capacity Function of "
-                                 "Temperature biquadratic curve = " +
+                ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + format("{}\": The condenser outlet temperature ({:.2T} C) is outside the range of condenser outlet temperatures (Y var) given in Cooling Capacity Function of Temperature biquadratic curve = ", this->Name, this->CondOutletTemp)  +
                                  this->CAPFTName);
                 ShowContinueErrorTimeStamp(format("The range specified = {:.2T} C to {:.2T} C.", CAPFTYTmin, CAPFTYTmax));
                 ShowRecurringWarningErrorAtEnd("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + this->Name +
@@ -2408,9 +2399,7 @@ namespace ChillerReformulatedEIR {
         if (this->CondOutletTemp < EIRFTYTmin || this->CondOutletTemp > EIRFTYTmax) {
             ++this->EIRFTYIter;
             if (this->EIRFTYIter == 1) {
-                ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + format("{}\": The condenser outlet temperature ({:.2T}", this->Name, this->CondOutletTemp) +
-                                 " C) is outside the range of condenser outlet temperatures (Y var) given in Electric Input to Cooling Output Ratio "
-                                 "Function of Temperature biquadratic curve = " +
+                ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + format("{}\": The condenser outlet temperature ({:.2T} C) is outside the range of condenser outlet temperatures (Y var) given in Electric Input to Cooling Output Ratio Function of Temperature biquadratic curve = ", this->Name, this->CondOutletTemp)  +
                                  this->EIRFTName);
                 ShowContinueErrorTimeStamp(format("The range specified = {:.2T} C to {:.2T} C.", EIRFTYTmin, EIRFTYTmax));
                 ShowRecurringWarningErrorAtEnd(
@@ -2433,9 +2422,7 @@ namespace ChillerReformulatedEIR {
             if (this->CondOutletTemp < EIRFPLRTmin || this->CondOutletTemp > EIRFPLRTmax) {
                 ++this->EIRFPLRTIter;
                 if (this->EIRFPLRTIter == 1) {
-                    ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + format("{}\": The condenser outlet temperature ({:.2T}", this->Name, this->CondOutletTemp) +
-                                     " C) is outside the range of condenser outlet temperatures (X var) given in Electric Input to Cooling Output "
-                                     "Ratio Function of Part-load Ratio bicubic curve = " +
+                    ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + format("{}\": The condenser outlet temperature ({:.2T} C) is outside the range of condenser outlet temperatures (X var) given in Electric Input to Cooling Output Ratio Function of Part-load Ratio bicubic curve = ", this->Name, this->CondOutletTemp)  +
                                      this->EIRFPLRName);
                     ShowContinueErrorTimeStamp(format("The range specified = {:.2T} C to {:.2T} C.", EIRFPLRTmin, EIRFPLRTmax));
                     ShowRecurringWarningErrorAtEnd(
@@ -2458,9 +2445,7 @@ namespace ChillerReformulatedEIR {
         if (this->ChillerPartLoadRatio < EIRFPLRPLRmin || this->ChillerPartLoadRatio > EIRFPLRPLRmax) {
             ++this->EIRFPLRPLRIter;
             if (this->EIRFPLRPLRIter == 1) {
-                ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + format("{}\": The part-load ratio ({:.3T}", this->Name, this->ChillerPartLoadRatio) +
-                                 ") is outside the range of part-load ratios (Y var) given in Electric Input to Cooling Output Ratio Function of "
-                                 "Part-load Ratio bicubic curve = " +
+                ShowWarningError("CHILLER:ELECTRIC:REFORMULATEDEIR \"" + format("{}\": The part-load ratio ({:.3T}) is outside the range of part-load ratios (Y var) given in Electric Input to Cooling Output Ratio Function of Part-load Ratio bicubic curve = ", this->Name, this->ChillerPartLoadRatio)  +
                                  this->EIRFPLRName);
                 ShowContinueErrorTimeStamp(format("The range specified = {:.3T} to {:.3T}.", EIRFPLRPLRmin, EIRFPLRPLRmax));
                 ShowRecurringWarningErrorAtEnd(
