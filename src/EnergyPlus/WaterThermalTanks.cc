@@ -808,8 +808,7 @@ namespace WaterThermalTanks {
                     if (state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).HeatReclaimRecoveryEff <= 0.0 ||
                         state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).HeatReclaimRecoveryEff > 0.3) {
                         ShowSevereError(DataIPShortCuts::cCurrentModuleObject + " = " + state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).Name + ": " +
-                                        DataIPShortCuts::cNumericFieldNames(2) + " must be > 0.0 and <= 0.3, " +
-                                        format("{} = {:.3T}", DataIPShortCuts::cNumericFieldNames(2), state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).HeatReclaimRecoveryEff));
+                                        DataIPShortCuts::cNumericFieldNames(2) + format(" must be > 0.0 and <= 0.3, {} = {:.3T}", DataIPShortCuts::cNumericFieldNames(2) , state.dataWaterThermalTanks->WaterHeaterDesuperheater(DesuperheaterNum).HeatReclaimRecoveryEff));
                         ErrorsFound = true;
                     }
                 } // Blank Num(2)

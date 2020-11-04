@@ -2354,8 +2354,8 @@ namespace SurfaceGeometry {
                 (std::abs(baseSurface.Tilt - subSurface.Tilt) > errorTolerance)) {
                 surfaceError = true;
                 ShowSevereError(format("checkSubSurfAzTiltNorm: Outward facing angle of subsurface differs more than {:.1R} degrees from base surface.", errorTolerance));
-                ShowContinueError("Subsurface=\"" + format("{}\" Tilt = {:.1R}  Azimuth = {:.1R}", subSurface.Name, subSurface.Tilt, subSurface.Azimuth));
-                ShowContinueError("Base surface=\"" + format("{}\" Tilt = {:.1R}  Azimuth = {:.1R}", baseSurface.Name, baseSurface.Tilt, baseSurface.Azimuth));
+                ShowContinueError(format("Subsurface=\"{}\" Tilt = {:.1R}  Azimuth = {:.1R}", subSurface.Name, subSurface.Tilt, subSurface.Azimuth) );
+                ShowContinueError(format("Base surface=\"{}\" Tilt = {:.1R}  Azimuth = {:.1R}", baseSurface.Name, baseSurface.Tilt, baseSurface.Azimuth) );
             } else if (((std::abs(baseSurface.Azimuth - subSurface.Azimuth) > warningTolerance) && !baseSurfHoriz) ||
                        (std::abs(baseSurface.Tilt - subSurface.Tilt) > warningTolerance)) {
                 ++checkSubSurfAzTiltNormErrCount;
@@ -2365,8 +2365,8 @@ namespace SurfaceGeometry {
                 }
                 if (DisplayExtraWarnings) {
                     ShowWarningError(format("checkSubSurfAzTiltNorm: Outward facing angle of subsurface differs more than {:.1R} degrees from base surface.", warningTolerance));
-                    ShowContinueError("Subsurface=\"" + format("{}\" Tilt = {:.1R}  Azimuth = {:.1R}", subSurface.Name, subSurface.Tilt, subSurface.Azimuth));
-                    ShowContinueError("Base surface=\"" + format("{}\" Tilt = {:.1R}  Azimuth = {:.1R}", baseSurface.Name, baseSurface.Tilt, baseSurface.Azimuth));
+                    ShowContinueError(format("Subsurface=\"{}\" Tilt = {:.1R}  Azimuth = {:.1R}", subSurface.Name, subSurface.Tilt, subSurface.Azimuth) );
+                    ShowContinueError(format("Base surface=\"{}\" Tilt = {:.1R}  Azimuth = {:.1R}", baseSurface.Name, baseSurface.Tilt, baseSurface.Azimuth) );
                 }
             }
         }
@@ -10998,10 +10998,10 @@ namespace SurfaceGeometry {
             if (!IsCoPlanar) {
                 if (OutOfLine > 0.01) {
                     ShowSevereError(RoutineName + "Suspected non-planar surface:\"" + Surface(ThisSurf).Name +
-                                    "\", Max \"out of line\"=" + format("{:.5T} at Vertex # ", OutOfLine) + fmt::to_string(LastVertexInError));
+                                    format("\", Max \"out of line\"={:.5T} at Vertex # ", OutOfLine)  + fmt::to_string(LastVertexInError));
                 } else {
                     ShowWarningError(RoutineName + "Possible non-planar surface:\"" + Surface(ThisSurf).Name +
-                                     "\", Max \"out of line\"=" + format("{:.5T} at Vertex # ", OutOfLine) + fmt::to_string(LastVertexInError));
+                                     format("\", Max \"out of line\"={:.5T} at Vertex # ", OutOfLine)  + fmt::to_string(LastVertexInError));
                 }
                 //       ErrorInSurface=.TRUE.
             }
